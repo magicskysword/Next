@@ -23,6 +23,7 @@ namespace SkySwordKill.Next
     {
         public string option;
         public string tagEvent;
+        public string condition;
     }
     
     public class DialogEventData
@@ -87,13 +88,17 @@ namespace SkySwordKill.Next
             var optionCommands = new DialogOptionCommand[option.Length];
             for (int i = 0; i < optionCommands.Length; i++)
             {
-                var curOption = new DialogOptionCommand();
                 var body = option[i].Split('#');
+                var curOption = new DialogOptionCommand();
                 curOption.option = body[0];
                 if (body.Length >= 2)
                     curOption.tagEvent = body[1];
                 else
                     curOption.tagEvent = "";
+                if (body.Length >= 3)
+                    curOption.condition = body[2];
+                else
+                    curOption.condition = "";
                 optionCommands[i] = curOption;
             }
 

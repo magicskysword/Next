@@ -18,7 +18,6 @@ namespace SkySwordKill.Next.DialogTrigger
                 roleID = npc.ID,
                 roleName = npc.Name
             };
-            
             return !DialogAnalysis.TryTrigger("交谈",env);
         }
     }

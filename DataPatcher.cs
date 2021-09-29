@@ -97,7 +97,7 @@ namespace SkySwordKill.Next
         public static void LoadAllMod()
         {
             modConfigs.Clear();
-            
+            Main.LogInfo($"===================" + "正在读取Mod列表" + "=====================\n");
             var home = Directory.CreateDirectory(pluginDir.Value);
             jsonData jsonInstance = jsonData.instance;
             foreach (var dir in home.GetDirectories("mod*"))

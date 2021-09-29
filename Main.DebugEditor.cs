@@ -12,11 +12,21 @@ namespace SkySwordKill.Next
         public Vector2 scrollRoll = new Vector2(0, 0);
 
         private bool isGUIInit = false;
+        private int toolbarSelected = 0;
+        private Rect winRect;
+
+        private string inputEvent;
         
         private GUIStyle titleStyle;
         private GUIStyle leftStyle;
         private GUIStyle middleStyle;
         private GUIStyle rightStyle;
+
+        private string[] toolbarList =
+        {
+            "Mod列表",
+            "剧情调试"
+        };
         
         #endregion
 
@@ -64,19 +74,41 @@ namespace SkySwordKill.Next
             if (isOpen)
             {
                 GUIInit();
-                GUI.Window(50, new Rect(W(0.1f), H(0.1f), W(0.8f), H(0.8f)),
-                    DrawDebugWindow, "Next 调试窗口");
+                winRect = new Rect(W(0.1f), H(0.1f), W(0.8f), H(0.8f));
+                GUI.Window(50, winRect, DrawDebugWindow, "Next 调试窗口");
             }
         }
 
         public void DrawDebugWindow(int id)
         {
+            GUILayout.Label($"按 {debugKeyCode.Value.ToString()} 开关此窗口。");
+            if (debugMode.Value)
+            {
+                toolbarSelected = GUILayout.Toolbar(toolbarSelected, toolbarList);
+            }
+            else
+            {
+                toolbarSelected = 0;
+            }
+
+            switch (toolbarSelected)
+            {
+                case 0:
+                    DrawModList();
+                    break;
+                case 1:
+                    DrawEventDebug();
+                    break;
+            }
+        }
+
+        public void DrawModList()
+        {
             GUILayout.Label("Mod列表",titleStyle);
-            
             GUILayout.BeginScrollView(scrollRoll, false, true,
                 new GUILayoutOption[]
                 {
-                    GUILayout.MinHeight(H(0.4f))
+                    GUILayout.MinHeight(winRect.height * 0.8f)
                 });
             foreach (var modConfig in DataPatcher.modConfigs)
             {
@@ -149,6 +181,35 @@ namespace SkySwordKill.Next
                 GUI.color = oldColor;
             }
             GUILayout.EndScrollView();
+        }
+
+        public void DrawEventDebug()
+        {
+            GUILayout.Label("剧情调试",titleStyle);
+            var lastRect = GUILayoutUtility.GetLastRect();
+            var lastHeight = lastRect.y + lastRect.height;
+            var debugArea1 = new Rect(winRect)
+            {
+                x = 20,
+                y = 20 + 100,
+                width = winRect.width / 2 - 10,
+                height = winRect.height / 2- (10 + 100)
+            };
+            
+            GUILayout.BeginArea(debugArea1);
+            {
+                GUILayout.BeginHorizontal();
+                {
+                    GUILayout.Label("剧情ID");
+                    inputEvent = GUILayout.TextArea(inputEvent);
+                    if (GUILayout.Button("执行"))
+                    {
+                        DialogAnalysis.StartDialogEvent(inputEvent);
+                    }
+                }
+                GUILayout.EndHorizontal();
+            }
+            GUILayout.EndArea();
         }
 
         #endregion

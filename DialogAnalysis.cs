@@ -52,6 +52,8 @@ namespace SkySwordKill.Next
         public static string curDialogID;
         public static int curDialogIndex = 0;
         public static DialogEnvironment curEnv;
+        
+        private static ExpressionEvaluator curEvaluator;
 
         #endregion
 
@@ -71,8 +73,12 @@ namespace SkySwordKill.Next
 
         public static void Init()
         {
-            dialogEventDic.Add("",new Say());
-            dialogEventDic.Add("SetChar",new SetChar());
+            // 注册剧情指令
+            RegisterCommand("",new Say());
+            RegisterCommand("Say",new Say());
+            RegisterCommand("SetChar",new SetChar());
+            
+            // 注册触发器
             foreach (var type in Assembly.GetAssembly(typeof(DialogAnalysis)).GetTypes()
                 .Where(type => type.Namespace == "SkySwordKill.Next.DialogTrigger"))
             {
@@ -80,17 +86,21 @@ namespace SkySwordKill.Next
             }
         }
 
+        public static void RegisterCommand(string command, IDialogEvent cEvent)
+        {
+            dialogEventDic[command] = cEvent;
+        }
+
         public static ExpressionEvaluator GetEvaluate(DialogEnvironment env)
         {
-            var evaluator = new ExpressionEvaluator();
-            evaluator.Context = env;
-            return evaluator;
+            curEvaluator = curEvaluator ?? new ExpressionEvaluator();
+            curEvaluator.Context = env;
+            return curEvaluator;
         }
 
         public static bool TryTrigger(string triggerType,DialogEnvironment env = null)
         {
             var newEnv = env ?? new DialogEnvironment();
-            var evaluator = GetEvaluate(newEnv);
 
             foreach (var kvp in
                 dialogTriggerDic.Where(pair => pair.Value.type == triggerType))
@@ -98,7 +108,7 @@ namespace SkySwordKill.Next
                 var trigger = kvp.Value;
                 try
                 {
-                    if (!string.IsNullOrEmpty(trigger.condition) && evaluator.Evaluate<bool>(trigger.condition))
+                    if (CheckCondition(trigger.condition,newEnv))
                     {
                         StartDialogEvent(trigger.triggerEvent,newEnv);
                         return true;
@@ -106,8 +116,8 @@ namespace SkySwordKill.Next
                 }
                 catch (Exception e)
                 {
+                    Main.LogError($"触发器 [{trigger.id}] {trigger.condition} 触发判断失败！请检查表达式是否正确！");
                     Main.LogError(e);
-                    Main.LogError($"触发器 {kvp.Key} 触发判断失败！请检查表达式是否正确！");
                 }
             }
             
@@ -141,7 +151,43 @@ namespace SkySwordKill.Next
                 return;
             }
 
+            var haveOption = false;
+            var jumpEvent = string.Empty;
+
             var command = data.GetDialogCommand(index);
+            
+            if (command.isEnd)
+            {
+                ClearMenu();
+                var optionCommands = data.GetOptionCommands();
+                
+                foreach (var optionCommand in optionCommands)
+                {
+                    if (optionCommand.option == "Default")
+                    {
+                        jumpEvent = optionCommand.tagEvent;
+                        continue;
+                    }
+                    try
+                    {
+                        if (CheckCondition(optionCommand.condition,curEnv))
+                        {
+                            haveOption = true;
+                            AddMenu(optionCommand.option, () =>
+                            {
+                                if(!string.IsNullOrEmpty(optionCommand.tagEvent))
+                                    StartDialogEvent(optionCommand.tagEvent);
+                            });
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Main.LogError($"事件 [{eventID}] 选项 [{optionCommand.option}]" +
+                                      $" {optionCommand.condition} 触发判断失败！请检查表达式是否正确！");
+                        Main.LogError(e);
+                    }
+                }
+            }
 
             if (dialogEventDic.TryGetValue(command.command, out var dialogEvent))
             {
@@ -151,6 +197,8 @@ namespace SkySwordKill.Next
                     {
                         if(!command.isEnd)
                             RunNextDialogEvent();
+                        else if(!haveOption && !string.IsNullOrEmpty(jumpEvent))
+                            StartDialogEvent(jumpEvent);
                     });
                 }
                 catch (Exception e)
@@ -160,19 +208,13 @@ namespace SkySwordKill.Next
                 }
             }
 
-            if (command.isEnd)
-            {
-                ClearMenu();
-                var optionCommands = data.GetOptionCommands();
-                foreach (var optionCommand in optionCommands)
-                {
-                    AddMenu(optionCommand.option, () =>
-                    {
-                        if(!string.IsNullOrEmpty(optionCommand.tagEvent))
-                            StartDialogEvent(optionCommand.tagEvent);
-                    });
-                }
-            }
+            
+        }
+
+        public static bool CheckCondition(string condition, DialogEnvironment env)
+        {
+            var evaluator = GetEvaluate(env);
+            return string.IsNullOrEmpty(condition) || evaluator.Evaluate<bool>(condition);
         }
 
         public static void LoadDialogEventData(string dirPath)
