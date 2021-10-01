@@ -46,7 +46,7 @@ namespace SkySwordKill.Next
         /// <summary>
         /// 对话触发器
         /// </summary>
-        public static Dictionary<string, DialogTriggerData> dialogTriggerDic =
+        public static Dictionary<string, DialogTriggerData> dialogTriggerDataDic =
             new Dictionary<string, DialogTriggerData>();
 
         public static string curDialogID;
@@ -73,17 +73,29 @@ namespace SkySwordKill.Next
 
         public static void Init()
         {
-            // 注册剧情指令
-            RegisterCommand("",new Say());
-            RegisterCommand("Say",new Say());
-            RegisterCommand("SetChar",new SetChar());
-            RegisterCommand("SetInt",new SetInt());
-            
-            // 注册触发器
-            foreach (var type in Assembly.GetAssembly(typeof(DialogAnalysis)).GetTypes()
-                .Where(type => type.Namespace == "SkySwordKill.Next.DialogTrigger"))
+
+            foreach (var types in AppDomain.CurrentDomain.GetAssemblies()
+                .Select(assembly => assembly.GetTypes()))
             {
-                Harmony.CreateAndPatchAll(type);
+                foreach (var type in types)
+                {
+                    // 注册触发器
+                    if(type.Namespace == "SkySwordKill.Next.DialogTrigger")
+                    {
+                        Harmony.CreateAndPatchAll(type);
+                        continue;
+                    }
+                    // 注册事件指令
+                    if (typeof(IDialogEvent).IsAssignableFrom(type))
+                    {
+                        foreach (var attribute in type.GetCustomAttributes<DialogEventAttribute>())
+                        {
+                            var command = attribute.registerCommand;
+                            RegisterCommand(command,Activator.CreateInstance(type) as IDialogEvent);
+                        }
+                    }
+                    
+                }
             }
         }
 
@@ -104,7 +116,7 @@ namespace SkySwordKill.Next
             var newEnv = env ?? new DialogEnvironment();
 
             foreach (var kvp in
-                dialogTriggerDic.Where(pair => pair.Value.type == triggerType))
+                dialogTriggerDataDic.Where(pair => pair.Value.type == triggerType))
             {
                 var trigger = kvp.Value;
                 try
@@ -131,6 +143,22 @@ namespace SkySwordKill.Next
             RunDialogEvent(eventID,0);
         }
 
+        public static void StartTestDialogEvent(string dialog)
+        {
+            if (!dialogDataDic.TryGetValue("next_test", out DialogEventData data))
+            {
+                data = new DialogEventData
+                {
+                    id = "next_test",
+                    option = Array.Empty<string>(),
+                    character = new Dictionary<string, int>()
+                };
+                dialogDataDic["next_test"] = data;
+            }
+            data.dialog = dialog.Split('\n').Where(str=>!string.IsNullOrWhiteSpace(str)).ToArray();
+            StartDialogEvent("next_test");
+        }
+
         public static void RunNextDialogEvent()
         {
             RunDialogEvent(curDialogID,curDialogIndex + 1);
@@ -155,7 +183,7 @@ namespace SkySwordKill.Next
             var haveOption = false;
             var jumpEvent = string.Empty;
 
-            var command = data.GetDialogCommand(index);
+            var command = data.GetDialogCommand(index,curEnv);
             
             if (command.isEnd)
             {
@@ -258,7 +286,7 @@ namespace SkySwordKill.Next
         
         public static void TryAddTriggerData(DialogTriggerData dialogTriggerData)
         {
-            dialogTriggerDic[dialogTriggerData.id] = dialogTriggerData;
+            dialogTriggerDataDic[dialogTriggerData.id] = dialogTriggerData;
         }
 
         public static void TryAddTmpChar(string name, int id)

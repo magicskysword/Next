@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Newtonsoft.Json;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 
@@ -8,14 +10,15 @@ namespace SkySwordKill.Next
     {
         #region 字段
 
-        public bool isOpen;
-        public Vector2 scrollRoll = new Vector2(0, 0);
+        public bool isWinOpen;
+        private Vector2 scrollRoll = new Vector2(0, 0);
 
         private bool isGUIInit = false;
         private int toolbarSelected = 0;
         private Rect winRect;
 
         private string inputEvent;
+        private string testCommand;
         
         private GUIStyle titleStyle;
         private GUIStyle leftStyle;
@@ -41,7 +44,7 @@ namespace SkySwordKill.Next
         private void Update()
         {
             if (Input.GetKeyDown(debugKeyCode.Value))
-                isOpen = !isOpen;
+                isWinOpen = !isWinOpen;
         }
 
         public void GUIInit()
@@ -71,7 +74,7 @@ namespace SkySwordKill.Next
 
         public void OnGUI()
         {
-            if (isOpen)
+            if (isWinOpen)
             {
                 GUIInit();
                 winRect = new Rect(W(0.1f), H(0.1f), W(0.8f), H(0.8f));
@@ -81,15 +84,23 @@ namespace SkySwordKill.Next
 
         public void DrawDebugWindow(int id)
         {
-            GUILayout.Label($"按 {debugKeyCode.Value.ToString()} 开关此窗口。");
+            
             if (debugMode.Value)
             {
+                GUILayout.Label($"按 {debugKeyCode.Value.ToString()} 开关此窗口。当前模式：调试模式（调试模式可从ModConfig开关）");
                 toolbarSelected = GUILayout.Toolbar(toolbarSelected, toolbarList);
             }
             else
             {
+                GUILayout.Label($"按 {debugKeyCode.Value.ToString()} 开关此窗口。当前模式：普通模式（调试模式可从ModConfig开关）");
                 toolbarSelected = 0;
             }
+            var closeRect = GUILayoutUtility.GetLastRect();
+            closeRect.x = closeRect.width - 100;
+            closeRect.y -= closeRect.height;
+            closeRect.width = 100;
+            if (GUI.Button(closeRect, "关闭"))
+                isWinOpen = false;
 
             switch (toolbarSelected)
             {
@@ -193,7 +204,7 @@ namespace SkySwordKill.Next
                 x = 20,
                 y = 20 + 100,
                 width = winRect.width / 2 - 10,
-                height = winRect.height / 2- (10 + 100)
+                height = winRect.height - (10 + 100)
             };
             
             GUILayout.BeginArea(debugArea1);
@@ -205,6 +216,34 @@ namespace SkySwordKill.Next
                     if (GUILayout.Button("执行"))
                     {
                         DialogAnalysis.StartDialogEvent(inputEvent);
+                    }
+                }
+                GUILayout.EndHorizontal();
+                GUILayout.Space(20);
+                GUILayout.Label("剧情指令调试");
+                testCommand = GUILayout.TextArea(testCommand, new GUILayoutOption[]
+                {
+                    GUILayout.MinHeight(debugArea1.height - 200)
+                });
+                GUILayout.BeginHorizontal();
+                {
+                    if (GUILayout.Button("运行"))
+                    {
+                        if(!string.IsNullOrEmpty(testCommand))
+                            DialogAnalysis.StartTestDialogEvent(testCommand);
+                    }
+
+                    if (GUILayout.Button("复制原数据"))
+                    {
+                        GUIUtility.systemCopyBuffer = testCommand;
+                    }
+
+                    if (GUILayout.Button("复制Json数据"))
+                    {
+                        GUIUtility.systemCopyBuffer = JArray.FromObject(testCommand
+                            .Split('\n')
+                            .Where(str=>!string.IsNullOrWhiteSpace(str))
+                            .ToArray()).ToString(Formatting.Indented);
                     }
                 }
                 GUILayout.EndHorizontal();

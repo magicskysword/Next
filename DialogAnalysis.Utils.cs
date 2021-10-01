@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine.Events;
 
 namespace SkySwordKill.Next
@@ -24,6 +26,22 @@ namespace SkySwordKill.Next
         #endregion
 
         #region 公共方法
+
+        public static string AnalysisInlineScript(string text,DialogEnvironment env)
+        {
+            StringBuilder finallyText = new StringBuilder(text);
+            Regex regex = new Regex(@"\[&(?<expression>[\s\S]*?)&]");
+            
+            var matches = regex.Matches(text);
+            var evaluate = DialogAnalysis.GetEvaluate(env);
+            foreach(Match match in matches)
+            {
+                var expression = match.Groups["expression"].Value;
+                var getValue = evaluate.Evaluate(expression).ToString();
+                finallyText.Replace(match.Value, getValue);
+            }
+            return finallyText.ToString();
+        }
 
         public static void SetCharacter(int getNum)
         {
@@ -86,6 +104,21 @@ namespace SkySwordKill.Next
             if (field == null || field.type != JSONObject.Type.NUMBER)
                 return 0;
             return field.I;
+        }
+        
+        public static void SetStr(string key,string value)
+        {
+            key = $"next_Str_{key}";
+            Tools.instance.getPlayer().AvatarChengJiuData.SetField(key,value);
+        }
+
+        public static string GetStr(string key)
+        {
+            key = $"next_Str_{key}";
+            var field = Tools.instance.getPlayer().AvatarChengJiuData.GetField(key);
+            if (field == null || field.type != JSONObject.Type.STRING)
+                return string.Empty;
+            return field.Str;
         }
 
         #endregion

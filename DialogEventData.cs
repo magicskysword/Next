@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -17,6 +18,20 @@ namespace SkySwordKill.Next
         public bool isEnd;
 
         public string rawCommand;
+
+        public int GetInt(int index)
+        {
+            if (index > paramList.Length - 1)
+                return 0;
+            return Convert.ToInt32(paramList[index]);
+        }
+        
+        public string GetStr(int index)
+        {
+            if (index > paramList.Length - 1)
+                return string.Empty;
+            return paramList[index];
+        }
     }
 
     public class DialogOptionCommand
@@ -51,17 +66,22 @@ namespace SkySwordKill.Next
 
         #region 公共方法
 
-        public DialogCommand GetDialogCommand(int index)
+        public DialogCommand GetDialogCommand(int index,DialogEnvironment env)
         {
-            var str = dialog[index];
+            var rawText = dialog[index];
             
             var command = new DialogCommand();
             command.bindEventData = this;
             command.isEnd = index == dialog.Length - 1;
-            command.rawCommand = str;
+            command.rawCommand = rawText;
+            var evaluateText = DialogAnalysis.AnalysisInlineScript(rawText, env);
             
-            var strArr = str.Split('*');
-            if (strArr.Length >= 2)
+            var strArr = evaluateText.Split('*');
+            var posSharp = evaluateText.IndexOf('#');
+            var posStar = evaluateText.IndexOf('*');
+            
+            // 确保第一个星号在井号前面
+            if (strArr.Length >= 2 && (posStar < posSharp || posSharp == -1))
             {
                 command.command = strArr[0];
                 var body = string.Join("*", strArr.Where((s, i) => i > 0));

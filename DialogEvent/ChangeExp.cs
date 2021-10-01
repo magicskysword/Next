@@ -2,14 +2,13 @@
 
 namespace SkySwordKill.Next.DialogEvent
 {
-    [DialogEvent("SetInt")]
-    public class SetInt : IDialogEvent
+    [DialogEvent("ChangeExp")]
+    public class ChangeExp : IDialogEvent
     {
         public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
         {
-            string key = command.GetStr(0);
-            int value = command.GetInt(1);
-            DialogAnalysis.SetInt(key,value);
+            int num = command.GetInt(0);
+            Tools.instance.getPlayer().AddHp(num);
             callback?.Invoke();
         }
     }

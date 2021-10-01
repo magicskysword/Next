@@ -18,6 +18,7 @@ namespace SkySwordKill.Next
         
         public ConfigEntry<string> gameVersion;
         public ConfigEntry<bool> debugMode;
+        public ConfigEntry<bool> openInStart;
         public ConfigEntry<KeyCode> debugKeyCode;
 
         private void Awake()
@@ -45,10 +46,13 @@ namespace SkySwordKill.Next
                 "Next插件调试窗口，用于查看当前加载mod以及进行Mod调试（需打开调试模式）。");
             debugMode = Config.Bind("Debug.Mode", "调试模式开关", false,
                 "Next插件调试模式开关，打开后才能在调试窗口里看到更多功能。");
+            openInStart = Config.Bind("Debug.OpenInStart", "游戏启动时弹出", true,
+                "是否在游戏启动时弹出调试窗口。");
             DialogAnalysis.Init();
             Harmony.CreateAndPatchAll(typeof(JsonDataPatch));
             Assembly.LoadFrom(Path.Combine(BepInEx.Paths.PluginPath, "Microsoft.CSharp.dll"));
-            //Harmony.CreateAndPatchAll(typeof(TuJianDBInitGongFaPatch));
+            // 初始窗口状态
+            isWinOpen = openInStart.Value;
         }
 
         public static void LogInfo(object obj)

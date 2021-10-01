@@ -4,22 +4,10 @@ using System.Text.RegularExpressions;
 
 namespace SkySwordKill.Next.DialogEvent
 {
+    [DialogEvent("")]
+    [DialogEvent("Say")]
     public class Say : IDialogEvent
     {
-        #region 字段
-
-
-
-        #endregion
-
-        #region 属性
-
-
-
-        #endregion
-
-        #region 回调方法
-
         public void Execute(DialogCommand command,DialogEnvironment env,Action callback)
         {
             int charNum;
@@ -32,41 +20,12 @@ namespace SkySwordKill.Next.DialogEvent
                     charNum = 0;
                 }
             }
-            // 处理对话文本
-            StringBuilder finallyText = new StringBuilder(text);
-            Regex regex = new Regex(@"\[&(?<expression>[\s\S]*?)&]");
-            
-            var matches = regex.Matches(text);
-            var evaluate = DialogAnalysis.GetEvaluate(env);
-            foreach(Match match in matches)
-            {
-                var expression = match.Groups["expression"].Value;
-                var getValue = evaluate.Evaluate(expression).ToString();
-                finallyText.Replace(match.Value, getValue);
-            }
-            
+
             DialogAnalysis.SetCharacter(charNum);
-            DialogAnalysis.Say(finallyText.ToString(), () =>
+            DialogAnalysis.Say(text.ToString(), () =>
             {
                 callback?.Invoke();
             });
         }
-
-        #endregion
-
-        #region 公共方法
-
-
-
-        #endregion
-
-        #region 私有方法
-
-
-
-        #endregion
-
-
-        
     }
 }
