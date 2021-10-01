@@ -94,11 +94,13 @@
     <ItemGroup>
         <Compile Include="DataPatcher.cs" />
         <Compile Include="DialogAnalysis.cs" />
+        <Compile Include="DialogAnalysis.Utils.cs" />
         <Compile Include="DialogEnvironment.cs" />
         <Compile Include="DialogEventData.cs" />
         <Compile Include="DialogEvent\IDialogEvent.cs" />
         <Compile Include="DialogEvent\Say.cs" />
         <Compile Include="DialogEvent\SetChar.cs" />
+        <Compile Include="DialogEvent\SetInt.cs" />
         <Compile Include="DialogTriggerData.cs" />
         <Compile Include="DialogTrigger\OnChat.cs" />
         <Compile Include="ExpressionEvaluator.cs" />

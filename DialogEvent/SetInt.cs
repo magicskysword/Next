@@ -2,7 +2,7 @@
 
 namespace SkySwordKill.Next.DialogEvent
 {
-    public class SetChar : IDialogEvent
+    public class SetInt : IDialogEvent
     {
         #region 字段
 
@@ -18,12 +18,12 @@ namespace SkySwordKill.Next.DialogEvent
 
         #region 回调方法
 
-        public void Execute(DialogCommand command,DialogEnvironment env,Action callback)
+        public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
         {
-            var name = command.paramList[0];
-            var expression = command.paramList[1];
-            var id = DialogAnalysis.GetEvaluate(env).Evaluate<int>(expression);
-            DialogAnalysis.TryAddTmpChar(name,id);
+            string key = command.paramList[0];
+            string expression = command.paramList[1];
+            int value = DialogAnalysis.GetEvaluate(env).Evaluate<int>(expression);
+            DialogAnalysis.SetInt(key,value);
             callback?.Invoke();
         }
 
@@ -40,8 +40,5 @@ namespace SkySwordKill.Next.DialogEvent
 
 
         #endregion
-
-
-        
     }
 }

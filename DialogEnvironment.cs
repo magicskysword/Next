@@ -26,7 +26,10 @@
 
         #region 公共方法
 
-
+        public int GetInt(string key)
+        {
+            return DialogAnalysis.GetInt(key);
+        }
 
         #endregion
 

@@ -11,7 +11,7 @@ using UnityEngine.Events;
 
 namespace SkySwordKill.Next
 {
-    public static class DialogAnalysis
+    public static partial class DialogAnalysis
     {
         #region 字段
 
@@ -77,6 +77,7 @@ namespace SkySwordKill.Next
             RegisterCommand("",new Say());
             RegisterCommand("Say",new Say());
             RegisterCommand("SetChar",new SetChar());
+            RegisterCommand("SetInt",new SetInt());
             
             // 注册触发器
             foreach (var type in Assembly.GetAssembly(typeof(DialogAnalysis)).GetTypes()
@@ -193,7 +194,7 @@ namespace SkySwordKill.Next
             {
                 try
                 {
-                    dialogEvent.Excute(command,curEnv, () =>
+                    dialogEvent.Execute(command,curEnv, () =>
                     {
                         if(!command.isEnd)
                             RunNextDialogEvent();
@@ -206,6 +207,11 @@ namespace SkySwordKill.Next
                     Main.LogError(e);
                     Main.LogError($"事件 [{eventID}] 第 {index} 行指令 {command.rawCommand} 执行错误");
                 }
+            }
+            else
+            {
+                Main.LogError($"指令 {command.command} 不存在！");
+                Main.LogError($"事件 [{eventID}] 第 {index} 行指令 {command.rawCommand} 执行错误");
             }
 
             
@@ -260,53 +266,7 @@ namespace SkySwordKill.Next
             tmpCharacter[name] = id;
         }
         
-        public static void SetCharacter(int getNum)
-        {
-            var sayDialog = Fungus.SayDialog.GetSayDialog();
-            var num = getNum;
-            if (NpcJieSuanManager.inst.ImportantNpcBangDingDictionary.ContainsKey(num))
-            {
-                num = NpcJieSuanManager.inst.ImportantNpcBangDingDictionary[num];
-            }
-            sayDialog.SetCharacter(null,num);
-            sayDialog.SetCharacterImage(null,num);
-        }
-
-        public static void Say(string text,Action callback)
-        {
-            var say = Fungus.SayDialog.GetSayDialog();
-            say.SetActive(true);
-            say.Say(text,true,true,true,true,
-                false,null, ()=>
-            {
-                callback?.Invoke();
-            });
-        }
-
-        public static void ClearMenu()
-        {
-            var menuDialog = Fungus.MenuDialog.GetMenuDialog();
-            menuDialog.Clear();
-        }
         
-        public static void AddMenu(string text,Action callback)
-        {
-            var menuDialog = Fungus.MenuDialog.GetMenuDialog();
-            menuDialog.SetActive(true);
-
-            void OptionAction()
-            {
-                menuDialog.StopAllCoroutines();
-                menuDialog.Clear();
-                menuDialog.HideSayDialog();
-                menuDialog.SetActive(false);
-                var say = Fungus.SayDialog.GetSayDialog();
-                say.Stop();
-                callback?.Invoke();
-            }
-
-            addOptionMethod.Value.Invoke(menuDialog, new object[] { text, true, false, (UnityAction)OptionAction });
-        }
 
         #endregion
 
