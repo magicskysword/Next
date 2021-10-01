@@ -11,7 +11,9 @@
 
 参考贴：https://bbs.3dmgame.com/thread-6207429-1-1.html
 
-Patch Mod 制作文档：[Next文档](doc/Next文档.md)
+Mod WiKi：[Next Wiki](https://michangshengnext.fandom.com/zh/wiki/%E8%A7%85%E9%95%BF%E7%94%9FNext_Wiki)
+
+文档附件：[Next文档](doc/Next文档.md)
 
 在游戏内可以通过 F4 打开mod菜单（按键可修改）
 
