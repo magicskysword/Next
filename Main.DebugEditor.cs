@@ -78,29 +78,36 @@ namespace SkySwordKill.Next
             {
                 GUIInit();
                 winRect = new Rect(W(0.1f), H(0.1f), W(0.8f), H(0.8f));
-                GUI.Window(50, winRect, DrawDebugWindow, "Next 调试窗口");
+                GUI.Window(50, winRect, DrawDebugWindow, "Next V0.2.2");
             }
         }
 
         public void DrawDebugWindow(int id)
         {
-            
-            if (debugMode.Value)
+            GUILayout.BeginHorizontal();
             {
-                GUILayout.Label($"按 {debugKeyCode.Value.ToString()} 开关此窗口。当前模式：调试模式（调试模式可从ModConfig开关）");
-                toolbarSelected = GUILayout.Toolbar(toolbarSelected, toolbarList);
+                if (debugMode.Value)
+                {
+                    GUILayout.Label($"按 {debugKeyCode.Value.ToString()} 开关此窗口。当前模式：调试模式（调试模式可从ModConfig开关）");
+                    toolbarSelected = GUILayout.Toolbar(toolbarSelected, toolbarList);
+                }
+                else
+                {
+                    GUILayout.Label($"按 {debugKeyCode.Value.ToString()} 开关此窗口。当前模式：普通模式（调试模式可从ModConfig开关）");
+                    toolbarSelected = 0;
+                }
+                GUILayout.FlexibleSpace();
+                
+                // 该部分不简化是为了避免反复操作 openInStart.Value 属性
+                bool isPop = openInStart.Value;
+                isPop = GUILayout.Toggle(isPop, "游戏启动时弹出");
+                if (isPop != openInStart.Value)
+                    openInStart.Value = isPop;
+                
+                if (GUILayout.Button("关闭"))
+                    isWinOpen = false;
             }
-            else
-            {
-                GUILayout.Label($"按 {debugKeyCode.Value.ToString()} 开关此窗口。当前模式：普通模式（调试模式可从ModConfig开关）");
-                toolbarSelected = 0;
-            }
-            var closeRect = GUILayoutUtility.GetLastRect();
-            closeRect.x = closeRect.width - 100;
-            closeRect.y -= closeRect.height;
-            closeRect.width = 100;
-            if (GUI.Button(closeRect, "关闭"))
-                isWinOpen = false;
+            GUILayout.EndHorizontal();
 
             switch (toolbarSelected)
             {

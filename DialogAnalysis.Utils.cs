@@ -66,6 +66,39 @@ namespace SkySwordKill.Next
                 });
         }
 
+        public static string DealSayText(string text, int sayRoleID)
+        {
+            StringBuilder dealStr = new StringBuilder(text);
+            var npcID = NPCEx.NPCIDToNew(sayRoleID);
+            var player = Tools.instance.getPlayer();
+            if (PlayerEx.IsDaoLv(npcID))
+            {
+                string daoLvNickName = PlayerEx.GetDaoLvNickName(npcID);
+                dealStr
+                    .Replace("{FirstName}", "")
+                    .Replace("{gongzi}", daoLvNickName)
+                    .Replace("{xiongdi}", daoLvNickName)
+                    .Replace("{shidi}", daoLvNickName)
+                    .Replace("{shixiong}", daoLvNickName);
+            }
+            else
+            {
+                dealStr
+                    .Replace("{FirstName}", player.firstName)
+                    .Replace("{gongzi}", (player.Sex == 1) ? "公子" : "姑娘")
+                    .Replace("{xiongdi}", (player.Sex == 1) ? "兄弟" : "姑娘")
+                    .Replace("{shidi}", (player.Sex == 1) ? "师弟" : "师妹")
+                    .Replace("{shixiong}", (player.Sex == 1) ? "师兄" : "师姐");
+            }
+            dealStr
+                .Replace("{LastName}", player.lastName)
+                .Replace("{xiaozi}", (player.Sex == 1) ? "小子" : "丫头")
+                .Replace("{ta}", (player.Sex == 1) ? "他" : "她")
+                .Replace("{menpai}", Tools.getStr("menpai" + player.menPai));
+
+            return dealStr.ToString();
+        }
+
         public static void ClearMenu()
         {
             var menuDialog = Fungus.MenuDialog.GetMenuDialog();

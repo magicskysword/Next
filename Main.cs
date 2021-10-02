@@ -11,7 +11,7 @@ using YSGame.TuJian;
 
 namespace SkySwordKill.Next
 {
-    [BepInPlugin("skyswordkill.plugin.Next", "Next", "0.2.1")]
+    [BepInPlugin("skyswordkill.plugin.Next", "Next", "0.2.2")]
     public partial class Main : BaseUnityPlugin
     {
         public static Main Instance;

@@ -102,6 +102,7 @@
         <Compile Include="DialogEvent\ChangeExp.cs" />
         <Compile Include="DialogEvent\ChangeHp.cs" />
         <Compile Include="DialogEvent\ChangeInt.cs" />
+        <Compile Include="DialogEvent\ChangeMoney.cs" />
         <Compile Include="DialogEvent\DialogEventAttribute.cs" />
         <Compile Include="DialogEvent\Event.cs" />
         <Compile Include="DialogEvent\IDialogEvent.cs" />

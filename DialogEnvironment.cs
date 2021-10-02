@@ -1,4 +1,5 @@
 ﻿using System;
+using KBEngine;
 
 namespace SkySwordKill.Next
 {
@@ -6,11 +7,13 @@ namespace SkySwordKill.Next
     {
         #region 字段
 
+        public Avatar player;
+        
         public int roleID;
         public int roleBindID;
         public string roleName;
         public UINPCData bindNpc;
-        
+
 
         #endregion
 
@@ -27,6 +30,11 @@ namespace SkySwordKill.Next
         #endregion
 
         #region 公共方法
+
+        public DialogEnvironment()
+        {
+            player = Tools.instance.getPlayer();
+        }
 
         public int GetInt(string key)
         {
@@ -50,6 +58,11 @@ namespace SkySwordKill.Next
             DateTime nowTime = Tools.instance.getPlayer().worldTimeMag.getNowTime();
             var tagTime = new DateTime(year, month, day);
             return tagTime < nowTime;
+        }
+        
+        public string GetCall(string man,string woman)
+        {
+            return player.Sex == 1 ? man : woman;
         }
 
         #endregion
