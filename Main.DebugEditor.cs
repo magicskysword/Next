@@ -166,14 +166,14 @@ namespace SkySwordKill.Next
                     width = rect.width - 20
                 };
                 
-                var modName = modConfig.GetValue("Name")?.Value<string>() ?? "未知";
-                var modAuthor = modConfig.GetValue("Author")?.Value<string>() ?? "未知";
-                var modVersion = modConfig.GetValue("Version")?.Value<string>() ?? "未知";
-                var modDescription = modConfig.GetValue("Description")?.Value<string>() ?? "无";
+                var modName = modConfig.Name ?? "未知";
+                var modAuthor = modConfig.Author ?? "未知";
+                var modVersion = modConfig.Version ?? "未知";
+                var modDescription = modConfig.Description ?? "无";
                 
-                var modDir = modConfig.GetValue("Dir")?.Value<string>() ?? "未知";
+                var modDir = modConfig.Path ?? "未知";
                 
-                var modState = modConfig.GetValue("success")?.Value<bool>() == true; 
+                var modState = modConfig.Success; 
                 
                 GUI.color = Color.white;
                 GUI.Label(infoRect,$"名称：{modName}",leftStyle);

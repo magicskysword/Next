@@ -17,6 +17,8 @@ namespace SkySwordKill.Next
     {
         #region 字段
 
+        public static List<ModConfig> modConfigs = new List<ModConfig>();
+        
         #endregion
 
         #region 属性
@@ -32,7 +34,7 @@ namespace SkySwordKill.Next
         public static Lazy<FieldInfo[]> dataField =
             new Lazy<FieldInfo[]>(() => typeof(jsonData).GetFields());
 
-        public static List<JObject> modConfigs = new List<JObject>();
+        
 
         #endregion
 
@@ -126,12 +128,12 @@ namespace SkySwordKill.Next
             Main.LogInfo($"===================" + "开始载入Mod数据" + "=====================");
             Main.LogInfo($"加载Mod数据：{Path.GetFileNameWithoutExtension(dir)}");
             var modConfig = GetModConfig(dir);
-            modConfig.Add("Dir",JToken.FromObject(dir));
+            modConfig.Path = dir;
             Main.logIndent = 1;
-            Main.LogInfo($"Mod名称：{modConfig.GetValue("Name")?.Value<string>()}");
-            Main.LogInfo($"Mod作者：{modConfig.GetValue("Author")?.Value<string>()}");
-            Main.LogInfo($"Mod版本：{modConfig.GetValue("Version")?.Value<string>()}");
-            Main.LogInfo($"Mod描述：{modConfig.GetValue("Description")?.Value<string>()}");
+            Main.LogInfo($"Mod名称：{modConfig.Name}");
+            Main.LogInfo($"Mod作者：{modConfig.Author}");
+            Main.LogInfo($"Mod版本：{modConfig.Version}");
+            Main.LogInfo($"Mod描述：{modConfig.Description}");
             modConfigs.Add(modConfig);
             try
             {
@@ -175,22 +177,22 @@ namespace SkySwordKill.Next
             }
             catch (Exception)
             {
-                modConfig.Add("Success",JToken.FromObject(false));
+                modConfig.Success = false;
                 throw;
             }
-            modConfig.Add("success",JToken.FromObject(true));
+            modConfig.Success = true;
             Main.logIndent = 0;
             Main.LogInfo($"===================" + "载入Mod数据完成" + "=====================");
         }
 
-        private static JObject GetModConfig(string dir)
+        private static ModConfig GetModConfig(string dir)
         {
             try
             {
                 string filePath = Utility.CombinePaths(dir, $"modConfig.json");
                 if (File.Exists(filePath))
                 {
-                    return JObject.Parse(File.ReadAllText(filePath));
+                    return JObject.Parse(File.ReadAllText(filePath)).ToObject<ModConfig>();
                 }
                 else
                 {
@@ -202,7 +204,7 @@ namespace SkySwordKill.Next
                 Main.LogWarning("Mod配置读取错误！");
             }
 
-            return new JObject();
+            return new ModConfig();
         }
 
         private static void PatchJsonObjectArray(string dirPathForData, JSONObject[] jsonObjects)

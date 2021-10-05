@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -8,7 +9,6 @@ using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
 using UnityEngine;
-using YSGame.TuJian;
 
 namespace SkySwordKill.Next
 {
@@ -53,12 +53,18 @@ namespace SkySwordKill.Next
             
             Harmony.CreateAndPatchAll(typeof(JsonDataPatch));
             // 加载运行时脚本所需DLL
-            Assembly.LoadFrom(Path.Combine(BepInEx.Paths.PluginPath, "Microsoft.CSharp.dll"));
+            string nextLibDir = Path.Combine(BepInEx.Paths.PluginPath, "NextLib");
+            Assembly.LoadFrom(Path.Combine(nextLibDir, "Microsoft.CSharp.dll"));
 
             DialogAnalysis.Init();
 
             // 初始窗口状态
             isWinOpen = openInStart.Value;
+        }
+
+        public static Coroutine InvokeCoroutine(IEnumerator enumerator)
+        {
+            return Instance.StartCoroutine(enumerator);
         }
 
         public static void LogInfo(object obj)
