@@ -96,6 +96,8 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="ExpressionEvaluator\ExpressionEvaluator.cs" />
+        <Compile Include="ModConfig.cs" />
         <Compile Include="ModManager.cs" />
         <Compile Include="DialogAnalysis.cs" />
         <Compile Include="DialogAnalysis.Utils.cs" />
@@ -117,19 +119,16 @@
         <Compile Include="DialogTriggerData.cs" />
         <Compile Include="DialogTrigger\OnChat.cs" />
         <Compile Include="DllTools.cs" />
-        <Compile Include="ExpressionEvaluator.cs" />
         <Compile Include="Main.cs" />
         <Compile Include="Main.DebugEditor.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
-      <Content Include="Microsoft.CSharp.dll" />
-      <Content Include="xlua.dll">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
+      <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-      <None Include="packages.config" />
+      <Content Include="ExpressionEvaluator\LICENSE.md" />
+      <Content Include="NextLib\Microsoft.CSharp.dll" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
