@@ -241,8 +241,6 @@ namespace SkySwordKill.Next
                 Main.LogError($"指令 {command.command} 不存在！");
                 Main.LogError($"事件 [{eventID}] 第 {index} 行指令 {command.rawCommand} 执行错误");
             }
-
-            
         }
 
         public static bool CheckCondition(string condition, DialogEnvironment env)
@@ -251,50 +249,10 @@ namespace SkySwordKill.Next
             return string.IsNullOrEmpty(condition) || evaluator.Evaluate<bool>(condition);
         }
 
-        public static void LoadDialogEventData(string dirPath)
-        {
-            var dirName = "DialogEvent";
-            var tagDir = Path.Combine(dirPath, dirName);
-            if(!Directory.Exists(tagDir))
-                return;
-            foreach (var filePath in Directory.GetFiles(tagDir))
-            {
-                string json = File.ReadAllText(filePath);
-                JArray.Parse(json).ToObject<List<DialogEventData>>()?.ForEach(TryAddEventData);
-                Main.LogInfo($"    载入 {dirName}/{Path.GetFileNameWithoutExtension(filePath)}.json");
-            }
-        }
-        
-        public static void LoadDialogTriggerData(string dirPath)
-        {
-            var dirName = "DialogTrigger";
-            var tagDir = Path.Combine(dirPath, dirName);
-            if(!Directory.Exists(tagDir))
-                return;
-            foreach (var filePath in Directory.GetFiles(tagDir))
-            {
-                string json = File.ReadAllText(filePath);
-                JArray.Parse(json).ToObject<List<DialogTriggerData>>()?.ForEach(TryAddTriggerData);
-                Main.LogInfo($"    载入 {dirName}/{Path.GetFileNameWithoutExtension(filePath)}.json");
-            }
-        }
-
-        public static void TryAddEventData(DialogEventData dialogEventData)
-        {
-            dialogDataDic[dialogEventData.id] = dialogEventData;
-        }
-        
-        public static void TryAddTriggerData(DialogTriggerData dialogTriggerData)
-        {
-            dialogTriggerDataDic[dialogTriggerData.id] = dialogTriggerData;
-        }
-
         public static void TryAddTmpChar(string name, int id)
         {
             tmpCharacter[name] = id;
         }
-        
-        
 
         #endregion
 

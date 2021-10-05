@@ -128,7 +128,7 @@ namespace SkySwordKill.Next
                 {
                     GUILayout.MinHeight(winRect.height * 0.8f)
                 });
-            foreach (var modConfig in DataPatcher.modConfigs)
+            foreach (var modConfig in ModManager.modConfigs)
             {
                 var oldColor = GUI.color;
                 

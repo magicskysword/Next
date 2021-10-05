@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 using BepInEx;
 using BepInEx.Configuration;
@@ -15,7 +16,8 @@ namespace SkySwordKill.Next
     public partial class Main : BaseUnityPlugin
     {
         public static Main Instance;
-        
+        public static int logIndent = 0;
+
         public ConfigEntry<string> gameVersion;
         public ConfigEntry<bool> debugMode;
         public ConfigEntry<bool> openInStart;
@@ -30,11 +32,11 @@ namespace SkySwordKill.Next
         {
             if (gameVersion.Value != Application.version)
             {
-                DataPatcher.GenerateBaseData();
+                ModManager.GenerateBaseData();
             }
 
             gameVersion.Value = Application.version;
-            DataPatcher.LoadAllMod();
+            ModManager.LoadAllMod();
         }
 
         private void Init()
@@ -48,26 +50,43 @@ namespace SkySwordKill.Next
                 "Next插件调试模式开关，打开后才能在调试窗口里看到更多功能。");
             openInStart = Config.Bind("Debug.OpenInStart", "游戏启动时弹出", true,
                 "是否在游戏启动时弹出调试窗口。");
-            DialogAnalysis.Init();
+            
             Harmony.CreateAndPatchAll(typeof(JsonDataPatch));
+            // 加载运行时脚本所需DLL
             Assembly.LoadFrom(Path.Combine(BepInEx.Paths.PluginPath, "Microsoft.CSharp.dll"));
+
+            DialogAnalysis.Init();
+
             // 初始窗口状态
             isWinOpen = openInStart.Value;
         }
 
         public static void LogInfo(object obj)
         {
-            Instance.Logger.LogInfo(obj);
+            Instance.Logger.LogInfo($"{GetIndent()}{obj}");
         }
 
         public static void LogWarning(object obj)
         {
-            Instance.Logger.LogWarning(obj);
+            Instance.Logger.LogWarning($"{GetIndent()}{obj}");
         }
 
         public static void LogError(object obj)
         {
-            Instance.Logger.LogError(obj);
+            Instance.Logger.LogError($"{GetIndent()}{obj}");
+        }
+
+        private static string GetIndent()
+        {
+            if (logIndent <= 0)
+                return string.Empty;
+            var sb = new StringBuilder(logIndent * 4);
+            for (int i = 0; i < logIndent * 4; i++)
+            {
+                sb.Append(' ');
+            }
+
+            return sb.ToString();
         }
 
     }

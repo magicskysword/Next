@@ -51,8 +51,8 @@
         <Reference Include="Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
           <HintPath>Microsoft.CSharp.dll</HintPath>
         </Reference>
-        <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\Newtonsoft.Json.dll</HintPath>
+        <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+          <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
           <Private>False</Private>
         </Reference>
         <Reference Include="System" />
@@ -78,6 +78,10 @@
           <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生test_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
           <Private>False</Private>
         </Reference>
+        <Reference Include="UnityEngine.InputModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\..\..\soft\steam\steamapps\common\觅长生\觅长生test_Data\Managed\UnityEngine.InputModule.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
         <Reference Include="UnityEngine.TextCoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生test_Data\Managed\UnityEngine.TextCoreModule.dll</HintPath>
           <Private>False</Private>
@@ -92,7 +96,7 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="DataPatcher.cs" />
+        <Compile Include="ModManager.cs" />
         <Compile Include="DialogAnalysis.cs" />
         <Compile Include="DialogAnalysis.Utils.cs" />
         <Compile Include="DialogEnvironment.cs" />
@@ -112,6 +116,7 @@
         <Compile Include="DialogEvent\SetStr.cs" />
         <Compile Include="DialogTriggerData.cs" />
         <Compile Include="DialogTrigger\OnChat.cs" />
+        <Compile Include="DllTools.cs" />
         <Compile Include="ExpressionEvaluator.cs" />
         <Compile Include="Main.cs" />
         <Compile Include="Main.DebugEditor.cs" />
@@ -119,6 +124,12 @@
     </ItemGroup>
     <ItemGroup>
       <Content Include="Microsoft.CSharp.dll" />
+      <Content Include="xlua.dll">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="packages.config" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

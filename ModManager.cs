@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace SkySwordKill.Next
 {
-    public static class DataPatcher
+    public static class ModManager
     {
         #region 字段
 
@@ -97,7 +97,7 @@ namespace SkySwordKill.Next
         public static void LoadAllMod()
         {
             modConfigs.Clear();
-            Main.LogInfo($"===================" + "正在读取Mod列表" + "=====================\n");
+            Main.LogInfo($"===================" + "正在读取Mod列表" + "=====================");
             var home = Directory.CreateDirectory(pluginDir.Value);
             jsonData jsonInstance = jsonData.instance;
             foreach (var dir in home.GetDirectories("mod*"))
@@ -123,14 +123,15 @@ namespace SkySwordKill.Next
 
         public static void LoadModPatch(jsonData jsonInstance, string dir)
         {
+            Main.LogInfo($"===================" + "开始载入Mod数据" + "=====================");
             Main.LogInfo($"加载Mod数据：{Path.GetFileNameWithoutExtension(dir)}");
             var modConfig = GetModConfig(dir);
             modConfig.Add("Dir",JToken.FromObject(dir));
-            Main.LogInfo($"    Mod名称：{modConfig.GetValue("Name")?.Value<string>()}");
-            Main.LogInfo($"    Mod作者：{modConfig.GetValue("Author")?.Value<string>()}");
-            Main.LogInfo($"    Mod版本：{modConfig.GetValue("Version")?.Value<string>()}");
-            Main.LogInfo($"    Mod描述：{modConfig.GetValue("Description")?.Value<string>()}");
-            Main.LogInfo($"===================" + "载入Mod数据" + "=====================");
+            Main.logIndent = 1;
+            Main.LogInfo($"Mod名称：{modConfig.GetValue("Name")?.Value<string>()}");
+            Main.LogInfo($"Mod作者：{modConfig.GetValue("Author")?.Value<string>()}");
+            Main.LogInfo($"Mod版本：{modConfig.GetValue("Version")?.Value<string>()}");
+            Main.LogInfo($"Mod描述：{modConfig.GetValue("Description")?.Value<string>()}");
             modConfigs.Add(modConfig);
             try
             {
@@ -169,16 +170,17 @@ namespace SkySwordKill.Next
                     }
                 }
                 // 载入Mod Dialog数据
-                DialogAnalysis.LoadDialogEventData(dir);
-                DialogAnalysis.LoadDialogTriggerData(dir);
+                LoadDialogEventData(dir);
+                LoadDialogTriggerData(dir);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 modConfig.Add("Success",JToken.FromObject(false));
                 throw;
             }
             modConfig.Add("success",JToken.FromObject(true));
-            Main.LogInfo($"===================" + "载入数据完成" + "=====================");
+            Main.logIndent = 0;
+            Main.LogInfo($"===================" + "载入Mod数据完成" + "=====================");
         }
 
         private static JObject GetModConfig(string dir)
@@ -195,7 +197,7 @@ namespace SkySwordKill.Next
                     Main.LogWarning("Mod配置不存在！");
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Main.LogWarning("Mod配置读取错误！");
             }
@@ -227,7 +229,7 @@ namespace SkySwordKill.Next
                     jsonObject.TryAddOrReplace(key, jsonData.GetField(key).Copy());
                 }
 
-                Main.LogInfo($"    载入 {dirName}{Path.GetFileNameWithoutExtension(filePath)}.json");
+                Main.LogInfo($"载入 {dirName}{Path.GetFileNameWithoutExtension(filePath)}.json");
             }
         }
 
@@ -244,7 +246,7 @@ namespace SkySwordKill.Next
                     jObject.Add(property.Name, property.Value.DeepClone());
                 }
 
-                Main.LogInfo($"    载入 {Path.GetFileNameWithoutExtension(filePath)}.json");
+                Main.LogInfo($"载入 {Path.GetFileNameWithoutExtension(filePath)}.json");
             }
         }
 
@@ -260,8 +262,36 @@ namespace SkySwordKill.Next
                 var key = Path.GetFileNameWithoutExtension(filePath);
                 dicData[key] = jsonData;
                 toJsonObject.TryAddOrReplace(key, jsonData);
-                Main.LogInfo($"    载入 {Path.GetFileNameWithoutExtension(dirPathForData)}/" +
+                Main.LogInfo($"载入 {Path.GetFileNameWithoutExtension(dirPathForData)}/" +
                              $"{Path.GetFileNameWithoutExtension(filePath)}.json [{key}]");
+            }
+        }
+        
+        public static void LoadDialogEventData(string dirPath)
+        {
+            var dirName = "DialogEvent";
+            var tagDir = Path.Combine(dirPath, dirName);
+            if(!Directory.Exists(tagDir))
+                return;
+            foreach (var filePath in Directory.GetFiles(tagDir))
+            {
+                string json = File.ReadAllText(filePath);
+                JArray.Parse(json).ToObject<List<DialogEventData>>()?.ForEach(TryAddEventData);
+                Main.LogInfo($"载入 {dirName}/{Path.GetFileNameWithoutExtension(filePath)}.json");
+            }
+        }
+        
+        public static void LoadDialogTriggerData(string dirPath)
+        {
+            var dirName = "DialogTrigger";
+            var tagDir = Path.Combine(dirPath, dirName);
+            if(!Directory.Exists(tagDir))
+                return;
+            foreach (var filePath in Directory.GetFiles(tagDir))
+            {
+                string json = File.ReadAllText(filePath);
+                JArray.Parse(json).ToObject<List<DialogTriggerData>>()?.ForEach(TryAddTriggerData);
+                Main.LogInfo($"载入 {dirName}/{Path.GetFileNameWithoutExtension(filePath)}.json");
             }
         }
 
@@ -284,6 +314,16 @@ namespace SkySwordKill.Next
             {
                 jsonObject.list[index] = value.Copy();
             }
+        }
+        
+        public static void TryAddEventData(DialogEventData dialogEventData)
+        {
+            DialogAnalysis.dialogDataDic[dialogEventData.id] = dialogEventData;
+        }
+        
+        public static void TryAddTriggerData(DialogTriggerData dialogTriggerData)
+        {
+            DialogAnalysis.dialogTriggerDataDic[dialogTriggerData.id] = dialogTriggerData;
         }
 
         #endregion
