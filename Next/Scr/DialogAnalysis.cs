@@ -150,7 +150,7 @@ namespace SkySwordKill.Next
                 data = new DialogEventData
                 {
                     id = "next_test",
-                    option = Array.Empty<string>(),
+                    option = new string[0],
                     character = new Dictionary<string, int>()
                 };
                 dialogDataDic["next_test"] = data;

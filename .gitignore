@@ -4,3 +4,7 @@
 
 bin/
 obj/
+
+Next.x86/NextLib
+Next.x86/Scr
+Next.x86/Properties

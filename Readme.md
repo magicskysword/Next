@@ -7,7 +7,7 @@
 
 ## 使用方法
 
-将 `Next.Dll` 与 `Microsoft.CSharp.dll` (本工程提供的版本) 置入 `觅长生\BepInEx\plugins` 文件夹
+将 `Next.Dll` 与 `NextLib`文件夹 置入 `觅长生\64\BepInEx\plugins` 文件夹 (如果是32位系统则为 `觅长生\64\BepInEx\plugins`，下面不再赘述)
 
 参考贴：https://bbs.3dmgame.com/thread-6207429-1-1.html
 
@@ -20,6 +20,31 @@ Mod WiKi：[Next Wiki](https://michangshengnext.fandom.com/zh/wiki/%E8%A7%85%E9%
 ## 鸣谢
 3dm  宵夜97  BepinEx开发教程<br>
 3md  ゞ残月﹎_|  Villain Mod的框架思路<br>
+
+## Build
+clone该库后，自行重新添加觅长生游戏文件夹里的Dll引用，包括
+
+`觅长生\64\BepInEx\core` 里的
+```
+0Harmony
+BepInEx
+```
+`觅长生\64\觅长生_Data\Managed` 里的
+```
+Assembly-CSharp
+Assembly-CSharp-firstpass
+Newtonsoft.CSharp
+UnityEngine
+UnityEngine.AudioModule
+UnityEngine.CoreModule
+UnityEngine.IMGUIModule
+UnityEngine.InputModule
+UnityEngine.TextRenderingModule
+UnityEngine.UI
+UnityEngine.UIModule
+```
+
+添加完后直接Build即可，将Build出来的 `Next.Dll` 与 `NextLib`文件夹 置入 `觅长生\64\BepInEx\plugins` 文件夹即可
 
 ## 使用库
 [ExpressionEvaluator](https://github.com/codingseb/ExpressionEvaluator) 用于事件与触发器的条件判断

@@ -53,8 +53,8 @@ namespace SkySwordKill.Next
             
             Harmony.CreateAndPatchAll(typeof(JsonDataPatch));
             // 加载运行时脚本所需DLL
-            string nextLibDir = Path.Combine(BepInEx.Paths.PluginPath, "NextLib");
-            Assembly.LoadFrom(Path.Combine(nextLibDir, "Microsoft.CSharp.dll"));
+            string nextLibDirPath = Path.Combine(BepInEx.Paths.PluginPath, "NextLib");
+            Assembly.LoadFrom(Path.Combine(nextLibDirPath, "Microsoft.CSharp.dll"));
 
             DialogAnalysis.Init();
 
