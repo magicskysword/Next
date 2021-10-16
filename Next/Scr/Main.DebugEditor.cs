@@ -44,7 +44,10 @@ namespace SkySwordKill.Next
         private void Update()
         {
             if (Input.GetKeyDown(debugKeyCode.Value))
+            {
                 isWinOpen = !isWinOpen;
+                winRect = new Rect(W(0.1f), H(0.1f), W(0.8f), H(0.8f));
+            }
         }
 
         public void GUIInit()
@@ -74,15 +77,25 @@ namespace SkySwordKill.Next
 
         public void OnGUI()
         {
+            if(!isGUIInit)
+                GUIInit();
             if (isWinOpen)
             {
-                GUIInit();
-                winRect = new Rect(W(0.1f), H(0.1f), W(0.8f), H(0.8f));
-                GUI.Window(50, winRect, DrawDebugWindow, "Next V0.2.2");
+                GUI.Window(50, winRect, DrawDebugWindow, $"Next v{MOD_VERSION}");
             }
         }
 
-        public void DrawDebugWindow(int id)
+        #endregion
+
+        #region 公共方法
+
+
+
+        #endregion
+
+        #region 私有方法
+
+        private void DrawDebugWindow(int id)
         {
             GUILayout.BeginHorizontal();
             {
@@ -96,14 +109,15 @@ namespace SkySwordKill.Next
                     GUILayout.Label($"按 {debugKeyCode.Value.ToString()} 开关此窗口。当前模式：普通模式（调试模式可从ModConfig开关）");
                     toolbarSelected = 0;
                 }
+
                 GUILayout.FlexibleSpace();
-                
+
                 // 该部分不简化是为了避免反复操作 openInStart.Value 属性
                 bool isPop = openInStart.Value;
                 isPop = GUILayout.Toggle(isPop, "游戏启动时弹出");
                 if (isPop != openInStart.Value)
                     openInStart.Value = isPop;
-                
+
                 if (GUILayout.Button("关闭"))
                     isWinOpen = false;
             }
@@ -120,7 +134,7 @@ namespace SkySwordKill.Next
             }
         }
 
-        public void DrawModList()
+        private void DrawModList()
         {
             GUILayout.Label("Mod列表",titleStyle);
             GUILayout.BeginScrollView(scrollRoll, false, true,
@@ -201,7 +215,7 @@ namespace SkySwordKill.Next
             GUILayout.EndScrollView();
         }
 
-        public void DrawEventDebug()
+        private void DrawEventDebug()
         {
             GUILayout.Label("剧情调试",titleStyle);
             var lastRect = GUILayoutUtility.GetLastRect();
@@ -257,16 +271,6 @@ namespace SkySwordKill.Next
             }
             GUILayout.EndArea();
         }
-
-        #endregion
-
-        #region 公共方法
-
-
-
-        #endregion
-
-        #region 私有方法
 
         private float W(float size)
         {

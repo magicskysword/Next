@@ -12,10 +12,12 @@ using UnityEngine;
 
 namespace SkySwordKill.Next
 {
-    [BepInPlugin("skyswordkill.plugin.Next", "Next", "0.2.2")]
+    [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public static Main Instance;
+        public const string MOD_VERSION = "0.2.4";
+        
+        public static Main Instance { get; private set; }
         public static int logIndent = 0;
 
         public ConfigEntry<string> gameVersion;
