@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading;
 using BepInEx;
 using HarmonyLib;
 using KBEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace SkySwordKill.Next
 {
@@ -114,13 +117,17 @@ namespace SkySwordKill.Next
                     Main.LogError(e);
                 }
             }
-
+            
             foreach (JSONObject jsonobject in jsonInstance._BuffJsonData.list)
             {
                 var key = (int)jsonobject["buffid"].n;
                 if (!jsonInstance.Buff.ContainsKey(key))
+                {
                     jsonInstance.Buff.Add(key, new Buff(key));
+                }
             }
+
+            Main.Instance.resourcesManager.StartLoadAsset();
         }
 
         public static void LoadModPatch(jsonData jsonInstance, string dir)
@@ -144,36 +151,42 @@ namespace SkySwordKill.Next
                         continue;
 
                     var value = fieldInfo.GetValue(jsonInstance);
-
+                    
                     // 普通数据
                     if (value is JSONObject jsonObject)
                     {
                         string filePath = Utility.CombinePaths(dir, $"{fieldInfo.Name}.json");
-                        PatchJsonObject(filePath, jsonObject);
+                        modConfig.jsonPathCache.Add(fieldInfo.Name,filePath);
+                        PatchJsonObject(fieldInfo,filePath, jsonObject);
                     }
                     else if (value is JObject jObject)
                     {
                         string filePath = Utility.CombinePaths(dir, $"{fieldInfo.Name}.json");
-                        PatchJObject(filePath, jObject);
+                        modConfig.jsonPathCache.Add(fieldInfo.Name,filePath);
+                        PatchJObject(fieldInfo,filePath, jObject);
                     }
                     else if (value is jsonData.YSDictionary<string, JSONObject> dicData)
                     {
                         string dirPathForData = Utility.CombinePaths(dir, fieldInfo.Name);
                         JSONObject toJsonObject =
                             typeof(jsonData).GetField($"_{fieldInfo.Name}").GetValue(jsonInstance) as JSONObject;
-
-                        PatchDicData(dirPathForData, dicData, toJsonObject);
+                        modConfig.jsonPathCache.Add(fieldInfo.Name,dirPathForData);
+                        PatchDicData(fieldInfo,dirPathForData, dicData, toJsonObject);
                     }
                     // 功能函数配置数据
                     else if (value is JSONObject[] jsonObjects)
                     {
                         string dirPathForData = Utility.CombinePaths(dir, fieldInfo.Name);
-                        PatchJsonObjectArray(dirPathForData, jsonObjects);
+                        modConfig.jsonPathCache.Add(fieldInfo.Name,dirPathForData);
+                        PatchJsonObjectArray(fieldInfo,dirPathForData, jsonObjects);
                     }
                 }
                 // 载入Mod Dialog数据
                 LoadDialogEventData(dir);
                 LoadDialogTriggerData(dir);
+                
+                // 载入ModAsset
+                CacheAssetDir("Assets", $"{dir}/Assets");
             }
             catch (Exception)
             {
@@ -207,7 +220,7 @@ namespace SkySwordKill.Next
             return new ModConfig();
         }
 
-        private static void PatchJsonObjectArray(string dirPathForData, JSONObject[] jsonObjects)
+        public static void PatchJsonObjectArray(FieldInfo fieldInfo,string dirPathForData, JSONObject[] jsonObjects)
         {
             if (!Directory.Exists(dirPathForData))
                 return;
@@ -216,27 +229,48 @@ namespace SkySwordKill.Next
                 if (jsonObjects[i] == null)
                     continue;
                 string filePath = Utility.CombinePaths(dirPathForData, $"{i}.json");
-                PatchJsonObject(filePath, jsonObjects[i], $"{Path.GetFileNameWithoutExtension(dirPathForData)}/");
+                PatchJsonObject(fieldInfo,filePath, jsonObjects[i], $"{Path.GetFileNameWithoutExtension(dirPathForData)}/");
             }
         }
 
-        private static void PatchJsonObject(string filePath, JSONObject jsonObject, string dirName = "")
+        public static void PatchJsonObject(FieldInfo fieldInfo,string filePath, JSONObject jsonObject, string dirName = "")
         {
+            var dataTemplate = jsonObject[0];
+            
             if (File.Exists(filePath))
             {
+                var fileName = Path.GetFileNameWithoutExtension(filePath);
                 string data = File.ReadAllText(filePath);
                 var jsonData = JSONObject.Create(data);
+                
+                
+                
                 foreach (var key in jsonData.keys)
                 {
-                    jsonObject.TryAddOrReplace(key, jsonData.GetField(key).Copy());
+                    var itemData = jsonData.GetField(key).Copy();
+                    
+                    foreach (var fieldKey in dataTemplate.keys)
+                    {
+                        if (!itemData.HasField(fieldKey))
+                        {
+                            itemData.AddField(fieldKey,dataTemplate[fieldKey].Clone());
+                            Main.LogWarning($"数据 {fieldInfo.Name} [{fileName}] 缺少字段 {fieldKey}，" +
+                                            $"已用模板对象属性 {dataTemplate[fieldKey]} 替代。");
+                        }
+                    }
+
+                    jsonObject.TryAddOrReplace(key, itemData);
                 }
 
-                Main.LogInfo($"载入 {dirName}{Path.GetFileNameWithoutExtension(filePath)}.json");
+                
+                Main.LogInfo($"载入 {dirName}{fileName}.json");
             }
         }
 
-        private static void PatchJObject(string filePath, JObject jObject)
+        public static void PatchJObject(FieldInfo fieldInfo,string filePath, JObject jObject)
         {
+            var dataTemplate = jObject.Properties().First().Value;
+            
             if (File.Exists(filePath))
             {
                 string data = File.ReadAllText(filePath);
@@ -245,6 +279,22 @@ namespace SkySwordKill.Next
                 {
                     if (jObject.ContainsKey(property.Name))
                         jObject.Remove(property.Name);
+                    
+                    var itemData = JObject.FromObject(property.Value);
+
+                    if (dataTemplate.Type == JTokenType.Object)
+                    {
+                        foreach (var field in JObject.FromObject(dataTemplate).Properties())
+                        {
+                            if (!itemData.ContainsKey(field.Name))
+                            {
+                                itemData.Add(field.Value.DeepClone());
+                                Main.LogWarning($"数据 {fieldInfo.Name} [{property.Name}] 缺少字段 {field.Name}，" +
+                                                $"已用模板对象属性 {field.Value} 替代。");
+                            }
+                        }
+                    }
+                    
                     jObject.Add(property.Name, property.Value.DeepClone());
                 }
 
@@ -252,16 +302,29 @@ namespace SkySwordKill.Next
             }
         }
 
-        private static void PatchDicData(string dirPathForData, jsonData.YSDictionary<string, JSONObject> dicData,
+        public static void PatchDicData(FieldInfo fieldInfo,string dirPathForData, 
+            jsonData.YSDictionary<string, JSONObject> dicData,
             JSONObject toJsonObject)
         {
             if (!Directory.Exists(dirPathForData))
                 return;
+            var dataTemplate = toJsonObject[0];
             foreach (var filePath in Directory.GetFiles(dirPathForData))
             {
                 string data = File.ReadAllText(filePath);
                 var jsonData = JSONObject.Create(data);
                 var key = Path.GetFileNameWithoutExtension(filePath);
+
+                foreach (var fieldKey in dataTemplate.keys)
+                {
+                    if (!jsonData.HasField(fieldKey))
+                    {
+                        jsonData.AddField(fieldKey,dataTemplate[fieldKey].Clone());
+                        Main.LogWarning($"数据 {fieldInfo.Name} [{key}] 缺少字段 {fieldKey}，已用模板对象属性 {dataTemplate[fieldKey]} 替代。");
+                    }
+                }
+                
+                
                 dicData[key] = jsonData;
                 toJsonObject.TryAddOrReplace(key, jsonData);
                 Main.LogInfo($"载入 {Path.GetFileNameWithoutExtension(dirPathForData)}/" +
@@ -294,6 +357,26 @@ namespace SkySwordKill.Next
                 string json = File.ReadAllText(filePath);
                 JArray.Parse(json).ToObject<List<DialogTriggerData>>()?.ForEach(TryAddTriggerData);
                 Main.LogInfo($"载入 {dirName}/{Path.GetFileNameWithoutExtension(filePath)}.json");
+            }
+        }
+
+        public static void CacheAssetDir(string rootPath,string dirPath)
+        {
+            if(!Directory.Exists(dirPath))
+                return;
+
+            foreach (var directory in Directory.GetDirectories(dirPath))
+            {
+                var name = Path.GetFileNameWithoutExtension(directory);
+                CacheAssetDir($"{rootPath}/{name}", directory);
+            }
+
+            foreach (var file in Directory.GetFiles(dirPath))
+            {
+                var fileName = Path.GetFileName(file);
+                
+                var cachePath = $"{rootPath}/{fileName}";
+                Main.Instance.resourcesManager.AddAsset(cachePath,file);
             }
         }
 

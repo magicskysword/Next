@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine.Events;
@@ -127,7 +128,16 @@ namespace SkySwordKill.Next
         public static void SetInt(string key,int value)
         {
             key = $"next_Int_{key}";
-            Tools.instance.getPlayer().AvatarChengJiuData.SetField(key,value);
+            var data = Tools.instance.getPlayer().AvatarChengJiuData;
+            if (value == 0)
+            {
+                if(data.HasField(key))
+                    data.RemoveField(key);
+            }
+            else
+            {
+                data.SetField(key,value);
+            }
         }
 
         public static int GetInt(string key)
@@ -138,11 +148,46 @@ namespace SkySwordKill.Next
                 return 0;
             return field.I;
         }
-        
+
+        public static Dictionary<string, int> GetAllInt()
+        {
+            var dic = new Dictionary<string, int>();
+            
+            var instance = Tools.instance;
+            if (instance == null)
+                return dic;
+            
+            var player = instance.getPlayer();
+            if (player == null)
+                return dic;
+            
+            var data = player.AvatarChengJiuData;
+            if (data == null)
+                return dic;
+            
+            foreach (var key in data.keys)
+            {
+                if (key.StartsWith("next_Int_"))
+                {
+                    dic.Add(key,data.GetField(key).I);
+                }
+            }
+            return dic;
+        }
+
         public static void SetStr(string key,string value)
         {
             key = $"next_Str_{key}";
-            Tools.instance.getPlayer().AvatarChengJiuData.SetField(key,value);
+            var data = Tools.instance.getPlayer().AvatarChengJiuData;
+            if (value == "")
+            {
+                if(data.HasField(key))
+                    data.RemoveField(key);
+            }
+            else
+            {
+                data.SetField(key,value);
+            }
         }
 
         public static string GetStr(string key)
@@ -154,6 +199,32 @@ namespace SkySwordKill.Next
             return field.Str;
         }
 
+        public static Dictionary<string, string> GetAllStr()
+        {
+            var dic = new Dictionary<string, string>();
+            
+            var instance = Tools.instance;
+            if (instance == null)
+                return dic;
+            
+            var player = instance.getPlayer();
+            if (player == null)
+                return dic;
+            
+            var data = player.AvatarChengJiuData;
+            if (data == null)
+                return dic;
+            
+            foreach (var key in data.keys)
+            {
+                if (key.StartsWith("next_Str_"))
+                {
+                    dic.Add(key,data.GetField(key).ToString());
+                }
+            }
+            return dic;
+        }
+        
         #endregion
 
         #region 私有方法

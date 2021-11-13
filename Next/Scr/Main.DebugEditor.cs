@@ -112,6 +112,14 @@ namespace SkySwordKill.Next
 
                 GUILayout.FlexibleSpace();
 
+                
+                if (debugMode.Value)
+                {
+                    if (GUILayout.Button("重置Base生成（重启游戏生效）"))
+                    {
+                        gameVersion.Value = "";
+                    }
+                }
                 // 该部分不简化是为了避免反复操作 openInStart.Value 属性
                 bool isPop = openInStart.Value;
                 isPop = GUILayout.Toggle(isPop, "游戏启动时弹出");
@@ -224,8 +232,24 @@ namespace SkySwordKill.Next
             {
                 x = 20,
                 y = 20 + 100,
-                width = winRect.width / 2 - 10,
+                width = winRect.width / 2 - 20,
                 height = winRect.height - (10 + 100)
+            };
+            
+            var debugArea2 = new Rect(winRect)
+            {
+                x = winRect.width / 2 + 20,
+                y = 20 + 100,
+                width = winRect.width / 4 - 20,
+                height = winRect.height - (10 + 150)
+            };
+            
+            var debugArea3 = new Rect(winRect)
+            {
+                x = winRect.width / 4 * 3,
+                y = 20 + 100,
+                width = winRect.width / 4 - 20,
+                height = winRect.height - (10 + 150)
             };
             
             GUILayout.BeginArea(debugArea1);
@@ -268,6 +292,68 @@ namespace SkySwordKill.Next
                     }
                 }
                 GUILayout.EndHorizontal();
+            }
+            GUILayout.EndArea();
+            
+            GUILayout.BeginArea(debugArea2);
+            {
+                GUI.Box(debugArea2,"");
+                GUILayout.Label("Int变量调试窗口");
+                GUILayout.BeginScrollView(scrollRoll, false, true,
+                    new GUILayoutOption[]
+                    {
+                        GUILayout.MinHeight(debugArea2.height - 50)
+                    });
+                {
+                    foreach (var pair in DialogAnalysis.GetAllInt())
+                    {
+                        GUILayout.Box("",new GUILayoutOption[]
+                        {
+                            GUILayout.MinHeight(26)
+                        });
+                        var rect = GUILayoutUtility.GetLastRect();
+                        var infoRect = new Rect(rect)
+                        {
+                            x = rect.x + 10,
+                            height = 24,
+                            width = rect.width - 20
+                        };
+                        GUI.Label(infoRect,$"{pair.Key}",leftStyle);
+                        GUI.Label(infoRect,$"{pair.Value}",rightStyle);
+                    }
+                }
+                GUILayout.EndScrollView();
+            }
+            GUILayout.EndArea();
+            
+            GUILayout.BeginArea(debugArea3);
+            {
+                GUI.Box(debugArea3,"");
+                GUILayout.Label("String变量调试窗口");
+                GUILayout.BeginScrollView(scrollRoll, false, true,
+                    new GUILayoutOption[]
+                    {
+                        GUILayout.MinHeight(debugArea3.height - 50)
+                    });
+                {
+                    foreach (var pair in DialogAnalysis.GetAllStr())
+                    {
+                        GUILayout.Box("",new GUILayoutOption[]
+                        {
+                            GUILayout.MinHeight(26)
+                        });
+                        var rect = GUILayoutUtility.GetLastRect();
+                        var infoRect = new Rect(rect)
+                        {
+                            x = rect.x + 10,
+                            height = 24,
+                            width = rect.width - 20
+                        };
+                        GUI.Label(infoRect,$"{pair.Key}",leftStyle);
+                        GUI.Label(infoRect,$"{pair.Value}",rightStyle);
+                    }
+                }
+                GUILayout.EndScrollView();
             }
             GUILayout.EndArea();
         }
