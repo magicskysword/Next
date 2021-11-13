@@ -9,7 +9,7 @@
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>Next</RootNamespace>
         <AssemblyName>Next</AssemblyName>
-        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -67,6 +67,9 @@
           <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.dll</HintPath>
           <Private>False</Private>
         </Reference>
+        <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+        </Reference>
         <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
           <Private>False</Private>
@@ -95,6 +98,26 @@
           <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UIModule.dll</HintPath>
           <Private>False</Private>
         </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestAudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestTextureModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestWWWModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,10 +141,12 @@
         <Compile Include="Scr\DialogTriggerData.cs" />
         <Compile Include="Scr\DialogTrigger\OnChat.cs" />
         <Compile Include="Scr\ExpressionEvaluator\ExpressionEvaluator.cs" />
+        <Compile Include="Scr\FileAsset.cs" />
         <Compile Include="Scr\Main.cs" />
         <Compile Include="Scr\Main.DebugEditor.cs" />
         <Compile Include="Scr\ModConfig.cs" />
         <Compile Include="Scr\ModManager.cs" />
+        <Compile Include="Scr\ResourcesManager.cs" />
     </ItemGroup>
     <ItemGroup>
       <Content Include="NextLib\Microsoft.CSharp.dll">
