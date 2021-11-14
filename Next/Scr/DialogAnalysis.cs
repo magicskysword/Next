@@ -123,6 +123,7 @@ namespace SkySwordKill.Next
                 {
                     if (CheckCondition(trigger.condition,newEnv))
                     {
+                        Main.LogInfo($"触发器 [{trigger.id}] {trigger.condition} 触发成功。");
                         StartDialogEvent(trigger.triggerEvent,newEnv);
                         return true;
                     }

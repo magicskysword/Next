@@ -14,6 +14,8 @@ namespace SkySwordKill.Next
         public string roleName;
         public UINPCData bindNpc;
 
+        public int qiyuID;
+        public int qiyuOption;
 
         #endregion
 

@@ -140,6 +140,9 @@
         <Compile Include="Scr\DialogEvent\SetStr.cs" />
         <Compile Include="Scr\DialogTriggerData.cs" />
         <Compile Include="Scr\DialogTrigger\OnChat.cs" />
+        <Compile Include="Scr\DialogTrigger\OnQiYuClose.cs" />
+        <Compile Include="Scr\DialogTrigger\OnQiYuShow.cs" />
+        <Compile Include="Scr\DialogTrigger\OnQiYuOption.cs" />
         <Compile Include="Scr\ExpressionEvaluator\ExpressionEvaluator.cs" />
         <Compile Include="Scr\FileAsset.cs" />
         <Compile Include="Scr\Main.cs" />
