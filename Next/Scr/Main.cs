@@ -17,7 +17,7 @@ namespace SkySwordKill.Next
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.2.11";
+        public const string MOD_VERSION = "0.2.12";
         
         public static Main Instance { get; private set; }
         public static int logIndent = 0;

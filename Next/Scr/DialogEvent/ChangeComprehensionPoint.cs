@@ -2,13 +2,14 @@
 
 namespace SkySwordKill.Next.DialogEvent
 {
-    [DialogEvent("ChangeExp")]
-    public class ChangeExp : IDialogEvent
+    [DialogEvent("ChangeComprehensionPoint")]
+    public class ChangeComprehensionPoint : IDialogEvent
     {
         public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
         {
             int num = command.GetInt(0);
-            Tools.instance.getPlayer().addEXP(num);
+            var player = Tools.instance.getPlayer();
+            player.WuDaoDian = Math.Max(0,player.WuDaoDian+num);
             callback?.Invoke();
         }
     }
