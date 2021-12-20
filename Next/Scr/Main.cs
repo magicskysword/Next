@@ -17,7 +17,7 @@ namespace SkySwordKill.Next
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.2.13";
+        public const string MOD_VERSION = "0.2.14";
 
         public static Main Instance { get; private set; }
         public static int logIndent = 0;
@@ -64,10 +64,8 @@ namespace SkySwordKill.Next
             Harmony.CreateAndPatchAll(typeof(NpcJieSuanManagerPatch));
 
             // 资源相关Patch
-            Harmony.CreateAndPatchAll(typeof(StaticSkillUIPatch));
-            Harmony.CreateAndPatchAll(typeof(SkillUIPatch));
+            Harmony.CreateAndPatchAll(typeof(SkillIconPatch));
             Harmony.CreateAndPatchAll(typeof(ItemUIPatch));
-            Harmony.CreateAndPatchAll(typeof(ItemUIPatch2));
 
             Harmony.CreateAndPatchAll(typeof(BagActiveSkillGetIconSprite));
             Harmony.CreateAndPatchAll(typeof(BagPassiveSkillGetIconSprite));
@@ -169,8 +167,8 @@ namespace SkySwordKill.Next
         }
     }
 
-    [HarmonyPatch(typeof(GUIPackage.Skill),"initStaticSkill")]
-    public class StaticSkillUIPatch
+    [HarmonyPatch(typeof(GUIPackage.Skill), "InitImage")]
+    public class SkillIconPatch
     {
         public static int GetStaticSkillIconByKey(int key)
         {
@@ -183,49 +181,6 @@ namespace SkySwordKill.Next
             }
         }
 
-        [HarmonyPostfix]
-        public static void Postfix(GUIPackage.Skill __instance,int id, int level, int max)
-        {
-            var staticSkillIDByKey = GetStaticSkillIconByKey(__instance.skill_ID);
-            var path = $"StaticSkill Icon/{staticSkillIDByKey}";
-            if (Main.Instance.resourcesManager.TryGetAsset($"Assets/{path}.png", asset =>
-            {
-                if (asset is Texture2D texture)
-                {
-                    __instance.skill_Icon = texture;
-                    __instance.skillIconSprite = Main.Instance.resourcesManager.GetSpriteCache(texture);
-                }
-            }))
-            {
-                Main.LogInfo($"功法 [{__instance.skill_ID}] 图标加载成功");
-            }
-            else
-            {
-                Texture2D exists = Resources.Load<Texture2D>(path);
-                if (exists)
-                {
-                    __instance.skill_Icon = exists;
-                }
-                else
-                {
-                    __instance.skill_Icon = Resources.Load<Texture2D>("StaticSkill Icon/0");
-                }
-                Sprite exists2 = Resources.Load<Sprite>(path);
-                if (exists2)
-                {
-                    __instance.skillIconSprite = exists2;
-                }
-                else
-                {
-                    __instance.skillIconSprite = Resources.Load<Sprite>("StaticSkill Icon/0");
-                }
-            }
-        }
-    }
-
-    [HarmonyPatch(typeof(GUIPackage.Skill),"skillInit")]
-    public class SkillUIPatch
-    {
         public static int GetSkillIconByKey(int key)
         {
             if (key < 0)
@@ -238,45 +193,87 @@ namespace SkySwordKill.Next
         }
 
         [HarmonyPostfix]
-        public static void Postfix(GUIPackage.Skill __instance,int id, int level, int max)
+        public static void Postfix(GUIPackage.Skill __instance)
         {
-            var path = $"Skill Icon/{GetSkillIconByKey(__instance.skill_ID)}";
-            if (Main.Instance.resourcesManager.TryGetAsset($"Assets/{path}.png", asset =>
+            if (__instance.IsStaticSkill)
             {
-                if (asset is Texture2D texture)
+                // 功法图标
+                var staticSkillIDByKey = GetStaticSkillIconByKey(__instance.skill_ID);
+                var path = $"StaticSkill Icon/{staticSkillIDByKey}";
+                if (Main.Instance.resourcesManager.TryGetAsset($"Assets/{path}.png", asset =>
                 {
-                    __instance.skill_Icon = texture;
-                    __instance.skillIconSprite = Main.Instance.resourcesManager.GetSpriteCache(texture);
+                    if (asset is Texture2D texture)
+                    {
+                        __instance.skill_Icon = texture;
+                        __instance.skillIconSprite = Main.Instance.resourcesManager.GetSpriteCache(texture);
+                    }
+                }))
+                {
+                    Main.LogInfo($"功法 [{__instance.skill_ID}] 图标加载成功");
                 }
-            }))
-            {
-                Main.LogInfo($"技能 [{__instance.skill_ID}] 图标加载成功");
+                else
+                {
+                    Texture2D exists = Resources.Load<Texture2D>(path);
+                    if (exists)
+                    {
+                        __instance.skill_Icon = exists;
+                    }
+                    else
+                    {
+                        __instance.skill_Icon = Resources.Load<Texture2D>("StaticSkill Icon/0");
+                    }
+                    Sprite exists2 = Resources.Load<Sprite>(path);
+                    if (exists2)
+                    {
+                        __instance.skillIconSprite = exists2;
+                    }
+                    else
+                    {
+                        __instance.skillIconSprite = Resources.Load<Sprite>("StaticSkill Icon/0");
+                    }
+                }
             }
             else
             {
-                Texture2D exists = Resources.Load<Texture2D>(path);
-                if (exists)
+                // 神通图标
+                var path = $"Skill Icon/{GetSkillIconByKey(__instance.skill_ID)}";
+                if (Main.Instance.resourcesManager.TryGetAsset($"Assets/{path}.png", asset =>
                 {
-                    __instance.skill_Icon = exists;
+                    if (asset is Texture2D texture)
+                    {
+                        __instance.skill_Icon = texture;
+                        __instance.skillIconSprite = Main.Instance.resourcesManager.GetSpriteCache(texture);
+                    }
+                }))
+                {
+                    Main.LogInfo($"技能 [{__instance.skill_ID}] 图标加载成功");
                 }
                 else
                 {
-                    __instance.skill_Icon = Resources.Load<Texture2D>("Skill Icon/0");
-                }
-                Sprite exists2 = Resources.Load<Sprite>(path);
-                if (exists2)
-                {
-                    __instance.skillIconSprite = exists2;
-                }
-                else
-                {
-                    __instance.skillIconSprite = Resources.Load<Sprite>("Skill Icon/0");
-                }
-            };
+                    Texture2D exists = Resources.Load<Texture2D>(path);
+                    if (exists)
+                    {
+                        __instance.skill_Icon = exists;
+                    }
+                    else
+                    {
+                        __instance.skill_Icon = Resources.Load<Texture2D>("Skill Icon/0");
+                    }
+                    Sprite exists2 = Resources.Load<Sprite>(path);
+                    if (exists2)
+                    {
+                        __instance.skillIconSprite = exists2;
+                    }
+                    else
+                    {
+                        __instance.skillIconSprite = Resources.Load<Sprite>("Skill Icon/0");
+                    }
+                };
+            }
         }
     }
 
-    [HarmonyPatch(typeof(GUIPackage.item),MethodType.Constructor,new []{typeof(int)})]
+    [HarmonyPatch(typeof(GUIPackage.item), "InitImage")]
     public class ItemUIPatch
     {
         public static int GetItemIconByKey(_ItemJsonData itemJsonData)
@@ -285,39 +282,9 @@ namespace SkySwordKill.Next
         }
 
         [HarmonyPostfix]
-        public static void Postfix(GUIPackage.item __instance,int id)
+        public static void Postfix(GUIPackage.item __instance)
         {
-            _ItemJsonData itemJsonData = _ItemJsonData.DataDict[id];
-            var path = $"Item Icon/{GetItemIconByKey(itemJsonData)}";
-            if (Main.Instance.resourcesManager.TryGetAsset($"Assets/{path}.png", asset =>
-            {
-                if (asset is Texture2D texture)
-                {
-                    __instance.itemIcon = texture;
-                    __instance.itemIconSprite = Main.Instance.resourcesManager.GetSpriteCache(texture);
-                }
-            }))
-            {
-                Main.LogInfo($"物品 [{__instance.itemID}] 图标加载成功");
-            }
-        }
-    }
-
-    [HarmonyPatch(typeof(GUIPackage.item),MethodType.Constructor,new []
-    {
-        typeof(string), typeof(int), typeof(string), typeof(string), typeof(int), typeof(GUIPackage.item.ItemType), typeof(int)
-    })]
-    public class ItemUIPatch2
-    {
-        public static int GetItemIconByKey(_ItemJsonData itemJsonData)
-        {
-            return itemJsonData.ItemIcon > 0 ? itemJsonData.ItemIcon : itemJsonData.id;
-        }
-
-        [HarmonyPostfix]
-        public static void Postfix(GUIPackage.item __instance,string name, int id, string nameCN, string desc,
-            int max_num, GUIPackage.item.ItemType type, int price)
-        {
+            int id = __instance.itemID;
             _ItemJsonData itemJsonData = _ItemJsonData.DataDict[id];
             var path = $"Item Icon/{GetItemIconByKey(itemJsonData)}";
             if (Main.Instance.resourcesManager.TryGetAsset($"Assets/{path}.png", asset =>
@@ -340,7 +307,7 @@ namespace SkySwordKill.Next
         [HarmonyPrefix]
         public static bool LoadSprite(Bag.ActiveSkill __instance,ref Sprite __result)
         {
-            __result = ResManager.inst.LoadSprite("Skill Icon/" + SkillUIPatch.GetSkillIconByKey(__instance.Id));
+            __result = ResManager.inst.LoadSprite("Skill Icon/" + SkillIconPatch.GetSkillIconByKey(__instance.Id));
             return false;
         }
     }
@@ -351,8 +318,7 @@ namespace SkySwordKill.Next
         [HarmonyPrefix]
         public static bool LoadSprite(Bag.PassiveSkill __instance,ref Sprite __result)
         {
-            __result = ResManager.inst.LoadSprite("StaticSkill Icon/" +
-                                                StaticSkillUIPatch.GetStaticSkillIconByKey(__instance.Id));
+            __result = ResManager.inst.LoadSprite("StaticSkill Icon/" + SkillIconPatch.GetStaticSkillIconByKey(__instance.Id));
             return false;
         }
     }
