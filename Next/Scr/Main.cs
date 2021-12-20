@@ -17,8 +17,8 @@ namespace SkySwordKill.Next
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.2.12";
-        
+        public const string MOD_VERSION = "0.2.13";
+
         public static Main Instance { get; private set; }
         public static int logIndent = 0;
 
@@ -58,11 +58,11 @@ namespace SkySwordKill.Next
                 "是否在游戏启动时弹出调试窗口。");
 
             resourcesManager = gameObject.AddComponent<ResourcesManager>();
-            
+
             // 数据加载Patch
             Harmony.CreateAndPatchAll(typeof(JsonDataPatch));
             Harmony.CreateAndPatchAll(typeof(NpcJieSuanManagerPatch));
-            
+
             // 资源相关Patch
             Harmony.CreateAndPatchAll(typeof(StaticSkillUIPatch));
             Harmony.CreateAndPatchAll(typeof(SkillUIPatch));
@@ -71,13 +71,13 @@ namespace SkySwordKill.Next
 
             Harmony.CreateAndPatchAll(typeof(BagActiveSkillGetIconSprite));
             Harmony.CreateAndPatchAll(typeof(BagPassiveSkillGetIconSprite));
-            
+
             Harmony.CreateAndPatchAll(typeof(ResManagerLoadSpritePatch));
             Harmony.CreateAndPatchAll(typeof(ResManagerLoadTexturePatch));
-            
+
             // Resources Patch 不成功
             //Harmony.CreateAndPatchAll(typeof(ResourcesPatch));
-            
+
             // 加载运行时脚本所需DLL
             string nextLibDirPath = Path.Combine(BepInEx.Paths.PluginPath, "NextLib");
             Assembly.LoadFrom(Path.Combine(nextLibDirPath, "Microsoft.CSharp.dll"));
@@ -222,7 +222,7 @@ namespace SkySwordKill.Next
             }
         }
     }
-    
+
     [HarmonyPatch(typeof(GUIPackage.Skill),"skillInit")]
     public class SkillUIPatch
     {
@@ -236,7 +236,7 @@ namespace SkySwordKill.Next
                 return staticSkillJsonData.icon > 0 ? staticSkillJsonData.icon : staticSkillJsonData.Skill_ID;
             }
         }
-        
+
         [HarmonyPostfix]
         public static void Postfix(GUIPackage.Skill __instance,int id, int level, int max)
         {
@@ -275,7 +275,7 @@ namespace SkySwordKill.Next
             };
         }
     }
-    
+
     [HarmonyPatch(typeof(GUIPackage.item),MethodType.Constructor,new []{typeof(int)})]
     public class ItemUIPatch
     {
@@ -283,7 +283,7 @@ namespace SkySwordKill.Next
         {
             return itemJsonData.ItemIcon > 0 ? itemJsonData.ItemIcon : itemJsonData.id;
         }
-        
+
         [HarmonyPostfix]
         public static void Postfix(GUIPackage.item __instance,int id)
         {
@@ -302,7 +302,7 @@ namespace SkySwordKill.Next
             }
         }
     }
-    
+
     [HarmonyPatch(typeof(GUIPackage.item),MethodType.Constructor,new []
     {
         typeof(string), typeof(int), typeof(string), typeof(string), typeof(int), typeof(GUIPackage.item.ItemType), typeof(int)
@@ -313,7 +313,7 @@ namespace SkySwordKill.Next
         {
             return itemJsonData.ItemIcon > 0 ? itemJsonData.ItemIcon : itemJsonData.id;
         }
-        
+
         [HarmonyPostfix]
         public static void Postfix(GUIPackage.item __instance,string name, int id, string nameCN, string desc,
             int max_num, GUIPackage.item.ItemType type, int price)
@@ -344,19 +344,19 @@ namespace SkySwordKill.Next
             return false;
         }
     }
-    
+
     [HarmonyPatch(typeof(Bag.PassiveSkill),"GetIconSprite")]
     public class BagPassiveSkillGetIconSprite
     {
         [HarmonyPrefix]
         public static bool LoadSprite(Bag.PassiveSkill __instance,ref Sprite __result)
         {
-            __result = ResManager.inst.LoadSprite("StaticSkill Icon/" + 
+            __result = ResManager.inst.LoadSprite("StaticSkill Icon/" +
                                                 StaticSkillUIPatch.GetStaticSkillIconByKey(__instance.Id));
             return false;
         }
     }
-    
+
     [HarmonyPatch(typeof(ResManager),"LoadTexture2D")]
     public class ResManagerLoadTexturePatch
     {
