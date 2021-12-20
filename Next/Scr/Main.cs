@@ -285,6 +285,11 @@ namespace SkySwordKill.Next
         public static void Postfix(GUIPackage.item __instance)
         {
             int id = __instance.itemID;
+            if (id == -1) return;
+            if (!_ItemJsonData.DataDict.ContainsKey(id))
+            {
+                return;
+            }
             _ItemJsonData itemJsonData = _ItemJsonData.DataDict[id];
             var path = $"Item Icon/{GetItemIconByKey(itemJsonData)}";
             if (Main.Instance.resourcesManager.TryGetAsset($"Assets/{path}.png", asset =>
