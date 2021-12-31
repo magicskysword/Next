@@ -10,8 +10,11 @@ namespace SkySwordKill.Next
     {
         #region 字段
 
+        [NonSerialized]
         public bool isWinOpen;
-        private Vector2 scrollRoll = new Vector2(0, 0);
+        private Vector2 scrollRollMods = new Vector2(0, 0);
+        private Vector2 scrollRollDebugString = new Vector2(0, 0);
+        private Vector2 scrollRollDebugInt = new Vector2(0, 0);
 
         private bool isGUIInit = false;
         private int toolbarSelected = 0;
@@ -46,8 +49,13 @@ namespace SkySwordKill.Next
             if (Input.GetKeyDown(debugKeyCode.Value))
             {
                 isWinOpen = !isWinOpen;
-                winRect = new Rect(W(0.1f), H(0.1f), W(0.8f), H(0.8f));
+                RefreshWinRect();
             }
+        }
+
+        private void RefreshWinRect()
+        {
+            winRect = new Rect(W(0.1f), H(0.1f), W(0.8f), H(0.8f));
         }
 
         public void GUIInit()
@@ -99,14 +107,18 @@ namespace SkySwordKill.Next
         {
             GUILayout.BeginHorizontal();
             {
+                GUILayout.Label($"按 {debugKeyCode.Value.ToString()} 开关此窗口。");
+                // 该部分不简化是为了避免反复操作 debugMode.Value 属性
+                var debugModeOpen = GUILayout.Toggle(debugMode.Value, "调试模式");
+                if (debugModeOpen != debugMode.Value)
+                    debugMode.Value = debugModeOpen;
+                
                 if (debugMode.Value)
                 {
-                    GUILayout.Label($"按 {debugKeyCode.Value.ToString()} 开关此窗口。当前模式：调试模式（调试模式可从ModConfig开关）");
                     toolbarSelected = GUILayout.Toolbar(toolbarSelected, toolbarList);
                 }
                 else
                 {
-                    GUILayout.Label($"按 {debugKeyCode.Value.ToString()} 开关此窗口。当前模式：普通模式（调试模式可从ModConfig开关）");
                     toolbarSelected = 0;
                 }
 
@@ -115,14 +127,18 @@ namespace SkySwordKill.Next
                 
                 if (debugMode.Value)
                 {
-                    if (GUILayout.Button("重置Base生成（重启游戏生效）"))
+                    if (GUILayout.Button("重载Mod"))
                     {
-                        gameVersion.Value = "";
+                        ModManager.ReloadAllMod();
+                    }
+                    if (GUILayout.Button("导出Base"))
+                    {
+                        ModManager.GenerateBaseData();
                     }
                 }
+                
                 // 该部分不简化是为了避免反复操作 openInStart.Value 属性
-                bool isPop = openInStart.Value;
-                isPop = GUILayout.Toggle(isPop, "游戏启动时弹出");
+                bool isPop = GUILayout.Toggle(openInStart.Value, "游戏启动时弹出");
                 if (isPop != openInStart.Value)
                     openInStart.Value = isPop;
 
@@ -145,7 +161,7 @@ namespace SkySwordKill.Next
         private void DrawModList()
         {
             GUILayout.Label("Mod列表",titleStyle);
-            GUILayout.BeginScrollView(scrollRoll, false, true,
+            scrollRollMods = GUILayout.BeginScrollView(scrollRollMods, false, true,
                 new GUILayoutOption[]
                 {
                     GUILayout.MinHeight(winRect.height * 0.8f)
@@ -299,7 +315,7 @@ namespace SkySwordKill.Next
             {
                 GUI.Box(debugArea2,"");
                 GUILayout.Label("Int变量调试窗口");
-                GUILayout.BeginScrollView(scrollRoll, false, true,
+                scrollRollDebugInt = GUILayout.BeginScrollView(scrollRollDebugInt, false, true,
                     new GUILayoutOption[]
                     {
                         GUILayout.MinHeight(debugArea2.height - 50)
@@ -330,7 +346,7 @@ namespace SkySwordKill.Next
             {
                 GUI.Box(debugArea3,"");
                 GUILayout.Label("String变量调试窗口");
-                GUILayout.BeginScrollView(scrollRoll, false, true,
+                scrollRollDebugString = GUILayout.BeginScrollView(scrollRollDebugString, false, true,
                     new GUILayoutOption[]
                     {
                         GUILayout.MinHeight(debugArea3.height - 50)

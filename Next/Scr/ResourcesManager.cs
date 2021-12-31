@@ -34,6 +34,12 @@ namespace SkySwordKill.Next
 
         #region 公共方法
 
+        public void Init()
+        {
+            fileAssets.Clear();
+            spriteCache.Clear();
+        }
+
         public bool TryGetAsset(string path,Action<Object> callback)
         {
             if (fileAssets.TryGetValue(path.ToLower(), out var fileAsset))

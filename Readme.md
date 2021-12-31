@@ -47,10 +47,10 @@ UnityEngine.UIModule
 添加完后直接Build即可，将Build出来的 `Next.Dll` 与 `NextLib`文件夹 置入 `觅长生\64\BepInEx\plugins` 文件夹即可
 
 ## 使用库
-[ExpressionEvaluator](https://github.com/codingseb/ExpressionEvaluator) 用于事件与触发器的条件判断
+[codingseb/ExpressionEvaluator](https://github.com/codingseb/ExpressionEvaluator) 用于事件与触发器的条件判断
 
 ## 相关库
 [BepinEx](https://github.com/BepInEx/BepInEx) 本mod基于BepinEx
 
 ## 许可证
-MIT 许可证
+[MIT许可证](https://github.com/magicskysword/Next/blob/main/LICENSE)

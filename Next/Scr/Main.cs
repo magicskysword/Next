@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -9,7 +10,9 @@ using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
 using JSONClass;
+using MarkerMetro.Unity.WinLegacy.Reflection;
 using UnityEngine;
+using BindingFlags = System.Reflection.BindingFlags;
 using Object = UnityEngine.Object;
 
 namespace SkySwordKill.Next
@@ -17,12 +20,11 @@ namespace SkySwordKill.Next
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.2.14";
+        public const string MOD_VERSION = "0.2.15";
 
         public static Main Instance { get; private set; }
         public static int logIndent = 0;
-
-        public ConfigEntry<string> gameVersion;
+        
         public ConfigEntry<bool> debugMode;
         public ConfigEntry<bool> openInStart;
         public ConfigEntry<KeyCode> debugKeyCode;
@@ -36,20 +38,22 @@ namespace SkySwordKill.Next
 
         public void PatchJson()
         {
-            if (gameVersion.Value != Application.version)
-            {
-                ModManager.GenerateBaseData();
-            }
-
-            gameVersion.Value = Application.version;
+            var watcher = Stopwatch.StartNew();
+            ModManager.CloneMainData();
+            watcher.Stop();
+            LogInfo($"储存数据耗时：{watcher.ElapsedMilliseconds / 1000f} s");
+            
             ModManager.LoadAllMod();
+            
+            // Mod加载完成后显示窗口
+            isWinOpen = openInStart.Value;
         }
 
         private void Init()
         {
             Instance = this;
-            gameVersion = Config.Bind("General.GameVersion", "游戏版本", "",
-                "游戏当前的版本，版本与配置不一致时会重新生成Base文件夹。");
+            /*gameVersion = Config.Bind("General.GameVersion", "游戏版本", "",
+                "游戏当前的版本，版本与配置不一致时会重新生成Base文件夹。");*/
             debugKeyCode = Config.Bind("Debug.OpenKeyCode", "调试窗口快捷键", KeyCode.F4,
                 "Next插件调试窗口，用于查看当前加载mod以及进行Mod调试（需打开调试模式）。");
             debugMode = Config.Bind("Debug.Mode", "调试模式开关", false,
@@ -83,7 +87,7 @@ namespace SkySwordKill.Next
             DialogAnalysis.Init();
 
             // 初始窗口状态
-            isWinOpen = openInStart.Value;
+            RefreshWinRect();
         }
 
         public static Coroutine InvokeCoroutine(IEnumerator enumerator)
@@ -118,8 +122,8 @@ namespace SkySwordKill.Next
 
             return sb.ToString();
         }
-
     }
+    
 
     [HarmonyPatch(typeof(YSJSONHelper), "InitJSONClassData")]
     public class JsonDataPatch

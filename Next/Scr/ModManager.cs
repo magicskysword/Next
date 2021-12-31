@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -13,6 +14,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 namespace SkySwordKill.Next
 {
@@ -21,7 +23,8 @@ namespace SkySwordKill.Next
         #region 字段
 
         public static List<ModConfig> modConfigs = new List<ModConfig>();
-        
+        public static MainDataContainer dataContainer;
+
         #endregion
 
         #region 属性
@@ -36,9 +39,7 @@ namespace SkySwordKill.Next
 
         public static Lazy<FieldInfo[]> dataField =
             new Lazy<FieldInfo[]>(() => typeof(jsonData).GetFields());
-
         
-
         #endregion
 
         #region 回调方法
@@ -47,61 +48,146 @@ namespace SkySwordKill.Next
 
         #region 公共方法
 
+        public static void CloneMainData()
+        {
+            dataContainer = MainDataContainer.CloneMainData();
+        }
+
         public static void GenerateBaseData()
         {
             Main.LogInfo($"正在生成Base文件。");
+
+            var sw = Stopwatch.StartNew();
+            
             string dirPath = baseDataDir.Value;
             if (Directory.Exists(dirPath))
                 Directory.Delete(dirPath, true);
             Directory.CreateDirectory(dirPath);
-            jsonData jsonInstance = jsonData.instance;
-            foreach (var fieldInfo in dataField.Value)
+
+            foreach (var pair in dataContainer.dataJObjects)
             {
-                if (fieldInfo.Name.StartsWith("_"))
-                    continue;
-
-                var value = fieldInfo.GetValue(jsonInstance);
-
-                if (value is JSONObject jsonObject)
+                string filePath = Utility.CombinePaths(dirPath, $"{pair.Key}.json");
+                File.WriteAllText(filePath, pair.Value.ToString(Formatting.Indented));
+            }
+            
+            foreach (var pair in dataContainer.dataJSONObjects)
+            {
+                string filePath = Utility.CombinePaths(dirPath, $"{pair.Key}.json");
+                File.WriteAllText(filePath, ConvertJson(pair.Value.Print(true)));
+            }
+            
+            foreach (var pair in dataContainer.dataYSDics)
+            {
+                string dirPathForData = Utility.CombinePaths(dirPath, pair.Key);
+                if (!Directory.Exists(dirPathForData))
+                    Directory.CreateDirectory(dirPathForData);
+                foreach (var kvp in pair.Value)
                 {
-                    string filePath = Utility.CombinePaths(dirPath, $"{fieldInfo.Name}.json");
-                    File.WriteAllText(filePath, ConvertJson(jsonObject.Print(true)));
+                    string filePath = Utility.CombinePaths(dirPathForData, $"{kvp.Key}.json");
+                    File.WriteAllText(filePath, ConvertJson(kvp.Value.Print(true)));
                 }
-                else if (value is JObject jObject)
+            }
+            
+            foreach (var pair in dataContainer.dataJSONObjectArrays)
+            {
+                string dirPathForData = Utility.CombinePaths(dirPath, pair.Key);
+                if (!Directory.Exists(dirPathForData))
+                    Directory.CreateDirectory(dirPathForData);
+                var jsonObjects = pair.Value;
+                for (int i = 0; i < jsonObjects.Length; i++)
                 {
-                    string filePath = Utility.CombinePaths(dirPath, $"{fieldInfo.Name}.json");
-                    File.WriteAllText(filePath, jObject.ToString(Formatting.Indented));
+                    if (jsonObjects[i] == null)
+                        continue;
+                    string filePath = Utility.CombinePaths(dirPathForData, $"{i}.json");
+                    File.WriteAllText(filePath, ConvertJson(jsonObjects[i].Print(true)));
                 }
-                else if (value is jsonData.YSDictionary<string, JSONObject> dicData)
+            }
+            
+            sw.Stop();
+            Main.LogInfo($"Base导出完毕，耗时 {sw.ElapsedMilliseconds / 1000f} s");
+        }
+
+        public static void ReloadAllMod()
+        {
+            Main.LogInfo($"开始重载Mod......");
+            var sw = Stopwatch.StartNew();
+            RestoreBaseData();
+            LoadAllMod();
+            InitJSONClassData();
+            SceneManager.LoadScene("MainMenu");
+            sw.Stop();
+            Main.LogInfo($"重载Mod完毕，耗时：{sw.ElapsedMilliseconds / 1000f} s");
+        }
+
+        private static void InitJSONClassData()
+        {
+            Type[] types = Assembly.GetAssembly(typeof(IJSONClass)).GetTypes();
+            List<Type> list = new List<Type>();
+            foreach (Type type in types)
+            {
+                if (!type.IsInterface)
                 {
-                    string dirPathForData = Utility.CombinePaths(dirPath, fieldInfo.Name);
-                    if (!Directory.Exists(dirPathForData))
-                        Directory.CreateDirectory(dirPathForData);
-                    foreach (var kvp in dicData)
+                    Type[] interfaces = type.GetInterfaces();
+                    for (int j = 0; j < interfaces.Length; j++)
                     {
-                        string filePath = Utility.CombinePaths(dirPathForData, $"{kvp.Key}.json");
-                        File.WriteAllText(filePath, ConvertJson(kvp.Value.Print(true)));
+                        if (interfaces[j] == typeof(IJSONClass))
+                        {
+                            list.Add(type);
+                        }
                     }
                 }
-                else if (value is JSONObject[] jsonObjects)
+            }
+            foreach (Type type2 in list)
+            {
+                MethodInfo method = type2.GetMethod("InitDataDict");
+                if (method != null)
                 {
-                    string dirPathForData = Utility.CombinePaths(dirPath, fieldInfo.Name);
-                    if (!Directory.Exists(dirPathForData))
-                        Directory.CreateDirectory(dirPathForData);
-                    for (int i = 0; i < jsonObjects.Length; i++)
-                    {
-                        if (jsonObjects[i] == null)
-                            continue;
-                        string filePath = Utility.CombinePaths(dirPathForData, $"{i}.json");
-                        File.WriteAllText(filePath, ConvertJson(jsonObjects[i].Print(true)));
-                    }
+                    method.Invoke(null, null);
                 }
             }
         }
 
+        public static void RestoreBaseData()
+        {
+            Type[] types = Assembly.GetAssembly(typeof(IJSONClass)).GetTypes();
+            List<Type> list = new List<Type>();
+            foreach (Type type in types)
+            {
+                if (!type.IsInterface)
+                {
+                    Type[] interfaces = type.GetInterfaces();
+                    for (int j = 0; j < interfaces.Length; j++)
+                    {
+                        if (interfaces[j] == typeof(IJSONClass))
+                        {
+                            list.Add(type);
+                        }
+                    }
+                }
+            }
+            foreach (Type jsonType in list)
+            {
+                var dataDic = 
+                    jsonType
+                        .GetField("DataDict", BindingFlags.Static | BindingFlags.Public)
+                        ?.GetValue(null) as IDictionary;
+                dataDic?.Clear();
+                
+                var dataList = 
+                    jsonType
+                        .GetField("DataList", BindingFlags.Static | BindingFlags.Public)
+                        ?.GetValue(null) as IList;
+                dataList?.Clear();
+            }
+            
+            MainDataContainer.CoverMainData(dataContainer);
+        }
+        
         public static void LoadAllMod()
         {
             modConfigs.Clear();
+            Main.Instance.resourcesManager.Init();
+            
             Main.LogInfo($"===================" + "正在读取Mod列表" + "=====================");
             var home = Directory.CreateDirectory(pluginDir.Value);
             jsonData jsonInstance = jsonData.instance;

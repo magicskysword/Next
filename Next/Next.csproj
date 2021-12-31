@@ -160,6 +160,7 @@
         <Compile Include="Scr\FileAsset.cs" />
         <Compile Include="Scr\Main.cs" />
         <Compile Include="Scr\Main.DebugEditor.cs" />
+        <Compile Include="Scr\MainDataContainer.cs" />
         <Compile Include="Scr\ModConfig.cs" />
         <Compile Include="Scr\ModManager.cs" />
         <Compile Include="Scr\ResourcesManager.cs" />
