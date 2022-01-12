@@ -3,6 +3,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
+using UnityEngine.SceneManagement;
 
 namespace SkySwordKill.Next
 {
@@ -127,10 +128,19 @@ namespace SkySwordKill.Next
                 
                 if (debugMode.Value)
                 {
+                    var inMainScene = SceneManager.GetActiveScene().name == "MainMenu";
+                    GUI.enabled = inMainScene;
+                    
+                    if(!inMainScene)
+                        GUILayout.Label("只能在游戏开始界面重载Mod");
+                    
                     if (GUILayout.Button("重载Mod"))
                     {
                         ModManager.ReloadAllMod();
                     }
+
+                    GUI.enabled = true;
+                    
                     if (GUILayout.Button("导出Base"))
                     {
                         ModManager.GenerateBaseData();

@@ -9,18 +9,15 @@ using System.Text.RegularExpressions;
 using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
-using JSONClass;
-using MarkerMetro.Unity.WinLegacy.Reflection;
+using SkySwordKill.Next.Patch;
 using UnityEngine;
-using BindingFlags = System.Reflection.BindingFlags;
-using Object = UnityEngine.Object;
 
 namespace SkySwordKill.Next
 {
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.2.15";
+        public const string MOD_VERSION = "0.2.16";
 
         public static Main Instance { get; private set; }
         public static int logIndent = 0;
@@ -77,6 +74,8 @@ namespace SkySwordKill.Next
             Harmony.CreateAndPatchAll(typeof(ResManagerLoadSpritePatch));
             Harmony.CreateAndPatchAll(typeof(ResManagerLoadTexturePatch));
 
+            Harmony.CreateAndPatchAll(typeof(UIFightWeaponItemPatch));
+
             // Resources Patch 不成功
             //Harmony.CreateAndPatchAll(typeof(ResourcesPatch));
 
@@ -109,6 +108,14 @@ namespace SkySwordKill.Next
         {
             Instance.Logger.LogError($"{GetIndent()}{obj}");
         }
+        
+        public static void LogDebug(object obj)
+        {
+            if (Instance.debugMode.Value)
+            {
+                Instance.Logger.LogInfo($"[Debug]{obj}");
+            }
+        }
 
         private static string GetIndent()
         {
@@ -125,247 +132,19 @@ namespace SkySwordKill.Next
     }
     
 
-    [HarmonyPatch(typeof(YSJSONHelper), "InitJSONClassData")]
-    public class JsonDataPatch
-    {
-        [HarmonyPrefix]
-        public static void FixMethod()
-        {
-            Main.Instance.PatchJson();
-        }
-    }
+    
 
-    [HarmonyPatch(typeof(NpcJieSuanManager),"InitCyData")]
-    public class NpcJieSuanManagerPatch
-    {
-        [HarmonyPrefix]
-        public static void FixMethod(NpcJieSuanManager __instance)
-        {
-            Main.LogInfo("重新Patch Npc数据");
-            jsonData jsonInstance = jsonData.instance;
-            var fieldInfo = typeof(jsonData).GetField("AvatarJsonData");
-            foreach (var modConfig in ModManager.modConfigs)
-            {
-                if (modConfig.jsonPathCache.TryGetValue("AvatarJsonData",out var path))
-                {
-                    ModManager.PatchJsonObject(fieldInfo,path,jsonInstance.AvatarJsonData);
-                }
-            }
-        }
-    }
+    
 
-    [HarmonyPatch(typeof(Resources), "Load", new Type[] {typeof(string),typeof(Type)})]
-    public class ResourcesPatch
-    {
-        [HarmonyPrefix]
-        public static bool FixMethod(string path,Type systemTypeInstance,ref Object __result)
-        {
-            Main.LogInfo($"读取资源：<{systemTypeInstance}>({path}");
-            if (Main.Instance.resourcesManager.TryGetAsset(path, out var asset))
-            {
-                __result = asset;
-                return true;
-            }
+    
 
-            return false;
-        }
-    }
+    
 
-    [HarmonyPatch(typeof(GUIPackage.Skill), "InitImage")]
-    public class SkillIconPatch
-    {
-        public static int GetStaticSkillIconByKey(int key)
-        {
-            if (key < 0)
-                return -1;
-            else
-            {
-                var staticSkillJsonData = StaticSkillJsonData.DataDict[key];
-                return staticSkillJsonData.icon > 0 ? staticSkillJsonData.icon : staticSkillJsonData.Skill_ID;
-            }
-        }
+    
 
-        public static int GetSkillIconByKey(int key)
-        {
-            if (key < 0)
-                return -1;
-            else
-            {
-                var staticSkillJsonData = _skillJsonData.DataDict[key];
-                return staticSkillJsonData.icon > 0 ? staticSkillJsonData.icon : staticSkillJsonData.Skill_ID;
-            }
-        }
+    
 
-        [HarmonyPostfix]
-        public static void Postfix(GUIPackage.Skill __instance)
-        {
-            if (__instance.IsStaticSkill)
-            {
-                // 功法图标
-                var staticSkillIDByKey = GetStaticSkillIconByKey(__instance.skill_ID);
-                var path = $"StaticSkill Icon/{staticSkillIDByKey}";
-                if (Main.Instance.resourcesManager.TryGetAsset($"Assets/{path}.png", asset =>
-                {
-                    if (asset is Texture2D texture)
-                    {
-                        __instance.skill_Icon = texture;
-                        __instance.skillIconSprite = Main.Instance.resourcesManager.GetSpriteCache(texture);
-                    }
-                }))
-                {
-                    Main.LogInfo($"功法 [{__instance.skill_ID}] 图标加载成功");
-                }
-                else
-                {
-                    Texture2D exists = Resources.Load<Texture2D>(path);
-                    if (exists)
-                    {
-                        __instance.skill_Icon = exists;
-                    }
-                    else
-                    {
-                        __instance.skill_Icon = Resources.Load<Texture2D>("StaticSkill Icon/0");
-                    }
-                    Sprite exists2 = Resources.Load<Sprite>(path);
-                    if (exists2)
-                    {
-                        __instance.skillIconSprite = exists2;
-                    }
-                    else
-                    {
-                        __instance.skillIconSprite = Resources.Load<Sprite>("StaticSkill Icon/0");
-                    }
-                }
-            }
-            else
-            {
-                // 神通图标
-                var path = $"Skill Icon/{GetSkillIconByKey(__instance.skill_ID)}";
-                if (Main.Instance.resourcesManager.TryGetAsset($"Assets/{path}.png", asset =>
-                {
-                    if (asset is Texture2D texture)
-                    {
-                        __instance.skill_Icon = texture;
-                        __instance.skillIconSprite = Main.Instance.resourcesManager.GetSpriteCache(texture);
-                    }
-                }))
-                {
-                    Main.LogInfo($"技能 [{__instance.skill_ID}] 图标加载成功");
-                }
-                else
-                {
-                    Texture2D exists = Resources.Load<Texture2D>(path);
-                    if (exists)
-                    {
-                        __instance.skill_Icon = exists;
-                    }
-                    else
-                    {
-                        __instance.skill_Icon = Resources.Load<Texture2D>("Skill Icon/0");
-                    }
-                    Sprite exists2 = Resources.Load<Sprite>(path);
-                    if (exists2)
-                    {
-                        __instance.skillIconSprite = exists2;
-                    }
-                    else
-                    {
-                        __instance.skillIconSprite = Resources.Load<Sprite>("Skill Icon/0");
-                    }
-                };
-            }
-        }
-    }
+    
 
-    [HarmonyPatch(typeof(GUIPackage.item), "InitImage")]
-    public class ItemUIPatch
-    {
-        public static int GetItemIconByKey(_ItemJsonData itemJsonData)
-        {
-            return itemJsonData.ItemIcon > 0 ? itemJsonData.ItemIcon : itemJsonData.id;
-        }
-
-        [HarmonyPostfix]
-        public static void Postfix(GUIPackage.item __instance)
-        {
-            int id = __instance.itemID;
-            if (id == -1) return;
-            if (!_ItemJsonData.DataDict.ContainsKey(id))
-            {
-                return;
-            }
-            _ItemJsonData itemJsonData = _ItemJsonData.DataDict[id];
-            var path = $"Item Icon/{GetItemIconByKey(itemJsonData)}";
-            if (Main.Instance.resourcesManager.TryGetAsset($"Assets/{path}.png", asset =>
-            {
-                if (asset is Texture2D texture)
-                {
-                    __instance.itemIcon = texture;
-                    __instance.itemIconSprite = Main.Instance.resourcesManager.GetSpriteCache(texture);
-                }
-            }))
-            {
-                Main.LogInfo($"物品 [{__instance.itemID}] 图标加载成功");
-            }
-        }
-    }
-
-    [HarmonyPatch(typeof(Bag.ActiveSkill),"GetIconSprite")]
-    public class BagActiveSkillGetIconSprite
-    {
-        [HarmonyPrefix]
-        public static bool LoadSprite(Bag.ActiveSkill __instance,ref Sprite __result)
-        {
-            __result = ResManager.inst.LoadSprite("Skill Icon/" + SkillIconPatch.GetSkillIconByKey(__instance.Id));
-            return false;
-        }
-    }
-
-    [HarmonyPatch(typeof(Bag.PassiveSkill),"GetIconSprite")]
-    public class BagPassiveSkillGetIconSprite
-    {
-        [HarmonyPrefix]
-        public static bool LoadSprite(Bag.PassiveSkill __instance,ref Sprite __result)
-        {
-            __result = ResManager.inst.LoadSprite("StaticSkill Icon/" + SkillIconPatch.GetStaticSkillIconByKey(__instance.Id));
-            return false;
-        }
-    }
-
-    [HarmonyPatch(typeof(ResManager),"LoadTexture2D")]
-    public class ResManagerLoadTexturePatch
-    {
-        [HarmonyPrefix]
-        public static bool LoadTexture2D(ResManager __instance,string path,ref Texture2D __result)
-        {
-            if (Main.Instance.resourcesManager.TryGetAsset($"Assets/{path}.png", out var asset))
-            {
-                if (asset is Texture2D texture)
-                {
-                    __result = texture;
-                    return false;
-                }
-            }
-            return true;
-        }
-    }
-
-    [HarmonyPatch(typeof(ResManager),"LoadSprite")]
-    public class ResManagerLoadSpritePatch
-    {
-        [HarmonyPrefix]
-        public static bool LoadSprite(ResManager __instance,string path,ref Sprite __result)
-        {
-            if (Main.Instance.resourcesManager.TryGetAsset($"Assets/{path}.png", out var asset))
-            {
-                if (asset is Texture2D texture)
-                {
-                    __result = Main.Instance.resourcesManager.GetSpriteCache(texture);
-                    return false;
-                }
-            }
-
-            return true;
-        }
-    }
+    
 }

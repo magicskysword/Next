@@ -163,6 +163,15 @@
         <Compile Include="Scr\MainDataContainer.cs" />
         <Compile Include="Scr\ModConfig.cs" />
         <Compile Include="Scr\ModManager.cs" />
+        <Compile Include="Scr\Patch\BagActiveSkillGetIconSprite.cs" />
+        <Compile Include="Scr\Patch\BagPassiveSkillGetIconSprite.cs" />
+        <Compile Include="Scr\Patch\ItemUIPatch.cs" />
+        <Compile Include="Scr\Patch\JsonDataPatch.cs" />
+        <Compile Include="Scr\Patch\NpcJieSuanManagerPatch.cs" />
+        <Compile Include="Scr\Patch\ResManagerLoadSpritePatch.cs" />
+        <Compile Include="Scr\Patch\ResManagerLoadTexturePatch.cs" />
+        <Compile Include="Scr\Patch\SkillIconPatch.cs" />
+        <Compile Include="Scr\Patch\UIFightWeaponItemPatch.cs" />
         <Compile Include="Scr\ResourcesManager.cs" />
     </ItemGroup>
     <ItemGroup>
