@@ -159,6 +159,7 @@
     <Compile Include="Scr\DialogTrigger\OnQiYuOption.cs" />
     <Compile Include="Scr\ExpressionEvaluator\ExpressionEvaluator.cs" />
     <Compile Include="Scr\FileAsset.cs" />
+    <Compile Include="Scr\Mod\ModSetting.cs" />
     <Compile Include="Scr\Mod\ModState.cs" />
     <Compile Include="Scr\XiaoYeGUI\InterfaceMaker.cs" />
     <Compile Include="Scr\XiaoYeGUI\RayBlocker.cs" />
@@ -169,7 +170,7 @@
     <Compile Include="Scr\Mod\ModConfig.cs" />
     <Compile Include="Scr\Mod\ModManager.cs" />
     <Compile Include="Scr\NextLanguage.cs" />
-    <Compile Include="Scr\NextModSort.cs" />
+    <Compile Include="Scr\NextModSetting.cs" />
     <Compile Include="Scr\Patch\BagActiveSkillGetIconSprite.cs" />
     <Compile Include="Scr\Patch\BagPassiveSkillGetIconSprite.cs" />
     <Compile Include="Scr\Patch\ItemUIPatch.cs" />
@@ -183,9 +184,6 @@
     <Compile Include="Scr\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NextConfig\config.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="NextConfig\language\english.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

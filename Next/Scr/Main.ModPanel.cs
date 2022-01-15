@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace SkySwordKill.Next
         public bool isWinOpen;
         private Vector2 scrollRollLanguages = new Vector2(0, 0);
         private Vector2 scrollRollMods = new Vector2(0, 0);
+        private Vector2 scrollRollModInfo = new Vector2(0, 0);
         private Vector2 scrollRollDebugString = new Vector2(0, 0);
         private Vector2 scrollRollDebugInt = new Vector2(0, 0);
 
@@ -32,10 +34,15 @@ namespace SkySwordKill.Next
         private GUIStyle labelLeftStyle;
         private GUIStyle labelMiddleStyle;
         private GUIStyle labelRightStyle;
+        
+        private GUIStyle modToggleStyle;
+        private GUIStyle modInfoStyle;
 
         private bool isSelectedLanguage = false;
         
         private RayBlocker rayBlocker;
+
+        private int curModSelectedIndex = 0;
 
         #endregion
 
@@ -51,19 +58,20 @@ namespace SkySwordKill.Next
         {
             if (Input.GetKeyDown(winKeyCode.Value))
             {
+                GUIInit();
                 isWinOpen = !isWinOpen;
             }
         }
 
         public void GUIInit()
         {
+            languageRect = new Rect(Screen.width / 2 - 200, Screen.height / 2 - 150, 400, 300);
+            winRect = new Rect(W(0.1f), H(0.1f), W(0.8f), H(0.8f));
+            
             if(isGUIInit)
                 return;
 
             rayBlocker = RayBlocker.CreateRayBlock();
-            
-            languageRect = new Rect(Screen.width / 2 - 200, Screen.height / 2 - 150, 400, 300);
-            winRect = new Rect(W(0.1f), H(0.1f), W(0.8f), H(0.8f));
             
             labelTitleStyle = new GUIStyle("label")
             {
@@ -72,7 +80,19 @@ namespace SkySwordKill.Next
             };
             labelLeftStyle = new GUIStyle("label")
             {
-                alignment = TextAnchor.UpperLeft
+                alignment = TextAnchor.UpperLeft,
+            };
+            modToggleStyle = new GUIStyle(InterfaceMaker.CustomSkin.button)
+            {
+                fontSize = 20,
+                alignment = TextAnchor.UpperLeft,
+                contentOffset = new Vector2(5,0),
+            };
+            modInfoStyle = new GUIStyle(InterfaceMaker.CustomSkin.box)
+            {
+                alignment = TextAnchor.UpperLeft,
+                contentOffset = new Vector2(5,0),
+                wordWrap = true
             };
             labelMiddleStyle = new GUIStyle("label")
             {
@@ -245,91 +265,123 @@ namespace SkySwordKill.Next
         private void DrawModList()
         {
             GUILayout.Label("Mod.List".I18N(),labelTitleStyle);
-            scrollRollMods = GUILayout.BeginScrollView(scrollRollMods, false, true,
-                new GUILayoutOption[]
-                {
-                    GUILayout.MinHeight(winRect.height * 0.8f-40)
-                });
-            foreach (var modConfig in ModManager.modConfigs)
+            GUILayout.BeginHorizontal();
             {
-                var oldColor = GUI.color;
-                
-                GUILayout.Box("",new GUILayoutOption[]
+                GUILayout.BeginVertical();
                 {
-                    GUILayout.MinHeight(100)
-                });
-                var rect = GUILayoutUtility.GetLastRect();
-                var infoRect = new Rect(rect)
-                {
-                    x = rect.x + 10,
-                    y = rect.y + 10,
-                    height = 20,
-                    width = rect.width - 20
-                };
-                var descRect = new Rect(rect)
-                {
-                    x = rect.x + 10,
-                    y = rect.y + 30,
-                    height = 20,
-                    width = rect.width - 20
-                };
-                var dirRect = new Rect(rect)
-                {
-                    x = rect.x + 10,
-                    y = rect.y + 50,
-                    height = 20,
-                    width = rect.width - 20
-                };
-                var stateRect = new Rect(rect)
-                {
-                    x = rect.x + 10,
-                    y = rect.y + 70,
-                    height = 20,
-                    width = rect.width - 20
-                };
-                
-                var modName = modConfig.Name ?? "Mod.Unknown".I18N();
-                var modAuthor = modConfig.Author ?? "Mod.Unknown".I18N();
-                var modVersion = modConfig.Version ?? "Mod.Unknown".I18N();
-                var modDescription = modConfig.Description ?? "Mod.Unknown".I18N();
-                
-                var modDir = modConfig.Path ?? "Mod.Unknown".I18N();
-                
-                var modState = modConfig.State; 
-                
-                GUI.color = Color.white;
-                GUI.Label(infoRect,$"{"Mod.Name".I18N()}: {modName}",labelLeftStyle);
-                GUI.Label(infoRect,$"{"Mod.Author".I18N()}: {modAuthor}",labelMiddleStyle);
-                GUI.Label(infoRect,$"{"Mod.Version".I18N()}: {modVersion}",labelRightStyle);
-                
-                GUI.Label(descRect,$"{"Mod.Description".I18N()}: {modDescription}");
-                
-                GUI.Label(dirRect,$"{"Mod.Directory".I18N()}: {modDir}");
+                    scrollRollMods = GUILayout.BeginScrollView(scrollRollMods, false, false, 
+                        GUILayout.MinHeight(winRect.height * 0.7f-60),
+                        GUILayout.MinWidth(winRect.width * 0.7f-40),
+                        GUILayout.MaxWidth(winRect.width * 0.7f-40));
+                    {
+                        var mods = ModManager.modConfigs.Select(config =>
+                        {
+                            var configName = config.Name ?? "Mod.Unknown".I18N();
+                            var modSetting = Main.Instance.nextModSetting.GetOrCreateModSetting(config);
+                            
+                            string modEnable = modSetting.enable ? "☑" : "□";
 
+                            string modState = string.Empty;
+                            string colorCode = string.Empty;
+                            switch (config.State)
+                            {
+                                case ModState.Unload:
+                                    modState = "Mod.Load.Unload".I18N();
+                                    colorCode = "#000000";
+                                    break;
+                                case ModState.Disable:
+                                    modState = "Mod.Load.Disable".I18N();
+                                    colorCode = "#808080";
+                                    break;
+                                case ModState.Loading:
+                                    modState = "Mod.Load.Loading".I18N();
+                                    colorCode = "#000000";
+                                    break;
+                                case ModState.LoadSuccess:
+                                    modState = "Mod.Load.Success".I18N();
+                                    colorCode = "#00FFFF";
+                                    break;
+                                case ModState.LoadFail:
+                                    modState = "Mod.Load.Fail".I18N();
+                                    colorCode = "#FF0000";
+                                    break;
+                            }
+                            
+                            return $"{modEnable} [<color={colorCode}>{modState}</color>]  {configName} ({Path.GetFileNameWithoutExtension(config.Path)})";
+                        }).ToArray();
+                        
+                        curModSelectedIndex = GUILayout.SelectionGrid(curModSelectedIndex, mods, 1, modToggleStyle);
+                    }
+                    GUILayout.EndScrollView();
+                    
+                    GUILayout.BeginHorizontal();
+                    {
+                        if (GUILayout.Button("Mod.Panel.MoveToTop".I18N()))
+                        {
+                            ModManager.ModMoveToTop(ref curModSelectedIndex);
+                        }
 
-                switch (modState)
-                {
-                    case ModState.Unload:
-                        GUI.color = Color.gray;
-                        GUI.Label(stateRect,"Mod.Load.Unload".I18N());
-                        break;
-                    case ModState.Loading:
-                        GUI.color = Color.white;
-                        GUI.Label(stateRect,"Mod.Load.Loading".I18N());
-                        break;
-                    case ModState.LoadSuccess:
-                        GUI.color = Color.cyan;
-                        GUI.Label(stateRect,"Mod.Load.Success".I18N());
-                        break;
-                    case ModState.LoadFail:
-                        GUI.color = Color.red;
-                        GUI.Label(stateRect,"Mod.Load.Fail".I18N());
-                        break;
+                        if (GUILayout.Button("Mod.Panel.MoveUp".I18N()))
+                        {
+                            ModManager.ModMoveUp(ref curModSelectedIndex);
+                        }
+
+                        if (GUILayout.Button("Mod.Panel.MoveDown".I18N()))
+                        {
+                            ModManager.ModMoveDown(ref curModSelectedIndex);
+                        }
+
+                        if (GUILayout.Button("Mod.Panel.MoveToBottom".I18N()))
+                        {
+                            ModManager.ModMoveToBottom(ref curModSelectedIndex);
+                        }
+                        
+                        GUILayout.Space(20);
+                        var modEnable = ModManager.ModGetEnable(curModSelectedIndex);
+                        var btnText = modEnable ? "Mod.Panel.DisableMod".I18N() : "Mod.Panel.EnableMod".I18N();
+                        if (GUILayout.Button(btnText))
+                        {
+                            ModManager.ModSetEnable(curModSelectedIndex,!modEnable);
+                        }
+                    }
+                    GUILayout.EndHorizontal();
+
+                    if (ModManager.ModDataDirty)
+                    {
+                        GUILayout.Label($"Mod.Panel.DataDirtyTip".I18N());
+                    }
                 }
+                GUILayout.EndVertical();
+                
+                var rect = GUILayoutUtility.GetRect(GUIContent.none, GUI.skin.box,
+                    GUILayout.MinHeight(winRect.height * 0.7f-70));
+                if (ModManager.TryGetModConfig(curModSelectedIndex, out var curMod))
+                {
+                    var modPath = curMod.Path ?? "Mod.Unknown".I18N();
+                        
+                    var modName = curMod.Name ?? "Mod.Unknown".I18N();
+                    var modAuthor = curMod.Author ?? "Mod.Unknown".I18N();
+                    var modVersion = curMod.Version ?? "Mod.Unknown".I18N();
+                    var modDesc = curMod.Description ?? "Mod.Unknown".I18N();
 
-                GUI.color = oldColor;
+                    scrollRollModInfo = GUILayout.BeginScrollView(scrollRollModInfo);
+                    {
+                        GUILayout.BeginVertical();
+                        {
+                            GUILayout.Label($"{"Mod.Name".I18N()} : {modName}",modInfoStyle);
+                            GUILayout.Space(30);
+                            GUILayout.Label($"{"Mod.Author".I18N()} : {modAuthor}",modInfoStyle);
+                            GUILayout.Label($"{"Mod.Version".I18N()} : {modVersion}",modInfoStyle);
+                            GUILayout.Label($"{"Mod.Description".I18N()} : {modDesc}",modInfoStyle);
+                            GUILayout.Space(30);
+                            GUILayout.Label($"{"Mod.Directory".I18N()} : {modPath}",modInfoStyle);
+                        }
+                        GUILayout.EndVertical();
+                    }
+                    GUILayout.EndScrollView();
+                }
             }
-            GUILayout.EndScrollView();
+            GUILayout.EndHorizontal();
         }
 
         private void DrawDramaDebug()

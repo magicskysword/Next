@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using BepInEx;
 using HarmonyLib;
+using JetBrains.Annotations;
 using KBEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -24,12 +25,13 @@ namespace SkySwordKill.Next.Mod
 
         public static List<ModConfig> modConfigs = new List<ModConfig>();
         public static MainDataContainer dataContainer;
+        public static FieldInfo[] jsonDataFields = typeof(jsonData).GetFields();
 
         #endregion
 
         #region 属性
 
-        public static FieldInfo[] jsonDataFields = typeof(jsonData).GetFields();
+        public static bool ModDataDirty { get; private set; } = false;
         
         #endregion
 
@@ -102,10 +104,13 @@ namespace SkySwordKill.Next.Mod
         {
             Main.LogInfo($"ModManager.StartReloadMod".I18N());
             var sw = Stopwatch.StartNew();
-            RestoreBaseData();
-            LoadAllMod();
-            InitJSONClassData();
-            SceneManager.LoadScene("MainMenu");
+            {
+                RestoreBaseData();
+                LoadAllMod();
+                InitJSONClassData();
+                SceneManager.LoadScene("MainMenu");
+                ModDataDirty = false;
+            }
             sw.Stop();
             Main.LogInfo(string.Format("ModManager.ReloadComplete".I18N(), sw.ElapsedMilliseconds / 1000f));
         }
@@ -191,10 +196,22 @@ namespace SkySwordKill.Next.Mod
                 var modConfig = LoadModMetadata(dir.FullName);
                 modConfigs.Add(modConfig);
             }
+
+            // 排序
+            modConfigs = SortMod(modConfigs).ToList();
+            ResetModPriority();
             
             // 加载Mod数据
             foreach (var modConfig in modConfigs)
             {
+                var modSetting = Main.Instance.nextModSetting.GetOrCreateModSetting(modConfig);
+
+                if (!modSetting.enable)
+                {
+                    modConfig.State = ModState.Disable;
+                    continue;
+                }
+                
                 try
                 {
                     LoadModData(modConfig);
@@ -223,6 +240,38 @@ namespace SkySwordKill.Next.Mod
             var modConfig = GetModConfig(dir);
             modConfig.Path = dir;
             return modConfig;
+        }
+        
+        public static IEnumerable<ModConfig> SortMod(IEnumerable<ModConfig> modEnumerable)
+        {
+            var mods = modEnumerable.ToArray();
+            var nextModSetting = Main.Instance.nextModSetting;
+
+            var enableModSortList = mods
+                .Select(modConfig =>
+                {
+                    var modId = Path.GetFileNameWithoutExtension(modConfig.Path);
+                    var modSetting = nextModSetting.GetOrCreateModSetting(modId);
+
+                    return new { id = modId, setting = modSetting, config = modConfig };
+                })
+                .OrderBy(data=> data.setting.enable ? 0 : 1)
+                .ThenBy(data => data.setting.priority)
+                .ThenBy(data => data.id)
+                .ToArray();
+
+            return enableModSortList.Select(data => data.config);
+        }
+
+        public static void ResetModPriority()
+        {
+            var index = 0;
+            var nextModSetting = Main.Instance.nextModSetting;
+            foreach (var modConfig in modConfigs)
+            {
+                nextModSetting.GetOrCreateModSetting(modConfig).priority = index++;
+            }
+            Main.Instance.SaveModSetting();
         }
 
         private static void LoadModData(ModConfig modConfig)
@@ -296,12 +345,13 @@ namespace SkySwordKill.Next.Mod
 
         private static ModConfig GetModConfig(string dir)
         {
+            ModConfig modConfig = null;
             try
             {
                 string filePath = Utility.CombinePaths(dir, $"modConfig.json");
                 if (File.Exists(filePath))
                 {
-                    return JObject.Parse(File.ReadAllText(filePath)).ToObject<ModConfig>();
+                    modConfig = JObject.Parse(File.ReadAllText(filePath)).ToObject<ModConfig>();
                 }
                 else
                 {
@@ -313,7 +363,10 @@ namespace SkySwordKill.Next.Mod
                 Main.LogWarning($"ModManager.ModConfigLoadFail".I18N());
             }
 
-            return new ModConfig();
+            modConfig = modConfig ?? new ModConfig();
+            modConfig.State = ModState.Unload;
+
+            return modConfig;
         }
 
         public static void PatchJsonObjectArray(FieldInfo fieldInfo,string dirPathForData, JSONObject[] jsonObjects)
@@ -343,23 +396,34 @@ namespace SkySwordKill.Next.Mod
                 
                 foreach (var key in jsonData.keys)
                 {
-                    var itemData = jsonData.GetField(key).Copy();
-                    
-                    foreach (var fieldKey in dataTemplate.keys)
+                    var curData = jsonData.GetField(key);
+                    if (jsonObject.HasField(key))
                     {
-                        if (!itemData.HasField(fieldKey))
+                        // Old data
+                        var tagData = jsonObject.GetField(key);
+                        foreach (var fieldKey in curData.keys)
                         {
-                            itemData.AddField(fieldKey,dataTemplate[fieldKey].Clone());
-                            Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
-                                fieldInfo.Name, 
-                                fileName, 
-                                fieldKey,
-                                dataTemplate[fieldKey]));
-                            
+                            tagData.TryAddOrReplace(fieldKey,curData.GetField(fieldKey));
                         }
                     }
-
-                    jsonObject.TryAddOrReplace(key, itemData);
+                    else
+                    {
+                        // New data
+                        foreach (var fieldKey in dataTemplate.keys)
+                        {
+                            if (!curData.HasField(fieldKey))
+                            {
+                                curData.AddField(fieldKey,dataTemplate[fieldKey].Clone());
+                                Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
+                                    fieldInfo.Name, 
+                                    fileName, 
+                                    fieldKey,
+                                    dataTemplate[fieldKey]));
+                            
+                            }
+                        }
+                        jsonObject.AddField(key, curData);
+                    }
                 }
 
                 
@@ -377,28 +441,40 @@ namespace SkySwordKill.Next.Mod
                 var jsonData = JObject.Parse(data);
                 foreach (var property in jsonData.Properties())
                 {
+                    var curData = JObject.FromObject(property.Value);
                     if (jObject.ContainsKey(property.Name))
-                        jObject.Remove(property.Name);
-                    
-                    var itemData = JObject.FromObject(property.Value);
-
-                    if (dataTemplate.Type == JTokenType.Object)
                     {
-                        foreach (var field in JObject.FromObject(dataTemplate).Properties())
+                        var tagData = jObject.GetValue(property.Name);
+                        if (tagData?.Type == JTokenType.Object)
                         {
-                            if (!itemData.ContainsKey(field.Name))
+                            var tagDataObject = (JObject)tagData;
+                            foreach (var field in curData.Properties())
                             {
-                                itemData.Add(field.Value.DeepClone());
-                                Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
-                                    fieldInfo.Name, 
-                                    property.Name, 
-                                    field.Name,
-                                    field.Value));
+                                if (tagDataObject.ContainsKey(field.Name))
+                                    tagDataObject.Remove(field.Name);
+                                tagDataObject.Add(field.Name,curData.GetValue(field.Name));
                             }
                         }
                     }
-                    
-                    jObject.Add(property.Name, property.Value.DeepClone());
+                    else
+                    {
+                        if (dataTemplate.Type == JTokenType.Object)
+                        {
+                            foreach (var field in JObject.FromObject(dataTemplate).Properties())
+                            {
+                                if (!curData.ContainsKey(field.Name))
+                                {
+                                    curData.Add(field.Value.DeepClone());
+                                    Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
+                                        fieldInfo.Name, 
+                                        property.Name, 
+                                        field.Name,
+                                        field.Value));
+                                }
+                            }
+                        }
+                        jObject.Add(property.Name, property.Value.DeepClone());
+                    }
                 }
                 
                 Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
@@ -416,25 +492,35 @@ namespace SkySwordKill.Next.Mod
             foreach (var filePath in Directory.GetFiles(dirPathForData))
             {
                 string data = File.ReadAllText(filePath);
-                var jsonData = JSONObject.Create(data);
+                var curData = JSONObject.Create(data);
                 var key = Path.GetFileNameWithoutExtension(filePath);
-
-                foreach (var fieldKey in dataTemplate.keys)
+                
+                if (toJsonObject.HasField(key))
                 {
-                    if (!jsonData.HasField(fieldKey))
+                    var tagData = toJsonObject.GetField(key);
+                    foreach (var fieldKey in curData.keys)
                     {
-                        jsonData.AddField(fieldKey,dataTemplate[fieldKey].Clone());
-                        Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
-                            fieldInfo.Name, 
-                            key, 
-                            fieldKey,
-                            dataTemplate[fieldKey]));
+                        tagData.TryAddOrReplace(fieldKey,curData.GetField(fieldKey));
                     }
                 }
+                else
+                {
+                    foreach (var fieldKey in dataTemplate.keys)
+                    {
+                        if (!curData.HasField(fieldKey))
+                        {
+                            curData.AddField(fieldKey,dataTemplate[fieldKey].Clone());
+                            Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
+                                fieldInfo.Name, 
+                                key, 
+                                fieldKey,
+                                dataTemplate[fieldKey]));
+                        }
+                    }
+                    dicData[key] = curData;
+                    toJsonObject.AddField(key, curData);
+                }
                 
-                
-                dicData[key] = jsonData;
-                toJsonObject.TryAddOrReplace(key, jsonData);
                 Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
                     $"{Path.GetFileNameWithoutExtension(dirPathForData)}/{Path.GetFileNameWithoutExtension(filePath)}.json [{key}]"));
             }
@@ -498,6 +584,91 @@ namespace SkySwordKill.Next.Mod
         public static void TryAddTriggerData(DialogTriggerData dialogTriggerData)
         {
             DialogAnalysis.dialogTriggerDataDic[dialogTriggerData.id] = dialogTriggerData;
+        }
+
+        public static void ModMoveUp(ref int curIndex)
+        {
+            if(!TryGetModConfig(curIndex,out var curMod))
+                return;
+            if(curIndex == 0)
+                return;
+
+            modConfigs.RemoveAt(curIndex);
+            curIndex -= 1;
+            modConfigs.Insert(curIndex, curMod);
+            ResetModPriority();
+            ModDataDirty = true;
+        }
+        
+        public static void ModMoveDown(ref int curIndex)
+        {
+            if(!TryGetModConfig(curIndex,out var curMod))
+                return;
+            if(curIndex == modConfigs.Count-1)
+                return;
+            
+            modConfigs.RemoveAt(curIndex);
+            curIndex += 1;
+            modConfigs.Insert(curIndex, curMod);
+            ResetModPriority();
+            ModDataDirty = true;
+        }
+        
+        public static void ModMoveToTop(ref int curIndex)
+        {
+            if(!TryGetModConfig(curIndex,out var curMod))
+                return;
+            if(curIndex == 0)
+                return;
+
+            modConfigs.RemoveAt(curIndex);
+            curIndex = 0;
+            modConfigs.Insert(curIndex, curMod);
+            ResetModPriority();
+            ModDataDirty = true;
+        }
+        
+        public static void ModMoveToBottom(ref int curIndex)
+        {
+            if(!TryGetModConfig(curIndex,out var curMod))
+                return;
+            if(curIndex == modConfigs.Count-1)
+                return;
+            
+            modConfigs.RemoveAt(curIndex);
+            modConfigs.Add(curMod);
+            curIndex = modConfigs.Count-1;
+            ResetModPriority();
+            ModDataDirty = true;
+        }
+
+        public static void ModSetEnable(int curIndex,bool enable)
+        {
+            if(!TryGetModConfig(curIndex,out var curMod))
+                return;
+            Main.Instance.nextModSetting.GetOrCreateModSetting(curMod).enable = enable;
+            Main.Instance.SaveModSetting();
+            ModDataDirty = true;
+        }
+        
+        public static bool ModGetEnable(int curIndex)
+        {
+            if(!TryGetModConfig(curIndex,out var curMod))
+                return true;
+            return Main.Instance.nextModSetting.GetOrCreateModSetting(curMod).enable;
+        }
+
+        [CanBeNull]
+        public static bool TryGetModConfig(int curIndex,out ModConfig modConfig)
+        {
+            if (curIndex < 0 || curIndex >= modConfigs.Count)
+            {
+                modConfig = null;
+                return false;
+            }
+
+            modConfig = modConfigs[curIndex];
+            return true;
         }
 
         #endregion

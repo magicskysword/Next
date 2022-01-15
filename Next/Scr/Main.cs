@@ -42,9 +42,9 @@ namespace SkySwordKill.Next
             new Lazy<string>(() => Utility.CombinePaths(
                 pathConfigDir.Value, "language"));
         
-        public static Lazy<string> pathConfigFile =
+        public static Lazy<string> pathModSettingFile =
             new Lazy<string>(() => Utility.CombinePaths(
-                pathConfigDir.Value, "config.json"));
+                pathConfigDir.Value, "modSetting.json"));
 
         public static Main Instance { get; private set; }
         public static int logIndent = 0;
@@ -54,8 +54,8 @@ namespace SkySwordKill.Next
         public ConfigTarget<bool> openInStart;
         public ConfigTarget<KeyCode> winKeyCode;
         
-        
         public NextLanguage nextLanguage;
+        public NextModSetting nextModSetting;
 
         public ResourcesManager resourcesManager;
 
@@ -107,15 +107,16 @@ namespace SkySwordKill.Next
             // Init language and config
             NextLanguage.InitLanguage();
             LoadDefaultLanguage();
+            nextModSetting = NextModSetting.LoadSetting();
             
-            // 显示窗口
-            // show window
+            // 根据设置显示窗口
+            // show window by config
             isWinOpen = openInStart.Value;
         }
 
         private void LoadDefaultLanguage()
         {
-            if (string.IsNullOrEmpty(languageID.Value) || !NextLanguage.languages.TryGetValue(languageID.Value, out var langu))
+            if (string.IsNullOrEmpty(languageID.Value) || !NextLanguage.languages.TryGetValue(languageID.Value, out var language))
             {
                 // 选择一个语言作为默认语言
                 // Choose Default Language
@@ -124,7 +125,7 @@ namespace SkySwordKill.Next
             }
             else
             {
-                SelectLanguage(nextLanguage);
+                SelectLanguage(language);
             }
             
             languageID.SetName("Config.Main.LanguageID.Name".I18N());
@@ -149,6 +150,11 @@ namespace SkySwordKill.Next
             
             languageID.Value = language.FileName;
             LogInfo($"{"Misc.CurrentLanguage".I18N()} : {language.LanguageName}");
+        }
+
+        public void SaveModSetting()
+        {
+            NextModSetting.SaveSetting(nextModSetting);
         }
 
         public static Coroutine InvokeCoroutine(IEnumerator enumerator)

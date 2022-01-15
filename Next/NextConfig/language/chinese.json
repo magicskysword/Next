@@ -19,9 +19,18 @@
     "Mod.Unknown" : "未知",
     
     "Mod.Load.Unload" : "未加载",
+    "Mod.Load.Disable" : "禁用",
     "Mod.Load.Loading" : "加载中",
     "Mod.Load.Success" : "加载成功",
     "Mod.Load.Fail" : "加载失败",
+    
+    "Mod.Panel.DataDirtyTip" : "Mod设置发生了改变，请重载Mod以生效设置。",
+    "Mod.Panel.MoveUp": "上移Mod",
+    "Mod.Panel.MoveDown": "下移Mod",
+    "Mod.Panel.MoveToTop": "置于顶上",
+    "Mod.Panel.MoveToBottom": "置于底下",
+    "Mod.Panel.EnableMod": "启用Mod",
+    "Mod.Panel.DisableMod": "禁用Mod",
     
     "DramaDebug.Title" : "剧情调试",
     "DramaDebug.DramaID": "剧情ID",

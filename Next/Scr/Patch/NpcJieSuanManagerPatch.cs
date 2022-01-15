@@ -9,7 +9,7 @@ namespace SkySwordKill.Next.Patch
         [HarmonyPrefix]
         public static void FixMethod(NpcJieSuanManager __instance)
         {
-            Main.LogInfo("Misc.RePatchNpcData".I18N());
+            Main.LogInfo("Misc.RestartPatchNpcData".I18N());
             jsonData jsonInstance = jsonData.instance;
             var fieldInfo = typeof(jsonData).GetField("AvatarJsonData");
             foreach (var modConfig in ModManager.modConfigs)

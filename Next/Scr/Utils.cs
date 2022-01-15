@@ -5,7 +5,7 @@ using BepInEx.Configuration;
 namespace SkySwordKill.Next
 {
     public static class Utils
-    { 
+    {
         public static void TryAddOrReplace(this JSONObject jsonObject, string key, JSONObject value)
         {
             var index = jsonObject.keys.IndexOf(key);

@@ -3,6 +3,7 @@
     public enum ModState
     {
         Unload,
+        Disable,
         Loading,
         LoadSuccess,
         LoadFail
