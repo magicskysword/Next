@@ -48,6 +48,7 @@ UnityEngine.UIModule
 
 ## 使用库
 [codingseb/ExpressionEvaluator](https://github.com/codingseb/ExpressionEvaluator) 用于事件与触发器的条件判断
+[xiaoye97/VRoidXYTool](https://github.com/xiaoye97/VRoidXYTool) 使用了其中的GUI库
 
 ## 相关库
 [BepinEx](https://github.com/BepInEx/BepInEx) 本mod基于BepinEx

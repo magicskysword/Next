@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using SkySwordKill.Next.Mod;
 
 namespace SkySwordKill.Next.Patch
 {
@@ -8,7 +9,7 @@ namespace SkySwordKill.Next.Patch
         [HarmonyPrefix]
         public static void FixMethod(NpcJieSuanManager __instance)
         {
-            Main.LogInfo("重新Patch Npc数据");
+            Main.LogInfo("Misc.RePatchNpcData".I18N());
             jsonData jsonInstance = jsonData.instance;
             var fieldInfo = typeof(jsonData).GetField("AvatarJsonData");
             foreach (var modConfig in ModManager.modConfigs)

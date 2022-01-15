@@ -1,0 +1,61 @@
+﻿{
+  "LanguageName": "English",
+  "Translation" : {
+    "Config.Main.LanguageID.Name" : "Plugin Language",
+    "Config.Main.LanguageID.Desc" : "Plugin's language，Corresponding to the language files in the NextConfig/language folder.",
+    "Config.Main.OpenKeyCode.Name" : "Plugin window hotkey",
+    "Config.Main.OpenKeyCode.Desc" : "Hotkey to open and close the plugin window.",
+    "Config.Main.OpenInStart.Name" : "Open In Game Start",
+    "Config.Main.OpenInStart.Desc" : "Whether the plug-in window pops up when the game starts.",
+    "Config.Debug.Mode.Name" : "Debug mode switch",
+    "Config.Debug.Mode.Desc" : "Next plugin debug mode switch, open to see more functions in the plugin window.",
+
+    "Mod.List" : "Mod List",
+    "Mod.Name" : "Name",
+    "Mod.Author" : "Author",
+    "Mod.Version" : "Version",
+    "Mod.Description" : "Desc",
+    "Mod.Directory" : "Path",
+    "Mod.Unknown" : "Unknown",
+
+    "Mod.Load.Unload" : "Unload",
+    "Mod.Load.Loading" : "Loading",
+    "Mod.Load.Success" : "Load Success",
+    "Mod.Load.Fail" : "Load Fail",
+
+    "DramaDebug.Title" : "Drama Debug",
+    "DramaDebug.DramaID": "Drama ID",
+    "DramaDebug.Run": "Run",
+    "DramaDebug.DramaCommandDebug": "Drama Command Debug",
+    "DramaDebug.CopyRawData": "Copy Raw Data",
+    "DramaDebug.CopyJsonData" : "Copy Json Data",
+    "DramaDebug.IntVariableDebugWin" : "Int Variable Debug Win",
+    "DramaDebug.StrVariableDebugWin" : "String Variable Debug Win",
+    
+    "Misc.CurrentLanguage" : "Current Language",
+    "Misc.RestartPatchNpcData" : "Restart patch Npc Data",
+    
+    "HeaderBar.HotkeyTip" : "Press {0} trigger the window。",
+    "HeaderBar.DebugMode" : "Debug Mode",
+    "HeaderBar.ModList" : "Mod List",
+    "HeaderBar.DramaDebug" : "Drama Debug",
+    "HeaderBar.ReloadMod" : "Reload Mod",
+    "HeaderBar.ReloadModTip" : "Only reload mod in start scene",
+    "HeaderBar.ExportBase" : "Export Base",
+    "HeaderBar.OpenInStart" : "Open In Game Start",
+    "HeaderBar.Close" : "Close",
+
+    "ModManager.GenerateBaseData": "Generating Base Files.",
+    "ModManager.LoadMod": "Load mod : {0}",
+    "ModManager.StartReloadMod": "Start reload mod......",
+    "ModManager.ReloadComplete": "Reload mod complete，cost ：{0} s",
+    "ModManager.LoadingModData": "Loading mod data",
+    "ModManager.LoadFail": "load mod fail! path : {0}",
+    "ModManager.StartLoadMod": "Start Load Mod Data",
+    "ModManager.LoadModComplete": "Load Mod Data Complete",
+    "ModManager.ModConfigDontExist": "Mod configuration dont exist！",
+    "ModManager.ModConfigLoadFail": "Load mod configuration fail！",
+    "ModManager.DataMissingField": "Data {0} [{1}] lack field {2}，replace with template data {3} .",
+    "ModManager.LoadData": "Load {0}"
+  }
+}

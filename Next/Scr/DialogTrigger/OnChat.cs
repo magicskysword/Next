@@ -18,7 +18,7 @@ namespace SkySwordKill.Next.DialogTrigger
                 roleID = npc.ID,
                 roleName = npc.Name
             };
-            if (DialogAnalysis.TryTrigger("交谈", env))
+            if (DialogAnalysis.TryTrigger(new []{"交谈","Talk"}, env))
             {
                 UINPCJiaoHu.Inst.HideJiaoHuPop();
                 return false;

@@ -16,7 +16,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
-namespace SkySwordKill.Next
+namespace SkySwordKill.Next.Mod
 {
     public static class ModManager
     {
@@ -29,16 +29,7 @@ namespace SkySwordKill.Next
 
         #region 属性
 
-        public static Lazy<string> pluginDir =
-            new Lazy<string>(() => BepInEx.Utility.CombinePaths(
-                BepInEx.Paths.PluginPath, "Next"));
-
-        public static Lazy<string> baseDataDir =
-            new Lazy<string>(() => BepInEx.Utility.CombinePaths(
-                pluginDir.Value, "Base"));
-
-        public static Lazy<FieldInfo[]> dataField =
-            new Lazy<FieldInfo[]>(() => typeof(jsonData).GetFields());
+        public static FieldInfo[] jsonDataFields = typeof(jsonData).GetFields();
         
         #endregion
 
@@ -55,11 +46,11 @@ namespace SkySwordKill.Next
 
         public static void GenerateBaseData()
         {
-            Main.LogInfo($"正在生成Base文件。");
+            Main.LogInfo("ModManager.GenerateBaseData".I18N());
 
             var sw = Stopwatch.StartNew();
             
-            string dirPath = baseDataDir.Value;
+            string dirPath = Main.pathBaseDataDir.Value;
             if (Directory.Exists(dirPath))
                 Directory.Delete(dirPath, true);
             Directory.CreateDirectory(dirPath);
@@ -73,7 +64,7 @@ namespace SkySwordKill.Next
             foreach (var pair in dataContainer.dataJSONObjects)
             {
                 string filePath = Utility.CombinePaths(dirPath, $"{pair.Key}.json");
-                File.WriteAllText(filePath, ConvertJson(pair.Value.Print(true)));
+                File.WriteAllText(filePath, pair.Value.Print(true).DecodeJsonUnicode());
             }
             
             foreach (var pair in dataContainer.dataYSDics)
@@ -84,7 +75,7 @@ namespace SkySwordKill.Next
                 foreach (var kvp in pair.Value)
                 {
                     string filePath = Utility.CombinePaths(dirPathForData, $"{kvp.Key}.json");
-                    File.WriteAllText(filePath, ConvertJson(kvp.Value.Print(true)));
+                    File.WriteAllText(filePath, kvp.Value.Print(true).DecodeJsonUnicode());
                 }
             }
             
@@ -99,7 +90,7 @@ namespace SkySwordKill.Next
                     if (jsonObjects[i] == null)
                         continue;
                     string filePath = Utility.CombinePaths(dirPathForData, $"{i}.json");
-                    File.WriteAllText(filePath, ConvertJson(jsonObjects[i].Print(true)));
+                    File.WriteAllText(filePath, jsonObjects[i].Print(true).DecodeJsonUnicode());
                 }
             }
             
@@ -109,14 +100,14 @@ namespace SkySwordKill.Next
 
         public static void ReloadAllMod()
         {
-            Main.LogInfo($"开始重载Mod......");
+            Main.LogInfo($"ModManager.StartReloadMod".I18N());
             var sw = Stopwatch.StartNew();
             RestoreBaseData();
             LoadAllMod();
             InitJSONClassData();
             SceneManager.LoadScene("MainMenu");
             sw.Stop();
-            Main.LogInfo($"重载Mod完毕，耗时：{sw.ElapsedMilliseconds / 1000f} s");
+            Main.LogInfo(string.Format("ModManager.ReloadComplete".I18N(), sw.ElapsedMilliseconds / 1000f));
         }
 
         private static void InitJSONClassData()
@@ -188,18 +179,29 @@ namespace SkySwordKill.Next
             modConfigs.Clear();
             Main.Instance.resourcesManager.Init();
             
-            Main.LogInfo($"===================" + "正在读取Mod列表" + "=====================");
-            var home = Directory.CreateDirectory(pluginDir.Value);
+            Main.LogInfo($"===================" + "ModManager.LoadingModData".I18N() + "=====================");
+            var home = Directory.CreateDirectory(Main.pathModsDir.Value);
             jsonData jsonInstance = jsonData.instance;
-            foreach (var dir in home.GetDirectories("mod*"))
+            var modDirectories = home.GetDirectories("mod*");
+
+            // 加载元数据
+            foreach (var dir in modDirectories)
+            {
+                Main.LogInfo(string.Format("ModManager.LoadMod".I18N(),dir.Name));
+                var modConfig = LoadModMetadata(dir.FullName);
+                modConfigs.Add(modConfig);
+            }
+            
+            // 加载Mod数据
+            foreach (var modConfig in modConfigs)
             {
                 try
                 {
-                    LoadModPatch(jsonInstance, dir.FullName);
+                    LoadModData(modConfig);
                 }
                 catch (Exception e)
                 {
-                    Main.LogError($"加载mod出错！{dir.FullName}");
+                    Main.LogError(string.Format("ModManager.LoadFail".I18N(),modConfig.Path));
                     Main.LogError(e);
                 }
             }
@@ -216,72 +218,80 @@ namespace SkySwordKill.Next
             Main.Instance.resourcesManager.StartLoadAsset();
         }
 
-        public static void LoadModPatch(jsonData jsonInstance, string dir)
+        public static ModConfig LoadModMetadata(string dir)
         {
-            Main.LogInfo($"===================" + "开始载入Mod数据" + "=====================");
-            Main.LogInfo($"加载Mod数据：{Path.GetFileNameWithoutExtension(dir)}");
             var modConfig = GetModConfig(dir);
             modConfig.Path = dir;
+            return modConfig;
+        }
+
+        private static void LoadModData(ModConfig modConfig)
+        {
+            Main.LogInfo($"===================" + "ModManager.StartLoadMod".I18N() + "=====================");
+            Main.LogInfo($"{"Mod.Directory".I18N()} : {Path.GetFileNameWithoutExtension(modConfig.Path)}");
             Main.logIndent = 1;
-            Main.LogInfo($"Mod名称：{modConfig.Name}");
-            Main.LogInfo($"Mod作者：{modConfig.Author}");
-            Main.LogInfo($"Mod版本：{modConfig.Version}");
-            Main.LogInfo($"Mod描述：{modConfig.Description}");
-            modConfigs.Add(modConfig);
+            Main.LogInfo($"{"Mod.Name".I18N()} : {modConfig.Name}");
+            Main.LogInfo($"{"Mod.Author".I18N()} : {modConfig.Author}");
+            Main.LogInfo($"{"Mod.Version".I18N()} : {modConfig.Version}");
+            Main.LogInfo($"{"Mod.Description".I18N()} : {modConfig.Description}");
             try
             {
+                jsonData jsonInstance = jsonData.instance;
+                modConfig.State = ModState.Loading;
                 // 载入Mod Patch数据
-                foreach (var fieldInfo in dataField.Value)
+                foreach (var fieldInfo in jsonDataFields)
                 {
                     if (fieldInfo.Name.StartsWith("_"))
                         continue;
 
                     var value = fieldInfo.GetValue(jsonInstance);
-                    
+
                     // 普通数据
                     if (value is JSONObject jsonObject)
                     {
-                        string filePath = Utility.CombinePaths(dir, $"{fieldInfo.Name}.json");
-                        modConfig.jsonPathCache.Add(fieldInfo.Name,filePath);
-                        PatchJsonObject(fieldInfo,filePath, jsonObject);
+                        string filePath = Utility.CombinePaths(modConfig.Path, $"{fieldInfo.Name}.json");
+                        modConfig.jsonPathCache.Add(fieldInfo.Name, filePath);
+                        PatchJsonObject(fieldInfo, filePath, jsonObject);
                     }
                     else if (value is JObject jObject)
                     {
-                        string filePath = Utility.CombinePaths(dir, $"{fieldInfo.Name}.json");
-                        modConfig.jsonPathCache.Add(fieldInfo.Name,filePath);
-                        PatchJObject(fieldInfo,filePath, jObject);
+                        string filePath = Utility.CombinePaths(modConfig.Path, $"{fieldInfo.Name}.json");
+                        modConfig.jsonPathCache.Add(fieldInfo.Name, filePath);
+                        PatchJObject(fieldInfo, filePath, jObject);
                     }
                     else if (value is jsonData.YSDictionary<string, JSONObject> dicData)
                     {
-                        string dirPathForData = Utility.CombinePaths(dir, fieldInfo.Name);
+                        string dirPathForData = Utility.CombinePaths(modConfig.Path, fieldInfo.Name);
                         JSONObject toJsonObject =
                             typeof(jsonData).GetField($"_{fieldInfo.Name}").GetValue(jsonInstance) as JSONObject;
-                        modConfig.jsonPathCache.Add(fieldInfo.Name,dirPathForData);
-                        PatchDicData(fieldInfo,dirPathForData, dicData, toJsonObject);
+                        modConfig.jsonPathCache.Add(fieldInfo.Name, dirPathForData);
+                        PatchDicData(fieldInfo, dirPathForData, dicData, toJsonObject);
                     }
                     // 功能函数配置数据
                     else if (value is JSONObject[] jsonObjects)
                     {
-                        string dirPathForData = Utility.CombinePaths(dir, fieldInfo.Name);
-                        modConfig.jsonPathCache.Add(fieldInfo.Name,dirPathForData);
-                        PatchJsonObjectArray(fieldInfo,dirPathForData, jsonObjects);
+                        string dirPathForData = Utility.CombinePaths(modConfig.Path, fieldInfo.Name);
+                        modConfig.jsonPathCache.Add(fieldInfo.Name, dirPathForData);
+                        PatchJsonObjectArray(fieldInfo, dirPathForData, jsonObjects);
                     }
                 }
+
                 // 载入Mod Dialog数据
-                LoadDialogEventData(dir);
-                LoadDialogTriggerData(dir);
-                
+                LoadDialogEventData(modConfig.Path);
+                LoadDialogTriggerData(modConfig.Path);
+
                 // 载入ModAsset
-                CacheAssetDir("Assets", $"{dir}/Assets");
+                CacheAssetDir("Assets", $"{modConfig.Path}/Assets");
             }
             catch (Exception)
             {
-                modConfig.Success = false;
+                modConfig.State = ModState.LoadFail;
                 throw;
             }
-            modConfig.Success = true;
+
+            modConfig.State = ModState.LoadSuccess;
             Main.logIndent = 0;
-            Main.LogInfo($"===================" + "载入Mod数据完成" + "=====================");
+            Main.LogInfo($"===================" + "ModManager.LoadModComplete".I18N() + "=====================");
         }
 
         private static ModConfig GetModConfig(string dir)
@@ -295,12 +305,12 @@ namespace SkySwordKill.Next
                 }
                 else
                 {
-                    Main.LogWarning("Mod配置不存在！");
+                    Main.LogWarning("ModManager.ModConfigDontExist".I18N());
                 }
             }
             catch (Exception)
             {
-                Main.LogWarning("Mod配置读取错误！");
+                Main.LogWarning($"ModManager.ModConfigLoadFail".I18N());
             }
 
             return new ModConfig();
@@ -340,8 +350,12 @@ namespace SkySwordKill.Next
                         if (!itemData.HasField(fieldKey))
                         {
                             itemData.AddField(fieldKey,dataTemplate[fieldKey].Clone());
-                            Main.LogWarning($"数据 {fieldInfo.Name} [{fileName}] 缺少字段 {fieldKey}，" +
-                                            $"已用模板对象属性 {dataTemplate[fieldKey]} 替代。");
+                            Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
+                                fieldInfo.Name, 
+                                fileName, 
+                                fieldKey,
+                                dataTemplate[fieldKey]));
+                            
                         }
                     }
 
@@ -349,7 +363,7 @@ namespace SkySwordKill.Next
                 }
 
                 
-                Main.LogInfo($"载入 {dirName}{fileName}.json");
+                Main.LogInfo(string.Format("ModManager.LoadData".I18N(),$"{dirName}{fileName}.json"));
             }
         }
 
@@ -375,16 +389,20 @@ namespace SkySwordKill.Next
                             if (!itemData.ContainsKey(field.Name))
                             {
                                 itemData.Add(field.Value.DeepClone());
-                                Main.LogWarning($"数据 {fieldInfo.Name} [{property.Name}] 缺少字段 {field.Name}，" +
-                                                $"已用模板对象属性 {field.Value} 替代。");
+                                Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
+                                    fieldInfo.Name, 
+                                    property.Name, 
+                                    field.Name,
+                                    field.Value));
                             }
                         }
                     }
                     
                     jObject.Add(property.Name, property.Value.DeepClone());
                 }
-
-                Main.LogInfo($"载入 {Path.GetFileNameWithoutExtension(filePath)}.json");
+                
+                Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
+                    $"{Path.GetFileNameWithoutExtension(filePath)}.json"));
             }
         }
 
@@ -406,15 +424,19 @@ namespace SkySwordKill.Next
                     if (!jsonData.HasField(fieldKey))
                     {
                         jsonData.AddField(fieldKey,dataTemplate[fieldKey].Clone());
-                        Main.LogWarning($"数据 {fieldInfo.Name} [{key}] 缺少字段 {fieldKey}，已用模板对象属性 {dataTemplate[fieldKey]} 替代。");
+                        Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
+                            fieldInfo.Name, 
+                            key, 
+                            fieldKey,
+                            dataTemplate[fieldKey]));
                     }
                 }
                 
                 
                 dicData[key] = jsonData;
                 toJsonObject.TryAddOrReplace(key, jsonData);
-                Main.LogInfo($"载入 {Path.GetFileNameWithoutExtension(dirPathForData)}/" +
-                             $"{Path.GetFileNameWithoutExtension(filePath)}.json [{key}]");
+                Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
+                    $"{Path.GetFileNameWithoutExtension(dirPathForData)}/{Path.GetFileNameWithoutExtension(filePath)}.json [{key}]"));
             }
         }
         
@@ -428,7 +450,8 @@ namespace SkySwordKill.Next
             {
                 string json = File.ReadAllText(filePath);
                 JArray.Parse(json).ToObject<List<DialogEventData>>()?.ForEach(TryAddEventData);
-                Main.LogInfo($"载入 {dirName}/{Path.GetFileNameWithoutExtension(filePath)}.json");
+                Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
+                    $"{dirName}/{Path.GetFileNameWithoutExtension(filePath)}.json"));
             }
         }
         
@@ -442,7 +465,8 @@ namespace SkySwordKill.Next
             {
                 string json = File.ReadAllText(filePath);
                 JArray.Parse(json).ToObject<List<DialogTriggerData>>()?.ForEach(TryAddTriggerData);
-                Main.LogInfo($"载入 {dirName}/{Path.GetFileNameWithoutExtension(filePath)}.json");
+                Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
+                    $"{dirName}/{Path.GetFileNameWithoutExtension(filePath)}.json"));
             }
         }
 
@@ -466,27 +490,6 @@ namespace SkySwordKill.Next
             }
         }
 
-        public static string ConvertJson(string json)
-        {
-            Regex reg = new Regex(@"(?i)\\[uU]([0-9a-f]{4})");
-            string convertSrt = reg.Replace(json,
-                delegate(Match m) { return ((char)Convert.ToInt32(m.Groups[1].Value, 16)).ToString(); });
-            return convertSrt;
-        }
-
-        public static void TryAddOrReplace(this JSONObject jsonObject, string key, JSONObject value)
-        {
-            var index = jsonObject.keys.IndexOf(key);
-            if (index <= -1)
-            {
-                jsonObject.AddField(key, value.Copy());
-            }
-            else
-            {
-                jsonObject.list[index] = value.Copy();
-            }
-        }
-        
         public static void TryAddEventData(DialogEventData dialogEventData)
         {
             DialogAnalysis.dialogDataDic[dialogEventData.id] = dialogEventData;

@@ -16,7 +16,7 @@ namespace SkySwordKill.Next.DialogTrigger
                 qiyuID = __instance.EventId,
                 qiyuOption = OnQiYuShow.lastOption
             };
-            DialogAnalysis.TryTrigger("奇遇关闭", env);
+            DialogAnalysis.TryTrigger(new []{"奇遇关闭","AdventureClose"}, env);
         }
     }
 }

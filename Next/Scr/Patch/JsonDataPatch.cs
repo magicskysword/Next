@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using System.Diagnostics;
+using HarmonyLib;
+using SkySwordKill.Next.Mod;
 
 namespace SkySwordKill.Next.Patch
 {
@@ -8,7 +10,12 @@ namespace SkySwordKill.Next.Patch
         [HarmonyPrefix]
         public static void FixMethod()
         {
-            Main.Instance.PatchJson();
+            var watcher = Stopwatch.StartNew();
+            ModManager.CloneMainData();
+            watcher.Stop();
+            Main.LogInfo($"储存数据耗时：{watcher.ElapsedMilliseconds / 1000f} s");
+            
+            ModManager.LoadAllMod();
         }
     }
 }

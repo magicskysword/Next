@@ -1,192 +1,221 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-    <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{48F99F98-1EE6-4027-93BA-B1082F52BB03}</ProjectGuid>
-        <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Next</RootNamespace>
-        <AssemblyName>Next</AssemblyName>
-        <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-        <FileAlignment>512</FileAlignment>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <OutputPath>bin\Debug\</OutputPath>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugType>pdbonly</DebugType>
-        <Optimize>true</Optimize>
-        <OutputPath>bin\Release\</OutputPath>
-        <DefineConstants>TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
-    <ItemGroup>
-        <Reference Include="0Harmony, Version=2.5.5.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\BepInEx\core\0Harmony.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\Assembly-CSharp.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="BepInEx, Version=5.4.17.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\BepInEx\core\BepInEx.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-          <HintPath>NextLib\Microsoft.CSharp.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\Newtonsoft.Json.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="System" />
-        <Reference Include="System.Core" />
-        <Reference Include="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生test_Data\Managed\System.Core.dll</HintPath>
-        </Reference>
-        <Reference Include="System.Data" />
-        <Reference Include="System.Xml" />
-        <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
-        </Reference>
-        <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.InputModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.InputModule.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UI.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UIModule.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.UnityWebRequestAudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.UnityWebRequestModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.UnityWebRequestTextureModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="UnityEngine.UnityWebRequestWWWModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
-          <Private>False</Private>
-        </Reference>
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="Scr\DialogAnalysis.cs" />
-        <Compile Include="Scr\DialogAnalysis.Utils.cs" />
-        <Compile Include="Scr\DialogEnvironment.cs" />
-        <Compile Include="Scr\DialogEventData.cs" />
-        <Compile Include="Scr\DialogEvent\AddComprehensionExp.cs" />
-        <Compile Include="Scr\DialogEvent\AddItem.cs" />
-        <Compile Include="Scr\DialogEvent\AddThinking.cs" />
-        <Compile Include="Scr\DialogEvent\AddTime.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeAbility.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeAge.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeBaseHpMax.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeComprehensionPoint.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeDrugsPoison.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeExp.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeHp.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeInspiration.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeInt.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeLife.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeMoney.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeMentality.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeBaseMoveSpeed.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeBaseSpirit.cs" />
-        <Compile Include="Scr\DialogEvent\ChangeTalent.cs" />
-        <Compile Include="Scr\DialogEvent\DialogEventAttribute.cs" />
-        <Compile Include="Scr\DialogEvent\Event.cs" />
-        <Compile Include="Scr\DialogEvent\IDialogEvent.cs" />
-        <Compile Include="Scr\DialogEvent\Say.cs" />
-        <Compile Include="Scr\DialogEvent\SetChar.cs" />
-        <Compile Include="Scr\DialogEvent\SetInt.cs" />
-        <Compile Include="Scr\DialogEvent\SetStr.cs" />
-        <Compile Include="Scr\DialogTriggerData.cs" />
-        <Compile Include="Scr\DialogTrigger\OnChat.cs" />
-        <Compile Include="Scr\DialogTrigger\OnQiYuClose.cs" />
-        <Compile Include="Scr\DialogTrigger\OnQiYuShow.cs" />
-        <Compile Include="Scr\DialogTrigger\OnQiYuOption.cs" />
-        <Compile Include="Scr\ExpressionEvaluator\ExpressionEvaluator.cs" />
-        <Compile Include="Scr\FileAsset.cs" />
-        <Compile Include="Scr\Main.cs" />
-        <Compile Include="Scr\Main.DebugEditor.cs" />
-        <Compile Include="Scr\MainDataContainer.cs" />
-        <Compile Include="Scr\ModConfig.cs" />
-        <Compile Include="Scr\ModManager.cs" />
-        <Compile Include="Scr\Patch\BagActiveSkillGetIconSprite.cs" />
-        <Compile Include="Scr\Patch\BagPassiveSkillGetIconSprite.cs" />
-        <Compile Include="Scr\Patch\ItemUIPatch.cs" />
-        <Compile Include="Scr\Patch\JsonDataPatch.cs" />
-        <Compile Include="Scr\Patch\NpcJieSuanManagerPatch.cs" />
-        <Compile Include="Scr\Patch\ResManagerLoadSpritePatch.cs" />
-        <Compile Include="Scr\Patch\ResManagerLoadTexturePatch.cs" />
-        <Compile Include="Scr\Patch\SkillIconPatch.cs" />
-        <Compile Include="Scr\Patch\UIFightWeaponItemPatch.cs" />
-        <Compile Include="Scr\ResourcesManager.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <Content Include="NextLib\Microsoft.CSharp.dll">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Scr\ExpressionEvaluator\LICENSE.md" />
-    </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-    <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{48F99F98-1EE6-4027-93BA-B1082F52BB03}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Next</RootNamespace>
+    <AssemblyName>Next</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony, Version=2.7.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\BepInEx\core\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx, Version=5.4.18.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\BepInEx\core\BepInEx.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>NextLib\Microsoft.CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生test_Data\Managed\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.InputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\64\觅长生_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scr\ConfigTarget.cs" />
+    <Compile Include="Scr\ConfigurationManagerAttribute.cs" />
+    <Compile Include="Scr\DialogAnalysis.cs" />
+    <Compile Include="Scr\DialogAnalysis.Utils.cs" />
+    <Compile Include="Scr\DialogEnvironment.cs" />
+    <Compile Include="Scr\DialogEventData.cs" />
+    <Compile Include="Scr\DialogEvent\AddComprehensionExp.cs" />
+    <Compile Include="Scr\DialogEvent\AddItem.cs" />
+    <Compile Include="Scr\DialogEvent\AddThinking.cs" />
+    <Compile Include="Scr\DialogEvent\AddTime.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeAbility.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeAge.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeBaseHpMax.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeComprehensionPoint.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeDrugsPoison.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeExp.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeHp.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeInspiration.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeInt.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeLife.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeMoney.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeMentality.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeBaseMoveSpeed.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeBaseSpirit.cs" />
+    <Compile Include="Scr\DialogEvent\ChangeTalent.cs" />
+    <Compile Include="Scr\DialogEvent\DialogEventAttribute.cs" />
+    <Compile Include="Scr\DialogEvent\Event.cs" />
+    <Compile Include="Scr\DialogEvent\IDialogEvent.cs" />
+    <Compile Include="Scr\DialogEvent\Say.cs" />
+    <Compile Include="Scr\DialogEvent\SetChar.cs" />
+    <Compile Include="Scr\DialogEvent\SetInt.cs" />
+    <Compile Include="Scr\DialogEvent\SetStr.cs" />
+    <Compile Include="Scr\DialogTriggerData.cs" />
+    <Compile Include="Scr\DialogTrigger\OnChat.cs" />
+    <Compile Include="Scr\DialogTrigger\OnQiYuClose.cs" />
+    <Compile Include="Scr\DialogTrigger\OnQiYuShow.cs" />
+    <Compile Include="Scr\DialogTrigger\OnQiYuOption.cs" />
+    <Compile Include="Scr\ExpressionEvaluator\ExpressionEvaluator.cs" />
+    <Compile Include="Scr\FileAsset.cs" />
+    <Compile Include="Scr\Mod\ModState.cs" />
+    <Compile Include="Scr\XiaoYeGUI\InterfaceMaker.cs" />
+    <Compile Include="Scr\XiaoYeGUI\RayBlocker.cs" />
+    <Compile Include="Scr\XiaoYeGUI\ResourceUtils.cs" />
+    <Compile Include="Scr\Main.cs" />
+    <Compile Include="Scr\Main.ModPanel.cs" />
+    <Compile Include="Scr\Mod\MainDataContainer.cs" />
+    <Compile Include="Scr\Mod\ModConfig.cs" />
+    <Compile Include="Scr\Mod\ModManager.cs" />
+    <Compile Include="Scr\NextLanguage.cs" />
+    <Compile Include="Scr\NextModSort.cs" />
+    <Compile Include="Scr\Patch\BagActiveSkillGetIconSprite.cs" />
+    <Compile Include="Scr\Patch\BagPassiveSkillGetIconSprite.cs" />
+    <Compile Include="Scr\Patch\ItemUIPatch.cs" />
+    <Compile Include="Scr\Patch\JsonDataPatch.cs" />
+    <Compile Include="Scr\Patch\NpcJieSuanManagerPatch.cs" />
+    <Compile Include="Scr\Patch\ResManagerLoadSpritePatch.cs" />
+    <Compile Include="Scr\Patch\ResManagerLoadTexturePatch.cs" />
+    <Compile Include="Scr\Patch\SkillIconPatch.cs" />
+    <Compile Include="Scr\Patch\UIFightWeaponItemPatch.cs" />
+    <Compile Include="Scr\ResourcesManager.cs" />
+    <Compile Include="Scr\Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NextConfig\config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NextConfig\language\english.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NextConfig\language\chinese.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NextLib\Microsoft.CSharp.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scr\ExpressionEvaluator\LICENSE.md" />
+    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\button_hover.png" />
+    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\button_normal.png" />
+    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\button_press.png" />
+    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\guisharp-box.png" />
+    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\guisharp-window.png" />
+    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\textfield hover.png" />
+    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\textfield on.png" />
+    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\textfield.png" />
+    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\toggle on.png" />
+    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\toggle.png" />
+    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\vertical scrollbar thumb.png" />
+    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\vertical scrollbar.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
          Other similar extension points exist, see Microsoft.Common.targets.
     <Target Name="BeforeBuild">
     </Target>
     <Target Name="AfterBuild">
     </Target>
     -->
-
 </Project>

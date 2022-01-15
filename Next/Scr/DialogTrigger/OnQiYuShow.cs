@@ -15,7 +15,7 @@ namespace SkySwordKill.Next.DialogTrigger
             {
                 qiyuID = id
             };
-            if (DialogAnalysis.TryTrigger("奇遇触发", env))
+            if (DialogAnalysis.TryTrigger(new []{"奇遇触发","AdventureTrigger"}, env))
             {
                 __instance.Close();
                 return false;
