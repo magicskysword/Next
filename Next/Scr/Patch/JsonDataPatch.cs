@@ -15,7 +15,7 @@ namespace SkySwordKill.Next.Patch
             watcher.Stop();
             Main.LogInfo($"储存数据耗时：{watcher.ElapsedMilliseconds / 1000f} s");
             
-            ModManager.LoadAllMod();
+            ModManager.FirstLoadAllMod();
         }
     }
 }

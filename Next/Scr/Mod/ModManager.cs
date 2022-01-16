@@ -13,6 +13,7 @@ using JetBrains.Annotations;
 using KBEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SkySwordKill.Next.Extension;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -36,6 +37,25 @@ namespace SkySwordKill.Next.Mod
         #endregion
 
         #region 回调方法
+
+        public static event Action ModLoadStart;
+        public static event Action ModLoadComplete;
+        public static event Action ModReload;
+        
+        private static void OnModLoadStart()
+        {
+            ModLoadStart?.Invoke();
+        }
+        
+        private static void OnModLoadComplete()
+        {
+            ModLoadComplete?.Invoke();
+        }
+
+        private static void OnModReload()
+        {
+            ModReload?.Invoke();
+        }
 
         #endregion
 
@@ -105,14 +125,24 @@ namespace SkySwordKill.Next.Mod
             Main.LogInfo($"ModManager.StartReloadMod".I18N());
             var sw = Stopwatch.StartNew();
             {
+                OnModReload();
                 RestoreBaseData();
+                OnModLoadStart();
                 LoadAllMod();
                 InitJSONClassData();
                 SceneManager.LoadScene("MainMenu");
                 ModDataDirty = false;
+                OnModLoadComplete();
             }
             sw.Stop();
             Main.LogInfo(string.Format("ModManager.ReloadComplete".I18N(), sw.ElapsedMilliseconds / 1000f));
+        }
+
+        public static void FirstLoadAllMod()
+        {
+            OnModLoadStart();
+            LoadAllMod();
+            OnModLoadComplete();
         }
 
         private static void InitJSONClassData()
@@ -255,8 +285,7 @@ namespace SkySwordKill.Next.Mod
 
                     return new { id = modId, setting = modSetting, config = modConfig };
                 })
-                .OrderBy(data=> data.setting.enable ? 0 : 1)
-                .ThenBy(data => data.setting.priority)
+                .OrderBy(data => data.setting.priority)
                 .ThenBy(data => data.id)
                 .ToArray();
 
@@ -441,7 +470,13 @@ namespace SkySwordKill.Next.Mod
                 var jsonData = JObject.Parse(data);
                 foreach (var property in jsonData.Properties())
                 {
-                    var curData = JObject.FromObject(property.Value);
+                    if (property.Value.Type !=  JTokenType.Object)
+                    {
+                        jObject.TryAddOrReplace(property.Name,property.Value);
+                        continue;
+                    }
+                    
+                    var curData = (JObject)property.Value;
                     if (jObject.ContainsKey(property.Name))
                     {
                         var tagData = jObject.GetValue(property.Name);
@@ -676,5 +711,7 @@ namespace SkySwordKill.Next.Mod
         #region 私有方法
 
         #endregion
+
+
     }
 }

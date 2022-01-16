@@ -32,7 +32,7 @@ modConfig.json
 ## 4 数据Patch
 数据Patch是指对游戏原版数据进行修改与增加。（目前未提供删除功能）
 
-### 4.1 数据查询
+### 4.1 数据类型
 当Next安装后，运行游戏时，Next会自动在 `觅长生/BepInEx/plugins/Next` 路径生成Base文件夹
 
 Base文件夹里的文件，大致分为三类：
@@ -103,7 +103,7 @@ Base文件夹里的文件，大致分为三类：
     要修改此类文件时，将该文件一份至mod文件夹里的`ItemJsonData`文件夹，然后修改其数据即可。<br/>
     如若需要新增数据，则将数据名称命名为新的数字，并修改数据内的ID与其一致即可。
 
-3. 文件夹内的普通Json<br/>
+3. SeidJson数据<br/>
     该类文件与类型1一样，但是其是放置在文件夹类的。目前版本以`SeidJsonData`结尾的文件夹皆属于该类。<br/>
     如 `BuffSeidJsonData/1.json` 文件，呈如下结构：
     ```json
@@ -135,7 +135,97 @@ Base文件夹里的文件，大致分为三类：
     与源数据ID一致的数据会进行替换，其余的数据则会新增到原版数据末尾<br/>
     注：该类文件一般为游戏内功能函数的配置文件，例如buff数据里配置的seid会在buffSeid文件夹里寻找对应的json文件，然后在该文件内寻找该buffID对应的数据。
 
-### 4.2 数据含义参考
+### 4.2 增量修改
+Next 0.3.0 版本新增了增量修改的功能
+
+当对源数据进行修改时，可以填写需要修改的部分。这样其他内容则不会被覆盖
+
+如 `ItemJsonData/1.json`
+```json
+{
+    "id":1,
+    "ItemIcon":0,
+    "maxNum":1,
+    "name":"锈渍铁剑",
+    "TuJianType":0,
+    "ShopType":99,
+    "ItemFlag":[
+        1,
+        101
+    ],
+    "WuWeiType":0,
+    "ShuXingType":0,
+    "type":0,
+    "quality":1,
+    "typePinJie":1,
+    "StuTime":0,
+    "seid":[
+        2
+    ],
+    "vagueType":0,
+    "price":350,
+    "desc":"主动：下一次造成的伤害提升25%（血量低于10时才能使用）",
+    "desc2":"剑身满是锈渍，看起来连凡人用的武器都不如，魏无极的残魂便寄居在其中。",
+    "CanSale":1,
+    "DanDu":0,
+    "CanUse":0,
+    "NPCCanUse":0,
+    "yaoZhi1":0,
+    "yaoZhi2":0,
+    "yaoZhi3":0,
+    "wuDao":[]
+}
+```
+
+制造增量补丁时，可以写成如下格式：
+```json
+{
+    "name":"魏老之剑",
+    "desc2":"这就是传说中的修仙老爷爷，魏无极的残魂便寄居在其中。",
+}
+```
+
+这样游戏里的最终数据便会变为如下：
+```json
+{
+    "id":1,
+    "ItemIcon":0,
+    "maxNum":1,
+    "name":"魏老之剑",
+    "TuJianType":0,
+    "ShopType":99,
+    "ItemFlag":[
+        1,
+        101
+    ],
+    "WuWeiType":0,
+    "ShuXingType":0,
+    "type":0,
+    "quality":1,
+    "typePinJie":1,
+    "StuTime":0,
+    "seid":[
+        2
+    ],
+    "vagueType":0,
+    "price":350,
+    "desc":"主动：下一次造成的伤害提升25%（血量低于10时才能使用）",
+    "desc2":"这就是传说中的修仙老爷爷，魏无极的残魂便寄居在其中。",
+    "CanSale":1,
+    "DanDu":0,
+    "CanUse":0,
+    "NPCCanUse":0,
+    "yaoZhi1":0,
+    "yaoZhi2":0,
+    "yaoZhi3":0,
+    "wuDao":[]
+}
+```
+
+增量修改可以避免游戏本体更新而导致需要重新适配数据文件，并且多个Mod之间也可以相互以增量修改的形式相互覆盖。
+
+
+### 4.3 数据含义参考
 
 该部分可参考3DM一位大佬的[此篇帖子](https://bbs.3dmgame.com/thread-6185512-1-1.html)
 

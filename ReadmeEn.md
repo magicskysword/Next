@@ -12,7 +12,7 @@ Reference Post(Chinese)：https://bbs.3dmgame.com/thread-6207429-1-1.html
 
 Wiki(Chinese)：[Next Wiki](https://michangshengnext.fandom.com/zh/wiki/%E8%A7%85%E9%95%BF%E7%94%9FNext_Wiki)
 
-Document：[Next Document](doc/EN/NextDocument.md)
+Document(Chinese)：[Next Document](doc/NextDocument.md)
 
 The mod menu can be opened through F4 in the game (the keys can be modified)
 

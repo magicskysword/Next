@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
+using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.Mod;
 using SkySwordKill.Next.Patch;
 using SkySwordKill.Next.XiaoYeGUI;

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using BepInEx.Configuration;
+using Newtonsoft.Json.Linq;
 
-namespace SkySwordKill.Next
+namespace SkySwordKill.Next.Extension
 {
     public static class Utils
     {
@@ -17,6 +18,13 @@ namespace SkySwordKill.Next
             {
                 jsonObject.list[index] = value.Copy();
             }
+        }
+        
+        public static void TryAddOrReplace(this JObject jsonObject, string key, JToken value)
+        {
+            if (jsonObject.ContainsKey(key))
+                jsonObject.Remove(key);
+            jsonObject.Add(key,value);
         }
         
         public static string DecodeJsonUnicode(this string json)

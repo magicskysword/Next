@@ -1,4 +1,4 @@
-# [English ReadMe](ReadmeEn.md)
+# [English ReadMe Click Here](ReadmeEn.md)
 
 # 觅长生 Next Mod框架
 

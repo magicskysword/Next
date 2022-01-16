@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.Mod;
 
 namespace SkySwordKill.Next.Patch

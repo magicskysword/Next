@@ -4,6 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
+using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.Mod;
 using SkySwordKill.Next.XiaoYeGUI;
 using UnityEngine.SceneManagement;
@@ -58,7 +59,6 @@ namespace SkySwordKill.Next
         {
             if (Input.GetKeyDown(winKeyCode.Value))
             {
-                GUIInit();
                 isWinOpen = !isWinOpen;
             }
         }
@@ -115,13 +115,13 @@ namespace SkySwordKill.Next
             
             if (isSelectedLanguage || nextLanguage == null)
             {
-                GUI.Window(20, languageRect, DrawLanguageSelectWindow, $"Next v{MOD_VERSION}");
+                GUILayout.Window(20, languageRect, DrawLanguageSelectWindow, $"Next v{MOD_VERSION}");
                 rayBlocker.SetSize(languageRect);
                 rayBlocker.OpenBlocker();
             }
             else if (isWinOpen)
             {
-                GUI.Window(50, winRect, DrawDebugWindow, $"Next v{MOD_VERSION}");
+                GUILayout.Window(50, winRect, DrawDebugWindow, $"Next v{MOD_VERSION}");
                 rayBlocker.SetSize(winRect);
                 rayBlocker.OpenBlocker();
             }
@@ -270,7 +270,7 @@ namespace SkySwordKill.Next
                 GUILayout.BeginVertical();
                 {
                     scrollRollMods = GUILayout.BeginScrollView(scrollRollMods, false, false, 
-                        GUILayout.MinHeight(winRect.height * 0.7f-60),
+                        GUILayout.MinHeight(winRect.height * 0.8f-60),
                         GUILayout.MinWidth(winRect.width * 0.7f-40),
                         GUILayout.MaxWidth(winRect.width * 0.7f-40));
                     {
