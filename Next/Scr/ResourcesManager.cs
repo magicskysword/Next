@@ -215,11 +215,24 @@ namespace SkySwordKill.Next
             }
         }
 
+        private void Update()
+        {
+            if (isLoading)
+            {
+                var assetCount = fileAssets.Count;
+                var loadSuccessCount = fileAssets.Count(pair => pair.Value.IsDone);
+                if (assetCount == loadSuccessCount)
+                {
+                    isLoading = false;
+                }
+            }
+        }
+
         public void OnGUI()
         {
             if (isLoading)
             {
-                GUI.Window(0, new Rect(0, 0, 300, 100), DrawWindow, "Next 资源加载中......");
+                GUILayout.Window(0, new Rect(0, 0, 300, 100), DrawWindow, "Next 资源加载中......");
             }
         }
 
@@ -232,11 +245,6 @@ namespace SkySwordKill.Next
             var assetCount = fileAssets.Count;
             var loadSuccessCount = fileAssets.Count(pair => pair.Value.IsDone);
             GUILayout.Label($"资源加载进度：{loadSuccessCount} / {assetCount}");
-
-            if (assetCount == loadSuccessCount)
-            {
-                isLoading = false;
-            }
         }
 
         #endregion

@@ -1,3 +1,5 @@
+# [English ReadMe Click Here](ReadmeEn.md)
+
 # 觅长生 Next Mod框架
 
 觅长生 Next Mod是基于BepinEx框架的Mod，为觅长生游戏提供了数据增量修改、添加剧情与触发器的功能
@@ -7,7 +9,7 @@
 
 ## 使用方法
 
-将 `Next.Dll` 与 `NextLib`文件夹 置入 `觅长生\64\BepInEx\plugins` 文件夹 (如果是32位系统则为 `觅长生\64\BepInEx\plugins`，下面不再赘述)
+下载压缩包，将文件解压至 `觅长生\64\BepInEx\plugins` 文件夹 (如果是32位系统则为 `觅长生\64\BepInEx\plugins`，下面不再赘述)
 
 参考贴：https://bbs.3dmgame.com/thread-6207429-1-1.html
 
@@ -26,28 +28,36 @@ clone该库后，自行重新添加觅长生游戏文件夹里的Dll引用，包
 
 `觅长生\64\BepInEx\core` 里的
 ```
-0Harmony
-BepInEx
+0Harmony.dll
+BepInEx.dll
 ```
 `觅长生\64\觅长生_Data\Managed` 里的
 ```
-Assembly-CSharp
-Assembly-CSharp-firstpass
-Newtonsoft.CSharp
-UnityEngine
-UnityEngine.AudioModule
-UnityEngine.CoreModule
-UnityEngine.IMGUIModule
-UnityEngine.InputModule
-UnityEngine.TextRenderingModule
-UnityEngine.UI
-UnityEngine.UIModule
+Assembly-CSharp.dll
+Assembly-CSharp-firstpass.dll
+Newtonsoft.CSharp.dll
+UnityEngine.dll
+UnityEngine.AssetBundleModule.dll
+UnityEngine.AudioModule.dll
+UnityEngine.CoreModule.dll
+UnityEngine.IMGUIModule.dll
+UnityEngine.InputModule.dll
+UnityEngine.TextRenderingModule.dll
+UnityEngine.UI.dll
+UnityEngine.UIModule.dll
+UnityEngine.UnityWebRequestAssetBundleModule.dll
+UnityEngine.UnityWebRequestAudioModule.dll
+UnityEngine.UnityWebRequestModule.dll
+UnityEngine.UnityWebRequestTextureModule.dll
+UnityEngine.UnityWebRequestWWWModule.dll
 ```
 
-添加完后直接Build即可，将Build出来的 `Next.Dll` 与 `NextLib`文件夹 置入 `觅长生\64\BepInEx\plugins` 文件夹即可
+添加完后直接Build即可，将Build出来的 `Next.Dll` 文件 、 `NextLib` 文件夹 与 `NextConfig` 文件夹 置入 `觅长生\64\BepInEx\plugins` 目录 即可
 
 ## 使用库
 [codingseb/ExpressionEvaluator](https://github.com/codingseb/ExpressionEvaluator) 用于事件与触发器的条件判断
+
+[xiaoye97/VRoidXYTool](https://github.com/xiaoye97/VRoidXYTool) 使用了其中的GUI库
 
 ## 相关库
 [BepinEx](https://github.com/BepInEx/BepInEx) 本mod基于BepinEx

@@ -3,13 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
+using SkySwordKill.Next.Extension;
+using SkySwordKill.Next.Mod;
 using SkySwordKill.Next.Patch;
+using SkySwordKill.Next.XiaoYeGUI;
 using UnityEngine;
 
 namespace SkySwordKill.Next
@@ -17,14 +21,42 @@ namespace SkySwordKill.Next
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.2.16";
+        public const string MOD_VERSION = "0.3.0";
+        
+        public static Lazy<string> pathModsDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                BepInEx.Paths.PluginPath, "Next"));
+        
+        public static Lazy<string> pathLibraryDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                BepInEx.Paths.PluginPath, "NextLib"));
+        
+        public static Lazy<string> pathConfigDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                BepInEx.Paths.PluginPath, "NextConfig"));
+
+        public static Lazy<string> pathBaseDataDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                pathModsDir.Value, "Base"));
+        
+        public static Lazy<string> pathLanguageDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                pathConfigDir.Value, "language"));
+        
+        public static Lazy<string> pathModSettingFile =
+            new Lazy<string>(() => Utility.CombinePaths(
+                pathConfigDir.Value, "modSetting.json"));
 
         public static Main Instance { get; private set; }
         public static int logIndent = 0;
         
-        public ConfigEntry<bool> debugMode;
-        public ConfigEntry<bool> openInStart;
-        public ConfigEntry<KeyCode> debugKeyCode;
+        public ConfigTarget<string> languageID;
+        public ConfigTarget<bool> debugMode;
+        public ConfigTarget<bool> openInStart;
+        public ConfigTarget<KeyCode> winKeyCode;
+        
+        public NextLanguage nextLanguage;
+        public NextModSetting nextModSetting;
 
         public ResourcesManager resourcesManager;
 
@@ -33,38 +65,28 @@ namespace SkySwordKill.Next
             Init();
         }
 
-        public void PatchJson()
-        {
-            var watcher = Stopwatch.StartNew();
-            ModManager.CloneMainData();
-            watcher.Stop();
-            LogInfo($"储存数据耗时：{watcher.ElapsedMilliseconds / 1000f} s");
-            
-            ModManager.LoadAllMod();
-            
-            // Mod加载完成后显示窗口
-            isWinOpen = openInStart.Value;
-        }
-
         private void Init()
         {
             Instance = this;
-            /*gameVersion = Config.Bind("General.GameVersion", "游戏版本", "",
-                "游戏当前的版本，版本与配置不一致时会重新生成Base文件夹。");*/
-            debugKeyCode = Config.Bind("Debug.OpenKeyCode", "调试窗口快捷键", KeyCode.F4,
-                "Next插件调试窗口，用于查看当前加载mod以及进行Mod调试（需打开调试模式）。");
-            debugMode = Config.Bind("Debug.Mode", "调试模式开关", false,
-                "Next插件调试模式开关，打开后才能在调试窗口里看到更多功能。");
-            openInStart = Config.Bind("Debug.OpenInStart", "游戏启动时弹出", true,
-                "是否在游戏启动时弹出调试窗口。");
-
+            
+            languageID = Config.CreateConfig("Main.Language", "Plugin Language", "",
+                "");
+            winKeyCode = Config.CreateConfig("Main.OpenKeyCode", "Window HotKey", KeyCode.F4,
+                "");
+            openInStart = Config.CreateConfig("Main.OpenInStart", "Open Window In Game Start", true,
+                "");
+            debugMode = Config.CreateConfig("Debug.Mode", "Debug Mode", false,
+                "");
+            
             resourcesManager = gameObject.AddComponent<ResourcesManager>();
 
             // 数据加载Patch
+            // data patch
             Harmony.CreateAndPatchAll(typeof(JsonDataPatch));
             Harmony.CreateAndPatchAll(typeof(NpcJieSuanManagerPatch));
 
             // 资源相关Patch
+            // resources patch
             Harmony.CreateAndPatchAll(typeof(SkillIconPatch));
             Harmony.CreateAndPatchAll(typeof(ItemUIPatch));
 
@@ -76,17 +98,64 @@ namespace SkySwordKill.Next
 
             Harmony.CreateAndPatchAll(typeof(UIFightWeaponItemPatch));
 
-            // Resources Patch 不成功
-            //Harmony.CreateAndPatchAll(typeof(ResourcesPatch));
-
             // 加载运行时脚本所需DLL
-            string nextLibDirPath = Path.Combine(BepInEx.Paths.PluginPath, "NextLib");
-            Assembly.LoadFrom(Path.Combine(nextLibDirPath, "Microsoft.CSharp.dll"));
+            // load runtime dll
+            Assembly.LoadFrom(Utility.CombinePaths(pathLibraryDir.Value, "Microsoft.CSharp.dll"));
 
             DialogAnalysis.Init();
 
-            // 初始窗口状态
-            RefreshWinRect();
+            // 初始化语言与配置
+            // Init language and config
+            NextLanguage.InitLanguage();
+            LoadDefaultLanguage();
+            nextModSetting = NextModSetting.LoadSetting();
+            
+            // 根据设置显示窗口
+            // show window by config
+            isWinOpen = openInStart.Value;
+        }
+
+        private void LoadDefaultLanguage()
+        {
+            if (string.IsNullOrEmpty(languageID.Value) || !NextLanguage.languages.TryGetValue(languageID.Value, out var language))
+            {
+                // 选择一个语言作为默认语言
+                // Choose Default Language
+                SelectLanguage(NextLanguage.languages.Values.FirstOrDefault());
+                isSelectedLanguage = true;
+            }
+            else
+            {
+                SelectLanguage(language);
+            }
+            
+            languageID.SetName("Config.Main.LanguageID.Name".I18N());
+            languageID.SetDesc("Config.Main.LanguageID.Desc".I18N());
+            
+            winKeyCode.SetName("Config.Main.OpenKeyCode.Name".I18N());
+            winKeyCode.SetDesc("Config.Main.OpenKeyCode.Desc".I18N());
+            
+            openInStart.SetName("Config.Main.OpenInStart.Name".I18N());
+            openInStart.SetDesc("Config.Main.OpenInStart.Desc".I18N());
+            
+            debugMode.SetName("Config.Debug.Mode.Name".I18N());
+            debugMode.SetDesc("Config.Debug.Mode.Desc".I18N());
+        }
+
+        public void SelectLanguage(NextLanguage language)
+        {
+            nextLanguage = language;
+
+            if (language == null)
+                return;
+            
+            languageID.Value = language.FileName;
+            LogInfo($"{"Misc.CurrentLanguage".I18N()} : {language.LanguageName}");
+        }
+
+        public void SaveModSetting()
+        {
+            NextModSetting.SaveSetting(nextModSetting);
         }
 
         public static Coroutine InvokeCoroutine(IEnumerator enumerator)

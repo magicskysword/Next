@@ -14,7 +14,7 @@ namespace SkySwordKill.Next.DialogTrigger
                 qiyuID = __instance.EventId,
                 qiyuOption = optionId
             };
-            if (DialogAnalysis.TryTrigger("奇遇选项", env))
+            if (DialogAnalysis.TryTrigger(new []{"奇遇选项","AdventureOption"}, env))
             {
                 __instance.Close();
             }

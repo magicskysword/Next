@@ -111,14 +111,13 @@ namespace SkySwordKill.Next
             return curEvaluator;
         }
 
-        public static bool TryTrigger(string triggerType,DialogEnvironment env = null)
+        public static bool TryTrigger(IEnumerable<string> triggerTypes,DialogEnvironment env = null)
         {
             var newEnv = env ?? new DialogEnvironment();
 
-            foreach (var kvp in
-                dialogTriggerDataDic.Where(pair => pair.Value.type == triggerType))
+            var triggers = dialogTriggerDataDic.Values.Where(triggerData => triggerTypes.Contains(triggerData.type));
+            foreach (var trigger in triggers)
             {
-                var trigger = kvp.Value;
                 try
                 {
                     if (CheckCondition(trigger.condition,newEnv))

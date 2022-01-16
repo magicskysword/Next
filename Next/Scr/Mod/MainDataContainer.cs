@@ -3,7 +3,7 @@ using System.Linq;
 using KBEngine;
 using Newtonsoft.Json.Linq;
 
-namespace SkySwordKill.Next
+namespace SkySwordKill.Next.Mod
 {
     public class MainDataContainer
     {
@@ -20,7 +20,7 @@ namespace SkySwordKill.Next
             var dataContainer = new MainDataContainer();
 
             jsonData jsonInstance = jsonData.instance;
-            foreach (var fieldInfo in ModManager.dataField.Value)
+            foreach (var fieldInfo in ModManager.jsonDataFields)
             {
                 if (fieldInfo.Name.StartsWith("_"))
                     continue;
@@ -64,7 +64,7 @@ namespace SkySwordKill.Next
         public static void CoverMainData(MainDataContainer dataContainer)
         {
             jsonData jsonInstance = jsonData.instance;
-            foreach (var fieldInfo in ModManager.dataField.Value)
+            foreach (var fieldInfo in ModManager.jsonDataFields)
             {
                 if (fieldInfo.Name.StartsWith("_"))
                     continue;
