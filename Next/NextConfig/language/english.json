@@ -52,6 +52,7 @@
     "HeaderBar.ReloadModTip" : "Only reload mod in start scene",
     "HeaderBar.ExportBase" : "Export Base",
     "HeaderBar.OpenInStart" : "Open In Game Start",
+    "HeaderBar.ModFolder" : "Mod Folder",
     "HeaderBar.Close" : "Close",
 
     "ModManager.GenerateBaseData": "Generating Base Files.",

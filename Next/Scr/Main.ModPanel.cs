@@ -223,16 +223,21 @@ namespace SkySwordKill.Next
                     if(!inMainScene)
                         GUILayout.Label("HeaderBar.ReloadModTip".I18N());
                     
+                    if (GUILayout.Button("HeaderBar.ExportBase".I18N()))
+                    {
+                        ModManager.GenerateBaseData();
+                    }
+                    
                     if (GUILayout.Button("HeaderBar.ReloadMod".I18N()))
                     {
                         ModManager.ReloadAllMod();
                     }
-
+                    
                     GUI.enabled = true;
                     
-                    if (GUILayout.Button("HeaderBar.ExportBase".I18N()))
+                    if (GUILayout.Button("HeaderBar.ModFolder".I18N()))
                     {
-                        ModManager.GenerateBaseData();
+                        System.Diagnostics.Process.Start(Main.pathModsDir.Value);
                     }
                 }
                 
@@ -369,11 +374,11 @@ namespace SkySwordKill.Next
                         GUILayout.BeginVertical();
                         {
                             GUILayout.Label($"{"Mod.Name".I18N()} : {modName}",modInfoStyle);
-                            GUILayout.Space(30);
+                            GUILayout.Space(20);
                             GUILayout.Label($"{"Mod.Author".I18N()} : {modAuthor}",modInfoStyle);
                             GUILayout.Label($"{"Mod.Version".I18N()} : {modVersion}",modInfoStyle);
                             GUILayout.Label($"{"Mod.Description".I18N()} : {modDesc}",modInfoStyle);
-                            GUILayout.Space(30);
+                            GUILayout.Space(20);
                             GUILayout.Label($"{"Mod.Directory".I18N()} : {modPath}",modInfoStyle);
                         }
                         GUILayout.EndVertical();

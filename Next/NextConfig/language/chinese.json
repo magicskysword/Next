@@ -52,6 +52,7 @@
     "HeaderBar.ReloadModTip" : "只能在游戏开始界面重载Mod",
     "HeaderBar.ExportBase" : "导出Base",
     "HeaderBar.OpenInStart" : "游戏启动时弹出",
+    "HeaderBar.ModFolder" : "Mod文件夹",
     "HeaderBar.Close" : "关闭",
 
     "ModManager.GenerateBaseData": "正在生成Base文件。",

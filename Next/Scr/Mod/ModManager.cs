@@ -277,7 +277,7 @@ namespace SkySwordKill.Next.Mod
             var mods = modEnumerable.ToArray();
             var nextModSetting = Main.Instance.nextModSetting;
 
-            var enableModSortList = mods
+            var modSortList = mods
                 .Select(modConfig =>
                 {
                     var modId = Path.GetFileNameWithoutExtension(modConfig.Path);
@@ -289,7 +289,7 @@ namespace SkySwordKill.Next.Mod
                 .ThenBy(data => data.id)
                 .ToArray();
 
-            return enableModSortList.Select(data => data.config);
+            return modSortList.Select(data => data.config);
         }
 
         public static void ResetModPriority()
