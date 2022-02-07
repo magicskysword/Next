@@ -10,8 +10,8 @@ namespace SkySwordKill.Next
         public string command;
         public string[] paramList;
         
-        public string charID;
-        public string say;
+        public string charID = string.Empty;
+        public string say = string.Empty;
 
         public DialogEventData bindEventData;
 
@@ -19,17 +19,24 @@ namespace SkySwordKill.Next
 
         public string rawCommand;
 
-        public int GetInt(int index)
+        public int GetInt(int index,int defaultValue = 0)
         {
-            if (index > paramList.Length - 1)
-                return 0;
+            if (index >= paramList.Length)
+                return defaultValue;
             return Convert.ToInt32(paramList[index]);
         }
         
-        public string GetStr(int index)
+        public bool GetBool(int index,bool defaultValue = false)
         {
-            if (index > paramList.Length - 1)
-                return string.Empty;
+            if (index >= paramList.Length)
+                return defaultValue;
+            return Convert.ToInt32(paramList[index]) != 0;
+        }
+        
+        public string GetStr(int index,string defaultValue = "")
+        {
+            if (index >= paramList.Length)
+                return defaultValue;
             return paramList[index];
         }
     }
@@ -92,14 +99,13 @@ namespace SkySwordKill.Next
                 command.command = "";
                 var body = strArr[0];
                 command.paramList = body.Split('#');
-
-                if (command.paramList.Length >= 2)
-                {
-                    command.charID = command.paramList[0];
-                    command.say = command.paramList[1];
-                }
             }
-
+            if (command.paramList.Length >= 2)
+            {
+                command.charID = command.paramList[0];
+                command.say = command.paramList[1];
+            }
+            
             return command;
         }
 

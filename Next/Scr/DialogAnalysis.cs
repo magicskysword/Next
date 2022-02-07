@@ -32,22 +32,24 @@ namespace SkySwordKill.Next
         });
 
         /// <summary>
-        /// 对话数据
-        /// </summary>
-        public static Dictionary<string, DialogEventData> dialogDataDic = new Dictionary<string, DialogEventData>();
-        /// <summary>
         /// 对话注册事件
         /// </summary>
-        public static Dictionary<string, IDialogEvent> dialogEventDic = new Dictionary<string, IDialogEvent>();
+        private static Dictionary<string, IDialogEvent> _registerEvents = new Dictionary<string, IDialogEvent>();
+        
+        
         /// <summary>
-        /// 对话临时储存角色
+        /// 对话数据
         /// </summary>
-        public static Dictionary<string, int> tmpCharacter = new Dictionary<string, int>();
+        public static Dictionary<string, DialogEventData> DialogDataDic = new Dictionary<string, DialogEventData>();
         /// <summary>
         /// 对话触发器
         /// </summary>
-        public static Dictionary<string, DialogTriggerData> dialogTriggerDataDic =
+        public static Dictionary<string, DialogTriggerData> DialogTriggerDataDic =
             new Dictionary<string, DialogTriggerData>();
+        /// <summary>
+        /// 对话临时储存角色
+        /// </summary>
+        public static Dictionary<string, int> TmpCharacter = new Dictionary<string, int>();
 
         public static string curDialogID;
         public static int curDialogIndex = 0;
@@ -101,7 +103,7 @@ namespace SkySwordKill.Next
 
         public static void RegisterCommand(string command, IDialogEvent cEvent)
         {
-            dialogEventDic[command] = cEvent;
+            _registerEvents[command] = cEvent;
         }
 
         public static ExpressionEvaluator GetEvaluate(DialogEnvironment env)
@@ -115,7 +117,7 @@ namespace SkySwordKill.Next
         {
             var newEnv = env ?? new DialogEnvironment();
 
-            var triggers = dialogTriggerDataDic.Values.Where(triggerData => triggerTypes.Contains(triggerData.type));
+            var triggers = DialogTriggerDataDic.Values.Where(triggerData => triggerTypes.Contains(triggerData.type));
             foreach (var trigger in triggers)
             {
                 try
@@ -145,7 +147,7 @@ namespace SkySwordKill.Next
 
         public static void StartTestDialogEvent(string dialog)
         {
-            if (!dialogDataDic.TryGetValue("next_test", out DialogEventData data))
+            if (!DialogDataDic.TryGetValue("next_test", out DialogEventData data))
             {
                 data = new DialogEventData
                 {
@@ -153,7 +155,7 @@ namespace SkySwordKill.Next
                     option = new string[0],
                     character = new Dictionary<string, int>()
                 };
-                dialogDataDic["next_test"] = data;
+                DialogDataDic["next_test"] = data;
             }
             data.dialog = dialog.Split('\n').Where(str=>!string.IsNullOrWhiteSpace(str)).ToArray();
             StartDialogEvent("next_test");
@@ -168,7 +170,7 @@ namespace SkySwordKill.Next
         {
             curDialogID = eventID;
             curDialogIndex = index;
-            if (!dialogDataDic.TryGetValue(eventID, out var data))
+            if (!DialogDataDic.TryGetValue(eventID, out var data))
             {
                 Main.LogWarning($"对话事件 {eventID} 不存在。");
                 return;
@@ -218,7 +220,7 @@ namespace SkySwordKill.Next
                 }
             }
 
-            if (dialogEventDic.TryGetValue(command.command, out var dialogEvent))
+            if (_registerEvents.TryGetValue(command.command, out var dialogEvent))
             {
                 try
                 {
@@ -251,7 +253,14 @@ namespace SkySwordKill.Next
 
         public static void TryAddTmpChar(string name, int id)
         {
-            tmpCharacter[name] = id;
+            TmpCharacter[name] = id;
+        }
+
+        public static void Clear()
+        {
+            DialogDataDic.Clear();
+            DialogTriggerDataDic.Clear();
+            TmpCharacter.Clear();
         }
 
         #endregion

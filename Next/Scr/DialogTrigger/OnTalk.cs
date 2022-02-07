@@ -4,7 +4,7 @@ using HarmonyLib;
 namespace SkySwordKill.Next.DialogTrigger
 {
     [HarmonyPatch(typeof(UINPCJiaoHuPop),"OnJiaoTanBtnClick")]
-    public class OnChat
+    public class OnTalk
     {
         public static bool Prefix(UINPCJiaoHuPop __instance)
         {

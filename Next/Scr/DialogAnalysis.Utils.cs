@@ -225,6 +225,18 @@ namespace SkySwordKill.Next
             return dic;
         }
         
+        public static JSONObject GetNpcRandomJsonData(int npcid)
+        {
+            int num = NPCEx.NPCIDToNew(npcid);
+            return jsonData.instance.AvatarRandomJsonData[num.ToString()];
+        }
+        
+        public static JSONObject GetNpcJsonData(int npcid)
+        {
+            int num = NPCEx.NPCIDToNew(npcid);
+            return jsonData.instance.AvatarJsonData[num.ToString()];
+        }
+        
         #endregion
 
         #region 私有方法

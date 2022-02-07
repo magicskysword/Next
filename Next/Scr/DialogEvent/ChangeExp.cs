@@ -9,6 +9,7 @@ namespace SkySwordKill.Next.DialogEvent
         {
             int num = command.GetInt(0);
             Tools.instance.getPlayer().addEXP(num);
+            MessageMag.Instance.Send(MessageName.MSG_PLAYER_USE_ITEM, null);
             callback?.Invoke();
         }
     }

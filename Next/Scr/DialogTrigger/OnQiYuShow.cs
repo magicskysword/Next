@@ -7,6 +7,7 @@ namespace SkySwordKill.Next.DialogTrigger
     {
         public static int lastOption = 0;
         
+        [HarmonyPrefix]
         public static bool Prefix(QiYu.QiYuUIMag __instance,int id)
         {
             Main.LogInfo($"打开奇遇 ID : [{id}]");

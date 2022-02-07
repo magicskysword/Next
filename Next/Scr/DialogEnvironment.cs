@@ -17,6 +17,8 @@ namespace SkySwordKill.Next
         public int qiyuID;
         public int qiyuOption;
 
+        public int itemID;
+
         #endregion
 
         #region 属性
@@ -101,6 +103,12 @@ namespace SkySwordKill.Next
         {
             return Tools.instance.getPlayer().getItemNum(itemID);
         }
+        
+        public int GetNpcFav(int npcId) => NPCEx.GetFavor(npcId);
+        public int GetNpcSex(int npcId) => DialogAnalysis.GetNpcRandomJsonData(npcId)["Sex"].I;
+        public int GetNpcAge(int npcId) => DialogAnalysis.GetNpcJsonData(npcId)["age"].I;
+        public bool IsNpcDeath(int npcId) => NPCEx.IsDeath(npcId);
+        
 
         #endregion
 

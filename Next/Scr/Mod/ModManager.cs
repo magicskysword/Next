@@ -127,6 +127,7 @@ namespace SkySwordKill.Next.Mod
             {
                 OnModReload();
                 RestoreBaseData();
+                RestoreDialogData();
                 OnModLoadStart();
                 LoadAllMod();
                 InitJSONClassData();
@@ -208,7 +209,12 @@ namespace SkySwordKill.Next.Mod
             
             MainDataContainer.CoverMainData(dataContainer);
         }
-        
+
+        public static void RestoreDialogData()
+        {
+            DialogAnalysis.Clear();
+        }
+
         public static void LoadAllMod()
         {
             modConfigs.Clear();
@@ -613,12 +619,12 @@ namespace SkySwordKill.Next.Mod
 
         public static void TryAddEventData(DialogEventData dialogEventData)
         {
-            DialogAnalysis.dialogDataDic[dialogEventData.id] = dialogEventData;
+            DialogAnalysis.DialogDataDic[dialogEventData.id] = dialogEventData;
         }
         
         public static void TryAddTriggerData(DialogTriggerData dialogTriggerData)
         {
-            DialogAnalysis.dialogTriggerDataDic[dialogTriggerData.id] = dialogTriggerData;
+            DialogAnalysis.DialogTriggerDataDic[dialogTriggerData.id] = dialogTriggerData;
         }
 
         public static void ModMoveUp(ref int curIndex)

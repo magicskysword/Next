@@ -14,7 +14,7 @@ namespace SkySwordKill.Next.DialogEvent
             // 处理对话角色ID
             if (!command.bindEventData.character.TryGetValue(command.charID, out charNum))
             {
-                if (!DialogAnalysis.tmpCharacter.TryGetValue(command.charID, out charNum))
+                if (!DialogAnalysis.TmpCharacter.TryGetValue(command.charID, out charNum))
                 {
                     charNum = 0;
                 }

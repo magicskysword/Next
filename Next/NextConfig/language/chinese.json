@@ -40,6 +40,10 @@
     "DramaDebug.CopyJsonData" : "复制Json数据",
     "DramaDebug.IntVariableDebugWin" : "Int变量调试窗口",
     "DramaDebug.StrVariableDebugWin" : "String变量调试窗口",
+
+    "Trigger" : "触发器",
+    "Trigger.UseItem" : "使用物品",
+    "Trigger.AfterUseItem" : "使用物品后",
     
     "Misc.CurrentLanguage" : "当前语言",
     "Misc.RestartPatchNpcData" : "重新Patch Npc数据",

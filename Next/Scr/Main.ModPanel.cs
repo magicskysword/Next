@@ -214,33 +214,7 @@ namespace SkySwordKill.Next
 
                 GUILayout.FlexibleSpace();
 
-                
-                if (debugMode.Value)
-                {
-                    var inMainScene = SceneManager.GetActiveScene().name == "MainMenu";
-                    GUI.enabled = inMainScene;
-                    
-                    if(!inMainScene)
-                        GUILayout.Label("HeaderBar.ReloadModTip".I18N());
-                    
-                    if (GUILayout.Button("HeaderBar.ExportBase".I18N()))
-                    {
-                        ModManager.GenerateBaseData();
-                    }
-                    
-                    if (GUILayout.Button("HeaderBar.ReloadMod".I18N()))
-                    {
-                        ModManager.ReloadAllMod();
-                    }
-                    
-                    GUI.enabled = true;
-                    
-                    if (GUILayout.Button("HeaderBar.ModFolder".I18N()))
-                    {
-                        System.Diagnostics.Process.Start(Main.pathModsDir.Value);
-                    }
-                }
-                
+
                 // 该部分不简化是为了避免反复操作 openInStart.Value 属性
                 bool isPop = GUILayout.Toggle(openInStart.Value, "HeaderBar.OpenInStart".I18N());
                 if (isPop != openInStart.Value)
@@ -269,6 +243,31 @@ namespace SkySwordKill.Next
 
         private void DrawModList()
         {
+            GUILayout.BeginHorizontal();
+            {
+                GUILayout.FlexibleSpace();
+                if (debugMode.Value)
+                {
+                    if (GUILayout.Button("HeaderBar.ExportBase".I18N()))
+                    {
+                        ModManager.GenerateBaseData();
+                    }
+                }
+                var inMainScene = SceneManager.GetActiveScene().name == "MainMenu";
+                if(!inMainScene)
+                    GUILayout.Label("HeaderBar.ReloadModTip".I18N());
+                GUI.enabled = inMainScene;
+                if (GUILayout.Button("HeaderBar.ReloadMod".I18N()))
+                {
+                    ModManager.ReloadAllMod();
+                }
+                GUI.enabled = true;
+                if (GUILayout.Button("HeaderBar.ModFolder".I18N()))
+                {
+                    System.Diagnostics.Process.Start(Main.pathModsDir.Value);
+                }
+            }
+            GUILayout.EndHorizontal();
             GUILayout.Label("Mod.List".I18N(),labelTitleStyle);
             GUILayout.BeginHorizontal();
             {

@@ -40,6 +40,10 @@
     "DramaDebug.CopyJsonData" : "Copy Json Data",
     "DramaDebug.IntVariableDebugWin" : "Int Variable Debug Win",
     "DramaDebug.StrVariableDebugWin" : "String Variable Debug Win",
+
+    "Trigger" : "Trigger",
+    "Trigger.UseItem" : "Use Item",
+    "Trigger.AfterUseItem" : "After Use Item",
     
     "Misc.CurrentLanguage" : "Current Language",
     "Misc.RestartPatchNpcData" : "Restart patch Npc Data",

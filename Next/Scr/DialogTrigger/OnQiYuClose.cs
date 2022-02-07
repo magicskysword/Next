@@ -6,7 +6,7 @@ namespace SkySwordKill.Next.DialogTrigger
     public class OnQiYuClose
     {
         [HarmonyPostfix]
-        public static void Prefix(QiYu.QiYuUIMag __instance)
+        public static void Postfix(QiYu.QiYuUIMag __instance)
         {
             if (__instance.EventId == 0)
                 return;
