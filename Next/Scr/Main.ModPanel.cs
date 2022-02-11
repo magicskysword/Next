@@ -14,9 +14,8 @@ namespace SkySwordKill.Next
     public partial class Main
     {
         #region 字段
-
-        [NonSerialized]
-        public bool isWinOpen;
+        
+        private bool _isWinOpen;
         private Vector2 scrollRollLanguages = new Vector2(0, 0);
         private Vector2 scrollRollMods = new Vector2(0, 0);
         private Vector2 scrollRollModInfo = new Vector2(0, 0);
@@ -38,6 +37,7 @@ namespace SkySwordKill.Next
         
         private GUIStyle modToggleStyle;
         private GUIStyle modInfoStyle;
+        private GUIStyle modInfoExceptionStyle;
 
         private bool isSelectedLanguage = false;
         
@@ -49,8 +49,6 @@ namespace SkySwordKill.Next
 
         #region 属性
 
-
-
         #endregion
 
         #region 回调方法
@@ -59,7 +57,25 @@ namespace SkySwordKill.Next
         {
             if (Input.GetKeyDown(winKeyCode.Value))
             {
-                isWinOpen = !isWinOpen;
+                _isWinOpen = !_isWinOpen;
+            }
+            
+            
+            if(rayBlocker == null)
+                return;
+            if (isSelectedLanguage || nextLanguage == null)
+            {
+                rayBlocker.SetSize(languageRect);
+                rayBlocker.OpenBlocker();
+            }
+            else if (_isWinOpen)
+            {
+                rayBlocker.SetSize(winRect);
+                rayBlocker.OpenBlocker();
+            }
+            else
+            {
+                rayBlocker.CloseBlocker();
             }
         }
 
@@ -88,11 +104,23 @@ namespace SkySwordKill.Next
                 alignment = TextAnchor.UpperLeft,
                 contentOffset = new Vector2(5,0),
             };
+            
             modInfoStyle = new GUIStyle(InterfaceMaker.CustomSkin.box)
             {
                 alignment = TextAnchor.UpperLeft,
                 contentOffset = new Vector2(5,0),
                 wordWrap = true
+            };
+
+            modInfoExceptionStyle = new GUIStyle(InterfaceMaker.CustomSkin.box)
+            {
+                alignment = TextAnchor.UpperLeft,
+                contentOffset = new Vector2(5, 0),
+                wordWrap = true,
+                normal =
+                {
+                    textColor = Color.red
+                }
             };
             labelMiddleStyle = new GUIStyle("label")
             {
@@ -116,18 +144,10 @@ namespace SkySwordKill.Next
             if (isSelectedLanguage || nextLanguage == null)
             {
                 GUILayout.Window(20, languageRect, DrawLanguageSelectWindow, $"Next v{MOD_VERSION}");
-                rayBlocker.SetSize(languageRect);
-                rayBlocker.OpenBlocker();
             }
-            else if (isWinOpen)
+            else if (_isWinOpen)
             {
                 GUILayout.Window(50, winRect, DrawDebugWindow, $"Next v{MOD_VERSION}");
-                rayBlocker.SetSize(winRect);
-                rayBlocker.OpenBlocker();
-            }
-            else
-            {
-                rayBlocker.CloseBlocker();
             }
 
             GUI.skin = oldSkin;
@@ -221,7 +241,7 @@ namespace SkySwordKill.Next
                     openInStart.Value = isPop;
 
                 if (GUILayout.Button("HeaderBar.Close".I18N()))
-                    isWinOpen = false;
+                    _isWinOpen = false;
             }
             GUILayout.EndHorizontal();
         }
@@ -284,34 +304,8 @@ namespace SkySwordKill.Next
                             var modSetting = Main.Instance.nextModSetting.GetOrCreateModSetting(config);
                             
                             string modEnable = modSetting.enable ? "☑" : "□";
-
-                            string modState = string.Empty;
-                            string colorCode = string.Empty;
-                            switch (config.State)
-                            {
-                                case ModState.Unload:
-                                    modState = "Mod.Load.Unload".I18N();
-                                    colorCode = "#000000";
-                                    break;
-                                case ModState.Disable:
-                                    modState = "Mod.Load.Disable".I18N();
-                                    colorCode = "#808080";
-                                    break;
-                                case ModState.Loading:
-                                    modState = "Mod.Load.Loading".I18N();
-                                    colorCode = "#000000";
-                                    break;
-                                case ModState.LoadSuccess:
-                                    modState = "Mod.Load.Success".I18N();
-                                    colorCode = "#00FFFF";
-                                    break;
-                                case ModState.LoadFail:
-                                    modState = "Mod.Load.Fail".I18N();
-                                    colorCode = "#FF0000";
-                                    break;
-                            }
                             
-                            return $"{modEnable} [<color={colorCode}>{modState}</color>]  {configName} ({Path.GetFileNameWithoutExtension(config.Path)})";
+                            return $"{modEnable} [{config.GetModStateDescription()}]  {configName} ({Path.GetFileNameWithoutExtension(config.Path)})";
                         }).ToArray();
                         
                         curModSelectedIndex = GUILayout.SelectionGrid(curModSelectedIndex, mods, 1, modToggleStyle);
@@ -373,11 +367,17 @@ namespace SkySwordKill.Next
                         GUILayout.BeginVertical();
                         {
                             GUILayout.Label($"{"Mod.Name".I18N()} : {modName}",modInfoStyle);
-                            GUILayout.Space(20);
+                            GUILayout.Space(15);
+                            GUILayout.Label($"{"Mod.State".I18N()} : {curMod.GetModStateDescription()}",modInfoStyle);
+                            if (curMod.Exception != null)
+                            {
+                                GUILayout.Label($"{"Mod.Exception".I18N()} : {curMod.Exception.Message} \n\nException : {curMod.Exception}",modInfoExceptionStyle);
+                                GUILayout.Space(15);
+                            }
                             GUILayout.Label($"{"Mod.Author".I18N()} : {modAuthor}",modInfoStyle);
                             GUILayout.Label($"{"Mod.Version".I18N()} : {modVersion}",modInfoStyle);
                             GUILayout.Label($"{"Mod.Description".I18N()} : {modDesc}",modInfoStyle);
-                            GUILayout.Space(20);
+                            GUILayout.Space(15);
                             GUILayout.Label($"{"Mod.Directory".I18N()} : {modPath}",modInfoStyle);
                         }
                         GUILayout.EndVertical();

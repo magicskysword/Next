@@ -6,6 +6,9 @@ namespace SkySwordKill.Next
     public class DialogEnvironment
     {
         #region 字段
+        
+        public string curDialogID;
+        public int curDialogIndex = 0;
 
         public Avatar player;
         
@@ -18,6 +21,8 @@ namespace SkySwordKill.Next
         public int qiyuOption;
 
         public int itemID;
+
+        public string[] fightTags;
 
         #endregion
 
@@ -38,6 +43,11 @@ namespace SkySwordKill.Next
         public DialogEnvironment()
         {
             player = Tools.instance.getPlayer();
+        }
+
+        public int Random(int minInclude, int maxExclude)
+        {
+            return UnityEngine.Random.Range(minInclude, maxExclude);
         }
 
         public int GetInt(string key)

@@ -11,6 +11,8 @@
     "Config.Debug.Mode.Desc" : "Next plugin debug mode switch, open to see more functions in the plugin window.",
 
     "Mod.List" : "Mod List",
+    "Mod.Exception" : "Exception",
+    "Mod.State" : "State",
     "Mod.Name" : "Name",
     "Mod.Author" : "Author",
     "Mod.Version" : "Version",

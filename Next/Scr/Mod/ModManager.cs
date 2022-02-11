@@ -256,6 +256,7 @@ namespace SkySwordKill.Next.Mod
                 {
                     Main.LogError(string.Format("ModManager.LoadFail".I18N(),modConfig.Path));
                     Main.LogError(e);
+                    modConfig.Exception = e;
                 }
             }
             
@@ -267,6 +268,13 @@ namespace SkySwordKill.Next.Mod
                     jsonInstance.Buff.Add(key, new Buff(key));
                 }
             }
+            
+            // 检查数据
+            if (!CheckData.Check())
+            {
+                Main.LogError(CheckData.log);
+            }
+            
 
             Main.Instance.resourcesManager.StartLoadAsset();
         }
@@ -424,11 +432,8 @@ namespace SkySwordKill.Next.Mod
             if (File.Exists(filePath))
             {
                 var fileName = Path.GetFileNameWithoutExtension(filePath);
-                string data = File.ReadAllText(filePath);
-                var jsonData = JSONObject.Create(data);
-                
-                
-                
+                var jsonData = LoadJSONObject(filePath);
+
                 foreach (var key in jsonData.keys)
                 {
                     var curData = jsonData.GetField(key);
@@ -472,8 +477,7 @@ namespace SkySwordKill.Next.Mod
             
             if (File.Exists(filePath))
             {
-                string data = File.ReadAllText(filePath);
-                var jsonData = JObject.Parse(data);
+                var jsonData = LoadJObject(filePath);
                 foreach (var property in jsonData.Properties())
                 {
                     if (property.Value.Type !=  JTokenType.Object)
@@ -532,8 +536,7 @@ namespace SkySwordKill.Next.Mod
             var dataTemplate = toJsonObject[0];
             foreach (var filePath in Directory.GetFiles(dirPathForData))
             {
-                string data = File.ReadAllText(filePath);
-                var curData = JSONObject.Create(data);
+                var curData = LoadJSONObject(filePath);
                 var key = Path.GetFileNameWithoutExtension(filePath);
                 
                 if (toJsonObject.HasField(key))
@@ -575,10 +578,17 @@ namespace SkySwordKill.Next.Mod
                 return;
             foreach (var filePath in Directory.GetFiles(tagDir))
             {
-                string json = File.ReadAllText(filePath);
-                JArray.Parse(json).ToObject<List<DialogEventData>>()?.ForEach(TryAddEventData);
-                Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
-                    $"{dirName}/{Path.GetFileNameWithoutExtension(filePath)}.json"));
+                try
+                {
+                    string json = File.ReadAllText(filePath);
+                    JArray.Parse(json).ToObject<List<DialogEventData>>()?.ForEach(TryAddEventData);
+                    Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
+                        $"{dirName}/{Path.GetFileNameWithoutExtension(filePath)}.json"));
+                }
+                catch (Exception e)
+                {
+                    throw new ModLoadException($"文件 {filePath} 加载失败。", e);
+                }
             }
         }
         
@@ -590,10 +600,17 @@ namespace SkySwordKill.Next.Mod
                 return;
             foreach (var filePath in Directory.GetFiles(tagDir))
             {
-                string json = File.ReadAllText(filePath);
-                JArray.Parse(json).ToObject<List<DialogTriggerData>>()?.ForEach(TryAddTriggerData);
-                Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
-                    $"{dirName}/{Path.GetFileNameWithoutExtension(filePath)}.json"));
+                try
+                {
+                    string json = File.ReadAllText(filePath);
+                    JArray.Parse(json).ToObject<List<DialogTriggerData>>()?.ForEach(TryAddTriggerData);
+                    Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
+                        $"{dirName}/{Path.GetFileNameWithoutExtension(filePath)}.json"));
+                }
+                catch (Exception e)
+                {
+                    throw new ModLoadException($"文件 {filePath} 加载失败。", e);
+                }
             }
         }
 
@@ -710,6 +727,34 @@ namespace SkySwordKill.Next.Mod
 
             modConfig = modConfigs[curIndex];
             return true;
+        }
+
+        public static JSONObject LoadJSONObject(string filePath)
+        {
+            try
+            {
+                string data = File.ReadAllText(filePath);
+                var jsonData = JSONObject.Create(data);
+                return jsonData;
+            }
+            catch (Exception e)
+            {
+                throw new ModLoadException($"文件 {filePath} 加载失败。", e);
+            }
+        }
+        
+        public static JObject LoadJObject(string filePath)
+        {
+            try
+            {
+                string data = File.ReadAllText(filePath);
+                var jObject = JObject.Parse(data);
+                return jObject;
+            }
+            catch (Exception e)
+            {
+                throw new ModLoadException($"文件 {filePath} 加载失败。", e);
+            }
         }
 
         #endregion

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
+using YSGame;
 using Object = UnityEngine.Object;
 
 namespace SkySwordKill.Next

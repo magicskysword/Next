@@ -9,7 +9,7 @@ namespace SkySwordKill.Next.XiaoYeGUI
     {
         public static byte[] ReadAllBytes(this Stream input)
         {
-            byte[] array = new byte[16384];
+            byte[] array = new byte[2000000];
             byte[] result;
             using (MemoryStream memoryStream = new MemoryStream())
             {

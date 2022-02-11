@@ -22,7 +22,9 @@ namespace SkySwordKill.Next.XiaoYeGUI
             var rayBlocker = new RayBlocker();
             
             rayBlocker.canvasObj = new GameObject("NextBlockerCanvas");
-            rayBlocker.canvasObj.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+            var canvas = rayBlocker.canvasObj.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.sortingOrder = 10000;
             rayBlocker.canvasObj.AddComponent<GraphicRaycaster>();
             var gameObject = new GameObject("RayBlocker");
             rayBlocker.rt = gameObject.AddComponent<RectTransform>();

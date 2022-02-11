@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using SkySwordKill.Next.DialogEvent;
 using SkySwordKill.Next.DialogTrigger;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace SkySwordKill.Next
 {
@@ -50,9 +51,7 @@ namespace SkySwordKill.Next
         /// 对话临时储存角色
         /// </summary>
         public static Dictionary<string, int> TmpCharacter = new Dictionary<string, int>();
-
-        public static string curDialogID;
-        public static int curDialogIndex = 0;
+        
         public static DialogEnvironment curEnv;
         
         private static ExpressionEvaluator curEvaluator;
@@ -81,12 +80,6 @@ namespace SkySwordKill.Next
             {
                 foreach (var type in types)
                 {
-                    // 注册触发器
-                    if(type.Namespace == "SkySwordKill.Next.DialogTrigger")
-                    {
-                        Harmony.CreateAndPatchAll(type);
-                        continue;
-                    }
                     // 注册事件指令
                     if (typeof(IDialogEvent).IsAssignableFrom(type))
                     {
@@ -100,6 +93,8 @@ namespace SkySwordKill.Next
                 }
             }
         }
+
+        
 
         public static void RegisterCommand(string command, IDialogEvent cEvent)
         {
@@ -163,13 +158,14 @@ namespace SkySwordKill.Next
 
         public static void RunNextDialogEvent()
         {
-            RunDialogEvent(curDialogID,curDialogIndex + 1);
+            RunDialogEvent(curEnv.curDialogID,curEnv.curDialogIndex + 1);
         }
 
         public static void RunDialogEvent(string eventID, int index)
         {
-            curDialogID = eventID;
-            curDialogIndex = index;
+            curEnv.curDialogID = eventID;
+            curEnv.curDialogIndex = index;
+            
             if (!DialogDataDic.TryGetValue(eventID, out var data))
             {
                 Main.LogWarning($"对话事件 {eventID} 不存在。");

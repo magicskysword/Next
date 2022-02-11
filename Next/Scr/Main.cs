@@ -21,7 +21,7 @@ namespace SkySwordKill.Next
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.3.2";
+        public const string MOD_VERSION = "0.3.3";
         
         public static Lazy<string> pathModsDir =
             new Lazy<string>(() => Utility.CombinePaths(
@@ -80,23 +80,7 @@ namespace SkySwordKill.Next
             
             resourcesManager = gameObject.AddComponent<ResourcesManager>();
 
-            // 数据加载Patch
-            // data patch
-            Harmony.CreateAndPatchAll(typeof(JsonDataPatch));
-            Harmony.CreateAndPatchAll(typeof(NpcJieSuanManagerPatch));
-
-            // 资源相关Patch
-            // resources patch
-            Harmony.CreateAndPatchAll(typeof(SkillIconPatch));
-            Harmony.CreateAndPatchAll(typeof(ItemUIPatch));
-
-            Harmony.CreateAndPatchAll(typeof(BagActiveSkillGetIconSprite));
-            Harmony.CreateAndPatchAll(typeof(BagPassiveSkillGetIconSprite));
-
-            Harmony.CreateAndPatchAll(typeof(ResManagerLoadSpritePatch));
-            Harmony.CreateAndPatchAll(typeof(ResManagerLoadTexturePatch));
-
-            Harmony.CreateAndPatchAll(typeof(UIFightWeaponItemPatch));
+            new Harmony("skyswordkill.plugin.Next").PatchAll();
 
             // 加载运行时脚本所需DLL
             // load runtime dll
@@ -112,7 +96,7 @@ namespace SkySwordKill.Next
             
             // 根据设置显示窗口
             // show window by config
-            isWinOpen = openInStart.Value;
+            _isWinOpen = openInStart.Value;
         }
 
         private void LoadDefaultLanguage()

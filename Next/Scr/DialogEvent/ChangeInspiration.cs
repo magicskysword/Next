@@ -10,11 +10,11 @@ namespace SkySwordKill.Next.DialogEvent
             int num = command.GetInt(0);
             if (num >= 0)
             {
-                Tools.instance.getPlayer().AddLingGan(num);
+                env.player.AddLingGan(num);
             }
             else
             {
-                Tools.instance.getPlayer().ReduceLingGan(-num);
+                env.player.ReduceLingGan(-num);
             }
             callback?.Invoke();
         }

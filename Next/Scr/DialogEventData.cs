@@ -26,6 +26,13 @@ namespace SkySwordKill.Next
             return Convert.ToInt32(paramList[index]);
         }
         
+        public float GetFloat(int index,float defaultValue = 0)
+        {
+            if (index >= paramList.Length)
+                return defaultValue;
+            return Convert.ToSingle(paramList[index]);
+        }
+        
         public bool GetBool(int index,bool defaultValue = false)
         {
             if (index >= paramList.Length)

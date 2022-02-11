@@ -1,15 +1,17 @@
 ﻿using System;
 using UnityEngine;
+using YSGame;
 
 namespace SkySwordKill.Next.DialogEvent
 {
-    [DialogEvent("ChangeAge")]
-    public class ChangeAge : IDialogEvent
+    [DialogEvent("PlayMusic")]
+    public class PlayMusic : IDialogEvent
     {
         public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
         {
-            int num = command.GetInt(0);
-            env.player.age = (uint)Mathf.Clamp((int)env.player.age + num, 0, (int)env.player.shouYuan);
+            var name = command.GetStr(0);
+
+            MusicMag.instance.playMusic(name);
             callback?.Invoke();
         }
     }

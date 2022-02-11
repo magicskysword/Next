@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 using UnityEngine.Networking;
 using Object = UnityEngine.Object;
 
@@ -51,6 +52,17 @@ namespace SkySwordKill.Next
                         if(webRequest.isDone)
                         {
                             asset = DownloadHandlerTexture.GetContent(webRequest);
+                            OnLoadedAsset?.Invoke(asset);
+                        }
+                    }
+                    break;
+                case ".mp3":
+                    using (UnityWebRequest webRequest = UnityWebRequestMultimedia.GetAudioClip(filePath,AudioType.UNKNOWN))
+                    {
+                        yield return webRequest.SendWebRequest();
+                        if(webRequest.isDone)
+                        {
+                            asset = DownloadHandlerAudioClip.GetContent(webRequest);
                             OnLoadedAsset?.Invoke(asset);
                         }
                     }

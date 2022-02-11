@@ -8,8 +8,7 @@ namespace SkySwordKill.Next.DialogEvent
         public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
         {
             int num = command.GetInt(0);
-            var player = Tools.instance.getPlayer();
-            player.addShoYuan(num);
+            env.player.addShoYuan(num);
             callback?.Invoke();
         }
     }

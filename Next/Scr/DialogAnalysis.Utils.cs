@@ -148,6 +148,30 @@ namespace SkySwordKill.Next
                 return 0;
             return field.I;
         }
+        
+        public static void SetInt(string group,string key,int value)
+        {
+            key = $"next_{group}Int_{key}";
+            var data = Tools.instance.getPlayer().AvatarChengJiuData;
+            if (value == 0)
+            {
+                if(data.HasField(key))
+                    data.RemoveField(key);
+            }
+            else
+            {
+                data.SetField(key,value);
+            }
+        }
+
+        public static int GetInt(string group,string key)
+        {
+            key = $"next_{group}Int_{key}";
+            var field = Tools.instance.getPlayer().AvatarChengJiuData.GetField(key);
+            if (field == null || field.type != JSONObject.Type.NUMBER)
+                return 0;
+            return field.I;
+        }
 
         public static Dictionary<string, int> GetAllInt()
         {
@@ -193,6 +217,30 @@ namespace SkySwordKill.Next
         public static string GetStr(string key)
         {
             key = $"next_Str_{key}";
+            var field = Tools.instance.getPlayer().AvatarChengJiuData.GetField(key);
+            if (field == null || field.type != JSONObject.Type.STRING)
+                return string.Empty;
+            return field.Str;
+        }
+        
+        public static void SetStr(string group,string key,string value)
+        {
+            key = $"next_{group}Str_{key}";
+            var data = Tools.instance.getPlayer().AvatarChengJiuData;
+            if (value == "")
+            {
+                if(data.HasField(key))
+                    data.RemoveField(key);
+            }
+            else
+            {
+                data.SetField(key,value);
+            }
+        }
+
+        public static string GetStr(string group,string key)
+        {
+            key = $"next_{group}Str_{key}";
             var field = Tools.instance.getPlayer().AvatarChengJiuData.GetField(key);
             if (field == null || field.type != JSONObject.Type.STRING)
                 return string.Empty;

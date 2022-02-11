@@ -11,6 +11,7 @@ namespace SkySwordKill.Next.Patch
         public static void FixMethod()
         {
             var watcher = Stopwatch.StartNew();
+            // 缓存游戏数据
             ModManager.CloneMainData();
             watcher.Stop();
             Main.LogInfo($"储存数据耗时：{watcher.ElapsedMilliseconds / 1000f} s");
