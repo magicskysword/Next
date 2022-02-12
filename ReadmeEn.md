@@ -18,7 +18,7 @@ The mod menu can be opened through F4 in the game (the keys can be modified)
 
 ## Credits
 3dm  宵夜97  BepinEx tutorial<br>
-3md  ゞ残月﹎_|  Villain mod framework ideas<br>
+3dm  ゞ残月﹎_|  Villain mod framework ideas<br>
 
 ## Build
 
