@@ -19,6 +19,7 @@
     "Mod.Description" : "描述",
     "Mod.Directory" : "目录",
     "Mod.Unknown" : "未知",
+    "Mod.GameNotStart" : "游戏未开始",
     
     "Mod.Load.Unload" : "未加载",
     "Mod.Load.Disable" : "禁用",
@@ -33,6 +34,8 @@
     "Mod.Panel.MoveToBottom": "置于底下",
     "Mod.Panel.EnableMod": "启用Mod",
     "Mod.Panel.DisableMod": "禁用Mod",
+    "Mod.Panel.EnableAllMod": "启用全部Mod",
+    "Mod.Panel.DisableAllMod": "禁用全部Mod",
     
     "DramaDebug.Title" : "剧情调试",
     "DramaDebug.DramaID": "剧情ID",
@@ -42,6 +45,30 @@
     "DramaDebug.CopyJsonData" : "复制Json数据",
     "DramaDebug.IntVariableDebugWin" : "Int变量调试窗口",
     "DramaDebug.StrVariableDebugWin" : "String变量调试窗口",
+
+    "NpcDebug.Title" : "Npc调试",
+    "NpcDebug.Search" : "搜索",
+    "NpcDebug.PgUp" : "上一页",
+    "NpcDebug.PgDn" : "下一页",
+    "NpcDebug.PageInfo" : "当前第 {0} 页，共 {1} 页",
+    "NpcDebug.NpcMissError" : "Npc {0} 已死亡或不存在！",
+    "NpcDebug.Info.ID" : "ID : {0}",
+    "NpcDebug.Info.BindingID" : "绑定ID : {0}",
+    "NpcDebug.Info.NotBinding" : "非绑定NPC",
+    "NpcDebug.Info.Name" : "名称 : {0}",
+    "NpcDebug.Info.Title" : "称号 : {0}",
+    "NpcDebug.Info.School" : "门派 : {0}",
+    "NpcDebug.Info.Location" : "位置 : {0}",
+    "NpcDebug.Info.Sprite" : "神识 : {0}",
+    "NpcDebug.Info.Gender" : "性别 : {0}",
+    "NpcDebug.Info.Age" : "年龄 : {0}",
+    "NpcDebug.Info.Life" : "寿元 : {0}",
+    "NpcDebug.Info.Relation.Couple" : "关系 : 道侣",
+    "NpcDebug.Info.Relation.Teacher" : "关系 : 师傅",
+    "NpcDebug.Info.Relation.Student" : "关系 : 徒弟",
+    "NpcDebug.Info.Relation.Brother" : "关系 : 结义",
+    "NpcDebug.Info.Func.Refresh" : "刷新",
+    "NpcDebug.Info.Func.ForceInteract" : "强制交互",
 
     "Trigger" : "触发器",
     "Trigger.UseItem" : "使用物品",
@@ -54,6 +81,7 @@
     "HeaderBar.DebugMode" : "调试模式",
     "HeaderBar.ModList" : "Mod列表",
     "HeaderBar.DramaDebug" : "剧情调试",
+    "HeaderBar.NpcDebug" : "NPC调试",
     "HeaderBar.ReloadMod" : "重载Mod",
     "HeaderBar.ReloadModTip" : "只能在游戏开始界面重载Mod",
     "HeaderBar.ExportBase" : "导出Base",
@@ -72,6 +100,14 @@
     "ModManager.ModConfigDontExist": "Mod配置不存在！",
     "ModManager.ModConfigLoadFail": "加载mod配置出错！",
     "ModManager.DataMissingField": "数据 {0} [{1}] 缺少字段 {2}，已用模板对象属性 {3} 替代。",
-    "ModManager.LoadData": "载入 {0}"
+    "ModManager.LoadData": "载入 {0}",
+    
+    "Map.Unknown" : "未知",
+
+    "School.Unknown" : "未知",
+
+    "Gender.Male" : "男性",
+    "Gender.Female" : "女性",
+    "Gender.Unknown" : "未知"
   }
 }

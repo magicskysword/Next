@@ -14,7 +14,7 @@ namespace SkySwordKill.Next
         
         public int roleID;
         public int roleBindID;
-        public string roleName;
+        public string roleName = string.Empty;
         public UINPCData bindNpc;
 
         public int qiyuID;
@@ -23,6 +23,7 @@ namespace SkySwordKill.Next
         public int itemID;
 
         public string[] fightTags;
+        public string input = string.Empty;
 
         #endregion
 
@@ -62,63 +63,98 @@ namespace SkySwordKill.Next
 
         public bool Before(int year, int month = 12, int day = 31)
         {
-            DateTime nowTime = Tools.instance.getPlayer().worldTimeMag.getNowTime();
+            DateTime nowTime = player.worldTimeMag.getNowTime();
             var tagTime = new DateTime(year, month, day);
             return tagTime > nowTime;
         }
 
         public bool After(int year, int month = 1, int day = 1)
         {
-            DateTime nowTime = Tools.instance.getPlayer().worldTimeMag.getNowTime();
+            DateTime nowTime = player.worldTimeMag.getNowTime();
             var tagTime = new DateTime(year, month, day);
             return tagTime < nowTime;
+        }
+
+        public DateTime GetDataTime(int year, int month = 1, int day = 1)
+        {
+            return new DateTime(year, month, day);
+        }
+        
+        public DateTime GetNowTime()
+        {
+            return player.worldTimeMag.getNowTime();
+        }
+
+        public bool HasSkill(int skillID)
+        {
+            return PlayerEx.Player.hasSkillList.Find(skill => skill.itemId == skillID) != null;
+        }
+        
+        public bool HasStaticSkill(int skillID)
+        {
+            return PlayerEx.Player.hasStaticSkillList.Find(skill => skill.itemId == skillID) != null;
+        }
+        
+        public bool HasTrainSkill(int skillID)
+        {
+            return PlayerEx.HasShuangXiuSkill(skillID);
         }
         
         public string GetCall(string man,string woman)
         {
-            return Tools.instance.getPlayer().Sex == 1 ? man : woman;
-        }
-        
-        public string GetCall(Avatar avatar,string man,string woman)
-        {
-            return avatar.Sex == 1 ? man : woman;
+            return player.Sex == 1 ? man : woman;
         }
 
-        public ulong GetMoney() => Tools.instance.getPlayer().money;
-        public int GetHp() => Tools.instance.getPlayer().HP;
-        public int GetBaseHpMax() => Tools.instance.getPlayer()._HP_Max;
-        public int GetHpMax() => Tools.instance.getPlayer().HP_Max;
-        public int GetMentality() => Tools.instance.getPlayer().xinjin;
-        public int GetDrugsPoison() => Tools.instance.getPlayer().Dandu;
-        public int GetComprehensionPoint() => Tools.instance.getPlayer().WuDaoDian;
-        public int GetSex() => Tools.instance.getPlayer().Sex;
-        public int GetInspiration() => Tools.instance.getPlayer().LingGan;
-        public int GetInspirationMax() => Tools.instance.getPlayer().GetLingGanMax();
-        public uint GetAge() => Tools.instance.getPlayer().age;
-        public uint GetLife() => Tools.instance.getPlayer().shouYuan;
-        public int GetTalent() => Tools.instance.getPlayer().ZiZhi;
-        public int GetBaseSpirit() => Tools.instance.getPlayer()._shengShi;
-        public int GetSpirit() => Tools.instance.getPlayer().shengShi;
-        public uint GetAbility() => Tools.instance.getPlayer().wuXin;
-        public int GetBaseMoveSpeed() => Tools.instance.getPlayer()._dunSu;
-        public int GetMoveSpeed() => Tools.instance.getPlayer().dunSu;
+        public string GetCurScene() => UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        public string GetCurMapRoad() => player.NowMapIndex.ToString();
+        public string GetSceneName(string sceneID) => DialogAnalysis.GetSceneName(sceneID);
+        public string GetRoadName(string roadId) => DialogAnalysis.GetMapRoadName(roadId);
+        public ulong GetMoney() => player.money;
+        public int GetHp() => player.HP;
+        public int GetBaseHpMax() => player._HP_Max;
+        public int GetHpMax() => player.HP_Max;
+        public int GetMentality() => player.xinjin;
+        public int GetDrugsPoison() => player.Dandu;
+        public int GetComprehensionPoint() => player.WuDaoDian;
+        public int GetSex() => player.Sex;
+        public int GetInspiration() => player.LingGan;
+        public int GetInspirationMax() => player.GetLingGanMax();
+        public uint GetAge() => player.age;
+        public uint GetLife() => player.shouYuan;
+        public int GetTalent() => player.ZiZhi;
+        public int GetBaseSpirit() => player._shengShi;
+        public int GetSpirit() => player.shengShi;
+        public uint GetAbility() => player.wuXin;
+        public int GetBaseMoveSpeed() => player._dunSu;
+        public int GetMoveSpeed() => player.dunSu;
+        public int GetLevel() => player.level;
+        public int GetLevelType() => player.getLevelType();
         
 
         public int GetComprehensionExp(int typeID)
         {
-            return Tools.instance.getPlayer().wuDaoMag.getWuDaoEx(typeID).I;
+            return player.wuDaoMag.getWuDaoEx(typeID).I;
         }
 
-        public int GetItemNum(int itemID)
+        public int GetItemNum(int _itemID)
         {
-            return Tools.instance.getPlayer().getItemNum(itemID);
+            return player.getItemNum(_itemID);
         }
         
-        public int GetNpcFav(int npcId) => NPCEx.GetFavor(npcId);
-        public int GetNpcSex(int npcId) => DialogAnalysis.GetNpcRandomJsonData(npcId)["Sex"].I;
-        public int GetNpcAge(int npcId) => DialogAnalysis.GetNpcJsonData(npcId)["age"].I;
-        public bool IsNpcDeath(int npcId) => NPCEx.IsDeath(npcId);
-        
+        public int GetNpcFav(int npcId) => NPCEx.GetFavor(NPCEx.NPCIDToNew(npcId));
+        public int GetNpcSex(int npcId) => DialogAnalysis.GetNpcSex(npcId);
+        public int GetNpcAge(int npcId) => DialogAnalysis.GetNpcAge(npcId);
+        public int GetNpcLife(int npcId) => DialogAnalysis.GetNpcLife(npcId);
+        public int GetNpcLevel(int npcId) => DialogAnalysis.GetNpcLevel(npcId);
+        public int GetNpcLevelType(int npcId) => DialogAnalysis.GetNpcLevelType(npcId);
+        public int GetNpcSprite(int npcId) => DialogAnalysis.GetNpcSprite(npcId);
+        public bool IsNpcDeath(int npcId) => NPCEx.IsDeath(NPCEx.NPCIDToNew(npcId));
+        public bool IsCouple(int npcId) => DialogAnalysis.IsPlayerCouple(npcId);
+        public bool IsTeacher(int npcId) => DialogAnalysis.IsPlayerTeacher(npcId);
+        public bool IsBrother(int npcId) => DialogAnalysis.IsPlayerBrother(npcId);
+        public bool IsStudent(int npcId) => DialogAnalysis.IsPlayerStudent(npcId);
+
+
 
         #endregion
 

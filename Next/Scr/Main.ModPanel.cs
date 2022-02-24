@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
-using UnityEngine;
 using Newtonsoft.Json.Linq;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.Mod;
 using SkySwordKill.Next.XiaoYeGUI;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace SkySwordKill.Next
@@ -21,29 +23,43 @@ namespace SkySwordKill.Next
         private Vector2 scrollRollModInfo = new Vector2(0, 0);
         private Vector2 scrollRollDebugString = new Vector2(0, 0);
         private Vector2 scrollRollDebugInt = new Vector2(0, 0);
+        
+        private Vector2 scrollRollDebugNpcs;
+        private Vector2 scrollRollDebugNpcInfo;
 
-        private bool isGUIInit = false;
-        private int toolbarSelected = 0;
+        private bool isGUIInit;
+        private int toolbarSelected;
         private Rect languageRect;
         private Rect winRect;
 
         private string inputEvent;
         private string testCommand;
+        private string inputNpcSearch;
         
         private GUIStyle labelTitleStyle;
         private GUIStyle labelLeftStyle;
         private GUIStyle labelMiddleStyle;
         private GUIStyle labelRightStyle;
         
+        private GUIStyle infoStyle;
+        
         private GUIStyle modToggleStyle;
-        private GUIStyle modInfoStyle;
         private GUIStyle modInfoExceptionStyle;
 
-        private bool isSelectedLanguage = false;
+        private bool isSelectedLanguage;
         
         private RayBlocker rayBlocker;
 
-        private int curModSelectedIndex = 0;
+        private int curModSelectedIndex;
+        
+        private int curNpcSelectedIndex;
+        private int curNpcSelectedPage;
+        private int countEachPage = 20;
+        private SearchNpcData curNpcData;
+
+        private List<SearchNpcData> npcDataList = new List<SearchNpcData>();
+        private string[] npcDataListName = new string[0];
+        
 
         #endregion
 
@@ -105,7 +121,7 @@ namespace SkySwordKill.Next
                 contentOffset = new Vector2(5,0),
             };
             
-            modInfoStyle = new GUIStyle(InterfaceMaker.CustomSkin.box)
+            infoStyle = new GUIStyle(InterfaceMaker.CustomSkin.box)
             {
                 alignment = TextAnchor.UpperLeft,
                 contentOffset = new Vector2(5,0),
@@ -201,6 +217,9 @@ namespace SkySwordKill.Next
                 case 1:
                     DrawDramaDebug();
                     break;
+                case 2:
+                    DrawNpcDebug();
+                    break;
             }
             
             GUILayout.FlexibleSpace();
@@ -223,7 +242,8 @@ namespace SkySwordKill.Next
                     string[] toolbarList =
                     {
                         "HeaderBar.ModList".I18N(),
-                        "HeaderBar.DramaDebug".I18N()
+                        "HeaderBar.DramaDebug".I18N(),
+                        "HeaderBar.NpcDebug".I18N()
                     };
                     toolbarSelected = GUILayout.Toolbar(toolbarSelected, toolbarList);
                 }
@@ -284,7 +304,7 @@ namespace SkySwordKill.Next
                 GUI.enabled = true;
                 if (GUILayout.Button("HeaderBar.ModFolder".I18N()))
                 {
-                    System.Diagnostics.Process.Start(Main.pathModsDir.Value);
+                    Process.Start(pathModsDir.Value);
                 }
             }
             GUILayout.EndHorizontal();
@@ -294,14 +314,14 @@ namespace SkySwordKill.Next
                 GUILayout.BeginVertical();
                 {
                     scrollRollMods = GUILayout.BeginScrollView(scrollRollMods, false, false, 
-                        GUILayout.MinHeight(winRect.height * 0.8f-60),
+                        GUILayout.MinHeight(winRect.height * 0.7f-60),
                         GUILayout.MinWidth(winRect.width * 0.7f-40),
                         GUILayout.MaxWidth(winRect.width * 0.7f-40));
                     {
                         var mods = ModManager.modConfigs.Select(config =>
                         {
                             var configName = config.Name ?? "Mod.Unknown".I18N();
-                            var modSetting = Main.Instance.nextModSetting.GetOrCreateModSetting(config);
+                            var modSetting = Instance.nextModSetting.GetOrCreateModSetting(config);
                             
                             string modEnable = modSetting.enable ? "☑" : "□";
                             
@@ -333,26 +353,50 @@ namespace SkySwordKill.Next
                         {
                             ModManager.ModMoveToBottom(ref curModSelectedIndex);
                         }
-                        
-                        GUILayout.Space(20);
+                    }
+                    GUILayout.EndHorizontal();
+                    
+                    GUILayout.Space(10);
+                    
+                    GUILayout.BeginHorizontal();
+                    {
                         var modEnable = ModManager.ModGetEnable(curModSelectedIndex);
                         var btnText = modEnable ? "Mod.Panel.DisableMod".I18N() : "Mod.Panel.EnableMod".I18N();
                         if (GUILayout.Button(btnText))
                         {
                             ModManager.ModSetEnable(curModSelectedIndex,!modEnable);
                         }
+                        
+                        GUILayout.Space(20);
+                        
+                        if (GUILayout.Button("Mod.Panel.EnableAllMod".I18N()))
+                        {
+                            for (int i = 0; i < ModManager.modConfigs.Count; i++)
+                            {
+                                ModManager.ModSetEnable(i,true);
+                            }
+                        }
+                        
+                        if (GUILayout.Button("Mod.Panel.DisableAllMod".I18N()))
+                        {
+                            for (int i = 0; i < ModManager.modConfigs.Count; i++)
+                            {
+                                ModManager.ModSetEnable(i,false);
+                            }
+                        }
                     }
                     GUILayout.EndHorizontal();
 
                     if (ModManager.ModDataDirty)
                     {
-                        GUILayout.Label($"Mod.Panel.DataDirtyTip".I18N());
+                        GUILayout.Label("Mod.Panel.DataDirtyTip".I18N());
                     }
                 }
                 GUILayout.EndVertical();
                 
                 var rect = GUILayoutUtility.GetRect(GUIContent.none, GUI.skin.box,
                     GUILayout.MinHeight(winRect.height * 0.7f-70));
+                GUILayout.Space(5);
                 if (ModManager.TryGetModConfig(curModSelectedIndex, out var curMod))
                 {
                     var modPath = curMod.Path ?? "Mod.Unknown".I18N();
@@ -366,19 +410,19 @@ namespace SkySwordKill.Next
                     {
                         GUILayout.BeginVertical();
                         {
-                            GUILayout.Label($"{"Mod.Name".I18N()} : {modName}",modInfoStyle);
+                            GUILayout.Label($"{"Mod.Name".I18N()} : {modName}",infoStyle);
                             GUILayout.Space(15);
-                            GUILayout.Label($"{"Mod.State".I18N()} : {curMod.GetModStateDescription()}",modInfoStyle);
+                            GUILayout.Label($"{"Mod.State".I18N()} : {curMod.GetModStateDescription()}",infoStyle);
                             if (curMod.Exception != null)
                             {
                                 GUILayout.Label($"{"Mod.Exception".I18N()} : {curMod.Exception.Message} \n\nException : {curMod.Exception}",modInfoExceptionStyle);
                                 GUILayout.Space(15);
                             }
-                            GUILayout.Label($"{"Mod.Author".I18N()} : {modAuthor}",modInfoStyle);
-                            GUILayout.Label($"{"Mod.Version".I18N()} : {modVersion}",modInfoStyle);
-                            GUILayout.Label($"{"Mod.Description".I18N()} : {modDesc}",modInfoStyle);
+                            GUILayout.Label($"{"Mod.Author".I18N()} : {modAuthor}",infoStyle);
+                            GUILayout.Label($"{"Mod.Version".I18N()} : {modVersion}",infoStyle);
+                            GUILayout.Label($"{"Mod.Description".I18N()} : {modDesc}",infoStyle);
                             GUILayout.Space(15);
-                            GUILayout.Label($"{"Mod.Directory".I18N()} : {modPath}",modInfoStyle);
+                            GUILayout.Label($"{"Mod.Directory".I18N()} : {modPath}",infoStyle);
                         }
                         GUILayout.EndVertical();
                     }
@@ -391,6 +435,13 @@ namespace SkySwordKill.Next
         private void DrawDramaDebug()
         {
             GUILayout.Label("DramaDebug.Title".I18N(),labelTitleStyle);
+            
+            if (Tools.instance == null || Tools.instance.getPlayer() == null)
+            {
+                GUILayout.Label("Mod.GameNotStart".I18N(),labelTitleStyle);
+                return;
+            }
+            
             var lastRect = GUILayoutUtility.GetLastRect();
             var lastHeight = lastRect.y + lastRect.height;
             var debugArea1 = new Rect(winRect)
@@ -431,10 +482,7 @@ namespace SkySwordKill.Next
                 GUILayout.EndHorizontal();
                 GUILayout.Space(20);
                 GUILayout.Label("DramaDebug.DramaCommandDebug".I18N());
-                testCommand = GUILayout.TextArea(testCommand, new GUILayoutOption[]
-                {
-                    GUILayout.MinHeight(debugArea1.height - 200)
-                });
+                testCommand = GUILayout.TextArea(testCommand, GUILayout.MinHeight(debugArea1.height - 200));
                 GUILayout.BeginHorizontal();
                 {
                     if (GUILayout.Button("DramaDebug.Run".I18N()))
@@ -464,18 +512,11 @@ namespace SkySwordKill.Next
             {
                 GUI.Box(debugArea2,"");
                 GUILayout.Label("DramaDebug.IntVariableDebugWin".I18N());
-                scrollRollDebugInt = GUILayout.BeginScrollView(scrollRollDebugInt, false, true,
-                    new GUILayoutOption[]
-                    {
-                        GUILayout.MinHeight(debugArea2.height - 50)
-                    });
+                scrollRollDebugInt = GUILayout.BeginScrollView(scrollRollDebugInt, false, true, GUILayout.MinHeight(debugArea2.height - 50));
                 {
                     foreach (var pair in DialogAnalysis.GetAllInt())
                     {
-                        GUILayout.Box("",new GUILayoutOption[]
-                        {
-                            GUILayout.MinHeight(26)
-                        });
+                        GUILayout.Box("", GUILayout.MinHeight(26));
                         var rect = GUILayoutUtility.GetLastRect();
                         var infoRect = new Rect(rect)
                         {
@@ -495,18 +536,11 @@ namespace SkySwordKill.Next
             {
                 GUI.Box(debugArea3,"");
                 GUILayout.Label("DramaDebug.StrVariableDebugWin".I18N());
-                scrollRollDebugString = GUILayout.BeginScrollView(scrollRollDebugString, false, true,
-                    new GUILayoutOption[]
-                    {
-                        GUILayout.MinHeight(debugArea3.height - 50)
-                    });
+                scrollRollDebugString = GUILayout.BeginScrollView(scrollRollDebugString, false, true, GUILayout.MinHeight(debugArea3.height - 50));
                 {
                     foreach (var pair in DialogAnalysis.GetAllStr())
                     {
-                        GUILayout.Box("",new GUILayoutOption[]
-                        {
-                            GUILayout.MinHeight(26)
-                        });
+                        GUILayout.Box("", GUILayout.MinHeight(26));
                         var rect = GUILayoutUtility.GetLastRect();
                         var infoRect = new Rect(rect)
                         {
@@ -521,6 +555,205 @@ namespace SkySwordKill.Next
                 GUILayout.EndScrollView();
             }
             GUILayout.EndArea();
+        }
+
+        private void DrawNpcDebug()
+        {
+            GUILayout.Label("NpcDebug.Title".I18N(),labelTitleStyle);
+            
+            if (Tools.instance == null || Tools.instance.getPlayer() == null)
+            {
+                GUILayout.Label("Mod.GameNotStart".I18N(),labelTitleStyle);
+                return;
+            }
+            
+            GUILayout.BeginHorizontal();
+            {
+                GUILayout.BeginVertical(GUILayout.MinWidth(winRect.width * 0.2f));
+                {
+                    GUILayout.BeginHorizontal();
+                    {
+                        inputNpcSearch = GUILayout.TextField(inputNpcSearch,GUILayout.MinWidth(winRect.width * 0.2f - 100));
+                        GUILayout.FlexibleSpace();
+                        if (GUILayout.Button("NpcDebug.Search".I18N()))
+                        {
+                            SearchNpc(inputNpcSearch);
+                        }
+                    }
+                    GUILayout.EndHorizontal();
+                    
+                    var maxPage = (npcDataListName.Length - 1) / countEachPage;
+                    GUILayout.BeginHorizontal();
+                    {
+                        var oldState = GUI.enabled;
+                        
+                        GUI.enabled = curNpcSelectedPage > 0;
+                        if (GUILayout.Button("NpcDebug.PgUp".I18N()))
+                        {
+                            curNpcSelectedPage -= 1;
+                        }
+                        
+                        GUI.enabled = curNpcSelectedPage < maxPage;
+                        if (GUILayout.Button("NpcDebug.PgDn".I18N()))
+                        {
+                            curNpcSelectedPage += 1;
+                        }
+
+                        GUI.enabled = oldState;
+                    }
+                    GUILayout.EndHorizontal();
+                    GUILayout.Label(
+                        string.Format("NpcDebug.PageInfo".I18N(), curNpcSelectedPage + 1, maxPage + 1));
+                    
+                    scrollRollDebugNpcs = GUILayout.BeginScrollView(scrollRollDebugNpcs, false, false);
+                    {
+                        var nameArray = npcDataListName.Where(
+                            (_, index) => index >= curNpcSelectedPage * countEachPage &&
+                                          index < (curNpcSelectedPage + 1) * countEachPage).ToArray();
+                        curNpcSelectedIndex = GUILayout.SelectionGrid(curNpcSelectedIndex, nameArray, 1);
+                    }
+                    GUILayout.EndScrollView();
+
+                    
+                }
+                GUILayout.EndVertical();
+                
+                GUILayout.BeginVertical();
+                {
+                    GUILayout.Space(5);
+                    var npcData = GetCurSelectNpcData();
+                    if (npcData != null)
+                    {
+                        if(curNpcData != npcData)
+                        {
+                            try
+                            {
+                                npcData.Refresh();
+                            }
+                            catch (Exception e)
+                            {
+                                LogError(string.Format("NpcDebug.NpcMissError".I18N(), npcData.ID));
+                                LogError(e);
+                                SearchNpc(null);
+                                goto EndNpc;
+                            }
+                        }
+                        
+                        GUILayout.BeginHorizontal();
+                        {
+                            GUILayout.BeginVertical();
+                            {
+                                scrollRollDebugNpcInfo = GUILayout.BeginScrollView(scrollRollDebugNpcInfo, false, false);
+                                {
+                                    GUILayout.Label(string.Format("NpcDebug.Info.ID".I18N(), npcData.ID), infoStyle);
+                                    if (npcData.ImportantID > 0)
+                                    {
+                                        GUILayout.Label(string.Format("NpcDebug.Info.BindingID".I18N(), npcData.ImportantID), infoStyle);
+                                    }
+                                    else
+                                    {
+                                        GUILayout.Label("NpcDebug.Info.NotBinding".I18N(), infoStyle);
+                                    }
+                            
+                                    GUILayout.Space(16);
+                                    GUILayout.Label(string.Format("NpcDebug.Info.Name".I18N(), npcData.Name), infoStyle);
+                                    GUILayout.Label(string.Format("NpcDebug.Info.Title".I18N(), npcData.Title), infoStyle);
+                                    GUILayout.Label(
+                                        string.Format("NpcDebug.Info.School".I18N(),
+                                            DialogAnalysis.GetSchoolName(npcData.School.ToString())), infoStyle);
+                                    GUILayout.Label(string.Format("NpcDebug.Info.Location".I18N(), npcData.LocationName), infoStyle);
+                            
+                                    GUILayout.Space(16);
+                                    GUILayout.Label(
+                                        string.Format("NpcDebug.Info.Gender".I18N(), DialogAnalysis.GetGenderName(npcData.Gender)), infoStyle);
+                                    GUILayout.Label(string.Format("NpcDebug.Info.Age".I18N(), npcData.AgeYear), infoStyle);
+                                    GUILayout.Label(string.Format("NpcDebug.Info.Life".I18N(), npcData.Life), infoStyle);
+                                    if(npcData.IsCouple)
+                                        GUILayout.Label("NpcDebug.Info.Relation.Couple".I18N(), infoStyle);
+                                    if(npcData.IsTeacher)
+                                        GUILayout.Label("NpcDebug.Info.Relation.Teacher".I18N(), infoStyle);
+                                    if(npcData.IsStudent)
+                                        GUILayout.Label("NpcDebug.Info.Relation.Student".I18N(), infoStyle);
+                                    if(npcData.IsBrother)
+                                        GUILayout.Label("NpcDebug.Info.Relation.Brother".I18N(), infoStyle);
+                            
+                                    GUILayout.Space(16);
+                                    GUILayout.Label(string.Format("NpcDebug.Info.Sprite".I18N(), npcData.Sprite), infoStyle);
+                                }
+                                GUILayout.EndScrollView();
+                            }
+                            GUILayout.EndVertical();
+                            
+                            GUILayout.BeginVertical(GUILayout.MinWidth(winRect.width * 0.2f));
+                            {
+                                if (GUILayout.Button("NpcDebug.Info.Func.Refresh".I18N()))
+                                {
+                                    try
+                                    {
+                                        curNpcData.Refresh();
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        LogError(string.Format("NpcDebug.NpcMissError".I18N(), npcData.ID));
+                                        LogError(e);
+                                        SearchNpc(null);
+                                    }
+                                }
+                                GUILayout.Space(16);
+                                if (GUILayout.Button("NpcDebug.Info.Func.ForceInteract".I18N()))
+                                {
+                                    DialogAnalysis.NpcForceInteract(npcData.ID);
+                                }
+                            }
+                            GUILayout.EndVertical();
+                        }
+                        GUILayout.EndHorizontal();
+                    }
+                    EndNpc:
+
+                    curNpcData = npcData;
+                }
+                GUILayout.EndVertical();
+            }
+            GUILayout.EndHorizontal();
+        }
+
+        private void SearchNpc(string searchFilter)
+        {
+            curNpcSelectedIndex = -1;
+            curNpcSelectedPage = 0;
+            npcDataList.Clear();
+
+            bool noFilter = string.IsNullOrWhiteSpace(searchFilter);
+            
+            foreach (var jsonObject in jsonData.instance.AvatarJsonData.list)
+            {
+                var npcId = jsonObject["id"].I;
+                if(npcId < 20000)
+                    continue;
+                var npcData = new SearchNpcData();
+                npcData.ID = npcId;
+                
+                npcData.Refresh();
+                
+                if(noFilter || npcData.FilterCheck(searchFilter))
+                    npcDataList.Add(npcData);
+            }
+
+            npcDataListName = npcDataList.Select(data => data.ToString()).ToArray();
+        }
+
+        
+
+        private SearchNpcData GetCurSelectNpcData()
+        {
+            if (curNpcSelectedIndex < 0 || curNpcSelectedIndex >= countEachPage)
+                return null;
+
+            var index = curNpcSelectedPage * countEachPage + curNpcSelectedIndex;
+            if (index >= 0 && index < npcDataList.Count)
+                return npcDataList[index];
+            return null;
         }
 
         private float W(float size)

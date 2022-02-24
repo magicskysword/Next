@@ -146,36 +146,9 @@ namespace SkySwordKill.Next.Mod
             OnModLoadComplete();
         }
 
-        private static void InitJSONClassData()
-        {
-            Type[] types = Assembly.GetAssembly(typeof(IJSONClass)).GetTypes();
-            List<Type> list = new List<Type>();
-            foreach (Type type in types)
-            {
-                if (!type.IsInterface)
-                {
-                    Type[] interfaces = type.GetInterfaces();
-                    for (int j = 0; j < interfaces.Length; j++)
-                    {
-                        if (interfaces[j] == typeof(IJSONClass))
-                        {
-                            list.Add(type);
-                        }
-                    }
-                }
-            }
-            foreach (Type type2 in list)
-            {
-                MethodInfo method = type2.GetMethod("InitDataDict");
-                if (method != null)
-                {
-                    method.Invoke(null, null);
-                }
-            }
-        }
-
         public static void RestoreBaseData()
         {
+            // 读取所有继承自IJSONClass的类型
             Type[] types = Assembly.GetAssembly(typeof(IJSONClass)).GetTypes();
             List<Type> list = new List<Type>();
             foreach (Type type in types)
@@ -192,6 +165,7 @@ namespace SkySwordKill.Next.Mod
                     }
                 }
             }
+            // 反射清空DataDict与DataList
             foreach (Type jsonType in list)
             {
                 var dataDic = 
@@ -206,6 +180,9 @@ namespace SkySwordKill.Next.Mod
                         ?.GetValue(null) as IList;
                 dataList?.Clear();
             }
+            
+            // 清空技能缓存
+            SkillBox.inst.skills.Clear();
             
             MainDataContainer.CoverMainData(dataContainer);
         }
@@ -277,6 +254,35 @@ namespace SkySwordKill.Next.Mod
             
 
             Main.Instance.resourcesManager.StartLoadAsset();
+        }
+        
+        private static void InitJSONClassData()
+        {
+            // 重新初始化所有继承IJSONClass的类型
+            Type[] types = Assembly.GetAssembly(typeof(IJSONClass)).GetTypes();
+            List<Type> list = new List<Type>();
+            foreach (Type type in types)
+            {
+                if (!type.IsInterface)
+                {
+                    Type[] interfaces = type.GetInterfaces();
+                    for (int j = 0; j < interfaces.Length; j++)
+                    {
+                        if (interfaces[j] == typeof(IJSONClass))
+                        {
+                            list.Add(type);
+                        }
+                    }
+                }
+            }
+            foreach (Type type2 in list)
+            {
+                MethodInfo method = type2.GetMethod("InitDataDict");
+                if (method != null)
+                {
+                    method.Invoke(null, null);
+                }
+            }
         }
 
         public static ModConfig LoadModMetadata(string dir)

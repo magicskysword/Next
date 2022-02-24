@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using SkySwordKill.Next.Extension;
 using UnityEngine.Events;
 
 namespace SkySwordKill.Next
@@ -273,17 +274,207 @@ namespace SkySwordKill.Next
             return dic;
         }
         
-        public static JSONObject GetNpcRandomJsonData(int npcid)
+        public static JSONObject GetNpcRandomJsonData(int npcId)
         {
-            int num = NPCEx.NPCIDToNew(npcid);
+            int num = NPCEx.NPCIDToNew(npcId);
             return jsonData.instance.AvatarRandomJsonData[num.ToString()];
         }
         
-        public static JSONObject GetNpcJsonData(int npcid)
+        public static JSONObject GetNpcJsonData(int npcId)
         {
-            int num = NPCEx.NPCIDToNew(npcid);
+            int num = NPCEx.NPCIDToNew(npcId);
             return jsonData.instance.AvatarJsonData[num.ToString()];
         }
+
+        public static string GetNpcName(int npcId)
+        {
+            int num = NPCEx.NPCIDToNew(npcId);
+            JSONObject wuJiangBangDing = Tools.instance.getWuJiangBangDing(num);
+            string nameText = "";
+            if (jsonData.instance != null && jsonData.instance.AvatarRandomJsonData.HasField(num.ToString()))
+            {
+                if (num == 1)
+                    nameText = Tools.instance.getPlayer().name;
+                else if (wuJiangBangDing == null)
+                    nameText = Tools.instance.Code64ToString(
+                        jsonData.instance.AvatarRandomJsonData[num.ToString()]["Name"].str);
+                else
+                    nameText = Tools.Code64(wuJiangBangDing["Name"].str);
+            }
+
+            return nameText;
+        }
+        
+        public static string GetNpcTitle(int npcId)
+        {
+            int num = NPCEx.NPCIDToNew(npcId);
+            JSONObject wuJiangBangDing = Tools.instance.getWuJiangBangDing(num);
+            string titleText = "";
+            if (jsonData.instance != null && jsonData.instance.AvatarRandomJsonData.HasField(num.ToString()))
+            {
+                titleText = wuJiangBangDing != null
+                    ? Tools.Code64(wuJiangBangDing["Title"].str)
+                    : Tools.getMonstarTitle(num);
+            }
+
+            return titleText;
+        }
+
+        public static int GetNpcSex(int npcId)
+        {
+            var sexData = GetNpcJsonData(npcId)?["SexType"];
+
+            return sexData?.I ?? 0;
+        }
+
+        public static int GetNpcAge(int npcId)
+        {
+            var ageData = GetNpcJsonData(npcId)?["age"];
+
+            return ageData?.I ?? -1;
+        }
+        
+        public static int GetNpcLife(int npcId)
+        {
+            var ageData = GetNpcJsonData(npcId)?["shouYuan"];
+
+            return ageData?.I ?? -1;
+        }
+        
+        public static int GetNpcSprite(int npcId)
+        {
+            var ageData = GetNpcJsonData(npcId)?["shengShi"];
+
+            return ageData?.I ?? -1;
+        }
+        
+        public static int GetNpcSchool(int npcId)
+        {
+            var ageData = GetNpcJsonData(npcId)?["MenPai"];
+
+            return ageData?.I ?? 0;
+        }
+        
+        public static int GetNpcLevel(int npcId)
+        {
+            var ageData = GetNpcJsonData(npcId)?["Level"];
+
+            return ageData?.I ?? 1;
+        }
+        
+        public static int GetNpcLevelType(int npcId)
+        {
+            var ageData = GetNpcJsonData(npcId)?["Level"];
+
+            var level = ageData?.I ?? 1;
+            return (level - 1) / 3 + 1;
+        }
+        
+        public static bool IsPlayerCouple(int npcId) => PlayerEx.IsDaoLv(NPCEx.NPCIDToNew(npcId));
+        public static bool IsPlayerTeacher(int npcId) => PlayerEx.IsTheather(NPCEx.NPCIDToNew(npcId));
+        public static bool IsPlayerStudent(int npcId) => PlayerEx.IsTuDi(NPCEx.NPCIDToNew(npcId));
+        public static bool IsPlayerBrother(int npcId) => PlayerEx.IsBrother(NPCEx.NPCIDToNew(npcId));
+        
+        public static string GetSchoolName(string schoolId)
+        {
+            var data = jsonData.instance.CyShiLiNameData[schoolId];
+            return data?["name"]?.Str ?? "School.Unknown".I18N();
+        }
+
+        public static string GetSceneName(string sceneId)
+        {
+            var data = jsonData.instance.SceneNameJsonData[sceneId];
+            return data?["MapName"]?.Str ?? "Map.Unknown".I18N();
+        }
+
+        public static string GetMapRoadName(string roadId)
+        {
+            var data = jsonData.instance.AllMapLuDainType[roadId];
+            return data?["LuDianName"]?.Str ?? "Map.Unknown".I18N();
+        }
+        
+        public static string GetGenderName(int gender)
+        {
+            switch (gender)
+            {
+                case 1:
+                    return "Gender.Male".I18N();
+                case 2:
+                    return "Gender.Female".I18N();
+            }
+
+            return "Gender.Unknown".I18N();
+        }
+        
+        public static string GetNpcLocationName(int npcId)
+        {
+            NPCMap npcMap = NpcJieSuanManager.inst.npcMap;
+            string curPosName = "Map.Unknown".I18N();
+            
+            if (npcMap.bigMapNPCDictionary != null)
+            {
+                foreach (var pair in npcMap.bigMapNPCDictionary)
+                {
+                    foreach (var id in pair.Value)
+                    {
+                        if (id == npcId)
+                        {
+                            curPosName = $"{GetSceneName("AllMaps")} - {GetMapRoadName(pair.Key.ToString())}";
+                            goto EndSearch;
+                        }
+                    }
+                }
+            }
+            
+            if (npcMap.threeSenceNPCDictionary != null)
+            {
+                foreach (var pair in npcMap.threeSenceNPCDictionary)
+                {
+                    foreach (var id in pair.Value)
+                    {
+                        if (id == npcId)
+                        {
+                            curPosName = GetSceneName(pair.Key);
+                            goto EndSearch;
+                        }
+                    }
+                }
+            }
+
+            if (npcMap.fuBenNPCDictionary != null)
+            {
+                foreach (var pair in npcMap.fuBenNPCDictionary)
+                {
+                    var posId = pair.Key;
+                    foreach (var pair2 in pair.Value)
+                    {
+                        foreach (var id in pair2.Value)
+                        {
+                            if (id == npcId)
+                            {
+                                curPosName = GetSceneName(posId);
+                                goto EndSearch;
+                            }
+                        }
+                    }
+                }
+            }
+
+            EndSearch:
+            return curPosName;
+        }
+
+        public static void NpcForceInteract(int npcId)
+        {
+            var npcData = new UINPCData(npcId);
+            npcData.RefreshData();
+            
+            UINPCJiaoHu.Inst.HideJiaoHuPop();
+            UINPCJiaoHu.Inst.NowJiaoHuNPC = npcData;
+            
+            UINPCJiaoHu.Inst.ShowJiaoHuPop();
+        }
+        
         
         #endregion
 
@@ -292,6 +483,7 @@ namespace SkySwordKill.Next
 
 
         #endregion
+
 
         
     }

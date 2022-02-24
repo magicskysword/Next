@@ -16,6 +16,7 @@ namespace SkySwordKill.Next.DialogEvent
             bool addHumanFeeling = command.GetBool(2);
             bool showTip = command.GetBool(3);
             NPCEx.AddFavor(npcId, favValue, addHumanFeeling, showTip);
+            callback?.Invoke();
         }
     }
 }

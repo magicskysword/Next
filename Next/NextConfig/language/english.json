@@ -19,6 +19,7 @@
     "Mod.Description" : "Description",
     "Mod.Directory" : "Path",
     "Mod.Unknown" : "Unknown",
+    "Mod.GameNotStart" : "Game Not Start",
 
     "Mod.Panel.DataDirtyTip" : "Mod Settings have changed, please reload the Mod to take effect.",
     "Mod.Panel.MoveUp": "Move up",
@@ -27,6 +28,8 @@
     "Mod.Panel.MoveToBottom": "Move to bottom",
     "Mod.Panel.EnableMod": "Enable mod",
     "Mod.Panel.DisableMod": "Disable mod",
+    "Mod.Panel.EnableAllMod": "Enable all mod",
+    "Mod.Panel.DisableAllMod": "Disable all mod",
 
     "Mod.Load.Unload" : "Unload",
     "Mod.Load.Disable" : "Disable",
@@ -43,6 +46,30 @@
     "DramaDebug.IntVariableDebugWin" : "Int Variable Debug Win",
     "DramaDebug.StrVariableDebugWin" : "String Variable Debug Win",
 
+    "NpcDebug.Title" : "Npc Debug",
+    "NpcDebug.Search" : "Search",
+    "NpcDebug.PgUp" : "Page Up",
+    "NpcDebug.PgDn" : "Page Down",
+    "NpcDebug.PageInfo" : "Current page {0}, total page {1}",
+    "NpcDebug.NpcMissError" : "Npc {0} is dead or missing！",
+    "NpcDebug.Info.ID" : "ID : {0}",
+    "NpcDebug.Info.BindingID" : "Binding ID : {0}",
+    "NpcDebug.Info.NotBinding" : "Not Binding Npc",
+    "NpcDebug.Info.Name" : "Name : {0}",
+    "NpcDebug.Info.Title" : "Title : {0}",
+    "NpcDebug.Info.School" : "School : {0}",
+    "NpcDebug.Info.Location" : "Location : {0}",
+    "NpcDebug.Info.Sprite" : "Sprite : {0}",
+    "NpcDebug.Info.Gender" : "Gender : {0}",
+    "NpcDebug.Info.Age" : "Age : {0}",
+    "NpcDebug.Info.Life" : "Life : {0}",
+    "NpcDebug.Info.Relation.Couple" : "Relation : Couple",
+    "NpcDebug.Info.Relation.Teacher" : "Relation : Teacher",
+    "NpcDebug.Info.Relation.Student" : "Relation : Student",
+    "NpcDebug.Info.Relation.Brother" : "Relation : Sworn Brothers & Sisters",
+    "NpcDebug.Info.Func.Refresh" : "Refresh",
+    "NpcDebug.Info.Func.ForceInteract" : "Force Interact",
+
     "Trigger" : "Trigger",
     "Trigger.UseItem" : "Use Item",
     "Trigger.AfterUseItem" : "After Use Item",
@@ -54,6 +81,7 @@
     "HeaderBar.DebugMode" : "Debug Mode",
     "HeaderBar.ModList" : "Mod List",
     "HeaderBar.DramaDebug" : "Drama Debug",
+    "HeaderBar.NpcDebug" : "Npc Debug",
     "HeaderBar.ReloadMod" : "Reload Mod",
     "HeaderBar.ReloadModTip" : "Only reload mod in start scene",
     "HeaderBar.ExportBase" : "Export Base",
@@ -72,6 +100,14 @@
     "ModManager.ModConfigDontExist": "Mod configuration dont exist！",
     "ModManager.ModConfigLoadFail": "Load mod configuration fail！",
     "ModManager.DataMissingField": "Data {0} [{1}] lack field {2}，replace with template data {3} .",
-    "ModManager.LoadData": "Load {0}"
+    "ModManager.LoadData": "Load {0}",
+
+    "Map.Unknown" : "Unknown",
+
+    "School.Unknown" : "Unknown",
+
+    "Gender.Male" : "Male",
+    "Gender.Female" : "Female",
+    "Gender.Unknown" : "Unknown"
   }
 }

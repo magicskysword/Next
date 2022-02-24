@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System.Linq;
+using HarmonyLib;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.Mod;
 
@@ -13,8 +14,10 @@ namespace SkySwordKill.Next.Patch
             Main.LogInfo("Misc.RestartPatchNpcData".I18N());
             jsonData jsonInstance = jsonData.instance;
             var fieldInfo = typeof(jsonData).GetField("AvatarJsonData");
-            foreach (var modConfig in ModManager.modConfigs)
+            foreach (var modConfig in ModManager.SortMod(ModManager.modConfigs))
             {
+                if(modConfig.State != ModState.LoadSuccess)
+                    continue;
                 if (modConfig.jsonPathCache.TryGetValue("AvatarJsonData",out var path))
                 {
                     ModManager.PatchJsonObject(fieldInfo,path,jsonInstance.AvatarJsonData);

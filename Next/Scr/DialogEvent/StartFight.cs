@@ -87,6 +87,9 @@ namespace SkySwordKill.Next.DialogEvent
 
         public static void ResetEventFight()
         {
+            if(Tools.instance.getPlayer() == null)
+                return;
+            
             FightTags = null;
             DialogAnalysis.SetStr("Fight","VictoryEvent","");
             DialogAnalysis.SetStr("Fight","DefeatEvent","");

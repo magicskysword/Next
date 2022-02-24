@@ -4,10 +4,11 @@
     {
         #region 字段
 
-        public string id;
-        public string type;
-        public string condition;
-        public string triggerEvent;
+        public string id = string.Empty;
+        public string type = string.Empty;
+        public string condition = string.Empty;
+        public string triggerEvent = string.Empty;
+        public string bindData = string.Empty;
 
         #endregion
 

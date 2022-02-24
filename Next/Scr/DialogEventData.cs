@@ -124,14 +124,8 @@ namespace SkySwordKill.Next
                 var body = option[i].Split('#');
                 var curOption = new DialogOptionCommand();
                 curOption.option = body[0];
-                if (body.Length >= 2)
-                    curOption.tagEvent = body[1];
-                else
-                    curOption.tagEvent = "";
-                if (body.Length >= 3)
-                    curOption.condition = body[2];
-                else
-                    curOption.condition = "";
+                curOption.tagEvent = body.Length >= 2 ? body[1] : "";
+                curOption.condition = body.Length >= 3 ? body[2] : "";
                 optionCommands[i] = curOption;
             }
 
