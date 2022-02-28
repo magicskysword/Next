@@ -10,6 +10,7 @@ namespace SkySwordKill.Next
         public string Title { get; set; }
         public int AgeYear { get; set; }
         public int Gender { get; set; }
+        public int Level { get; set; }
         public string LocationName { get; set; }
         public int School { get; set; }
         public int Life { get; set; }
@@ -57,6 +58,9 @@ namespace SkySwordKill.Next
             if (DialogAnalysis.GetGenderName(Gender).Contains(matchStr))
                 return true;
             
+            if (DialogAnalysis.GetLevelName(Level).Contains(matchStr))
+                return true;
+            
             return false;
         }
 
@@ -76,6 +80,7 @@ namespace SkySwordKill.Next
             Title = DialogAnalysis.GetNpcTitle(ID);
             Gender = DialogAnalysis.GetNpcSex(ID);
             AgeYear = DialogAnalysis.GetNpcAge(ID) / 12;
+            Level = DialogAnalysis.GetNpcLevel(ID);
             LocationName = DialogAnalysis.GetNpcLocationName(ID);
             Life = DialogAnalysis.GetNpcLife(ID);
             Sprite = DialogAnalysis.GetNpcSprite(ID);

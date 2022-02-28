@@ -124,6 +124,7 @@
     <Compile Include="Scr\DialogEnvironment.cs" />
     <Compile Include="Scr\DialogEventData.cs" />
     <Compile Include="Scr\DialogEvent\AddComprehensionExp.cs" />
+    <Compile Include="Scr\DialogEvent\AddCongenitalBuff.cs" />
     <Compile Include="Scr\DialogEvent\AddItem.cs" />
     <Compile Include="Scr\DialogEvent\AddNpcItem.cs" />
     <Compile Include="Scr\DialogEvent\AddRelation.cs" />
@@ -158,10 +159,12 @@
     <Compile Include="Scr\DialogEvent\Nothing.cs" />
     <Compile Include="Scr\DialogEvent\PlayEffect.cs" />
     <Compile Include="Scr\DialogEvent\PlayMusic.cs" />
+    <Compile Include="Scr\DialogEvent\RemoveCongenitalBuff.cs" />
     <Compile Include="Scr\DialogEvent\RemoveItem.cs" />
     <Compile Include="Scr\DialogEvent\RemoveRelation.cs" />
     <Compile Include="Scr\DialogEvent\Say.cs" />
     <Compile Include="Scr\DialogEvent\SetChar.cs" />
+    <Compile Include="Scr\DialogEvent\SetCustomFace.cs" />
     <Compile Include="Scr\DialogEvent\SetFace.cs" />
     <Compile Include="Scr\DialogEvent\SetInt.cs" />
     <Compile Include="Scr\DialogEvent\ChangeNpcFav.cs" />
@@ -185,7 +188,10 @@
     <Compile Include="Scr\Patch\ModResourcesLoadSpritePatch.cs" />
     <Compile Include="Scr\Patch\ModResourcesLoadTexturePatch.cs" />
     <Compile Include="Scr\Patch\MusicMagPatch.cs" />
+    <Compile Include="Scr\Patch\SetAvatarFacePatch.cs" />
     <Compile Include="Scr\SearchNpcData.cs" />
+    <Compile Include="Scr\StaticFace\CustomStaticFaceInfo.cs" />
+    <Compile Include="Scr\StaticFace\StaticFaceUtils.cs" />
     <Compile Include="Scr\XiaoYeGUI\InterfaceMaker.cs" />
     <Compile Include="Scr\XiaoYeGUI\RayBlocker.cs" />
     <Compile Include="Scr\XiaoYeGUI\ResourceUtils.cs" />

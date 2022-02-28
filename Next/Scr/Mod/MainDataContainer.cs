@@ -22,7 +22,7 @@ namespace SkySwordKill.Next.Mod
             jsonData jsonInstance = jsonData.instance;
             foreach (var fieldInfo in ModManager.jsonDataFields)
             {
-                if (fieldInfo.Name.StartsWith("_"))
+                if (ModManager.IsBanField(fieldInfo))
                     continue;
 
                 var value = fieldInfo.GetValue(jsonInstance);
@@ -66,7 +66,7 @@ namespace SkySwordKill.Next.Mod
             jsonData jsonInstance = jsonData.instance;
             foreach (var fieldInfo in ModManager.jsonDataFields)
             {
-                if (fieldInfo.Name.StartsWith("_"))
+                if (ModManager.IsBanField(fieldInfo))
                     continue;
 
                 var value = fieldInfo.GetValue(jsonInstance);

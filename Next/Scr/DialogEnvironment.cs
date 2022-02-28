@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using KBEngine;
 
 namespace SkySwordKill.Next
@@ -134,6 +135,17 @@ namespace SkySwordKill.Next
         public int GetComprehensionExp(int typeID)
         {
             return player.wuDaoMag.getWuDaoEx(typeID).I;
+        }
+
+        public int GetCongenitalBuffCount(int buffID)
+        {
+            var seid16 = 16.ToString();
+            if (player.TianFuID.HasField(seid16))
+            {
+                var list = player.TianFuID[seid16].ToList();
+                return list.Count(buff => buff == buffID);
+            }
+            return 0;
         }
 
         public int GetItemNum(int _itemID)

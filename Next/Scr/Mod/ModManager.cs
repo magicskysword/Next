@@ -14,6 +14,7 @@ using KBEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SkySwordKill.Next.Extension;
+using SkySwordKill.Next.StaticFace;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -127,7 +128,7 @@ namespace SkySwordKill.Next.Mod
             {
                 OnModReload();
                 RestoreBaseData();
-                RestoreDialogData();
+                RestoreNextData();
                 OnModLoadStart();
                 LoadAllMod();
                 InitJSONClassData();
@@ -182,14 +183,15 @@ namespace SkySwordKill.Next.Mod
             }
             
             // 清空技能缓存
-            SkillBox.inst.skills.Clear();
+            SkillBox.inst?.clear();
             
             MainDataContainer.CoverMainData(dataContainer);
         }
 
-        public static void RestoreDialogData()
+        public static void RestoreNextData()
         {
             DialogAnalysis.Clear();
+            StaticFaceUtils.Clear();
         }
 
         public static void LoadAllMod()
@@ -339,7 +341,7 @@ namespace SkySwordKill.Next.Mod
                 // 载入Mod Patch数据
                 foreach (var fieldInfo in jsonDataFields)
                 {
-                    if (fieldInfo.Name.StartsWith("_"))
+                    if (IsBanField(fieldInfo))
                         continue;
 
                     var value = fieldInfo.GetValue(jsonInstance);
@@ -377,6 +379,9 @@ namespace SkySwordKill.Next.Mod
                 // 载入Mod Dialog数据
                 LoadDialogEventData(modConfig.Path);
                 LoadDialogTriggerData(modConfig.Path);
+                
+                // 载入Mod Face数据
+                LoadCustomFaceData(modConfig.Path);
 
                 // 载入ModAsset
                 CacheAssetDir("Assets", $"{modConfig.Path}/Assets");
@@ -390,6 +395,21 @@ namespace SkySwordKill.Next.Mod
             modConfig.State = ModState.LoadSuccess;
             Main.logIndent = 0;
             Main.LogInfo($"===================" + "ModManager.LoadModComplete".I18N() + "=====================");
+        }
+
+        public static bool IsBanField(FieldInfo fieldInfo)
+        {
+            if (fieldInfo.Name.StartsWith("_"))
+                return true;
+            
+            if (fieldInfo.Name == "BadWord")
+                return true;
+
+            if (fieldInfo.CustomAttributes.FirstOrDefault(attr => attr.AttributeType == typeof(ObsoleteAttribute)) !=
+                null)
+                return true;
+
+            return false;
         }
 
         private static ModConfig GetModConfig(string dir)
@@ -616,6 +636,29 @@ namespace SkySwordKill.Next.Mod
                 catch (Exception e)
                 {
                     throw new ModLoadException($"文件 {filePath} 加载失败。", e);
+                }
+            }
+        }
+        
+        private static void LoadCustomFaceData(string dirPath)
+        {
+            var dirName = "CustomFace";
+            var tagDir = Path.Combine(dirPath, dirName);
+            if(!Directory.Exists(tagDir))
+                return;
+            foreach (var filePath in Directory.GetFiles(tagDir))
+            {
+                try
+                {
+                    var jObject = LoadJObject(filePath);
+                    var faceData = jObject.ToObject<CustomStaticFaceInfo>();
+                    StaticFaceUtils.RegisterFace(faceData);
+                    Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
+                        $"{dirName}/{Path.GetFileNameWithoutExtension(filePath)}.json"));
+                }
+                catch (Exception e)
+                {
+                    throw new ModLoadException($"文件 {filePath} 转换失败。", e);
                 }
             }
         }

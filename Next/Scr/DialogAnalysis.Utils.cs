@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using SkySwordKill.Next.Extension;
+using SkySwordKill.Next.StaticFace;
+using UnityEngine;
 using UnityEngine.Events;
+using YSGame;
 
 namespace SkySwordKill.Next
 {
@@ -369,6 +372,102 @@ namespace SkySwordKill.Next
             var level = ageData?.I ?? 1;
             return (level - 1) / 3 + 1;
         }
+
+        public static CustomStaticFaceInfo GetNpcFaceInfo(int npcId)
+        {
+            var randomData = GetNpcRandomJsonData(npcId);
+            var jsonData = GetNpcJsonData(npcId);
+            
+            var importantID = jsonData["BindingNpcID"]?.I ?? 0;
+            if (randomData == null)
+                return null;
+            
+            var staticFaceInfo =
+                SetAvatarFaceRandomInfo.inst.StaticRandomInfo.Find(item => item.AvatarScope == importantID);
+            
+            if (staticFaceInfo != null)
+            {
+                // 重要NPC
+                return StaticFaceUtils.GetFaceInfoByStaticFaceInfo(staticFaceInfo);
+            }
+            else
+            {
+                // 普通NPC
+                return StaticFaceUtils.GetFaceInfoByJson(randomData);
+            }
+        }
+        
+        public static void SetNpcFaceData(int npcId,CustomStaticFaceInfo faceInfo)
+        {
+            var randomData = GetNpcRandomJsonData(npcId);
+
+            foreach (var pair in faceInfo.RandomInfos)
+            {
+                randomData.SetField(pair.Key, pair.Value);
+            }
+        }
+        
+        public static void SetNpcFaceData(int npcId,int faceId)
+        {
+            var npcFaceData = GetFaceInfoById(faceId);
+            if (npcFaceData != null)
+            {
+                SetNpcFaceData(npcId, npcFaceData);
+                return;
+            }
+
+            Debug.LogError($"不存在对应的捏脸数据 {faceId}");
+        }
+
+        public static CustomStaticFaceInfo GetPlayerFaceData()
+        {
+            var randomData = jsonData.instance.AvatarRandomJsonData["1"];
+
+            var faceInfo = StaticFaceUtils.GetFaceInfoByJson(randomData);
+
+            return faceInfo;
+        }
+
+        public static void SetPlayerFaceData(CustomStaticFaceInfo faceInfo)
+        {
+            var randomData = jsonData.instance.AvatarRandomJsonData["1"];
+
+            foreach (var pair in faceInfo.RandomInfos)
+            {
+                randomData.SetField(pair.Key, pair.Value);
+            }
+            
+            if(UIHeadPanel.Inst != null)
+                UIHeadPanel.Inst.Face.setFace();
+
+            var playerRandomFace = GameObject.FindObjectOfType<PlayerSetRandomFace>();
+            if (playerRandomFace != null)
+            {
+                playerRandomFace.setFaceByJson(randomData);
+            }
+        }
+        
+        public static void SetPlayerFaceData(int faceId)
+        {
+            var npcFaceData = GetFaceInfoById(faceId);
+            if (npcFaceData != null)
+            {
+                SetPlayerFaceData(npcFaceData);
+                return;
+            }
+
+            Debug.LogError($"不存在对应的捏脸数据 {faceId}");
+        }
+
+        public static CustomStaticFaceInfo GetFaceInfoById(int faceId)
+        {
+            if(StaticFaceUtils.HasFace(faceId))
+            {
+                return StaticFaceUtils.GetFace(faceId);
+            }
+
+            return GetNpcFaceInfo(faceId);
+        }
         
         public static bool IsPlayerCouple(int npcId) => PlayerEx.IsDaoLv(NPCEx.NPCIDToNew(npcId));
         public static bool IsPlayerTeacher(int npcId) => PlayerEx.IsTheather(NPCEx.NPCIDToNew(npcId));
@@ -379,6 +478,12 @@ namespace SkySwordKill.Next
         {
             var data = jsonData.instance.CyShiLiNameData[schoolId];
             return data?["name"]?.Str ?? "School.Unknown".I18N();
+        }
+        
+        public static string GetLevelName(int level)
+        {
+            var data = jsonData.instance.LevelUpDataJsonData[level.ToString()];
+            return data?["Name"]?.Str ?? "Level.Unknown".I18N();
         }
 
         public static string GetSceneName(string sceneId)

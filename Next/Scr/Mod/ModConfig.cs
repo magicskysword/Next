@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Newtonsoft.Json;
 using SkySwordKill.Next.Extension;
 
 namespace SkySwordKill.Next.Mod
@@ -11,10 +12,13 @@ namespace SkySwordKill.Next.Mod
         public string Author { get; set; }
         public string Version { get; set; }
         public string Description { get; set; }
+        [JsonIgnore]
         public ModState State { get; set; }
+        [JsonIgnore]
         public string Path { get; set; }
+        [JsonIgnore]
         public Exception Exception { get; set; }
-
+        [JsonIgnore]
         public Dictionary<string, string> jsonPathCache = new Dictionary<string, string>();
 
         public string GetModStateDescription()

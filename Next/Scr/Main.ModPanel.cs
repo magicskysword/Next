@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.Mod;
+using SkySwordKill.Next.StaticFace;
 using SkySwordKill.Next.XiaoYeGUI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,6 +36,8 @@ namespace SkySwordKill.Next
         private string inputEvent;
         private string testCommand;
         private string inputNpcSearch;
+
+        private string inputPlayerFaceJson;
         
         private GUIStyle labelTitleStyle;
         private GUIStyle labelLeftStyle;
@@ -220,6 +223,9 @@ namespace SkySwordKill.Next
                 case 2:
                     DrawNpcDebug();
                     break;
+                case 3:
+                    DrawMiscDebug();
+                    break;
             }
             
             GUILayout.FlexibleSpace();
@@ -243,7 +249,8 @@ namespace SkySwordKill.Next
                     {
                         "HeaderBar.ModList".I18N(),
                         "HeaderBar.DramaDebug".I18N(),
-                        "HeaderBar.NpcDebug".I18N()
+                        "HeaderBar.NpcDebug".I18N(),
+                        "HeaderBar.MiscDebug".I18N()
                     };
                     toolbarSelected = GUILayout.Toolbar(toolbarSelected, toolbarList);
                 }
@@ -664,6 +671,7 @@ namespace SkySwordKill.Next
                                     GUILayout.Label(string.Format("NpcDebug.Info.Location".I18N(), npcData.LocationName), infoStyle);
                             
                                     GUILayout.Space(16);
+                                    GUILayout.Label(string.Format("NpcDebug.Info.Level".I18N(), DialogAnalysis.GetLevelName(npcData.Level)), infoStyle);
                                     GUILayout.Label(
                                         string.Format("NpcDebug.Info.Gender".I18N(), DialogAnalysis.GetGenderName(npcData.Gender)), infoStyle);
                                     GUILayout.Label(string.Format("NpcDebug.Info.Age".I18N(), npcData.AgeYear), infoStyle);
@@ -704,6 +712,21 @@ namespace SkySwordKill.Next
                                 {
                                     DialogAnalysis.NpcForceInteract(npcData.ID);
                                 }
+                                GUILayout.Space(16);
+                                if (GUILayout.Button("NpcDebug.Info.Func.ExportFaceInfo".I18N()))
+                                {
+                                    var faceInfo = DialogAnalysis.GetNpcFaceInfo(npcData.ID);
+                                    if (faceInfo != null)
+                                    {
+                                        var jsonData = JObject.FromObject(faceInfo);
+                                        GUIUtility.systemCopyBuffer = jsonData.ToString(Formatting.Indented);
+                                        LogInfo(string.Format("NpcDebug.Info.Func.ExportFaceInfo.Success".I18N(), npcData.ID, npcData.Name));
+                                    }
+                                    else
+                                    {
+                                        LogError(string.Format("NpcDebug.Info.Func.ExportFaceInfo.Failure".I18N(), npcData.ID, npcData.Name));
+                                    }
+                                }
                             }
                             GUILayout.EndVertical();
                         }
@@ -716,6 +739,34 @@ namespace SkySwordKill.Next
                 GUILayout.EndVertical();
             }
             GUILayout.EndHorizontal();
+        }
+        
+        private void DrawMiscDebug()
+        {
+            GUILayout.Label("Misc.Title".I18N(),labelTitleStyle);
+            
+            GUILayout.BeginVertical(GUILayout.MaxWidth(winRect.width * 0.4f));
+            {
+                GUILayout.Label("Misc.PlayerFace".I18N());
+                inputPlayerFaceJson = GUILayout.TextArea(inputPlayerFaceJson,
+                    GUILayout.MinHeight(winRect.height * 0.4f));
+                GUILayout.BeginHorizontal();
+                {
+                    if (GUILayout.Button($"Misc.ExportPlayerFace".I18N()))
+                    {
+                        var faceInfo = DialogAnalysis.GetNpcFaceInfo(1);
+                        var jsonData = JObject.FromObject(faceInfo);
+                        inputPlayerFaceJson = jsonData.ToString(Formatting.Indented);
+                    }
+                    if (GUILayout.Button($"Misc.ImportPlayerFace".I18N()))
+                    {
+                        var faceInfo = JObject.Parse(inputPlayerFaceJson).ToObject<CustomStaticFaceInfo>();
+                        DialogAnalysis.SetPlayerFaceData(faceInfo);
+                    }
+                }
+                GUILayout.EndHorizontal();
+            }
+            GUILayout.EndVertical();
         }
 
         private void SearchNpc(string searchFilter)

@@ -61,6 +61,7 @@
     "NpcDebug.Info.Location" : "位置 : {0}",
     "NpcDebug.Info.Sprite" : "神识 : {0}",
     "NpcDebug.Info.Gender" : "性别 : {0}",
+    "NpcDebug.Info.Level" : "境界 : {0}",
     "NpcDebug.Info.Age" : "年龄 : {0}",
     "NpcDebug.Info.Life" : "寿元 : {0}",
     "NpcDebug.Info.Relation.Couple" : "关系 : 道侣",
@@ -69,6 +70,14 @@
     "NpcDebug.Info.Relation.Brother" : "关系 : 结义",
     "NpcDebug.Info.Func.Refresh" : "刷新",
     "NpcDebug.Info.Func.ForceInteract" : "强制交互",
+    "NpcDebug.Info.Func.ExportFaceInfo" : "导出捏脸数据",
+    "NpcDebug.Info.Func.ExportFaceInfo.Success" : "当前角色 {0} {1} 捏脸数据已经复制到剪切板。",
+    "NpcDebug.Info.Func.ExportFaceInfo.Failure" : "当前角色 {0} {1} 捏脸数据不存在，导出失败。",
+
+    "Misc.Title" : "杂项调试",
+    "Misc.ExportPlayerFace" : "导出主角捏脸",
+    "Misc.ImportPlayerFace" : "导入主角捏脸",
+    "Misc.PlayerFace" : "主角捏脸数据",
 
     "Trigger" : "触发器",
     "Trigger.UseItem" : "使用物品",
@@ -82,6 +91,7 @@
     "HeaderBar.ModList" : "Mod列表",
     "HeaderBar.DramaDebug" : "剧情调试",
     "HeaderBar.NpcDebug" : "NPC调试",
+    "HeaderBar.MiscDebug" : "杂项调试",
     "HeaderBar.ReloadMod" : "重载Mod",
     "HeaderBar.ReloadModTip" : "只能在游戏开始界面重载Mod",
     "HeaderBar.ExportBase" : "导出Base",
@@ -105,6 +115,8 @@
     "Map.Unknown" : "未知",
 
     "School.Unknown" : "未知",
+
+    "Level.Unknown" : "未知",
 
     "Gender.Male" : "男性",
     "Gender.Female" : "女性",

@@ -21,7 +21,7 @@ namespace SkySwordKill.Next
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.3.4";
+        public const string MOD_VERSION = "0.3.5";
         
         public static Lazy<string> pathModsDir =
             new Lazy<string>(() => Utility.CombinePaths(

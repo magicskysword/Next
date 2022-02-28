@@ -61,6 +61,7 @@
     "NpcDebug.Info.Location" : "Location : {0}",
     "NpcDebug.Info.Sprite" : "Sprite : {0}",
     "NpcDebug.Info.Gender" : "Gender : {0}",
+    "NpcDebug.Info.Level" : "Level : {0}",
     "NpcDebug.Info.Age" : "Age : {0}",
     "NpcDebug.Info.Life" : "Life : {0}",
     "NpcDebug.Info.Relation.Couple" : "Relation : Couple",
@@ -69,7 +70,15 @@
     "NpcDebug.Info.Relation.Brother" : "Relation : Sworn Brothers & Sisters",
     "NpcDebug.Info.Func.Refresh" : "Refresh",
     "NpcDebug.Info.Func.ForceInteract" : "Force Interact",
+    "NpcDebug.Info.Func.ExportFaceInfo" : "Export FaceInfo",
+    "NpcDebug.Info.Func.ExportFaceInfo.Success" : "Cur Role {0} {1} face data was copy to copy clipboard success.",
+    "NpcDebug.Info.Func.ExportFaceInfo.Failure" : "Cur Role {0} {1} face data didn't exist,export failure.",
 
+    "Misc.Title" : "Misc Debug",
+    "Misc.ExportPlayerFace" : "Export Player Face",
+    "Misc.ImportPlayerFace" : "Import Player Face",
+    "Misc.PlayerFace" : "Player Face Data",
+    
     "Trigger" : "Trigger",
     "Trigger.UseItem" : "Use Item",
     "Trigger.AfterUseItem" : "After Use Item",
@@ -82,6 +91,7 @@
     "HeaderBar.ModList" : "Mod List",
     "HeaderBar.DramaDebug" : "Drama Debug",
     "HeaderBar.NpcDebug" : "Npc Debug",
+    "HeaderBar.MiscDebug" : "Misc Debug",
     "HeaderBar.ReloadMod" : "Reload Mod",
     "HeaderBar.ReloadModTip" : "Only reload mod in start scene",
     "HeaderBar.ExportBase" : "Export Base",
@@ -105,6 +115,8 @@
     "Map.Unknown" : "Unknown",
 
     "School.Unknown" : "Unknown",
+
+    "Level.Unknown" : "Unknown",
 
     "Gender.Male" : "Male",
     "Gender.Female" : "Female",

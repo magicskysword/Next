@@ -25,8 +25,8 @@ namespace SkySwordKill.Next.Patch
                 return -1;
             else
             {
-                var staticSkillJsonData = _skillJsonData.DataDict[key];
-                return staticSkillJsonData.icon > 0 ? staticSkillJsonData.icon : staticSkillJsonData.Skill_ID;
+                var skillJsonData = _skillJsonData.DataDict[key];
+                return skillJsonData.icon > 0 ? skillJsonData.icon : skillJsonData.Skill_ID;
             }
         }
 
