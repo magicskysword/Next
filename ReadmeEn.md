@@ -6,7 +6,7 @@ Next Mod is a Mod based on the BepinEx framework. It provides the ability to cha
 You can write JSON files to insert additional functionality and data into the game.
 
 ## How To Use
-Download the package and decompress it to `觅长生\64\BepInEx\plugins` folder (For a 32-bit system is to `觅长生\64\BepInEx\plugins`)
+Download the package and decompress it to `觅长生\BepInEx\plugins` folder
 
 Reference Post(Chinese)：https://bbs.3dmgame.com/thread-6207429-1-1.html
 
@@ -24,12 +24,12 @@ The mod menu can be opened through F4 in the game (the keys can be modified)
 
 Clone the library, add the Dll references in the game folder, including
 
-`觅长生\64\BepInEx\core`
+`觅长生\BepInEx\core`
 ```
 0Harmony.dll
 BepInEx.dll
 ```
-`觅长生\64\觅长生_Data\Managed`
+`觅长生\觅长生_Data\Managed`
 ```
 Assembly-CSharp.dll
 Assembly-CSharp-firstpass.dll

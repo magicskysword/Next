@@ -9,7 +9,7 @@
 
 ## 使用方法
 
-下载压缩包，将文件解压至 `觅长生\64\BepInEx\plugins` 文件夹 (如果是32位系统则为 `觅长生\64\BepInEx\plugins`，下面不再赘述)
+下载压缩包，将文件解压至 `觅长生\BepInEx\plugins` 文件夹
 
 参考贴：https://bbs.3dmgame.com/thread-6207429-1-1.html
 
@@ -26,12 +26,12 @@ Mod WiKi：[Next Wiki](https://michangshengnext.fandom.com/zh/wiki/%E8%A7%85%E9%
 ## Build
 clone该库后，自行重新添加觅长生游戏文件夹里的Dll引用，包括
 
-`觅长生\64\BepInEx\core` 里的
+`觅长生\BepInEx\core` 里的
 ```
 0Harmony.dll
 BepInEx.dll
 ```
-`觅长生\64\觅长生_Data\Managed` 里的
+`觅长生\觅长生_Data\Managed` 里的
 ```
 Assembly-CSharp.dll
 Assembly-CSharp-firstpass.dll
