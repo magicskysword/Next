@@ -31,36 +31,34 @@ namespace SkySwordKill.Next
                 null);
             return method;
         });
-
         /// <summary>
         /// 对话注册事件
         /// </summary>
         private static Dictionary<string, IDialogEvent> _registerEvents = new Dictionary<string, IDialogEvent>();
-        
-        
-        /// <summary>
-        /// 对话数据
-        /// </summary>
-        public static Dictionary<string, DialogEventData> DialogDataDic = new Dictionary<string, DialogEventData>();
-        /// <summary>
-        /// 对话触发器
-        /// </summary>
-        public static Dictionary<string, DialogTriggerData> DialogTriggerDataDic =
-            new Dictionary<string, DialogTriggerData>();
-        /// <summary>
-        /// 对话临时储存角色
-        /// </summary>
-        public static Dictionary<string, int> TmpCharacter = new Dictionary<string, int>();
-        
-        public static DialogEnvironment curEnv;
-        
-        private static ExpressionEvaluator curEvaluator;
 
         #endregion
 
         #region 属性
 
+        /// <summary>
+        /// 对话数据
+        /// </summary>
+        public static Dictionary<string, DialogEventData> DialogDataDic { get; set; } = new Dictionary<string, DialogEventData>();
+        /// <summary>
+        /// 对话触发器
+        /// </summary>
+        public static Dictionary<string, DialogTriggerData> DialogTriggerDataDic { get; set; } =
+            new Dictionary<string, DialogTriggerData>();
+        /// <summary>
+        /// 对话临时储存角色
+        /// </summary>
+        public static Dictionary<string, int> TmpCharacter { get; set; } = new Dictionary<string, int>();
+        
+        public static DialogEnvironment CurEnv  { get; set; }
+        public static Queue<DialogEventRtData> EventQueue { get; set; } = new Queue<DialogEventRtData>();
 
+        private static ExpressionEvaluator CurEvaluator  { get; set; }
+        private static bool IsRunningEvent { get; set; } = false;
 
         #endregion
 
@@ -74,9 +72,8 @@ namespace SkySwordKill.Next
 
         public static void Init()
         {
-
             foreach (var types in AppDomain.CurrentDomain.GetAssemblies()
-                .Select(assembly => assembly.GetTypes()))
+                         .Select(assembly => assembly.GetTypes()))
             {
                 foreach (var type in types)
                 {
@@ -93,9 +90,7 @@ namespace SkySwordKill.Next
                 }
             }
         }
-
         
-
         public static void RegisterCommand(string command, IDialogEvent cEvent)
         {
             _registerEvents[command] = cEvent;
@@ -103,30 +98,41 @@ namespace SkySwordKill.Next
 
         public static ExpressionEvaluator GetEvaluate(DialogEnvironment env)
         {
-            curEvaluator = curEvaluator ?? new ExpressionEvaluator();
-            curEvaluator.Context = env;
-            return curEvaluator;
+            CurEvaluator = CurEvaluator ?? new ExpressionEvaluator();
+            CurEvaluator.Context = env;
+            return CurEvaluator;
         }
 
-        public static bool TryTrigger(IEnumerable<string> triggerTypes,DialogEnvironment env = null)
+        public static bool TryTrigger(IEnumerable<string> triggerTypes,DialogEnvironment env = null,bool triggerAll = false)
         {
             var newEnv = env ?? new DialogEnvironment();
 
-            var triggers = DialogTriggerDataDic.Values.Where(triggerData => triggerTypes.Contains(triggerData.type));
+            var triggers = DialogTriggerDataDic.Values
+                .Where(triggerData => triggerTypes.Contains(triggerData.Type))
+                .OrderByDescending(triggerData => triggerData.Priority);
             foreach (var trigger in triggers)
             {
                 try
                 {
-                    if (CheckCondition(trigger.condition,newEnv))
+                    if (CheckCondition(trigger.Condition,newEnv))
                     {
-                        Main.LogInfo($"触发器 [{trigger.id}] {trigger.condition} 触发成功。");
-                        StartDialogEvent(trigger.triggerEvent,newEnv);
-                        return true;
+                        Main.LogInfo($"触发器 [{trigger.ID}] {trigger.Condition} 触发成功。");
+                        if(!triggerAll)
+                        {
+                            // 非队列触发，直接切换事件
+                            SwitchDialogEvent(trigger.TriggerEvent,newEnv);
+                            return true;
+                        }
+                        else
+                        {
+                            // 队列触发，添加事件
+                            StartDialogEvent(trigger.TriggerEvent,newEnv);
+                        }
                     }
                 }
                 catch (Exception e)
                 {
-                    Main.LogError($"触发器 [{trigger.id}] {trigger.condition} 触发判断失败！请检查表达式是否正确！");
+                    Main.LogError($"触发器 [{trigger.ID}] {trigger.Condition} 触发判断失败！请检查表达式是否正确！");
                     Main.LogError(e);
                 }
             }
@@ -136,108 +142,79 @@ namespace SkySwordKill.Next
         
         public static void StartDialogEvent(string eventID,DialogEnvironment env = null)
         {
-            curEnv = env ?? new DialogEnvironment();
-            RunDialogEvent(eventID,0);
-        }
-
-        public static void StartTestDialogEvent(string dialog)
-        {
-            if (!DialogDataDic.TryGetValue("next_test", out DialogEventData data))
-            {
-                data = new DialogEventData
-                {
-                    id = "next_test",
-                    option = new string[0],
-                    character = new Dictionary<string, int>()
-                };
-                DialogDataDic["next_test"] = data;
-            }
-            data.dialog = dialog.Split('\n').Where(str=>!string.IsNullOrWhiteSpace(str)).ToArray();
-            StartDialogEvent("next_test");
-        }
-
-        public static void RunNextDialogEvent()
-        {
-            RunDialogEvent(curEnv.curDialogID,curEnv.curDialogIndex + 1);
-        }
-
-        public static void RunDialogEvent(string eventID, int index)
-        {
-            curEnv.curDialogID = eventID;
-            curEnv.curDialogIndex = index;
-            
             if (!DialogDataDic.TryGetValue(eventID, out var data))
             {
                 Main.LogWarning($"对话事件 {eventID} 不存在。");
                 return;
             }
 
-            if (index < 0 || index >= data.dialog.Length)
+            StartDialogEvent(data,env);
+        }
+        
+        public static void StartTestDialogEvent(string dialog,DialogEnvironment env = null)
+        {
+            var data = new DialogEventData()
             {
-                Main.LogWarning($"对话事件 {eventID} 超出索引。");
-                return;
-            }
-
-            var haveOption = false;
-            var jumpEvent = string.Empty;
-
-            var command = data.GetDialogCommand(index,curEnv);
+                ID = "next_test",
+                Option = new string[0],
+                Character = new Dictionary<string, int>()
+            };
             
-            if (command.isEnd)
-            {
-                ClearMenu();
-                var optionCommands = data.GetOptionCommands();
-                
-                foreach (var optionCommand in optionCommands)
-                {
-                    if (optionCommand.option == "Default")
-                    {
-                        jumpEvent = optionCommand.tagEvent;
-                        continue;
-                    }
-                    try
-                    {
-                        if (CheckCondition(optionCommand.condition,curEnv))
-                        {
-                            haveOption = true;
-                            AddMenu(optionCommand.option, () =>
-                            {
-                                if(!string.IsNullOrEmpty(optionCommand.tagEvent))
-                                    StartDialogEvent(optionCommand.tagEvent);
-                            });
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Main.LogError($"事件 [{eventID}] 选项 [{optionCommand.option}]" +
-                                      $" {optionCommand.condition} 触发判断失败！请检查表达式是否正确！");
-                        Main.LogError(e);
-                    }
-                }
-            }
+            data.Dialog = dialog.Split('\n').Where(str=>!string.IsNullOrWhiteSpace(str)).ToArray();
+            StartDialogEvent(data,env);
+        }
 
-            if (_registerEvents.TryGetValue(command.command, out var dialogEvent))
+        public static bool RunDialogEventOption(DialogOptionCommand[] optionCommands,DialogEnvironment env ,ref string jumpEvent)
+        {
+            ClearMenu();
+            var haveOption = false;
+            foreach (var optionCommand in optionCommands)
             {
+                // 如果存在默认跳转事件，赋值
+                if (optionCommand.Option == "Default")
+                {
+                    jumpEvent = optionCommand.TagEvent;
+                    continue;
+                }
                 try
                 {
-                    dialogEvent.Execute(command,curEnv, () =>
+                    if (CheckCondition(optionCommand.Condition,env))
                     {
-                        if(!command.isEnd)
-                            RunNextDialogEvent();
-                        else if(!haveOption && !string.IsNullOrEmpty(jumpEvent))
-                            StartDialogEvent(jumpEvent);
-                    });
+                        haveOption = true;
+                        AddMenu(optionCommand.Option, () =>
+                        {
+                            if(!string.IsNullOrEmpty(optionCommand.TagEvent))
+                                StartDialogEvent(optionCommand.TagEvent);
+                        });
+                    }
                 }
                 catch (Exception e)
                 {
-                    Main.LogError(e);
-                    Main.LogError($"事件 [{eventID}] 第 {index} 行指令 {command.rawCommand} 执行错误");
+                    throw new ArgumentException($"选项 [{optionCommand.Option}]" +
+                                                $" {optionCommand.Condition} 触发判断失败！请检查表达式是否正确！", e);
+                }
+            }
+
+            return haveOption;
+        }
+
+        public static void RunDialogEventCommand(DialogCommand command,DialogEnvironment environment,
+            Action callback = null)
+        {
+            if (_registerEvents.TryGetValue(command.Command, out var dialogEvent))
+            {
+                try
+                {
+                    dialogEvent.Execute(command, environment, () => callback?.Invoke());
+                }
+                catch (Exception e)
+                {
+                    throw new ArgumentNullException($"指令 {command.RawCommand} 执行错误！",e);
                 }
             }
             else
             {
-                Main.LogError($"指令 {command.command} 不存在！");
-                Main.LogError($"事件 [{eventID}] 第 {index} 行指令 {command.rawCommand} 执行错误");
+                throw new ArgumentNullException($"指令 {command.Command} 不存在！");
             }
         }
 
@@ -257,13 +234,139 @@ namespace SkySwordKill.Next
             DialogDataDic.Clear();
             DialogTriggerDataDic.Clear();
             TmpCharacter.Clear();
+            CurEvaluator = null;
+            IsRunningEvent = false;
+        }
+
+        public static void CancelEvent()
+        {
+            IsRunningEvent = false;
+            EventQueue.Clear();
+        }
+        
+        private static void CompleteEvent()
+        {
+            if (EventQueue.Count > 0)
+            {
+                var rtEvent = EventQueue.Dequeue();
+                RunDialogEvent(rtEvent,0);
+            }
+            else
+            {
+                IsRunningEvent = false;
+            }
+        }
+        
+        public static void SwitchDialogEvent(string eventId,DialogEnvironment env = null)
+        {
+            if (!DialogDataDic.TryGetValue(eventId, out var data))
+            {
+                Main.LogWarning($"对话事件 {eventId} 不存在。");
+                CompleteEvent();
+            }
+
+            SwitchDialogEvent(data, env);
+        }
+        
+        /// <summary>
+        /// 事件开始入口，事件进入队列执行
+        /// </summary>
+        /// <param name="eventData"></param>
+        /// <param name="env"></param>
+        public static void StartDialogEvent(DialogEventData eventData,DialogEnvironment env = null)
+        {
+            var getEnv = env == null ? new DialogEnvironment() : env.Clone();
+            var rtEvent = new DialogEventRtData()
+            {
+                BindEventData = eventData,
+                BindEnv = getEnv,
+            };
+            if (!IsRunningEvent)
+            {
+                RunDialogEvent(rtEvent,0);
+            }
+            else
+            {
+                EventQueue.Enqueue(rtEvent);
+            }
+        }
+
+        /// <summary>
+        /// 事件开始入口，替换当前事件
+        /// </summary>
+        /// <param name="eventData"></param>
+        /// <param name="env"></param>
+        public static void SwitchDialogEvent(DialogEventData eventData,DialogEnvironment env = null)
+        {
+            var getEnv = env == null ? new DialogEnvironment() : env.Clone();
+            var rtEvent = new DialogEventRtData()
+            {
+                BindEventData = eventData,
+                BindEnv = getEnv,
+            };
+            RunDialogEvent(rtEvent,0);
         }
 
         #endregion
 
         #region 私有方法
 
+        private static void RunDialogEvent(DialogEventRtData rtEvent, int index)
+        {
+            CurEnv = rtEvent.BindEnv;
+            var eventData = rtEvent.BindEventData;
+            IsRunningEvent = true;
+            
+            CurEnv.curDialogID = eventData.ID;
+            CurEnv.curDialogIndex = index;
 
+            if (index < 0 || index >= eventData.Dialog.Length)
+            {
+                Main.LogWarning($"对话事件 {CurEnv.curDialogID} 超出索引。");
+                return;
+            }
+
+            var haveOption = false;
+            var jumpEvent = string.Empty;
+
+            var command = eventData.GetDialogCommand(index,CurEnv);
+            
+            if (command.IsEnd)
+            {
+                var optionCommands = eventData.GetOptionCommands();
+                try
+                {
+                    haveOption = RunDialogEventOption(optionCommands, CurEnv, ref jumpEvent);
+                }
+                catch (Exception e)
+                {
+                    Main.LogError($"事件 [{CurEnv.curDialogID}] 选项判断出错，已清空选项。");
+                    Main.LogError(e);
+                    ClearMenu();
+                    haveOption = false;
+                }
+            }
+
+            try
+            {
+                RunDialogEventCommand(command, CurEnv, () =>
+                {
+                    if (!command.IsEnd)
+                        RunDialogEvent(rtEvent, index + 1);
+                    // 当不存在选项且有默认跳转事件时，进行跳转
+                    else if (!haveOption && !string.IsNullOrEmpty(jumpEvent))
+                        SwitchDialogEvent(jumpEvent);
+                    else
+                        CompleteEvent();
+                });
+            }
+            catch (Exception e)
+            {
+                Main.LogError($"事件 [{CurEnv.curDialogID}] 第 {index} 行指令 {command.RawCommand} 执行错误");
+                Main.LogError(e);
+                CancelEvent();
+            }
+        }
 
         #endregion
 

@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using KBEngine;
 
 namespace SkySwordKill.Next
 {
+    /// <summary>
+    /// 脚本环境类
+    /// 该类中的变量与函数不可轻易改名
+    /// 其对应 运行时脚本 中的变量与方法
+    /// </summary>
     public class DialogEnvironment
     {
         #region 字段
@@ -26,6 +32,8 @@ namespace SkySwordKill.Next
         public string[] fightTags;
         public string input = string.Empty;
 
+        public Dictionary<string, int> tmpArgs = new Dictionary<string, int>();
+
         #endregion
 
         #region 属性
@@ -46,7 +54,31 @@ namespace SkySwordKill.Next
         {
             player = Tools.instance.getPlayer();
         }
+        
+        public DialogEnvironment Clone()
+        {
+            var newEnv = new DialogEnvironment();
 
+            // 反射复制字段
+            // TODO: 性能较低，待改进
+            foreach (var fieldInfo in typeof(DialogEnvironment).GetFields())
+            {
+                fieldInfo.SetValue(newEnv,fieldInfo.GetValue(this));
+            }
+
+            return newEnv;
+        }
+
+        public int GetArg(string argKey)
+        {
+            if (tmpArgs.TryGetValue(argKey, out var value))
+            {
+                return value;
+            }
+
+            return 0;
+        }
+        
         public int Random(int minInclude, int maxExclude)
         {
             return UnityEngine.Random.Range(minInclude, maxExclude);
@@ -175,7 +207,5 @@ namespace SkySwordKill.Next
 
 
         #endregion
-
-
     }
 }

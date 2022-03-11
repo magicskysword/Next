@@ -52,7 +52,10 @@ UnityEngine.UnityWebRequestTextureModule.dll
 UnityEngine.UnityWebRequestWWWModule.dll
 ```
 
-添加完后直接Build即可，将Build出来的 `Next.Dll` 文件 、 `NextLib` 文件夹 与 `NextConfig` 文件夹 置入 `觅长生\64\BepInEx\plugins` 目录 即可
+添加完后直接Build即可，将Build出来的 `Next.Dll` 文件 、 `NextLib` 文件夹 与 `NextConfig` 文件夹 置入 `觅长生\BepInEx\plugins` 目录 即可
+
+## 基于Next开发Mod
+Next插件范例：https://github.com/magicskysword/NextExamplePlugin
 
 ## 使用库
 [codingseb/ExpressionEvaluator](https://github.com/codingseb/ExpressionEvaluator) 用于事件与触发器的条件判断

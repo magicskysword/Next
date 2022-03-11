@@ -4,7 +4,7 @@ using YSGame;
 
 namespace SkySwordKill.Next.DialogEvent
 {
-    [DialogEvent("PlayMusic")]
+    [DialogEvent("PlayEffect")]
     public class PlayEffect : IDialogEvent
     {
         public void Execute(DialogCommand command, DialogEnvironment env, Action callback)

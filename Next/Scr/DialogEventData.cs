@@ -2,67 +2,111 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace SkySwordKill.Next
 {
     public class DialogCommand
     {
-        public string command;
-        public string[] paramList;
-        
-        public string charID = string.Empty;
-        public string say = string.Empty;
+        public string Command { get; set; } 
+        public string[] ParamList { get; set; } 
 
-        public DialogEventData bindEventData;
+        public DialogEventData BindEventData { get; set; } 
 
-        public bool isEnd;
+        public bool IsEnd { get; set; } 
 
-        public string rawCommand;
+        public string RawCommand { get; set; } 
+
+        public DialogCommand()
+        {
+            
+        }
+
+        public DialogCommand(string commandStr,DialogEventData bindEventData,DialogEnvironment env,bool isEnd)
+        {
+            RawCommand = commandStr;
+            BindEventData = bindEventData;
+            IsEnd = isEnd;
+            var evaluateText = DialogAnalysis.AnalysisInlineScript(RawCommand, env);
+            var strArr = evaluateText.Split('*');
+            var posSharp = evaluateText.IndexOf('#');
+            var posStar = evaluateText.IndexOf('*');
+            
+            // 确保第一个星号在井号前面
+            if (strArr.Length >= 2 && (posStar < posSharp || posSharp == -1))
+            {
+                Command = strArr[0];
+                var body = string.Join("*", strArr.Where((s, i) => i > 0));
+                ParamList = body.Split('#');
+            }
+            else
+            {
+                Command = "";
+                var body = strArr[0];
+                ParamList = body.Split('#');
+            }
+        }
 
         public int GetInt(int index,int defaultValue = 0)
         {
-            if (index >= paramList.Length)
+            if (index >= ParamList.Length)
                 return defaultValue;
-            return Convert.ToInt32(paramList[index]);
+            return Convert.ToInt32(ParamList[index]);
         }
         
         public float GetFloat(int index,float defaultValue = 0)
         {
-            if (index >= paramList.Length)
+            if (index >= ParamList.Length)
                 return defaultValue;
-            return Convert.ToSingle(paramList[index]);
+            return Convert.ToSingle(ParamList[index]);
         }
         
         public bool GetBool(int index,bool defaultValue = false)
         {
-            if (index >= paramList.Length)
+            if (index >= ParamList.Length)
                 return defaultValue;
-            return Convert.ToInt32(paramList[index]) != 0;
+            return Convert.ToInt32(ParamList[index]) != 0;
         }
         
         public string GetStr(int index,string defaultValue = "")
         {
-            if (index >= paramList.Length)
+            if (index >= ParamList.Length)
                 return defaultValue;
-            return paramList[index];
+            return ParamList[index];
         }
     }
 
     public class DialogOptionCommand
     {
-        public string option;
-        public string tagEvent;
-        public string condition;
+        public string Option { get; set; }
+        public string TagEvent { get; set; }
+        public string Condition { get; set; } 
+
+        public DialogOptionCommand()
+        {
+            
+        }
+
+        public DialogOptionCommand(string optionStr)
+        {
+            var body = optionStr.Split('#');
+            Option = body[0];
+            TagEvent = body.Length >= 2 ? body[1] : "";
+            Condition = body.Length >= 3 ? body[2] : "";
+        }
     }
     
     public class DialogEventData
     {
         #region 字段
-
-        public string id;
-        public Dictionary<string, int> character;
-        public string[] dialog;
-        public string[] option;
+        [JsonProperty(PropertyName = "id")]
+        public string ID { get; set; } 
+        [JsonProperty(PropertyName = "character")]
+        public Dictionary<string, int> Character { get; set; } 
+        [JsonProperty(PropertyName = "dialog")]
+        public string[] Dialog { get; set; } 
+        [JsonProperty(PropertyName = "option")]
+        public string[] Option { get; set; } 
 
         #endregion
 
@@ -82,50 +126,20 @@ namespace SkySwordKill.Next
 
         public DialogCommand GetDialogCommand(int index,DialogEnvironment env)
         {
-            var rawText = dialog[index];
-            
-            var command = new DialogCommand();
-            command.bindEventData = this;
-            command.isEnd = index == dialog.Length - 1;
-            command.rawCommand = rawText;
-            var evaluateText = DialogAnalysis.AnalysisInlineScript(rawText, env);
-            
-            var strArr = evaluateText.Split('*');
-            var posSharp = evaluateText.IndexOf('#');
-            var posStar = evaluateText.IndexOf('*');
-            
-            // 确保第一个星号在井号前面
-            if (strArr.Length >= 2 && (posStar < posSharp || posSharp == -1))
-            {
-                command.command = strArr[0];
-                var body = string.Join("*", strArr.Where((s, i) => i > 0));
-                command.paramList = body.Split('#');
-            }
-            else
-            {
-                command.command = "";
-                var body = strArr[0];
-                command.paramList = body.Split('#');
-            }
-            if (command.paramList.Length >= 2)
-            {
-                command.charID = command.paramList[0];
-                command.say = command.paramList[1];
-            }
-            
+            var rawText = Dialog[index];
+
+            var isEnd = index == Dialog.Length - 1;
+            var command = new DialogCommand(rawText, this, env, isEnd);
+
             return command;
         }
 
         public DialogOptionCommand[] GetOptionCommands()
         {
-            var optionCommands = new DialogOptionCommand[option.Length];
+            var optionCommands = new DialogOptionCommand[Option.Length];
             for (int i = 0; i < optionCommands.Length; i++)
             {
-                var body = option[i].Split('#');
-                var curOption = new DialogOptionCommand();
-                curOption.option = body[0];
-                curOption.tagEvent = body.Length >= 2 ? body[1] : "";
-                curOption.condition = body.Length >= 3 ? body[2] : "";
+                var curOption = new DialogOptionCommand(Option[i]);
                 optionCommands[i] = curOption;
             }
 
@@ -141,5 +155,11 @@ namespace SkySwordKill.Next
         #endregion
 
 
+    }
+
+    public class DialogEventRtData
+    {
+        public DialogEventData BindEventData { get; set; }
+        public DialogEnvironment BindEnv { get; set; }
     }
 }

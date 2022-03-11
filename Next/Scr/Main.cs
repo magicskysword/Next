@@ -21,7 +21,7 @@ namespace SkySwordKill.Next
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.3.5";
+        public const string MOD_VERSION = "0.3.6";
         
         public static Lazy<string> pathModsDir =
             new Lazy<string>(() => Utility.CombinePaths(
@@ -97,6 +97,9 @@ namespace SkySwordKill.Next
             // 根据设置显示窗口
             // show window by config
             _isWinOpen = openInStart.Value;
+            
+            // ModManager 启动由 JsonDataPatch 进行引导
+            // ModManager startup is booted by JsonDataPatch
         }
 
         private void LoadDefaultLanguage()

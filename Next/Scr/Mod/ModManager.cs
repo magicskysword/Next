@@ -248,13 +248,16 @@ namespace SkySwordKill.Next.Mod
                 }
             }
             
+            // 重建Buff缓存
+            jsonInstance.Buff.Clear();
+            jsonInstance.InitBuff();
+
             // 检查数据
             if (!CheckData.Check())
             {
                 Main.LogError(CheckData.log);
             }
             
-
             Main.Instance.resourcesManager.StartLoadAsset();
         }
         
@@ -685,12 +688,12 @@ namespace SkySwordKill.Next.Mod
 
         public static void TryAddEventData(DialogEventData dialogEventData)
         {
-            DialogAnalysis.DialogDataDic[dialogEventData.id] = dialogEventData;
+            DialogAnalysis.DialogDataDic[dialogEventData.ID] = dialogEventData;
         }
         
         public static void TryAddTriggerData(DialogTriggerData dialogTriggerData)
         {
-            DialogAnalysis.DialogTriggerDataDic[dialogTriggerData.id] = dialogTriggerData;
+            DialogAnalysis.DialogTriggerDataDic[dialogTriggerData.ID] = dialogTriggerData;
         }
 
         public static void ModMoveUp(ref int curIndex)

@@ -46,6 +46,9 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Csoft_005Csteam_005Csteamapps_005Ccommon_005C_89C5_957F_751F_005C64_005C_89C5_957F_751F_005FData_005CManaged_005CUnityEngine_002EUnityWebRequestTextureModule_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Csoft_005Csteam_005Csteamapps_005Ccommon_005C_89C5_957F_751F_005C64_005C_89C5_957F_751F_005FData_005CManaged_005CUnityEngine_002EUnityWebRequestWWWModule_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Csoft_005Csteam_005Csteamapps_005Ccommon_005C_9B3C_8C37_516B_8352_005CMelonLoader_005CManaged_005CUnityEngine_002EImageConversionModule_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
+  &lt;Assembly Path="D:\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\Assembly-CSharp.dll" /&gt;&#xD;
+&lt;/AssemblyExplorer&gt;</s:String>
 	
 	
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/Initialized/@EntryValue">True</s:Boolean></wpf:ResourceDictionary>

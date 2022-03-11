@@ -50,7 +50,10 @@ UnityEngine.UnityWebRequestTextureModule.dll
 UnityEngine.UnityWebRequestWWWModule.dll
 ```
 
-After adding them, Build them directly and place the `Next.Dll` file, `NextLib` and `NextConfig` folders into the `觅长生\64\BepInEx\plugins` directory
+After adding them, Build them directly and place the `Next.Dll` file, `NextLib` and `NextConfig` folders into the `觅长生\BepInEx\plugins` directory
+
+## Develop mods based on Next
+Next Plugin Example：https://github.com/magicskysword/NextExamplePlugin
 
 ## Use Repo
 [codingseb/ExpressionEvaluator](https://github.com/codingseb/ExpressionEvaluator) Conditions for events and triggers

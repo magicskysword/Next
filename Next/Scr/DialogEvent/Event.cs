@@ -11,7 +11,7 @@ namespace SkySwordKill.Next.DialogEvent
             var condition = command.GetStr(1);
             if (string.IsNullOrWhiteSpace(condition) || condition.Equals("true",StringComparison.OrdinalIgnoreCase))
             {
-                DialogAnalysis.StartDialogEvent(id);
+                DialogAnalysis.SwitchDialogEvent(id);
                 return;
             }
             callback?.Invoke();

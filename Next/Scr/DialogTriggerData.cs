@@ -1,14 +1,22 @@
-﻿namespace SkySwordKill.Next
+﻿using Newtonsoft.Json;
+
+namespace SkySwordKill.Next
 {
     public class DialogTriggerData
     {
         #region 字段
-
-        public string id = string.Empty;
-        public string type = string.Empty;
-        public string condition = string.Empty;
-        public string triggerEvent = string.Empty;
-        public string bindData = string.Empty;
+        [JsonProperty(PropertyName = "id")]
+        public string ID { get; set; } = string.Empty;
+        [JsonProperty(PropertyName = "type")]
+        public string Type { get; set; } = string.Empty;
+        [JsonProperty(PropertyName = "condition")]
+        public string Condition { get; set; } = string.Empty;
+        [JsonProperty(PropertyName = "triggerEvent")]
+        public string TriggerEvent { get; set; } = string.Empty;
+        [JsonProperty(PropertyName = "bindData")]
+        public string BindData { get; set; } = string.Empty;
+        [JsonProperty(PropertyName = "priority")]
+        public int Priority { get; set; }  = 0;
 
         #endregion
 

@@ -8,10 +8,10 @@ namespace SkySwordKill.Next.Mod
 {
     public class ModConfig
     {
-        public string Name { get; set; }
-        public string Author { get; set; }
-        public string Version { get; set; }
-        public string Description { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Author { get; set; } = string.Empty;
+        public string Version { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
         [JsonIgnore]
         public ModState State { get; set; }
         [JsonIgnore]

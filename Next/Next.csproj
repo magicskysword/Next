@@ -152,6 +152,7 @@
     <Compile Include="Scr\DialogEvent\DialogEventAttribute.cs" />
     <Compile Include="Scr\DialogEvent\Event.cs" />
     <Compile Include="Scr\DialogEvent\IDialogEvent.cs" />
+    <Compile Include="Scr\DialogEvent\If.cs" />
     <Compile Include="Scr\DialogEvent\Input.cs" />
     <Compile Include="Scr\DialogEvent\LearnSkill.cs" />
     <Compile Include="Scr\DialogEvent\LearnStaticSkill.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Scr\DialogEvent\Nothing.cs" />
     <Compile Include="Scr\DialogEvent\PlayEffect.cs" />
     <Compile Include="Scr\DialogEvent\PlayMusic.cs" />
+    <Compile Include="Scr\DialogEvent\Print.cs" />
     <Compile Include="Scr\DialogEvent\RemoveCongenitalBuff.cs" />
     <Compile Include="Scr\DialogEvent\RemoveItem.cs" />
     <Compile Include="Scr\DialogEvent\RemoveRelation.cs" />
@@ -173,6 +175,7 @@
     <Compile Include="Scr\DialogEvent\StartFight.cs" />
     <Compile Include="Scr\DialogEvent\UseItem.cs" />
     <Compile Include="Scr\DialogTriggerData.cs" />
+    <Compile Include="Scr\DialogTrigger\OnEnterGame.cs" />
     <Compile Include="Scr\DialogTrigger\OnFightStart.cs" />
     <Compile Include="Scr\DialogTrigger\OnTalk.cs" />
     <Compile Include="Scr\DialogTrigger\OnQiYuClose.cs" />
