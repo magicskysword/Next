@@ -9,6 +9,7 @@ namespace SkySwordKill.Next.DialogEvent
         {
             var deathType = (DeathType)command.GetInt(0, 1);
             UIDeath.Inst.Show(deathType);
+            DialogAnalysis.CancelEvent();
         }
     }
 }

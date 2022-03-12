@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -58,7 +59,7 @@ namespace SkySwordKill.Next
         public static Queue<DialogEventRtData> EventQueue { get; set; } = new Queue<DialogEventRtData>();
 
         private static ExpressionEvaluator CurEvaluator  { get; set; }
-        private static bool IsRunningEvent { get; set; } = false;
+        public static bool IsRunningEvent { get;private set; } = false;
 
         #endregion
 
@@ -184,7 +185,9 @@ namespace SkySwordKill.Next
                         AddMenu(optionCommand.Option, () =>
                         {
                             if(!string.IsNullOrEmpty(optionCommand.TagEvent))
-                                StartDialogEvent(optionCommand.TagEvent);
+                                SwitchDialogEvent(optionCommand.TagEvent);
+                            else
+                                CompleteEvent();
                         });
                     }
                 }
@@ -323,13 +326,24 @@ namespace SkySwordKill.Next
             if (index < 0 || index >= eventData.Dialog.Length)
             {
                 Main.LogWarning($"对话事件 {CurEnv.curDialogID} 超出索引。");
+                CompleteEvent();
                 return;
             }
 
             var haveOption = false;
             var jumpEvent = string.Empty;
-
-            var command = eventData.GetDialogCommand(index,CurEnv);
+            DialogCommand command;
+            try
+            {
+                command = eventData.GetDialogCommand(index,CurEnv);
+            }
+            catch (Exception e)
+            {
+                Main.LogError($"事件 [{CurEnv.curDialogID}] 第 {index} 行指令 {eventData.Dialog[index]} 解析错误");
+                Main.LogError(e);
+                CancelEvent();
+                return;
+            }
             
             if (command.IsEnd)
             {
@@ -343,28 +357,40 @@ namespace SkySwordKill.Next
                     Main.LogError($"事件 [{CurEnv.curDialogID}] 选项判断出错，已清空选项。");
                     Main.LogError(e);
                     ClearMenu();
-                    haveOption = false;
+                    CancelEvent();
+                    return;
                 }
             }
 
             try
             {
-                RunDialogEventCommand(command, CurEnv, () =>
+                if (haveOption)
                 {
-                    if (!command.IsEnd)
-                        RunDialogEvent(rtEvent, index + 1);
-                    // 当不存在选项且有默认跳转事件时，进行跳转
-                    else if (!haveOption && !string.IsNullOrEmpty(jumpEvent))
-                        SwitchDialogEvent(jumpEvent);
-                    else
-                        CompleteEvent();
-                });
+                    // 有选项不执行回调
+                    RunDialogEventCommand(command, CurEnv, () => { });
+                }
+                else
+                {
+                    RunDialogEventCommand(command, CurEnv, () =>
+                    {
+                        if (!command.IsEnd)
+                            RunDialogEvent(rtEvent, index + 1);
+                        // 当不存在选项且有默认跳转事件时，进行跳转
+                        else if (!haveOption && !string.IsNullOrEmpty(jumpEvent))
+                            SwitchDialogEvent(jumpEvent);
+                        else
+                            CompleteEvent();
+                    });
+                }
+                
+                
             }
             catch (Exception e)
             {
                 Main.LogError($"事件 [{CurEnv.curDialogID}] 第 {index} 行指令 {command.RawCommand} 执行错误");
                 Main.LogError(e);
                 CancelEvent();
+                return;
             }
         }
 

@@ -74,6 +74,7 @@ namespace SkySwordKill.Next.DialogEvent
                 ResetEventFight();
                 throw;
             }
+            DialogAnalysis.CancelEvent();
         }
 
         public static void SetEventFight(string victory, string defeat, string[] tags)
