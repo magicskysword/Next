@@ -145,6 +145,8 @@ namespace SkySwordKill.Next.DialogEvent
                         // 直接跳转 跳转到大地图
                         if (sceneName.Equals(Tools.jumpToName))
                         {
+                            Tools.instance.CanShowFightUI = 0;
+                            
                             var VictoryEvent = DialogAnalysis.GetStr("Fight", "VictoryEvent");
                             var DefeatEvent = DialogAnalysis.GetStr("Fight", "DefeatEvent");
                             var IsVictory = DialogAnalysis.GetInt("Fight", "IsVictory") == 1;
