@@ -479,6 +479,17 @@ namespace SkySwordKill.Next
             {
                 GUILayout.BeginHorizontal();
                 {
+                    GUILayout.Label($"当前状态：{(DialogAnalysis.IsRunningEvent ? "运行中" : "未运行")} 当前队列事件数量：{DialogAnalysis.EventQueue.Count}");
+                    if (GUILayout.Button("重置事件状态"))
+                    {
+                        DialogAnalysis.CancelEvent();
+                    }
+                }
+                GUILayout.EndHorizontal();
+                
+                
+                GUILayout.BeginHorizontal();
+                {
                     GUILayout.Label("DramaDebug.DramaID".I18N());
                     inputEvent = GUILayout.TextArea(inputEvent);
                     if (GUILayout.Button("DramaDebug.Run".I18N()))
