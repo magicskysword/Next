@@ -745,28 +745,46 @@ namespace SkySwordKill.Next
         {
             GUILayout.Label("Misc.Title".I18N(),labelTitleStyle);
             
-            GUILayout.BeginVertical(GUILayout.MaxWidth(winRect.width * 0.4f));
+            GUILayout.BeginHorizontal();
             {
-                GUILayout.Label("Misc.PlayerFace".I18N());
-                inputPlayerFaceJson = GUILayout.TextArea(inputPlayerFaceJson,
-                    GUILayout.MinHeight(winRect.height * 0.4f));
-                GUILayout.BeginHorizontal();
+                GUILayout.BeginVertical(GUILayout.MaxWidth(winRect.width * 0.4f));
                 {
-                    if (GUILayout.Button($"Misc.ExportPlayerFace".I18N()))
+                    GUILayout.Label("Misc.PlayerFace".I18N());
+                    inputPlayerFaceJson = GUILayout.TextArea(inputPlayerFaceJson,
+                        GUILayout.MinHeight(winRect.height * 0.4f));
+                    GUILayout.BeginHorizontal();
                     {
-                        var faceInfo = DialogAnalysis.GetNpcFaceInfo(1);
-                        var jsonData = JObject.FromObject(faceInfo);
-                        inputPlayerFaceJson = jsonData.ToString(Formatting.Indented);
+                        if (GUILayout.Button($"Misc.ExportPlayerFace".I18N()))
+                        {
+                            var faceInfo = DialogAnalysis.GetNpcFaceInfo(1);
+                            var jsonData = JObject.FromObject(faceInfo);
+                            inputPlayerFaceJson = jsonData.ToString(Formatting.Indented);
+                        }
+                        if (GUILayout.Button($"Misc.ImportPlayerFace".I18N()))
+                        {
+                            var faceInfo = JObject.Parse(inputPlayerFaceJson).ToObject<CustomStaticFaceInfo>();
+                            DialogAnalysis.SetPlayerFaceData(faceInfo);
+                        }
                     }
-                    if (GUILayout.Button($"Misc.ImportPlayerFace".I18N()))
-                    {
-                        var faceInfo = JObject.Parse(inputPlayerFaceJson).ToObject<CustomStaticFaceInfo>();
-                        DialogAnalysis.SetPlayerFaceData(faceInfo);
-                    }
+                    GUILayout.EndHorizontal();
                 }
-                GUILayout.EndHorizontal();
+                GUILayout.EndVertical();
+                
+                GUILayout.BeginVertical();
+                {
+                    GUILayout.BeginHorizontal();
+                    {
+                        if (GUILayout.Button("重载Lua虚拟机"))
+                        {
+                            Main.Instance.luaManager.Clear();
+                            DialogAnalysis.CancelEvent();
+                        }
+                    }
+                    GUILayout.EndHorizontal();
+                }
+                GUILayout.EndVertical();
             }
-            GUILayout.EndVertical();
+            GUILayout.EndHorizontal();
         }
 
         private void SearchNpc(string searchFilter)

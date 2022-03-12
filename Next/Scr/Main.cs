@@ -11,6 +11,7 @@ using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
 using SkySwordKill.Next.Extension;
+using SkySwordKill.Next.Lua;
 using SkySwordKill.Next.Mod;
 using SkySwordKill.Next.Patch;
 using SkySwordKill.Next.XiaoYeGUI;
@@ -39,6 +40,10 @@ namespace SkySwordKill.Next
             new Lazy<string>(() => Utility.CombinePaths(
                 pathModsDir.Value, "Base"));
         
+        public static Lazy<string> pathLuaLibDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                pathLibraryDir.Value, "Lua"));
+        
         public static Lazy<string> pathLanguageDir =
             new Lazy<string>(() => Utility.CombinePaths(
                 pathConfigDir.Value, "language"));
@@ -59,6 +64,7 @@ namespace SkySwordKill.Next
         public NextModSetting nextModSetting;
 
         public ResourcesManager resourcesManager;
+        public LuaManager luaManager;
 
         private void Awake()
         {
@@ -77,8 +83,13 @@ namespace SkySwordKill.Next
                 "");
             debugMode = Config.CreateConfig("Debug.Mode", "Debug Mode", false,
                 "");
+
+            LuaManager.Init();
             
             resourcesManager = gameObject.AddComponent<ResourcesManager>();
+            luaManager = new LuaManager();
+
+            luaManager.DoString(@"print(""Hello World"")");
 
             new Harmony("skyswordkill.plugin.Next").PatchAll();
 

@@ -47,6 +47,15 @@ namespace SkySwordKill.Next
             }
         }
 
+        public DialogCommand(string commandHead, string[] paramList, DialogEventData bindEventData,bool isEnd)
+        {
+            RawCommand = $"Call {commandHead}()";
+            Command = commandHead;
+            ParamList = paramList;
+            BindEventData = bindEventData;
+            IsEnd = isEnd;
+        }
+
         public int GetInt(int index,int defaultValue = 0)
         {
             if (index >= ParamList.Length)
