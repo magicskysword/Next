@@ -165,6 +165,14 @@ namespace SkySwordKill.Next
             StartDialogEvent(data,env);
         }
 
+        /// <summary>
+        /// 显示对话跳转选项
+        /// </summary>
+        /// <param name="optionCommands"></param>
+        /// <param name="env"></param>
+        /// <param name="jumpEvent"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public static bool RunDialogEventOption(DialogOptionCommand[] optionCommands,DialogEnvironment env ,ref string jumpEvent)
         {
             ClearMenu();
@@ -201,6 +209,13 @@ namespace SkySwordKill.Next
             return haveOption;
         }
 
+        /// <summary>
+        /// 运行剧情指令
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="environment"></param>
+        /// <param name="callback"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public static void RunDialogEventCommand(DialogCommand command,DialogEnvironment environment,
             Action callback = null)
         {
@@ -208,7 +223,10 @@ namespace SkySwordKill.Next
             {
                 try
                 {
-                    dialogEvent.Execute(command, environment, () => callback?.Invoke());
+                    dialogEvent.Execute(command, environment, () =>
+                    {
+                        callback?.Invoke();
+                    });
                 }
                 catch (Exception e)
                 {
@@ -219,6 +237,16 @@ namespace SkySwordKill.Next
             {
                 throw new ArgumentNullException($"指令 {command.Command} 不存在！");
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public static bool ResultIsNullOrTrue(string condition)
+        {
+            return string.IsNullOrWhiteSpace(condition) || condition.Equals("true", StringComparison.OrdinalIgnoreCase);
         }
 
         public static bool CheckCondition(string condition, DialogEnvironment env)

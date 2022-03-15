@@ -2,6 +2,8 @@
 
 Next Mod is a Mod based on the BepinEx framework. It provides the ability to change data incrementally, add story and trigger to the game
 
+github url：https://github.com/magicskysword/Next
+
 ## Function
 You can write JSON files to insert additional functionality and data into the game.
 
@@ -59,6 +61,11 @@ Next Plugin Example：https://github.com/magicskysword/NextExamplePlugin
 [codingseb/ExpressionEvaluator](https://github.com/codingseb/ExpressionEvaluator) Conditions for events and triggers
 
 [xiaoye97/VRoidXYTool](https://github.com/xiaoye97/VRoidXYTool) The GUI library is used
+
+[Tencent/xLua](https://github.com/Tencent/xLua) Emitted lua script
+
+[rxi/json.lua](https://github.com/rxi/json.lua) lua json lib
+
 
 ## Related Repo
 [BepinEx](https://github.com/BepInEx/BepInEx) this mod based BepinEx

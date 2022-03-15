@@ -8,7 +8,7 @@ namespace SkySwordKill.Next.DialogEvent
         public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
         {
             var condition = command.GetStr(0);
-            if (string.IsNullOrWhiteSpace(condition) || condition.Equals("true",StringComparison.OrdinalIgnoreCase))
+            if (DialogAnalysis.ResultIsNullOrTrue(condition))
             {
                 var newCommand = string.Join("#", command.ParamList, 1, command.ParamList.Length - 1);
                 var newCommandData = new DialogCommand(newCommand, command.BindEventData, env, command.IsEnd);

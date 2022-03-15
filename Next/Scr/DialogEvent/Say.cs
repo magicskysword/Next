@@ -10,12 +10,11 @@ namespace SkySwordKill.Next.DialogEvent
     {
         public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
         {
-            int charNum;
             var charId = command.GetStr(0);
             var say = command.GetStr(1);
 
             // 处理对话角色ID
-            if (!command.BindEventData.Character.TryGetValue(charId, out charNum))
+            if (!command.BindEventData.Character.TryGetValue(charId, out var charNum))
             {
                 if (!DialogAnalysis.TmpCharacter.TryGetValue(charId, out charNum))
                 {

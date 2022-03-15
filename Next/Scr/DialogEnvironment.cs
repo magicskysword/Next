@@ -32,6 +32,8 @@ namespace SkySwordKill.Next
         public string[] fightTags;
         public string input = string.Empty;
 
+        public int optionID;
+
         public Dictionary<string, int> tmpArgs = new Dictionary<string, int>();
 
         #endregion
@@ -120,12 +122,12 @@ namespace SkySwordKill.Next
 
         public bool HasSkill(int skillID)
         {
-            return PlayerEx.Player.hasSkillList.Find(skill => skill.itemId == skillID) != null;
+            return player.hasSkillList.Find(skill => skill.itemId == skillID) != null;
         }
         
         public bool HasStaticSkill(int skillID)
         {
-            return PlayerEx.Player.hasStaticSkillList.Find(skill => skill.itemId == skillID) != null;
+            return player.hasStaticSkillList.Find(skill => skill.itemId == skillID) != null;
         }
         
         public bool HasTrainSkill(int skillID)
