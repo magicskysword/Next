@@ -4,6 +4,8 @@
 
 觅长生 Next Mod是基于BepinEx框架的Mod，为觅长生游戏提供了数据增量修改、添加剧情与触发器的功能
 
+github地址：https://github.com/magicskysword/Next
+
 ## 功能与作用
 可以通过编写json文件，以在游戏里插入额外的功能与数据。
 

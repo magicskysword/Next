@@ -2,6 +2,8 @@
 
 Next Mod is a Mod based on the BepinEx framework. It provides the ability to change data incrementally, add story and trigger to the game
 
+github url：https://github.com/magicskysword/Next
+
 ## Function
 You can write JSON files to insert additional functionality and data into the game.
 
