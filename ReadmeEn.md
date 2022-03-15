@@ -60,6 +60,11 @@ Next Plugin Example：https://github.com/magicskysword/NextExamplePlugin
 
 [xiaoye97/VRoidXYTool](https://github.com/xiaoye97/VRoidXYTool) The GUI library is used
 
+[Tencent/xLua](https://github.com/Tencent/xLua) Emitted lua script
+
+[rxi/json.lua](https://github.com/rxi/json.lua) lua json lib
+
+
 ## Related Repo
 [BepinEx](https://github.com/BepInEx/BepInEx) this mod based BepinEx
 

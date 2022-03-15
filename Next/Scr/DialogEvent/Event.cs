@@ -9,7 +9,7 @@ namespace SkySwordKill.Next.DialogEvent
         {
             var id = command.GetStr(0);
             var condition = command.GetStr(1);
-            if (string.IsNullOrWhiteSpace(condition) || condition.Equals("true",StringComparison.OrdinalIgnoreCase))
+            if (DialogAnalysis.ResultIsNullOrTrue(condition))
             {
                 DialogAnalysis.SwitchDialogEvent(id);
                 return;

@@ -8,7 +8,7 @@ namespace SkySwordKill.Next.Lua
 {
     public class LuaManager
     {
-        public Dictionary<string, byte[]> LuaChunkCaches = new Dictionary<string, byte[]>();
+        public Dictionary<string, LuaFileCache> LuaCaches = new Dictionary<string, LuaFileCache>();
 
         public static void Init()
         {
@@ -46,27 +46,53 @@ namespace SkySwordKill.Next.Lua
         public void Clear()
         {
             InitLuaEnv();
-            LuaChunkCaches.Clear();
+            LuaCaches.Clear();
         }
         
         private void InitLuaEnv()
         {
+            GC.Collect();
             if (LuaEnv != null)
             {
-                LuaEnv.Dispose();
+                LuaEnv.DoString(@"
+collectgarbage(""collect"")
+");
+                /*LuaEnv.DoString(@"
+local util = require 'xlua.util'
+print(""Lua callback ref trace:"")
+util.print_func_ref_by_csharp()");*/
+                try
+                {
+                    LuaEnv.Dispose();
+                }
+                catch (Exception e)
+                {
+                    Main.LogWarning(e);
+                }
             }
             LuaEnv = new LuaEnv();
             LuaEnv.AddLoader(LuaLibLoader);
             LuaEnv.AddLoader(LuaScriptsLoader);
+            LuaEnv.DoString(@"
+function print(...)
+    local msgtb = {}
+    for key, value in pairs({...}) do
+        table.insert(msgtb,tostring(value))
+    end
+    local msg = table.concat(msgtb,""\t"")
+    CS.SkySwordKill.Next.Main.LogLua(msg)
+end
+");
         }
 
         private byte[] LuaLibLoader(ref string filepath)
         {
-            filepath = filepath.Replace(".", "/");
-            filepath = $"{Main.pathLuaLibDir.Value}/{filepath}.lua";
-            Main.LogDebug($"Lua载入地址 {filepath}");
+            filepath = filepath.Replace(@".", @"/");
+            filepath = $"{Main.pathLuaLibDir.Value}/{filepath}.lua"
+                .Replace(@"\", @"/");
             if (File.Exists(filepath))
             {
+                Main.LogDebug($"Lua载入地址 {filepath}");
                 var luaChunk = Encoding.UTF8.GetBytes(File.ReadAllText(filepath));
                 return luaChunk;
             }
@@ -76,15 +102,34 @@ namespace SkySwordKill.Next.Lua
 
         private byte[] LuaScriptsLoader(ref string filepath)
         {
-            filepath = filepath.Replace(".", "/");
-            filepath = $"{filepath}.lua";
-            Main.LogDebug($"Lua载入缓存 {filepath}");
-            if (LuaChunkCaches.TryGetValue(filepath, out var luaChunk))
+            var virtualPath = filepath.Replace(".", "/");
+            if (LuaCaches.TryGetValue(virtualPath, out var luaCache))
             {
-                return luaChunk;
+                filepath = luaCache.FilePath;
+                if (File.Exists(filepath))
+                {
+                    Main.LogDebug($"Lua载入缓存 [{luaCache.FromMod.Path}] {filepath}");
+                    var luaChunk = Encoding.UTF8.GetBytes(File.ReadAllText(filepath));
+                    return luaChunk;
+                }
+            }
+            return null;
+        }
+
+        public void AddLuaCacheFile(string luaPath,LuaFileCache luaCache)
+        {
+            if (LuaCaches.ContainsKey(luaPath))
+            {
+                var oldLuaCache = LuaCaches[luaPath];
+                Main.LogWarning($"Lua\"{luaPath}\"发生覆盖 [{oldLuaCache.FromMod.Name}]{oldLuaCache.FilePath} --> " +
+                                $"[{luaCache.FromMod.Name}]{luaCache.FilePath}");
+            }
+            else
+            {
+                Main.LogInfo($"添加Lua指向：{luaPath}.lua");
             }
 
-            return null;
+            LuaCaches[luaPath] = luaCache;
         }
     }
 }

@@ -151,6 +151,7 @@
     <Compile Include="Scr\DialogEvent\Death.cs" />
     <Compile Include="Scr\DialogEvent\DialogEventAttribute.cs" />
     <Compile Include="Scr\DialogEvent\Event.cs" />
+    <Compile Include="Scr\DialogEvent\HideCG.cs" />
     <Compile Include="Scr\DialogEvent\IDialogEvent.cs" />
     <Compile Include="Scr\DialogEvent\If.cs" />
     <Compile Include="Scr\DialogEvent\Input.cs" />
@@ -166,12 +167,15 @@
     <Compile Include="Scr\DialogEvent\RemoveRelation.cs" />
     <Compile Include="Scr\DialogEvent\RunLua.cs" />
     <Compile Include="Scr\DialogEvent\Say.cs" />
+    <Compile Include="Scr\DialogEvent\SendMsg.cs" />
     <Compile Include="Scr\DialogEvent\SetChar.cs" />
     <Compile Include="Scr\DialogEvent\SetCustomFace.cs" />
     <Compile Include="Scr\DialogEvent\SetFace.cs" />
     <Compile Include="Scr\DialogEvent\SetInt.cs" />
     <Compile Include="Scr\DialogEvent\ChangeNpcFav.cs" />
     <Compile Include="Scr\DialogEvent\SetStr.cs" />
+    <Compile Include="Scr\DialogEvent\ShowCG.cs" />
+    <Compile Include="Scr\DialogEvent\ShowOption.cs" />
     <Compile Include="Scr\DialogEvent\ShowTip.cs" />
     <Compile Include="Scr\DialogEvent\StartFight.cs" />
     <Compile Include="Scr\DialogEvent\UseItem.cs" />
@@ -182,11 +186,13 @@
     <Compile Include="Scr\DialogTrigger\OnQiYuClose.cs" />
     <Compile Include="Scr\DialogTrigger\OnQiYuShow.cs" />
     <Compile Include="Scr\DialogTrigger\OnQiYuOption.cs" />
+    <Compile Include="Scr\DialogTrigger\OnTimeChange.cs" />
     <Compile Include="Scr\DialogTrigger\OnUseItem.cs" />
     <Compile Include="Scr\DllTools.cs" />
     <Compile Include="Scr\ExpressionEvaluator\ExpressionEvaluator.cs" />
     <Compile Include="Scr\Extension\Utils.cs" />
     <Compile Include="Scr\FileAsset.cs" />
+    <Compile Include="Scr\Lua\LuaFileCache.cs" />
     <Compile Include="Scr\Lua\LuaManager.cs" />
     <Compile Include="Scr\Lua\XluaRumtime\Src\CodeEmit.cs" />
     <Compile Include="Scr\Lua\XluaRumtime\Src\CopyByValue.cs" />
@@ -255,6 +261,7 @@
     <Content Include="NextLib\Lua\libs\eventRunner.lua">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="NextLib\Lua\libs\json.lua" />
     <Content Include="NextLib\Lua\perf\memory.lua">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

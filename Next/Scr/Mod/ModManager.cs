@@ -23,6 +23,8 @@ namespace SkySwordKill.Next.Mod
 {
     public static class ModManager
     {
+        public delegate void FileHandle(string virtualPath, string filePath);
+        
         #region 字段
 
         public static List<ModConfig> modConfigs = new List<ModConfig>();
@@ -386,10 +388,14 @@ namespace SkySwordKill.Next.Mod
                 
                 // 载入Mod Face数据
                 LoadCustomFaceData(modConfig.Path);
+                
+                // 载入Mod Lua数据
+                LoadCustomLuaData(modConfig,$"{modConfig.Path}/Lua");
 
                 // 载入ModAsset
-                CacheAssetDir("Assets", $"{modConfig.Path}/Assets");
+                CacheAssetDir($"{modConfig.Path}/Assets");
             }
+            
             catch (Exception)
             {
                 modConfig.State = ModState.LoadFail;
@@ -667,7 +673,35 @@ namespace SkySwordKill.Next.Mod
             }
         }
 
-        public static void CacheAssetDir(string rootPath,string dirPath)
+        private static void LoadCustomLuaData(ModConfig modConfig, string rootPath)
+        {
+            DirectoryHandle("",rootPath, (virtualPath, filePath) =>
+            {
+                if(Path.GetExtension(filePath) != ".lua")
+                    return;
+                
+                var luaCache = new LuaFileCache()
+                {
+                    FromMod = modConfig,
+                    FilePath = filePath
+                        .Replace(@"\", @"/"),
+                };
+                var luaPath = Path.GetFileNameWithoutExtension(virtualPath)
+                    .Replace(@"\", @"/");
+
+                Main.Instance.luaManager.AddLuaCacheFile(luaPath, luaCache);
+            });
+        }
+
+        public static void CacheAssetDir(string rootPath)
+        {
+            DirectoryHandle("Assets", rootPath, (virtualPath,filePath) =>
+            {
+                Main.Instance.resourcesManager.AddAsset(virtualPath, filePath);
+            });
+        }
+
+        public static void DirectoryHandle(string rootPath,string dirPath,FileHandle fileHandle)
         {
             if(!Directory.Exists(dirPath))
                 return;
@@ -675,7 +709,7 @@ namespace SkySwordKill.Next.Mod
             foreach (var directory in Directory.GetDirectories(dirPath))
             {
                 var name = Path.GetFileNameWithoutExtension(directory);
-                CacheAssetDir($"{rootPath}/{name}", directory);
+                DirectoryHandle($"{rootPath}/{name}", directory, fileHandle);
             }
 
             foreach (var file in Directory.GetFiles(dirPath))
@@ -683,7 +717,7 @@ namespace SkySwordKill.Next.Mod
                 var fileName = Path.GetFileName(file);
                 
                 var cachePath = $"{rootPath}/{fileName}";
-                Main.Instance.resourcesManager.AddAsset(cachePath,file);
+                fileHandle.Invoke(cachePath, file);
             }
         }
 

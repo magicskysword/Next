@@ -22,7 +22,7 @@ namespace SkySwordKill.Next
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.3.6";
+        public const string MOD_VERSION = "0.4.0";
         
         public static Lazy<string> pathModsDir =
             new Lazy<string>(() => Utility.CombinePaths(
@@ -88,8 +88,6 @@ namespace SkySwordKill.Next
             
             resourcesManager = gameObject.AddComponent<ResourcesManager>();
             luaManager = new LuaManager();
-
-            luaManager.DoString(@"print(""Hello World"")");
 
             new Harmony("skyswordkill.plugin.Next").PatchAll();
 
@@ -161,6 +159,11 @@ namespace SkySwordKill.Next
             return Instance.StartCoroutine(enumerator);
         }
 
+        public static void LogLua(object obj)
+        {
+            Instance.Logger.LogInfo($"Lua:\t{obj}");
+        }
+        
         public static void LogInfo(object obj)
         {
             Instance.Logger.LogInfo($"{GetIndent()}{obj}");
@@ -197,21 +200,4 @@ namespace SkySwordKill.Next
             return sb.ToString();
         }
     }
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
 }

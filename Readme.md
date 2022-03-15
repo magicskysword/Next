@@ -62,8 +62,12 @@ Next插件范例：https://github.com/magicskysword/NextExamplePlugin
 
 [xiaoye97/VRoidXYTool](https://github.com/xiaoye97/VRoidXYTool) 使用了其中的GUI库
 
+[Tencent/xLua](https://github.com/Tencent/xLua) 嵌入lua脚本
+
+[rxi/json.lua](https://github.com/rxi/json.lua) lua json库
+
 ## 相关库
 [BepinEx](https://github.com/BepInEx/BepInEx) 本mod基于BepinEx
 
 ## 许可证
-[MIT许可证](https://github.com/magicskysword/Next/blob/main/LICENSE)
+[MIT许可证](https://github.com/magicskysword/Next/blob/main/Licenses/NextLICENSE)

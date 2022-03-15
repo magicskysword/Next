@@ -12,7 +12,7 @@ function dialog.runEvent(scr, funcName, command,
             func(runner,env)
             callback()
         end, function(error)
-            CS.SkySwordKill.Next.Main.LogError("Lua运行错误 --> "..error.."\n"..debug.traceback())
+            CS.SkySwordKill.Next.Main.LogError("Lua运行错误 --> "..error.."\n"..debug.traceback(nil,2))
             eventRunner.cancelEvent()
         end )
 
