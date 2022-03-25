@@ -261,7 +261,9 @@
     <Content Include="NextLib\Lua\libs\eventRunner.lua">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="NextLib\Lua\libs\json.lua" />
+    <Content Include="NextLib\Lua\libs\json.lua">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="NextLib\Lua\perf\memory.lua">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

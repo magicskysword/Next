@@ -67,6 +67,25 @@ local a = env:GetHP()
 
 **结论：env中，带括号调用的需要用冒号代替点，如`env:method()`**
 
+## 获取Lua函数返回值
+在运行时脚本中，通过`GetLuaInt(luaFile,luaFunc)`或`GetLuaStr(luaFile,luaFunc)`的方式即可运行Lua函数并获取返回值。
+
+获取返回值的函数与被对话指令调用的函数格式略有不同，函数范例如下：
+```lua
+local test = {}
+
+function test.I1(env)
+    return env:GetMoney() * 2
+end
+
+function test.S1(env)
+    return "灵石：" .. tostring(env:GetMoney())
+end
+
+return test
+```
+env为运行时脚本环境，通过return即可将计算完的数值返回。
+
 ## Lua脚本逻辑范例
 
 ```lua
@@ -77,11 +96,19 @@ function test.T1(runner,env)
     runner.Say("倪旭欣","{daoyou}你好。")
     runner.ChangeMoney(1000)
     if env:GetMoney() < 2000 then
-        runner.Say("倪旭欣","给少了，再来！")
+        runner.Say("倪旭欣","拿少了，再来！")
         runner.ChangeMoney(1000)
     else
         runner.Say("倪旭欣","钱给了，告辞！")
     end
+end
+
+function test.I1(env)
+    return env:GetMoney() * 2
+end
+
+function test.S1(env)
+    return "灵石：" .. tostring(env:GetMoney())
 end
 
 return test
