@@ -8,7 +8,7 @@ namespace SkySwordKill.Next.DialogTrigger
     public class OnUseItem
     {
         [HarmonyPrefix]
-        public static bool Prefix(GUIPackage.item __instance,UnityAction Next, bool isToPo,ref bool __state)
+        public static bool Prefix(GUIPackage.item __instance,UnityAction Next, bool isTuPo,ref bool __state)
         {
             Main.LogInfo($"[{"Trigger".I18N()}] {"Trigger.UseItem".I18N()} {__instance.itemID} [{__instance.itemName}]");
             var env = new DialogEnvironment()
@@ -25,7 +25,7 @@ namespace SkySwordKill.Next.DialogTrigger
         }
         
         [HarmonyPostfix]
-        public static void Postfix(GUIPackage.item __instance,UnityAction Next, bool isToPo,bool __state)
+        public static void Postfix(GUIPackage.item __instance,UnityAction Next, bool isTuPo,bool __state)
         {
             if(__state)
                 return;

@@ -29,17 +29,18 @@ namespace SkySwordKill.Next.Lua
             return LuaEnv.DoString(str);
         }
 
-        public void RunFunc(string scr, string funcName, object[] args)
+        public object[] RunFunc(string scr, string funcName, object[] args)
         {
             var rets = LuaEnv.DoString($"return require '{scr}'");
             if (rets.Length > 0 && rets[0] is LuaTable table)
             {
                 var func = table.Get<LuaFunction>(funcName);
-                func.Call(args);
+                return func.Call(args);
             }
             else
             {
                 Main.LogError($"读取Lua {scr} 失败");
+                return null;
             }
         }
 

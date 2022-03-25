@@ -23,7 +23,8 @@ Mod WiKi：[Next Wiki](https://michangshengnext.fandom.com/zh/wiki/%E8%A7%85%E9%
 
 ## 鸣谢
 3dm  宵夜97  BepinEx开发教程<br>
-3md  ゞ残月﹎_|  Villain Mod的框架思路<br>
+3dm  ゞ残月﹎_|  Villain Mod的框架思路<br>
+@玄武 赞助者
 
 ## Build
 clone该库后，自行重新添加觅长生游戏文件夹里的Dll引用，包括

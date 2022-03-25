@@ -80,6 +80,30 @@ namespace SkySwordKill.Next
 
             return 0;
         }
+
+        public int GetLuaInt(string luaFile, string luaFunc)
+        {
+            var rets = Main.Instance.luaManager.RunFunc(luaFile, luaFunc,
+                new object[] { this });
+            if (rets != null && rets.Length > 0)
+            {
+                return Convert.ToInt32(rets[0]);
+            }
+
+            return 0;
+        }
+        
+        public string GetLuaStr(string luaFile, string luaFunc)
+        {
+            var rets = Main.Instance.luaManager.RunFunc(luaFile, luaFunc,
+                new object[] { this });
+            if (rets != null && rets.Length > 0)
+            {
+                return Convert.ToString(rets[0]);
+            }
+
+            return string.Empty;
+        }
         
         public int Random(int minInclude, int maxExclude)
         {
@@ -110,7 +134,7 @@ namespace SkySwordKill.Next
             return tagTime < nowTime;
         }
 
-        public DateTime GetDataTime(int year, int month = 1, int day = 1)
+        public DateTime GetDateTime(int year, int month = 1, int day = 1)
         {
             return new DateTime(year, month, day);
         }
