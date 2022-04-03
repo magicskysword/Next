@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using KBEngine;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.StaticFace;
 using UnityEngine;
 using UnityEngine.Events;
 using YSGame;
+using GameObject = UnityEngine.GameObject;
 
 namespace SkySwordKill.Next
 {
@@ -14,7 +19,7 @@ namespace SkySwordKill.Next
     {
         #region 字段
 
-
+        public static AvatarNextData AvatarNextData = new AvatarNextData();
 
         #endregion
 
@@ -129,7 +134,56 @@ namespace SkySwordKill.Next
             addOptionMethod.Value.Invoke(menuDialog, new object[] { text, true, false, (UnityAction)OptionAction });
         }
 
-        public static void SetInt(string key,int value)
+        public static void LoadAvatarNextData(int id,int index)
+        {
+            var fileName = $"AvatarNextData{Tools.instance.getSaveID(id, index)}.sav";
+            var savePath = Paths.GetSavePath();
+            AvatarNextData = null;
+            try
+            {
+                var path = $"{savePath}/{fileName}";
+                if (File.Exists(path))
+                {
+                    AvatarNextData = JObject.Parse(File.ReadAllText(path)).ToObject<AvatarNextData>();
+                }
+                else
+                {
+                    AvatarNextData = new AvatarNextData();
+                    // 导入旧数据
+                    Main.LogInfo($"首次加载数据，导入旧数据。");
+                    AvatarNextData.IntGroup.AddRange(GetAllOldInt());
+                    AvatarNextData.StrGroup.AddRange(GetAllOldStr());
+                }
+            }
+            catch (Exception e)
+            {
+                Main.LogError($"读取Next存档数据失败！");
+                Main.LogError(e);
+            }
+
+            AvatarNextData = AvatarNextData ?? new AvatarNextData();
+        }
+
+        public static void SaveAvatarNextData(int id,int index)
+        {
+            var fileName = $"AvatarNextData{Tools.instance.getSaveID(id, index)}.sav";
+            var savePath = Paths.GetSavePath();
+            try
+            {
+                var path = $"{savePath}/{fileName}";
+                if (AvatarNextData == null)
+                    throw new NullReferenceException("AvatarNextData not exist！");
+                var jsonData = JObject.FromObject(AvatarNextData);
+                File.WriteAllText(path, jsonData.ToString(Formatting.None));
+            }
+            catch (Exception e)
+            {
+                Main.LogError($"保存Next存档数据失败！");
+                Main.LogError(e);
+            }
+        }
+        
+        public static void SetIntOld(string key,int value)
         {
             key = $"next_Int_{key}";
             var data = Tools.instance.getPlayer().AvatarChengJiuData;
@@ -142,52 +196,46 @@ namespace SkySwordKill.Next
             {
                 data.SetField(key,value);
             }
+        }
+
+        public static int GetIntOld(string key)
+        {
+            key = $"next_Int_{key}";
+            var field = Tools.instance.getPlayer().AvatarChengJiuData.GetField(key);
+            if (field == null || field.type != JSONObject.Type.NUMBER)
+                return 0;
+            return field.I;
+        }
+
+        public static void SetInt(string key,int value)
+        {
+            AvatarNextData.IntGroup.Set(key,value);
         }
 
         public static int GetInt(string key)
         {
-            key = $"next_Int_{key}";
-            var field = Tools.instance.getPlayer().AvatarChengJiuData.GetField(key);
-            if (field == null || field.type != JSONObject.Type.NUMBER)
-                return 0;
-            return field.I;
+            return AvatarNextData.IntGroup.Get(key);
         }
         
         public static void SetInt(string group,string key,int value)
         {
-            key = $"next_{group}Int_{key}";
-            var data = Tools.instance.getPlayer().AvatarChengJiuData;
-            if (value == 0)
-            {
-                if(data.HasField(key))
-                    data.RemoveField(key);
-            }
-            else
-            {
-                data.SetField(key,value);
-            }
+            AvatarNextData.IntGroup.Set(group,key,value);
         }
 
         public static int GetInt(string group,string key)
         {
-            key = $"next_{group}Int_{key}";
-            var field = Tools.instance.getPlayer().AvatarChengJiuData.GetField(key);
-            if (field == null || field.type != JSONObject.Type.NUMBER)
-                return 0;
-            return field.I;
+            return AvatarNextData.IntGroup.Get(group,key);
         }
 
         public static Dictionary<string, int> GetAllInt()
         {
+            return AvatarNextData.IntGroup.GetDefaultGroup();
+        }
+        public static Dictionary<string, int> GetAllOldInt()
+        {
             var dic = new Dictionary<string, int>();
             
-            var instance = Tools.instance;
-            if (instance == null)
-                return dic;
-            
-            var player = instance.getPlayer();
-            if (player == null)
-                return dic;
+            var player = (KBEngine.Avatar)KBEngineApp.app.player();
             
             var data = player.AvatarChengJiuData;
             if (data == null)
@@ -197,13 +245,13 @@ namespace SkySwordKill.Next
             {
                 if (key.StartsWith("next_Int_"))
                 {
-                    dic.Add(key,data.GetField(key).I);
+                    dic.Add(key.Substring("next_Int_".Length),data.GetField(key).I);
                 }
             }
             return dic;
         }
 
-        public static void SetStr(string key,string value)
+        public static void SetStrOld(string key,string value)
         {
             key = $"next_Str_{key}";
             var data = Tools.instance.getPlayer().AvatarChengJiuData;
@@ -218,7 +266,7 @@ namespace SkySwordKill.Next
             }
         }
 
-        public static string GetStr(string key)
+        public static string GetStrOld(string key)
         {
             key = $"next_Str_{key}";
             var field = Tools.instance.getPlayer().AvatarChengJiuData.GetField(key);
@@ -227,41 +275,40 @@ namespace SkySwordKill.Next
             return field.Str;
         }
         
+        public static void SetStr(string key,string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                value = null;
+            AvatarNextData.StrGroup.Set(key,value);
+        }
+
+        public static string GetStr(string key)
+        {
+            return AvatarNextData.StrGroup.Get(key) ?? string.Empty;
+        }
+        
         public static void SetStr(string group,string key,string value)
         {
-            key = $"next_{group}Str_{key}";
-            var data = Tools.instance.getPlayer().AvatarChengJiuData;
-            if (value == "")
-            {
-                if(data.HasField(key))
-                    data.RemoveField(key);
-            }
-            else
-            {
-                data.SetField(key,value);
-            }
+            if (string.IsNullOrEmpty(value))
+                value = null;
+            AvatarNextData.StrGroup.Set(group,key,value);
         }
 
         public static string GetStr(string group,string key)
         {
-            key = $"next_{group}Str_{key}";
-            var field = Tools.instance.getPlayer().AvatarChengJiuData.GetField(key);
-            if (field == null || field.type != JSONObject.Type.STRING)
-                return string.Empty;
-            return field.Str;
+            return AvatarNextData.StrGroup.Get(group,key) ?? string.Empty;
         }
 
         public static Dictionary<string, string> GetAllStr()
         {
+            return AvatarNextData.StrGroup.GetDefaultGroup();
+        }
+        
+        public static Dictionary<string, string> GetAllOldStr()
+        {
             var dic = new Dictionary<string, string>();
             
-            var instance = Tools.instance;
-            if (instance == null)
-                return dic;
-            
-            var player = instance.getPlayer();
-            if (player == null)
-                return dic;
+            var player = (KBEngine.Avatar)KBEngineApp.app.player();
             
             var data = player.AvatarChengJiuData;
             if (data == null)
@@ -271,7 +318,7 @@ namespace SkySwordKill.Next
             {
                 if (key.StartsWith("next_Str_"))
                 {
-                    dic.Add(key,data.GetField(key).ToString());
+                    dic.Add(key.Substring("next_Str_".Length),data.GetField(key).ToString());
                 }
             }
             return dic;

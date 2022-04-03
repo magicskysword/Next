@@ -44,7 +44,7 @@ namespace SkySwordKill.Next.Lua
             }
         }
 
-        public void Clear()
+        public void Reset()
         {
             InitLuaEnv();
             LuaCaches.Clear();
@@ -82,6 +82,9 @@ function print(...)
     end
     local msg = table.concat(msgtb,""\t"")
     CS.SkySwordKill.Next.Main.LogLua(msg)
+end
+function getmodpath(luafile)
+    return CS.SkySwordKill.Next.Main.Instance.luaManager:GetLuaModPath(luafile)
 end
 ");
         }
@@ -131,6 +134,30 @@ end
             }
 
             LuaCaches[luaPath] = luaCache;
+        }
+
+        public string GetLuaModPath(string filepath)
+        {
+            var virtualPath = filepath.Replace(".", "/");
+            if (LuaCaches.TryGetValue(virtualPath, out var luaCache))
+            {
+                return luaCache.FromMod.Path;
+            }
+
+            return null;
+        }
+
+        public void ClearCache()
+        {
+            DoString(@"
+for key, _ in pairs(package.preload) do
+    package.preload[key] = nil
+end
+for key, _ in pairs(package.loaded) do
+    package.loaded[key] = nil
+end
+");
+            
         }
     }
 }

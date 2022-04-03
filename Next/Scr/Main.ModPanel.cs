@@ -322,8 +322,8 @@ namespace SkySwordKill.Next
                 {
                     scrollRollMods = GUILayout.BeginScrollView(scrollRollMods, false, false, 
                         GUILayout.MinHeight(winRect.height * 0.7f-100),
-                        GUILayout.MinWidth(winRect.width * 0.7f-40),
-                        GUILayout.MaxWidth(winRect.width * 0.7f-40));
+                        GUILayout.MinWidth(winRect.width * 0.6f-40),
+                        GUILayout.MaxWidth(winRect.width * 0.6f-40));
                     {
                         var mods = ModManager.modConfigs.Select(config =>
                         {
@@ -339,64 +339,60 @@ namespace SkySwordKill.Next
                     }
                     GUILayout.EndScrollView();
                     
-                    GUILayout.BeginHorizontal();
-                    {
-                        if (GUILayout.Button("Mod.Panel.MoveToTop".I18N()))
-                        {
-                            ModManager.ModMoveToTop(ref curModSelectedIndex);
-                        }
-
-                        if (GUILayout.Button("Mod.Panel.MoveUp".I18N()))
-                        {
-                            ModManager.ModMoveUp(ref curModSelectedIndex);
-                        }
-
-                        if (GUILayout.Button("Mod.Panel.MoveDown".I18N()))
-                        {
-                            ModManager.ModMoveDown(ref curModSelectedIndex);
-                        }
-
-                        if (GUILayout.Button("Mod.Panel.MoveToBottom".I18N()))
-                        {
-                            ModManager.ModMoveToBottom(ref curModSelectedIndex);
-                        }
-                    }
-                    GUILayout.EndHorizontal();
-                    
-                    GUILayout.Space(10);
-                    
-                    GUILayout.BeginHorizontal();
-                    {
-                        var modEnable = ModManager.ModGetEnable(curModSelectedIndex);
-                        var btnText = modEnable ? "Mod.Panel.DisableMod".I18N() : "Mod.Panel.EnableMod".I18N();
-                        if (GUILayout.Button(btnText))
-                        {
-                            ModManager.ModSetEnable(curModSelectedIndex,!modEnable);
-                        }
-                        
-                        GUILayout.Space(20);
-                        
-                        if (GUILayout.Button("Mod.Panel.EnableAllMod".I18N()))
-                        {
-                            for (int i = 0; i < ModManager.modConfigs.Count; i++)
-                            {
-                                ModManager.ModSetEnable(i,true);
-                            }
-                        }
-                        
-                        if (GUILayout.Button("Mod.Panel.DisableAllMod".I18N()))
-                        {
-                            for (int i = 0; i < ModManager.modConfigs.Count; i++)
-                            {
-                                ModManager.ModSetEnable(i,false);
-                            }
-                        }
-                    }
-                    GUILayout.EndHorizontal();
-
                     if (ModManager.ModDataDirty)
                     {
                         GUILayout.Label("Mod.Panel.DataDirtyTip".I18N());
+                    }
+                }
+                GUILayout.EndVertical();
+                
+                GUILayout.BeginVertical();
+                {
+                    var modEnable = ModManager.ModGetEnable(curModSelectedIndex);
+                    var btnText = modEnable ? "Mod.Panel.DisableMod".I18N() : "Mod.Panel.EnableMod".I18N();
+                    if (GUILayout.Button(btnText,GUILayout.MinHeight(40)))
+                    {
+                        ModManager.ModSetEnable(curModSelectedIndex,!modEnable);
+                    }
+                        
+                    GUILayout.Space(20);
+                        
+                    if (GUILayout.Button("Mod.Panel.EnableAllMod".I18N()))
+                    {
+                        for (int i = 0; i < ModManager.modConfigs.Count; i++)
+                        {
+                            ModManager.ModSetEnable(i,true);
+                        }
+                    }
+                        
+                    if (GUILayout.Button("Mod.Panel.DisableAllMod".I18N()))
+                    {
+                        for (int i = 0; i < ModManager.modConfigs.Count; i++)
+                        {
+                            ModManager.ModSetEnable(i,false);
+                        }
+                    }
+                    
+                    GUILayout.Space(40);
+                    
+                    if (GUILayout.Button("Mod.Panel.MoveToTop".I18N()))
+                    {
+                        ModManager.ModMoveToTop(ref curModSelectedIndex);
+                    }
+
+                    if (GUILayout.Button("Mod.Panel.MoveUp".I18N()))
+                    {
+                        ModManager.ModMoveUp(ref curModSelectedIndex);
+                    }
+
+                    if (GUILayout.Button("Mod.Panel.MoveDown".I18N()))
+                    {
+                        ModManager.ModMoveDown(ref curModSelectedIndex);
+                    }
+
+                    if (GUILayout.Button("Mod.Panel.MoveToBottom".I18N()))
+                    {
+                        ModManager.ModMoveToBottom(ref curModSelectedIndex);
                     }
                 }
                 GUILayout.EndVertical();
@@ -567,7 +563,10 @@ namespace SkySwordKill.Next
                             width = rect.width - 20
                         };
                         GUI.Label(infoRect,$"{pair.Key}",labelLeftStyle);
-                        GUI.Label(infoRect,$"{pair.Value}",labelRightStyle);
+                        if(pair.Value.Length > 15)
+                            GUI.Label(infoRect,$"{pair.Value.Substring(0,15)}...",labelRightStyle);
+                        else
+                            GUI.Label(infoRect,$"{pair.Value}",labelRightStyle);
                     }
                 }
                 GUILayout.EndScrollView();
@@ -785,9 +784,13 @@ namespace SkySwordKill.Next
                 {
                     GUILayout.BeginHorizontal();
                     {
+                        if (GUILayout.Button("清空Lua已载入文件"))
+                        {
+                            Main.Instance.luaManager.ClearCache();
+                        }
                         if (GUILayout.Button("重载Lua虚拟机"))
                         {
-                            Main.Instance.luaManager.Clear();
+                            Main.Instance.luaManager.Reset();
                             DialogAnalysis.CancelEvent();
                         }
                     }

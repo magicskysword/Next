@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace SkySwordKill.Next.Patch
 {
+    /// <summary>
+    /// 游戏资源加载Patch
+    /// </summary>
     [HarmonyPatch(typeof(ResManager),"LoadTexture2D")]
     public class ResManagerLoadTexturePatch
     {

@@ -194,7 +194,7 @@ namespace SkySwordKill.Next.Mod
         {
             DialogAnalysis.Clear();
             StaticFaceUtils.Clear();
-            Main.Instance.luaManager.Clear();
+            Main.Instance.luaManager.Reset();
         }
 
         public static void LoadAllMod()

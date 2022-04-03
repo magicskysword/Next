@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace SkySwordKill.Next.Patch
 {
+    /// <summary>
+    /// 物品图标Patch
+    /// </summary>
     [HarmonyPatch(typeof(GUIPackage.item), "InitImage")]
     public class ItemUIPatch
     {

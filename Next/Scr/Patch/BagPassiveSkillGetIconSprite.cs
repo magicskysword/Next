@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace SkySwordKill.Next.Patch
 {
+    /// <summary>
+    /// 功法 - 技能图标Patch
+    /// </summary>
     [HarmonyPatch(typeof(Bag.PassiveSkill),"GetIconSprite")]
     public class BagPassiveSkillGetIconSprite
     {

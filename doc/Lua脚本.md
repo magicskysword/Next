@@ -136,3 +136,15 @@ local test = require 'test'
 local test = require 'test'
 local test = require('test')
 ```
+
+## 内置函数
+
+`print(arg1,arg2,...)`
+
+    打印数据，该函数已经重定向到Next的输出上。
+
+
+`getmodpath(luafile)`
+
+    参数为lua脚本地址，可参考require
+    该函数返回lua脚本的mod目录来源。

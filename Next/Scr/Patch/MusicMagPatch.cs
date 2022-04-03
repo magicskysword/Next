@@ -6,6 +6,9 @@ using YSGame;
 
 namespace SkySwordKill.Next.Patch
 {
+    /// <summary>
+    /// 游戏音乐加载Patch
+    /// </summary>
     [HarmonyPatch(typeof(MusicMag))]
     public class MusicMagPatch
     {

@@ -14,7 +14,7 @@ namespace SkySwordKill.Next.DialogTrigger
         }
     }
 
-    [HarmonyPatch(typeof(StartGame),"firstAddAvatar")]
+    [HarmonyPatch(typeof(CreateNewPlayerFactory),"createPlayer")]
     public class OnEnterGameAfterCreatePlayer
     {
         [HarmonyPrefix]

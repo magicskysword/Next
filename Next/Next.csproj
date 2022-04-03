@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scr\AvatarNextData.cs" />
     <Compile Include="Scr\ConfigTarget.cs" />
     <Compile Include="Scr\ConfigurationManagerAttribute.cs" />
     <Compile Include="Scr\DialogAnalysis.cs" />
@@ -223,6 +224,7 @@
     <Compile Include="Scr\Patch\ModResourcesLoadSpritePatch.cs" />
     <Compile Include="Scr\Patch\ModResourcesLoadTexturePatch.cs" />
     <Compile Include="Scr\Patch\MusicMagPatch.cs" />
+    <Compile Include="Scr\Patch\GameExDataPatch.cs" />
     <Compile Include="Scr\Patch\SetAvatarFacePatch.cs" />
     <Compile Include="Scr\SearchNpcData.cs" />
     <Compile Include="Scr\StaticFace\CustomStaticFaceInfo.cs" />

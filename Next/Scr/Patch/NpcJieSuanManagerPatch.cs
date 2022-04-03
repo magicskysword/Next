@@ -5,6 +5,9 @@ using SkySwordKill.Next.Mod;
 
 namespace SkySwordKill.Next.Patch
 {
+    /// <summary>
+    /// Npc数据补充Patch
+    /// </summary>
     [HarmonyPatch(typeof(NpcJieSuanManager),"InitCyData")]
     public class NpcJieSuanManagerPatch
     {

@@ -4,6 +4,9 @@ using YSGame;
 
 namespace SkySwordKill.Next.Patch
 {
+    /// <summary>
+    /// 游戏捏脸数据Patch
+    /// </summary>
     [HarmonyPatch(typeof(SetAvatarFaceRandomInfo),"findStatic")]
     public class SetAvatarFacePatch
     {

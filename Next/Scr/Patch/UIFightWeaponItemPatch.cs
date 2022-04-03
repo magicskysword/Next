@@ -6,6 +6,9 @@ using YSGame.Fight;
 
 namespace SkySwordKill.Next.Patch
 {
+    /// <summary>
+    /// 战斗界面武器图标补充Patch
+    /// </summary>
     [HarmonyPatch(typeof(UIFightWeaponItem),"SetWeapon")]
     public class UIFightWeaponItemPatch
     {

@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace SkySwordKill.Next.Patch
 {
+    /// <summary>
+    /// 技能图标Patch
+    /// </summary>
     [HarmonyPatch(typeof(GUIPackage.Skill), "InitImage")]
     public class SkillIconPatch
     {
