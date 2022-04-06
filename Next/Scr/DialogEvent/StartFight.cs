@@ -25,7 +25,7 @@ namespace SkySwordKill.Next.DialogEvent
                 var fightType = (Fungus.StartFight.FightEnumType)command.GetInt(2);
             
                 var background = command.GetInt(3);
-                var music = command.GetStr(4);
+                var music = command.GetInt(4);
             
                 var playerBuffStr = command.GetStr(5);
                 var enemyBuffStr = command.GetStr(6);
@@ -80,10 +80,10 @@ namespace SkySwordKill.Next.DialogEvent
         public static void SetEventFight(string victory, string defeat, string[] tags)
         {
             FightTags = tags;
-            DialogAnalysis.SetStr("Fight","VictoryEvent",victory);
-            DialogAnalysis.SetStr("Fight","DefeatEvent",defeat);
-            DialogAnalysis.SetInt("Fight", "IsVictory", 0);
-            DialogAnalysis.SetInt("Fight", "IsEventFight", 1);
+            DialogAnalysis.SetStrOld("Fight","VictoryEvent",victory);
+            DialogAnalysis.SetStrOld("Fight","DefeatEvent",defeat);
+            DialogAnalysis.SetIntOld("Fight", "IsVictory", 0);
+            DialogAnalysis.SetIntOld("Fight", "IsEventFight", 1);
         }
 
         public static void ResetEventFight()
@@ -92,10 +92,10 @@ namespace SkySwordKill.Next.DialogEvent
                 return;
             
             FightTags = null;
-            DialogAnalysis.SetStr("Fight","VictoryEvent","");
-            DialogAnalysis.SetStr("Fight","DefeatEvent","");
-            DialogAnalysis.SetInt("Fight", "IsVictory", 0);
-            DialogAnalysis.SetInt("Fight", "IsEventFight", 0);
+            DialogAnalysis.SetStrOld("Fight","VictoryEvent","");
+            DialogAnalysis.SetStrOld("Fight","DefeatEvent","");
+            DialogAnalysis.SetIntOld("Fight", "IsVictory", 0);
+            DialogAnalysis.SetIntOld("Fight", "IsEventFight", 0);
         }
 
         [HarmonyPatch(typeof(Fight.FightResultMag),"ShowVictory")]
@@ -104,7 +104,7 @@ namespace SkySwordKill.Next.DialogEvent
             [HarmonyPrefix]
             public static void Prefix()
             {
-                DialogAnalysis.SetInt("Fight", "IsVictory", 1);
+                DialogAnalysis.SetIntOld("Fight", "IsVictory", 1);
             }
         }
 
@@ -128,7 +128,7 @@ namespace SkySwordKill.Next.DialogEvent
                     return;
                 
                 string sceneName = SceneManager.GetActiveScene().name;
-                var IsEventFight = DialogAnalysis.GetInt("Fight", "IsEventFight") == 1;
+                var IsEventFight = DialogAnalysis.GetIntOld("Fight", "IsEventFight") == 1;
                 var IsInBattle = sceneName == "YSNewFight";
                 if(Tools.instance.isNeedSetTalk && IsEventFight)
                 {
@@ -147,9 +147,9 @@ namespace SkySwordKill.Next.DialogEvent
                         {
                             Tools.instance.CanShowFightUI = 0;
                             
-                            var VictoryEvent = DialogAnalysis.GetStr("Fight", "VictoryEvent");
-                            var DefeatEvent = DialogAnalysis.GetStr("Fight", "DefeatEvent");
-                            var IsVictory = DialogAnalysis.GetInt("Fight", "IsVictory") == 1;
+                            var VictoryEvent = DialogAnalysis.GetStrOld("Fight", "VictoryEvent");
+                            var DefeatEvent = DialogAnalysis.GetStrOld("Fight", "DefeatEvent");
+                            var IsVictory = DialogAnalysis.GetIntOld("Fight", "IsVictory") == 1;
 
                             if (IsVictory && !string.IsNullOrEmpty(VictoryEvent))
                             {

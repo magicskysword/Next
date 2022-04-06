@@ -25,7 +25,7 @@ namespace SkySwordKill.Next.XiaoYeGUI
                     {
                         InterfaceMaker._customSkin = InterfaceMaker.CreateSkin();
                     }
-                    catch (System.Exception ex)
+                    catch (System.Exception)
                     {
                         InterfaceMaker._customSkin = GUI.skin;
                     }

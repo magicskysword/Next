@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.7.0.0, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="0Harmony, Version=2.5.5.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
@@ -43,7 +43,7 @@
       <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="BepInEx, Version=5.4.18.0, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="BepInEx, Version=5.4.17.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\BepInEx\core\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -229,6 +229,7 @@
     <Compile Include="Scr\SearchNpcData.cs" />
     <Compile Include="Scr\StaticFace\CustomStaticFaceInfo.cs" />
     <Compile Include="Scr\StaticFace\StaticFaceUtils.cs" />
+    <Compile Include="Scr\Updater.cs" />
     <Compile Include="Scr\XiaoYeGUI\InterfaceMaker.cs" />
     <Compile Include="Scr\XiaoYeGUI\RayBlocker.cs" />
     <Compile Include="Scr\XiaoYeGUI\ResourceUtils.cs" />

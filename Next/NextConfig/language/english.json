@@ -78,14 +78,14 @@
     "Misc.ExportPlayerFace" : "Export Player Face",
     "Misc.ImportPlayerFace" : "Import Player Face",
     "Misc.PlayerFace" : "Player Face Data",
-    
+
     "Trigger" : "Trigger",
     "Trigger.UseItem" : "Use Item",
     "Trigger.AfterUseItem" : "After Use Item",
-    
+
     "Misc.CurrentLanguage" : "Current Language",
     "Misc.RestartPatchNpcData" : "Restart patch Npc Data",
-    
+
     "HeaderBar.HotkeyTip" : "Press {0} trigger the window。",
     "HeaderBar.DebugMode" : "Debug Mode",
     "HeaderBar.ModList" : "Mod List",
@@ -98,6 +98,14 @@
     "HeaderBar.OpenInStart" : "Open In Game Start",
     "HeaderBar.ModFolder" : "Mod Folder",
     "HeaderBar.Close" : "Close",
+    "HeaderBar.CheckUpdate" : "Check Update",
+    "HeaderBar.CheckUpdating" : "Checking...",
+    "HeaderBar.CheckUpdateFailure" : "Check Failure",
+    "HeaderBar.CheckUpdateHasNewVersion" : "Cur version : {0},the new version : {1}",
+    "HeaderBar.CheckUpdateIsNewVersion" : "The current version is the latest",
+    "HeaderBar.Github" : "Github",
+    "HeaderBar.3dmBBS" : "3dm BBS",
+    "HeaderBar.3dmModSite" : "3dm Mod Site",
 
     "ModManager.GenerateBaseData": "Generating Base Files.",
     "ModManager.LoadMod": "Load mod : {0}",
@@ -120,6 +128,9 @@
 
     "Gender.Male" : "Male",
     "Gender.Female" : "Female",
-    "Gender.Unknown" : "Unknown"
+    "Gender.Unknown" : "Unknown",
+
+    "Updater.GetVersionJsonFailure" : "Failed to get updates.",
+    "Updater.JsonParseFailure" : "Json parsing failure."
   }
 }

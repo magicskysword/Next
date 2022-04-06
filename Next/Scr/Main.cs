@@ -1,20 +1,12 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 using BepInEx;
-using BepInEx.Configuration;
 using HarmonyLib;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.Lua;
-using SkySwordKill.Next.Mod;
-using SkySwordKill.Next.Patch;
-using SkySwordKill.Next.XiaoYeGUI;
 using UnityEngine;
 
 namespace SkySwordKill.Next
@@ -22,7 +14,7 @@ namespace SkySwordKill.Next
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.4.2";
+        public const string MOD_VERSION = "0.4.3";
         
         public static Lazy<string> pathModsDir =
             new Lazy<string>(() => Utility.CombinePaths(
@@ -102,6 +94,10 @@ namespace SkySwordKill.Next
             NextLanguage.InitLanguage();
             LoadDefaultLanguage();
             nextModSetting = NextModSetting.LoadSetting();
+            
+            // 检查更新
+            // Check Update
+            Updater.CheckVersion();
             
             // 根据设置显示窗口
             // show window by config

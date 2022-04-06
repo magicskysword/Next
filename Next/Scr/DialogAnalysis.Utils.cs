@@ -183,9 +183,9 @@ namespace SkySwordKill.Next
             }
         }
         
-        public static void SetIntOld(string key,int value)
+        public static void SetIntOld(string group,string key,int value)
         {
-            key = $"next_Int_{key}";
+            key = $"next_{group}Int_{key}";
             var data = Tools.instance.getPlayer().AvatarChengJiuData;
             if (value == 0)
             {
@@ -198,9 +198,9 @@ namespace SkySwordKill.Next
             }
         }
 
-        public static int GetIntOld(string key)
+        public static int GetIntOld(string group,string key)
         {
-            key = $"next_Int_{key}";
+            key = $"next_{group}Int_{key}";
             var field = Tools.instance.getPlayer().AvatarChengJiuData.GetField(key);
             if (field == null || field.type != JSONObject.Type.NUMBER)
                 return 0;
@@ -251,9 +251,9 @@ namespace SkySwordKill.Next
             return dic;
         }
 
-        public static void SetStrOld(string key,string value)
+        public static void SetStrOld(string group,string key,string value)
         {
-            key = $"next_Str_{key}";
+            key = $"next_{group}Str_{key}";
             var data = Tools.instance.getPlayer().AvatarChengJiuData;
             if (value == "")
             {
@@ -266,9 +266,9 @@ namespace SkySwordKill.Next
             }
         }
 
-        public static string GetStrOld(string key)
+        public static string GetStrOld(string group,string key)
         {
-            key = $"next_Str_{key}";
+            key = $"next_{group}Str_{key}";
             var field = Tools.instance.getPlayer().AvatarChengJiuData.GetField(key);
             if (field == null || field.type != JSONObject.Type.STRING)
                 return string.Empty;

@@ -98,6 +98,14 @@
     "HeaderBar.OpenInStart" : "游戏启动时弹出",
     "HeaderBar.ModFolder" : "Mod文件夹",
     "HeaderBar.Close" : "关闭",
+    "HeaderBar.CheckUpdate" : "检查更新",
+    "HeaderBar.CheckUpdating" : "正在检查更新",
+    "HeaderBar.CheckUpdateFailure" : "检查更新失败",
+    "HeaderBar.CheckUpdateHasNewVersion" : "当前版本：{0}，检查到最新版本：{1}",
+    "HeaderBar.CheckUpdateIsNewVersion" : "当前已经是最新版本",
+    "HeaderBar.Github" : "Github",
+    "HeaderBar.3dmBBS" : "3dm 帖子",
+    "HeaderBar.3dmModSite" : "3dm Mod站",
 
     "ModManager.GenerateBaseData": "正在生成Base文件。",
     "ModManager.LoadMod": "读取Mod : {0}",
@@ -120,6 +128,9 @@
 
     "Gender.Male" : "男性",
     "Gender.Female" : "女性",
-    "Gender.Unknown" : "未知"
+    "Gender.Unknown" : "未知",
+    
+    "Updater.GetVersionJsonFailure" : "版本Json获取失败",
+    "Updater.JsonParseFailure" : "Json解析失败"
   }
 }

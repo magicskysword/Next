@@ -17,14 +17,14 @@ namespace SkySwordKill.Next
     public partial class Main
     {
         #region 字段
-        
+
         private bool _isWinOpen;
         private Vector2 scrollRollLanguages = new Vector2(0, 0);
         private Vector2 scrollRollMods = new Vector2(0, 0);
         private Vector2 scrollRollModInfo = new Vector2(0, 0);
         private Vector2 scrollRollDebugString = new Vector2(0, 0);
         private Vector2 scrollRollDebugInt = new Vector2(0, 0);
-        
+
         private Vector2 scrollRollDebugNpcs;
         private Vector2 scrollRollDebugNpcInfo;
 
@@ -38,23 +38,23 @@ namespace SkySwordKill.Next
         private string inputNpcSearch;
 
         private string inputPlayerFaceJson;
-        
+
         private GUIStyle labelTitleStyle;
         private GUIStyle labelLeftStyle;
         private GUIStyle labelMiddleStyle;
         private GUIStyle labelRightStyle;
-        
+
         private GUIStyle infoStyle;
-        
+
         private GUIStyle modToggleStyle;
         private GUIStyle modInfoExceptionStyle;
 
         private bool isSelectedLanguage;
-        
+
         private RayBlocker rayBlocker;
 
         private int curModSelectedIndex;
-        
+
         private int curNpcSelectedIndex;
         private int curNpcSelectedPage;
         private int countEachPage = 20;
@@ -62,7 +62,6 @@ namespace SkySwordKill.Next
 
         private List<SearchNpcData> npcDataList = new List<SearchNpcData>();
         private string[] npcDataListName = new string[0];
-        
 
         #endregion
 
@@ -78,9 +77,9 @@ namespace SkySwordKill.Next
             {
                 _isWinOpen = !_isWinOpen;
             }
-            
-            
-            if(rayBlocker == null)
+
+
+            if (rayBlocker == null)
                 return;
             if (isSelectedLanguage || nextLanguage == null)
             {
@@ -102,12 +101,12 @@ namespace SkySwordKill.Next
         {
             languageRect = new Rect(Screen.width / 2 - 200, Screen.height / 2 - 150, 400, 300);
             winRect = new Rect(W(0.1f), H(0.1f), W(0.8f), H(0.8f));
-            
-            if(isGUIInit)
+
+            if (isGUIInit)
                 return;
 
             rayBlocker = RayBlocker.CreateRayBlock();
-            
+
             labelTitleStyle = new GUIStyle("label")
             {
                 fontSize = 36,
@@ -121,13 +120,13 @@ namespace SkySwordKill.Next
             {
                 fontSize = 20,
                 alignment = TextAnchor.UpperLeft,
-                contentOffset = new Vector2(5,0),
+                contentOffset = new Vector2(5, 0),
             };
-            
+
             infoStyle = new GUIStyle(InterfaceMaker.CustomSkin.box)
             {
                 alignment = TextAnchor.UpperLeft,
-                contentOffset = new Vector2(5,0),
+                contentOffset = new Vector2(5, 0),
                 wordWrap = true
             };
 
@@ -149,7 +148,7 @@ namespace SkySwordKill.Next
             {
                 alignment = TextAnchor.UpperRight
             };
-            
+
             isGUIInit = true;
         }
 
@@ -159,7 +158,7 @@ namespace SkySwordKill.Next
 
             var oldSkin = GUI.skin;
             GUI.skin = InterfaceMaker.CustomSkin;
-            
+
             if (isSelectedLanguage || nextLanguage == null)
             {
                 GUILayout.Window(20, languageRect, DrawLanguageSelectWindow, $"Next v{MOD_VERSION}");
@@ -176,8 +175,6 @@ namespace SkySwordKill.Next
 
         #region 公共方法
 
-
-
         #endregion
 
         #region 私有方法
@@ -186,14 +183,14 @@ namespace SkySwordKill.Next
         {
             if (NextLanguage.languages.Count == 0)
             {
-                GUILayout.Label("请重写下载该Mod或下载Mod语言文件！",labelTitleStyle);
-                GUILayout.Label("Please re-download the Mod or download the Mod language file！",labelTitleStyle);
+                GUILayout.Label("请重写下载该Mod或下载Mod语言文件！", labelTitleStyle);
+                GUILayout.Label("Please re-download the Mod or download the Mod language file！", labelTitleStyle);
                 return;
             }
-            
-            GUILayout.Label("请选择Mod语言",labelMiddleStyle);
-            GUILayout.Label("Choose Mod Language",labelMiddleStyle);
-            
+
+            GUILayout.Label("请选择Mod语言", labelMiddleStyle);
+            GUILayout.Label("Choose Mod Language", labelMiddleStyle);
+
             scrollRollLanguages = GUILayout.BeginScrollView(scrollRollLanguages);
             {
                 foreach (var pair in NextLanguage.languages)
@@ -227,7 +224,7 @@ namespace SkySwordKill.Next
                     DrawMiscDebug();
                     break;
             }
-            
+
             GUILayout.FlexibleSpace();
 
             DrawBottomBar();
@@ -237,12 +234,12 @@ namespace SkySwordKill.Next
         {
             GUILayout.BeginHorizontal();
             {
-                GUILayout.Label(string.Format("HeaderBar.HotkeyTip".I18N(),winKeyCode.Value.ToString()));
+                GUILayout.Label(string.Format("HeaderBar.HotkeyTip".I18N(), winKeyCode.Value.ToString()));
                 // 该部分不简化是为了避免反复操作 debugMode.Value 属性
                 var debugModeOpen = GUILayout.Toggle(debugMode.Value, "HeaderBar.DebugMode".I18N());
                 if (debugModeOpen != debugMode.Value)
                     debugMode.Value = debugModeOpen;
-                
+
                 if (debugMode.Value)
                 {
                     string[] toolbarList =
@@ -260,7 +257,6 @@ namespace SkySwordKill.Next
                 }
 
                 GUILayout.FlexibleSpace();
-
 
                 // 该部分不简化是为了避免反复操作 openInStart.Value 属性
                 bool isPop = GUILayout.Toggle(openInStart.Value, "HeaderBar.OpenInStart".I18N());
@@ -292,6 +288,29 @@ namespace SkySwordKill.Next
         {
             GUILayout.BeginHorizontal();
             {
+                if (GUILayout.Button("HeaderBar.CheckUpdate".I18N()))
+                    Updater.CheckVersion();
+                if (Updater.IsChecking)
+                {
+                    GUILayout.Label("HeaderBar.CheckUpdating".I18N());
+                }
+                else if (!Updater.CheckSuccess)
+                {
+                    GUILayout.Label("HeaderBar.CheckUpdateFailure".I18N());
+                }
+                else
+                {
+                    if (Updater.HasNewVersion)
+                    {
+                        GUILayout.Label(string.Format("HeaderBar.CheckUpdateHasNewVersion".I18N(),
+                            Updater.CurVersionStr, Updater.NewVersionStr));
+                    }
+                    else
+                    {
+                        GUILayout.Label("HeaderBar.CheckUpdateIsNewVersion".I18N());
+                    }
+                }
+
                 GUILayout.FlexibleSpace();
                 if (debugMode.Value)
                 {
@@ -300,14 +319,16 @@ namespace SkySwordKill.Next
                         ModManager.GenerateBaseData();
                     }
                 }
+
                 var inMainScene = SceneManager.GetActiveScene().name == "MainMenu";
-                if(!inMainScene)
+                if (!inMainScene)
                     GUILayout.Label("HeaderBar.ReloadModTip".I18N());
                 GUI.enabled = inMainScene;
                 if (GUILayout.Button("HeaderBar.ReloadMod".I18N()))
                 {
                     ModManager.ReloadAllMod();
                 }
+
                 GUI.enabled = true;
                 if (GUILayout.Button("HeaderBar.ModFolder".I18N()))
                 {
@@ -315,66 +336,87 @@ namespace SkySwordKill.Next
                 }
             }
             GUILayout.EndHorizontal();
-            GUILayout.Label("Mod.List".I18N(),labelTitleStyle);
+            
+            GUILayout.BeginHorizontal();
+            {
+                if (GUILayout.Button("HeaderBar.Github".I18N()))
+                {
+                    Process.Start(Updater.WebGitHubUrl);
+                }
+                if (GUILayout.Button("HeaderBar.3dmBBS".I18N()))
+                {
+                    Process.Start(Updater.Web3dmBBSUrl);
+                }
+                if (GUILayout.Button("HeaderBar.3dmModSite".I18N()))
+                {
+                    Process.Start(Updater.Web3dmModSiteUrl);
+                }
+                
+                GUILayout.FlexibleSpace();
+            }
+            GUILayout.EndHorizontal();
+            
+            GUILayout.Label("Mod.List".I18N(), labelTitleStyle);
             GUILayout.BeginHorizontal();
             {
                 GUILayout.BeginVertical();
                 {
-                    scrollRollMods = GUILayout.BeginScrollView(scrollRollMods, false, false, 
-                        GUILayout.MinHeight(winRect.height * 0.7f-100),
-                        GUILayout.MinWidth(winRect.width * 0.6f-40),
-                        GUILayout.MaxWidth(winRect.width * 0.6f-40));
+                    scrollRollMods = GUILayout.BeginScrollView(scrollRollMods, false, false,
+                        GUILayout.MinHeight(winRect.height * 0.7f - 100),
+                        GUILayout.MinWidth(winRect.width * 0.6f - 40),
+                        GUILayout.MaxWidth(winRect.width * 0.6f - 40));
                     {
                         var mods = ModManager.modConfigs.Select(config =>
                         {
                             var configName = config.Name ?? "Mod.Unknown".I18N();
                             var modSetting = Instance.nextModSetting.GetOrCreateModSetting(config);
-                            
+
                             string modEnable = modSetting.enable ? "☑" : "□";
-                            
-                            return $"{modEnable} [{config.GetModStateDescription()}]  {configName} ({Path.GetFileNameWithoutExtension(config.Path)})";
+
+                            return
+                                $"{modEnable} [{config.GetModStateDescription()}]  {configName} ({Path.GetFileNameWithoutExtension(config.Path)})";
                         }).ToArray();
-                        
+
                         curModSelectedIndex = GUILayout.SelectionGrid(curModSelectedIndex, mods, 1, modToggleStyle);
                     }
                     GUILayout.EndScrollView();
-                    
+
                     if (ModManager.ModDataDirty)
                     {
                         GUILayout.Label("Mod.Panel.DataDirtyTip".I18N());
                     }
                 }
                 GUILayout.EndVertical();
-                
+
                 GUILayout.BeginVertical();
                 {
                     var modEnable = ModManager.ModGetEnable(curModSelectedIndex);
                     var btnText = modEnable ? "Mod.Panel.DisableMod".I18N() : "Mod.Panel.EnableMod".I18N();
-                    if (GUILayout.Button(btnText,GUILayout.MinHeight(40)))
+                    if (GUILayout.Button(btnText, GUILayout.MinHeight(40)))
                     {
-                        ModManager.ModSetEnable(curModSelectedIndex,!modEnable);
+                        ModManager.ModSetEnable(curModSelectedIndex, !modEnable);
                     }
-                        
+
                     GUILayout.Space(20);
-                        
+
                     if (GUILayout.Button("Mod.Panel.EnableAllMod".I18N()))
                     {
                         for (int i = 0; i < ModManager.modConfigs.Count; i++)
                         {
-                            ModManager.ModSetEnable(i,true);
+                            ModManager.ModSetEnable(i, true);
                         }
                     }
-                        
+
                     if (GUILayout.Button("Mod.Panel.DisableAllMod".I18N()))
                     {
                         for (int i = 0; i < ModManager.modConfigs.Count; i++)
                         {
-                            ModManager.ModSetEnable(i,false);
+                            ModManager.ModSetEnable(i, false);
                         }
                     }
-                    
+
                     GUILayout.Space(40);
-                    
+
                     if (GUILayout.Button("Mod.Panel.MoveToTop".I18N()))
                     {
                         ModManager.ModMoveToTop(ref curModSelectedIndex);
@@ -396,14 +438,14 @@ namespace SkySwordKill.Next
                     }
                 }
                 GUILayout.EndVertical();
-                
+
                 var rect = GUILayoutUtility.GetRect(GUIContent.none, GUI.skin.box,
-                    GUILayout.MinHeight(winRect.height * 0.7f-70));
+                    GUILayout.MinHeight(winRect.height * 0.7f - 70));
                 GUILayout.Space(5);
                 if (ModManager.TryGetModConfig(curModSelectedIndex, out var curMod))
                 {
                     var modPath = curMod.Path ?? "Mod.Unknown".I18N();
-                        
+
                     var modName = curMod.Name ?? "Mod.Unknown".I18N();
                     var modAuthor = curMod.Author ?? "Mod.Unknown".I18N();
                     var modVersion = curMod.Version ?? "Mod.Unknown".I18N();
@@ -413,19 +455,22 @@ namespace SkySwordKill.Next
                     {
                         GUILayout.BeginVertical();
                         {
-                            GUILayout.Label($"{"Mod.Name".I18N()} : {modName}",infoStyle);
+                            GUILayout.Label($"{"Mod.Name".I18N()} : {modName}", infoStyle);
                             GUILayout.Space(15);
-                            GUILayout.Label($"{"Mod.State".I18N()} : {curMod.GetModStateDescription()}",infoStyle);
+                            GUILayout.Label($"{"Mod.State".I18N()} : {curMod.GetModStateDescription()}", infoStyle);
                             if (curMod.Exception != null)
                             {
-                                GUILayout.Label($"{"Mod.Exception".I18N()} : {curMod.Exception.Message} \n\nException : {curMod.Exception}",modInfoExceptionStyle);
+                                GUILayout.Label(
+                                    $"{"Mod.Exception".I18N()} : {curMod.Exception.Message} \n\nException : {curMod.Exception}",
+                                    modInfoExceptionStyle);
                                 GUILayout.Space(15);
                             }
-                            GUILayout.Label($"{"Mod.Author".I18N()} : {modAuthor}",infoStyle);
-                            GUILayout.Label($"{"Mod.Version".I18N()} : {modVersion}",infoStyle);
-                            GUILayout.Label($"{"Mod.Description".I18N()} : {modDesc}",infoStyle);
+
+                            GUILayout.Label($"{"Mod.Author".I18N()} : {modAuthor}", infoStyle);
+                            GUILayout.Label($"{"Mod.Version".I18N()} : {modVersion}", infoStyle);
+                            GUILayout.Label($"{"Mod.Description".I18N()} : {modDesc}", infoStyle);
                             GUILayout.Space(15);
-                            GUILayout.Label($"{"Mod.Directory".I18N()} : {modPath}",infoStyle);
+                            GUILayout.Label($"{"Mod.Directory".I18N()} : {modPath}", infoStyle);
                         }
                         GUILayout.EndVertical();
                     }
@@ -437,14 +482,14 @@ namespace SkySwordKill.Next
 
         private void DrawDramaDebug()
         {
-            GUILayout.Label("DramaDebug.Title".I18N(),labelTitleStyle);
-            
+            GUILayout.Label("DramaDebug.Title".I18N(), labelTitleStyle);
+
             if (Tools.instance == null || Tools.instance.getPlayer() == null)
             {
-                GUILayout.Label("Mod.GameNotStart".I18N(),labelTitleStyle);
+                GUILayout.Label("Mod.GameNotStart".I18N(), labelTitleStyle);
                 return;
             }
-            
+
             var lastRect = GUILayoutUtility.GetLastRect();
             var lastHeight = lastRect.y + lastRect.height;
             var debugArea1 = new Rect(winRect)
@@ -454,7 +499,7 @@ namespace SkySwordKill.Next
                 width = winRect.width / 2 - 20,
                 height = winRect.height - (10 + 100)
             };
-            
+
             var debugArea2 = new Rect(winRect)
             {
                 x = winRect.width / 2 + 20,
@@ -462,7 +507,7 @@ namespace SkySwordKill.Next
                 width = winRect.width / 4 - 20,
                 height = winRect.height - (10 + 150)
             };
-            
+
             var debugArea3 = new Rect(winRect)
             {
                 x = winRect.width / 4 * 3,
@@ -470,20 +515,21 @@ namespace SkySwordKill.Next
                 width = winRect.width / 4 - 20,
                 height = winRect.height - (10 + 150)
             };
-            
+
             GUILayout.BeginArea(debugArea1);
             {
                 GUILayout.BeginHorizontal();
                 {
-                    GUILayout.Label($"当前状态：{(DialogAnalysis.IsRunningEvent ? "运行中" : "未运行")} 当前队列事件数量：{DialogAnalysis.EventQueue.Count}");
+                    GUILayout.Label(
+                        $"当前状态：{(DialogAnalysis.IsRunningEvent ? "运行中" : "未运行")} 当前队列事件数量：{DialogAnalysis.EventQueue.Count}");
                     if (GUILayout.Button("重置事件状态"))
                     {
                         DialogAnalysis.CancelEvent();
                     }
                 }
                 GUILayout.EndHorizontal();
-                
-                
+
+
                 GUILayout.BeginHorizontal();
                 {
                     GUILayout.Label("DramaDebug.DramaID".I18N());
@@ -501,7 +547,7 @@ namespace SkySwordKill.Next
                 {
                     if (GUILayout.Button("DramaDebug.Run".I18N()))
                     {
-                        if(!string.IsNullOrEmpty(testCommand))
+                        if (!string.IsNullOrEmpty(testCommand))
                             DialogAnalysis.StartTestDialogEvent(testCommand);
                     }
 
@@ -514,19 +560,20 @@ namespace SkySwordKill.Next
                     {
                         GUIUtility.systemCopyBuffer = JArray.FromObject(testCommand
                             .Split('\n')
-                            .Where(str=>!string.IsNullOrWhiteSpace(str))
+                            .Where(str => !string.IsNullOrWhiteSpace(str))
                             .ToArray()).ToString(Formatting.Indented);
                     }
                 }
                 GUILayout.EndHorizontal();
             }
             GUILayout.EndArea();
-            
+
             GUILayout.BeginArea(debugArea2);
             {
-                GUI.Box(debugArea2,"");
+                GUI.Box(debugArea2, "");
                 GUILayout.Label("DramaDebug.IntVariableDebugWin".I18N());
-                scrollRollDebugInt = GUILayout.BeginScrollView(scrollRollDebugInt, false, true, GUILayout.MinHeight(debugArea2.height - 50));
+                scrollRollDebugInt = GUILayout.BeginScrollView(scrollRollDebugInt, false, true,
+                    GUILayout.MinHeight(debugArea2.height - 50));
                 {
                     foreach (var pair in DialogAnalysis.GetAllInt())
                     {
@@ -538,19 +585,20 @@ namespace SkySwordKill.Next
                             height = 24,
                             width = rect.width - 20
                         };
-                        GUI.Label(infoRect,$"{pair.Key}",labelLeftStyle);
-                        GUI.Label(infoRect,$"{pair.Value}",labelRightStyle);
+                        GUI.Label(infoRect, $"{pair.Key}", labelLeftStyle);
+                        GUI.Label(infoRect, $"{pair.Value}", labelRightStyle);
                     }
                 }
                 GUILayout.EndScrollView();
             }
             GUILayout.EndArea();
-            
+
             GUILayout.BeginArea(debugArea3);
             {
-                GUI.Box(debugArea3,"");
+                GUI.Box(debugArea3, "");
                 GUILayout.Label("DramaDebug.StrVariableDebugWin".I18N());
-                scrollRollDebugString = GUILayout.BeginScrollView(scrollRollDebugString, false, true, GUILayout.MinHeight(debugArea3.height - 50));
+                scrollRollDebugString = GUILayout.BeginScrollView(scrollRollDebugString, false, true,
+                    GUILayout.MinHeight(debugArea3.height - 50));
                 {
                     foreach (var pair in DialogAnalysis.GetAllStr())
                     {
@@ -562,11 +610,11 @@ namespace SkySwordKill.Next
                             height = 24,
                             width = rect.width - 20
                         };
-                        GUI.Label(infoRect,$"{pair.Key}",labelLeftStyle);
-                        if(pair.Value.Length > 15)
-                            GUI.Label(infoRect,$"{pair.Value.Substring(0,15)}...",labelRightStyle);
+                        GUI.Label(infoRect, $"{pair.Key}", labelLeftStyle);
+                        if (pair.Value.Length > 15)
+                            GUI.Label(infoRect, $"{pair.Value.Substring(0, 15)}...", labelRightStyle);
                         else
-                            GUI.Label(infoRect,$"{pair.Value}",labelRightStyle);
+                            GUI.Label(infoRect, $"{pair.Value}", labelRightStyle);
                     }
                 }
                 GUILayout.EndScrollView();
@@ -576,21 +624,22 @@ namespace SkySwordKill.Next
 
         private void DrawNpcDebug()
         {
-            GUILayout.Label("NpcDebug.Title".I18N(),labelTitleStyle);
-            
+            GUILayout.Label("NpcDebug.Title".I18N(), labelTitleStyle);
+
             if (Tools.instance == null || Tools.instance.getPlayer() == null)
             {
-                GUILayout.Label("Mod.GameNotStart".I18N(),labelTitleStyle);
+                GUILayout.Label("Mod.GameNotStart".I18N(), labelTitleStyle);
                 return;
             }
-            
+
             GUILayout.BeginHorizontal();
             {
                 GUILayout.BeginVertical(GUILayout.MinWidth(winRect.width * 0.2f));
                 {
                     GUILayout.BeginHorizontal();
                     {
-                        inputNpcSearch = GUILayout.TextField(inputNpcSearch,GUILayout.MinWidth(winRect.width * 0.2f - 100));
+                        inputNpcSearch =
+                            GUILayout.TextField(inputNpcSearch, GUILayout.MinWidth(winRect.width * 0.2f - 100));
                         GUILayout.FlexibleSpace();
                         if (GUILayout.Button("NpcDebug.Search".I18N()))
                         {
@@ -598,18 +647,18 @@ namespace SkySwordKill.Next
                         }
                     }
                     GUILayout.EndHorizontal();
-                    
+
                     var maxPage = (npcDataListName.Length - 1) / countEachPage;
                     GUILayout.BeginHorizontal();
                     {
                         var oldState = GUI.enabled;
-                        
+
                         GUI.enabled = curNpcSelectedPage > 0;
                         if (GUILayout.Button("NpcDebug.PgUp".I18N()))
                         {
                             curNpcSelectedPage -= 1;
                         }
-                        
+
                         GUI.enabled = curNpcSelectedPage < maxPage;
                         if (GUILayout.Button("NpcDebug.PgDn".I18N()))
                         {
@@ -621,7 +670,7 @@ namespace SkySwordKill.Next
                     GUILayout.EndHorizontal();
                     GUILayout.Label(
                         string.Format("NpcDebug.PageInfo".I18N(), curNpcSelectedPage + 1, maxPage + 1));
-                    
+
                     scrollRollDebugNpcs = GUILayout.BeginScrollView(scrollRollDebugNpcs, false, false);
                     {
                         var nameArray = npcDataListName.Where(
@@ -630,18 +679,16 @@ namespace SkySwordKill.Next
                         curNpcSelectedIndex = GUILayout.SelectionGrid(curNpcSelectedIndex, nameArray, 1);
                     }
                     GUILayout.EndScrollView();
-
-                    
                 }
                 GUILayout.EndVertical();
-                
+
                 GUILayout.BeginVertical();
                 {
                     GUILayout.Space(5);
                     var npcData = GetCurSelectNpcData();
                     if (npcData != null)
                     {
-                        if(curNpcData != npcData)
+                        if (curNpcData != npcData)
                         {
                             try
                             {
@@ -655,53 +702,66 @@ namespace SkySwordKill.Next
                                 goto EndNpc;
                             }
                         }
-                        
+
                         GUILayout.BeginHorizontal();
                         {
                             GUILayout.BeginVertical();
                             {
-                                scrollRollDebugNpcInfo = GUILayout.BeginScrollView(scrollRollDebugNpcInfo, false, false);
+                                scrollRollDebugNpcInfo =
+                                    GUILayout.BeginScrollView(scrollRollDebugNpcInfo, false, false);
                                 {
                                     GUILayout.Label(string.Format("NpcDebug.Info.ID".I18N(), npcData.ID), infoStyle);
                                     if (npcData.ImportantID > 0)
                                     {
-                                        GUILayout.Label(string.Format("NpcDebug.Info.BindingID".I18N(), npcData.ImportantID), infoStyle);
+                                        GUILayout.Label(
+                                            string.Format("NpcDebug.Info.BindingID".I18N(), npcData.ImportantID),
+                                            infoStyle);
                                     }
                                     else
                                     {
                                         GUILayout.Label("NpcDebug.Info.NotBinding".I18N(), infoStyle);
                                     }
-                            
+
                                     GUILayout.Space(16);
-                                    GUILayout.Label(string.Format("NpcDebug.Info.Name".I18N(), npcData.Name), infoStyle);
-                                    GUILayout.Label(string.Format("NpcDebug.Info.Title".I18N(), npcData.Title), infoStyle);
+                                    GUILayout.Label(string.Format("NpcDebug.Info.Name".I18N(), npcData.Name),
+                                        infoStyle);
+                                    GUILayout.Label(string.Format("NpcDebug.Info.Title".I18N(), npcData.Title),
+                                        infoStyle);
                                     GUILayout.Label(
                                         string.Format("NpcDebug.Info.School".I18N(),
                                             DialogAnalysis.GetSchoolName(npcData.School.ToString())), infoStyle);
-                                    GUILayout.Label(string.Format("NpcDebug.Info.Location".I18N(), npcData.LocationName), infoStyle);
-                            
-                                    GUILayout.Space(16);
-                                    GUILayout.Label(string.Format("NpcDebug.Info.Level".I18N(), DialogAnalysis.GetLevelName(npcData.Level)), infoStyle);
                                     GUILayout.Label(
-                                        string.Format("NpcDebug.Info.Gender".I18N(), DialogAnalysis.GetGenderName(npcData.Gender)), infoStyle);
-                                    GUILayout.Label(string.Format("NpcDebug.Info.Age".I18N(), npcData.AgeYear), infoStyle);
-                                    GUILayout.Label(string.Format("NpcDebug.Info.Life".I18N(), npcData.Life), infoStyle);
-                                    if(npcData.IsCouple)
-                                        GUILayout.Label("NpcDebug.Info.Relation.Couple".I18N(), infoStyle);
-                                    if(npcData.IsTeacher)
-                                        GUILayout.Label("NpcDebug.Info.Relation.Teacher".I18N(), infoStyle);
-                                    if(npcData.IsStudent)
-                                        GUILayout.Label("NpcDebug.Info.Relation.Student".I18N(), infoStyle);
-                                    if(npcData.IsBrother)
-                                        GUILayout.Label("NpcDebug.Info.Relation.Brother".I18N(), infoStyle);
-                            
+                                        string.Format("NpcDebug.Info.Location".I18N(), npcData.LocationName),
+                                        infoStyle);
+
                                     GUILayout.Space(16);
-                                    GUILayout.Label(string.Format("NpcDebug.Info.Sprite".I18N(), npcData.Sprite), infoStyle);
+                                    GUILayout.Label(
+                                        string.Format("NpcDebug.Info.Level".I18N(),
+                                            DialogAnalysis.GetLevelName(npcData.Level)), infoStyle);
+                                    GUILayout.Label(
+                                        string.Format("NpcDebug.Info.Gender".I18N(),
+                                            DialogAnalysis.GetGenderName(npcData.Gender)), infoStyle);
+                                    GUILayout.Label(string.Format("NpcDebug.Info.Age".I18N(), npcData.AgeYear),
+                                        infoStyle);
+                                    GUILayout.Label(string.Format("NpcDebug.Info.Life".I18N(), npcData.Life),
+                                        infoStyle);
+                                    if (npcData.IsCouple)
+                                        GUILayout.Label("NpcDebug.Info.Relation.Couple".I18N(), infoStyle);
+                                    if (npcData.IsTeacher)
+                                        GUILayout.Label("NpcDebug.Info.Relation.Teacher".I18N(), infoStyle);
+                                    if (npcData.IsStudent)
+                                        GUILayout.Label("NpcDebug.Info.Relation.Student".I18N(), infoStyle);
+                                    if (npcData.IsBrother)
+                                        GUILayout.Label("NpcDebug.Info.Relation.Brother".I18N(), infoStyle);
+
+                                    GUILayout.Space(16);
+                                    GUILayout.Label(string.Format("NpcDebug.Info.Sprite".I18N(), npcData.Sprite),
+                                        infoStyle);
                                 }
                                 GUILayout.EndScrollView();
                             }
                             GUILayout.EndVertical();
-                            
+
                             GUILayout.BeginVertical(GUILayout.MinWidth(winRect.width * 0.2f));
                             {
                                 if (GUILayout.Button("NpcDebug.Info.Func.Refresh".I18N()))
@@ -717,11 +777,13 @@ namespace SkySwordKill.Next
                                         SearchNpc(null);
                                     }
                                 }
+
                                 GUILayout.Space(16);
                                 if (GUILayout.Button("NpcDebug.Info.Func.ForceInteract".I18N()))
                                 {
                                     DialogAnalysis.NpcForceInteract(npcData.ID);
                                 }
+
                                 GUILayout.Space(16);
                                 if (GUILayout.Button("NpcDebug.Info.Func.ExportFaceInfo".I18N()))
                                 {
@@ -730,11 +792,13 @@ namespace SkySwordKill.Next
                                     {
                                         var jsonData = JObject.FromObject(faceInfo);
                                         GUIUtility.systemCopyBuffer = jsonData.ToString(Formatting.Indented);
-                                        LogInfo(string.Format("NpcDebug.Info.Func.ExportFaceInfo.Success".I18N(), npcData.ID, npcData.Name));
+                                        LogInfo(string.Format("NpcDebug.Info.Func.ExportFaceInfo.Success".I18N(),
+                                            npcData.ID, npcData.Name));
                                     }
                                     else
                                     {
-                                        LogError(string.Format("NpcDebug.Info.Func.ExportFaceInfo.Failure".I18N(), npcData.ID, npcData.Name));
+                                        LogError(string.Format("NpcDebug.Info.Func.ExportFaceInfo.Failure".I18N(),
+                                            npcData.ID, npcData.Name));
                                     }
                                 }
                             }
@@ -742,6 +806,7 @@ namespace SkySwordKill.Next
                         }
                         GUILayout.EndHorizontal();
                     }
+
                     EndNpc:
 
                     curNpcData = npcData;
@@ -750,11 +815,11 @@ namespace SkySwordKill.Next
             }
             GUILayout.EndHorizontal();
         }
-        
+
         private void DrawMiscDebug()
         {
-            GUILayout.Label("Misc.Title".I18N(),labelTitleStyle);
-            
+            GUILayout.Label("Misc.Title".I18N(), labelTitleStyle);
+
             GUILayout.BeginHorizontal();
             {
                 GUILayout.BeginVertical(GUILayout.MaxWidth(winRect.width * 0.4f));
@@ -770,6 +835,7 @@ namespace SkySwordKill.Next
                             var jsonData = JObject.FromObject(faceInfo);
                             inputPlayerFaceJson = jsonData.ToString(Formatting.Indented);
                         }
+
                         if (GUILayout.Button($"Misc.ImportPlayerFace".I18N()))
                         {
                             var faceInfo = JObject.Parse(inputPlayerFaceJson).ToObject<CustomStaticFaceInfo>();
@@ -779,7 +845,7 @@ namespace SkySwordKill.Next
                     GUILayout.EndHorizontal();
                 }
                 GUILayout.EndVertical();
-                
+
                 GUILayout.BeginVertical();
                 {
                     GUILayout.BeginHorizontal();
@@ -788,6 +854,7 @@ namespace SkySwordKill.Next
                         {
                             Main.Instance.luaManager.ClearCache();
                         }
+
                         if (GUILayout.Button("重载Lua虚拟机"))
                         {
                             Main.Instance.luaManager.Reset();
@@ -808,25 +875,24 @@ namespace SkySwordKill.Next
             npcDataList.Clear();
 
             bool noFilter = string.IsNullOrWhiteSpace(searchFilter);
-            
+
             foreach (var jsonObject in jsonData.instance.AvatarJsonData.list)
             {
                 var npcId = jsonObject["id"].I;
-                if(npcId < 20000)
+                if (npcId < 20000)
                     continue;
                 var npcData = new SearchNpcData();
                 npcData.ID = npcId;
-                
+
                 npcData.Refresh();
-                
-                if(noFilter || npcData.FilterCheck(searchFilter))
+
+                if (noFilter || npcData.FilterCheck(searchFilter))
                     npcDataList.Add(npcData);
             }
 
             npcDataListName = npcDataList.Select(data => data.ToString()).ToArray();
         }
 
-        
 
         private SearchNpcData GetCurSelectNpcData()
         {
@@ -843,14 +909,12 @@ namespace SkySwordKill.Next
         {
             return Screen.width * size;
         }
-        
+
         private float H(float size)
         {
             return Screen.height * size;
         }
 
         #endregion
-
-        
     }
 }

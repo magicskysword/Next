@@ -23,7 +23,7 @@ namespace SkySwordKill.Next
                     var json = File.ReadAllText(filePath);
                     nextModSetting = JObject.Parse(json).ToObject<NextModSetting>();
                 }
-                catch (Exception _)
+                catch (Exception)
                 {
                     // ignored
                 }
