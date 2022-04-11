@@ -131,6 +131,7 @@
     "Gender.Unknown" : "Unknown",
 
     "Updater.GetVersionJsonFailure" : "Failed to get updates.",
-    "Updater.JsonParseFailure" : "Json parsing failure."
+    "Updater.JsonParseFailure" : "Json parsing failure.",
+    "Updater.DownloadFailure" : "Failed to download version file."
   }
 }

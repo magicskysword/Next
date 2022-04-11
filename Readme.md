@@ -26,6 +26,11 @@ Mod WiKi：[Next Wiki](https://michangshengnext.fandom.com/zh/wiki/%E8%A7%85%E9%
 3dm  ゞ残月﹎_|  Villain Mod的框架思路<br>
 @玄武 赞助者
 
+## 下载地址
+[Github Release](https://github.com/magicskysword/Next/releases/latest)
+[3DM 论坛](https://bbs.3dmgame.com/thread-6207429-1-1.html)
+[3DM Mod站](https://mod.3dmgame.com/mod/178805)
+
 ## Build
 clone该库后，自行重新添加觅长生游戏文件夹里的Dll引用，包括
 

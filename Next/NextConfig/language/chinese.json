@@ -131,6 +131,7 @@
     "Gender.Unknown" : "未知",
     
     "Updater.GetVersionJsonFailure" : "版本Json获取失败",
-    "Updater.JsonParseFailure" : "Json解析失败"
+    "Updater.JsonParseFailure" : "Json解析失败",
+    "Updater.DownloadFailure" : "版本Json下载失败"
   }
 }

@@ -23,6 +23,11 @@ The mod menu can be opened through F4 in the game (the keys can be modified)
 3dm  ゞ残月﹎_|  Villain mod framework ideas<br>
 @玄武 Sponsor
 
+## Download
+[Github Release](https://github.com/magicskysword/Next/releases/latest)
+[3DM BBS](https://bbs.3dmgame.com/thread-6207429-1-1.html)
+[3DM Mod Site](https://mod.3dmgame.com/mod/178805)
+
 ## Build
 
 Clone the library, add the Dll references in the game folder, including

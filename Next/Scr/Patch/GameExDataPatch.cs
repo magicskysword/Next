@@ -15,6 +15,16 @@ namespace SkySwordKill.Next.Patch
             }
         }
         
+        [HarmonyPatch(typeof(CreateNewPlayerFactory),"createPlayer")]
+        public class OnCreatePlayer
+        {
+            [HarmonyPrefix]
+            public static void Prefix()
+            {
+                DialogAnalysis.ResetAvatarNextData();
+            }
+        }
+        
         [HarmonyPatch(typeof(StartGame),"addAvatar")]
         public class OnLoadInStart
         {

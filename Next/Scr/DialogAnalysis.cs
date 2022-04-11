@@ -423,7 +423,5 @@ namespace SkySwordKill.Next
         }
 
         #endregion
-
-        
     }
 }

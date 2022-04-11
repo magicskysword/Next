@@ -156,6 +156,31 @@ namespace SkySwordKill.Next
         {
             GUIInit();
 
+            try
+            {
+                OnDrawModPanel();
+            }
+            catch (ArgumentException argumentException)
+            {
+                LogWarning("UI绘制异常");
+                LogWarning(argumentException);
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+            }
+        }
+
+        #endregion
+
+        #region 公共方法
+
+        #endregion
+
+        #region 私有方法
+
+        private void OnDrawModPanel()
+        {
             var oldSkin = GUI.skin;
             GUI.skin = InterfaceMaker.CustomSkin;
 
@@ -170,14 +195,6 @@ namespace SkySwordKill.Next
 
             GUI.skin = oldSkin;
         }
-
-        #endregion
-
-        #region 公共方法
-
-        #endregion
-
-        #region 私有方法
 
         private void DrawLanguageSelectWindow(int id)
         {

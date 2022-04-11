@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using SkySwordKill.Next.Extension;
 
@@ -14,7 +15,8 @@ namespace SkySwordKill.Next
             public string Version { get; set; }
         }
 
-        public static string VersionJsonUrl => "https://raw.githubusercontent.com/magicskysword/Next/main/version.json";
+        public static string VersionJsonUrlGithub => "https://raw.githubusercontent.com/magicskysword/Next/main/version.json";
+        public static string VersionJsonUrlGitee => "https://gitee.com/magicskysword/Next/raw/main/version.json";
         public static string WebGitHubUrl => "https://github.com/magicskysword/Next/releases/latest";
         public static string Web3dmBBSUrl => "https://bbs.3dmgame.com/thread-6207429-1-1.html";
         public static string Web3dmModSiteUrl => "https://mod.3dmgame.com/mod/178805";
@@ -31,10 +33,9 @@ namespace SkySwordKill.Next
             
             CheckSuccess = false;
             IsChecking = true;
-            WebClient wc = new WebClient();
-            var result = await wc.DownloadStringTaskAsync(VersionJsonUrl);
             try
             {
+                var result = await DownloadVersionJson();
                 var data = JObject.Parse(result).ToObject<VersionJson>();
                 if (data == null)
                     throw new Exception("Updater.JsonParseFailure".I18N());
@@ -47,6 +48,28 @@ namespace SkySwordKill.Next
                 CheckSuccess = false;
             }
             IsChecking = false;
+        }
+
+        private static async Task<string> DownloadVersionJson()
+        {
+            WebClient wc = new WebClient();
+            try
+            {
+                return await wc.DownloadStringTaskAsync(VersionJsonUrlGithub);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+            try
+            {
+                return await wc.DownloadStringTaskAsync(VersionJsonUrlGitee);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+            throw new Exception("Updater.DownloadFailure".I18N());
         }
 
         private static void CompareVersion(string getVersionStr)

@@ -25,7 +25,7 @@ namespace SkySwordKill.Next.DialogEvent
                 var fightType = (Fungus.StartFight.FightEnumType)command.GetInt(2);
             
                 var background = command.GetInt(3);
-                var music = command.GetInt(4);
+                var music = command.GetStr(4);
             
                 var playerBuffStr = command.GetStr(5);
                 var enemyBuffStr = command.GetStr(6);

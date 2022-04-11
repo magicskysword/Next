@@ -172,7 +172,7 @@ namespace SkySwordKill.Next
             {
                 var path = $"{savePath}/{fileName}";
                 if (AvatarNextData == null)
-                    throw new NullReferenceException("AvatarNextData not exist！");
+                    AvatarNextData = new AvatarNextData();
                 var jsonData = JObject.FromObject(AvatarNextData);
                 File.WriteAllText(path, jsonData.ToString(Formatting.None));
             }
@@ -181,6 +181,11 @@ namespace SkySwordKill.Next
                 Main.LogError($"保存Next存档数据失败！");
                 Main.LogError(e);
             }
+        }
+        
+        public static void ResetAvatarNextData()
+        {
+            AvatarNextData = new AvatarNextData();
         }
         
         public static void SetIntOld(string group,string key,int value)
