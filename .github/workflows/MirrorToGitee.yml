@@ -1,0 +1,23 @@
+# This is a basic workflow to help you get started with Actions
+on:
+  push:
+  pull_request_target:
+    branches: [master]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  run:
+    name: Run
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - name: Mirror the Github organization repos to Gitee.
+      uses: magicskysword/Next@master
+      with:
+        src: github/magicskysword
+        dst: gitee/magicskysword
+        dst_key: ${{ secrets.GITEEKEY }}
+        dst_token: ${{ secrets.GITEETOKEN }}
+        account_type: user
+        static_list: "Next"
