@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="200,10" extention="ScrollBar">
+  <displayList>
+    <graph id="n0_10zy0" name="n0" xy="0,0" size="200,10" touchable="false" type="rect" lineSize="0" fillColor="#ff3e4247">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n1_10zy0" name="bar" xy="0,0" size="200,10">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <component id="n2_10zy0" name="grip" src="nkvz2k" fileName="Component/ScrollBar/ScrollBarV_grip.xml" xy="20,0" size="20,10" restrictSize="20,0,0,0">
+      <relation target="" sidePair="height-height"/>
+    </component>
+  </displayList>
+  <ScrollBar/>
+</component>

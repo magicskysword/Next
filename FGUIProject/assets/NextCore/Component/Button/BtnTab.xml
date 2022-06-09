@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="55,28" overflow="hidden" extention="Button">
+  <controller name="button" pages="2,up,3,down,4,over,5,selectedOver" selected="0"/>
+  <displayList>
+    <image id="n0_10zy0" name="n0" src="nkvz1i" fileName="Image/frame.png" xy="-1,0" size="57,32" color="#21252b">
+      <gearColor controller="button" pages="3,5" values="#2b3139|#2b3139" default="#21252b"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <graph id="n3_10zy0" name="n3" xy="3,2" size="49,2" type="rect" lineColor="#ff4992e0" fillColor="#ff4992e0">
+      <gearDisplay controller="button" pages="3,5"/>
+      <relation target="" sidePair="width-width"/>
+    </graph>
+    <component id="n1_10zy0" name="closeButton" src="nkvz1p" fileName="Component/Button/BtnCloseTab.xml" xy="38,11" size="12,12">
+      <gearDisplay controller="button" pages="3,4,5"/>
+      <relation target="" sidePair="right-right"/>
+    </component>
+    <loader id="n2_10zy0" name="icon" xy="5,6" size="20,20" url="ui://028qk31hnkvz1n" fill="scale"/>
+    <text id="n4_10zy0" name="title" xy="26,6" size="10,19" fontSize="12" color="#959595" text="">
+      <relation target="" sidePair="middle-middle"/>
+    </text>
+  </displayList>
+  <Button mode="Radio"/>
+  <relation target="n4_10zy0" sidePair="width-width"/>
+</component>

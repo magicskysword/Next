@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="64,25" extention="Button" bgColor="#cccccc">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="2"/>
+  <displayList>
+    <graph id="n9_tcay" name="n9" xy="0,0" size="64,25" type="rect" lineSize="0" fillColor="#ff484e59" corner="3">
+      <gearColor controller="button" pages="1,2,3" values="#33383f|#484e59|#33383f" default="#3d424b"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <text id="n6_sy2r" name="title" xy="0,0" size="64,25" fontSize="14" color="#ffffff" align="center" vAlign="middle" autoSize="none" autoClearText="true" text="X">
+      <relation target="" sidePair="width-width,height-height"/>
+    </text>
+  </displayList>
+  <Button/>
+</component>

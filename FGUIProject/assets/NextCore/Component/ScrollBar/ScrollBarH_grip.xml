@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="20,10" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <graph id="n0_10zy0" name="n0" xy="0,0" size="20,10" alpha="0.6" touchable="false" type="rect" lineSize="0" fillColor="#ff9badb7" corner="5">
+      <gearLook controller="button" pages="0" values="0.6,0,0,0" default="1,0,0,0" tween="true"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+  </displayList>
+  <Button/>
+</component>

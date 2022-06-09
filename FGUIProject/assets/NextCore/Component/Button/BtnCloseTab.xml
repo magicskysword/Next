@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="12,12" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <image id="n0_10zy0" name="n0" src="nkvz1q" fileName="Image/icon_colse.png" xy="0,0" pivot="0.5,0.5" size="12,12">
+      <gearColor controller="button" pages="1,2,3" values="#e3a7a3|#e3a7a3|#e3a7a3" default="#ffffff" tween="true"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+  </displayList>
+  <Button/>
+</component>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="028qk31h">
+  <resources>
+    <component id="q7os0" name="ModMainPanel.xml" path="/Window/" exported="true"/>
+    <component id="cnag1" name="WindowFrame.xml" path="/Component/Frame/"/>
+    <font id="cnag2" name="Alibaba-PuHuiTi-Medium.ttf" path="/Font/" renderMode="smooth" samplePointSize="16"/>
+    <component id="cnag3" name="WindowFrameTranslucency.xml" path="/Component/Frame/"/>
+    <image id="nkvz4" name="icon_TrueAndFalse2.png" path="/Image/"/>
+    <component id="nkvz5" name="BtnClose.xml" path="/Component/Button/"/>
+    <component id="nkvz1f" name="BtnCommon.xml" path="/Component/Button/"/>
+    <component id="nkvz1g" name="BtnOK.xml" path="/Component/Button/"/>
+    <component id="nkvz1h" name="BtnMenuItem.xml" path="/Component/Button/"/>
+    <image id="nkvz1i" name="frame.png" path="/Image/" scale="9grid" scale9grid="8,8,48,48"/>
+    <component id="nkvz1j" name="BtnTreeItem.xml" path="/Component/Button/" exported="true"/>
+    <component id="nkvz1k" name="BtnExpand.xml" path="/Component/Button/"/>
+    <image id="nkvz1l" name="icon_arrow4.png" path="/Image/"/>
+    <image id="nkvz1m" name="icon_arrow2.png" path="/Image/"/>
+    <image id="nkvz1n" name="icon_tool1.png" path="/Image/" exported="true"/>
+    <component id="nkvz1o" name="BtnTab.xml" path="/Component/Button/" exported="true"/>
+    <component id="nkvz1p" name="BtnCloseTab.xml" path="/Component/Button/"/>
+    <image id="nkvz1q" name="icon_colse.png" path="/Image/"/>
+    <component id="nkvz1r" name="BtnEdit.xml" path="/Component/Button/"/>
+    <image id="nkvz1s" name="icon_edit.png" path="/Image/"/>
+    <component id="nkvz1t" name="ComboBox_item.xml" path="/Component/ComboBox/"/>
+    <component id="nkvz1u" name="ComboBox_popup.xml" path="/Component/ComboBox/"/>
+    <image id="nkvz1v" name="shadow_flat.png" path="/Image/" scale="9grid" scale9grid="6,6,20,20"/>
+    <component id="nkvz1w" name="ComboBox.xml" path="/Component/ComboBox/" exported="true"/>
+    <component id="nkvz1x" name="ComStringDrawer.xml" path="/Component/Drawer/" exported="true"/>
+    <component id="nkvz1y" name="ComIntDrawer.xml" path="/Component/Drawer/" exported="true"/>
+    <image id="nkvz1z" name="icon_warning.png" path="/Image/"/>
+    <component id="nkvz20" name="ComFloatDrawer.xml" path="/Component/Drawer/" exported="true"/>
+    <component id="nkvz21" name="ComStringAreaDrawer.xml" path="/Component/Drawer/" exported="true"/>
+    <component id="nkvz22" name="ComIntBindDataDrawer.xml" path="/Component/Drawer/" exported="true"/>
+    <component id="nkvz23" name="ComDropdownDrawer.xml" path="/Component/Drawer/" exported="true"/>
+    <component id="nkvz24" name="ComMainHeader.xml" path="/Component/PanelCom/" exported="true"/>
+    <component id="nkvz25" name="ComMainProject.xml" path="/Component/PanelCom/" exported="true"/>
+    <image id="nkvz26" name="inputFrame.png" path="/Image/" scale="9grid" scale9grid="16,16,32,32"/>
+    <component id="nkvz27" name="ScrollBarV.xml" path="/Component/ScrollBar/" exported="true"/>
+    <component id="nkvz28" name="ScrollBarV_grip.xml" path="/Component/ScrollBar/"/>
+    <component id="nkvz29" name="ComMainDocumentView.xml" path="/Component/PanelCom/" exported="true"/>
+    <component id="nkvz2a" name="ScrollBarTab.xml" path="/Component/ScrollBar/" exported="true"/>
+    <component id="nkvz2b" name="ComTableList.xml" path="/Component/Table/" exported="true"/>
+    <component id="nkvz2c" name="LabelTableGridHeader.xml" path="/Component/Table/" exported="true"/>
+    <component id="nkvz2d" name="ComTableRow.xml" path="/Component/Table/" exported="true"/>
+    <component id="nkvz2e" name="LabelTableGrid.xml" path="/Component/Table/" exported="true"/>
+    <component id="nkvz2f" name="ComMainInspector.xml" path="/Component/PanelCom/" exported="true"/>
+    <component id="nkvz2g" name="ComMainFooter.xml" path="/Component/PanelCom/" exported="true"/>
+    <component id="nkvz2h" name="PopupMenu_item.xml" path="/Component/Popup/"/>
+    <image id="nkvz2i" name="icon_TrueAndFalse1.png" path="/Image/"/>
+    <component id="nkvz2j" name="PopupMenu.xml" path="/Component/Popup/" exported="true"/>
+    <component id="nkvz2k" name="ScrollBarH_grip.xml" path="/Component/ScrollBar/"/>
+    <component id="nkvz2l" name="ScrollBarH.xml" path="/Component/ScrollBar/" exported="true"/>
+    <component id="nkvz2m" name="WindowFrame2.xml" path="/Component/Frame/"/>
+    <image id="nkvz2n" name="slider4.png" path="/Image/"/>
+    <image id="nkvz2o" name="slider3.png" path="/Image/"/>
+    <image id="nkvz2p" name="slider2.png" path="/Image/"/>
+    <image id="nkvz2q" name="slider1.png" path="/Image/"/>
+    <image id="nkvz2r" name="icon_tool3.png" path="/Image/"/>
+    <image id="nkvz2s" name="icon_tool2.png" path="/Image/"/>
+    <image id="nkvz2t" name="icon_drag.png" path="/Image/"/>
+    <image id="nkvz2u" name="icon_arrow3.png" path="/Image/"/>
+    <image id="nkvz2v" name="icon_arrow1.png" path="/Image/"/>
+    <image id="nkvz2w" name="toggle1.png" path="/Image/"/>
+    <image id="nkvz2x" name="toggle2.png" path="/Image/"/>
+    <image id="nkvz2y" name="shadow_radial.png" path="/Image/" scale="9grid"/>
+    <image id="nkvz2z" name="Radial Filled 32px.png" path="/Image/" scale="9grid"/>
+    <component id="nkvz31" name="WinStringInputDialog.xml" path="/Popup/" exported="true"/>
+    <component id="nkvz32" name="WinConfirmDialog.xml" path="/Popup/" exported="true"/>
+    <component id="nkvz33" name="WinSelectorDialog.xml" path="/Popup/" exported="true"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

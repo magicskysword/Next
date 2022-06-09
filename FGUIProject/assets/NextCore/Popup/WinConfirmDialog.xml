@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="350,100">
+  <displayList>
+    <component id="n0_tcay" name="frame" src="nkvz2m" fileName="Component/WindowFrame/WindowFrame.xml" xy="0,0" size="350,100">
+      <relation target="" sidePair="width-width,height-height"/>
+    </component>
+    <text id="n1_tcay" name="text" xy="11,32" size="330,22" fontSize="14" color="#ffffff" autoSize="height" autoClearText="true" text=""/>
+    <component id="n2_tcay" name="btnOk" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="107,65">
+      <relation target="" sidePair="bottom-bottom"/>
+      <Button title="确定"/>
+    </component>
+    <component id="n3_tcay" name="closeButton" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="191,65">
+      <relation target="" sidePair="bottom-bottom"/>
+      <Button title="取消"/>
+    </component>
+  </displayList>
+  <relation target="n1_tcay" sidePair="height-height"/>
+</component>

@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 3448704808
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: next_fairygui
+      Dependencies: {}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="612,466" bgColorEnabled="true" bgColor="#3e4247">
+  <displayList>
+    <graph id="n1_10zy0" name="n1" xy="0,0" size="612,30" type="rect" lineSize="0" fillColor="#ff21252b">
+      <relation target="" sidePair="width-width"/>
+    </graph>
+    <graph id="n2_10zy0" name="n2" xy="0,30" size="612,436" type="rect" lineSize="0" lineColor="#ff21252b" fillColor="#ff2c313c">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <list id="n0_10zy0" name="lstTab" xy="0,0" size="612,32" layout="row" overflow="scroll" scroll="horizontal" scrollBarFlags="164" scrollBar="auto" margin="0,0,0,20" scrollBarMargin="0,0,1,1" scrollBarRes=",ui://028qk31hnkvz2a" defaultItem="ui://028qk31hnkvz1o" autoItemSize="false" autoClearItems="true">
+      <relation target="" sidePair="width-width"/>
+      <item title="Mod信息"/>
+      <item title="游戏物品"/>
+      <item title="请教物品"/>
+      <item title="功法"/>
+      <item title="神通"/>
+    </list>
+    <list id="n6_10zy0" name="content" xy="0,32" size="612,434" layout="pagination" lineItemCount="1" lineItemCount2="1" autoItemSize="true" autoClearItems="true" scrollItemToViewOnClick="false">
+      <relation target="" sidePair="width-width,height-height"/>
+      <item url="ui://028qk31hnkvz2b"/>
+    </list>
+  </displayList>
+</component>
