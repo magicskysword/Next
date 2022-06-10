@@ -1,0 +1,23 @@
+{
+	"buffid":11001,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"天道压制",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		182,
+		106,
+		5,
+		17
+	],
+	"descr":"【极难】你受到的所有伤害提升50%，对手受到的所有伤害降低50%",
+	"trigger":23,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

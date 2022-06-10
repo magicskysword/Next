@@ -1,0 +1,18 @@
+{
+	"buffid":410,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"三阳玄火变",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[],
+	"descr":"每释放过一种不同的【异火】神通，对手在本场战斗中受到的火系伤害便提升（attack）%",
+	"trigger":29,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

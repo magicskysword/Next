@@ -1,0 +1,20 @@
+{
+	"buffid":9128,
+	"BuffIcon":9001,
+	"skillEffect":"fx_Summoner_o",
+	"name":"妖兽天赋·龙甲",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		11
+	],
+	"descr":"每次受到技能伤害时，对敌方造成8点伤害。",
+	"trigger":29,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

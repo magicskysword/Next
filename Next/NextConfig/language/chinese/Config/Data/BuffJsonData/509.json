@@ -1,0 +1,18 @@
+{
+	"buffid":509,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"废弃",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[],
+	"descr":"每使用耗灵气6点或以上的土系技能技能，获得【尘】*（attack）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

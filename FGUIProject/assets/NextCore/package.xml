@@ -64,9 +64,9 @@
     <image id="nkvz2x" name="toggle2.png" path="/Image/"/>
     <image id="nkvz2y" name="shadow_radial.png" path="/Image/" scale="9grid"/>
     <image id="nkvz2z" name="Radial Filled 32px.png" path="/Image/" scale="9grid"/>
-    <component id="nkvz31" name="WinStringInputDialog.xml" path="/Popup/" exported="true"/>
-    <component id="nkvz32" name="WinConfirmDialog.xml" path="/Popup/" exported="true"/>
-    <component id="nkvz33" name="WinSelectorDialog.xml" path="/Popup/" exported="true"/>
+    <component id="nkvz31" name="WinStringInputDialog.xml" path="/Dialog/" exported="true"/>
+    <component id="nkvz32" name="WinConfirmDialog.xml" path="/Dialog/" exported="true"/>
+    <component id="nkvz33" name="WinSelectorDialog.xml" path="/Dialog/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

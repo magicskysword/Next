@@ -1,0 +1,21 @@
+{
+	"buffid":665,
+	"BuffIcon":664,
+	"skillEffect":"fx_Summoner_o",
+	"name":"狱血魔经",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		62,
+		2
+	],
+	"descr":"生命值低于30%时，吸收灵气阶段多吸收3点灵气",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

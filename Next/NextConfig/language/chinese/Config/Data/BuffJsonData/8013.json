@@ -1,0 +1,20 @@
+{
+	"buffid":8013,
+	"BuffIcon":9012,
+	"skillEffect":"fx_Summoner_o",
+	"name":"生水",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		26
+	],
+	"descr":"回合开始时额外吸收2点水系灵气",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

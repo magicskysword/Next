@@ -1,0 +1,20 @@
+{
+	"buffid":10023,
+	"BuffIcon":10017,
+	"skillEffect":"10023.0",
+	"name":"水之领域",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		26
+	],
+	"descr":"每回合额外吸收10点水系灵气，造成的水系伤害提升20%。未处于【领域】状态下的对手对你造成的伤害降低50%。",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

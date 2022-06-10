@@ -1,0 +1,20 @@
+{
+	"buffid":42,
+	"BuffIcon":26,
+	"skillEffect":"fx_Summoner_o",
+	"name":"厚土",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		9
+	],
+	"descr":"【厚土剑】造成的伤害+（5*attack）",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

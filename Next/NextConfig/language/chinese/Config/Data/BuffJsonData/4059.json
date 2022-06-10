@@ -1,0 +1,21 @@
+{
+	"buffid":4059,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"玄冰刺",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		75,
+		5
+	],
+	"descr":"本回合结束时，若处于【霜冻】状态，则获得【滞气】*（attack）",
+	"trigger":1,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

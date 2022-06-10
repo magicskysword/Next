@@ -1,0 +1,20 @@
+{
+	"buffid":766,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"天煞",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		82
+	],
+	"descr":"回合结束，自身损失（attack*60）点生命值，并触发（attack）次剑气",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

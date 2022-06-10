@@ -1,0 +1,21 @@
+{
+	"buffid":808,
+	"BuffIcon":807,
+	"skillEffect":"fx_Summoner_o",
+	"name":"魔神锻体决",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		62,
+		5
+	],
+	"descr":"回合结束时，若生命值在30%以下，则自身获得【减伤】*8，【护罩】*72",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

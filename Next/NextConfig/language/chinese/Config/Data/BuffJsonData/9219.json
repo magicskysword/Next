@@ -1,0 +1,20 @@
+{
+	"buffid":9219,
+	"BuffIcon":9001,
+	"skillEffect":"fx_Summoner_o",
+	"name":"妖兽天赋·毒体",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		17
+	],
+	"descr":"每次受到伤害时，敌方获得【中毒】*（attack）",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

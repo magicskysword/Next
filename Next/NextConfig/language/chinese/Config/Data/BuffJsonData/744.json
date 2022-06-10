@@ -1,0 +1,21 @@
+{
+	"buffid":744,
+	"BuffIcon":729,
+	"skillEffect":"fx_Summoner_o",
+	"name":"九纹轮回诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		165,
+		115
+	],
+	"descr":"未处于【护罩】状态下时，造成的技能伤害提升10%",
+	"trigger":37,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

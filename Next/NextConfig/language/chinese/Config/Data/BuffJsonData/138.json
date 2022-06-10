@@ -1,0 +1,20 @@
+{
+	"buffid":138,
+	"BuffIcon":137,
+	"skillEffect":"fx_Summoner_o",
+	"name":"重元无锋功（隐藏）",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		144
+	],
+	"descr":"释放【蓄势】技能将额外消耗两点金系灵气",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

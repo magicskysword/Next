@@ -1,0 +1,21 @@
+{
+	"buffid":439,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"玄阳哺焰诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		164,
+		67
+	],
+	"descr":"脱离化焰状态时，对手获得【灼烧】*X，X为你【化焰】的层数",
+	"trigger":32,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,22 @@
+{
+	"buffid":992,
+	"BuffIcon":9012,
+	"skillEffect":"fx_Summoner_o",
+	"name":"辟水",
+	"Affix":[
+		58
+	],
+	"bufftype":7,
+	"seid":[
+		89
+	],
+	"descr":"每次使用技能时，移除自身【霜冻】*（attack）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

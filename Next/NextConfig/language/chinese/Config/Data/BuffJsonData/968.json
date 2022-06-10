@@ -1,0 +1,20 @@
+{
+	"buffid":968,
+	"BuffIcon":9010,
+	"skillEffect":"fx_Summoner_o",
+	"name":"木灵之地",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		64
+	],
+	"descr":"此地木属性灵气浓郁，吸收灵气时，木属性灵气权重+（attack*20）",
+	"trigger":12,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":166,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"重元轮转诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"回合结束时，获得【蓄势】*（attack），【护罩】*（attack）。每次使用5点或以上灵气的技能，都会使此效果提升。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

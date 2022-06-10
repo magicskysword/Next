@@ -1,0 +1,20 @@
+{
+	"buffid":4156,
+	"BuffIcon":4154,
+	"skillEffect":"fx_Summoner_o",
+	"name":"化尘·减伤",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"获得99%减伤",
+	"trigger":23,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":84,
+	"BuffIcon":79,
+	"skillEffect":"fx_Summoner_o",
+	"name":"三才剑阵-【克】",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		5
+	],
+	"descr":"回合结束受到18点伤害，获得【剑气】*6",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

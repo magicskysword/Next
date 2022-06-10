@@ -1,0 +1,20 @@
+{
+	"buffid":324,
+	"BuffIcon":320,
+	"skillEffect":"fx_Summoner_o",
+	"name":"天星润水诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		36
+	],
+	"descr":"回合结束时，恢复16X点生命（X为你当前的灵气总量）",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

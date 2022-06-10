@@ -1,0 +1,20 @@
+{
+	"buffid":415,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"幽炎决",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		27
+	],
+	"descr":"受到的火系伤害-（attack），造成的火系技能伤害+（attack）",
+	"trigger":31,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

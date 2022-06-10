@@ -1,0 +1,20 @@
+{
+	"buffid":8063,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"归一",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		130
+	],
+	"descr":"每次造成技能伤害后，若你的灵气数量等于灵气上限，则本次造成的技能伤害提升50%。否则，恢复等同于你当前灵气数量的生命值。",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

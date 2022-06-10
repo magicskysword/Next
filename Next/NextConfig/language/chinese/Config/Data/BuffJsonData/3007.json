@@ -1,0 +1,20 @@
+{
+	"buffid":3007,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"通脉术",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		210
+	],
+	"descr":"下一次对金丹造成的伤害翻倍",
+	"trigger":39,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":2,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,22 @@
+{
+	"buffid":349,
+	"BuffIcon":345,
+	"skillEffect":"fx_Summoner_o",
+	"name":"狂澜诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		122,
+		65,
+		26
+	],
+	"descr":"每次造成水系伤害后，有20%的几率获得一点水系灵气",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

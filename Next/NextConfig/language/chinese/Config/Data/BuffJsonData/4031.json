@@ -1,0 +1,20 @@
+{
+	"buffid":4031,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"偷袭",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		12
+	],
+	"descr":"先手攻击，本回合造成的所有伤害翻倍。",
+	"trigger":9,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

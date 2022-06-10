@@ -1,0 +1,20 @@
+{
+	"buffid":4102,
+	"BuffIcon":4101,
+	"skillEffect":"fx_Summoner_o",
+	"name":"修为压制",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		21
+	],
+	"descr":"每回合吸收灵气数-3",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

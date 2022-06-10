@@ -1,0 +1,21 @@
+{
+	"buffid":9244,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"酸性灵气",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		65,
+		5
+	],
+	"descr":"每次吸收灵气时，有50%的几率获得【腐蚀】*1",
+	"trigger":25,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

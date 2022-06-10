@@ -1,0 +1,20 @@
+{
+	"buffid":76,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"落石阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		43
+	],
+	"descr":"每受到5次攻击，释放一次【落石】反击对手",
+	"trigger":29,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

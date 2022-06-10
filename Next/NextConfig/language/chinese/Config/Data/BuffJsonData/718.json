@@ -1,0 +1,21 @@
+{
+	"buffid":718,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"通宝合元诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		155,
+		11
+	],
+	"descr":"连续释放同一技能时，额外对敌方造成（attack）点伤害",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

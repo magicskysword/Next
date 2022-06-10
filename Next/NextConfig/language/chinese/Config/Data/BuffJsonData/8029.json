@@ -1,0 +1,21 @@
+{
+	"buffid":8029,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"噬心",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		159,
+		17
+	],
+	"descr":"回合开始时，若对手的【中毒】层数大于50，则其获得【滞气】*6",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

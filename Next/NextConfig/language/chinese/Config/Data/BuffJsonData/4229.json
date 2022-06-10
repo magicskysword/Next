@@ -1,0 +1,20 @@
+{
+	"buffid":4229,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"玄冰刺",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		5
+	],
+	"descr":"回合开始时，额外吸收5点水系灵气，并获得【霜冻】*（attack）",
+	"trigger":2,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

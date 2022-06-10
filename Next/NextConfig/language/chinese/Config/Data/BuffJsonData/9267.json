@@ -1,0 +1,22 @@
+{
+	"buffid":9267,
+	"BuffIcon":0,
+	"skillEffect":"",
+	"name":"奇门绝魂阵-死",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		5,
+		189,
+		87
+	],
+	"descr":"每使用一次技能，获得【神殇】*（attack），若神识小于零则获得【滞气】*（attack）。",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":387,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"冰魄经",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		130
+	],
+	"descr":"回合结束时，若对手的【霜冻】层数低于50，则使其获得【霜冻】*2。否则，使其获得【内伤】*1。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

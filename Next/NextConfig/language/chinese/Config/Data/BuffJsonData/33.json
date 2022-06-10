@@ -1,0 +1,20 @@
+{
+	"buffid":33,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"通心蛊",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		13
+	],
+	"descr":"跳过施法阶段，持续（attack）回合",
+	"trigger":4,
+	"removeTrigger":3,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

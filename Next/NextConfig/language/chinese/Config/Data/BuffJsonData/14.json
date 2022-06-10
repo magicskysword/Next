@@ -1,0 +1,21 @@
+{
+	"buffid":14,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"隐藏隐匿",
+	"Affix":[],
+	"bufftype":2,
+	"seid":[
+		85,
+		111
+	],
+	"descr":"使用技能后移除隐匿",
+	"trigger":30,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

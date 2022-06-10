@@ -1,0 +1,20 @@
+{
+	"buffid":3112,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"惧念关联1",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		205
+	],
+	"descr":"本回合化婴的速度降低50%",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

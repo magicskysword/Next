@@ -1,0 +1,20 @@
+{
+	"buffid":9245,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"灵气屏障",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		33
+	],
+	"descr":"灵气消散阶段，每消散一点灵气，获得【护罩】*20",
+	"trigger":18,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

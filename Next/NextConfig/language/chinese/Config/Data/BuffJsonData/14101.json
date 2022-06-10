@@ -1,0 +1,20 @@
+{
+	"buffid":14101,
+	"BuffIcon":1505,
+	"skillEffect":"fx_Summoner_o",
+	"name":"辟水道袍",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		5
+	],
+	"descr":"战斗开始时，获得【御土】*9",
+	"trigger":23,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

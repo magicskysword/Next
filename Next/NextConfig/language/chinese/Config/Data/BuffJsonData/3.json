@@ -1,0 +1,22 @@
+{
+	"buffid":3,
+	"BuffIcon":0,
+	"skillEffect":"3",
+	"name":"易伤",
+	"Affix":[
+		3
+	],
+	"bufftype":1,
+	"seid":[
+		3
+	],
+	"descr":"本回合受到的技能伤害+（attack）",
+	"trigger":46,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":218,
+	"BuffIcon":202,
+	"skillEffect":"fx_Summoner_o",
+	"name":"青蛇要诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		41
+	],
+	"descr":"每次使用【青蛇劲】，敌方额外获得【中毒】*3",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

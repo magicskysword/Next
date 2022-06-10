@@ -1,0 +1,21 @@
+{
+	"buffid":8057,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"斩天",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		75,
+		15
+	],
+	"descr":"若对手有【护罩】，则受到的剑系伤害翻倍。",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

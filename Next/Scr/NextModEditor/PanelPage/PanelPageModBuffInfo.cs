@@ -13,7 +13,7 @@ namespace SkySwordKill.NextEditor.PanelPage
         base.OnAdd();
 
         AddTableHeader(new TableInfo(
-            "modEditor.main.modBuffInfo.id".I18N(),
+            "ModEditor.Main.modBuffInfo.id".I18N(),
             TableInfo.DEFAULT_GRID_WIDTH,
             data =>
             {
@@ -22,7 +22,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             }));
 
         AddTableHeader(new TableInfo(
-            "modEditor.main.modBuffInfo.name".I18N(),
+            "ModEditor.Main.modBuffInfo.name".I18N(),
             TableInfo.DEFAULT_GRID_WIDTH,
             data =>
             {
@@ -31,7 +31,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             }));
 
         AddTableHeader(new TableInfo(
-            "modEditor.main.modBuffInfo.desc".I18N(),
+            "ModEditor.Main.modBuffInfo.desc".I18N(),
              TableInfo.DEFAULT_GRID_WIDTH * 3,
             data =>
             {
@@ -52,7 +52,7 @@ namespace SkySwordKill.NextEditor.PanelPage
         var buffData = (ModBuffData)data;
 
         Inspector.AddDrawer(new ModIDPropertyDrawer(
-                "modEditor.main.modBuffInfo.id".I18N(),
+                "ModEditor.Main.modBuffInfo.id".I18N(),
                 buffData,
                 () => Project.BuffData,
                 theData =>
@@ -79,45 +79,45 @@ namespace SkySwordKill.NextEditor.PanelPage
         );
 
         Inspector.AddDrawer(new ModStringPropertyDrawer(
-                "modEditor.main.modBuffInfo.name".I18N(),
+                "ModEditor.Main.modBuffInfo.name".I18N(),
                 str => buffData.Name = str,
                 () => buffData.Name)
             { OnChanged = RefreshCurrentRow }
         );
 
         Inspector.AddDrawer(new ModStringPropertyDrawer(
-            "modEditor.main.modBuffInfo.skillEffect".I18N(),
+            "ModEditor.Main.modBuffInfo.skillEffect".I18N(),
             str => buffData.SkillEffect = str,
             () => buffData.SkillEffect)
         );
 
         Inspector.AddDrawer(new ModIntPropertyDrawer(
-            "modEditor.main.modBuffInfo.icon".I18N(),
+            "ModEditor.Main.modBuffInfo.icon".I18N(),
             num => buffData.Icon = num,
             () => buffData.Icon)
         );
 
         Inspector.AddDrawer(new ModStringAreaPropertyDrawer(
-                "modEditor.main.modBuffInfo.desc".I18N(),
+                "ModEditor.Main.modBuffInfo.desc".I18N(),
                 str => buffData.Desc = str,
                 () => buffData.Desc)
             { OnChanged = RefreshCurrentRow }
         );
         
         Inspector.AddDrawer(new ModIntBindMultiDataPropertyDrawer(
-            "modEditor.main.modBuffInfo.affix".I18N(),
+            "ModEditor.Main.modBuffInfo.affix".I18N(),
             list => buffData.AffixList = list,
             () => buffData.AffixList,
             list => Project.GetAffixDesc(list),
             new List<TableInfo>()
             {
-                new TableInfo("modEditor.main.modAffixData.id".I18N(),
+                new TableInfo("ModEditor.Main.modAffixData.id".I18N(),
                     TableInfo.DEFAULT_GRID_WIDTH / 2,
                     getData=>((ModAffixData)getData).ID.ToString()),
-                new TableInfo("modEditor.main.modAffixData.name".I18N(),
+                new TableInfo("ModEditor.Main.modAffixData.name".I18N(),
                     TableInfo.DEFAULT_GRID_WIDTH / 2,
                     getData=>((ModAffixData)getData).Name),
-                new TableInfo("modEditor.main.modAffixData.desc".I18N(),
+                new TableInfo("ModEditor.Main.modAffixData.desc".I18N(),
                     TableInfo.DEFAULT_GRID_WIDTH * 3,
                     getData=>((ModAffixData)getData).Desc),
             },

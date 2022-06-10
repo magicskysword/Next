@@ -1,0 +1,20 @@
+{
+	"buffid":8507,
+	"BuffIcon":8501,
+	"skillEffect":"fx_Summoner_o",
+	"name":"元婴",
+	"Affix":[],
+	"bufftype":13,
+	"seid":[
+		141
+	],
+	"descr":"受到的所有伤害降低10%",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,18 @@
+{
+	"buffid":2005,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"通灵宝玉",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[],
+	"descr":"回合结束时，若你在本回合使用五次以上技能，吸收（attack）点灵气",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

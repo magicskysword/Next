@@ -1,0 +1,20 @@
+{
+	"buffid":885,
+	"BuffIcon":884,
+	"skillEffect":"fx_Summoner_o",
+	"name":"疾风劲",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		10
+	],
+	"descr":"造成的第一次技能伤害+（attack）",
+	"trigger":9,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,22 @@
+{
+	"buffid":3102,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"色念",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		212,
+		5,
+		111
+	],
+	"descr":"吸收5点灵气。回合结束时，每有两点灵气，心魔伤害+1",
+	"trigger":34,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

@@ -10,6 +10,7 @@ using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.Mod;
 using SkySwordKill.Next.StaticFace;
 using SkySwordKill.Next.XiaoYeGUI;
+using SkySwordKill.NextEditor.Panel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -894,7 +895,11 @@ namespace SkySwordKill.Next
                         window.Show();
                     }
                     
-                    
+                    if (GUILayout.Button("FGUI编辑器测试"))
+                    {
+                        var window = new ModEditorMainPanel();
+                        window.Show();
+                    }
                 }
                 GUILayout.EndVertical();
             }

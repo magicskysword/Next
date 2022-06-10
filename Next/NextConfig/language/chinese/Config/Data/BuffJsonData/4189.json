@@ -1,0 +1,20 @@
+{
+	"buffid":4189,
+	"BuffIcon":0,
+	"skillEffect":"4189",
+	"name":"星辰神念体",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		57
+	],
+	"descr":"造成的神识系技能伤害增加15%",
+	"trigger":9,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":2,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,18 @@
+{
+	"buffid":18007,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"白板-甲胄",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[],
+	"descr":"白板-甲胄",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

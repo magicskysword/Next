@@ -1,0 +1,20 @@
+{
+	"buffid":339,
+	"BuffIcon":335,
+	"skillEffect":"fx_Summoner_o",
+	"name":"幻雾真法",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		79
+	],
+	"descr":"每次闪避对手的攻击时，窃取对手的一点灵气",
+	"trigger":35,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

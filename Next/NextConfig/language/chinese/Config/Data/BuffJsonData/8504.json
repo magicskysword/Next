@@ -1,0 +1,20 @@
+{
+	"buffid":8504,
+	"BuffIcon":8501,
+	"skillEffect":"fx_Summoner_o",
+	"name":"元婴",
+	"Affix":[],
+	"bufftype":13,
+	"seid":[
+		26
+	],
+	"descr":"回合结束时，吸收（attack）点火系灵气",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

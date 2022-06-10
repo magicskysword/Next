@@ -1,0 +1,20 @@
+{
+	"buffid":4130,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"凝神丹（隐藏）",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		5
+	],
+	"descr":"获得5005",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

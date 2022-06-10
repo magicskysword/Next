@@ -1,0 +1,21 @@
+{
+	"buffid":4005,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"化焰叠灼烧",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		75,
+		5
+	],
+	"descr":"回合结束时，如果在化焰状态下则获得灼烧*1",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

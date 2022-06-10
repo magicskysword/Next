@@ -1,0 +1,20 @@
+{
+	"buffid":8080,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"充盈",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		117
+	],
+	"descr":"下一次造成技能伤害时，获得【护罩】*5X。（X为该技能消耗的灵气数量）",
+	"trigger":9,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,18 @@
+{
+	"buffid":9018,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"锐金剑意",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[],
+	"descr":"每受到一点伤害，移除一层【蓄势】。",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

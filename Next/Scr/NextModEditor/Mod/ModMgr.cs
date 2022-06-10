@@ -43,6 +43,7 @@ namespace SkySwordKill.NextEditor.Mod
             initMethod.Invoke(null, Array.Empty<object>());
         }
         I = new ModMgr();
+        I.Init();
     }
 
     public void Init()

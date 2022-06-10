@@ -1,0 +1,20 @@
+{
+	"buffid":9177,
+	"BuffIcon":9010,
+	"skillEffect":"fx_Summoner_o",
+	"name":"木",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		148
+	],
+	"descr":"免疫土系伤害，受到的金系伤害翻倍",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

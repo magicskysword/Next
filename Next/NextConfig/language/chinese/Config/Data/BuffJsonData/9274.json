@@ -1,0 +1,20 @@
+{
+	"buffid":9274,
+	"BuffIcon":38,
+	"skillEffect":"",
+	"name":"获得蓄势",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"获得【蓄势】*（attack）。",
+	"trigger":4,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

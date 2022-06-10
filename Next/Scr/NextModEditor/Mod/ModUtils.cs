@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using SkySwordKill.Next;
 using SkySwordKill.NextModEditor.Mod.Data;
 using UnityEngine;
 
@@ -93,7 +94,7 @@ namespace SkySwordKill.NextEditor.Mod
 
         public static string GetConfigPath(string path)
         {
-            return $"{Application.dataPath}/../Config/{path}";
+            return $"{Main.pathLanguageDir}/{Main.I.nextLanguage.ConfigDir}/Config/{path}";
         }
 
         public static string GetAffixDesc(ModAffixData affixData)

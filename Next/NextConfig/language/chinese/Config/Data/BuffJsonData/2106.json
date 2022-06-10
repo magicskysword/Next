@@ -1,0 +1,20 @@
+{
+	"buffid":2106,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"玉净瓶",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		36
+	],
+	"descr":"回合结束时，每有一点灵气，恢复1点生命值",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

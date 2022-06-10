@@ -1,0 +1,22 @@
+{
+	"buffid":24,
+	"BuffIcon":0,
+	"skillEffect":"24",
+	"name":"幻雾",
+	"Affix":[
+		19
+	],
+	"bufftype":2,
+	"seid":[
+		18
+	],
+	"descr":"有5%的几率闪避技能伤害",
+	"trigger":29,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

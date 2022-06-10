@@ -1,0 +1,21 @@
+{
+	"buffid":4212,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"放5点剑系伤害",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		24,
+		129
+	],
+	"descr":"放5点剑系伤害",
+	"trigger":12,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":3,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

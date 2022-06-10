@@ -1,0 +1,20 @@
+{
+	"buffid":14405,
+	"BuffIcon":1701,
+	"skillEffect":"fx_Summoner_o",
+	"name":"坤金甲",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		5
+	],
+	"descr":"回合结束时，获得【减伤】*4【护罩】*10",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

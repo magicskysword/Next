@@ -1,0 +1,20 @@
+{
+	"buffid":779,
+	"BuffIcon":775,
+	"skillEffect":"fx_Summoner_o",
+	"name":"太乙剑诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		57
+	],
+	"descr":"你造成的剑系技能伤害提升35%",
+	"trigger":37,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

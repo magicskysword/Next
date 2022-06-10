@@ -10,25 +10,25 @@ namespace SkySwordKill.NextEditor.PanelPage
             var config = Project.Config;
 
             Inspector.AddDrawer(new ModStringPropertyDrawer(
-                "modEditor.main.modConfig.name".I18N(),
+                "ModEditor.Main.modConfig.name".I18N(),
                 str => config.Name = str,
                 () => config.Name)
             );
 
             Inspector.AddDrawer(new ModStringPropertyDrawer(
-                "modEditor.main.modConfig.author".I18N(),
+                "ModEditor.Main.modConfig.author".I18N(),
                 str => config.Author = str,
                 () => config.Author)
             );
 
             Inspector.AddDrawer(new ModStringPropertyDrawer(
-                "modEditor.main.modConfig.version".I18N(),
+                "ModEditor.Main.modConfig.version".I18N(),
                 str => config.Version = str,
                 () => config.Version)
             );
 
             Inspector.AddDrawer(new ModStringAreaPropertyDrawer(
-                "modEditor.main.modConfig.desc".I18N(),
+                "ModEditor.Main.modConfig.desc".I18N(),
                 str => config.Description = str,
                 () => config.Description)
             );

@@ -1,0 +1,18 @@
+{
+	"buffid":9295,
+	"BuffIcon":4171,
+	"skillEffect":"",
+	"name":"魔灵",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[],
+	"descr":"天魔每获得一点魔气则层数加一。当前层数：（attack）。",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

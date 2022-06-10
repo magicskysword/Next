@@ -1,0 +1,18 @@
+{
+	"buffid":10,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"逆天七魔刀",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[],
+	"descr":"无用但不能删",
+	"trigger":5,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

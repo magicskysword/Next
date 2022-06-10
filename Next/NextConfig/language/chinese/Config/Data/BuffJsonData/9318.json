@@ -1,0 +1,21 @@
+{
+	"buffid":9318,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"魂力·鬼尊",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		7,
+		20
+	],
+	"descr":"魂力·鬼尊，当前：（attack）；上限：1500",
+	"trigger":5,
+	"removeTrigger":9,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

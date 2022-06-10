@@ -1,0 +1,22 @@
+{
+	"buffid":3097,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"经脉受损",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		206,
+		21,
+		106
+	],
+	"descr":"当【经脉】血量低于50时，每回合吸收灵气数-2",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

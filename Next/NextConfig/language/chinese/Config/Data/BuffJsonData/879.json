@@ -1,0 +1,21 @@
+{
+	"buffid":879,
+	"BuffIcon":873,
+	"skillEffect":"fx_Summoner_o",
+	"name":"九玄内经",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		156,
+		141
+	],
+	"descr":"体内每有一种不同的暗劲，受到的伤害便提升5%",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

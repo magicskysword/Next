@@ -1,0 +1,20 @@
+{
+	"buffid":4149,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"星河护山大阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		5
+	],
+	"descr":"星河剑派护山大阵。\n攻击时获得等额吸血；\n溢出治疗量造成等额伤害；\n战斗开始时获得【护罩】*800；\n每次使用技能造成【真实伤害】*10",
+	"trigger":23,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":2,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

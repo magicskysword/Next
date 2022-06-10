@@ -1,0 +1,20 @@
+{
+	"buffid":8056,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"慢剑",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		15
+	],
+	"descr":"对手受到的剑系伤害+20%",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

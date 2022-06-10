@@ -1,0 +1,20 @@
+{
+	"buffid":3991,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"缠丝咒",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		145
+	],
+	"descr":"本回合结束时，【缠绕】将保留一半的层数。",
+	"trigger":5,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

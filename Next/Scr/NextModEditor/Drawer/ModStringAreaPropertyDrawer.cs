@@ -28,7 +28,7 @@ namespace SkySwordKill.NextEditor.Drawer
             drawer.m_btnEdit.onClick.Set(()=>
             {
                 WindowStringInputDialog.CreateDialog(
-                    "modEditor.main.dialog.textEdit".I18N(),
+                    "ModEditor.Main.dialog.textEdit".I18N(),
                     OnGetProperty(), 
                     OnConfirmEdit);
             });

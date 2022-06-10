@@ -1,0 +1,21 @@
+{
+	"buffid":9200,
+	"BuffIcon":9200,
+	"skillEffect":"fx_Summoner_o",
+	"name":"根须",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		164,
+		17
+	],
+	"descr":"每受到一点伤害移除一层，全部移除后，可解除【寄生】效果。",
+	"trigger":32,
+	"removeTrigger":9,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

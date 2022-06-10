@@ -1,0 +1,20 @@
+{
+	"buffid":9273,
+	"BuffIcon":0,
+	"skillEffect":"",
+	"name":"天赋·引灵",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		2
+	],
+	"descr":"战斗开始时，获得（attack）点灵气。",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

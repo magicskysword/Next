@@ -1,0 +1,20 @@
+{
+	"buffid":939,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"抵挡一次伤害",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		18
+	],
+	"descr":"抵挡一次伤害",
+	"trigger":7,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

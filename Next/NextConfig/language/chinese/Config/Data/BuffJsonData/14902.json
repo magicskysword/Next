@@ -1,0 +1,20 @@
+{
+	"buffid":14902,
+	"BuffIcon":14901,
+	"skillEffect":"fx_Summoner_o",
+	"name":"融血玄灵印",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		5
+	],
+	"descr":"回合结束，自身受到6点伤害，吸收两点灵气",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

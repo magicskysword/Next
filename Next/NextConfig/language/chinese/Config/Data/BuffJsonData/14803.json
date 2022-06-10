@@ -1,0 +1,20 @@
+{
+	"buffid":14803,
+	"BuffIcon":14800,
+	"skillEffect":"fx_Summoner_o",
+	"name":"化焰珠",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		5
+	],
+	"descr":"回合结束，获得【化焰】*3",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

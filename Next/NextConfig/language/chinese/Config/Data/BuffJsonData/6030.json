@@ -1,0 +1,21 @@
+{
+	"buffid":6030,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"乱魂（隐藏）",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		189,
+		115
+	],
+	"descr":"神识小于0时，受到的技能伤害增加50%。",
+	"trigger":29,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

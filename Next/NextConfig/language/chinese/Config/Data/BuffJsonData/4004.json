@@ -1,0 +1,22 @@
+{
+	"buffid":4004,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"化焰移除关联",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		113,
+		20,
+		89
+	],
+	"descr":"使用非火系技能时移除自身与化焰相关的所有buff",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

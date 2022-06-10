@@ -1,0 +1,21 @@
+{
+	"buffid":839,
+	"BuffIcon":836,
+	"skillEffect":"fx_Summoner_o",
+	"name":"太清幻境",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		65,
+		100
+	],
+	"descr":"释放技能时有14%的概率失败。",
+	"trigger":30,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":4234,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"魔神变",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"回合结束时，自己获得【神殇】*（attack）",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

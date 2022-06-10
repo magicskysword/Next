@@ -1,0 +1,20 @@
+{
+	"buffid":767,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"地绝隐藏",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		5
+	],
+	"descr":"回合结束，自身损失（attack*15）点生命值",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

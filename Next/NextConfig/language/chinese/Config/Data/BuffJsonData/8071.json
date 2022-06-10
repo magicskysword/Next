@@ -1,0 +1,21 @@
+{
+	"buffid":8071,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"四象",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		168,
+		24
+	],
+	"descr":"回合结束时，若阵法数量大于等于5，则释放一次【御阵】",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

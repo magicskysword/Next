@@ -1,0 +1,20 @@
+{
+	"buffid":751,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"太上化龙诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		93
+	],
+	"descr":"回合开始时，恢复自身血量上限5%的生命值",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":4202,
+	"BuffIcon":0,
+	"skillEffect":"4202",
+	"name":"寒月清辉",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		65,
+		117
+	],
+	"descr":"释放技能时有25%概率获得所消耗灵气数量*1的【神殇】",
+	"trigger":8,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

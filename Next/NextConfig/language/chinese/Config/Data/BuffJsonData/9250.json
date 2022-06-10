@@ -1,0 +1,20 @@
+{
+	"buffid":9250,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"吸力",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		183
+	],
+	"descr":"无法逃离",
+	"trigger":5,
+	"removeTrigger":3,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

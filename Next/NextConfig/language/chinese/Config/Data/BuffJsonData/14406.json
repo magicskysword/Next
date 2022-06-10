@@ -1,0 +1,20 @@
+{
+	"buffid":14406,
+	"BuffIcon":1701,
+	"skillEffect":"fx_Summoner_o",
+	"name":"玄晶甲",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		5
+	],
+	"descr":"回合结束时，获得【减伤】*6【护罩】*6",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

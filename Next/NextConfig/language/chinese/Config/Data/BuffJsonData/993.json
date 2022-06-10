@@ -1,0 +1,22 @@
+{
+	"buffid":993,
+	"BuffIcon":9014,
+	"skillEffect":"fx_Summoner_o",
+	"name":"辟火",
+	"Affix":[
+		59
+	],
+	"bufftype":7,
+	"seid":[
+		89
+	],
+	"descr":"回合结束时，移除自身【灼烧】*（attack*12）",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

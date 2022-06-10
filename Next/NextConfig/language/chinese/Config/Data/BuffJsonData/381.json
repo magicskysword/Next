@@ -1,0 +1,20 @@
+{
+	"buffid":381,
+	"BuffIcon":372,
+	"skillEffect":"fx_Summoner_o",
+	"name":"裂冰诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		53
+	],
+	"descr":"你每使用的第三次伤害技能，造成的伤害提升3X%（X为敌方【霜冻】层数）",
+	"trigger":21,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

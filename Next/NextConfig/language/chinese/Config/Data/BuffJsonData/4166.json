@@ -1,0 +1,20 @@
+{
+	"buffid":4166,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"离火·焰灵",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"回合开始时获得【焰】*10，火灵气*5，木灵气*3",
+	"trigger":2,
+	"removeTrigger":3,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

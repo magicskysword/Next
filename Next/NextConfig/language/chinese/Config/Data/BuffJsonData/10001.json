@@ -1,0 +1,20 @@
+{
+	"buffid":10001,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"稍有不适",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		21
+	],
+	"descr":"丹毒入体，对体内灵气的运转产生了略微的影响。每回合吸收灵气数-1",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

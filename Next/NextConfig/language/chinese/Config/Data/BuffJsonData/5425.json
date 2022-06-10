@@ -1,0 +1,20 @@
+{
+	"buffid":5425,
+	"BuffIcon":5205,
+	"skillEffect":"fx_Summoner_o",
+	"name":"天命淬体丹",
+	"Affix":[],
+	"bufftype":15,
+	"seid":[
+		41
+	],
+	"descr":"每次淬体效果+1",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

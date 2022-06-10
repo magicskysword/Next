@@ -1,0 +1,20 @@
+{
+	"buffid":2013,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"避毒珠",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		89
+	],
+	"descr":"回合开始时，移除自身【中毒】*18",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

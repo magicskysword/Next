@@ -1,0 +1,22 @@
+{
+	"buffid":8066,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"观气",
+	"Affix":[],
+	"bufftype":45,
+	"seid":[
+		85,
+		166,
+		117
+	],
+	"descr":"使用相生的灵气释放神识技能时，获得【护罩】*8X（X为此技能消耗灵气的数量）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

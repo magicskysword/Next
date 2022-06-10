@@ -1,0 +1,22 @@
+{
+	"buffid":8089,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"洗髓2",
+	"Affix":[],
+	"bufftype":14,
+	"seid":[
+		181,
+		106,
+		22
+	],
+	"descr":"筑基手牌上限+2",
+	"trigger":5,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

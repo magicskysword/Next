@@ -1,0 +1,22 @@
+{
+	"buffid":27,
+	"BuffIcon":0,
+	"skillEffect":"27",
+	"name":"剑气",
+	"Affix":[
+		20
+	],
+	"bufftype":2,
+	"seid":[
+		25
+	],
+	"descr":"回合结束时，对敌方造成（attack）点剑系伤害，不主动移除。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,22 @@
+{
+	"buffid":12,
+	"BuffIcon":0,
+	"skillEffect":"12",
+	"name":"蓄力",
+	"Affix":[
+		11
+	],
+	"bufftype":2,
+	"seid":[
+		5
+	],
+	"descr":"下回合所有技能伤害+（attack）",
+	"trigger":2,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

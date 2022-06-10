@@ -1,0 +1,20 @@
+{
+	"buffid":859,
+	"BuffIcon":858,
+	"skillEffect":"fx_Summoner_o",
+	"name":"九幽残阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		2
+	],
+	"descr":"每回合吸收灵气数+5",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

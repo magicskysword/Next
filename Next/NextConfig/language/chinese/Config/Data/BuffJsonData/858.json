@@ -1,0 +1,20 @@
+{
+	"buffid":858,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"九幽大阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		2
+	],
+	"descr":"每回合吸收灵气数+10",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

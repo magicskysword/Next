@@ -1,0 +1,20 @@
+{
+	"buffid":9270,
+	"BuffIcon":0,
+	"skillEffect":"",
+	"name":"天赋·健体",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		130
+	],
+	"descr":"回合结束时，如果是生命值高于80%，则获得【护罩】*（attack）。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

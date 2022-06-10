@@ -1,0 +1,20 @@
+{
+	"buffid":9234,
+	"BuffIcon":9001,
+	"skillEffect":"fx_Summoner_o",
+	"name":"龙气",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		141
+	],
+	"descr":"在下一次回合开始前获得90%的伤害减免。",
+	"trigger":7,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

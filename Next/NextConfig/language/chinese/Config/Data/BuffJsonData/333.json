@@ -1,0 +1,21 @@
+{
+	"buffid":333,
+	"BuffIcon":304,
+	"skillEffect":"fx_Summoner_o",
+	"name":"灵水诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		65,
+		42
+	],
+	"descr":"每使用一次水系技能，50%的概率恢复自身1点生命值",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

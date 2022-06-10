@@ -1,0 +1,20 @@
+{
+	"buffid":119,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"神剑诀隐藏",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		145
+	],
+	"descr":"【剑气】将在触发后被移除",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

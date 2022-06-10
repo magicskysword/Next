@@ -1,0 +1,21 @@
+{
+	"buffid":771,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"血剑典·地绝",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		85,
+		1
+	],
+	"descr":"每一次使用剑系技能恢复（attack）点生命值。",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

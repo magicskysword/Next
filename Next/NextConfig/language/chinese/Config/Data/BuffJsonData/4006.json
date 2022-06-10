@@ -1,0 +1,20 @@
+{
+	"buffid":4006,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"吞焰",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		50
+	],
+	"descr":"下一次技能造成的火系伤害+（attack）",
+	"trigger":9,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

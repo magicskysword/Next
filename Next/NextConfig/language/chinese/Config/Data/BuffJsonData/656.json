@@ -1,0 +1,18 @@
+{
+	"buffid":656,
+	"BuffIcon":654,
+	"skillEffect":"fx_Summoner_o",
+	"name":"神门度气诀（废弃）",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[],
+	"descr":"每次使用神识类技能时，恢复自身9点生命",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

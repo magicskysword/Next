@@ -1,0 +1,18 @@
+{
+	"buffid":2201,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"番天印",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[],
+	"descr":"战斗开始时，选择一种灵气，你在施法阶段吸收的所有灵气都为此系",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

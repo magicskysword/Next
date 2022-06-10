@@ -1,0 +1,22 @@
+{
+	"buffid":692,
+	"BuffIcon":691,
+	"skillEffect":"fx_Summoner_o",
+	"name":"飞星剑诀（隐藏）",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		85,
+		166,
+		17
+	],
+	"descr":"【克】则获得敌方【易伤】*（attack）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

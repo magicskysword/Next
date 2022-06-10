@@ -1,0 +1,20 @@
+{
+	"buffid":883,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"静气诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"每场战斗的首个回合结束时，获得【聚气】*（attack）",
+	"trigger":1,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

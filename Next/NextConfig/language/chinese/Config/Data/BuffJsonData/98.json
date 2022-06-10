@@ -1,0 +1,20 @@
+{
+	"buffid":98,
+	"BuffIcon":3,
+	"skillEffect":"fx_Summoner_o",
+	"name":"回合开始敌方获得易伤",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		17
+	],
+	"descr":"回合开始敌方获得易伤*（attack）",
+	"trigger":2,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

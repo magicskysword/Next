@@ -1,0 +1,21 @@
+{
+	"buffid":137,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"重元无锋功",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		76,
+		5
+	],
+	"descr":"释放【蓄势】技能将额外消耗两点金系灵气，并使获得的【蓄势】层数+（attack）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

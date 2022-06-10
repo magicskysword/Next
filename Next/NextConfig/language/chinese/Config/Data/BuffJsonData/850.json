@@ -1,0 +1,20 @@
+{
+	"buffid":850,
+	"BuffIcon":846,
+	"skillEffect":"fx_Summoner_o",
+	"name":"罗睺振魂诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		186
+	],
+	"descr":"每造成21点技能伤害，获得星魂之力*3",
+	"trigger":40,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

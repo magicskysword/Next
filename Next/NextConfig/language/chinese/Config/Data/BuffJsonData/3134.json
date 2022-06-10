@@ -1,0 +1,18 @@
+{
+	"buffid":3134,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"淬体",
+	"Affix":[],
+	"bufftype":15,
+	"seid":[],
+	"descr":"化神成功后，每点【淬体】提升100点血量上限。",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

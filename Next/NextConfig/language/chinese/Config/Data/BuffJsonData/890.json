@@ -1,0 +1,20 @@
+{
+	"buffid":890,
+	"BuffIcon":886,
+	"skillEffect":"fx_Summoner_o",
+	"name":"散元固气功",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		33
+	],
+	"descr":"任何时候，每当你消散一点灵气，有14%的几率获得【聚气】*1",
+	"trigger":26,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":9272,
+	"BuffIcon":0,
+	"skillEffect":"",
+	"name":"天赋·储灵",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		2
+	],
+	"descr":"回合结束时，获得（attack）点灵气。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

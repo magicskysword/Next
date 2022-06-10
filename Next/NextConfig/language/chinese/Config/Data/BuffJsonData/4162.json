@@ -1,0 +1,21 @@
+{
+	"buffid":4162,
+	"BuffIcon":4162,
+	"skillEffect":"fx_Summoner_o",
+	"name":"竹山·回合开始buff",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5,
+		17
+	],
+	"descr":"每回合开始时获得木灵气*6，【护罩】*200，对方获得【缠绕】*20",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

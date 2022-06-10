@@ -1,0 +1,20 @@
+{
+	"buffid":9300,
+	"BuffIcon":9073,
+	"skillEffect":"fx_Summoner_o",
+	"name":"天魔之力",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		17
+	],
+	"descr":"当造成伤害的时候，敌方获得【流血】*4。",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

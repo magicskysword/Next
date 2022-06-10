@@ -1,0 +1,20 @@
+{
+	"buffid":9264,
+	"BuffIcon":0,
+	"skillEffect":"",
+	"name":"神魂",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"傀儡中可以古神教秘法封印了一位元婴修士的神魂作为核心，回合结束时，获得【凝神】*22。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

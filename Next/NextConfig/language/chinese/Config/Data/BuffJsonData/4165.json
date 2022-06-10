@@ -1,0 +1,20 @@
+{
+	"buffid":4165,
+	"BuffIcon":4161,
+	"skillEffect":"fx_Summoner_o",
+	"name":"离火护山大阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		5
+	],
+	"descr":"离火门护山大阵。\n战斗开始时增加遁速；\n前三回合获得一定焰，每回合递减；\n前三回合获得一定火灵气和木灵气，每回合递减。",
+	"trigger":23,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

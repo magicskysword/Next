@@ -1,0 +1,22 @@
+{
+	"buffid":1,
+	"BuffIcon":0,
+	"skillEffect":"1",
+	"name":"中毒",
+	"Affix":[
+		1
+	],
+	"bufftype":1,
+	"seid":[
+		1
+	],
+	"descr":"回合结束时，受到（attack）点伤害，每次触发后移除一层。",
+	"trigger":1,
+	"removeTrigger":1,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

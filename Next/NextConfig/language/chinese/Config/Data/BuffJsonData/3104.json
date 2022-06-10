@@ -1,0 +1,23 @@
+{
+	"buffid":3104,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"贪念",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		165,
+		212,
+		5,
+		111
+	],
+	"descr":"本回合吸收灵气数+10。本回合每次使用技能，心魔伤害+1",
+	"trigger":34,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

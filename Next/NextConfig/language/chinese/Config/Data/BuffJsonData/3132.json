@@ -1,0 +1,18 @@
+{
+	"buffid":3132,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"凡性",
+	"Affix":[],
+	"bufftype":15,
+	"seid":[],
+	"descr":"凡性每回合自动提升，且提升速度随回合数递增。当凡性达到100时，突破失败。",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

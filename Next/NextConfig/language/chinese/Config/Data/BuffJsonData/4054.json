@@ -1,0 +1,20 @@
+{
+	"buffid":4054,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"活血术",
+	"Affix":[],
+	"bufftype":11,
+	"seid":[
+		112
+	],
+	"descr":"（attack）回合后，恢复12点生命值。",
+	"trigger":32,
+	"removeTrigger":3,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":2,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

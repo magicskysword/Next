@@ -1,0 +1,20 @@
+{
+	"buffid":9302,
+	"BuffIcon":9073,
+	"skillEffect":"fx_Summoner_o",
+	"name":"先天魔物（隐藏）",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		32
+	],
+	"descr":"天魔每获得一点魔气则层数加一。",
+	"trigger":25,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

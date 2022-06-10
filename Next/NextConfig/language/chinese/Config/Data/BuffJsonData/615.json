@@ -1,0 +1,20 @@
+{
+	"buffid":615,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"浑天术",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		3
+	],
+	"descr":"受到的所有伤害+（attack）",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,23 @@
+{
+	"buffid":760,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"天剑",
+	"Affix":[
+		38,
+		27
+	],
+	"bufftype":3,
+	"seid":[
+		82
+	],
+	"descr":"回合结束时，触发剑气（attack）次",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

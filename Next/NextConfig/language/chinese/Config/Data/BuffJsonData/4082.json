@@ -1,0 +1,20 @@
+{
+	"buffid":4082,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"铁骨",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		141
+	],
+	"descr":"受到的伤害降低20%",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

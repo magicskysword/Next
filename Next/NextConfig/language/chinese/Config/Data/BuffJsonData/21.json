@@ -1,0 +1,20 @@
+{
+	"buffid":21,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"魂链",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		19
+	],
+	"descr":"双方血量同时变化",
+	"trigger":10,
+	"removeTrigger":3,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

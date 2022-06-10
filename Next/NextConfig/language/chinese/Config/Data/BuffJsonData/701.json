@@ -1,0 +1,20 @@
+{
+	"buffid":701,
+	"BuffIcon":401,
+	"skillEffect":"fx_Summoner_o",
+	"name":"弄焰诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"回合开始时，获得（attack）层功法buff。",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

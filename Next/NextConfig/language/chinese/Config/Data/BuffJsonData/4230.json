@@ -1,0 +1,20 @@
+{
+	"buffid":4230,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"玄冰刺隐藏",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		26
+	],
+	"descr":"回合开始时，额外吸收5点水系灵气。",
+	"trigger":2,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

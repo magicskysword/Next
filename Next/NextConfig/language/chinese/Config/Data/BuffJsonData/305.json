@@ -1,0 +1,21 @@
+{
+	"buffid":305,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"裂冰",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		115,
+		6
+	],
+	"descr":"技能造成的伤害提升（attack）%",
+	"trigger":9,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

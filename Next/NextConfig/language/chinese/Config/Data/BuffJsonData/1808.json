@@ -1,0 +1,18 @@
+{
+	"buffid":1808,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"太虚法袍",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[],
+	"descr":"被神识系技能攻击时，不受【神识】效果影响",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

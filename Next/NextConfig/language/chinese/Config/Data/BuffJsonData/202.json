@@ -1,0 +1,18 @@
+{
+	"buffid":202,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"青蛇要诀（废弃）",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[],
+	"descr":"每次使用【青蛇劲】，敌方额外获得【中毒】*（attack）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

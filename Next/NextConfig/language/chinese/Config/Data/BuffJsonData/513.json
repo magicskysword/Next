@@ -1,0 +1,22 @@
+{
+	"buffid":513,
+	"BuffIcon":512,
+	"skillEffect":"fx_Summoner_o",
+	"name":"混元无极功隐藏",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		119,
+		76,
+		17
+	],
+	"descr":"释放【化沙】时，对手额外获得【沙】*（attack）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":9112,
+	"BuffIcon":9001,
+	"skillEffect":"fx_Summoner_o",
+	"name":"妖兽天赋·霜甲",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		65,
+		17
+	],
+	"descr":"每次受到伤害，有15%给敌人施加【霜冻】*1",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

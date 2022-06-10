@@ -1,0 +1,22 @@
+{
+	"buffid":986,
+	"BuffIcon":9012,
+	"skillEffect":"fx_Summoner_o",
+	"name":"御水",
+	"Affix":[
+		52
+	],
+	"bufftype":2,
+	"seid":[
+		72
+	],
+	"descr":"本回合受到的水系伤害-（attack）",
+	"trigger":7,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

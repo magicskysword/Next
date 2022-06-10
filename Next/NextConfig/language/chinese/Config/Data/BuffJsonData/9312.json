@@ -1,0 +1,22 @@
+{
+	"buffid":9312,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"鬼将",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		54,
+		5,
+		24
+	],
+	"descr":"回合开始时，每有【魂】*1则获得【护罩】*1，恢复【魂力】*100，且攻击你一次，魂力耗尽时消散。",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

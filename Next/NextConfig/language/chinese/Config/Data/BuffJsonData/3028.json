@@ -1,0 +1,21 @@
+{
+	"buffid":3028,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"以气入道",
+	"Affix":[],
+	"bufftype":15,
+	"seid":[
+		75,
+		2
+	],
+	"descr":"【仙胎】不再跳过吸收灵气，改为吸收2点。",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

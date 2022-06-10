@@ -1,0 +1,22 @@
+{
+	"buffid":8067,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"敛息",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		164,
+		152,
+		5
+	],
+	"descr":"脱离【隐匿】状态时，造成的第一次伤害提升50%",
+	"trigger":32,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

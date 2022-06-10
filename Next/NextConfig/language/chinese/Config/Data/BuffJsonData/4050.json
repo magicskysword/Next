@@ -1,0 +1,20 @@
+{
+	"buffid":4050,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"雾隐术",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		18
+	],
+	"descr":"直到下个回合开始前，闪避所有技能伤害。",
+	"trigger":29,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

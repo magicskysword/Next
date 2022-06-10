@@ -1,0 +1,22 @@
+{
+	"buffid":4100,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"威压",
+	"Affix":[
+		78
+	],
+	"bufftype":5,
+	"seid":[
+		21
+	],
+	"descr":"吸收灵气阶段，吸收灵气数-（attack），每次触发后移除一层。",
+	"trigger":3,
+	"removeTrigger":1,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

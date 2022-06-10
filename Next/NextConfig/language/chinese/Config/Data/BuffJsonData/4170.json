@@ -1,0 +1,20 @@
+{
+	"buffid":4170,
+	"BuffIcon":0,
+	"skillEffect":"4170",
+	"name":"影匿",
+	"Affix":[],
+	"bufftype":2,
+	"seid":[
+		18
+	],
+	"descr":"下一回合有（attack*9）%的概率闪避敌方技能伤害。",
+	"trigger":29,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

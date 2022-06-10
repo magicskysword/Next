@@ -1,0 +1,20 @@
+{
+	"buffid":8022,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"冲穴",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		134
+	],
+	"descr":"施法阶段每次弃灵气时，随机移除自身一层负面buff。",
+	"trigger":19,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

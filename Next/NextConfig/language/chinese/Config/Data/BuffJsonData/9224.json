@@ -1,0 +1,20 @@
+{
+	"buffid":9224,
+	"BuffIcon":9001,
+	"skillEffect":"fx_Summoner_o",
+	"name":"龙尸死气",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"回合开始时，扣除675点生命值获得【疗】*178。",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

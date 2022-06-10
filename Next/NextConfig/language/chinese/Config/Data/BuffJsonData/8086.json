@@ -1,0 +1,21 @@
+{
+	"buffid":8086,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"归尘",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		159,
+		24
+	],
+	"descr":"每次【护罩】被击破后，若对手拥有【沙】，则立即释放一次【还尘】。",
+	"trigger":43,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

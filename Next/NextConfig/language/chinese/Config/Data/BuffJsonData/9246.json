@@ -1,0 +1,20 @@
+{
+	"buffid":9246,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"灵力护体",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		36
+	],
+	"descr":"回合结束时，每有一点灵气，获得【减伤】*1",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

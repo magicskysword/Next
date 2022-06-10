@@ -1,0 +1,20 @@
+{
+	"buffid":3118,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"怒念关联2",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		207
+	],
+	"descr":"当经脉受损时，意志受到同等伤害。",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

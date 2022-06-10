@@ -1,0 +1,21 @@
+{
+	"buffid":9238,
+	"BuffIcon":9238,
+	"skillEffect":"fx_Summoner_o",
+	"name":"仓促出手",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		21,
+		23
+	],
+	"descr":"吸收灵气数－（attack），且灵气灵气上限为0。",
+	"trigger":3,
+	"removeTrigger":1,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

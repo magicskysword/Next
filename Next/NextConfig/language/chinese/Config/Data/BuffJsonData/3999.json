@@ -1,0 +1,20 @@
+{
+	"buffid":3999,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"炙脉指",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		32
+	],
+	"descr":"本回合，每吸收取或消散5点灵气，便触发一次自身【灼烧】",
+	"trigger":25,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

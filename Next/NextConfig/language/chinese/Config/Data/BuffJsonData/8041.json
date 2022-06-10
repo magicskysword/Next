@@ -1,0 +1,20 @@
+{
+	"buffid":8041,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"引力",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		314
+	],
+	"descr":"对手每有一层【引力】，你造成的土系技能伤害便提升X点。（X为该技能消耗的灵气数量）",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

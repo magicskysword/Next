@@ -1,0 +1,18 @@
+{
+	"buffid":75,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"共劫化生阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[],
+	"descr":"双方血量同时变化",
+	"trigger":5,
+	"removeTrigger":9,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

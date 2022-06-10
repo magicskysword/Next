@@ -1,0 +1,20 @@
+{
+	"buffid":4238,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"星河剑典",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"回合开始时，获得【惊涛】*（attack），【止水】*（attack）。",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

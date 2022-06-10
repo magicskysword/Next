@@ -1,0 +1,20 @@
+{
+	"buffid":7011,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"毒体",
+	"Affix":[],
+	"bufftype":16,
+	"seid":[
+		215
+	],
+	"descr":"受到的雷劫伤害降低5%；回合开始时，移除自身所有【护罩】，每移除1000层，吸收一点灵气。",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

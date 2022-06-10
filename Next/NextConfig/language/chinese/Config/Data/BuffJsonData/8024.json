@@ -1,0 +1,21 @@
+{
+	"buffid":8024,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"锻金",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		158,
+		26
+	],
+	"descr":"对手的回合开始前，若你没有灵气，则立刻获得6点金系灵气。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

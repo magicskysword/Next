@@ -1,0 +1,20 @@
+{
+	"buffid":3100,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"金丹",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		208
+	],
+	"descr":"每回合结束时，金丹将恢复已损失血量的20%",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

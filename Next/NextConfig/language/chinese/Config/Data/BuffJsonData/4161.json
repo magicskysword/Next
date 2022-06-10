@@ -1,0 +1,20 @@
+{
+	"buffid":4161,
+	"BuffIcon":4162,
+	"skillEffect":"fx_Summoner_o",
+	"name":"竹山护山大阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		5
+	],
+	"descr":"竹山宗护山大阵。\n每回合开始时获得木灵气*6，【护罩】*200，对方获得若干【缠绕】；\n被攻击时有一定概率闪避；\n阵内灵气受到影响，吸收灵气时木属性权重+20。",
+	"trigger":23,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

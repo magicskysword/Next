@@ -1,0 +1,20 @@
+{
+	"buffid":4205,
+	"BuffIcon":0,
+	"skillEffect":"4205",
+	"name":"月华入体",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		141
+	],
+	"descr":"造成的技能伤害降低20%",
+	"trigger":37,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

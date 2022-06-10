@@ -1,0 +1,18 @@
+{
+	"buffid":411,
+	"BuffIcon":410,
+	"skillEffect":"fx_Summoner_o",
+	"name":"废弃",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[],
+	"descr":"受到技能伤害时，有40%的几率消散敌方一点灵气",
+	"trigger":29,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":8087,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"通土",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		199
+	],
+	"descr":"你造成的土系技能伤害提升6X%（X为该技能消耗的灵气数）",
+	"trigger":37,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":3024,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"以土入道",
+	"Affix":[],
+	"bufftype":15,
+	"seid":[
+		26
+	],
+	"descr":"每回合额外吸收一点土系灵气。",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

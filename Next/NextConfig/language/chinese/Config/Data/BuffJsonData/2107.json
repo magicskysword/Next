@@ -1,0 +1,18 @@
+{
+	"buffid":2107,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"太极图",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[],
+	"descr":"战斗开始时，吸收一点灵气，若为金，则敌方受到【破势】*4；若为木，则敌方受到【缠绕】*4；若为水，则我方恢复12点生命；若为火，则敌方受到【灼烧】*4；若为土，则我方增加10层护罩",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":66,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"混元引气阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		159,
+		107
+	],
+	"descr":"对手处于【引力】状态下时，无法闪避你造成的伤害。",
+	"trigger":12,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

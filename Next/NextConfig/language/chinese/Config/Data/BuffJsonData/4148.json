@@ -1,0 +1,20 @@
+{
+	"buffid":4148,
+	"BuffIcon":4141,
+	"skillEffect":"fx_Summoner_o",
+	"name":"金虹护山大阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		5
+	],
+	"descr":"金虹剑派护山大阵。\n获得50%减伤；\n每受到一定伤害获得10%受伤增伤；\n每受到一定伤害，下回合获得【蓄力】*1。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

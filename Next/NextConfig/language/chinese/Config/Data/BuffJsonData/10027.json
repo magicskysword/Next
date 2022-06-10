@@ -1,0 +1,21 @@
+{
+	"buffid":10027,
+	"BuffIcon":10017,
+	"skillEffect":"10027.0",
+	"name":"霸体领域",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		5,
+		93
+	],
+	"descr":"每回合提升100点血量上限，并恢复等同于自身血量上限10%的生命值。未处于【领域】状态下的对手对你造成的伤害降低50%。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

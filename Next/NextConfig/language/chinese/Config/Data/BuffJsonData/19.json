@@ -1,0 +1,23 @@
+{
+	"buffid":19,
+	"BuffIcon":0,
+	"skillEffect":"19",
+	"name":"化焰",
+	"Affix":[
+		16,
+		2
+	],
+	"bufftype":2,
+	"seid":[
+		25
+	],
+	"descr":"每次受到技能伤害时，反弹敌方（attack）点火属性伤害，回合结束时，获得【灼烧】*1。使用任何非火系技能时，都会离开化焰状态。",
+	"trigger":29,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

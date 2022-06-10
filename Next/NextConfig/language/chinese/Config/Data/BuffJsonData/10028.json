@@ -1,0 +1,18 @@
+{
+	"buffid":10028,
+	"BuffIcon":10017,
+	"skillEffect":"10028.0",
+	"name":"剑之领域",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[],
+	"descr":"造成的剑系伤害提升50%。未处于【领域】状态下的对手对你造成的伤害降低50%。",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

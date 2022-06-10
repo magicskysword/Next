@@ -1,0 +1,20 @@
+{
+	"buffid":203,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"青藤诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		17
+	],
+	"descr":"战斗开始时，敌方获得【缠绕】*（attack）",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

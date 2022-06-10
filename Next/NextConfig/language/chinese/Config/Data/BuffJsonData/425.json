@@ -1,0 +1,21 @@
+{
+	"buffid":425,
+	"BuffIcon":603,
+	"skillEffect":"fx_Summoner_o",
+	"name":"大帝轮华经",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		65,
+		134
+	],
+	"descr":"每吸收一点灵气，有80%的几率随机移除一层自身的负面状态。",
+	"trigger":25,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":711,
+	"BuffIcon":709,
+	"skillEffect":"fx_Summoner_o",
+	"name":"幻影神行诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		174,
+		18
+	],
+	"descr":"遁速+12。若遁速大于对手，则有18%的几率闪避技能伤害。",
+	"trigger":29,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

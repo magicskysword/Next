@@ -1,0 +1,18 @@
+{
+	"buffid":409,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"废弃",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[],
+	"descr":"受到致死伤害时，吸收一点灵气，若为火系灵气，恢复至一点血。自身获得指示物【劫焱】",
+	"trigger":28,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

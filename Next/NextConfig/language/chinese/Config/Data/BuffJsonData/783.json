@@ -1,0 +1,21 @@
+{
+	"buffid":783,
+	"BuffIcon":780,
+	"skillEffect":"fx_Summoner_o",
+	"name":"浮尘炼心诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		74,
+		57
+	],
+	"descr":"对处于【扰魂】状态下的对手造成的神识系技能伤害提升21%",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

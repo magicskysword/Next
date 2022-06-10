@@ -1,0 +1,20 @@
+{
+	"buffid":3992,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"驱寒",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		89
+	],
+	"descr":"移除自身1层【霜冻】",
+	"trigger":12,
+	"removeTrigger":1,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

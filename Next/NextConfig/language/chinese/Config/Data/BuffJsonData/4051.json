@@ -1,0 +1,20 @@
+{
+	"buffid":4051,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"雾相化身",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		18
+	],
+	"descr":"抵挡下一次受到的技能伤害",
+	"trigger":29,
+	"removeTrigger":1,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

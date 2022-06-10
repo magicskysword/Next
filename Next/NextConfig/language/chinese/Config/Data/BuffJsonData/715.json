@@ -1,0 +1,22 @@
+{
+	"buffid":715,
+	"BuffIcon":713,
+	"skillEffect":"fx_Summoner_o",
+	"name":"玄门引气真诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		97,
+		93,
+		111
+	],
+	"descr":"回合开始时，若生命值首次低于30%，则立刻恢复自身血量上限24%的生命值。",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

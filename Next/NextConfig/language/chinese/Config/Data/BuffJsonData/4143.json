@@ -1,0 +1,20 @@
+{
+	"buffid":4143,
+	"BuffIcon":4141,
+	"skillEffect":"fx_Summoner_o",
+	"name":"金虹·增加减伤",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		5
+	],
+	"descr":"战斗开始时，获得10层【金虹阵法·减伤】",
+	"trigger":23,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

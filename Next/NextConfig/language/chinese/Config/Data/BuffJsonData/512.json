@@ -1,0 +1,22 @@
+{
+	"buffid":512,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"混元尘引录",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		119,
+		76,
+		5
+	],
+	"descr":"处于【引力】状态下释放【还尘】时，额外获得【尘】*（attack）；释放【化沙】时，对手额外获得【沙】*（attack）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

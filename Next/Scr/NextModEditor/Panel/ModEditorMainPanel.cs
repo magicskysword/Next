@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FairyGUI;
+using SkySwordKill.Next;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.NextEditor.Event;
@@ -39,22 +40,28 @@ namespace SkySwordKill.NextEditor.Panel
             InitProject();
             InitDocumentView();
             InitSeg();
+            
+            MakeFullScreen();
+            Center();
+            AddRelation(GRoot.inst,RelationType.Size);
         }
 
         private void InitPopMenu()
         {
-            var btnOpen = _filePopMenu.AddItem("modEditor.main.header.file.open".I18N(), OnOpenModProject);
+            var btnOpen = _filePopMenu.AddItem("ModEditor.Main.Header.File.Open".I18N(), OnOpenModProject);
             btnOpen.name = "itemOpen";
-            var btnSave = _filePopMenu.AddItem("modEditor.main.header.file.save".I18N(), () => { });
+            var btnSave = _filePopMenu.AddItem("ModEditor.Main.Header.File.Save".I18N(), () => { });
             btnSave.name = "itemSave";
-            var btnExport = _filePopMenu.AddItem("modEditor.main.header.file.export".I18N(), () => { });
+            var btnExport = _filePopMenu.AddItem("ModEditor.Main.Header.File.Export".I18N(), () => { });
             btnExport.name = "itemExport";
+            var btnExit = _filePopMenu.AddItem("ModEditor.Main.Header.File.Exit".I18N(), Hide);
+            btnExit.name = "exit";
         }
 
         private void InitHeader()
         {
             var btnFile = MainView.m_comHeader.As<UI_ComMainHeader>().m_lstHeader.AddItemFromPool().asButton;
-            btnFile.title = "modEditor.main.header.file".I18N();
+            btnFile.title = "ModEditor.Main.Header.File".I18N();
             btnFile.onClick.Add(()=>_filePopMenu.Show(btnFile,PopupDirection.Down));
         }
         
@@ -64,9 +71,9 @@ namespace SkySwordKill.NextEditor.Panel
             treeView.treeNodeRender = ProjectTreeItemRenderer;
             treeView.onClickItem.Set(OnClickProjectTreeItem);
             
-            AddProject("modEditor.main.project.modConfig".I18N(),0,new UIProjectItemModConfig());
-            AddProject("modEditor.main.project.modCreateAvatar".I18N(),0,new UIProjectItemModCreateAvatar());
-            AddProject("modEditor.main.project.modBuffInfo".I18N(),0,new UIProjectItemModBuffInfo());
+            AddProject("ModEditor.Main.project.modConfig".I18N(),0,new UIProjectItemModConfig());
+            AddProject("ModEditor.Main.project.modCreateAvatar".I18N(),0,new UIProjectItemModCreateAvatar());
+            AddProject("ModEditor.Main.project.modBuffInfo".I18N(),0,new UIProjectItemModBuffInfo());
             
         }
 
@@ -136,7 +143,7 @@ namespace SkySwordKill.NextEditor.Panel
             }
             catch (Exception e)
             {
-                Debug.LogException(e);
+                Main.LogError(e);
             }
         }
 
@@ -269,6 +276,8 @@ namespace SkySwordKill.NextEditor.Panel
             if(Project == null)
                 return;
             
+            Main.LogDebug("点击TreeItem");
+            
             var obj = (GObject)context.data;
             var node = obj.treeNode;
             var uiProjectBase = (UIProjectBase)node.data;
@@ -299,7 +308,7 @@ namespace SkySwordKill.NextEditor.Panel
                 }
                 else
                 {
-                    treeItem.icon = "ui://Main/icon_tool1";
+                    treeItem.icon = "ui://NextCore/icon_tool1";
                 }
             }
         }

@@ -1,0 +1,20 @@
+{
+	"buffid":9232,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"玄阴冥气",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		134
+	],
+	"descr":"回合开始时，移除敌方随机正面buff（attack）层。",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

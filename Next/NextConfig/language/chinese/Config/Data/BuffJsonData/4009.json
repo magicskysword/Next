@@ -1,0 +1,20 @@
+{
+	"buffid":4009,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"看破",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		100
+	],
+	"descr":"下一个使用的技能失效。",
+	"trigger":30,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

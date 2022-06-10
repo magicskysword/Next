@@ -1,0 +1,20 @@
+{
+	"buffid":4113,
+	"BuffIcon":4101,
+	"skillEffect":"fx_Summoner_o",
+	"name":"留一手",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		13
+	],
+	"descr":"跳过下（attack）回合的施法阶段。",
+	"trigger":4,
+	"removeTrigger":1,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

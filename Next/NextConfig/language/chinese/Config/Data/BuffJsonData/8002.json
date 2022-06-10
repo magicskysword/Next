@@ -1,0 +1,20 @@
+{
+	"buffid":8002,
+	"BuffIcon":9010,
+	"skillEffect":"fx_Summoner_o",
+	"name":"御木",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		133
+	],
+	"descr":"你灵气中每有一点木系灵气，受到的土系伤害便-1",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

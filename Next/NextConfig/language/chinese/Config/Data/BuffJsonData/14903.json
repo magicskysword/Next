@@ -1,0 +1,20 @@
+{
+	"buffid":14903,
+	"BuffIcon":14900,
+	"skillEffect":"fx_Summoner_o",
+	"name":"玄阳化蕴珠",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		5
+	],
+	"descr":"回合结束，自身受到15点伤害，获得【护罩】*75",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

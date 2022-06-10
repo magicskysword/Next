@@ -1,0 +1,22 @@
+{
+	"buffid":367,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"重水潽度诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		85,
+		152,
+		130
+	],
+	"descr":"使用相同的灵气释放水系伤害技能时，造成的伤害提升9%；使用相生的灵气释放时，获得【护罩】*X（X为该技能灵气消耗的数量）",
+	"trigger":37,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,22 @@
+{
+	"buffid":10008,
+	"BuffIcon":10007,
+	"skillEffect":"fx_Summoner_o",
+	"name":"大道感悟",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		143,
+		163,
+		106
+	],
+	"descr":"大道感悟",
+	"trigger":23,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

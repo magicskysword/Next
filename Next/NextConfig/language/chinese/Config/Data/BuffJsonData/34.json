@@ -1,0 +1,20 @@
+{
+	"buffid":34,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"黑丝蛊",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		21
+	],
+	"descr":"吸收灵气阶段，吸收灵气数-4",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":8054,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"偏锋",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		5
+	],
+	"descr":"战斗开始时吸收灵气数-2，但获得【剑气】*25",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,22 @@
+{
+	"buffid":9287,
+	"BuffIcon":4171,
+	"skillEffect":"fx_Summoner_o",
+	"name":"魔狱缚魂阵-死",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		5,
+		65,
+		26
+	],
+	"descr":"每使用一次技能，获得【神殇】*（attack）、【缚足】*（attack），且有30%的概率获得一点魔气。",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

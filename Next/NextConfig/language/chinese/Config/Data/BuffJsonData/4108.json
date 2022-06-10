@@ -1,0 +1,20 @@
+{
+	"buffid":4108,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"灵体印",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		140
+	],
+	"descr":"本回合释放金系技能将额外消耗1点金系灵气",
+	"trigger":7,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":2,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

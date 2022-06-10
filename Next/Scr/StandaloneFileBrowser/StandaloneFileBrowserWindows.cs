@@ -36,7 +36,7 @@ namespace SFB {
                 fd.FileName = GetDirectoryPath(directory);
             }
             var res = fd.ShowDialog(new WindowWrapper(GetActiveWindow()));
-            var filenames = (int)res == (int)DialogResult.OK ? fd.FileNames : new string[0];
+            var filenames = res == System.Windows.Forms.DialogResult.OK ? fd.FileNames : new string[0];
             fd.Dispose();
             return filenames;
         }
@@ -52,7 +52,7 @@ namespace SFB {
                 fd.SelectedPath = GetDirectoryPath(directory);
             }
             var res = fd.ShowDialog(new WindowWrapper(GetActiveWindow()));
-            var filenames = (int)res == (int)DialogResult.OK ? new []{ fd.SelectedPath } : new string[0];
+            var filenames = res == System.Windows.Forms.DialogResult.OK ? new []{ fd.SelectedPath } : new string[0];
             fd.Dispose();
             return filenames;
         }
@@ -88,7 +88,7 @@ namespace SFB {
                 fd.AddExtension = false;
             }
             var res = fd.ShowDialog(new WindowWrapper(GetActiveWindow()));
-            var filename = (int)res == (int)DialogResult.OK ? fd.FileName : "";
+            var filename = res == System.Windows.Forms.DialogResult.OK ? fd.FileName : "";
             fd.Dispose();
             return filename;
         }

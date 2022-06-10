@@ -1,0 +1,20 @@
+{
+	"buffid":8075,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"重剑",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		17
+	],
+	"descr":"每回合开始时敌方获得8052",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

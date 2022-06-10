@@ -1,0 +1,23 @@
+{
+	"buffid":3108,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"思念",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		165,
+		212,
+		5,
+		111
+	],
+	"descr":"本回合结束时，心魔伤害+3，并额外受到一次心魔伤害。",
+	"trigger":34,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

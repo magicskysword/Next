@@ -1,0 +1,20 @@
+{
+	"buffid":449,
+	"BuffIcon":445,
+	"skillEffect":"fx_Summoner_o",
+	"name":"涅槃诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		31
+	],
+	"descr":"首次受到致死伤害时，将生命值置为1，随后恢复等同于自身【焰】【化焰】与【灼烧】总层数*5的血量。",
+	"trigger":28,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

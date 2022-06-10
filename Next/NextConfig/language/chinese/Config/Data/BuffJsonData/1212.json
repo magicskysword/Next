@@ -1,0 +1,21 @@
+{
+	"buffid":1212,
+	"BuffIcon":1207,
+	"skillEffect":"fx_Summoner_o",
+	"name":"破山剑",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		128,
+		5
+	],
+	"descr":"主动：本回合每使用一次土剑系技能，获得【剑气】*1",
+	"trigger":8,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

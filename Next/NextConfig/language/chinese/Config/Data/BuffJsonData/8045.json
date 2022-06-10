@@ -1,0 +1,23 @@
+{
+	"buffid":8045,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"土之天道",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		81,
+		85,
+		152,
+		57
+	],
+	"descr":"使用灵气消耗大于等于6点的土系技能时，造成的伤害提升50%",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

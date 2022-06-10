@@ -1,0 +1,21 @@
+{
+	"buffid":4187,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"幻境未尽",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		65,
+		100
+	],
+	"descr":"海底遗迹遗留症状。",
+	"trigger":30,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

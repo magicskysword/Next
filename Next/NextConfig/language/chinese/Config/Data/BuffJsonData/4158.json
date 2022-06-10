@@ -1,0 +1,20 @@
+{
+	"buffid":4158,
+	"BuffIcon":4154,
+	"skillEffect":"fx_Summoner_o",
+	"name":"减伤",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		115
+	],
+	"descr":"每层获得33%减伤，回合结束后减少一层",
+	"trigger":7,
+	"removeTrigger":3,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

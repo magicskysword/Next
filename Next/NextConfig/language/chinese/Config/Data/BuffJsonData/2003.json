@@ -1,0 +1,20 @@
+{
+	"buffid":2003,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"五毒珠",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		17
+	],
+	"descr":"回合开始时，敌方获得【中毒】*5",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

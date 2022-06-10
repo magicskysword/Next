@@ -1,0 +1,22 @@
+{
+	"buffid":3098,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"意志受损",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		206,
+		204,
+		106
+	],
+	"descr":"当【意志】血量低于50时，意志受到的伤害提升20%",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

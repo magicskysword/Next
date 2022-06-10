@@ -1,0 +1,20 @@
+{
+	"buffid":749,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"灭灵诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		2
+	],
+	"descr":"每回合吸收灵气数+（attack），但单回合将只能使用三次技能。",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":6003,
+	"BuffIcon":9014,
+	"skillEffect":"fx_Summoner_o",
+	"name":"强火",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		192
+	],
+	"descr":"火系技能伤害+（attack）%",
+	"trigger":37,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

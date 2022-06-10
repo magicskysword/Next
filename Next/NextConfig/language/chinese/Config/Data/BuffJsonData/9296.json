@@ -1,0 +1,20 @@
+{
+	"buffid":9296,
+	"BuffIcon":9200,
+	"skillEffect":"fx_Summoner_o",
+	"name":"将死",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		71
+	],
+	"descr":"回合结束时死亡",
+	"trigger":2,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":4215,
+	"BuffIcon":4213,
+	"skillEffect":"fx_Summoner_o",
+	"name":"天罡剑阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		5
+	],
+	"descr":"回合结束时，造成（attack）段3点剑系伤害，每回合增加一段。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

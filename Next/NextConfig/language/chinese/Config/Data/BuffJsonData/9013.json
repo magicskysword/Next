@@ -1,0 +1,20 @@
+{
+	"buffid":9013,
+	"BuffIcon":9012,
+	"skillEffect":"fx_Summoner_o",
+	"name":"五行属水",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		15
+	],
+	"descr":"火属性伤害-（attack*20）%。",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

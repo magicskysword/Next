@@ -1,0 +1,20 @@
+{
+	"buffid":9010,
+	"BuffIcon":9010,
+	"skillEffect":"fx_Summoner_o",
+	"name":"五行属木",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		15
+	],
+	"descr":"受到的金属性伤害+（attack*20）%，土属性伤害-（attack*20）%。",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

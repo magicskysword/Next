@@ -1,0 +1,20 @@
+{
+	"buffid":28,
+	"BuffIcon":0,
+	"skillEffect":"28",
+	"name":"沙",
+	"Affix":[
+		22
+	],
+	"bufftype":3,
+	"seid":[],
+	"descr":"聚尘为沙，当前层数：（attack）",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":4235,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"天引术",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		197,
+		27
+	],
+	"descr":"下一次造成的土系技能伤害基于对手的【引力】层数提升，每有一层【引力】额外提升（attack）点。",
+	"trigger":9,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

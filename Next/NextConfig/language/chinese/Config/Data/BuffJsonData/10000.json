@@ -1,0 +1,25 @@
+{
+	"buffid":10000,
+	"BuffIcon":9001,
+	"skillEffect":"fx_Summoner_o",
+	"name":"魔气",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		101,
+		102,
+		105,
+		83,
+		103,
+		106
+	],
+	"descr":"每次使用技能便损失2X点生命值（X为魔气灵气数量），且每回合不能使用技能超过5次。",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

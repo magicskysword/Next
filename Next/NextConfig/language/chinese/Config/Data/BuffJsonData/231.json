@@ -1,0 +1,22 @@
+{
+	"buffid":231,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"九冲图集",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		85,
+		150,
+		28
+	],
+	"descr":"使用木系技能时，若上一个使用的是水系技能，则使敌方获得（attack）次随机负面状态。",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

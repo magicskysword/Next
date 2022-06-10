@@ -1,0 +1,21 @@
+{
+	"buffid":118,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"奔雷诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		81,
+		5
+	],
+	"descr":"使用灵气消耗大于等于五点灵气的技能时，获得【蓄势】*（attack）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

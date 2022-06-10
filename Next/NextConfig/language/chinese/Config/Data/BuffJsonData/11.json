@@ -1,0 +1,24 @@
+{
+	"buffid":11,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"冻结",
+	"Affix":[
+		9,
+		10
+	],
+	"bufftype":3,
+	"seid":[
+		6,
+		13
+	],
+	"descr":"免疫【霜冻】，跳过下一次施法阶段",
+	"trigger":4,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

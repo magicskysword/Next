@@ -1,0 +1,20 @@
+{
+	"buffid":330,
+	"BuffIcon":313,
+	"skillEffect":"fx_Summoner_o",
+	"name":"龙象吞海诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		22
+	],
+	"descr":"灵气上限+5",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

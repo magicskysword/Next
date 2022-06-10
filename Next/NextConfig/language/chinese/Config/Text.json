@@ -1,0 +1,37 @@
+{
+    "Main.Unknown" : "未知",
+
+    "main.project.modConfig" : "Mod配置",
+    "main.project.modCreateAvatar" : "创建角色天赋",
+    "main.project.modBuffInfo" : "Buff信息",
+
+    "main.modConfig.name" : "Mod名称",
+    "main.modConfig.author" : "Mod作者",
+    "main.modConfig.version" : "Mod版本",
+    "main.modConfig.desc" : "Mod描述",
+
+    "main.modAffixData.id" : "ID",
+    "main.modAffixData.name" : "名称",
+    "main.modAffixData.desc" : "技能特效",
+
+    "main.modCreateAvatar.id" : "ID",
+    "main.modCreateAvatar.name" : "名称",
+    "main.modCreateAvatar.group" : "分组",
+    "main.modCreateAvatar.cost" : "消耗",
+    "main.modCreateAvatar.createType" : "类型",
+    "main.modCreateAvatar.desc" : "描述",
+
+    "main.modBuffInfo.id" : "ID",
+    "main.modBuffInfo.name" : "名称",
+    "main.modBuffInfo.skillEffect" : "技能特效",
+    "main.modBuffInfo.icon" : "图标",
+    "main.modBuffInfo.desc" : "描述",
+    "main.modBuffInfo.affix" : "词缀",
+
+    "main.header.file":"文件",
+    "main.header.file.open":"打开",
+    "main.header.file.save":"保存",
+    "main.header.file.export":"导出",
+
+    "main.dialog.textEdit" : "文本编辑"
+}

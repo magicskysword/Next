@@ -1,0 +1,22 @@
+{
+	"buffid":55,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"都天烈火仙阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		127,
+		5,
+		17
+	],
+	"descr":"回合开始时，获得2点火系灵气，双方获得【灼烧】*（attack）",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

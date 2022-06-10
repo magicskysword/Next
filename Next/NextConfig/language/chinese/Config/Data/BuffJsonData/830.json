@@ -1,0 +1,20 @@
+{
+	"buffid":830,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"渊血冥图",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		310
+	],
+	"descr":"当【流血】造成伤害的时候，自身恢复等量的生命值。",
+	"trigger":38,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

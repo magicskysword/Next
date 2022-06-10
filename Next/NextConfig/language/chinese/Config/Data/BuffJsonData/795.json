@@ -1,0 +1,21 @@
+{
+	"buffid":795,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"四方愈灵图",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		156,
+		5
+	],
+	"descr":"回合结束时，每有一个【阵法】则自己获得【疗】*1。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

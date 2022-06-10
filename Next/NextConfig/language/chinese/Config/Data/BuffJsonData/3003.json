@@ -1,0 +1,20 @@
+{
+	"buffid":3003,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"灼脉",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		32
+	],
+	"descr":"每吸收5点灵气，对金丹造成（attack*4）点伤害",
+	"trigger":25,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

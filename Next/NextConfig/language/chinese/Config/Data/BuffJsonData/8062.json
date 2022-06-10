@@ -1,0 +1,22 @@
+{
+	"buffid":8062,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"引气",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		138,
+		156,
+		17
+	],
+	"descr":"回合结束时，对手的所有【暗劲】回合数-1。每剩余一种不同的【暗劲】，便获得【内伤】*1",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

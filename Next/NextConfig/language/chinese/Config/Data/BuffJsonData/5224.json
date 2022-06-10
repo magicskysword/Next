@@ -1,0 +1,22 @@
+{
+	"buffid":5224,
+	"BuffIcon":5205,
+	"skillEffect":"fx_Summoner_o",
+	"name":"凝土丹",
+	"Affix":[],
+	"bufftype":10,
+	"seid":[
+		75,
+		64,
+		89
+	],
+	"descr":"在凝液成丹阶段，土系灵根权重+（attack*20）",
+	"trigger":25,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

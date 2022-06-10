@@ -1,0 +1,20 @@
+{
+	"buffid":18019,
+	"BuffIcon":18016,
+	"skillEffect":"fx_Summoner_o",
+	"name":"阵法加成",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		17
+	],
+	"descr":"战斗开始时，对方获得【灼烧】*160",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

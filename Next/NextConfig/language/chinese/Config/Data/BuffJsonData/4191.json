@@ -1,0 +1,20 @@
+{
+	"buffid":4191,
+	"BuffIcon":0,
+	"skillEffect":"4191",
+	"name":"苍云荫月",
+	"Affix":[],
+	"bufftype":2,
+	"seid":[
+		187
+	],
+	"descr":"在下回合开始前，将受到20%的技能伤害转嫁给对方",
+	"trigger":29,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

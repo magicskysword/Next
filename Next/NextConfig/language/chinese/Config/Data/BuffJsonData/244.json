@@ -1,0 +1,20 @@
+{
+	"buffid":244,
+	"BuffIcon":240,
+	"skillEffect":"fx_Summoner_o",
+	"name":"血毒经",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		1
+	],
+	"descr":"每当对手的【中毒】触发时，为你恢复186点生命值。",
+	"trigger":41,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

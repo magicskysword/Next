@@ -1,0 +1,21 @@
+{
+	"buffid":8101,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"五行",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		162,
+		139
+	],
+	"descr":"法术的五行【连击】的特效会触发两次。",
+	"trigger":30,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

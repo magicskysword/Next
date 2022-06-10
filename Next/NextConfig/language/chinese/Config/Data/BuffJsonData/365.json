@@ -1,0 +1,24 @@
+{
+	"buffid":365,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"浪击诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		85,
+		150,
+		151,
+		152,
+		10
+	],
+	"descr":"使用水系伤害技能时，若上一个使用的是金系技能，则造成的伤害+（attack）",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

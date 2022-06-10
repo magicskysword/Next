@@ -1,0 +1,18 @@
+{
+	"buffid":25,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"隐藏幻雾",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[],
+	"descr":"回合开始时移除，同时移除所有【幻雾】",
+	"trigger":2,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":633,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"唤魔经",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		62,
+		10
+	],
+	"descr":"生命值低于30%时，所有技能的伤害+1",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

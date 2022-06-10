@@ -1,0 +1,22 @@
+{
+	"buffid":3987,
+	"BuffIcon":3982,
+	"skillEffect":"fx_Summoner_o",
+	"name":"晕眩",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		65,
+		100,
+		1
+	],
+	"descr":"受血煞之气的影响，释放技能后有15%的概率失败并对自身造成20点伤害。（概率受心境影响）",
+	"trigger":30,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

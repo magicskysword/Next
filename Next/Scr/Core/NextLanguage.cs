@@ -55,6 +55,7 @@ namespace SkySwordKill.Next
         [JsonIgnore]
         public string FileName { get; set; }
         public string LanguageName { get; set; }
+        public string ConfigDir { get; set; }
         public Dictionary<string, string> Translation { get; set; } = new Dictionary<string, string>();
     }
 }

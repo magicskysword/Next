@@ -1,0 +1,22 @@
+{
+	"buffid":247,
+	"BuffIcon":229,
+	"skillEffect":"fx_Summoner_o",
+	"name":"万象缠身诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		122,
+		173,
+		17
+	],
+	"descr":"单次造成至少5点木系技能伤害时，敌方获得【缠绕】*2",
+	"trigger":40,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

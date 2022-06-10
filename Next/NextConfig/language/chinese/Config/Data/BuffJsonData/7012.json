@@ -1,0 +1,20 @@
+{
+	"buffid":7012,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"毒体隐藏",
+	"Affix":[],
+	"bufftype":16,
+	"seid":[
+		141
+	],
+	"descr":"受到的雷劫伤害降低5%",
+	"trigger":29,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":3026,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"以体入道",
+	"Affix":[],
+	"bufftype":15,
+	"seid":[
+		5
+	],
+	"descr":"初始获得【淬体】*12",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,18 @@
+{
+	"buffid":4049,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"朝元丹判定",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[],
+	"descr":"没有效果，用来判定",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

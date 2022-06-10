@@ -1,0 +1,21 @@
+{
+	"buffid":225,
+	"BuffIcon":222,
+	"skillEffect":"fx_Summoner_o",
+	"name":"万象寄生诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		65,
+		39
+	],
+	"descr":"每累计使用3点木系灵气，有90%的几率释放一次【寄生引血术】",
+	"trigger":27,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

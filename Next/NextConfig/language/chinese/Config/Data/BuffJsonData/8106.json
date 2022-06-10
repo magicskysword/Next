@@ -1,0 +1,23 @@
+{
+	"buffid":8106,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"化劲",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		173,
+		180,
+		63,
+		3
+	],
+	"descr":"单次受到超过50点伤害且灵气数不为0时，消散一点灵气并使此次伤害降低50",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":8513,
+	"BuffIcon":8501,
+	"skillEffect":"fx_Summoner_o",
+	"name":"元婴",
+	"Affix":[],
+	"bufftype":13,
+	"seid":[
+		15
+	],
+	"descr":"受到的剑系伤害提升20%",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

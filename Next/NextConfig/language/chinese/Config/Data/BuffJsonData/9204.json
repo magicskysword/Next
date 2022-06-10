@@ -1,0 +1,22 @@
+{
+	"buffid":9204,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"嗜灵",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		119,
+		79,
+		28
+	],
+	"descr":"回合开始时，若对手处于【寄生】状态，则吸收取其全部灵气，并【汲取】其50点生命值。",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

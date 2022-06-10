@@ -1,0 +1,21 @@
+{
+	"buffid":9269,
+	"BuffIcon":0,
+	"skillEffect":"",
+	"name":"天赋·兽力",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		77,
+		10
+	],
+	"descr":"如果是满血状态则造成的技能伤害+（attack）。",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,22 @@
+{
+	"buffid":10004,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"病入膏肓（隐）",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		65,
+		100,
+		71
+	],
+	"descr":"每次施放法术有50%的几率失败，并失去30点生命值。",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

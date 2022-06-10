@@ -1,0 +1,21 @@
+{
+	"buffid":8035,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"水之天道",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		137,
+		29
+	],
+	"descr":"你的治疗效果提升30%，且溢出治疗将对敌方造成等量伤害",
+	"trigger":6,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

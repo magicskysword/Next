@@ -1,0 +1,21 @@
+{
+	"buffid":4066,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"驱藤术",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		17,
+		111
+	],
+	"descr":"在本回合下一次受到技能伤害时，对手获得【缠绕】*（attack）",
+	"trigger":29,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

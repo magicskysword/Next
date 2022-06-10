@@ -1,0 +1,20 @@
+{
+	"buffid":860,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"广微凝月功",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		17
+	],
+	"descr":"对方神识为0时，每次使用技能有9%概率失败，且对自身造成5点伤害。",
+	"trigger":23,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

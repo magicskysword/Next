@@ -1,0 +1,20 @@
+{
+	"buffid":18021,
+	"BuffIcon":18016,
+	"skillEffect":"fx_Summoner_o",
+	"name":"阵法核心人左",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"战斗开始时获得【护罩】*100",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

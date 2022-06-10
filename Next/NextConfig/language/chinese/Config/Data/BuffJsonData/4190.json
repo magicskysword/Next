@@ -1,0 +1,21 @@
+{
+	"buffid":4190,
+	"BuffIcon":0,
+	"skillEffect":"4190",
+	"name":"清月露华体",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		115,
+		43
+	],
+	"descr":"受到的技能伤害减少20%，但每次受到技能伤害时获得【滞气】*1，持续一回合。",
+	"trigger":29,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

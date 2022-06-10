@@ -1,0 +1,21 @@
+{
+	"buffid":6020,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"怒水",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		162,
+		5
+	],
+	"descr":"每次触发【连击】后，我方获得【疗】*（attack）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

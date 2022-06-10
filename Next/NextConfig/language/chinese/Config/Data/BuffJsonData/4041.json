@@ -1,0 +1,20 @@
+{
+	"buffid":4041,
+	"BuffIcon":4038,
+	"skillEffect":"fx_Summoner_o",
+	"name":"暗雷劲",
+	"Affix":[],
+	"bufftype":11,
+	"seid":[
+		112
+	],
+	"descr":"（attack）回合后，造成44点伤害。",
+	"trigger":32,
+	"removeTrigger":3,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":2,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

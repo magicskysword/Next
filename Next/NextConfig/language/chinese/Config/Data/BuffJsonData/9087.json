@@ -1,0 +1,20 @@
+{
+	"buffid":9087,
+	"BuffIcon":9001,
+	"skillEffect":"fx_Summoner_o",
+	"name":"妖兽天赋·结网",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		17
+	],
+	"descr":"回合结束时，敌方获得【束缚】*1",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

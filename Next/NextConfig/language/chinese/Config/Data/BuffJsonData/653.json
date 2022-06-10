@@ -1,0 +1,20 @@
+{
+	"buffid":653,
+	"BuffIcon":649,
+	"skillEffect":"fx_Summoner_o",
+	"name":"金刚移山诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		130
+	],
+	"descr":"自身血量高于70%时，造成的所有技能伤害提升35%",
+	"trigger":37,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

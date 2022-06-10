@@ -1,0 +1,20 @@
+{
+	"buffid":4240,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"触发灼烧（自身）",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		82
+	],
+	"descr":"触发一次自身的【灼烧】",
+	"trigger":12,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

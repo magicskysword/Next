@@ -1,0 +1,20 @@
+{
+	"buffid":5203,
+	"BuffIcon":5205,
+	"skillEffect":"fx_Summoner_o",
+	"name":"清蕴丹",
+	"Affix":[],
+	"bufftype":8,
+	"seid":[
+		6
+	],
+	"descr":"下场战斗中免疫【中毒】，持续（attack）回合",
+	"trigger":5,
+	"removeTrigger":3,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

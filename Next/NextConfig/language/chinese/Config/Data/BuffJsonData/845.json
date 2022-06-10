@@ -1,0 +1,22 @@
+{
+	"buffid":845,
+	"BuffIcon":841,
+	"skillEffect":"fx_Summoner_o",
+	"name":"月破引虚诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		57,
+		65,
+		5
+	],
+	"descr":"造成的神识技能伤害增加38%，但自身释放技能时有30%概率获得【神殇】*5",
+	"trigger":37,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

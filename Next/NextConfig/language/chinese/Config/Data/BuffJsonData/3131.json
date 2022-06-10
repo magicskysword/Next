@@ -1,0 +1,20 @@
+{
+	"buffid":3131,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"仙胎",
+	"Affix":[],
+	"bufftype":15,
+	"seid":[
+		5
+	],
+	"descr":"回合开始时，【仙性】+4；处于此状态时将跳过吸收灵气阶段。",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

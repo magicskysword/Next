@@ -1,0 +1,18 @@
+{
+	"buffid":510,
+	"BuffIcon":509,
+	"skillEffect":"fx_Summoner_o",
+	"name":"废弃",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[],
+	"descr":"施法阶段，每吸收5点灵气，额外获得一点灵气",
+	"trigger":24,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

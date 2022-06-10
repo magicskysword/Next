@@ -1,0 +1,23 @@
+{
+	"buffid":3107,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"悲念",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		165,
+		212,
+		5,
+		111
+	],
+	"descr":"本回合结束时，心魔伤害+3；若化婴进度不大于50，意志损伤20",
+	"trigger":34,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,23 @@
+{
+	"buffid":38,
+	"BuffIcon":0,
+	"skillEffect":"38",
+	"name":"蓄势",
+	"Affix":[
+		27
+	],
+	"bufftype":3,
+	"seid":[
+		25,
+		111
+	],
+	"descr":"每受到一点伤害移除一层，回合开始时移除所有，造成层数点剑系伤害。",
+	"trigger":2,
+	"removeTrigger":9,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

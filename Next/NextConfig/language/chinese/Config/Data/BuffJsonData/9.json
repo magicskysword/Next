@@ -1,0 +1,22 @@
+{
+	"buffid":9,
+	"BuffIcon":0,
+	"skillEffect":"9.0",
+	"name":"霜冻",
+	"Affix":[
+		9
+	],
+	"bufftype":1,
+	"seid":[
+		10
+	],
+	"descr":"技能造成的基础伤害-（attack），每次使用技能后移除一层。",
+	"trigger":9,
+	"removeTrigger":10,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

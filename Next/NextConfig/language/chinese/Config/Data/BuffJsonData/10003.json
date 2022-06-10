@@ -1,0 +1,20 @@
+{
+	"buffid":10003,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"病入膏肓",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		21
+	],
+	"descr":"毒入五脏，运气行脉不能自如，每回合吸收灵气数-2，每次施放法术有50%的几率失败，并失去30点生命值。",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

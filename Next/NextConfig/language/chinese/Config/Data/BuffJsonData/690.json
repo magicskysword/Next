@@ -1,0 +1,20 @@
+{
+	"buffid":690,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"御剑九决",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		9
+	],
+	"descr":"【御剑术】的伤害+（attack）",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

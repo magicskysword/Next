@@ -1,0 +1,18 @@
+{
+	"buffid":2108,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"落魄镜",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[],
+	"descr":"神识系技能伤害变为真实伤害。",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

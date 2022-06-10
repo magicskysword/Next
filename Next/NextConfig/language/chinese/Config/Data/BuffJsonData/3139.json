@@ -1,0 +1,21 @@
+{
+	"buffid":3139,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"忘凡咒",
+	"Affix":[],
+	"bufftype":15,
+	"seid":[
+		119,
+		89
+	],
+	"descr":"本回合结束时，若处于【仙胎】状态，则【凡性】-（attack）。",
+	"trigger":1,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

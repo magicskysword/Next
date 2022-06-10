@@ -1,0 +1,22 @@
+{
+	"buffid":9027,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"魔化",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		17,
+		65,
+		104
+	],
+	"descr":"攻击对手时，使对手获得【流血】*4，并有50%的几率使对手的一点灵气变化为魔气。",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

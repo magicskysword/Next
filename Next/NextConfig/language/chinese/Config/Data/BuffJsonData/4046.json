@@ -1,0 +1,18 @@
+{
+	"buffid":4046,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"生水印",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[],
+	"descr":"本场战斗，水灵根权重+（attack）",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

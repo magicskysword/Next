@@ -1,0 +1,22 @@
+{
+	"buffid":9169,
+	"BuffIcon":9001,
+	"skillEffect":"fx_Summoner_o",
+	"name":"逆鳞",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		175,
+		5,
+		111
+	],
+	"descr":"若单回合累积受到的伤害大于等于400，则下一次技能造成的伤害翻倍。",
+	"trigger":10,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

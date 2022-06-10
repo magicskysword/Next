@@ -1,0 +1,20 @@
+{
+	"buffid":40,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"葵水",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		48
+	],
+	"descr":"满三层后移除所有，获得【增伤】*1",
+	"trigger":13,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

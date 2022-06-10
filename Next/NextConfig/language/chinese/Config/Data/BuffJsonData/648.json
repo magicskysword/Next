@@ -1,0 +1,21 @@
+{
+	"buffid":648,
+	"BuffIcon":644,
+	"skillEffect":"fx_Summoner_o",
+	"name":"蛮牛护体诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		77,
+		5
+	],
+	"descr":"回合结束时，如果是满血状态，则获得【护罩】*96",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

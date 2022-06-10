@@ -1,0 +1,18 @@
+{
+	"buffid":856,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"空置位",
+	"Affix":[],
+	"bufftype":0,
+	"seid":[],
+	"descr":"",
+	"trigger":0,
+	"removeTrigger":0,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

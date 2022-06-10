@@ -1,0 +1,21 @@
+{
+	"buffid":4070,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"炙火印",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		17,
+		111
+	],
+	"descr":"在本回合下一次受到技能伤害时，使对手获得【灼烧】*（attack）",
+	"trigger":29,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

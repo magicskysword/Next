@@ -1,0 +1,20 @@
+{
+	"buffid":102,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"养刀术",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		10
+	],
+	"descr":"每场战斗第一次技能伤害+（attack）",
+	"trigger":9,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

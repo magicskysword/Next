@@ -1,0 +1,20 @@
+{
+	"buffid":9243,
+	"BuffIcon":10017,
+	"skillEffect":"fx_Summoner_o",
+	"name":"浪方领域",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		28
+	],
+	"descr":"每次受到伤害时，触发一次对手的【腐蚀】；未处于【领域】状态下的对手对你造成的伤害降低50%。",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,18 @@
+{
+	"buffid":9237,
+	"BuffIcon":9001,
+	"skillEffect":"9225",
+	"name":"龙族登场",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[],
+	"descr":"战斗开始时播放特效",
+	"trigger":12,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

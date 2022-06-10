@@ -1,0 +1,21 @@
+{
+	"buffid":884,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"疾风劲",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		174,
+		5
+	],
+	"descr":"若遁速大于对手，则获得885*（attack）层",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

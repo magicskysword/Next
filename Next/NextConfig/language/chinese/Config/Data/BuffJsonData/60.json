@@ -1,0 +1,20 @@
+{
+	"buffid":60,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"九宫颠倒阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		312
+	],
+	"descr":"若本回合释放技能的次数未超过三次，则跳过灵气消散阶段",
+	"trigger":44,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

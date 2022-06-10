@@ -1,0 +1,22 @@
+{
+	"buffid":20,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"须弥",
+	"Affix":[
+		17
+	],
+	"bufftype":3,
+	"seid":[
+		12
+	],
+	"descr":"你下一次造成的技能伤害翻倍，触发后移除。",
+	"trigger":37,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

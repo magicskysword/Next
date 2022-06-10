@@ -1,0 +1,18 @@
+{
+	"buffid":405,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"废弃",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[],
+	"descr":"单次造成超过30点火系技能伤害时，敌方获得【灼烧】*（attack）",
+	"trigger":40,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

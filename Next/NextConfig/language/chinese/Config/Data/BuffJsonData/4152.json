@@ -1,0 +1,20 @@
+{
+	"buffid":4152,
+	"BuffIcon":4149,
+	"skillEffect":"fx_Summoner_o",
+	"name":"星河·真伤",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		17
+	],
+	"descr":"使用技能时，为敌方增加【星河·真伤2】*10",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

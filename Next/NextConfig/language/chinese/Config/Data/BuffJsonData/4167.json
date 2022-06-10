@@ -1,0 +1,21 @@
+{
+	"buffid":4167,
+	"BuffIcon":0,
+	"skillEffect":"4167",
+	"name":"影役",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		1,
+		315
+	],
+	"descr":"回合结束，影役会汲取敌人（attack）点生命值。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

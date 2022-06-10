@@ -1,0 +1,20 @@
+{
+	"buffid":7004,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"愈合",
+	"Affix":[],
+	"bufftype":16,
+	"seid":[
+		1
+	],
+	"descr":"回合开始时，恢复（attack）点生命",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

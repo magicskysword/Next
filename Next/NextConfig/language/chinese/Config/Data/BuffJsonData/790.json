@@ -1,0 +1,21 @@
+{
+	"buffid":790,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"方圆",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		156,
+		1
+	],
+	"descr":"战斗胜利时，每有一个【阵法】恢复生命值20点。",
+	"trigger":22,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

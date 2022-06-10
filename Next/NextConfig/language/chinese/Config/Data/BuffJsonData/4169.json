@@ -1,0 +1,20 @@
+{
+	"buffid":4169,
+	"BuffIcon":0,
+	"skillEffect":"4169",
+	"name":"影",
+	"Affix":[
+		81
+	],
+	"bufftype":2,
+	"seid":[],
+	"descr":"暗影重重，指示物，数目：（attack）。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

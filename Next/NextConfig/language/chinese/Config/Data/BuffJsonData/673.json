@@ -1,0 +1,20 @@
+{
+	"buffid":673,
+	"BuffIcon":209,
+	"skillEffect":"fx_Summoner_o",
+	"name":"厄难毒体",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		80
+	],
+	"descr":"自身每有一点【中毒】，提升木系伤害4点。",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":616,
+	"BuffIcon":615,
+	"skillEffect":"fx_Summoner_o",
+	"name":"浑天术（弃用）",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		56,
+		1
+	],
+	"descr":"血量上限+（attack*20），受到的所有伤害+1",
+	"trigger":23,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

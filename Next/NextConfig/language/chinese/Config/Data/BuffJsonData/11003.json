@@ -1,0 +1,22 @@
+{
+	"buffid":11003,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"天道福泽",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		182,
+		106,
+		5
+	],
+	"descr":"【简单】每回合获得灵气的数量+2，受到的所有伤害降低20%",
+	"trigger":23,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

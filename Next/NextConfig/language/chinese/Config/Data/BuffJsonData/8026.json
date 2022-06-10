@@ -1,0 +1,21 @@
+{
+	"buffid":8026,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"寄生",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		119,
+		17
+	],
+	"descr":"对手在【缠绕】状态下使用技能时，会为你恢复4点生命值",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

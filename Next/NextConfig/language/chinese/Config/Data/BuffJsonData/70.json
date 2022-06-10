@@ -1,0 +1,18 @@
+{
+	"buffid":70,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"诛仙剑阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[],
+	"descr":"回合结束时，对敌方造成2点伤害，并下次伤害翻倍，此效果累加。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

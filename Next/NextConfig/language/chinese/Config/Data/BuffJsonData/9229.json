@@ -1,0 +1,20 @@
+{
+	"buffid":9229,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"龙体",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		60
+	],
+	"descr":"土龙",
+	"trigger":28,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

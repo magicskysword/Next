@@ -1,0 +1,22 @@
+{
+	"buffid":457,
+	"BuffIcon":405,
+	"skillEffect":"fx_Summoner_o",
+	"name":"燃焰诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		122,
+		173,
+		17
+	],
+	"descr":"单次造成至少20点火系技能伤害时，敌方获得【灼烧】*3",
+	"trigger":40,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -110,6 +110,8 @@ namespace SkySwordKill.Next
             // 加载运行时脚本所需DLL
             // load runtime dll
             Assembly.LoadFrom(Utility.CombinePaths(pathLibraryDir.Value, "Microsoft.CSharp.dll"));
+            Assembly.LoadFrom(Utility.CombinePaths(pathLibraryDir.Value, "System.Windows.Forms.dll"));
+            Assembly.LoadFrom(Utility.CombinePaths(pathLibraryDir.Value, "Ookii.Dialogs.dll"));
 
             DialogAnalysis.Init();
 

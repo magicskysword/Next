@@ -1,0 +1,20 @@
+{
+	"buffid":92,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"酆都鬼蜮",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		5
+	],
+	"descr":"【阵法】回合结束，获得【影匿】*1、【影】*4",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":211,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"回春诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		39
+	],
+	"descr":"每累积使用5点木系灵气，恢复（attack）点生命",
+	"trigger":27,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

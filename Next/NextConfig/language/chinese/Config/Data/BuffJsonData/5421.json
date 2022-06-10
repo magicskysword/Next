@@ -1,0 +1,22 @@
+{
+	"buffid":5421,
+	"BuffIcon":5205,
+	"skillEffect":"fx_Summoner_o",
+	"name":"大活络丹",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		206,
+		200,
+		111
+	],
+	"descr":"回合结束时，若经脉低于50，立刻恢复自身10点经脉。（效果不可叠加）",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":765,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"地绝",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		50
+	],
+	"descr":"剑系技能伤害+（attack*2）；回合结束，自身损失（attack*15）点生命值",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

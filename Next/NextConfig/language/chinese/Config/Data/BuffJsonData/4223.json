@@ -1,0 +1,22 @@
+{
+	"buffid":4223,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"灵沙术",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		76,
+		79,
+		111
+	],
+	"descr":"下一次释放【还尘】时，随机吸收（attack）点对手的灵气。",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

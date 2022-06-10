@@ -1,0 +1,21 @@
+{
+	"buffid":228,
+	"BuffIcon":209,
+	"skillEffect":"fx_Summoner_o",
+	"name":"五毒蚀心诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		65,
+		17
+	],
+	"descr":"回合结束时，50%概率敌方获得【中毒】*1",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

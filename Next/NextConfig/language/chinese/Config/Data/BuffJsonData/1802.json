@@ -1,0 +1,20 @@
+{
+	"buffid":1802,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"三阳道袍",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		15
+	],
+	"descr":"受到的金系伤害降低50%",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

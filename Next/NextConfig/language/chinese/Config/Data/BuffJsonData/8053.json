@@ -1,0 +1,21 @@
+{
+	"buffid":8053,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"入微",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		85,
+		117
+	],
+	"descr":"每次释放剑系技能后，获得【振剑】*3X。（X为该技能消耗的灵气数量）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

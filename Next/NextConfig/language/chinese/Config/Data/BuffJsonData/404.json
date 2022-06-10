@@ -1,0 +1,20 @@
+{
+	"buffid":404,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"焚心诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		17
+	],
+	"descr":"回合开始时，敌方获得【灼烧】*（attack）",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

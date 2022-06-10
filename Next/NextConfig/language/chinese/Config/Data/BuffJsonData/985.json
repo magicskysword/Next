@@ -1,0 +1,22 @@
+{
+	"buffid":985,
+	"BuffIcon":9010,
+	"skillEffect":"fx_Summoner_o",
+	"name":"御木",
+	"Affix":[
+		51
+	],
+	"bufftype":2,
+	"seid":[
+		72
+	],
+	"descr":"本回合受到的木系伤害-（attack）",
+	"trigger":7,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

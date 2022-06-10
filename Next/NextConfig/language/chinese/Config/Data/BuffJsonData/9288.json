@@ -1,0 +1,21 @@
+{
+	"buffid":9288,
+	"BuffIcon":4171,
+	"skillEffect":"fx_Summoner_o",
+	"name":"魔狱缚魂阵-生",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		65,
+		26
+	],
+	"descr":"每使用一次技能，且有30%的概率获得一点魔气。",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

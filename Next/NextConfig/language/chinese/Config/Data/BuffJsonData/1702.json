@@ -1,0 +1,20 @@
+{
+	"buffid":1702,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"青光盾",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		3
+	],
+	"descr":"每场战斗受到的第一次伤害-30",
+	"trigger":7,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

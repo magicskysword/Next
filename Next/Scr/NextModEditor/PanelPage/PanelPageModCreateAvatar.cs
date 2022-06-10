@@ -13,7 +13,7 @@ namespace SkySwordKill.NextEditor.PanelPage
         base.OnAdd();
 
         AddTableHeader(new TableInfo(
-            "modEditor.main.modCreateAvatar.id".I18N(),
+            "ModEditor.Main.modCreateAvatar.id".I18N(),
             TableInfo.DEFAULT_GRID_WIDTH,
             data =>
             {
@@ -22,7 +22,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             }));
 
         AddTableHeader(new TableInfo(
-            "modEditor.main.modCreateAvatar.name".I18N(),
+            "ModEditor.Main.modCreateAvatar.name".I18N(),
             TableInfo.DEFAULT_GRID_WIDTH,
             data =>
             {
@@ -31,7 +31,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             }));
 
         AddTableHeader(new TableInfo(
-            "modEditor.main.modCreateAvatar.createType".I18N(),
+            "ModEditor.Main.modCreateAvatar.createType".I18N(),
             TableInfo.DEFAULT_GRID_WIDTH,
             data =>
             {
@@ -40,7 +40,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             }));
 
         AddTableHeader(new TableInfo(
-            "modEditor.main.modCreateAvatar.group".I18N(),
+            "ModEditor.Main.modCreateAvatar.group".I18N(),
             TableInfo.DEFAULT_GRID_WIDTH * 0.5f,
             data =>
             {
@@ -49,7 +49,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             }));
 
         AddTableHeader(new TableInfo(
-            "modEditor.main.modCreateAvatar.desc".I18N(),
+            "ModEditor.Main.modCreateAvatar.desc".I18N(),
             TableInfo.DEFAULT_GRID_WIDTH * 3,
             data =>
             {
@@ -70,7 +70,7 @@ namespace SkySwordKill.NextEditor.PanelPage
         var createAvatarData = (ModCreateAvatarData)data;
 
         Inspector.AddDrawer(new ModIDPropertyDrawer(
-                "modEditor.main.modCreateAvatar.id".I18N(),
+                "ModEditor.Main.modCreateAvatar.id".I18N(),
                 createAvatarData,
                 () => Project.CreateAvatarData,
                 theData =>
@@ -97,27 +97,27 @@ namespace SkySwordKill.NextEditor.PanelPage
         );
 
         Inspector.AddDrawer(new ModStringPropertyDrawer(
-                "modEditor.main.modCreateAvatar.name".I18N(),
+                "ModEditor.Main.modCreateAvatar.name".I18N(),
                 str => createAvatarData.Name = str,
                 () => createAvatarData.Name)
             { OnChanged = RefreshCurrentRow }
         );
 
         Inspector.AddDrawer(new ModIntPropertyDrawer(
-                "modEditor.main.modCreateAvatar.group".I18N(),
+                "ModEditor.Main.modCreateAvatar.group".I18N(),
                 value => createAvatarData.Group = value,
                 () => createAvatarData.Group)
             { OnChanged = RefreshCurrentRow }
         );
 
         Inspector.AddDrawer(new ModIntPropertyDrawer(
-            "modEditor.main.modCreateAvatar.cost".I18N(),
+            "ModEditor.Main.modCreateAvatar.cost".I18N(),
             value => createAvatarData.Cost = value,
             () => createAvatarData.Cost)
         );
 
         Inspector.AddDrawer(new ModDropdownPropertyDrawer(
-            "modEditor.main.modCreateAvatar.createType".I18N(),
+            "ModEditor.Main.modCreateAvatar.createType".I18N(),
             () => ModMgr.I.CreateAvatarDataTalentTypes.Select(type => $"{type.TypeID} : {type.Desc}"),
             index => createAvatarData.SetTalentType(ModMgr.I.CreateAvatarDataTalentTypes[index]),
             () => ModMgr.I.CreateAvatarDataTalentTypes.FindIndex(type =>

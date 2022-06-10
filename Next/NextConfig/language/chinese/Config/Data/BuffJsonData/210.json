@@ -1,0 +1,21 @@
+{
+	"buffid":210,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"太乙玄功",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		74,
+		57
+	],
+	"descr":"对被【缠绕】的对手造成的木系技能伤害提升（attack）%",
+	"trigger":37,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

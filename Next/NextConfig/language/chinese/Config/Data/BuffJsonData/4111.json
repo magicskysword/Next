@@ -1,0 +1,20 @@
+{
+	"buffid":4111,
+	"BuffIcon":4101,
+	"skillEffect":"fx_Summoner_o",
+	"name":"修为压制",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		137
+	],
+	"descr":"受到的治疗效果降低80%",
+	"trigger":6,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

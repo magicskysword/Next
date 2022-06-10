@@ -1,0 +1,20 @@
+{
+	"buffid":4150,
+	"BuffIcon":4149,
+	"skillEffect":"fx_Summoner_o",
+	"name":"星河·治疗伤害",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		29
+	],
+	"descr":"溢出治疗量，造成伤害",
+	"trigger":6,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

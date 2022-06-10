@@ -1,0 +1,18 @@
+{
+	"buffid":3122,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"魔念指示物",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[],
+	"descr":"无效果的指示物",
+	"trigger":5,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

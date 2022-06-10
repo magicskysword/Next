@@ -1,0 +1,20 @@
+{
+	"buffid":3101,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"心魔",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		201
+	],
+	"descr":"回合结束时，对【意志】造成（attack）点伤害",
+	"trigger":34,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,22 @@
+{
+	"buffid":9208,
+	"BuffIcon":9200,
+	"skillEffect":"fx_Summoner_o",
+	"name":"扎根",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		164,
+		127,
+		185
+	],
+	"descr":"三回合后，对手进入【寄生】状态。",
+	"trigger":32,
+	"removeTrigger":3,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

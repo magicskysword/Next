@@ -1,0 +1,20 @@
+{
+	"buffid":4071,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"丹阳印",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		27
+	],
+	"descr":"本回合造成的火系技能伤害+（attack）",
+	"trigger":9,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":693,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"小须弥禁法",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		65,
+		24
+	],
+	"descr":"受到技能伤害时，有20%的几率释放一次【御阵】",
+	"trigger":29,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

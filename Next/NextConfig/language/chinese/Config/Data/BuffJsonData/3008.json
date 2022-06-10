@@ -1,0 +1,20 @@
+{
+	"buffid":3008,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"破丹诀",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		211
+	],
+	"descr":"金丹受到的所有伤害提升25%",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

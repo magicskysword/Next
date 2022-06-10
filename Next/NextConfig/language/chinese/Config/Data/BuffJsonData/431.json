@@ -1,0 +1,18 @@
+{
+	"buffid":431,
+	"BuffIcon":406,
+	"skillEffect":"fx_Summoner_o",
+	"name":"煮海诀（废弃）",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[],
+	"descr":"回合结束，触发两次敌人的【灼烧】",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":207,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"太阴玄毒功",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		119,
+		50
+	],
+	"descr":"对【中毒】状态下的对手，造成的木系技能伤害+（attack）",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

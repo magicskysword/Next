@@ -1,0 +1,20 @@
+{
+	"buffid":8051,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"轻剑",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		27
+	],
+	"descr":"你造成的剑系技能伤害+2",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":8032,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"冰冻",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		39
+	],
+	"descr":"每累计打出5点水系灵气，对手获得【霜冻】*2",
+	"trigger":27,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

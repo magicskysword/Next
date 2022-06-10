@@ -1,0 +1,21 @@
+{
+	"buffid":77,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"九宫杀阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		11,
+		127
+	],
+	"descr":"回合结束时，造成（attack）点伤害，该伤害每次递增9点",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

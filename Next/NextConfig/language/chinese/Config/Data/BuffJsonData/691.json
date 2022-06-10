@@ -1,0 +1,22 @@
+{
+	"buffid":691,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"飞星剑诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		85,
+		166,
+		5
+	],
+	"descr":"使用剑系技能【生】则获得【减伤】*（attack）.【克】则获得【易伤】*（attack）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

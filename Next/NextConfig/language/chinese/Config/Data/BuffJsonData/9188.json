@@ -1,0 +1,21 @@
+{
+	"buffid":9188,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"朱雀",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		85,
+		5
+	],
+	"descr":"每次释放火系技能时，获得【化焰】*5",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

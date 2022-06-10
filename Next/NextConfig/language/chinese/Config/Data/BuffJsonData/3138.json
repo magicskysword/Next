@@ -1,0 +1,22 @@
+{
+	"buffid":3138,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"定元咒",
+	"Affix":[],
+	"bufftype":15,
+	"seid":[
+		164,
+		2,
+		111
+	],
+	"descr":"下一次进入【仙胎】状态时，吸收（attack）点灵气",
+	"trigger":36,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

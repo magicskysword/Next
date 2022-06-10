@@ -1,0 +1,20 @@
+{
+	"buffid":308,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"天星化海诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		36
+	],
+	"descr":"回合结束时，对敌方造成X点伤害（X为你当前的灵气总量）",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

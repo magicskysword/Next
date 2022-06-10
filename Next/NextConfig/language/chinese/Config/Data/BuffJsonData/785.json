@@ -1,0 +1,20 @@
+{
+	"buffid":785,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"胎息经",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		112
+	],
+	"descr":"第三回合开始时，恢复自身7点生命值。",
+	"trigger":32,
+	"removeTrigger":5,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

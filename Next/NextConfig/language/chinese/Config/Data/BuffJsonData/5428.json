@@ -1,0 +1,20 @@
+{
+	"buffid":5428,
+	"BuffIcon":5205,
+	"skillEffect":"fx_Summoner_o",
+	"name":"锻脉丹",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		200
+	],
+	"descr":"每回合结束时【经脉】-（attack），【意志】-（attack）。结婴成功后，可额外提升（attack*200）点血量上限。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

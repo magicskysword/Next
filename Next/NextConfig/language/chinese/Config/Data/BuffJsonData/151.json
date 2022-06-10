@@ -1,0 +1,22 @@
+{
+	"buffid":151,
+	"BuffIcon":103,
+	"skillEffect":"fx_Summoner_o",
+	"name":"金虹剑诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		122,
+		65,
+		12
+	],
+	"descr":"每使用4点金系灵气，获得【蓄势】*1；造成剑系伤害时，有9%的几率使此次伤害翻倍。",
+	"trigger":31,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

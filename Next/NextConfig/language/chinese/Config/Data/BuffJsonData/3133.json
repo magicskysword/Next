@@ -1,0 +1,18 @@
+{
+	"buffid":3133,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"仙性",
+	"Affix":[],
+	"bufftype":15,
+	"seid":[],
+	"descr":"仙性达到100时，突破成功。",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

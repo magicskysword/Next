@@ -1,0 +1,22 @@
+{
+	"buffid":5,
+	"BuffIcon":0,
+	"skillEffect":"5",
+	"name":"护罩",
+	"Affix":[
+		5
+	],
+	"bufftype":2,
+	"seid":[
+		4
+	],
+	"descr":"抵挡（attack）点伤害",
+	"trigger":7,
+	"removeTrigger":8,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":1301,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"血薇剑",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		25
+	],
+	"descr":"造成20点剑系伤害",
+	"trigger":12,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

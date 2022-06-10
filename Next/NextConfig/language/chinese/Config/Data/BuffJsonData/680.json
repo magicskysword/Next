@@ -1,0 +1,21 @@
+{
+	"buffid":680,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"龟息术",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		96,
+		1
+	],
+	"descr":"回合结束时，若本回合没有造成过任何伤害，则恢复（attack）点生命值",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

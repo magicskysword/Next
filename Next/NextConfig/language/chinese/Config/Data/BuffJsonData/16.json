@@ -1,0 +1,23 @@
+{
+	"buffid":16,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"隐匿",
+	"Affix":[
+		13
+	],
+	"bufftype":2,
+	"seid":[
+		18,
+		20
+	],
+	"descr":"有50%几率闪避技能伤害，使用任何技能都会破除【隐匿】状态",
+	"trigger":29,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

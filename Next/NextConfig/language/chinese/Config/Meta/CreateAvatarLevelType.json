@@ -1,0 +1,66 @@
+[
+    {
+        "TypeID": 0,
+        "Desc": "无"
+    },
+    {
+        "TypeID": 1,
+        "Desc": "炼气初期"
+    },
+    {
+        "TypeID": 2,
+        "Desc": "炼气中期"
+    },
+    {
+        "TypeID": 3,
+        "Desc": "炼气后期"
+    },
+    {
+        "TypeID": 4,
+        "Desc": "筑基初期"
+    },
+    {
+        "TypeID": 5,
+        "Desc": "筑基中期"
+    },
+    {
+        "TypeID": 6,
+        "Desc": "筑基后期"
+    },
+    {
+        "TypeID": 7,
+        "Desc": "金丹初期"
+    },
+    {
+        "TypeID": 8,
+        "Desc": "金丹中期"
+    },
+    {
+        "TypeID": 9,
+        "Desc": "金丹后期"
+    },
+    {
+        "TypeID": 10,
+        "Desc": "元婴初期"
+    },
+    {
+        "TypeID": 11,
+        "Desc": "元婴中期"
+    },
+    {
+        "TypeID": 12,
+        "Desc": "元婴后期"
+    },
+    {
+        "TypeID": 13,
+        "Desc": "化神初期"
+    },
+    {
+        "TypeID": 14,
+        "Desc": "化神中期"
+    },
+    {
+        "TypeID": 15,
+        "Desc": "化神后期"
+    }
+]

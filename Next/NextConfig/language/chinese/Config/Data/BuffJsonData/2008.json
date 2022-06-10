@@ -1,0 +1,20 @@
+{
+	"buffid":2008,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"水灵丝",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		26
+	],
+	"descr":"回合开始时，获得一点水系灵气",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":627,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"忘忧诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		65,
+		47
+	],
+	"descr":"回合开始时，如果你没有灵气，则有50%的几率吸收（attack）点灵气",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

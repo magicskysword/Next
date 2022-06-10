@@ -1,0 +1,20 @@
+{
+	"buffid":959,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"天星若雨伤害增加",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		9
+	],
+	"descr":"天星若雨伤害增加（attack）",
+	"trigger":9,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -12,22 +12,19 @@ namespace SkySwordKill.Next.XiaoYeGUI
     {
         private class GUIBlocker : MonoBehaviour
         {
-            private RectTransform _rect;
             private GUIStyle _style;
+            public Rect rect;
 
             private void Awake()
             {
-                _rect = GetComponent<RectTransform>();
+                // _rect = GetComponent<RectTransform>();
                 _style = new GUIStyle();
             }
 
             private void OnGUI()
             {
-                var rect = _rect.rect;
-                GUI.Button(new Rect(rect)
-                {
-                    y = Screen.height - rect.y
-                }, "", XiaoYeGUI.InterfaceMaker.CustomSkin.button);
+                
+                GUI.Button(rect, "", _style);
             }
         }
         
@@ -72,6 +69,7 @@ namespace SkySwordKill.Next.XiaoYeGUI
         {
             _rt.sizeDelta = rect.size;
             _rt.position = new Vector3(rect.position.x,Screen.height - rect.position.y);
+            _guiBlocker.rect = new Rect(rect);
         }
 
         public void OpenBlocker()

@@ -1,0 +1,18 @@
+{
+	"buffid":2103,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"六根清净竹",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[],
+	"descr":"因【缠绕】造成的伤害*3",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

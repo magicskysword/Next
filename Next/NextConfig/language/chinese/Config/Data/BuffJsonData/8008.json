@@ -1,0 +1,24 @@
+{
+	"buffid":8008,
+	"BuffIcon":9012,
+	"skillEffect":"fx_Summoner_o",
+	"name":"强水",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		85,
+		150,
+		151,
+		152,
+		10
+	],
+	"descr":"使用水系技能时，若上一个使用的是金系技能，则此技能造成的伤害+6",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

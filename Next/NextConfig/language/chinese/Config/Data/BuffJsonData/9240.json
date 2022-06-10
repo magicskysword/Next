@@ -1,0 +1,21 @@
+{
+	"buffid":9240,
+	"BuffIcon":9240,
+	"skillEffect":"fx_Summoner_o",
+	"name":"根基不稳",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		97,
+		111
+	],
+	"descr":"生命值小于33%时退出战斗。",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":9235,
+	"BuffIcon":9001,
+	"skillEffect":"fx_Summoner_o",
+	"name":"真龙之体",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		5
+	],
+	"descr":"龙族越战越强，每回合吸收灵气数将随回合数不断提升，最多提升10。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":8016,
+	"BuffIcon":9008,
+	"skillEffect":"fx_Summoner_o",
+	"name":"相生",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		5
+	],
+	"descr":"每回合首次释放金系技能并触发五行【连击】后，获得【聚气】*6",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":162,
+	"BuffIcon":156,
+	"skillEffect":"fx_Summoner_o",
+	"name":"藏离诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		75,
+		141
+	],
+	"descr":"内伤状态下，造成的技能伤害提升20%",
+	"trigger":37,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

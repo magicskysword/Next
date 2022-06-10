@@ -1,0 +1,20 @@
+{
+	"buffid":6004,
+	"BuffIcon":9012,
+	"skillEffect":"fx_Summoner_o",
+	"name":"强水",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		50
+	],
+	"descr":"水系技能伤害+（attack）",
+	"trigger":9,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

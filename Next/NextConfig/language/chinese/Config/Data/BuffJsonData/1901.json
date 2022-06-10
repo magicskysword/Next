@@ -1,0 +1,18 @@
+{
+	"buffid":1901,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"通天灵宝防具",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[],
+	"descr":"通天灵宝防具",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

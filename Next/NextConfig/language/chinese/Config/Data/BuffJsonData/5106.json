@@ -1,0 +1,20 @@
+{
+	"buffid":5106,
+	"BuffIcon":5205,
+	"skillEffect":"fx_Summoner_o",
+	"name":"三阳丹",
+	"Affix":[],
+	"bufftype":8,
+	"seid":[
+		50
+	],
+	"descr":"本场战斗中造成的火系伤+1。",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

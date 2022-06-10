@@ -1,0 +1,20 @@
+{
+	"buffid":6029,
+	"BuffIcon":6029,
+	"skillEffect":"fx_Summoner_o",
+	"name":"乱魂",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		17
+	],
+	"descr":"对方神识降至0时，受到的技能伤害增加50%。",
+	"trigger":23,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

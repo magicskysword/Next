@@ -1,0 +1,21 @@
+{
+	"buffid":364,
+	"BuffIcon":355,
+	"skillEffect":"fx_Summoner_o",
+	"name":"乾坤化剑诀(隐藏)",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		126,
+		5
+	],
+	"descr":"若【止水】层数大于【惊涛】则获得【疗】*16",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

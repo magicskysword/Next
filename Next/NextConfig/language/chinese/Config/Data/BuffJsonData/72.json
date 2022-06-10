@@ -1,0 +1,20 @@
+{
+	"buffid":72,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"落魂阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		54
+	],
+	"descr":"回合开始时，每有【魂】*1，获得【振神】*1",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

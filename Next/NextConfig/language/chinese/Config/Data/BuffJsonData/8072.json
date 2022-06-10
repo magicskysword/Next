@@ -1,0 +1,21 @@
+{
+	"buffid":8072,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"两仪",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		156,
+		141
+	],
+	"descr":"每布下一个不同的【阵法】，便使受到的技能伤害降低3%。",
+	"trigger":29,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

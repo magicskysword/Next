@@ -1,0 +1,20 @@
+{
+	"buffid":8036,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"炙火",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		28
+	],
+	"descr":"回合结束时，立刻触发一次对手的【灼烧】。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

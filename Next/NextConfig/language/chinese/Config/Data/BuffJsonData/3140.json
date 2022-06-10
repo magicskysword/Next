@@ -1,0 +1,20 @@
+{
+	"buffid":3140,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"褪灵",
+	"Affix":[],
+	"bufftype":15,
+	"seid":[
+		5
+	],
+	"descr":"回合结束时，【凡性】+（attack）（随回合数递增）",
+	"trigger":34,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

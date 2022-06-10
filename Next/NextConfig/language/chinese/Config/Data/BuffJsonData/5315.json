@@ -1,0 +1,20 @@
+{
+	"buffid":5315,
+	"BuffIcon":5205,
+	"skillEffect":"fx_Summoner_o",
+	"name":"聚顶丹",
+	"Affix":[],
+	"bufftype":10,
+	"seid":[
+		2
+	],
+	"descr":"在三花聚顶阶段，额外吸收（attack）点灵气",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

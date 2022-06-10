@@ -1,0 +1,21 @@
+{
+	"buffid":39,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"杀戮剑气",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		91,
+		25
+	],
+	"descr":"回合开始时，造成20点伤害，目标没有【护罩】追加一段伤害。",
+	"trigger":2,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

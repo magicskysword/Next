@@ -1,0 +1,22 @@
+{
+	"buffid":9275,
+	"BuffIcon":0,
+	"skillEffect":"",
+	"name":"神识压制",
+	"Affix":[
+		34
+	],
+	"bufftype":3,
+	"seid":[
+		55
+	],
+	"descr":"来源不明的神识压制，好像...只针对冲虚散人，而且他并未察觉。",
+	"trigger":12,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":1801,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"青溪法袍",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		18
+	],
+	"descr":"有20%几率回避所有伤害",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

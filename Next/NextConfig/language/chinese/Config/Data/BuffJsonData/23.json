@@ -1,0 +1,22 @@
+{
+	"buffid":23,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"焰",
+	"Affix":[
+		18
+	],
+	"bufftype":2,
+	"seid":[
+		27
+	],
+	"descr":"本回合火系技能伤害+（attack）",
+	"trigger":9,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

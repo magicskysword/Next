@@ -1,0 +1,20 @@
+{
+	"buffid":9186,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"青龙",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		5
+	],
+	"descr":"回合结束时，对手获得【缠绕】*10，【中毒】*20",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":9259,
+	"BuffIcon":0,
+	"skillEffect":"",
+	"name":"失魂",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		17
+	],
+	"descr":"古神教于傀儡上铭刻失魂大阵，回合结束时，敌方获得【神殇】*22。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

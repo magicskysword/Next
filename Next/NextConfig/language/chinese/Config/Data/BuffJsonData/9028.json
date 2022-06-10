@@ -1,0 +1,20 @@
+{
+	"buffid":9028,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"喙击",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		112
+	],
+	"descr":"（attack）回合后，造成21点伤害。",
+	"trigger":32,
+	"removeTrigger":3,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":2,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

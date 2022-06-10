@@ -1,0 +1,20 @@
+{
+	"buffid":3994,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"抱元守一",
+	"Affix":[],
+	"bufftype":10,
+	"seid":[
+		22
+	],
+	"descr":"灵气上限+3",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":10012,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"天生异瞳",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		178,
+		17
+	],
+	"descr":"神识高于对手时，对手有10%的概率使用技能失败",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

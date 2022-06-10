@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using FairyGUI;
+using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextFGUI.NextModEditor;
 using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI
@@ -25,6 +27,13 @@ namespace SkySwordKill.Next.FGUI
             
             RegisterCursor("resizeH","Assets/Cursor/cursor_resize1.png");
             RegisterCursor("resizeV","Assets/Cursor/cursor_resize2.png");
+            
+            AddPackage("NextCore");
+            AddPackage("NextModEditor");
+            NextCoreBinder.BindAll();
+            NextModEditorBinder.BindAll();
+            
+            GRoot.inst.SetContentScaleFactor(1);
         }
 
         public void Reset()

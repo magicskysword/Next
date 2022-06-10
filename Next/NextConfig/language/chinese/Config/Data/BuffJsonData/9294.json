@@ -1,0 +1,20 @@
+{
+	"buffid":9294,
+	"BuffIcon":0,
+	"skillEffect":"",
+	"name":"天魔狱",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		138
+	],
+	"descr":"【阵法】回合结束，扣除敌方所有增益buff*（attack）。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

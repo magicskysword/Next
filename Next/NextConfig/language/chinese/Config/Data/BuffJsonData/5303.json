@@ -1,0 +1,20 @@
+{
+	"buffid":5303,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"血煞丹",
+	"Affix":[],
+	"bufftype":8,
+	"seid":[
+		1
+	],
+	"descr":"所有技能造成的伤害+3，每次使用技能受到一点伤害。",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

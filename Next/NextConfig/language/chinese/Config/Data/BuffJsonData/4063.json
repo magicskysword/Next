@@ -1,0 +1,22 @@
+{
+	"buffid":4063,
+	"BuffIcon":4060,
+	"skillEffect":"fx_Summoner_o",
+	"name":"玄冰劲",
+	"Affix":[],
+	"bufftype":11,
+	"seid":[
+		164,
+		172,
+		127
+	],
+	"descr":"（attack）回合后，获得【霜冻】*7",
+	"trigger":32,
+	"removeTrigger":3,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":2,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

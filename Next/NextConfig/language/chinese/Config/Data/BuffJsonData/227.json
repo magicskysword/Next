@@ -1,0 +1,20 @@
+{
+	"buffid":227,
+	"BuffIcon":222,
+	"skillEffect":"fx_Summoner_o",
+	"name":"放【寄生引血术】",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		24
+	],
+	"descr":"回合结束时，释放一次【寄生引血术】；【寄生引血术】的伤害+2",
+	"trigger":12,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

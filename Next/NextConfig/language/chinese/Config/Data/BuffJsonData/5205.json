@@ -1,0 +1,20 @@
+{
+	"buffid":5205,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"筑基丹",
+	"Affix":[],
+	"bufftype":14,
+	"seid":[
+		2
+	],
+	"descr":"筑基开始时，额外吸收一点灵气。",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

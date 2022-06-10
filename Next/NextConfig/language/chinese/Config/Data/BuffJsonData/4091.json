@@ -1,0 +1,20 @@
+{
+	"buffid":4091,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"聚元咒",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		40
+	],
+	"descr":"本回合每使用3次技能，获得【护罩】*6",
+	"trigger":8,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

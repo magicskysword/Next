@@ -1,0 +1,20 @@
+{
+	"buffid":9266,
+	"BuffIcon":0,
+	"skillEffect":"",
+	"name":"奇门绝魂阵-生",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		5
+	],
+	"descr":"每使用一次技能，获得【凝神】*（attack）。",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

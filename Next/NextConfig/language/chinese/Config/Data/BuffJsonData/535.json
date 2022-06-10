@@ -1,0 +1,22 @@
+{
+	"buffid":535,
+	"BuffIcon":534,
+	"skillEffect":"fx_Summoner_o",
+	"name":"三转炼山诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		81,
+		85,
+		117
+	],
+	"descr":"每次使用消耗灵气6点或以上的土系技能时，获得【尘】*4X（X为该技能消耗的灵气数）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

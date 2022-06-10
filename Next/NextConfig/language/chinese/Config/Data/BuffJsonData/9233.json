@@ -1,0 +1,20 @@
+{
+	"buffid":9233,
+	"BuffIcon":9001,
+	"skillEffect":"fx_Summoner_o",
+	"name":"鲲鹏血脉",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		5
+	],
+	"descr":"每受到一次技能伤害，获得【减伤】*（attack）",
+	"trigger":29,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

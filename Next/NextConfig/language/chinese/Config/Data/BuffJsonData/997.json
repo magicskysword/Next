@@ -1,0 +1,22 @@
+{
+	"buffid":997,
+	"BuffIcon":12,
+	"skillEffect":"fx_Summoner_o",
+	"name":"驭气",
+	"Affix":[
+		63
+	],
+	"bufftype":2,
+	"seid":[
+		50
+	],
+	"descr":"本回合气属性技能伤害提升（attack）",
+	"trigger":9,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

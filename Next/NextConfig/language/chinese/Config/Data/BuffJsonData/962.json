@@ -1,0 +1,21 @@
+{
+	"buffid":962,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"放水系伤害5",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		24,
+		129
+	],
+	"descr":"放水系伤害5",
+	"trigger":12,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":3,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

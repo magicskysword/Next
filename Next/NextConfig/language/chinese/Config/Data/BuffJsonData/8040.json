@@ -1,0 +1,20 @@
+{
+	"buffid":8040,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"火之天道",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		5
+	],
+	"descr":"你造成的火系技能伤害会随着回合数不断提升。（每回合提升20%）",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

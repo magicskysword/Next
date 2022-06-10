@@ -1,0 +1,21 @@
+{
+	"buffid":4065,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"灵光印",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		26,
+		111
+	],
+	"descr":"在本回合下一次受到伤害时，获得3点金系灵气",
+	"trigger":7,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

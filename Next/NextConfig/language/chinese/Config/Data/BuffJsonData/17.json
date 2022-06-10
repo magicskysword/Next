@@ -1,0 +1,20 @@
+{
+	"buffid":17,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"破体",
+	"Affix":[],
+	"bufftype":1,
+	"seid":[
+		14
+	],
+	"descr":"受到的治疗效果减半",
+	"trigger":6,
+	"removeTrigger":3,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":307,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"怒涛诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		41
+	],
+	"descr":"每次使用【水枪】，追加（attack）点水属性伤害",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

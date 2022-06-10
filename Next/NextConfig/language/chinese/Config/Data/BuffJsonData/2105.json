@@ -1,0 +1,18 @@
+{
+	"buffid":2105,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"汲血杖",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[],
+	"descr":"{FirstName}{xiongdi}，就是现在！动手吧！",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

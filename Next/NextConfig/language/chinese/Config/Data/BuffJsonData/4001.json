@@ -1,0 +1,20 @@
+{
+	"buffid":4001,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"五鬼附身",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		3
+	],
+	"descr":"暂时提升生命值上限，但受到的所有伤害+1。",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

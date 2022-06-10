@@ -1,0 +1,22 @@
+{
+	"buffid":15,
+	"BuffIcon":0,
+	"skillEffect":"15",
+	"name":"聚气",
+	"Affix":[
+		12
+	],
+	"bufftype":2,
+	"seid":[
+		2
+	],
+	"descr":"吸收灵气阶段，多吸收（attack）点灵气，触发后移除。",
+	"trigger":3,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

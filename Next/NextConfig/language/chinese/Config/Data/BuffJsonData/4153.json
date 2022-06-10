@@ -1,0 +1,20 @@
+{
+	"buffid":4153,
+	"BuffIcon":4149,
+	"skillEffect":"fx_Summoner_o",
+	"name":"星河·真伤2",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		71
+	],
+	"descr":"对自己造成【真实伤害】*1",
+	"trigger":38,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

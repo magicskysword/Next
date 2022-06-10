@@ -1,0 +1,22 @@
+{
+	"buffid":8103,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"火毒隐藏",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		122,
+		74,
+		17
+	],
+	"descr":"对【中毒】状态下的目标造成火系技能伤害时，会使其获得【灼烧】*1",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

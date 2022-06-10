@@ -1,0 +1,21 @@
+{
+	"buffid":730,
+	"BuffIcon":729,
+	"skillEffect":"fx_Summoner_o",
+	"name":"九纹轮回诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		119,
+		115
+	],
+	"descr":"当你处于【护罩】状态下时，你受到与造成的所有技能伤害降低15%。否则，你受到与造成的所有技能伤害提升15%",
+	"trigger":29,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

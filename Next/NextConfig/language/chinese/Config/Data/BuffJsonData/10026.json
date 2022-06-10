@@ -1,0 +1,20 @@
+{
+	"buffid":10026,
+	"BuffIcon":10017,
+	"skillEffect":"10026.0",
+	"name":"神念领域",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		5
+	],
+	"descr":"每回合提升10点神识，造成的神识系伤害提升20%。未处于【领域】状态下的对手对你造成的伤害降低50%。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

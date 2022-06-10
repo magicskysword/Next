@@ -1,0 +1,22 @@
+{
+	"buffid":8,
+	"BuffIcon":0,
+	"skillEffect":"8",
+	"name":"缠绕",
+	"Affix":[
+		8
+	],
+	"bufftype":1,
+	"seid":[
+		1
+	],
+	"descr":"本回合每使用一次技能，受到（attack）点伤害",
+	"trigger":8,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

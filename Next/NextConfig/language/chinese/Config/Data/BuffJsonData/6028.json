@@ -1,0 +1,20 @@
+{
+	"buffid":6028,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"冰肌",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		141
+	],
+	"descr":"本回合受到的第一次伤害减半。",
+	"trigger":7,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,22 @@
+{
+	"buffid":618,
+	"BuffIcon":617,
+	"skillEffect":"fx_Summoner_o",
+	"name":"紫阳混元劲",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		76,
+		65,
+		5
+	],
+	"descr":"每次使用运气术时，有30%的几率使吸收到的灵气翻倍",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

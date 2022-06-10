@@ -1,0 +1,20 @@
+{
+	"buffid":10025,
+	"BuffIcon":10017,
+	"skillEffect":"10025.0",
+	"name":"土之领域",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		26
+	],
+	"descr":"每回合额外吸收10点土系灵气，造成的土系伤害提升20%。未处于【领域】状态下的对手对你造成的伤害降低50%。",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

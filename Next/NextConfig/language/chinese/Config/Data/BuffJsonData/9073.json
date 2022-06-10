@@ -1,0 +1,21 @@
+{
+	"buffid":9073,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"地魔",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		65,
+		104
+	],
+	"descr":"由魔气侵染凝聚而成，不会受到魔气入体的负面影响。每次受到攻击时，有30%的几率使对手的一点灵气转化为魔气。",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

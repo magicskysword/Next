@@ -1,0 +1,20 @@
+{
+	"buffid":829,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"通幽冥图",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"每次闪避获得【影役】*（attack）",
+	"trigger":35,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

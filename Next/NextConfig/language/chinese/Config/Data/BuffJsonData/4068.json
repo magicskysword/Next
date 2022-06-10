@@ -1,0 +1,21 @@
+{
+	"buffid":4068,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"璇水印",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		1,
+		111
+	],
+	"descr":"在本回合下一次受到技能伤害时，恢复（attack）点生命值。",
+	"trigger":29,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

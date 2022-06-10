@@ -1,0 +1,20 @@
+{
+	"buffid":9239,
+	"BuffIcon":9239,
+	"skillEffect":"fx_Summoner_o",
+	"name":"心有顾忌",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		115
+	],
+	"descr":"处于林府大殿，不敢全力施为，造成技能伤害降低50%。",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

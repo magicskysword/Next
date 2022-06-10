@@ -1,0 +1,21 @@
+{
+	"buffid":4164,
+	"BuffIcon":4162,
+	"skillEffect":"fx_Summoner_o",
+	"name":"竹山·木旺土衰",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5,
+		17
+	],
+	"descr":"护山大阵周遭灵气受到影响，吸收灵气时获取木灵气概率+20%",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

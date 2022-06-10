@@ -1,0 +1,20 @@
+{
+	"buffid":4072,
+	"BuffIcon":4069,
+	"skillEffect":"fx_Summoner_o",
+	"name":"罡水印",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		27
+	],
+	"descr":"本回合造成的水系技能伤害+（attack）",
+	"trigger":9,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

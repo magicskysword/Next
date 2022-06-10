@@ -1,0 +1,20 @@
+{
+	"buffid":507,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"碎岩化甲诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		30
+	],
+	"descr":"每次受到攻击，若生命值不损失，则对敌方造成（attack）点土系伤害",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

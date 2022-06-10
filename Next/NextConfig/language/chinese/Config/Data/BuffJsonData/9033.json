@@ -1,0 +1,18 @@
+{
+	"buffid":9033,
+	"BuffIcon":9026,
+	"skillEffect":"fx_Summoner_o",
+	"name":"魔种",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[],
+	"descr":"吸收到魔气的几率权重提升（attack）。",
+	"trigger":12,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

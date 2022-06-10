@@ -1,0 +1,20 @@
+{
+	"buffid":4154,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"化尘护山大阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		5
+	],
+	"descr":"化尘教护山大阵。\n回合开始时获得一定【尘】，每回合递减10；\n战斗开始时获得99%减伤，每回合递减33%；\n第三回合开始时,受伤增伤20%；\n每回合开始时获得土灵气*6。",
+	"trigger":23,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

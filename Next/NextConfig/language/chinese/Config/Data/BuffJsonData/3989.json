@@ -1,0 +1,20 @@
+{
+	"buffid":3989,
+	"BuffIcon":0,
+	"skillEffect":"3989",
+	"name":"血煞之气",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		141
+	],
+	"descr":"被血煞之气侵染神智，遗忘了大部分神通，只能凭借本能战斗，但造成的所有伤害翻倍。回合开始时，恢复已损失血量25%的生命值。",
+	"trigger":31,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

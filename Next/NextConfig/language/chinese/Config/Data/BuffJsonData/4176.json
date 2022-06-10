@@ -1,0 +1,20 @@
+{
+	"buffid":4176,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"引尘",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		67
+	],
+	"descr":"回合结束，自己身上每有【尘】*150，则获得【减伤】*（attack）。",
+	"trigger":1,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

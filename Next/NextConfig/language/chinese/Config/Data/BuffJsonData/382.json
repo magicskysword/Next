@@ -1,0 +1,21 @@
+{
+	"buffid":382,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"玄武吐纳术",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		65,
+		54
+	],
+	"descr":"每吸收一点灵气，有10%的几率获得【疗】*X。X为自身【幻雾】的层数。",
+	"trigger":25,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

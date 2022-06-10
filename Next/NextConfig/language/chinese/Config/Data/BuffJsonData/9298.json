@@ -1,0 +1,22 @@
+{
+	"buffid":9298,
+	"BuffIcon":9073,
+	"skillEffect":"fx_Summoner_o",
+	"name":"不灭魔灵",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		62,
+		138,
+		24
+	],
+	"descr":"回合结束时，若生命值在10%以下，则生命值恢复到1000并净化所有debuff。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":9305,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"血魂录3",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"回合结束时，失去24点生命，获得【魂】*16",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,22 @@
+{
+	"buffid":9202,
+	"BuffIcon":9200,
+	"skillEffect":"9202.0",
+	"name":"寄生",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		183,
+		71,
+		17
+	],
+	"descr":"无法逃跑；每次释放技能时，将被【汲取】50点生命值。若此状态持续超过十回合，将被直接【汲取】全部生命值。（斩断根须后，可移除此状态）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

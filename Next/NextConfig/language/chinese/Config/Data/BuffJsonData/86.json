@@ -1,0 +1,22 @@
+{
+	"buffid":86,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"炙炎三才阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		5,
+		17,
+		24
+	],
+	"descr":"回合结束时，我方获得【剑气】*2敌方获得【灼烧】*2，并对敌方造成4点火剑属性伤害。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

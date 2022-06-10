@@ -1,0 +1,24 @@
+{
+	"buffid":973,
+	"BuffIcon":9008,
+	"skillEffect":"fx_Summoner_o",
+	"name":"振金",
+	"Affix":[
+		39
+	],
+	"bufftype":2,
+	"seid":[
+		85,
+		50,
+		111
+	],
+	"descr":"下一次金属性技能伤害提升（attack）",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

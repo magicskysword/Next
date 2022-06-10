@@ -1,0 +1,20 @@
+{
+	"buffid":927,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"吸收土系灵气",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		26
+	],
+	"descr":"吸收一点土系灵气",
+	"trigger":12,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

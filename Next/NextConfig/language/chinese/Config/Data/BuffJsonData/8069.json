@@ -1,0 +1,18 @@
+{
+	"buffid":8069,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"奇门",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[],
+	"descr":"释放阵法后，能够再次释放此技能以驱动该阵法。",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,20 @@
+{
+	"buffid":898,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"造成伤害",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		25
+	],
+	"descr":"回合结束结束时，造成（attack）点伤害。",
+	"trigger":34,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

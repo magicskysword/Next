@@ -1,0 +1,20 @@
+{
+	"buffid":318,
+	"BuffIcon":314,
+	"skillEffect":"fx_Summoner_o",
+	"name":"冰霜诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		17
+	],
+	"descr":"每次受到技能伤害时，使对手获得【霜冻】*1",
+	"trigger":29,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

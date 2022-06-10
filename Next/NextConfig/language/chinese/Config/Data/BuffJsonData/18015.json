@@ -1,0 +1,18 @@
+{
+	"buffid":18015,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"白板-印",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[],
+	"descr":"npc白板-印",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

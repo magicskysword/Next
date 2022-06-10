@@ -1,0 +1,20 @@
+{
+	"buffid":4157,
+	"BuffIcon":4154,
+	"skillEffect":"fx_Summoner_o",
+	"name":"化尘·受伤增伤",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"满四层后获得20%受伤增伤",
+	"trigger":14,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

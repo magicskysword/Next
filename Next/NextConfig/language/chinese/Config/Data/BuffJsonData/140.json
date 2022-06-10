@@ -1,0 +1,21 @@
+{
+	"buffid":140,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"流光真决",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5,
+		127
+	],
+	"descr":"回合开始时，获得【内伤】*1，下一次释放金系伤害技能并触发五行【连击】后，提升（attack）伤害。（此效果可叠加）",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

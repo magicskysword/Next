@@ -1,0 +1,20 @@
+{
+	"buffid":3997,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"逆脉",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		146
+	],
+	"descr":"下一次技能造成的伤害将为你恢复等量生命值。",
+	"trigger":40,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

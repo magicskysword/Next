@@ -1,0 +1,21 @@
+{
+	"buffid":8030,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"木之天道",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		156,
+		15
+	],
+	"descr":"对手每有一个不同的负面buff，受到的木系技能伤害就提升10%",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

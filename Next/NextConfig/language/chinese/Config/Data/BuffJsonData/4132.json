@@ -1,0 +1,20 @@
+{
+	"buffid":4132,
+	"BuffIcon":39,
+	"skillEffect":"fx_Summoner_o",
+	"name":"杀戮剑气（隐藏）",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		91
+	],
+	"descr":"若目标没有【护罩】则额外获得【流血】*（attack）",
+	"trigger":2,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

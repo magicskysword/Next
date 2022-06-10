@@ -1,0 +1,20 @@
+{
+	"buffid":175,
+	"BuffIcon":112,
+	"skillEffect":"fx_Summoner_o",
+	"name":"天晶诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		64
+	],
+	"descr":"战斗开始时，金灵根权重+40",
+	"trigger":12,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

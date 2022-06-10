@@ -1,0 +1,21 @@
+{
+	"buffid":319,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"游神御水诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		76,
+		5
+	],
+	"descr":"每次使用【御水决】时，则获得【蓄力】*（attack）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

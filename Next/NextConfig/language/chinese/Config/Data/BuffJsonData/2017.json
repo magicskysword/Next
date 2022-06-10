@@ -1,0 +1,20 @@
+{
+	"buffid":2017,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"光洁之石",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		89
+	],
+	"descr":"每次使用技能时，移除自身【缠绕】*1",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

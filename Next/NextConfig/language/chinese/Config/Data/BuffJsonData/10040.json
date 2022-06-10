@@ -1,0 +1,21 @@
+{
+	"buffid":10040,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"低血量逃跑",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		62,
+		111
+	],
+	"descr":"血量低于50%时，立即死亡",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

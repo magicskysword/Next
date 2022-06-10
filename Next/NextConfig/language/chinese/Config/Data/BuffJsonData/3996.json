@@ -1,0 +1,20 @@
+{
+	"buffid":3996,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"大周天吐纳",
+	"Affix":[],
+	"bufftype":10,
+	"seid":[
+		2
+	],
+	"descr":"每回合吸收灵气数+（attack）",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

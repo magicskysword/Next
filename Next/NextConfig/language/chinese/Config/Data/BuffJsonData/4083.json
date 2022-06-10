@@ -1,0 +1,20 @@
+{
+	"buffid":4083,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"坚韧",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		93
+	],
+	"descr":"回合结束时，恢复自身血量上限10%的生命值。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

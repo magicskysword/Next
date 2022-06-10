@@ -1,0 +1,21 @@
+{
+	"buffid":723,
+	"BuffIcon":719,
+	"skillEffect":"fx_Summoner_o",
+	"name":"大罗千幻诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		165,
+		5
+	],
+	"descr":"你每造成的第6次技能伤害翻倍。",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

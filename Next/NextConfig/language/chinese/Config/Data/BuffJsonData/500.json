@@ -1,0 +1,21 @@
+{
+	"buffid":500,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"化尘诀隐藏",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		76,
+		25
+	],
+	"descr":"每次释放【化沙】后，对敌方造成（attack）点土系伤害。",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

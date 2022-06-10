@@ -1,0 +1,22 @@
+{
+	"buffid":983,
+	"BuffIcon":19,
+	"skillEffect":"fx_Summoner_o",
+	"name":"反伤",
+	"Affix":[
+		49
+	],
+	"bufftype":2,
+	"seid":[
+		25
+	],
+	"descr":"受到技能伤害时，对敌方造成（attack）点伤害",
+	"trigger":29,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

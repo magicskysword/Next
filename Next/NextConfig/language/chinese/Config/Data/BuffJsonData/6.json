@@ -1,0 +1,22 @@
+{
+	"buffid":6,
+	"BuffIcon":0,
+	"skillEffect":"6.0",
+	"name":"滞气",
+	"Affix":[
+		6
+	],
+	"bufftype":1,
+	"seid":[
+		21
+	],
+	"descr":"吸收灵气阶段，吸收灵气数-（attack），触发后移除。",
+	"trigger":3,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

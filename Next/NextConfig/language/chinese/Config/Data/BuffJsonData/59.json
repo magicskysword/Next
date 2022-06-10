@@ -1,0 +1,20 @@
+{
+	"buffid":59,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"土相仙阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		5
+	],
+	"descr":"回合开始时，获得【护罩】*（attack）",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":334,
+	"BuffIcon":325,
+	"skillEffect":"fx_Summoner_o",
+	"name":"玄水真法",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		65,
+		1
+	],
+	"descr":"受到伤害时，50%概率恢复1点生命值",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

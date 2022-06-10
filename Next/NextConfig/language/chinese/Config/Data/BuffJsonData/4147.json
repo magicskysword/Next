@@ -1,0 +1,20 @@
+{
+	"buffid":4147,
+	"BuffIcon":4141,
+	"skillEffect":"fx_Summoner_o",
+	"name":"金虹阵法·增伤",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[
+		115
+	],
+	"descr":"每层获得10%受伤增伤",
+	"trigger":7,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

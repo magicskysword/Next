@@ -1,0 +1,20 @@
+{
+	"buffid":607,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"玄清天衍录",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		2
+	],
+	"descr":"吸收灵气数+（attack）",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

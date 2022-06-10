@@ -1,0 +1,20 @@
+{
+	"buffid":4097,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"铁甲咒",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		5
+	],
+	"descr":"本回合每受到一次技能伤害，获得【减伤】*（attack）",
+	"trigger":29,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

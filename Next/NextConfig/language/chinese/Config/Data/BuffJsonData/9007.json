@@ -1,0 +1,20 @@
+{
+	"buffid":9007,
+	"BuffIcon":9001,
+	"skillEffect":"fx_Summoner_o",
+	"name":"灵巧身姿",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		18
+	],
+	"descr":"闪避下一次受到的技能伤害。",
+	"trigger":29,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

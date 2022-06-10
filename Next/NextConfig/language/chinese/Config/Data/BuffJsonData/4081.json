@@ -1,0 +1,20 @@
+{
+	"buffid":4081,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"凶猛",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		141
+	],
+	"descr":"造成的伤害提升20%",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

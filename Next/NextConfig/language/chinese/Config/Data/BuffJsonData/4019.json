@@ -1,0 +1,18 @@
+{
+	"buffid":4019,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"水源灵气",
+	"Affix":[],
+	"bufftype":10,
+	"seid":[],
+	"descr":"同时获得五行源灵气后，完成五气朝元。",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

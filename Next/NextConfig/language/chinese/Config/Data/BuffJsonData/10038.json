@@ -1,0 +1,20 @@
+{
+	"buffid":10038,
+	"BuffIcon":10017,
+	"skillEffect":"10038",
+	"name":"九幽领域",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		142
+	],
+	"descr":"对手的【护罩】与【疗】无法被保留至下一回合；未处于【领域】状态下的对手对你造成的伤害降低50%。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

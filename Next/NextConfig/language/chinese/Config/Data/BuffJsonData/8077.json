@@ -1,0 +1,22 @@
+{
+	"buffid":8077,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"聚灵",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		85,
+		5,
+		111
+	],
+	"descr":"每场战斗首次布下一个【阵法】后，获得【聚气】*3",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

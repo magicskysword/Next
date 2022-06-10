@@ -1,0 +1,20 @@
+{
+	"buffid":11005,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"隐藏",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		141
+	],
+	"descr":"受到的所有伤害提升50%",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

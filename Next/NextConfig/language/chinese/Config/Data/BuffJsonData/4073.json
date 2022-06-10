@@ -1,0 +1,21 @@
+{
+	"buffid":4073,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"重岩决",
+	"Affix":[],
+	"bufftype":5,
+	"seid":[
+		50,
+		111
+	],
+	"descr":"下一次释放的土系伤害技能将额外消耗两点土系灵气，但造成的伤害+（attack）",
+	"trigger":9,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

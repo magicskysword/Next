@@ -1,0 +1,21 @@
+{
+	"buffid":3981,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"复原",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		1,
+		111
+	],
+	"descr":"下回合开始时，恢复（attack）点生命。每受到1点伤害，恢复量-1。",
+	"trigger":2,
+	"removeTrigger":9,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

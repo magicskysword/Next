@@ -1,0 +1,21 @@
+{
+	"buffid":824,
+	"BuffIcon":822,
+	"skillEffect":"fx_Summoner_o",
+	"name":"天魔录",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5,
+		26
+	],
+	"descr":"回合开始时，自身损失40点生命值，获得六点魔气灵气。",
+	"trigger":2,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

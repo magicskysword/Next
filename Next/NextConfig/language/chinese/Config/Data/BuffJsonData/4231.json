@@ -1,0 +1,22 @@
+{
+	"buffid":4231,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"玄阴劲",
+	"Affix":[],
+	"bufftype":11,
+	"seid":[
+		164,
+		172,
+		127
+	],
+	"descr":"（attack）回合后，敌方获得【内伤】*9",
+	"trigger":32,
+	"removeTrigger":3,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":2,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

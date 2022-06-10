@@ -1,0 +1,20 @@
+{
+	"buffid":1807,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"六合镜",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		5
+	],
+	"descr":"抵挡每回合受到的第一次伤害",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

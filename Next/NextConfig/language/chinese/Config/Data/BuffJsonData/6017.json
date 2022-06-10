@@ -1,0 +1,20 @@
+{
+	"buffid":6017,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"凝滞",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		63
+	],
+	"descr":"每次使用技能时，随机消散一点灵气",
+	"trigger":8,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":10013,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"幻觉",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		65,
+		100
+	],
+	"descr":"有10%的概率使用技能失败",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,21 @@
+{
+	"buffid":819,
+	"BuffIcon":817,
+	"skillEffect":"fx_Summoner_o",
+	"name":"魔狱典",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5,
+		17
+	],
+	"descr":"回合结束时，获得【护罩】*40，双方魔力灵根+3。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

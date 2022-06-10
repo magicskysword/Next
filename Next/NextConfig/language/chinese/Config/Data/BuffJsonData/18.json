@@ -1,0 +1,22 @@
+{
+	"buffid":18,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"避火",
+	"Affix":[
+		15
+	],
+	"bufftype":2,
+	"seid":[
+		72
+	],
+	"descr":"直到下回合开始前，受到的火系伤害-（attack）",
+	"trigger":7,
+	"removeTrigger":6,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

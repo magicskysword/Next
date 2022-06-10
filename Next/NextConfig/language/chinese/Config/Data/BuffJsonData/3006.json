@@ -1,0 +1,20 @@
+{
+	"buffid":3006,
+	"BuffIcon":3005,
+	"skillEffect":"fx_Summoner_o",
+	"name":"蓄灵印",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		209
+	],
+	"descr":"本回合对金丹造成的伤害+（attack*5）",
+	"trigger":5,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":2,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,22 @@
+{
+	"buffid":2,
+	"BuffIcon":0,
+	"skillEffect":"2",
+	"name":"灼烧",
+	"Affix":[
+		2
+	],
+	"bufftype":1,
+	"seid":[
+		98
+	],
+	"descr":"回合开始时，受到（attack）点火系伤害，每次触发后移除一层。",
+	"trigger":2,
+	"removeTrigger":1,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

@@ -1,0 +1,18 @@
+{
+	"buffid":71,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"奇门化劫阵",
+	"Affix":[],
+	"bufftype":4,
+	"seid":[],
+	"descr":"受到致死伤害时，获得【免疫】，持续一回合",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

@@ -1,0 +1,22 @@
+{
+	"buffid":374,
+	"BuffIcon":372,
+	"skillEffect":"fx_Summoner_o",
+	"name":"裂冰诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		151,
+		152,
+		5
+	],
+	"descr":"每次使用伤害技能，获得1层指示物。",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

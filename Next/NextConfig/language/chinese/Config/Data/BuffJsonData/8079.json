@@ -1,0 +1,21 @@
+{
+	"buffid":8079,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"充盈",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		159,
+		40
+	],
+	"descr":"每释放三次技能后，进入【充盈】状态。下一次造成技能伤害时，获得【护罩】*5X。（X为该技能消耗的灵气数量）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

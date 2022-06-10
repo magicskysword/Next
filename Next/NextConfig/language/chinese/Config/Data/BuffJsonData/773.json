@@ -1,0 +1,21 @@
+{
+	"buffid":773,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"五幽炼神诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		178,
+		17
+	],
+	"descr":"战斗开始时，若神识高于对手，则使其获得【威压】*（attack）",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

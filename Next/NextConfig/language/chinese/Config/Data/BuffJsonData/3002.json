@@ -1,0 +1,20 @@
+{
+	"buffid":3002,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"聚灵",
+	"Affix":[],
+	"bufftype":9,
+	"seid":[
+		202
+	],
+	"descr":"回合结束时，化婴进度+1",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

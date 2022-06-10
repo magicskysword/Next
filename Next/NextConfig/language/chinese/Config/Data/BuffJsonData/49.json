@@ -1,0 +1,20 @@
+{
+	"buffid":49,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"止水",
+	"Affix":[
+		33
+	],
+	"bufftype":3,
+	"seid":[],
+	"descr":"静如止水",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

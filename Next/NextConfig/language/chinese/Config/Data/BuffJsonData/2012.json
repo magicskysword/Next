@@ -1,0 +1,21 @@
+{
+	"buffid":2012,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"五色华光",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		81,
+		2
+	],
+	"descr":"当你使用消耗大于5点灵气的技能时，吸收一点灵气",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

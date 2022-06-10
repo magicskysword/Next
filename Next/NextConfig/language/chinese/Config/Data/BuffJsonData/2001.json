@@ -1,0 +1,21 @@
+{
+	"buffid":2001,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"三宝玉如意",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		76,
+		5
+	],
+	"descr":"每次使用【凝神咒】时，额外获得3点神识",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

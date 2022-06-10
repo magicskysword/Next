@@ -1,0 +1,21 @@
+{
+	"buffid":8043,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"重岩",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		119,
+		57
+	],
+	"descr":"对【引力】状态下的对手，造成的土系技能伤害+25%",
+	"trigger":37,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

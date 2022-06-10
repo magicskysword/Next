@@ -1,0 +1,22 @@
+{
+	"buffid":660,
+	"BuffIcon":659,
+	"skillEffect":"fx_Summoner_o",
+	"name":"夺灵诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		73,
+		78,
+		79
+	],
+	"descr":"吸收灵气阶段，如果对手有灵气，则不吸收灵气，改为获得对手的3点灵气",
+	"trigger":3,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

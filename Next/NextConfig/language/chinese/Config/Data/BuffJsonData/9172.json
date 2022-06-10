@@ -1,0 +1,20 @@
+{
+	"buffid":9172,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"龙怒",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		12
+	],
+	"descr":"下一次技能造成的伤害翻倍。",
+	"trigger":9,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

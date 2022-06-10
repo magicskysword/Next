@@ -1,5 +1,6 @@
 ﻿{
   "LanguageName": "中文",
+  "ConfigDir" : "chinese",
   "Translation" : {
     "Config.Main.LanguageID.Name" : "插件语言",
     "Config.Main.LanguageID.Desc" : "Next插件语言，对应NextConfig/language文件夹里的语言文件。",
@@ -9,7 +10,7 @@
     "Config.Main.OpenInStart.Desc" : "是否在游戏启动时弹出调试窗口。",
     "Config.Debug.Mode.Name" : "调试模式开关",
     "Config.Debug.Mode.Desc" : "Next插件调试模式开关，打开后才能在插件窗口里看到更多功能。",
-    
+
     "Mod.List" : "Mod列表",
     "Mod.Exception" : "异常信息",
     "Mod.State" : "状态",
@@ -20,13 +21,13 @@
     "Mod.Directory" : "目录",
     "Mod.Unknown" : "未知",
     "Mod.GameNotStart" : "游戏未开始",
-    
+
     "Mod.Load.Unload" : "未加载",
     "Mod.Load.Disable" : "禁用",
     "Mod.Load.Loading" : "加载中",
     "Mod.Load.Success" : "加载成功",
     "Mod.Load.Fail" : "加载失败",
-    
+
     "Mod.Panel.DataDirtyTip" : "Mod设置发生了改变，请重载Mod以生效设置。",
     "Mod.Panel.MoveUp": "上移Mod",
     "Mod.Panel.MoveDown": "下移Mod",
@@ -36,7 +37,7 @@
     "Mod.Panel.DisableMod": "禁用Mod",
     "Mod.Panel.EnableAllMod": "启用全部Mod",
     "Mod.Panel.DisableAllMod": "禁用全部Mod",
-    
+
     "DramaDebug.Title" : "剧情调试",
     "DramaDebug.DramaID": "剧情ID",
     "DramaDebug.Run": "运行",
@@ -82,10 +83,10 @@
     "Trigger" : "触发器",
     "Trigger.UseItem" : "使用物品",
     "Trigger.AfterUseItem" : "使用物品后",
-    
+
     "Misc.CurrentLanguage" : "当前语言",
     "Misc.RestartPatchNpcData" : "重新Patch Npc数据",
-    
+
     "HeaderBar.HotkeyTip" : "按 {0} 开关此窗口。",
     "HeaderBar.DebugMode" : "调试模式",
     "HeaderBar.ModList" : "Mod列表",
@@ -119,7 +120,7 @@
     "ModManager.ModConfigLoadFail": "加载mod配置出错！",
     "ModManager.DataMissingField": "数据 {0} [{1}] 缺少字段 {2}，已用模板对象属性 {3} 替代。",
     "ModManager.LoadData": "载入 {0}",
-    
+
     "Map.Unknown" : "未知",
 
     "School.Unknown" : "未知",
@@ -129,9 +130,46 @@
     "Gender.Male" : "男性",
     "Gender.Female" : "女性",
     "Gender.Unknown" : "未知",
-    
+
     "Updater.GetVersionJsonFailure" : "版本Json获取失败",
     "Updater.JsonParseFailure" : "Json解析失败",
-    "Updater.DownloadFailure" : "版本Json下载失败"
+    "Updater.DownloadFailure" : "版本Json下载失败",
+
+    "Main.Unknown" : "未知",
+
+    "ModEditor.Main.project.modConfig" : "Mod配置",
+    "ModEditor.Main.project.modCreateAvatar" : "创建角色天赋",
+    "ModEditor.Main.project.modBuffInfo" : "Buff信息",
+
+    "ModEditor.Main.modConfig.name" : "Mod名称",
+    "ModEditor.Main.modConfig.author" : "Mod作者",
+    "ModEditor.Main.modConfig.version" : "Mod版本",
+    "ModEditor.Main.modConfig.desc" : "Mod描述",
+
+    "ModEditor.Main.modAffixData.id" : "ID",
+    "ModEditor.Main.modAffixData.name" : "名称",
+    "ModEditor.Main.modAffixData.desc" : "技能特效",
+
+    "ModEditor.Main.modCreateAvatar.id" : "ID",
+    "ModEditor.Main.modCreateAvatar.name" : "名称",
+    "ModEditor.Main.modCreateAvatar.group" : "分组",
+    "ModEditor.Main.modCreateAvatar.cost" : "消耗",
+    "ModEditor.Main.modCreateAvatar.createType" : "类型",
+    "ModEditor.Main.modCreateAvatar.desc" : "描述",
+
+    "ModEditor.Main.modBuffInfo.id" : "ID",
+    "ModEditor.Main.modBuffInfo.name" : "名称",
+    "ModEditor.Main.modBuffInfo.skillEffect" : "技能特效",
+    "ModEditor.Main.modBuffInfo.icon" : "图标",
+    "ModEditor.Main.modBuffInfo.desc" : "描述",
+    "ModEditor.Main.modBuffInfo.affix" : "词缀",
+
+    "ModEditor.Main.Header.File": "文件",
+    "ModEditor.Main.Header.File.Open": "打开",
+    "ModEditor.Main.Header.File.Save": "保存",
+    "ModEditor.Main.Header.File.Export": "导出",
+    "ModEditor.Main.Header.File.Exit": "退出",
+
+    "ModEditor.Main.dialog.textEdit" : "文本编辑"
   }
 }

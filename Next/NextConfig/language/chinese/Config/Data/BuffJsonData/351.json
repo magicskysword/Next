@@ -1,0 +1,20 @@
+{
+	"buffid":351,
+	"BuffIcon":350,
+	"skillEffect":"fx_Summoner_o",
+	"name":"问水剑典",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		5
+	],
+	"descr":"战斗开始时将【惊涛】置为2，【止水】置为2。",
+	"trigger":23,
+	"removeTrigger":2,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

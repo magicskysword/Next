@@ -1,0 +1,21 @@
+{
+	"buffid":8025,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"金之天道",
+	"Affix":[],
+	"bufftype":12,
+	"seid":[
+		62,
+		141
+	],
+	"descr":"若对手血量低于50%，则受到的伤害翻倍。",
+	"trigger":7,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

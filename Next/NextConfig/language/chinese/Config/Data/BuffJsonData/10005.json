@@ -1,0 +1,20 @@
+{
+	"buffid":10005,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"死亡倒计时",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		114
+	],
+	"descr":"移除后死亡",
+	"trigger":5,
+	"removeTrigger":3,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":0
+}

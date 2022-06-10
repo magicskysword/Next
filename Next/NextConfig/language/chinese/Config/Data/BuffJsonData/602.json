@@ -1,0 +1,21 @@
+{
+	"buffid":602,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"敛息术",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		75,
+		10
+	],
+	"descr":"【隐匿】状态下造成的伤害+（attack）",
+	"trigger":9,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

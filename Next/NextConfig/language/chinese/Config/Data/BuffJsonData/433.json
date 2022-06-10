@@ -1,0 +1,22 @@
+{
+	"buffid":433,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"叠焰决",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		85,
+		150,
+		5
+	],
+	"descr":"使用火系技能时，若上一个使用的是木系技能，则获得【焰】*（attack）",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}

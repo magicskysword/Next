@@ -1,0 +1,21 @@
+{
+	"buffid":2101,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"虚天鼎",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		47,
+		2
+	],
+	"descr":"回合结束阶段，吸收一点灵气。如果你没有灵气，则改为吸收两点灵气。",
+	"trigger":1,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":1,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

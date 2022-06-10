@@ -1,0 +1,20 @@
+{
+	"buffid":9241,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"立即死亡（不会自动移除）",
+	"Affix":[],
+	"bufftype":3,
+	"seid":[
+		114
+	],
+	"descr":"用其他技能移除造成立即死亡。",
+	"trigger":5,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":1,
+	"ShowOnlyOne":1
+}

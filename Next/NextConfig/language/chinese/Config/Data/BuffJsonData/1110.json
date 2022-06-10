@@ -1,0 +1,20 @@
+{
+	"buffid":1110,
+	"BuffIcon":0,
+	"skillEffect":"fx_Summoner_o",
+	"name":"山河鼎",
+	"Affix":[],
+	"bufftype":7,
+	"seid":[
+		42
+	],
+	"descr":"本回合每使用一次土系技能，额外对敌方造成2点伤害",
+	"trigger":8,
+	"removeTrigger":4,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":0
+}

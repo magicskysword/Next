@@ -1,0 +1,21 @@
+{
+	"buffid":611,
+	"BuffIcon":610,
+	"skillEffect":"fx_Summoner_o",
+	"name":"少阳诀",
+	"Affix":[],
+	"bufftype":6,
+	"seid":[
+		65,
+		2
+	],
+	"descr":"每次使用技能时，有14%几率吸收一点灵气",
+	"trigger":8,
+	"removeTrigger":7,
+	"script":"Buff",
+	"looptime":1,
+	"totaltime":1,
+	"BuffType":0,
+	"isHide":0,
+	"ShowOnlyOne":1
+}
