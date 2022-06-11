@@ -4,7 +4,7 @@ using HarmonyLib;
 namespace SkySwordKill.Next.FungusTools.FakerCommand
 {
     [FCommandBinder(typeof(Fungus.Menu))]
-    public class Option : FCommand
+    public class Menu : FCommand
     {
         public string Text;
         public string TargetBlockID;
@@ -18,7 +18,7 @@ namespace SkySwordKill.Next.FungusTools.FakerCommand
             var targetBlock = (Block)AccessTools.Field(cmdMenu.GetType(), "targetBlock").GetValue(command);
             if (targetBlock != null)
             {
-                TargetBlockID = $"this/{targetBlock.ItemId}({targetBlock.blockName})";
+                TargetBlockID = $"this:{targetBlock.ItemId}({targetBlock.blockName})";
             }
             else
             {
