@@ -21,7 +21,7 @@ namespace SkySwordKill.Next
         {
             var targetGroup = GetGroup(group);
 
-            if (value.Equals(default(T)))
+            if (value == null || value.Equals(default))
             {
                 if (targetGroup.ContainsKey(key))
                     targetGroup.Remove(key);
