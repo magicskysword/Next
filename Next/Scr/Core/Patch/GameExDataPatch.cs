@@ -1,49 +1,71 @@
 ﻿using HarmonyLib;
+using KBEngine;
 
 namespace SkySwordKill.Next.Patch
 {
     public class GameExDataPatch
     {
+        [HarmonyPatch(typeof(YSNewSaveSystem))]
+        public class NewSaveSystemPatch
+        {
+            [HarmonyPatch("LoadSave")]
+            [HarmonyPostfix]
+            public static void AfterLoad(int avatarIndex, int slot, int DFIndex)
+            {
+                Main.LogInfo($"NextData 读取存档数据");
+                DialogAnalysis.LoadAvatarNextData(avatarIndex, slot);
+            }
+        
+            [HarmonyPatch("SaveGame")]
+            [HarmonyPostfix]
+            public static void AfterSave(int avatarIndex, int slot, Avatar _avatar, bool ignoreSlot0Time)
+            {
+                Main.LogInfo($"NextData 保存存档数据");
+                DialogAnalysis.SaveAvatarNextData(avatarIndex, slot);
+            }
+        }
+        
         [HarmonyPatch(typeof(Tools),"saveGame")]
-        public class SaveGamePatch
+        public class OldSaveGamePatch
         {
             [HarmonyPostfix]
             public static void Postfix(Tools __instance,int id, int index, KBEngine.Avatar _avatar)
             {
-                Main.LogInfo($"保存 AvatarNextData");
-                DialogAnalysis.SaveAvatarNextData(id, index);
+                Main.LogInfo($"NextData 保存旧版存档数据");
+                DialogAnalysis.SaveAvatarNextDataOld(id, index);
             }
         }
         
         [HarmonyPatch(typeof(CreateNewPlayerFactory),"createPlayer")]
-        public class OnCreatePlayer
+        public class OldCreatePlayer
         {
             [HarmonyPrefix]
             public static void Prefix()
             {
+                Main.LogInfo($"NextData 创建新角色数据");
                 DialogAnalysis.ResetAvatarNextData();
             }
         }
         
         [HarmonyPatch(typeof(StartGame),"addAvatar")]
-        public class OnLoadInStart
+        public class OldLoadInStart
         {
             [HarmonyPostfix]
             public static void Postfix(int id, int index)
             {
-                Main.LogInfo($"加载 AvatarNextData");
-                DialogAnalysis.LoadAvatarNextData(id,index);
+                Main.LogInfo($"NextData 读取旧版存档数据");
+                DialogAnalysis.LoadAvatarNextDataOld(id,index);
             }
         }
     
         [HarmonyPatch(typeof(MainUIMag),"addAvatar")]
-        public class OnLoadInMain
+        public class OldLoadInMain
         {
             [HarmonyPostfix]
             public static void Postfix(int id, int index)
             {
-                Main.LogInfo($"加载 AvatarNextData");
-                DialogAnalysis.LoadAvatarNextData(id,index);
+                Main.LogInfo($"NextData 读取旧版存档数据");
+                DialogAnalysis.LoadAvatarNextDataOld(id,index);
             }
         }
     }
