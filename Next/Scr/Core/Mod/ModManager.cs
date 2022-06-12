@@ -138,6 +138,11 @@ namespace SkySwordKill.Next.Mod
 
         public static void FirstLoadAllMod()
         {
+            var watcher = Stopwatch.StartNew();
+            // 缓存游戏数据
+            CloneMainData();
+            watcher.Stop();
+            Main.LogInfo($"储存数据耗时：{watcher.ElapsedMilliseconds / 1000f} s");
             OnModLoadStart();
             LoadAllMod();
             OnModLoadComplete();
@@ -423,7 +428,7 @@ namespace SkySwordKill.Next.Mod
                 string filePath = Utility.CombinePaths(dir, $"modConfig.json");
                 if (File.Exists(filePath))
                 {
-                    modConfig = JObject.Parse(File.ReadAllText(filePath)).ToObject<ModConfig>();
+                    modConfig = JsonConvert.DeserializeObject<ModConfig>(File.ReadAllText(filePath));
                 }
                 else
                 {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace SkySwordKill.Next
 {
@@ -22,7 +21,7 @@ namespace SkySwordKill.Next
                 try
                 {
                     var json = File.ReadAllText(file);
-                    var language = JObject.Parse(json).ToObject<NextLanguage>();
+                    var language = JsonConvert.DeserializeObject<NextLanguage>(json);
                     if (language == null)
                         throw new JsonException("json data is empty.");
                     language.FileName = Path.GetFileNameWithoutExtension(file);

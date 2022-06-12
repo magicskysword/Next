@@ -4,6 +4,7 @@ using FairyGUI;
 using SkySwordKill.Next;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
+using SkySwordKill.Next.FGUI.ComponentCtl;
 using SkySwordKill.NextEditor.Event;
 using SkySwordKill.NextEditor.Mod;
 using SkySwordKill.NextEditor.PanelPage;
@@ -25,10 +26,12 @@ namespace SkySwordKill.NextEditor.Panel
         
         private ModProject Project { get; set; }
         
+        public CtlPropertyInspector Inspector { get; set; }
+        
         private EventCallback1 _onRemoveTabItem;
         private PopupMenu _filePopMenu = new PopupMenu();
         private List<PanelPageBase> Tabs { get; } = new List<PanelPageBase>();
-        private List<UIProjectBase> ProjectItems { get; } = new List<UIProjectBase>();
+        private List<ProjectTreeBase> ProjectItems { get; } = new List<ProjectTreeBase>();
         
         private int _curTabIndex;
 
@@ -71,10 +74,10 @@ namespace SkySwordKill.NextEditor.Panel
             treeView.treeNodeRender = ProjectTreeItemRenderer;
             treeView.onClickItem.Set(OnClickProjectTreeItem);
             
-            AddProject("ModEditor.Main.project.modConfig".I18N(),0,new UIProjectItemModConfig());
-            AddProject("ModEditor.Main.project.modCreateAvatar".I18N(),0,new UIProjectItemModCreateAvatar());
-            AddProject("ModEditor.Main.project.modBuffInfo".I18N(),0,new UIProjectItemModBuffInfo());
-            
+            AddProject("ModEditor.Main.project.modConfig".I18N(),0,new ProjectTreeItemModConfig());
+            AddProject("ModEditor.Main.project.modCreateAvatar".I18N(),0,new ProjectTreeItemModCreateAvatar());
+            AddProject("ModEditor.Main.project.modBuffInfo".I18N(),0,new ProjectTreeItemModBuffInfo());
+            AddProject("剧情预览",0,new ProjectTreeItemBaseFungus());
         }
 
         private void InitDocumentView()
@@ -84,6 +87,8 @@ namespace SkySwordKill.NextEditor.Panel
             var lstTab = MainView.m_comDocument.As<UI_ComMainDocumentView>().m_lstTab;
             lstTab.itemRenderer = TabItemRenderer;
             lstTab.onClickItem.Set(OnClickTabItem);
+
+            Inspector = new CtlPropertyInspector(MainView.m_comInspector.As<UI_ComMainInspector>());
         }
         
         private void InitSeg()
@@ -169,13 +174,16 @@ namespace SkySwordKill.NextEditor.Panel
             MainView.m_comDocument.As<UI_ComMainDocumentView>().m_lstTab.selectedIndex = _curTabIndex;
 
             MainView.m_comDocument.As<UI_ComMainDocumentView>().m_content.RemoveChildren();
-            MainView.m_comInspector.As<UI_ComMainInspector>().Clear();
+            Inspector.Clear();
 
             if (index >= 0)
             {
-                var tab = Tabs[index];
-                MainView.m_comDocument.As<UI_ComMainDocumentView>().m_content.AddChild(tab.Content);
-                tab.OnOpen();
+                var page = Tabs[index];
+                if(page.Content != null)
+                {
+                    MainView.m_comDocument.As<UI_ComMainDocumentView>().m_content.AddChild(page.Content);
+                }
+                page.OnOpen();
             }
         }
 
@@ -217,7 +225,7 @@ namespace SkySwordKill.NextEditor.Panel
         {
             Tabs.Add(page);
             
-            page.Inspector = MainView.m_comInspector.As<UI_ComMainInspector>();
+            page.Inspector = Inspector;
             page.Project = Project;
             page.OnAdd();
             
@@ -257,14 +265,14 @@ namespace SkySwordKill.NextEditor.Panel
 
         #region ProjectFunction
 
-        private void AddProject(string projName,int projLayer,UIProjectBase uiProjectBase)
+        private void AddProject(string projName,int projLayer,ProjectTreeBase projectTreeBase)
         {
-            uiProjectBase.Name = projName;
-            uiProjectBase.Layer = projLayer;
-            ProjectItems.Add(uiProjectBase);
+            projectTreeBase.Name = projName;
+            projectTreeBase.Layer = projLayer;
+            ProjectItems.Add(projectTreeBase);
 
-            var node = new GTreeNode(!uiProjectBase.IsLeaf);
-            node.data = uiProjectBase;
+            var node = new GTreeNode(!projectTreeBase.IsLeaf);
+            node.data = projectTreeBase;
             MainView.m_comProject.As<UI_ComMainProject>().m_treeView.rootNode.AddChild(node);
         }
         
@@ -280,9 +288,9 @@ namespace SkySwordKill.NextEditor.Panel
             
             var obj = (GObject)context.data;
             var node = obj.treeNode;
-            var uiProjectBase = (UIProjectBase)node.data;
+            var uiProjectBase = (ProjectTreeBase)node.data;
 
-            if (uiProjectBase is UIProjectItem uiProjectItem)
+            if (uiProjectBase is ProjectTreeItem uiProjectItem)
             {
                 if (!TryGetTab(uiProjectItem.ID,out var tab))
                 {
@@ -296,11 +304,11 @@ namespace SkySwordKill.NextEditor.Panel
         
         private void ProjectTreeItemRenderer(GTreeNode node, GComponent obj)
         {
-            var uiProjectBase = (UIProjectBase)node.data;
+            var uiProjectBase = (ProjectTreeBase)node.data;
             var treeItem = (UI_BtnTreeItem)obj;
 
             treeItem.title = uiProjectBase.Name;
-            if (uiProjectBase is UIProjectItem uiProjectItem)
+            if (uiProjectBase is ProjectTreeItem uiProjectItem)
             {
                 if (!string.IsNullOrEmpty(uiProjectItem.Icon))
                 {

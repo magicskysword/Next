@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SkySwordKill.Next.Mod;
 
 namespace SkySwordKill.Next
@@ -20,7 +19,7 @@ namespace SkySwordKill.Next
                 try
                 {
                     var json = File.ReadAllText(filePath);
-                    nextModSetting = JObject.Parse(json).ToObject<NextModSetting>();
+                    nextModSetting = JsonConvert.DeserializeObject<NextModSetting>(json);
                 }
                 catch (Exception)
                 {
@@ -37,7 +36,7 @@ namespace SkySwordKill.Next
             var filePath = Main.pathModSettingFile.Value;
             try
             {
-                var json = JObject.FromObject(modSetting).ToString(Formatting.Indented);
+                var json = JsonConvert.SerializeObject(modSetting, Formatting.Indented);
                 File.WriteAllText(filePath,json);
             }
             catch (Exception e)

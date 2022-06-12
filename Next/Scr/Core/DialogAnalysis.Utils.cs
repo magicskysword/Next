@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using KBEngine;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.StaticFace;
 using UnityEngine;
@@ -158,7 +156,7 @@ namespace SkySwordKill.Next
             {
                 if (File.Exists(path))
                 {
-                    AvatarNextData = JObject.Parse(File.ReadAllText(path)).ToObject<AvatarNextData>();
+                    AvatarNextData = JsonConvert.DeserializeObject<AvatarNextData>(File.ReadAllText(path));
                 }
                 else
                 {
@@ -201,8 +199,7 @@ namespace SkySwordKill.Next
             {
                 if (AvatarNextData == null)
                     AvatarNextData = new AvatarNextData();
-                var jsonData = JObject.FromObject(AvatarNextData);
-                File.WriteAllText(path, jsonData.ToString(Formatting.None));
+                File.WriteAllText(path, JsonConvert.SerializeObject(AvatarNextData, Formatting.Indented));
             }
             catch (Exception e)
             {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using SkySwordKill.Next.Extension;
 
 namespace SkySwordKill.Next
@@ -34,7 +34,7 @@ namespace SkySwordKill.Next
             try
             {
                 var result = await DownloadVersionJson();
-                var data = JObject.Parse(result).ToObject<VersionJson>();
+                var data = JsonConvert.DeserializeObject<VersionJson>(result);
                 if (data == null)
                     throw new Exception("Updater.JsonParseFailure".I18N());
                 CompareVersion(data.Version);

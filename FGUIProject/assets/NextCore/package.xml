@@ -67,6 +67,15 @@
     <component id="nkvz31" name="WinStringInputDialog.xml" path="/Dialog/" exported="true"/>
     <component id="nkvz32" name="WinConfirmDialog.xml" path="/Dialog/" exported="true"/>
     <component id="nkvz33" name="WinSelectorDialog.xml" path="/Dialog/" exported="true"/>
+    <component id="f7x834" name="ComNodeCanvas.xml" path="/Component/NodeCanvas/" exported="true"/>
+    <component id="f7x835" name="ComNodeCanvasInner.xml" path="/Component/NodeCanvas/"/>
+    <component id="f7x836" name="ComNodeBlock.xml" path="/Component/NodeCanvas/" exported="true"/>
+    <component id="asvv37" name="ComNodePort.xml" path="/Component/NodeCanvas/" exported="true"/>
+    <component id="asvv38" name="BtnEditNoBg.xml" path="/Component/Button/"/>
+    <component id="asvv39" name="ComCmdText.xml" path="/Component/NodeCanvas/Commands/" exported="true"/>
+    <component id="asvv3a" name="ComCmdTextWithPort.xml" path="/Component/NodeCanvas/Commands/" exported="true"/>
+    <component id="asvv3b" name="ComMainDocumentNodeView.xml" path="/Component/PanelCom/" exported="true"/>
+    <component id="asvv3c" name="ComNodeZoomArea.xml" path="/Component/NodeCanvas/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

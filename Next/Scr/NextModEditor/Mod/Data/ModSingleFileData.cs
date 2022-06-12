@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SkySwordKill.NextEditor.Mod;
 
 namespace SkySwordKill.NextModEditor.Mod.Data
@@ -17,7 +16,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
             string filePath = $"{dir}/{FileName}";
             if (File.Exists(filePath))
             {
-                dataDic = JObject.Parse(File.ReadAllText(filePath)).ToObject<Dictionary<string, T>>();
+                dataDic = JsonConvert.DeserializeObject<Dictionary<string, T>>(File.ReadAllText(filePath));
             }
 
             if (dataDic == null)
@@ -37,7 +36,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
             string filePath = $"{dir}/{FileName}";
             if (dataDic != null)
             {
-                var json = JObject.FromObject(dataDic).ToString(Formatting.Indented);
+                var json = JsonConvert.SerializeObject(dataDic, Formatting.Indented);
                 File.WriteAllText(filePath, json);
             }
             else

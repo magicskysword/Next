@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace SkySwordKill.NextEditor.Mod
 {
@@ -12,7 +11,7 @@ namespace SkySwordKill.NextEditor.Mod
             string filePath = $"{dir}/modConfig.json";
             if (File.Exists(filePath))
             {
-                modConfig = JObject.Parse(File.ReadAllText(filePath)).ToObject<ModConfig>();
+                modConfig = JsonConvert.DeserializeObject<ModConfig>(File.ReadAllText(filePath));
             }
 
             modConfig = modConfig ?? new ModConfig();
@@ -24,7 +23,7 @@ namespace SkySwordKill.NextEditor.Mod
         {
             string filePath = $"{dir}/modConfig.json";
 
-            var json = JObject.FromObject(modConfig).ToString(Formatting.Indented);
+            var json = JsonConvert.SerializeObject(modConfig, Formatting.Indented);
             File.WriteAllText(filePath, json);
         }
     }

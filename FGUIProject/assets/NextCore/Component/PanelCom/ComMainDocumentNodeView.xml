@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="800,600">
+  <displayList>
+    <component id="n0_asvv" name="list" src="nkvz2b" fileName="Component/Table/ComTableList.xml" xy="0,0" size="200,600">
+      <relation target="" sidePair="height-height"/>
+    </component>
+    <component id="n1_asvv" name="nodeCanvas" src="f7x834" fileName="Component/NodeCanvas/ComNodeCanvas.xml" xy="200,0" pivot="0.5,0.5" size="600,600">
+      <relation target="" sidePair="width-width,height-height"/>
+    </component>
+    <text id="n3_asvv" name="txtState" xy="210,569" size="113,24" fontSize="16" color="#ffffff" text="X : xxx Y : xxx">
+      <relation target="" sidePair="bottom-bottom"/>
+    </text>
+  </displayList>
+</component>

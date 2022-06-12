@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="64,64" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <image id="n0_10zy0" name="n0" src="nkvz1s" fileName="Image/icon_edit.png" xy="0,0" alpha="0.6">
+      <gearLook controller="button" pages="0" values="0.6,0,0,0" default="1,0,0,0" tween="true"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+  </displayList>
+  <Button/>
+</component>

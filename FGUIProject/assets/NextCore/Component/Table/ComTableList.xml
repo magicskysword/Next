@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="406,522" overflow="hidden" designImageLayer="1">
+<component size="416,539" overflow="hidden" designImageLayer="1">
   <displayList>
-    <graph id="n2_of7d" name="n2" xy="0,0" size="406,20" type="rect" lineSize="0" fillColor="#ff3e4247">
+    <graph id="n2_of7d" name="n2" xy="0,0" size="416,20" type="rect" lineSize="0" fillColor="#ff3e4247">
       <relation target="" sidePair="width-width"/>
     </graph>
-    <list id="n3_of7d" name="listHeader" xy="0,0" size="396,20" layout="row" overflow="scroll" scroll="horizontal" scrollBarFlags="128" scrollBar="hidden" colGap="-1" defaultItem="ui://028qk31hnkvz2c" autoClearItems="true">
+    <list id="n3_of7d" name="listHeader" xy="0,0" size="406,20" layout="row" overflow="scroll" scroll="horizontal" scrollBarFlags="128" scrollBar="hidden" colGap="-1" defaultItem="ui://028qk31hnkvz2c" autoClearItems="true">
       <relation target="" sidePair="width-width"/>
       <item title="ID"/>
       <item title="名称"/>
       <item title="描述"/>
       <item title="类型"/>
     </list>
-    <list id="n0_10zy0" name="list" xy="0,20" size="406,502" overflow="scroll" scroll="both" scrollBarFlags="128" scrollBar="visible" scrollBarRes="ui://028qk31hnkvz27," lineGap="-1" defaultItem="ui://028qk31hnkvz2d" autoItemSize="false" autoClearItems="true">
+    <list id="n0_10zy0" name="list" xy="0,20" size="416,519" overflow="scroll" scroll="both" scrollBarFlags="128" scrollBar="visible" scrollBarRes="ui://028qk31hnkvz27," lineGap="-1" defaultItem="ui://028qk31hnkvz2d" autoItemSize="false" autoClearItems="true">
       <relation target="" sidePair="width-width,height-height"/>
       <item/>
       <item/>

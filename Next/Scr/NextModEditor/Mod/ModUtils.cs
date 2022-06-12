@@ -92,9 +92,33 @@ namespace SkySwordKill.NextEditor.Mod
             return string.Empty;
         }
 
+        public static string LoadBaseConfig(string path)
+        {
+            var targetPath = GetBasePath(path);
+            if (File.Exists(targetPath))
+                return File.ReadAllText(targetPath);
+            Debug.LogWarning($"目标文件 {targetPath} 不存在！");
+            return string.Empty;
+        }
+        
+        
         public static string GetConfigPath(string path)
         {
+            if (string.IsNullOrWhiteSpace(path))
+                return $"{Main.pathLanguageDir}/{Main.I.nextLanguage.ConfigDir}";
             return $"{Main.pathLanguageDir}/{Main.I.nextLanguage.ConfigDir}/Config/{path}";
+        }
+        
+        public static string GetBasePath(string path = "")
+        {
+            if (string.IsNullOrWhiteSpace(path))
+                return Main.pathBaseDataDir.Value;
+            return $"{Main.pathBaseDataDir.Value}/{path}";
+        }
+        
+        public static string GetFungusDataPath()
+        {
+            return Main.pathBaseFungusDataDir.Value;
         }
 
         public static string GetAffixDesc(ModAffixData affixData)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FairyGUI;
+using SkySwordKill.Next.FGUI.ComponentCtl;
 using SkySwordKill.NextModEditor.Mod.Data;
 using SkySwordKill.NextFGUI.NextCore;
 
@@ -50,17 +51,17 @@ namespace SkySwordKill.Next.FGUI
         MainView.m_closeButton.onClick.Set(Cancel);
         MainView.m_btnOk.onClick.Set(Confirm);
 
-        var viewMTable = MainView.m_table.As<UI_ComTableList>();
+        var viewMTable = new CtlTableList(MainView.m_table.As<UI_ComTableList>());
         viewMTable.BindTable(_tableInfos, i => _dataList[i], () => _dataList.Count,
             OnItemRenderer, _ => OnClickListItem());
 
         if (_allowMulti)
         {
-            viewMTable.m_list.selectionMode = ListSelectionMode.Multiple_SingleClick;
+            viewMTable.MainView.m_list.selectionMode = ListSelectionMode.Multiple_SingleClick;
         }
         else
         {
-            viewMTable.m_list.selectionMode = ListSelectionMode.Single;
+            viewMTable.MainView.m_list.selectionMode = ListSelectionMode.Single;
             
         }
         
@@ -76,9 +77,9 @@ namespace SkySwordKill.Next.FGUI
             }
 
             if (idIndex >= 0)
-                viewMTable.m_list.AddSelection(idIndex, false);
+                viewMTable.MainView.m_list.AddSelection(idIndex, false);
         }
-        viewMTable.m_list.GetSelection(_selection);
+        viewMTable.MainView.m_list.GetSelection(_selection);
 
         RefreshConfirm();
         RefreshTipText();

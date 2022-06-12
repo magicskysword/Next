@@ -39,7 +39,7 @@ namespace SkySwordKill.Next
         
         public static Lazy<string> pathBaseFungusDataDir =
             new Lazy<string>(() => Utility.CombinePaths(
-                pathModsDir.Value, "BaseFungus"));
+                pathBaseDataDir.Value, "Fungus"));
         
         public static Lazy<string> pathLuaLibDir =
             new Lazy<string>(() => Utility.CombinePaths(

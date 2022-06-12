@@ -809,8 +809,8 @@ namespace SkySwordKill.Next
                                     var faceInfo = DialogAnalysis.GetNpcFaceInfo(npcData.ID);
                                     if (faceInfo != null)
                                     {
-                                        var jsonData = JObject.FromObject(faceInfo);
-                                        GUIUtility.systemCopyBuffer = jsonData.ToString(Formatting.Indented);
+                                        GUIUtility.systemCopyBuffer =
+                                            JsonConvert.SerializeObject(faceInfo, Formatting.Indented);
                                         LogInfo(string.Format("NpcDebug.Info.Func.ExportFaceInfo.Success".I18N(),
                                             npcData.ID, npcData.Name));
                                     }
@@ -851,13 +851,12 @@ namespace SkySwordKill.Next
                         if (GUILayout.Button($"Misc.ExportPlayerFace".I18N()))
                         {
                             var faceInfo = DialogAnalysis.GetNpcFaceInfo(1);
-                            var jsonData = JObject.FromObject(faceInfo);
-                            inputPlayerFaceJson = jsonData.ToString(Formatting.Indented);
+                            inputPlayerFaceJson = JsonConvert.SerializeObject(faceInfo, Formatting.Indented);
                         }
 
                         if (GUILayout.Button($"Misc.ImportPlayerFace".I18N()))
                         {
-                            var faceInfo = JObject.Parse(inputPlayerFaceJson).ToObject<CustomStaticFaceInfo>();
+                            var faceInfo = JsonConvert.DeserializeObject<CustomStaticFaceInfo>(inputPlayerFaceJson);
                             DialogAnalysis.SetPlayerFaceData(faceInfo);
                         }
                     }
@@ -886,7 +885,7 @@ namespace SkySwordKill.Next
                     
                     if (GUILayout.Button("导出FungusBase（实验性）"))
                     {
-                        FungusTools.FungusTools.ExportAllFungusFlowchart(Main.pathBaseFungusDataDir.Value);
+                        FCanvas.FFlowchartTools.ExportAllFungusFlowchart(Main.pathBaseFungusDataDir.Value);
                     }
                     
                     if (GUILayout.Button("FGUI测试"))

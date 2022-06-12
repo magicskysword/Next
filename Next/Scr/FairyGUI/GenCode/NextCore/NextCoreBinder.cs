@@ -8,7 +8,13 @@ namespace SkySwordKill.NextFGUI.NextCore
     {
         public static void BindAll()
         {
+            UIObjectFactory.SetPackageItemExtension(UI_ComCmdText.URL, typeof(UI_ComCmdText));
+            UIObjectFactory.SetPackageItemExtension(UI_ComCmdTextWithPort.URL, typeof(UI_ComCmdTextWithPort));
+            UIObjectFactory.SetPackageItemExtension(UI_ComMainDocumentNodeView.URL, typeof(UI_ComMainDocumentNodeView));
+            UIObjectFactory.SetPackageItemExtension(UI_ComNodeZoomArea.URL, typeof(UI_ComNodeZoomArea));
             UIObjectFactory.SetPackageItemExtension(UI_WindowFrameTranslucency.URL, typeof(UI_WindowFrameTranslucency));
+            UIObjectFactory.SetPackageItemExtension(UI_ComNodeCanvas.URL, typeof(UI_ComNodeCanvas));
+            UIObjectFactory.SetPackageItemExtension(UI_ComNodeBlock.URL, typeof(UI_ComNodeBlock));
             UIObjectFactory.SetPackageItemExtension(UI_BtnTreeItem.URL, typeof(UI_BtnTreeItem));
             UIObjectFactory.SetPackageItemExtension(UI_BtnTab.URL, typeof(UI_BtnTab));
             UIObjectFactory.SetPackageItemExtension(UI_ComboBox_item.URL, typeof(UI_ComboBox_item));

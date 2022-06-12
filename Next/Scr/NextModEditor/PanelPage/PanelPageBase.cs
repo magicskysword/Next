@@ -1,6 +1,6 @@
 ﻿using FairyGUI;
+using SkySwordKill.Next.FGUI.ComponentCtl;
 using SkySwordKill.NextEditor.Mod;
-using SkySwordKill.NextFGUI.NextCore;
 
 namespace SkySwordKill.NextEditor.PanelPage
 {
@@ -9,7 +9,7 @@ namespace SkySwordKill.NextEditor.PanelPage
         public string ID { get; set; }
         public string Name { get; set; }
         public ModProject Project { get; set; }
-        public UI_ComMainInspector Inspector { get; set; }
+        public CtlPropertyInspector Inspector { get; set; }
         public GObject Content { get; set; }
     
         public abstract void OnAdd();

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SkySwordKill.NextEditor.Mod;
 
 namespace SkySwordKill.NextModEditor.Mod.Data
@@ -19,7 +18,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
                 return dataList;
             foreach (var filePath in Directory.GetFiles(buffDir))
             {
-                var data = JObject.Parse(File.ReadAllText(filePath)).ToObject<T>();
+                var data = JsonConvert.DeserializeObject<T>(File.ReadAllText(filePath));
 
                 if (Path.GetFileNameWithoutExtension(filePath) != data?.ID.ToString())
                     throw new ModException("文件ID与定义ID不一致");
@@ -39,7 +38,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
             foreach (var data in dataDic)
             {
                 var filePath = $"{buffDir}/{data.ID}.json";
-                var json = JObject.FromObject(data).ToString(Formatting.Indented);
+                var json = JsonConvert.SerializeObject(data, Formatting.Indented);
                 File.WriteAllText(filePath, json);
             }
         }

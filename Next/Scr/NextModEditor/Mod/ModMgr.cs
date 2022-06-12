@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using SkySwordKill.NextModEditor.Mod.Data;
 using SFB;
 using SkySwordKill.Next.Extension;
+using SkySwordKill.Next.FCanvas;
 
 namespace SkySwordKill.NextEditor.Mod
 {
@@ -33,6 +34,7 @@ namespace SkySwordKill.NextEditor.Mod
     // Data
     public Dictionary<int,ModAffixData> DefaultAffixData { get; set; }
     public Dictionary<int,ModBuffData> DefaultBuffData { get; set; }
+    public Dictionary<string, FFlowchart> DefaultFFlowchart { get; set; }
 
     static ModMgr()
     {
@@ -94,10 +96,11 @@ namespace SkySwordKill.NextEditor.Mod
             .Parse(ModUtils.LoadConfig("Meta/TargetType.json"))
             .ToObject<List<ModTargetType>>();
         
-        DefaultAffixData = ModAffixData.Load(ModUtils.GetConfigPath("Data"))
+        DefaultAffixData = ModAffixData.Load(ModUtils.GetBasePath())
             .ToDictionary(pair => pair.Value.ID, pair => pair.Value);
-        DefaultBuffData = ModBuffData.Load(ModUtils.GetConfigPath("Data"))
+        DefaultBuffData = ModBuffData.Load(ModUtils.GetBasePath())
             .ToDictionary(item => item.ID);
+        DefaultFFlowchart = FFlowchartTools.ImportAllFFlowchart(ModUtils.GetFungusDataPath());
     }
 
     public ModProject OpenProject()

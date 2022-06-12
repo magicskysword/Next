@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="180,20">
+  <displayList>
+    <component id="n1_asvv" name="container" src="f7x835" fileName="Component/NodeCanvas/ComNodeCanvasInner.xml" xy="0,0" pivot="0.5,0.5" size="180,20">
+      <relation target="" sidePair="width-width,height-height"/>
+    </component>
+  </displayList>
+</component>
