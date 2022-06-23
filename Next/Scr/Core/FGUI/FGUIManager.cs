@@ -52,6 +52,7 @@ namespace SkySwordKill.Next.FGUI
             {
                 var tagPackage = UIPackage.AddPackage(bytesAsset.Bytes , fguiPath, LoadResFunc);
                 Packages.Add(pkgName, tagPackage);
+                // 加载依赖
                 foreach (var dependency in tagPackage.dependencies)
                 {
                     AddPackage(dependency["name"]);
