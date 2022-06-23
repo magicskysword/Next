@@ -8,6 +8,7 @@ using HarmonyLib;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.Lua;
 using UnityEngine;
+using System.IO;
 
 namespace SkySwordKill.Next
 {
@@ -16,33 +17,19 @@ namespace SkySwordKill.Next
     {
         public const string MOD_VERSION = "0.4.6";
         
-        public static Lazy<string> pathModsDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                BepInEx.Paths.PluginPath, "Next"));
+        public static Lazy<string> pathModsDir;
         
-        public static Lazy<string> pathLibraryDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                BepInEx.Paths.PluginPath, "NextLib"));
+        public static Lazy<string> pathLibraryDir;
         
-        public static Lazy<string> pathConfigDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                BepInEx.Paths.PluginPath, "NextConfig"));
+        public static Lazy<string> pathConfigDir;
 
-        public static Lazy<string> pathBaseDataDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                pathModsDir.Value, "Base"));
+        public static Lazy<string> pathBaseDataDir;
         
-        public static Lazy<string> pathLuaLibDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                pathLibraryDir.Value, "Lua"));
+        public static Lazy<string> pathLuaLibDir;
         
-        public static Lazy<string> pathLanguageDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                pathConfigDir.Value, "language"));
+        public static Lazy<string> pathLanguageDir;
         
-        public static Lazy<string> pathModSettingFile =
-            new Lazy<string>(() => Utility.CombinePaths(
-                pathConfigDir.Value, "modSetting.json"));
+        public static Lazy<string> pathModSettingFile;
 
         public static Main Instance { get; private set; }
         public static int logIndent = 0;
@@ -62,11 +49,12 @@ namespace SkySwordKill.Next
         {
             Init();
         }
-
         private void Init()
         {
             Instance = this;
             
+            InitDir();
+
             languageID = Config.CreateConfig("Main.Language", "Plugin Language", "",
                 "");
             winKeyCode = Config.CreateConfig("Main.OpenKeyCode", "Window HotKey", KeyCode.F4,
@@ -102,9 +90,36 @@ namespace SkySwordKill.Next
             // 根据设置显示窗口
             // show window by config
             _isWinOpen = openInStart.Value;
-            
+
             // ModManager 启动由 JsonDataPatch 进行引导
             // ModManager startup is booted by JsonDataPatch
+        }
+        private void InitDir()
+        {
+            pathModsDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                Directory.GetParent(Instance.GetType().Assembly.Location).FullName,
+                "Next"));
+            pathLibraryDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                Directory.GetParent(Instance.GetType().Assembly.Location).FullName,
+                "NextLib"));
+            pathConfigDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                Directory.GetParent(Instance.GetType().Assembly.Location).FullName,
+                "NextConfig"));
+            pathBaseDataDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                pathModsDir.Value, "Base"));
+            pathLuaLibDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                pathLibraryDir.Value, "Lua"));
+            pathLanguageDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                pathConfigDir.Value, "language"));
+            pathModSettingFile =
+            new Lazy<string>(() => Utility.CombinePaths(
+                pathConfigDir.Value, "modSetting.json"));
         }
 
         private void LoadDefaultLanguage()

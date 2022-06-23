@@ -200,7 +200,7 @@ namespace SkySwordKill.Next
         {
             if (NextLanguage.languages.Count == 0)
             {
-                GUILayout.Label("请重写下载该Mod或下载Mod语言文件！", labelTitleStyle);
+                GUILayout.Label("请重新下载该Mod，或下载Mod语言文件！", labelTitleStyle);
                 GUILayout.Label("Please re-download the Mod or download the Mod language file！", labelTitleStyle);
                 return;
             }

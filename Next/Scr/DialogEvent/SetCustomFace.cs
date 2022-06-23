@@ -13,7 +13,7 @@ namespace SkySwordKill.Next.DialogEvent
             if (id == 1)
             {
                 // 主角
-                PlayerEx.Player.Face = new JSONObject(faceId);
+                PlayerEx.Player.Face = faceId;
                 if (UIHeadPanel.Inst != null)
                 {
                     UIHeadPanel.Inst.Face.setFace();

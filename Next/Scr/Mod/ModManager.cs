@@ -203,16 +203,32 @@ namespace SkySwordKill.Next.Mod
             Main.Instance.resourcesManager.Init();
             
             Main.LogInfo($"===================" + "ModManager.LoadingModData".I18N() + "=====================");
-            var home = Directory.CreateDirectory(Main.pathModsDir.Value);
             jsonData jsonInstance = jsonData.instance;
-            var modDirectories = home.GetDirectories("mod*");
-
-            // 加载元数据
-            foreach (var dir in modDirectories)
+            DirectoryInfo testModPath = new DirectoryInfo(BepInEx.Paths.GameRootPath+ @"\本地Mod测试");
+            List<DirectoryInfo> dirInfoList = new List<DirectoryInfo>();
+            foreach (var dir in WorkshopTool.GetAllModDirectory())
             {
-                Main.LogInfo(string.Format("ModManager.LoadMod".I18N(),dir.Name));
-                var modConfig = LoadModMetadata(dir.FullName);
-                modConfigs.Add(modConfig);
+                string workshopID = dir.Name;
+                bool disable = WorkshopTool.CheckModIsDisable(workshopID);
+                if (disable) continue;
+                dirInfoList.Add(dir);
+            }
+            foreach (var dir in testModPath.GetDirectories())
+            {
+                if (Directory.Exists(dir + @"\plugins\Next"))
+                {
+                    dirInfoList.Add(new DirectoryInfo(dir + @"\plugins\Next"));
+                }
+            }
+            // 加载元数据
+            foreach (DirectoryInfo dirInfo in dirInfoList)
+            {
+                foreach (DirectoryInfo modDirInfo in dirInfo.GetDirectories("mod*"))
+                {
+                    Main.LogInfo(string.Format("ModManager.LoadMod".I18N(), modDirInfo.Name));
+                    ModConfig item = ModManager.LoadModMetadata(modDirInfo.FullName);
+                    ModManager.modConfigs.Add(item);
+                }
             }
 
             // 排序
