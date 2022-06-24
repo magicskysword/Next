@@ -210,7 +210,11 @@ namespace SkySwordKill.Next.Mod
             {
                 string workshopID = dir.Name;
                 bool disable = WorkshopTool.CheckModIsDisable(workshopID);
-                if (disable) continue;
+                if (disable)
+                {
+                    Main.LogInfo($"{workshopID}是关闭的，跳过");
+                    continue;
+                }
                 dirInfoList.Add(dir);
             }
             foreach (var dir in testModPath.GetDirectories())
