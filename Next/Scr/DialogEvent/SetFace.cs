@@ -25,8 +25,12 @@ namespace SkySwordKill.Next.DialogEvent
             {
                 // NPC
                 jsonData.instance.AvatarJsonData[id.ToString()].SetField("face", faceId);
+                jsonData.instance.AvatarJsonData[id.ToString()].SetField("workshoplihui", workshopID);
                 NpcJieSuanManager.inst.isUpDateNpcList = true;
-                UINPCJiaoHu.Inst.JiaoHuPop.RefreshUI();
+                if (UINPCJiaoHu.Inst != null && UINPCJiaoHu.Inst.NowJiaoHuNPC != null)
+                {
+                    UINPCJiaoHu.Inst.JiaoHuPop.RefreshUI();
+                }
             }
             
             callback?.Invoke();
