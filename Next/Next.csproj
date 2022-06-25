@@ -123,6 +123,11 @@
     <Compile Include="Scr\AvatarNextData.cs" />
     <Compile Include="Scr\ConfigTarget.cs" />
     <Compile Include="Scr\ConfigurationManagerAttribute.cs" />
+    <Compile Include="Scr\Core\Main.cs" />
+    <Compile Include="Scr\Core\Main.ModPanel.cs" />
+    <Compile Include="Scr\Core\Mod\ModConfig.cs" />
+    <Compile Include="Scr\Core\Mod\ModManager.cs" />
+    <Compile Include="Scr\Core\Updater.cs" />
     <Compile Include="Scr\DialogAnalysis.cs" />
     <Compile Include="Scr\DialogAnalysis.Utils.cs" />
     <Compile Include="Scr\DialogEnvironment.cs" />
@@ -232,15 +237,10 @@
     <Compile Include="Scr\SearchNpcData.cs" />
     <Compile Include="Scr\StaticFace\CustomStaticFaceInfo.cs" />
     <Compile Include="Scr\StaticFace\StaticFaceUtils.cs" />
-    <Compile Include="Scr\Updater.cs" />
     <Compile Include="Scr\XiaoYeGUI\InterfaceMaker.cs" />
     <Compile Include="Scr\XiaoYeGUI\RayBlocker.cs" />
     <Compile Include="Scr\XiaoYeGUI\ResourceUtils.cs" />
-    <Compile Include="Scr\Main.cs" />
-    <Compile Include="Scr\Main.ModPanel.cs" />
     <Compile Include="Scr\Mod\MainDataContainer.cs" />
-    <Compile Include="Scr\Mod\ModConfig.cs" />
-    <Compile Include="Scr\Mod\ModManager.cs" />
     <Compile Include="Scr\NextLanguage.cs" />
     <Compile Include="Scr\NextModSetting.cs" />
     <Compile Include="Scr\Patch\BagActiveSkillGetIconSprite.cs" />
