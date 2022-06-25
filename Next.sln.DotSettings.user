@@ -48,6 +48,8 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Csoft_005Csteam_005Csteamapps_005Ccommon_005C_89C5_957F_751F_005CBepInEx_005Ccore_005C0Harmony_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Csoft_005Csteam_005Csteamapps_005Ccommon_005C_89C5_957F_751F_005CBepInEx_005Ccore_005CBepInEx_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Csoft_005Csteam_005Csteamapps_005Ccommon_005C_9B3C_8C37_516B_8352_005CMelonLoader_005CManaged_005CUnityEngine_002EImageConversionModule_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Csoft_005Csteam_005Csteamapps_005Cworkshop_005Ccontent_005C1189490_005C2824349934_005CBepInEx_005Ccore_005C0Harmony_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Csoft_005Csteam_005Csteamapps_005Cworkshop_005Ccontent_005C1189490_005C2824349934_005CBepInEx_005Ccore_005CBepInEx_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="D:\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\Assembly-CSharp.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>

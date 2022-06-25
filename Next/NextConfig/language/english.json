@@ -96,7 +96,7 @@
     "HeaderBar.ReloadModTip" : "Only reload mod in start scene",
     "HeaderBar.ExportBase" : "Export Base",
     "HeaderBar.OpenInStart" : "Open In Game Start",
-    "HeaderBar.ModFolder" : "Mod Folder",
+    "HeaderBar.ModBaseFolder" : "Output Base Folder",
     "HeaderBar.Close" : "Close",
     "HeaderBar.CheckUpdate" : "Check Update",
     "HeaderBar.CheckUpdating" : "Checking...",
@@ -106,6 +106,7 @@
     "HeaderBar.Github" : "Github",
     "HeaderBar.3dmBBS" : "3dm BBS",
     "HeaderBar.3dmModSite" : "3dm Mod Site",
+    "HeaderBar.BWiki" : "BWiki",
 
     "ModManager.GenerateBaseData": "Generating Base Files.",
     "ModManager.LoadMod": "Load mod : {0}",

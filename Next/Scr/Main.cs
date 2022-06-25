@@ -15,9 +15,9 @@ namespace SkySwordKill.Next
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.4.6";
+        public const string MOD_VERSION = "0.4.7";
         
-        public static Lazy<string> pathModsDir;
+        public static Lazy<string> pathLocalModsDir;
         
         public static Lazy<string> pathLibraryDir;
         
@@ -96,21 +96,20 @@ namespace SkySwordKill.Next
         }
         private void InitDir()
         {
-            pathModsDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                Directory.GetParent(Instance.GetType().Assembly.Location).FullName,
-                "Next"));
+            pathLocalModsDir =
+            new Lazy<string>(() => BepInEx.Paths.GameRootPath + @"\本地Mod测试");
             pathLibraryDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                Directory.GetParent(Instance.GetType().Assembly.Location).FullName,
-                "NextLib"));
+                new Lazy<string>(() => Utility.CombinePaths(
+                    Directory.GetParent(Instance.GetType().Assembly.Location).FullName,
+                    "NextLib"));
             pathConfigDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                Directory.GetParent(Instance.GetType().Assembly.Location).FullName,
-                "NextConfig"));
+                new Lazy<string>(() => Utility.CombinePaths(
+                    Directory.GetParent(Instance.GetType().Assembly.Location).FullName,
+                    "NextConfig"));
             pathBaseDataDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                pathModsDir.Value, "Base"));
+                new Lazy<string>(() => Utility.CombinePaths(
+                    Directory.GetParent(Instance.GetType().Assembly.Location).FullName,
+                    "../BaseOutPut"));
             pathLuaLibDir =
             new Lazy<string>(() => Utility.CombinePaths(
                 pathLibraryDir.Value, "Lua"));
@@ -119,7 +118,7 @@ namespace SkySwordKill.Next
                 pathConfigDir.Value, "language"));
             pathModSettingFile =
             new Lazy<string>(() => Utility.CombinePaths(
-                pathConfigDir.Value, "modSetting.json"));
+                BepInEx.Paths.GameRootPath, "nextModSetting.json"));
         }
 
         private void LoadDefaultLanguage()

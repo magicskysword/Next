@@ -204,15 +204,21 @@ namespace SkySwordKill.Next.Mod
             
             Main.LogInfo($"===================" + "ModManager.LoadingModData".I18N() + "=====================");
             jsonData jsonInstance = jsonData.instance;
-            DirectoryInfo testModPath = new DirectoryInfo(BepInEx.Paths.GameRootPath+ @"\本地Mod测试");
+            DirectoryInfo testModPath = new DirectoryInfo(Main.pathLocalModsDir.Value);
             List<DirectoryInfo> dirInfoList = new List<DirectoryInfo>();
+            // 加载工坊模组
             foreach (var dir in WorkshopTool.GetAllModDirectory())
             {
                 string workshopID = dir.Name;
                 bool disable = WorkshopTool.CheckModIsDisable(workshopID);
-                if (disable) continue;
-                dirInfoList.Add(dir);
+                if (disable) 
+                    continue;
+                if (Directory.Exists(dir + @"\plugins\Next"))
+                {
+                    dirInfoList.Add(new DirectoryInfo(dir + @"\plugins\Next"));
+                }
             }
+            // 加载本地模组
             foreach (var dir in testModPath.GetDirectories())
             {
                 if (Directory.Exists(dir + @"\plugins\Next"))
@@ -226,8 +232,8 @@ namespace SkySwordKill.Next.Mod
                 foreach (DirectoryInfo modDirInfo in dirInfo.GetDirectories("mod*"))
                 {
                     Main.LogInfo(string.Format("ModManager.LoadMod".I18N(), modDirInfo.Name));
-                    ModConfig item = ModManager.LoadModMetadata(modDirInfo.FullName);
-                    ModManager.modConfigs.Add(item);
+                    ModConfig item = LoadModMetadata(modDirInfo.FullName);
+                    modConfigs.Add(item);
                 }
             }
 
@@ -350,6 +356,11 @@ namespace SkySwordKill.Next.Mod
         private static void LoadModData(ModConfig modConfig)
         {
             Main.LogInfo($"===================" + "ModManager.StartLoadMod".I18N() + "=====================");
+            // V1版本地址
+            var modConfigDir = modConfig.GetConfigDir();
+            var modDataDir = modConfig.GetDataDir();
+            var modNDataDir = modConfig.GetNDataDir();
+            
             Main.LogInfo($"{"Mod.Directory".I18N()} : {Path.GetFileNameWithoutExtension(modConfig.Path)}");
             Main.logIndent = 1;
             Main.LogInfo($"{"Mod.Name".I18N()} : {modConfig.Name}");
@@ -371,19 +382,19 @@ namespace SkySwordKill.Next.Mod
                     // 普通数据
                     if (value is JSONObject jsonObject)
                     {
-                        string filePath = Utility.CombinePaths(modConfig.Path, $"{fieldInfo.Name}.json");
+                        string filePath = Utility.CombinePaths(modDataDir, $"{fieldInfo.Name}.json");
                         modConfig.jsonPathCache.Add(fieldInfo.Name, filePath);
                         PatchJsonObject(fieldInfo, filePath, jsonObject);
                     }
                     else if (value is JObject jObject)
                     {
-                        string filePath = Utility.CombinePaths(modConfig.Path, $"{fieldInfo.Name}.json");
+                        string filePath = Utility.CombinePaths(modDataDir, $"{fieldInfo.Name}.json");
                         modConfig.jsonPathCache.Add(fieldInfo.Name, filePath);
                         PatchJObject(fieldInfo, filePath, jObject);
                     }
                     else if (value is jsonData.YSDictionary<string, JSONObject> dicData)
                     {
-                        string dirPathForData = Utility.CombinePaths(modConfig.Path, fieldInfo.Name);
+                        string dirPathForData = Utility.CombinePaths(modDataDir, fieldInfo.Name);
                         JSONObject toJsonObject =
                             typeof(jsonData).GetField($"_{fieldInfo.Name}").GetValue(jsonInstance) as JSONObject;
                         modConfig.jsonPathCache.Add(fieldInfo.Name, dirPathForData);
@@ -392,18 +403,18 @@ namespace SkySwordKill.Next.Mod
                     // 功能函数配置数据
                     else if (value is JSONObject[] jsonObjects)
                     {
-                        string dirPathForData = Utility.CombinePaths(modConfig.Path, fieldInfo.Name);
+                        string dirPathForData = Utility.CombinePaths(modDataDir, fieldInfo.Name);
                         modConfig.jsonPathCache.Add(fieldInfo.Name, dirPathForData);
                         PatchJsonObjectArray(fieldInfo, dirPathForData, jsonObjects);
                     }
                 }
 
                 // 载入Mod Dialog数据
-                LoadDialogEventData(modConfig.Path);
-                LoadDialogTriggerData(modConfig.Path);
+                LoadDialogEventData(modNDataDir);
+                LoadDialogTriggerData(modNDataDir);
                 
                 // 载入Mod Face数据
-                LoadCustomFaceData(modConfig.Path);
+                LoadCustomFaceData(modNDataDir);
                 
                 // 载入Mod Lua数据
                 LoadCustomLuaData(modConfig,$"{modConfig.Path}/Lua");
@@ -441,12 +452,19 @@ namespace SkySwordKill.Next.Mod
         private static ModConfig GetModConfig(string dir)
         {
             ModConfig modConfig = null;
+            int dataVersion = 1;
             try
             {
                 string filePath = Utility.CombinePaths(dir, $"modConfig.json");
+                string filePathV2 = Utility.CombinePaths(dir, "Config", $"modConfig.json");
                 if (File.Exists(filePath))
                 {
                     modConfig = JObject.Parse(File.ReadAllText(filePath)).ToObject<ModConfig>();
+                }
+                else if (File.Exists(filePathV2))
+                {
+                    modConfig = JObject.Parse(File.ReadAllText(filePathV2)).ToObject<ModConfig>();
+                    dataVersion = 2;
                 }
                 else
                 {
@@ -460,6 +478,7 @@ namespace SkySwordKill.Next.Mod
 
             modConfig = modConfig ?? new ModConfig();
             modConfig.State = ModState.Unload;
+            modConfig.DataVersion = dataVersion;
 
             return modConfig;
         }
@@ -479,8 +498,12 @@ namespace SkySwordKill.Next.Mod
 
         public static void PatchJsonObject(FieldInfo fieldInfo,string filePath, JSONObject jsonObject, string dirName = "")
         {
-            var dataTemplate = jsonObject[0];
-            
+            JSONObject dataTemplate = null;
+            if(jsonObject.Count > 0)
+            {
+                dataTemplate = jsonObject[0];
+            }
+
             if (File.Exists(filePath))
             {
                 var fileName = Path.GetFileNameWithoutExtension(filePath);
@@ -501,17 +524,20 @@ namespace SkySwordKill.Next.Mod
                     else
                     {
                         // New data
-                        foreach (var fieldKey in dataTemplate.keys)
+                        if(dataTemplate != null)
                         {
-                            if (!curData.HasField(fieldKey))
+                            foreach (var fieldKey in dataTemplate.keys)
                             {
-                                curData.AddField(fieldKey,dataTemplate[fieldKey].Clone());
-                                Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
-                                    fieldInfo.Name, 
-                                    fileName, 
-                                    fieldKey,
-                                    dataTemplate[fieldKey]));
-                            
+                                if (!curData.HasField(fieldKey))
+                                {
+                                    curData.AddField(fieldKey, dataTemplate[fieldKey].Clone());
+                                    Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
+                                        fieldInfo.Name,
+                                        fileName,
+                                        fieldKey,
+                                        dataTemplate[fieldKey]));
+
+                                }
                             }
                         }
                         jsonObject.AddField(key, curData);

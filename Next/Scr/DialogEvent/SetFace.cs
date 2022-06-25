@@ -9,11 +9,13 @@ namespace SkySwordKill.Next.DialogEvent
         {
             int id = NPCEx.NPCIDToNew(command.GetInt(0));
             int faceId = command.GetInt(1);
+            string workshopID = command.GetStr(2, "");
 
             if (id == 1)
             {
                 // 主角
                 PlayerEx.Player.Face = faceId;
+                PlayerEx.Player.FaceWorkshop = workshopID;
                 if (UIHeadPanel.Inst != null)
                 {
                     UIHeadPanel.Inst.Face.setFace();

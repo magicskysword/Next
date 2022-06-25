@@ -18,6 +18,14 @@ namespace SkySwordKill.Next.Mod
         public string Path { get; set; }
         [JsonIgnore]
         public Exception Exception { get; set; }
+        /// <summary>
+        /// 数据版本
+        /// V1版本是老版本
+        /// V2版本是新版本
+        /// </summary>
+        [JsonIgnore]
+        public int DataVersion { get; set; } = 1;
+
         [JsonIgnore]
         public Dictionary<string, string> jsonPathCache = new Dictionary<string, string>();
 
@@ -51,6 +59,48 @@ namespace SkySwordKill.Next.Mod
             }
 
             return $"<color={colorCode}>{modState}</color>";
+        }
+
+        /// <summary>
+        /// 游戏数据文件夹
+        /// </summary>
+        /// <returns></returns>
+        public string GetDataDir()
+        {
+            if (DataVersion == 2)
+            {
+                return $"{Path}/Data";
+            }
+
+            return Path;
+        }
+        
+        /// <summary>
+        /// Next数据文件夹
+        /// </summary>
+        /// <returns></returns>
+        public string GetNDataDir()
+        {
+            if (DataVersion == 2)
+            {
+                return $"{Path}/NData";
+            }
+
+            return Path;
+        }
+
+        /// <summary>
+        /// 配置文件夹
+        /// </summary>
+        /// <returns></returns>
+        public string GetConfigDir()
+        {
+            if (DataVersion == 2)
+            {
+                return $"{Path}/Config";
+            }
+
+            return Path;
         }
     }
 }

@@ -333,7 +333,9 @@ namespace SkySwordKill.Next
                 {
                     if (GUILayout.Button("HeaderBar.ExportBase".I18N()))
                     {
+                        Directory.CreateDirectory(pathBaseDataDir.Value);
                         ModManager.GenerateBaseData();
+                        Process.Start(pathBaseDataDir.Value);
                     }
                 }
 
@@ -347,9 +349,10 @@ namespace SkySwordKill.Next
                 }
 
                 GUI.enabled = true;
-                if (GUILayout.Button("HeaderBar.ModFolder".I18N()))
+                if (GUILayout.Button("HeaderBar.ModBaseFolder".I18N()))
                 {
-                    Process.Start(pathModsDir.Value);
+                    Directory.CreateDirectory(pathBaseDataDir.Value);
+                    Process.Start(pathBaseDataDir.Value);
                 }
             }
             GUILayout.EndHorizontal();
@@ -367,6 +370,10 @@ namespace SkySwordKill.Next
                 if (GUILayout.Button("HeaderBar.3dmModSite".I18N()))
                 {
                     Process.Start(Updater.Web3dmModSiteUrl);
+                }
+                if (GUILayout.Button("HeaderBar.BWiki".I18N()))
+                {
+                    Process.Start(Updater.WebBWikiUrl);
                 }
                 
                 GUILayout.FlexibleSpace();
