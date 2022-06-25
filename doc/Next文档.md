@@ -4,9 +4,25 @@
 Patch Mod是对需要 Next插件Mod（简称Next） 进行加载的mod的称呼，以便与需要 BepinEx 加载的Mod进行区分。（Next本身需要BepinEx进行加载）
 
 ## 2 新建 Patch Mod
-在 `觅长生/BepInEx/plugins/Next` 文件夹下，新建文件夹。<br/>
-文件夹以 mod 开头，如 `mod测试`<br/>
-只有以"mod"开头的文件夹能被读取。
+在 `觅长生/本地Mod测试/` 文件夹下，新建文件夹。\
+文件夹内目录结构如下
+
+### Mod目录结构
+
+V2版本
+```
+plugins
+└── Next
+    └── mod测试                 PatchMod文件夹
+        ├── Assets                  Mod资源文件夹
+        ├── Config                  Mod配置文件夹
+        │   └── modConfig.json          Mod描述文件
+        ├── Data                    游戏数据文件夹
+        ├── Lua                     Lua数据文件夹
+        └── NData                   Next数据文件夹
+```
+Next Patch的文件夹以 mod 开头，如 `mod测试`\
+只有以"mod"开头的文件夹会被加载。
 
 ## 3 Mod描述文件
 Mod描述文件是用于描述mod名称、作者、版本与介绍。
@@ -15,7 +31,7 @@ Mod描述文件是用于描述mod名称、作者、版本与介绍。
 
 ### 3.1 创建描述文件
 
-新建json文件，保存如 `mod测试/modConfig.json` 的路径中
+新建json文件，保存至 `mod测试/Config/modConfig.json` 的路径中
 
 文件结构：
 
@@ -33,7 +49,11 @@ modConfig.json
 数据Patch是指对游戏原版数据进行修改与增加。（目前未提供删除功能）
 
 ### 4.1 数据类型
-当Next安装后，运行游戏时，Next会自动在 `觅长生/BepInEx/plugins/Next` 路径生成Base文件夹
+当Next安装后，可以点击Next面板上的导出Base，自动导出Base文件。
+
+点击面板上的打开导出文件夹按钮，即可找到导出的Base文件
+
+导出的数据位于 `.\BaseOutPut` 根据Next的安装位置，有所不同
 
 Base文件夹里的文件，大致分为三类：
 
@@ -49,7 +69,7 @@ Base文件夹里的文件，大致分为三类：
         }
     }
     ```
-    对这类文件制作补丁时，只需要在mod文件夹里创建同名json文件，然后进行修改/新增数据即可。如：
+    对这类文件制作补丁时，只需要在 `Data` 文件夹里创建同名json文件，然后进行修改/新增数据即可。如：
     ```json
     {
         "2":{
@@ -100,7 +120,7 @@ Base文件夹里的文件，大致分为三类：
         "wuDao":[]
     }
     ```
-    要修改此类文件时，将该文件一份至mod文件夹里的`ItemJsonData`文件夹，然后修改其数据即可。<br/>
+    要修改此类文件时，将该文件一份至mod文件夹里的`Data/ItemJsonData`文件夹，然后修改其数据即可。<br/>
     如若需要新增数据，则将数据名称命名为新的数字，并修改数据内的ID与其一致即可。
 
 3. SeidJson数据<br/>
@@ -177,7 +197,7 @@ Next 0.3.0 版本新增了增量修改的功能
 }
 ```
 
-制造增量补丁时，可以写成如下格式：
+制作增量补丁时，可以写成如下格式：
 ```json
 {
     "name":"魏老之剑",
@@ -227,7 +247,9 @@ Next 0.3.0 版本新增了增量修改的功能
 
 ### 4.3 数据含义参考
 
-该部分可参考3DM一位大佬的[此篇帖子](https://bbs.3dmgame.com/thread-6185512-1-1.html)
+此处可参考官方的Excel开源文件
+
+或参考3DM一位大佬的[此篇帖子](https://bbs.3dmgame.com/thread-6185512-1-1.html)
 
 ## 5 剧情文件
 
@@ -236,7 +258,7 @@ Next 0.3.0 版本新增了增量修改的功能
 
 ### 5.2 创建剧情文件
 
-在Mod文件夹里新建 `DialogEvent` 文件夹，随后在该文件夹里新建任意名称的json文件，文件结构如下：
+在Mod文件夹里新建 `NData/DialogEvent` 文件夹，随后在该文件夹里新建任意名称的json文件，文件结构如下：
 
 example.json
 ```json
@@ -288,7 +310,7 @@ example.json
 
 ### 6.2 触发器文件
 
-在Mod文件夹里新建 `DialogTrigger` 文件夹，随后在该文件夹里新建任意名称的json文件，文件结构如下：
+在Mod文件夹里新建 `NData/DialogTrigger` 文件夹，随后在该文件夹里新建任意名称的json文件，文件结构如下：
 
 example.json
 ```json
@@ -331,7 +353,7 @@ Next为游戏引入了添加自定义资源的功能
 
 ### 8.2 捏脸数据文件
 
-在Mod文件夹里新建 `CustomFace` 文件夹，随后在该文件夹里新建任意名称的json文件，文件结构如下：
+在Mod文件夹里新建 `NData/CustomFace` 文件夹，随后在该文件夹里新建任意名称的json文件，文件结构如下：
 
 ```json
 {

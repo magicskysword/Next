@@ -1,62 +1,44 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
+using UnityEngine;
+using SkySwordKill.Next.Lua;
+using SkySwordKill.Next.Extension;
+using SkySwordKill.Next.FGUI;
+using HarmonyLib;
+using BepInEx;
 using System.Reflection;
 using System.Text;
-using BepInEx;
-using HarmonyLib;
-using SkySwordKill.Next.FGUI;
-using SkySwordKill.Next.Extension;
-using SkySwordKill.Next.Lua;
-using UnityEngine;
+using System.Linq;
+using System.Collections;
+﻿using System;
 
 namespace SkySwordKill.Next
 {
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
-    {
         public const string MOD_VERSION = "0.5.0";
+    {
         
-        public static Lazy<string> pathModsDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                BepInEx.Paths.PluginPath, "Next"));
+        public static Lazy<string> pathLocalModsDir;
         
-        public static Lazy<string> pathLibraryDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                BepInEx.Paths.PluginPath, "NextLib"));
+        public static Lazy<string> pathLibraryDir;
         
-        public static Lazy<string> pathConfigDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                BepInEx.Paths.PluginPath, "NextConfig"));
+        public static Lazy<string> pathConfigDir;
+
+        public static Lazy<string> pathBaseDataDir;
         
+        public static Lazy<string> pathLuaLibDir;
+        
+        public static Lazy<string> pathLanguageDir;
+        
+        public static Lazy<string> pathModSettingFile;
         public static Lazy<string> pathInnerAssetDir =
             new Lazy<string>(() => Utility.CombinePaths(
                 BepInEx.Paths.PluginPath, "NextAssets"));
-
-        public static Lazy<string> pathBaseDataDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                pathModsDir.Value, "Base"));
-        
         public static Lazy<string> pathBaseFungusDataDir =
             new Lazy<string>(() => Utility.CombinePaths(
                 pathBaseDataDir.Value, "Fungus"));
-        
-        public static Lazy<string> pathLuaLibDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                pathLibraryDir.Value, "Lua"));
-        
         public static Lazy<string> pathABDir = 
             new Lazy<string>(() => Utility.CombinePaths(
                 pathLibraryDir.Value, "AB"));
-        
-        public static Lazy<string> pathLanguageDir =
-            new Lazy<string>(() => Utility.CombinePaths(
-                pathConfigDir.Value, "Language"));
-        
-        public static Lazy<string> pathModSettingFile =
-            new Lazy<string>(() => Utility.CombinePaths(
-                pathConfigDir.Value, "modSetting.json"));
-
         public static Main Instance { get; private set; }
         public static Main I { get; private set; }
         public static ResourcesManager Res => I.resourcesManager;
@@ -87,6 +69,8 @@ namespace SkySwordKill.Next
         {
             I = this;
             
+            InitDir();
+
             languageID = Config.CreateConfig("Main.Language", "Plugin Language", "",
                 "");
             winKeyCode = Config.CreateConfig("Main.OpenKeyCode", "Window HotKey", KeyCode.F4,
@@ -131,6 +115,33 @@ namespace SkySwordKill.Next
             
             // ModManager 启动由 JsonDataPatch 进行引导
             // ModManager startup is booted by JsonDataPatch
+        }
+
+        private void InitDir()
+        {
+            pathLocalModsDir =
+            new Lazy<string>(() => BepInEx.Paths.GameRootPath + @"\本地Mod测试");
+            pathLibraryDir =
+                new Lazy<string>(() => Utility.CombinePaths(
+                    Directory.GetParent(Instance.GetType().Assembly.Location).FullName,
+                    "NextLib"));
+            pathConfigDir =
+                new Lazy<string>(() => Utility.CombinePaths(
+                    Directory.GetParent(Instance.GetType().Assembly.Location).FullName,
+                    "NextConfig"));
+            pathBaseDataDir =
+                new Lazy<string>(() => Utility.CombinePaths(
+                    Directory.GetParent(Instance.GetType().Assembly.Location).FullName,
+                    "../BaseOutPut"));
+            pathLuaLibDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                pathLibraryDir.Value, "Lua"));
+            pathLanguageDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                pathConfigDir.Value, "language"));
+            pathModSettingFile =
+            new Lazy<string>(() => Utility.CombinePaths(
+                BepInEx.Paths.GameRootPath, "nextModSetting.json"));
         }
 
         private void LoadDefaultLanguage()

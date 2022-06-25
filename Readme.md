@@ -2,6 +2,8 @@
 
 # 觅长生 Next Mod框架
 
+![Next](/preview.png)
+
 觅长生 Next Mod是基于BepinEx框架的Mod，为觅长生游戏提供了数据增量修改、添加剧情与触发器的功能
 
 github地址：https://github.com/magicskysword/Next
@@ -10,14 +12,19 @@ github地址：https://github.com/magicskysword/Next
 可以通过编写json文件，以在游戏里插入额外的功能与数据。
 
 ## 使用方法
+从Steam创意工坊安装：
 
 下载压缩包，将文件解压至 `觅长生\BepInEx\plugins` 文件夹
 
 参考贴：https://bbs.3dmgame.com/thread-6207429-1-1.html
 
-Mod WiKi：[Next Wiki](https://michangshengnext.fandom.com/zh/wiki/%E8%A7%85%E9%95%BF%E7%94%9FNext_Wiki)
+Mod WiKi：
 
-文档附件：[Next文档](doc/Next文档.md)
+* [Bilibili Wiki](https://wiki.biligame.com/mcs/Next%E9%A6%96%E9%A1%B5)
+
+* [文档附件](doc/Next文档.md)
+
+* [Fandom Wiki](https://michangshengnext.fandom.com/zh/wiki/%E8%A7%85%E9%95%BF%E7%94%9FNext_Wiki)
 
 在游戏内可以通过 F4 打开mod菜单（按键可修改）
 

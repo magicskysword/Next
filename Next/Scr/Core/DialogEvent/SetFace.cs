@@ -9,11 +9,13 @@ namespace SkySwordKill.Next.DialogEvent
         {
             int id = NPCEx.NPCIDToNew(command.GetInt(0));
             int faceId = command.GetInt(1);
+            string workshopID = command.GetStr(2, "");
 
             if (id == 1)
             {
                 // 主角
-                PlayerEx.Player.Face = new JSONObject(faceId);
+                PlayerEx.Player.Face = faceId;
+                PlayerEx.Player.FaceWorkshop = workshopID;
                 if (UIHeadPanel.Inst != null)
                 {
                     UIHeadPanel.Inst.Face.setFace();
@@ -23,8 +25,12 @@ namespace SkySwordKill.Next.DialogEvent
             {
                 // NPC
                 jsonData.instance.AvatarJsonData[id.ToString()].SetField("face", faceId);
+                jsonData.instance.AvatarJsonData[id.ToString()].SetField("workshoplihui", workshopID);
                 NpcJieSuanManager.inst.isUpDateNpcList = true;
-                UINPCJiaoHu.Inst.JiaoHuPop.RefreshUI();
+                if (UINPCJiaoHu.Inst != null && UINPCJiaoHu.Inst.NowJiaoHuNPC != null)
+                {
+                    UINPCJiaoHu.Inst.JiaoHuPop.RefreshUI();
+                }
             }
             
             callback?.Invoke();

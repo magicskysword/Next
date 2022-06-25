@@ -5,20 +5,26 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Threading;
 using BepInEx;
+using HarmonyLib;
 using JetBrains.Annotations;
 using KBEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.StaticFace;
+using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 namespace SkySwordKill.Next.Mod
 {
     public static class ModManager
     {
-
+        public delegate void FileHandle(string virtualPath, string filePath);
+        
         #region 字段
 
         public static List<ModConfig> modConfigs = new List<ModConfig>();
@@ -138,11 +144,6 @@ namespace SkySwordKill.Next.Mod
 
         public static void FirstLoadAllMod()
         {
-            var watcher = Stopwatch.StartNew();
-            // 缓存游戏数据
-            CloneMainData();
-            watcher.Stop();
-            Main.LogInfo($"储存数据耗时：{watcher.ElapsedMilliseconds / 1000f} s");
             OnModLoadStart();
             LoadAllMod();
             OnModLoadComplete();
@@ -193,26 +194,50 @@ namespace SkySwordKill.Next.Mod
         {
             DialogAnalysis.Clear();
             StaticFaceUtils.Clear();
-            Main.Lua.Reset();
-            Main.FGUI.Reset();
-            Main.Res.Reset();
+            Main.Instance.luaManager.Reset();
         }
 
         public static void LoadAllMod()
         {
             modConfigs.Clear();
+            Main.Instance.resourcesManager.Init();
             
             Main.LogInfo($"===================" + "ModManager.LoadingModData".I18N() + "=====================");
-            var home = Directory.CreateDirectory(Main.pathModsDir.Value);
             jsonData jsonInstance = jsonData.instance;
-            var modDirectories = home.GetDirectories("mod*");
-
-            // 加载元数据
-            foreach (var dir in modDirectories)
+            DirectoryInfo testModPath = new DirectoryInfo(Main.pathLocalModsDir.Value);
+            List<DirectoryInfo> dirInfoList = new List<DirectoryInfo>();
+            // 加载工坊模组
+            foreach (var dir in WorkshopTool.GetAllModDirectory())
             {
-                Main.LogInfo(string.Format("ModManager.LoadMod".I18N(),dir.Name));
-                var modConfig = LoadModMetadata(dir.FullName);
-                modConfigs.Add(modConfig);
+                string workshopID = dir.Name;
+                bool disable = WorkshopTool.CheckModIsDisable(workshopID);
+                if (disable)
+                {
+                    Main.LogInfo($"{workshopID}是关闭的，跳过");
+                    continue;
+                }
+                if (Directory.Exists(dir + @"\plugins\Next"))
+                {
+                    dirInfoList.Add(new DirectoryInfo(dir + @"\plugins\Next"));
+                }
+            }
+            // 加载本地模组
+            foreach (var dir in testModPath.GetDirectories())
+            {
+                if (Directory.Exists(dir + @"\plugins\Next"))
+                {
+                    dirInfoList.Add(new DirectoryInfo(dir + @"\plugins\Next"));
+                }
+            }
+            // 加载元数据
+            foreach (DirectoryInfo dirInfo in dirInfoList)
+            {
+                foreach (DirectoryInfo modDirInfo in dirInfo.GetDirectories("mod*"))
+                {
+                    Main.LogInfo(string.Format("ModManager.LoadMod".I18N(), modDirInfo.Name));
+                    ModConfig item = LoadModMetadata(modDirInfo.FullName);
+                    modConfigs.Add(item);
+                }
             }
 
             // 排序
@@ -222,7 +247,7 @@ namespace SkySwordKill.Next.Mod
             // 加载Mod数据
             foreach (var modConfig in modConfigs)
             {
-                var modSetting = Main.I.nextModSetting.GetOrCreateModSetting(modConfig);
+                var modSetting = Main.Instance.nextModSetting.GetOrCreateModSetting(modConfig);
 
                 if (!modSetting.enable)
                 {
@@ -260,6 +285,8 @@ namespace SkySwordKill.Next.Mod
             {
                 Main.LogError(CheckData.log);
             }
+            
+            Main.Instance.resourcesManager.StartLoadAsset();
         }
         
         private static void InitJSONClassData()
@@ -301,7 +328,7 @@ namespace SkySwordKill.Next.Mod
         public static IEnumerable<ModConfig> SortMod(IEnumerable<ModConfig> modEnumerable)
         {
             var mods = modEnumerable.ToArray();
-            var nextModSetting = Main.I.nextModSetting;
+            var nextModSetting = Main.Instance.nextModSetting;
 
             var modSortList = mods
                 .Select(modConfig =>
@@ -321,17 +348,22 @@ namespace SkySwordKill.Next.Mod
         public static void ResetModPriority()
         {
             var index = 0;
-            var nextModSetting = Main.I.nextModSetting;
+            var nextModSetting = Main.Instance.nextModSetting;
             foreach (var modConfig in modConfigs)
             {
                 nextModSetting.GetOrCreateModSetting(modConfig).priority = index++;
             }
-            Main.I.SaveModSetting();
+            Main.Instance.SaveModSetting();
         }
 
         private static void LoadModData(ModConfig modConfig)
         {
             Main.LogInfo($"===================" + "ModManager.StartLoadMod".I18N() + "=====================");
+            // V1版本地址
+            var modConfigDir = modConfig.GetConfigDir();
+            var modDataDir = modConfig.GetDataDir();
+            var modNDataDir = modConfig.GetNDataDir();
+            
             Main.LogInfo($"{"Mod.Directory".I18N()} : {Path.GetFileNameWithoutExtension(modConfig.Path)}");
             Main.logIndent = 1;
             Main.LogInfo($"{"Mod.Name".I18N()} : {modConfig.Name}");
@@ -353,19 +385,19 @@ namespace SkySwordKill.Next.Mod
                     // 普通数据
                     if (value is JSONObject jsonObject)
                     {
-                        string filePath = Utility.CombinePaths(modConfig.Path, $"{fieldInfo.Name}.json");
+                        string filePath = Utility.CombinePaths(modDataDir, $"{fieldInfo.Name}.json");
                         modConfig.jsonPathCache.Add(fieldInfo.Name, filePath);
                         PatchJsonObject(fieldInfo, filePath, jsonObject);
                     }
                     else if (value is JObject jObject)
                     {
-                        string filePath = Utility.CombinePaths(modConfig.Path, $"{fieldInfo.Name}.json");
+                        string filePath = Utility.CombinePaths(modDataDir, $"{fieldInfo.Name}.json");
                         modConfig.jsonPathCache.Add(fieldInfo.Name, filePath);
                         PatchJObject(fieldInfo, filePath, jObject);
                     }
                     else if (value is jsonData.YSDictionary<string, JSONObject> dicData)
                     {
-                        string dirPathForData = Utility.CombinePaths(modConfig.Path, fieldInfo.Name);
+                        string dirPathForData = Utility.CombinePaths(modDataDir, fieldInfo.Name);
                         JSONObject toJsonObject =
                             typeof(jsonData).GetField($"_{fieldInfo.Name}").GetValue(jsonInstance) as JSONObject;
                         modConfig.jsonPathCache.Add(fieldInfo.Name, dirPathForData);
@@ -374,24 +406,24 @@ namespace SkySwordKill.Next.Mod
                     // 功能函数配置数据
                     else if (value is JSONObject[] jsonObjects)
                     {
-                        string dirPathForData = Utility.CombinePaths(modConfig.Path, fieldInfo.Name);
+                        string dirPathForData = Utility.CombinePaths(modDataDir, fieldInfo.Name);
                         modConfig.jsonPathCache.Add(fieldInfo.Name, dirPathForData);
                         PatchJsonObjectArray(fieldInfo, dirPathForData, jsonObjects);
                     }
                 }
 
                 // 载入Mod Dialog数据
-                LoadDialogEventData(modConfig.Path);
-                LoadDialogTriggerData(modConfig.Path);
+                LoadDialogEventData(modNDataDir);
+                LoadDialogTriggerData(modNDataDir);
                 
                 // 载入Mod Face数据
-                LoadCustomFaceData(modConfig.Path);
+                LoadCustomFaceData(modNDataDir);
                 
                 // 载入Mod Lua数据
                 LoadCustomLuaData(modConfig,$"{modConfig.Path}/Lua");
 
                 // 载入ModAsset
-                Main.Res.CacheAssetDir($"{modConfig.Path}/Assets");
+                CacheAssetDir($"{modConfig.Path}/Assets");
             }
             
             catch (Exception)
@@ -423,12 +455,19 @@ namespace SkySwordKill.Next.Mod
         private static ModConfig GetModConfig(string dir)
         {
             ModConfig modConfig = null;
+            int dataVersion = 1;
             try
             {
                 string filePath = Utility.CombinePaths(dir, $"modConfig.json");
+                string filePathV2 = Utility.CombinePaths(dir, "Config", $"modConfig.json");
                 if (File.Exists(filePath))
                 {
-                    modConfig = JsonConvert.DeserializeObject<ModConfig>(File.ReadAllText(filePath));
+                    modConfig = JObject.Parse(File.ReadAllText(filePath)).ToObject<ModConfig>();
+                }
+                else if (File.Exists(filePathV2))
+                {
+                    modConfig = JObject.Parse(File.ReadAllText(filePathV2)).ToObject<ModConfig>();
+                    dataVersion = 2;
                 }
                 else
                 {
@@ -442,6 +481,7 @@ namespace SkySwordKill.Next.Mod
 
             modConfig = modConfig ?? new ModConfig();
             modConfig.State = ModState.Unload;
+            modConfig.DataVersion = dataVersion;
 
             return modConfig;
         }
@@ -461,8 +501,12 @@ namespace SkySwordKill.Next.Mod
 
         public static void PatchJsonObject(FieldInfo fieldInfo,string filePath, JSONObject jsonObject, string dirName = "")
         {
-            var dataTemplate = jsonObject[0];
-            
+            JSONObject dataTemplate = null;
+            if(jsonObject.Count > 0)
+            {
+                dataTemplate = jsonObject[0];
+            }
+
             if (File.Exists(filePath))
             {
                 var fileName = Path.GetFileNameWithoutExtension(filePath);
@@ -483,17 +527,20 @@ namespace SkySwordKill.Next.Mod
                     else
                     {
                         // New data
-                        foreach (var fieldKey in dataTemplate.keys)
+                        if(dataTemplate != null)
                         {
-                            if (!curData.HasField(fieldKey))
+                            foreach (var fieldKey in dataTemplate.keys)
                             {
-                                curData.AddField(fieldKey,dataTemplate[fieldKey].Clone());
-                                Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
-                                    fieldInfo.Name, 
-                                    fileName, 
-                                    fieldKey,
-                                    dataTemplate[fieldKey]));
-                            
+                                if (!curData.HasField(fieldKey))
+                                {
+                                    curData.AddField(fieldKey, dataTemplate[fieldKey].Clone());
+                                    Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
+                                        fieldInfo.Name,
+                                        fileName,
+                                        fieldKey,
+                                        dataTemplate[fieldKey]));
+
+                                }
                             }
                         }
                         jsonObject.AddField(key, curData);
@@ -673,7 +720,7 @@ namespace SkySwordKill.Next.Mod
 
         private static void LoadCustomLuaData(ModConfig modConfig, string rootPath)
         {
-            Main.Res.DirectoryHandle("",rootPath, (virtualPath, filePath) =>
+            DirectoryHandle("",rootPath, (virtualPath, filePath) =>
             {
                 if(Path.GetExtension(filePath) != ".lua")
                     return;
@@ -687,10 +734,38 @@ namespace SkySwordKill.Next.Mod
                 var luaPath = Path.GetFileNameWithoutExtension(virtualPath)
                     .Replace(@"\", @"/");
 
-                Main.Lua.AddLuaCacheFile(luaPath, luaCache);
+                Main.Instance.luaManager.AddLuaCacheFile(luaPath, luaCache);
             });
         }
-        
+
+        public static void CacheAssetDir(string rootPath)
+        {
+            DirectoryHandle("Assets", rootPath, (virtualPath,filePath) =>
+            {
+                Main.Instance.resourcesManager.AddAsset(virtualPath, filePath);
+            });
+        }
+
+        public static void DirectoryHandle(string rootPath,string dirPath,FileHandle fileHandle)
+        {
+            if(!Directory.Exists(dirPath))
+                return;
+
+            foreach (var directory in Directory.GetDirectories(dirPath))
+            {
+                var name = Path.GetFileNameWithoutExtension(directory);
+                DirectoryHandle($"{rootPath}/{name}", directory, fileHandle);
+            }
+
+            foreach (var file in Directory.GetFiles(dirPath))
+            {
+                var fileName = Path.GetFileName(file);
+                
+                var cachePath = $"{rootPath}/{fileName}";
+                fileHandle.Invoke(cachePath, file);
+            }
+        }
+
         public static void TryAddEventData(DialogEventData dialogEventData)
         {
             DialogAnalysis.DialogDataDic[dialogEventData.ID] = dialogEventData;
@@ -761,8 +836,8 @@ namespace SkySwordKill.Next.Mod
         {
             if(!TryGetModConfig(curIndex,out var curMod))
                 return;
-            Main.I.nextModSetting.GetOrCreateModSetting(curMod).enable = enable;
-            Main.I.SaveModSetting();
+            Main.Instance.nextModSetting.GetOrCreateModSetting(curMod).enable = enable;
+            Main.Instance.SaveModSetting();
             ModDataDirty = true;
         }
         
@@ -770,7 +845,7 @@ namespace SkySwordKill.Next.Mod
         {
             if(!TryGetModConfig(curIndex,out var curMod))
                 return true;
-            return Main.I.nextModSetting.GetOrCreateModSetting(curMod).enable;
+            return Main.Instance.nextModSetting.GetOrCreateModSetting(curMod).enable;
         }
 
         [CanBeNull]

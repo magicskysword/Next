@@ -13,7 +13,8 @@ namespace SkySwordKill.Next.DialogEvent
             if (id == 1)
             {
                 // 主角
-                PlayerEx.Player.Face = new JSONObject(faceId);
+                PlayerEx.Player.Face = faceId;
+                PlayerEx.Player.FaceWorkshop = "";
                 if (UIHeadPanel.Inst != null)
                 {
                     UIHeadPanel.Inst.Face.setFace();
@@ -24,7 +25,10 @@ namespace SkySwordKill.Next.DialogEvent
                 // NPC
                 DialogAnalysis.SetNpcFaceData(id, faceId);
                 NpcJieSuanManager.inst.isUpDateNpcList = true;
-                UINPCJiaoHu.Inst.JiaoHuPop.RefreshUI();
+                if (UINPCJiaoHu.Inst != null && UINPCJiaoHu.Inst.NowJiaoHuNPC != null)
+                {
+                    UINPCJiaoHu.Inst.JiaoHuPop.RefreshUI();
+                }
             }
             
             callback?.Invoke();

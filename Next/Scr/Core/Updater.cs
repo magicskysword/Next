@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SkySwordKill.Next.Extension;
 
 namespace SkySwordKill.Next
@@ -18,12 +20,13 @@ namespace SkySwordKill.Next
         public static string WebGitHubUrl => "https://github.com/magicskysword/Next/releases/latest";
         public static string Web3dmBBSUrl => "https://bbs.3dmgame.com/thread-6207429-1-1.html";
         public static string Web3dmModSiteUrl => "https://mod.3dmgame.com/mod/178805";
+        public static string WebBWikiUrl => "https://wiki.biligame.com/mcs";
         public static bool CheckSuccess { get;private set; } = false;
         public static bool HasNewVersion { get;private set; }
         public static string CurVersionStr => Main.MOD_VERSION;
         public static string NewVersionStr { get;private set; } = "0.0.0";
         public static bool IsChecking { get; set; } = false;
-        
+
         public static async void CheckVersion()
         {
             if(IsChecking)
@@ -34,7 +37,7 @@ namespace SkySwordKill.Next
             try
             {
                 var result = await DownloadVersionJson();
-                var data = JsonConvert.DeserializeObject<VersionJson>(result);
+                var data = JObject.Parse(result).ToObject<VersionJson>();
                 if (data == null)
                     throw new Exception("Updater.JsonParseFailure".I18N());
                 CompareVersion(data.Version);
