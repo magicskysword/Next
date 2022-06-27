@@ -34,8 +34,15 @@ github地址：https://github.com/magicskysword/Next
 @玄武 赞助者
 
 ## 下载地址
+
+在Steam创意工坊或游戏内创意工坊，搜索Next并订阅
+
+* 以下方式已经停止更新
+
 [Github Release](https://github.com/magicskysword/Next/releases/latest)
+
 [3DM 论坛](https://bbs.3dmgame.com/thread-6207429-1-1.html)
+
 [3DM Mod站](https://mod.3dmgame.com/mod/178805)
 
 ## Build
