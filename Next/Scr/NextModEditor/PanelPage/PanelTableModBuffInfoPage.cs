@@ -52,7 +52,7 @@ namespace SkySwordKill.NextEditor.PanelPage
 
         var buffData = (ModBuffData)data;
 
-        Inspector.AddDrawer(new CtlIDCtlPropertyDrawer(
+        Inspector.AddDrawer(new CtlIDPropertyDrawer(
                 "ModEditor.Main.modBuffInfo.id".I18N(),
                 buffData,
                 () => Project.BuffData,
@@ -105,7 +105,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             { OnChanged = RefreshCurrentRow }
         );
         
-        Inspector.AddDrawer(new CtlIntBindMultiDataCtlPropertyDrawer(
+        Inspector.AddDrawer(new CtlIntBindMultiDataPropertyDrawer(
             "ModEditor.Main.modBuffInfo.affix".I18N(),
             list => buffData.AffixList = list,
             () => buffData.AffixList,

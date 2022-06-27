@@ -35,13 +35,13 @@ namespace SkySwordKill.Next
 
         #region 公共方法
 
-        public static string AnalysisInlineScript(string text,DialogEnvironment env)
+        public static string AnalysisInlineScript(string text,DialogEnvironment env = null)
         {
             StringBuilder finallyText = new StringBuilder(text);
             Regex regex = new Regex(@"\[&(?<expression>[\s\S]*?)&]");
             
             var matches = regex.Matches(text);
-            var evaluate = DialogAnalysis.GetEvaluate(env);
+            var evaluate = GetEvaluate(env);
             foreach(Match match in matches)
             {
                 var expression = match.Groups["expression"].Value;

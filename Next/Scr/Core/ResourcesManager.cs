@@ -47,7 +47,7 @@ namespace SkySwordKill.Next
 
         public void LoadInnerAsset()
         {
-            CacheAssetDir(Main.pathInnerAssetDir.Value);
+            CacheAssetDir(Main.PathInnerAssetDir.Value);
         }
         
         public void CacheAssetDir(string rootPath)

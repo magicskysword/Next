@@ -13,8 +13,8 @@ namespace SkySwordKill.Next.FCanvas
         public string Description { get; set; }
         [JsonConverter(typeof(Vector2Converter))]
         public Vector2 Position { get; set; }
+        [JsonProperty(ItemConverterType = typeof(FCommandConverter))]
         public List<FCommand> Commands { get; set; } = new List<FCommand>();
-
 
         public void ReadBlock(Block block)
         {

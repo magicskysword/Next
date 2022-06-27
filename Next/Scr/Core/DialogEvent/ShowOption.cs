@@ -31,7 +31,7 @@ namespace SkySwordKill.Next.DialogEvent
                 else
                     condition = string.Empty;
 
-                if (DialogAnalysis.ResultIsNullOrTrue(condition))
+                if (DialogAnalysis.StringIsNullOrTrue(condition))
                 {
                     haveOption = true;
                     DialogAnalysis.AddMenu(optionContent, () =>

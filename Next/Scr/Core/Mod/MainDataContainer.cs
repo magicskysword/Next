@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using BepInEx;
 using KBEngine;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SkySwordKill.Next.Extension;
 
 namespace SkySwordKill.Next.Mod
 {
@@ -122,6 +126,53 @@ namespace SkySwordKill.Next.Mod
             {
                 var key = jsonObject["buffid"].I;
                 jsonInstance.Buff.Add(key, new Buff(key));
+            }
+        }
+
+        public static void ExportMainData(MainDataContainer dataContainer, string exportDir)
+        {
+            string dirPath = exportDir;
+            if (Directory.Exists(dirPath))
+                Directory.Delete(dirPath, true);
+            Directory.CreateDirectory(dirPath);
+
+            foreach (var pair in dataContainer.dataJObjects)
+            {
+                string filePath = Utility.CombinePaths(dirPath, $"{pair.Key}.json");
+                File.WriteAllText(filePath, pair.Value.ToString(Formatting.Indented));
+            }
+            
+            foreach (var pair in dataContainer.dataJSONObjects)
+            {
+                string filePath = Utility.CombinePaths(dirPath, $"{pair.Key}.json");
+                File.WriteAllText(filePath, pair.Value.Print(true).DecodeJsonUnicode());
+            }
+            
+            foreach (var pair in dataContainer.dataYSDics)
+            {
+                string dirPathForData = Utility.CombinePaths(dirPath, pair.Key);
+                if (!Directory.Exists(dirPathForData))
+                    Directory.CreateDirectory(dirPathForData);
+                foreach (var kvp in pair.Value)
+                {
+                    string filePath = Utility.CombinePaths(dirPathForData, $"{kvp.Key}.json");
+                    File.WriteAllText(filePath, kvp.Value.Print(true).DecodeJsonUnicode());
+                }
+            }
+            
+            foreach (var pair in dataContainer.dataJSONObjectArrays)
+            {
+                string dirPathForData = Utility.CombinePaths(dirPath, pair.Key);
+                if (!Directory.Exists(dirPathForData))
+                    Directory.CreateDirectory(dirPathForData);
+                var jsonObjects = pair.Value;
+                for (int i = 0; i < jsonObjects.Length; i++)
+                {
+                    if (jsonObjects[i] == null)
+                        continue;
+                    string filePath = Utility.CombinePaths(dirPathForData, $"{i}.json");
+                    File.WriteAllText(filePath, jsonObjects[i].Print(true).DecodeJsonUnicode());
+                }
             }
         }
 

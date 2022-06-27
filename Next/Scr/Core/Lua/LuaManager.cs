@@ -13,7 +13,7 @@ namespace SkySwordKill.Next.Lua
         public void Init()
         {
             Main.LogInfo($"开始加载xlua.dll");
-            DllTools.LoadDllFile(Main.pathLibraryDir.Value, "xlua.dll" );
+            DllTools.LoadDllFile(Main.PathLibraryDir.Value, "xlua.dll" );
             Main.LogInfo($"加载完毕");
             InitLuaEnv();
         }
@@ -88,7 +88,7 @@ end
         private byte[] LuaLibLoader(ref string filepath)
         {
             filepath = filepath.Replace(@".", @"/");
-            filepath = $"{Main.pathLuaLibDir.Value}/{filepath}.lua"
+            filepath = $"{Main.PathLuaLibDir.Value}/{filepath}.lua"
                 .Replace(@"\", @"/");
             if (File.Exists(filepath))
             {

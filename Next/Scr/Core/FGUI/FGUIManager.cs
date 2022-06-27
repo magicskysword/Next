@@ -73,7 +73,7 @@ namespace SkySwordKill.Next.FGUI
         
         private void LoadFGUIAB()
         {
-            FguiAB = AssetBundle.LoadFromFile($"{Main.pathABDir.Value}/next_fairygui");
+            FguiAB = AssetBundle.LoadFromFile($"{Main.PathAbDir.Value}/next_fairygui");
             foreach (var asset in FguiAB.LoadAllAssets())
             {
                 if (asset is Shader shader)

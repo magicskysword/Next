@@ -13,7 +13,7 @@ namespace SkySwordKill.Next
         public static NextModSetting LoadSetting()
         {
             NextModSetting nextModSetting = null;
-            var filePath = Main.pathModSettingFile.Value;
+            var filePath = Main.PathModSettingFile.Value;
             if (File.Exists(filePath))
             {
                 try
@@ -33,7 +33,7 @@ namespace SkySwordKill.Next
 
         public static void SaveSetting(NextModSetting modSetting)
         {
-            var filePath = Main.pathModSettingFile.Value;
+            var filePath = Main.PathModSettingFile.Value;
             try
             {
                 var json = JsonConvert.SerializeObject(modSetting, Formatting.Indented);

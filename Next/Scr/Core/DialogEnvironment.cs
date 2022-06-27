@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Fungus;
 using KBEngine;
 
 namespace SkySwordKill.Next
@@ -33,6 +34,8 @@ namespace SkySwordKill.Next
         public string input = string.Empty;
 
         public int optionID;
+        
+        public Flowchart flowchart;
 
         public Dictionary<string, int> tmpArgs = new Dictionary<string, int>();
 

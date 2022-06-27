@@ -40,27 +40,49 @@ namespace SkySwordKill.Next.FGUI.ComponentCtl
             for (var index = 0; index < FBlock.Commands.Count; index++)
             {
                 var command = FBlock.Commands[index];
+                GLabel item;
                 if (command is Say cmdSay)
                 {
-                    var item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
+                    item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
                     var id = cmdSay.AvatarIDSetType == StartFight.MonstarType.Normal
                         ? cmdSay.AvatarIDInt.ToString()
                         : cmdSay.AvatarBindKey;
                     item.title = $"{id} : {cmdSay.StoryText}";
-                    item.GetController("bg").selectedIndex = index % 2;
                 }
                 else if (command is FCanvas.FakerCommand.Menu cmdMenu)
                 {
-                    var item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
+                    item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
                     item.title = $"【选项】{cmdMenu.Text} => {cmdMenu.TargetBlockID}";
-                    item.GetController("bg").selectedIndex = index % 2;
+                }
+                else if (command is FCanvas.FakerCommand.If cmdIf)
+                {
+                    item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
+                    item.title = $"if ({cmdIf.Condition})";
+                }
+                else if (command is FCanvas.FakerCommand.ElseIf cmdElseIf)
+                {
+                    item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
+                    item.title = $"else if ({cmdElseIf.Condition})";
+                }
+                else if (command is FCanvas.FakerCommand.Else cmdElse)
+                {
+                    item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
+                    item.title = "else";
+                }
+                else if (command is FCanvas.FakerCommand.Call cmdCall)
+                {
+                    item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
+                    item.title = $"=> {cmdCall.targetFlowchartName ?? "this"}:{cmdCall.targetBlockID}";
                 }
                 else
                 {
-                    var item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
+                    item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
                     item.title = $"[{command.CmdType}]";
-                    item.GetController("bg").selectedIndex = index % 2;
                 }
+
+                var controller = item.GetController("bg");
+                if(controller != null)
+                    controller.selectedIndex = index % 2;
             }
             Content.ResizeToFit();
         }

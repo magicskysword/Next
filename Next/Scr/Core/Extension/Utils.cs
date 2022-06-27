@@ -37,7 +37,7 @@ namespace SkySwordKill.Next.Extension
 
         public static string I18N(this string key)
         {
-            return NextLanguage.Get(Main.I.nextLanguage, key);
+            return NextLanguage.Get(Main.I.NextLanguage, key);
         }
 
         public static ConfigTarget<T> CreateConfig<T>(this ConfigFile config, string section, string key,

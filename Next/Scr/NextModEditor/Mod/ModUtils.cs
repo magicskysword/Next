@@ -105,20 +105,20 @@ namespace SkySwordKill.NextEditor.Mod
         public static string GetConfigPath(string path)
         {
             if (string.IsNullOrWhiteSpace(path))
-                return $"{Main.pathLanguageDir}/{Main.I.nextLanguage.ConfigDir}";
-            return $"{Main.pathLanguageDir}/{Main.I.nextLanguage.ConfigDir}/Config/{path}";
+                return $"{Main.PathLanguageDir}/{Main.I.NextLanguage.ConfigDir}";
+            return $"{Main.PathLanguageDir}/{Main.I.NextLanguage.ConfigDir}/Config/{path}";
         }
         
         public static string GetBasePath(string path = "")
         {
             if (string.IsNullOrWhiteSpace(path))
-                return Main.pathBaseDataDir.Value;
-            return $"{Main.pathBaseDataDir.Value}/{path}";
+                return Main.PathBaseDataDir.Value;
+            return $"{Main.PathBaseDataDir.Value}/{path}";
         }
         
         public static string GetFungusDataPath()
         {
-            return Main.pathBaseFungusDataDir.Value;
+            return Main.PathBaseFungusDataDir.Value;
         }
 
         public static string GetAffixDesc(ModAffixData affixData)

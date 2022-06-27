@@ -236,17 +236,17 @@ namespace SkySwordKill.Next
         /// <summary>
         ///
         /// </summary>
-        /// <param name="condition"></param>
+        /// <param name="str"></param>
         /// <returns></returns>
-        public static bool ResultIsNullOrTrue(string condition)
+        public static bool StringIsNullOrTrue(string str)
         {
-            return string.IsNullOrWhiteSpace(condition) || condition.Equals("true", StringComparison.OrdinalIgnoreCase);
+            return string.IsNullOrWhiteSpace(str) || str.Equals("true", StringComparison.OrdinalIgnoreCase);
         }
 
-        public static bool CheckCondition(string condition, DialogEnvironment env)
+        public static bool CheckCondition(string condition, DialogEnvironment env = null)
         {
             var evaluator = GetEvaluate(env);
-            return string.IsNullOrEmpty(condition) || evaluator.Evaluate<bool>(condition);
+            return string.IsNullOrWhiteSpace(condition) || evaluator.Evaluate<bool>(condition);
         }
 
         public static void TryAddTmpChar(string name, int id)
@@ -269,7 +269,7 @@ namespace SkySwordKill.Next
             EventQueue.Clear();
         }
 
-        private static void CompleteEvent()
+        public static void CompleteEvent()
         {
             if (EventQueue.Count > 0)
             {

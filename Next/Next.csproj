@@ -63,6 +63,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     </Reference>
     <Reference Include="Ookii.Dialogs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0c15020868fd6249">
       <HintPath>NextLib\Ookii.Dialogs.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -90,6 +91,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
@@ -101,9 +103,11 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     </Reference>
     <Reference Include="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
@@ -140,15 +144,27 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scr\Core\DialogEvent\RunFungusBlock.cs" />
+    <Compile Include="Scr\Core\FCanvas\Command\Call.cs" />
+    <Compile Include="Scr\Core\FCanvas\Command\VariableCondition.cs" />
+    <Compile Include="Scr\Core\FCanvas\FCommandConverter.cs" />
+    <Compile Include="Scr\Core\FCanvas\FPatch.cs" />
+    <Compile Include="Scr\Core\FCanvas\FPatchCommand.cs" />
+    <Compile Include="Scr\Core\FCanvas\FPatchManager.cs" />
+    <Compile Include="Scr\Core\FCanvas\FPatchRecord.cs" />
+    <Compile Include="Scr\Core\FCanvas\PCommand.cs" />
+    <Compile Include="Scr\Core\FCanvas\PCommandBinderAttribute.cs" />
+    <Compile Include="Scr\Core\FCanvas\PCommand\NextEvent.cs" />
+    <Compile Include="Scr\Core\FCanvas\PCommand\NextMenu.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlDocumentNodeView.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlNodeBlock.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlNodeCanvas.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlTableList.cs" />
     <Compile Include="Scr\Core\FGUI\Component\IPropertyDrawer.cs" />
-    <Compile Include="Scr\Core\FGUI\Component\CtlDropdownCtlPropertyDrawerBase.cs" />
-    <Compile Include="Scr\Core\FGUI\Component\CtlIDCtlPropertyDrawer.cs" />
-    <Compile Include="Scr\Core\FGUI\Component\CtlBindDataCtlPropertyDrawer.cs" />
-    <Compile Include="Scr\Core\FGUI\Component\CtlIntBindMultiDataCtlPropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlDropdownPropertyDrawerBase.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlIDPropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlBindDataPropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlIntBindMultiDataPropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlIntPropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlPropertyDrawerBase.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlStringAreaPropertyDrawer.cs" />
@@ -159,6 +175,8 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\WindowDialogBase.cs" />
     <Compile Include="Scr\Core\FGUI\WindowSelectorDialog.cs" />
     <Compile Include="Scr\Core\FGUI\WindowStringInputDialog.cs" />
+    <Compile Include="Scr\Core\Patch\FungusClonePatch.cs" />
+    <Compile Include="Scr\Core\Utils\AccessExtension.cs" />
     <Compile Include="Scr\Core\Utils\Vector2Converter.cs" />
     <Compile Include="Scr\FairyGUI\**" />
     <Compile Include="Scr\Core\AvatarNextData.cs" />
@@ -247,34 +265,10 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FCanvas\FCommand.cs" />
     <Compile Include="Scr\Core\FCanvas\FCommandBinderAttribute.cs" />
     <Compile Include="Scr\Core\FCanvas\FFlowchart.cs" />
-    <Compile Include="Scr\Core\FCanvas\FPatch.cs" />
     <Compile Include="Scr\Core\FCanvas\FFlowchartTools.cs" />
     <Compile Include="Scr\Core\FCanvas\FVariable.cs" />
     <Compile Include="Scr\Core\Lua\LuaFileCache.cs" />
     <Compile Include="Scr\Core\Lua\LuaManager.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\CodeEmit.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\CopyByValue.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\DelegateBridge.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\GenAttributes.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\GenericDelegateBridge.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\InternalGlobals.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\LuaBase.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\LuaDLL.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\LuaEnv.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\LuaException.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\LuaFunction.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\LuaTable.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\MethodWarpsCache.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\ObjectCasters.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\ObjectPool.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\ObjectTranslator.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\ObjectTranslatorPool.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\RawObject.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\SignatureLoader.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\StaticLuaCallbacks.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\TemplateEngine\TemplateEngine.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\TypeExtensions.cs" />
-    <Compile Include="Scr\Core\Lua\XluaRumtime\Src\Utils.cs" />
     <Compile Include="Scr\Core\Main.cs" />
     <Compile Include="Scr\Core\Main.ModPanel.cs" />
     <Compile Include="Scr\Core\Mod\MainDataContainer.cs" />
@@ -373,6 +367,29 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\StandaloneFileBrowser\StandaloneFileBrowserLinux.cs" />
     <Compile Include="Scr\StandaloneFileBrowser\StandaloneFileBrowserMac.cs" />
     <Compile Include="Scr\StandaloneFileBrowser\StandaloneFileBrowserWindows.cs" />
+    <Compile Include="Scr\Xlua\Src\CodeEmit.cs" />
+    <Compile Include="Scr\Xlua\Src\CopyByValue.cs" />
+    <Compile Include="Scr\Xlua\Src\DelegateBridge.cs" />
+    <Compile Include="Scr\Xlua\Src\GenAttributes.cs" />
+    <Compile Include="Scr\Xlua\Src\GenericDelegateBridge.cs" />
+    <Compile Include="Scr\Xlua\Src\InternalGlobals.cs" />
+    <Compile Include="Scr\Xlua\Src\LuaBase.cs" />
+    <Compile Include="Scr\Xlua\Src\LuaDLL.cs" />
+    <Compile Include="Scr\Xlua\Src\LuaEnv.cs" />
+    <Compile Include="Scr\Xlua\Src\LuaException.cs" />
+    <Compile Include="Scr\Xlua\Src\LuaFunction.cs" />
+    <Compile Include="Scr\Xlua\Src\LuaTable.cs" />
+    <Compile Include="Scr\Xlua\Src\MethodWarpsCache.cs" />
+    <Compile Include="Scr\Xlua\Src\ObjectCasters.cs" />
+    <Compile Include="Scr\Xlua\Src\ObjectPool.cs" />
+    <Compile Include="Scr\Xlua\Src\ObjectTranslator.cs" />
+    <Compile Include="Scr\Xlua\Src\ObjectTranslatorPool.cs" />
+    <Compile Include="Scr\Xlua\Src\RawObject.cs" />
+    <Compile Include="Scr\Xlua\Src\SignatureLoader.cs" />
+    <Compile Include="Scr\Xlua\Src\StaticLuaCallbacks.cs" />
+    <Compile Include="Scr\Xlua\Src\TemplateEngine\TemplateEngine.cs" />
+    <Compile Include="Scr\Xlua\Src\TypeExtensions.cs" />
+    <Compile Include="Scr\Xlua\Src\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NextConfig\**">
@@ -398,8 +415,6 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\vertical scrollbar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Scr\Core\NFlowchart" />
-    <Folder Include="Scr\Core\NodeCanvas" />
     <Folder Include="Scr\FairyGUI\Source" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

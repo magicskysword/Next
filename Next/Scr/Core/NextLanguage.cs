@@ -14,8 +14,8 @@ namespace SkySwordKill.Next
         {
             languages.Clear();
             
-            Main.LogInfo($"Load language folder : {Main.pathLanguageDir.Value}");
-            var languageFiles = Directory.GetFiles(Main.pathLanguageDir.Value);
+            Main.LogInfo($"Load language folder : {Main.PathLanguageDir.Value}");
+            var languageFiles = Directory.GetFiles(Main.PathLanguageDir.Value);
             foreach (var file in languageFiles)
             {
                 try

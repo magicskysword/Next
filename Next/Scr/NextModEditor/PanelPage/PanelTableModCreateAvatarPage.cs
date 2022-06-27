@@ -70,7 +70,7 @@ namespace SkySwordKill.NextEditor.PanelPage
 
         var createAvatarData = (ModCreateAvatarData)data;
 
-        Inspector.AddDrawer(new CtlIDCtlPropertyDrawer(
+        Inspector.AddDrawer(new CtlIDPropertyDrawer(
                 "ModEditor.Main.modCreateAvatar.id".I18N(),
                 createAvatarData,
                 () => Project.CreateAvatarData,
@@ -117,7 +117,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             () => createAvatarData.Cost)
         );
 
-        Inspector.AddDrawer(new CtlDropdownCtlPropertyDrawerBase(
+        Inspector.AddDrawer(new CtlDropdownPropertyDrawerBase(
             "ModEditor.Main.modCreateAvatar.createType".I18N(),
             () => ModMgr.I.CreateAvatarDataTalentTypes.Select(type => $"{type.TypeID} : {type.Desc}"),
             index => createAvatarData.SetTalentType(ModMgr.I.CreateAvatarDataTalentTypes[index]),

@@ -75,7 +75,7 @@ namespace SkySwordKill.Next
 
         private void Update()
         {
-            if (Input.GetKeyDown(winKeyCode.Value))
+            if (Input.GetKeyDown(WinKeyCode.Value))
             {
                 _isWinOpen = !_isWinOpen;
             }
@@ -83,7 +83,7 @@ namespace SkySwordKill.Next
 
             if (rayBlocker == null)
                 return;
-            if (isSelectedLanguage || nextLanguage == null)
+            if (isSelectedLanguage || NextLanguage == null)
             {
                 rayBlocker.SetSize(languageRect);
                 rayBlocker.OpenBlocker();
@@ -186,7 +186,7 @@ namespace SkySwordKill.Next
             var oldSkin = GUI.skin;
             GUI.skin = InterfaceMaker.CustomSkin;
 
-            if (isSelectedLanguage || nextLanguage == null)
+            if (isSelectedLanguage || NextLanguage == null)
             {
                 GUILayout.Window(20, languageRect, DrawLanguageSelectWindow, $"Next v{MOD_VERSION}");
             }
@@ -253,13 +253,13 @@ namespace SkySwordKill.Next
         {
             GUILayout.BeginHorizontal();
             {
-                GUILayout.Label(string.Format("HeaderBar.HotkeyTip".I18N(), winKeyCode.Value.ToString()));
+                GUILayout.Label(string.Format("HeaderBar.HotkeyTip".I18N(), WinKeyCode.Value.ToString()));
                 // 该部分不简化是为了避免反复操作 debugMode.Value 属性
-                var debugModeOpen = GUILayout.Toggle(debugMode.Value, "HeaderBar.DebugMode".I18N());
-                if (debugModeOpen != debugMode.Value)
-                    debugMode.Value = debugModeOpen;
+                var debugModeOpen = GUILayout.Toggle(DebugMode.Value, "HeaderBar.DebugMode".I18N());
+                if (debugModeOpen != DebugMode.Value)
+                    DebugMode.Value = debugModeOpen;
 
-                if (debugMode.Value)
+                if (DebugMode.Value)
                 {
                     string[] toolbarList =
                     {
@@ -278,9 +278,9 @@ namespace SkySwordKill.Next
                 GUILayout.FlexibleSpace();
 
                 // 该部分不简化是为了避免反复操作 openInStart.Value 属性
-                bool isPop = GUILayout.Toggle(openInStart.Value, "HeaderBar.OpenInStart".I18N());
-                if (isPop != openInStart.Value)
-                    openInStart.Value = isPop;
+                bool isPop = GUILayout.Toggle(OpenInStart.Value, "HeaderBar.OpenInStart".I18N());
+                if (isPop != OpenInStart.Value)
+                    OpenInStart.Value = isPop;
 
                 if (GUILayout.Button("HeaderBar.Close".I18N()))
                     _isWinOpen = false;
@@ -293,11 +293,11 @@ namespace SkySwordKill.Next
             GUILayout.BeginHorizontal();
             {
                 GUILayout.FlexibleSpace();
-                GUILayout.Label($"{"Misc.CurrentLanguage".I18N()} : {nextLanguage.LanguageName}");
+                GUILayout.Label($"{"Misc.CurrentLanguage".I18N()} : {NextLanguage.LanguageName}");
                 if (GUILayout.Button("Language"))
                 {
                     NextLanguage.InitLanguage();
-                    nextLanguage = null;
+                    NextLanguage = null;
                 }
             }
             GUILayout.EndHorizontal();
@@ -331,11 +331,13 @@ namespace SkySwordKill.Next
                 }
 
                 GUILayout.FlexibleSpace();
-                if (debugMode.Value)
+                if (DebugMode.Value)
                 {
                     if (GUILayout.Button("HeaderBar.ExportBase".I18N()))
                     {
+                        Directory.CreateDirectory(PathExportOutputDir.Value);
                         ModManager.GenerateBaseData();
+                        Process.Start(PathExportOutputDir.Value);
                     }
                 }
 
@@ -349,9 +351,10 @@ namespace SkySwordKill.Next
                 }
 
                 GUI.enabled = true;
-                if (GUILayout.Button("HeaderBar.ModFolder".I18N()))
+                if (GUILayout.Button("HeaderBar.ModBaseFolder".I18N()))
                 {
-                    Process.Start(pathModsDir.Value);
+                    Directory.CreateDirectory(PathExportOutputDir.Value);
+                    Process.Start(PathExportOutputDir.Value);
                 }
             }
             GUILayout.EndHorizontal();
@@ -369,6 +372,10 @@ namespace SkySwordKill.Next
                 if (GUILayout.Button("HeaderBar.3dmModSite".I18N()))
                 {
                     Process.Start(Updater.Web3dmModSiteUrl);
+                }
+                if (GUILayout.Button("HeaderBar.BWiki".I18N()))
+                {
+                    Process.Start(Updater.WebBWikiUrl);
                 }
                 
                 GUILayout.FlexibleSpace();
@@ -388,7 +395,7 @@ namespace SkySwordKill.Next
                         var mods = ModManager.modConfigs.Select(config =>
                         {
                             var configName = config.Name ?? "Mod.Unknown".I18N();
-                            var modSetting = I.nextModSetting.GetOrCreateModSetting(config);
+                            var modSetting = I.NextModSetting.GetOrCreateModSetting(config);
 
                             string modEnable = modSetting.enable ? "☑" : "□";
 
@@ -870,12 +877,12 @@ namespace SkySwordKill.Next
                     {
                         if (GUILayout.Button("清空Lua已载入文件"))
                         {
-                            Main.I.luaManager.ClearCache();
+                            Main.I._luaManager.ClearCache();
                         }
 
                         if (GUILayout.Button("重载Lua虚拟机"))
                         {
-                            Main.I.luaManager.Reset();
+                            Main.I._luaManager.Reset();
                             DialogAnalysis.CancelEvent();
                         }
                     }
@@ -883,22 +890,22 @@ namespace SkySwordKill.Next
                     
 
                     
-                    if (GUILayout.Button("导出FungusBase（实验性）"))
-                    {
-                        FCanvas.FFlowchartTools.ExportAllFungusFlowchart(Main.pathBaseFungusDataDir.Value);
-                    }
-                    
-                    if (GUILayout.Button("FGUI测试"))
-                    {
-                        var window = new ModPanelWindow();
-                        window.Show();
-                    }
-                    
-                    if (GUILayout.Button("FGUI编辑器测试"))
-                    {
-                        var window = new ModEditorMainPanel();
-                        window.Show();
-                    }
+                    // if (GUILayout.Button("导出FungusBase（实验性）"))
+                    // {
+                    //     FCanvas.FFlowchartTools.ExportAllFungusFlowchart(Main.PathBaseFungusDataDir.Value);
+                    // }
+                    //
+                    // if (GUILayout.Button("FGUI测试"))
+                    // {
+                    //     var window = new ModPanelWindow();
+                    //     window.Show();
+                    // }
+                    //
+                    // if (GUILayout.Button("FGUI编辑器测试"))
+                    // {
+                    //     var window = new ModEditorMainPanel();
+                    //     window.Show();
+                    // }
                 }
                 GUILayout.EndVertical();
             }

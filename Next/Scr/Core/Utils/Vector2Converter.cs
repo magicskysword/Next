@@ -6,9 +6,7 @@ public class Vector2Converter : JsonConverter
 {
     public override bool CanConvert(Type objectType)
     {
-        if (objectType == typeof(Vector2[]))
-            objectType = typeof(Vector2Converter);
-        return (objectType == typeof(Vector2) || objectType == typeof(Vector2[]));
+        return objectType == typeof(Vector2);
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

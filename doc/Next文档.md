@@ -49,13 +49,13 @@ modConfig.json
 数据Patch是指对游戏原版数据进行修改与增加。（目前未提供删除功能）
 
 ### 4.1 数据类型
-当Next安装后，可以点击Next面板上的导出Base，自动导出Base文件。
+当Next安装后，可以点击Next面板上的【导出Base】，自动导出Data文件。
 
-点击面板上的打开导出文件夹按钮，即可找到导出的Base文件
+点击面板上的【打开导出文件夹】按钮，即可找到导出的Data文件
 
-导出的数据位于 `.\BaseOutPut` 根据Next的安装位置，有所不同
+导出的游戏数据位于 `..\OutPut\Data` 根据Next的安装位置，有所不同
 
-Base文件夹里的文件，大致分为三类：
+Data文件夹里的文件，大致分为三类：
 
 1. 普通Json数据文件<br/>
     该类文件格式如下
@@ -260,7 +260,7 @@ Next 0.3.0 版本新增了增量修改的功能
 
 在Mod文件夹里新建 `NData/DialogEvent` 文件夹，随后在该文件夹里新建任意名称的json文件，文件结构如下：
 
-example.json
+`example.json`
 ```json
 [
     {
@@ -312,7 +312,7 @@ example.json
 
 在Mod文件夹里新建 `NData/DialogTrigger` 文件夹，随后在该文件夹里新建任意名称的json文件，文件结构如下：
 
-example.json
+`example.json`
 ```json
 [
     {
@@ -390,8 +390,21 @@ RandomInfos 为捏脸数据具体内容
 
 ## 9 Lua脚本
 
-### 8.1 介绍
+### 9.1 介绍
 Lua脚本不同于运行时脚本，运行时脚本本质上仅是为了方便进行逻辑运算而引入的C#逻辑判断脚本，但Lua脚本则可以独立调用剧情指令，进行更加复杂的流程调控。
 
-### 8.2 详情
+### 9.2 详情
 该部分可参考 [**Lua脚本**](Lua脚本.md)
+
+## 10 Fungus补丁
+
+### 10.1 介绍
+
+#### Fungus是什么
+Fungus是觅长生原生的剧情运行框架，游戏内的原版剧情由Fungus运行。
+
+#### Fungus补丁是什么
+从Next 0.5.0版本开始，Next提供了修改Fungus的方法，通过创建Fungus补丁，可以对原版剧情进行新增与删除，方便与原版剧情交互。
+
+### 10.2 创建Fungus补丁
+该部分可参考 [**Fungus补丁**](Fungus补丁.md)

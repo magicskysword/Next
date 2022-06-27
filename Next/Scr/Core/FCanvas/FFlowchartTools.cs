@@ -5,35 +5,58 @@ using System.Linq;
 using System.Reflection;
 using Fungus;
 using Newtonsoft.Json;
+using SkySwordKill.Next.FCanvas.PatchCommand;
 using UnityEngine;
 
 namespace SkySwordKill.Next.FCanvas
 {
     public static class FFlowchartTools
     {
-        private static Dictionary<Type, Type> _fCommandBinderDic;
+        private static Dictionary<string, Type> _fCommandBinderDic;
 
-        private static List<FPatch> FungusPatches;
-
-        public static Dictionary<Type, Type> FCommandBinderDic
+        public static Dictionary<string, Type> FCommandBinderDic
         {
             get
             {
                 if (_fCommandBinderDic == null)
                 {
-                    _fCommandBinderDic = new Dictionary<Type, Type>();
+                    _fCommandBinderDic = new Dictionary<string, Type>();
                     foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
                     {
                         var f = type.GetCustomAttribute<FCommandBinderAttribute>();
-                        if (f != null)
+                        if (f?.Type?.FullName != null)
                         {
-                            Main.LogInfo($"Bind {f.Type} {type}");
-                            _fCommandBinderDic.Add(f.Type, type);
+                            Main.LogInfo($"Bind FCommand {f.Type} {type}");
+                            _fCommandBinderDic.Add(f.Type.FullName, type);
                         }
                     }
                 }
 
                 return _fCommandBinderDic;
+            }
+        }
+        
+        private static Dictionary<string, Type> _pCommandBinderDic;
+
+        public static Dictionary<string, Type> PCommandBinderDic
+        {
+            get
+            {
+                if (_pCommandBinderDic == null)
+                {
+                    _pCommandBinderDic = new Dictionary<string, Type>();
+                    foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+                    {
+                        var p = type.GetCustomAttribute<PCommandBinderAttribute>();
+                        if (p?.BindType != null)
+                        {
+                            Main.LogInfo($"Bind PCommand {p.BindType} {type}");
+                            _pCommandBinderDic.Add(p.BindType, type);
+                        }
+                    }
+                }
+
+                return _pCommandBinderDic;
             }
         }
 
@@ -60,10 +83,7 @@ namespace SkySwordKill.Next.FCanvas
                 try
                 {
                     var fFlowchart = flowchart.ConvertToFFlowchart();
-                    var json = JsonConvert.SerializeObject(fFlowchart, Formatting.Indented, new JsonSerializerSettings()
-                    {
-                        TypeNameHandling = TypeNameHandling.All
-                    });
+                    var json = JsonConvert.SerializeObject(fFlowchart, Formatting.Indented);
                     var pathName = $"{outputPath}/{fFlowchart.Name}.json";
                     
                     File.WriteAllText(pathName ,json);
@@ -104,10 +124,7 @@ namespace SkySwordKill.Next.FCanvas
         public static FFlowchart ImportFFlowchart(string path)
         {
             string json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<FFlowchart>(json, new JsonSerializerSettings()
-            {
-                TypeNameHandling = TypeNameHandling.All
-            });
+            return JsonConvert.DeserializeObject<FFlowchart>(json);
         }
 
         public static FCommand CreateBindFCommand(this Type cmdType)
@@ -118,7 +135,30 @@ namespace SkySwordKill.Next.FCanvas
 
         public static Type GetFCommandType(this Type cmdType)
         {
-            return FCommandBinderDic.TryGetValue(cmdType, out var fCmdType) ? fCmdType : typeof(FCommand);
+            var fullName = cmdType.FullName ?? "";
+            return FCommandBinderDic.TryGetValue(fullName, out var fCmdType) ? fCmdType : typeof(FCommand);
+        }
+
+        public static FCommand CreateFCommand(string cmdType)
+        {
+            if(FCommandBinderDic.ContainsKey(cmdType))
+            {
+                return (FCommand)Activator.CreateInstance(FCommandBinderDic[cmdType]);
+            }
+            
+            return new FCommand();
+        }
+
+        public static PCommand GetPCommandType(GameObject go,string cmdType)
+        {
+            Type pCmdType = typeof(PCommand);
+            if(PCommandBinderDic.ContainsKey(cmdType))
+            {
+                pCmdType = PCommandBinderDic[cmdType];
+            }
+            
+            var pCmd = (PCommand)go.AddComponent(pCmdType);
+            return pCmd;
         }
     }
 }
