@@ -1,0 +1,32 @@
+{
+  "libview.firstColumnWidth": 361,
+  "libview.iconScale": 0,
+  "backgroundColor": 6710886,
+  "auxline1": true,
+  "canvasColor": 10066329,
+  "auxline2": true,
+  "doc.activeDoc": "ui://kvh7d0b3nkvz30",
+  "libview.twoColumn": false,
+  "libview.expandedNodes": [
+    "028qk31h",
+    "/",
+    "028qk31h",
+    "/Component/",
+    "028qk31h",
+    "/Component/NodeCanvas/",
+    "028qk31h",
+    "/Window/",
+    "kvh7d0b3",
+    "/",
+    "kvh7d0b3",
+    "/Panel/"
+  ],
+  "doc.openedDocs": [
+    "ui://kvh7d0b3nkvz30",
+    "ui://028qk31hf7x834"
+  ],
+  "snapToGrid": true,
+  "gridColor": 80,
+  "libview.currentGroup": "",
+  "gridSize": 30
+}
