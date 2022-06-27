@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="90,32" extention="Button">
+  <controller name="expanded" pages="0,,1," selected="0"/>
+  <controller name="leaf" pages="0,,1," selected="1"/>
+  <controller name="button" pages="2,up,3,down,4,over,5,selectedOver" selected="0"/>
+  <displayList>
+    <graph id="n5_10zy0" name="selected" xy="0,0" size="90,32" type="rect" lineColor="#ff3b4e6d" fillColor="#ff3b4e6d">
+      <gearDisplay controller="button" pages="3,5"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n4_10zy0" name="hover" xy="0,0" size="90,32" type="rect" lineColor="#ff3e5f96" fillColor="#ff3e5f96">
+      <gearDisplay controller="button" pages="4"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n1_10zy0" name="indent" xy="2,1" size="16,30"/>
+    <component id="n2_10zy0" name="expandButton" src="nkvz1k" fileName="Component/Button/BtnExpand.xml" xy="18,6" size="20,20">
+      <gearDisplay controller="leaf" pages="0"/>
+      <relation target="n1_10zy0" sidePair="left-right"/>
+      <Button controller="expanded" page="1"/>
+    </component>
+    <text id="n3_10zy0" name="title" xy="42,0" size="47,32" font="ui://jcakb2cpsy2r12" fontSize="14" color="#ffffff" vAlign="middle" autoSize="none" autoClearText="true" text="Title">
+      <relation target="" sidePair="width-width,height-height"/>
+      <relation target="n2_10zy0" sidePair="width-width,leftext-right"/>
+    </text>
+    <loader id="n6_10zy0" name="icon" xy="18,4" size="24,24" url="ui://028qk31hnkvz1n" fill="scale" clearOnPublish="true">
+      <gearDisplay controller="leaf" pages="1"/>
+      <relation target="n1_10zy0" sidePair="left-right"/>
+    </loader>
+  </displayList>
+  <Button mode="Radio"/>
+</component>

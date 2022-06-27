@@ -1,0 +1,37 @@
+[
+    {
+        "TypeID": 1,
+        "TypeName": "选择难度",
+        "Desc": "选择难度"
+    },
+    {
+        "TypeID": 2,
+        "TypeName": "角色设定",
+        "Desc": "角色设定"
+    },
+    {
+        "TypeID": 3,
+        "TypeName": "你的出生",
+        "Desc": "你的出生"
+    },
+    {
+        "TypeID": 4,
+        "TypeName": "你的资质",
+        "Desc": "你的资质"
+    },
+    {
+        "TypeID": 6,
+        "TypeName": "先天体质",
+        "Desc": "先天体质"
+    },
+    {
+        "TypeID": 7,
+        "TypeName": "儿时经历",
+        "Desc": "儿时经历"
+    },
+    {
+        "TypeID": 8,
+        "TypeName": "青年经历",
+        "Desc": "青年经历"
+    }
+]

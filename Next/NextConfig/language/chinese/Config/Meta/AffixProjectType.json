@@ -1,0 +1,22 @@
+[
+  {
+    "TypeName": "词缀",
+    "TypeNum": 101
+  },
+  {
+    "TypeName": "快捷键",
+    "TypeNum": 104
+  },
+  {
+    "TypeName": "职位",
+    "TypeNum": 105
+  },
+  {
+    "TypeName": "法宝",
+    "TypeNum": 108
+  },
+  {
+    "TypeName": "状态",
+    "TypeNum": "109"
+  }
+]

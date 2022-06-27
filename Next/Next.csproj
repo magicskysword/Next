@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_STANDALONE_WIN;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -27,9 +27,14 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_STANDALONE_WIN;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "$(SolutionDir)NextAssets\**" "$(OutDir)NextAssets" /s /r /f /y /i
+XCOPY "$(SolutionDir)Next\NextConfig\**" "$(OutDir)NextConfig" /s /r /f /y /i
+XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.5.5.0, Culture=neutral, PublicKeyToken=null">
@@ -56,10 +61,17 @@
       <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Ookii.Dialogs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0c15020868fd6249">
+      <HintPath>NextLib\Ookii.Dialogs.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <HintPath>NextLib\System.Windows.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.dll</HintPath>
@@ -77,12 +89,24 @@
       <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.InputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
@@ -120,187 +144,278 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scr\AvatarNextData.cs" />
-    <Compile Include="Scr\ConfigTarget.cs" />
-    <Compile Include="Scr\ConfigurationManagerAttribute.cs" />
-    <Compile Include="Scr\DialogAnalysis.cs" />
-    <Compile Include="Scr\DialogAnalysis.Utils.cs" />
-    <Compile Include="Scr\DialogEnvironment.cs" />
-    <Compile Include="Scr\DialogEventData.cs" />
-    <Compile Include="Scr\DialogEvent\AddComprehensionExp.cs" />
-    <Compile Include="Scr\DialogEvent\AddCongenitalBuff.cs" />
-    <Compile Include="Scr\DialogEvent\AddItem.cs" />
-    <Compile Include="Scr\DialogEvent\AddNpcItem.cs" />
-    <Compile Include="Scr\DialogEvent\AddRelation.cs" />
-    <Compile Include="Scr\DialogEvent\AddThinking.cs" />
-    <Compile Include="Scr\DialogEvent\AddTime.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeAbility.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeAge.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeBaseHpMax.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeComprehensionPoint.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeDrugsPoison.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeExp.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeHp.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeInspiration.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeInt.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeLife.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeMoney.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeMentality.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeBaseMoveSpeed.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeBaseSpirit.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeNpcLife.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeNpcSprite.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeTalent.cs" />
-    <Compile Include="Scr\DialogEvent\CloseTabUI.cs" />
-    <Compile Include="Scr\DialogEvent\Death.cs" />
-    <Compile Include="Scr\DialogEvent\DialogEventAttribute.cs" />
-    <Compile Include="Scr\DialogEvent\Event.cs" />
-    <Compile Include="Scr\DialogEvent\HideCG.cs" />
-    <Compile Include="Scr\DialogEvent\IDialogEvent.cs" />
-    <Compile Include="Scr\DialogEvent\If.cs" />
-    <Compile Include="Scr\DialogEvent\Input.cs" />
-    <Compile Include="Scr\DialogEvent\LearnSkill.cs" />
-    <Compile Include="Scr\DialogEvent\LearnStaticSkill.cs" />
-    <Compile Include="Scr\DialogEvent\LearnTrainSkill.cs" />
-    <Compile Include="Scr\DialogEvent\Nothing.cs" />
-    <Compile Include="Scr\DialogEvent\PlayEffect.cs" />
-    <Compile Include="Scr\DialogEvent\PlayMusic.cs" />
-    <Compile Include="Scr\DialogEvent\Print.cs" />
-    <Compile Include="Scr\DialogEvent\RemoveCongenitalBuff.cs" />
-    <Compile Include="Scr\DialogEvent\RemoveItem.cs" />
-    <Compile Include="Scr\DialogEvent\RemoveRelation.cs" />
-    <Compile Include="Scr\DialogEvent\RunLua.cs" />
-    <Compile Include="Scr\DialogEvent\Say.cs" />
-    <Compile Include="Scr\DialogEvent\SendMsg.cs" />
-    <Compile Include="Scr\DialogEvent\SetChar.cs" />
-    <Compile Include="Scr\DialogEvent\SetCustomFace.cs" />
-    <Compile Include="Scr\DialogEvent\SetFace.cs" />
-    <Compile Include="Scr\DialogEvent\SetInt.cs" />
-    <Compile Include="Scr\DialogEvent\ChangeNpcFav.cs" />
-    <Compile Include="Scr\DialogEvent\SetStr.cs" />
-    <Compile Include="Scr\DialogEvent\ShowCG.cs" />
-    <Compile Include="Scr\DialogEvent\ShowOption.cs" />
-    <Compile Include="Scr\DialogEvent\ShowTip.cs" />
-    <Compile Include="Scr\DialogEvent\StartFight.cs" />
-    <Compile Include="Scr\DialogEvent\UseItem.cs" />
-    <Compile Include="Scr\DialogTriggerData.cs" />
-    <Compile Include="Scr\DialogTrigger\OnEnterGame.cs" />
-    <Compile Include="Scr\DialogTrigger\OnFightStart.cs" />
-    <Compile Include="Scr\DialogTrigger\OnTalk.cs" />
-    <Compile Include="Scr\DialogTrigger\OnQiYuClose.cs" />
-    <Compile Include="Scr\DialogTrigger\OnQiYuShow.cs" />
-    <Compile Include="Scr\DialogTrigger\OnQiYuOption.cs" />
-    <Compile Include="Scr\DialogTrigger\OnTimeChange.cs" />
-    <Compile Include="Scr\DialogTrigger\OnUseItem.cs" />
-    <Compile Include="Scr\DllTools.cs" />
-    <Compile Include="Scr\ExpressionEvaluator\ExpressionEvaluator.cs" />
-    <Compile Include="Scr\Extension\Utils.cs" />
-    <Compile Include="Scr\FileAsset.cs" />
-    <Compile Include="Scr\Lua\LuaFileCache.cs" />
-    <Compile Include="Scr\Lua\LuaManager.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\CodeEmit.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\CopyByValue.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\DelegateBridge.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\GenAttributes.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\GenericDelegateBridge.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\InternalGlobals.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\LuaBase.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\LuaDLL.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\LuaEnv.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\LuaException.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\LuaFunction.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\LuaTable.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\MethodWarpsCache.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\ObjectCasters.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\ObjectPool.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\ObjectTranslator.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\ObjectTranslatorPool.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\RawObject.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\SignatureLoader.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\StaticLuaCallbacks.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\TemplateEngine\TemplateEngine.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\TypeExtensions.cs" />
-    <Compile Include="Scr\Lua\XluaRumtime\Src\Utils.cs" />
-    <Compile Include="Scr\Mod\ModLoadException.cs" />
-    <Compile Include="Scr\Mod\ModSetting.cs" />
-    <Compile Include="Scr\Mod\ModState.cs" />
-    <Compile Include="Scr\Patch\ModResourcesLoadSpritePatch.cs" />
-    <Compile Include="Scr\Patch\ModResourcesLoadTexturePatch.cs" />
-    <Compile Include="Scr\Patch\MusicMagPatch.cs" />
-    <Compile Include="Scr\Patch\GameExDataPatch.cs" />
-    <Compile Include="Scr\Patch\SetAvatarFacePatch.cs" />
-    <Compile Include="Scr\SearchNpcData.cs" />
-    <Compile Include="Scr\StaticFace\CustomStaticFaceInfo.cs" />
-    <Compile Include="Scr\StaticFace\StaticFaceUtils.cs" />
-    <Compile Include="Scr\Updater.cs" />
-    <Compile Include="Scr\XiaoYeGUI\InterfaceMaker.cs" />
-    <Compile Include="Scr\XiaoYeGUI\RayBlocker.cs" />
-    <Compile Include="Scr\XiaoYeGUI\ResourceUtils.cs" />
-    <Compile Include="Scr\Main.cs" />
-    <Compile Include="Scr\Main.ModPanel.cs" />
-    <Compile Include="Scr\Mod\MainDataContainer.cs" />
-    <Compile Include="Scr\Mod\ModConfig.cs" />
-    <Compile Include="Scr\Mod\ModManager.cs" />
-    <Compile Include="Scr\NextLanguage.cs" />
-    <Compile Include="Scr\NextModSetting.cs" />
-    <Compile Include="Scr\Patch\BagActiveSkillGetIconSprite.cs" />
-    <Compile Include="Scr\Patch\BagPassiveSkillGetIconSprite.cs" />
-    <Compile Include="Scr\Patch\ItemUIPatch.cs" />
-    <Compile Include="Scr\Patch\JsonDataPatch.cs" />
-    <Compile Include="Scr\Patch\NpcJieSuanManagerPatch.cs" />
-    <Compile Include="Scr\Patch\ResManagerLoadSpritePatch.cs" />
-    <Compile Include="Scr\Patch\ResManagerLoadTexturePatch.cs" />
-    <Compile Include="Scr\Patch\SkillIconPatch.cs" />
-    <Compile Include="Scr\Patch\UIFightWeaponItemPatch.cs" />
-    <Compile Include="Scr\ResourcesManager.cs" />
+    <Compile Include="Scr\Core\DialogEvent\RunFungusBlock.cs" />
+    <Compile Include="Scr\Core\FCanvas\Command\Call.cs" />
+    <Compile Include="Scr\Core\FCanvas\Command\VariableCondition.cs" />
+    <Compile Include="Scr\Core\FCanvas\FCommandConverter.cs" />
+    <Compile Include="Scr\Core\FCanvas\FPatch.cs" />
+    <Compile Include="Scr\Core\FCanvas\FPatchCommand.cs" />
+    <Compile Include="Scr\Core\FCanvas\FPatchManager.cs" />
+    <Compile Include="Scr\Core\FCanvas\FPatchRecord.cs" />
+    <Compile Include="Scr\Core\FCanvas\PCommand.cs" />
+    <Compile Include="Scr\Core\FCanvas\PCommandBinderAttribute.cs" />
+    <Compile Include="Scr\Core\FCanvas\PCommand\NextEvent.cs" />
+    <Compile Include="Scr\Core\FCanvas\PCommand\NextMenu.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlDocumentNodeView.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlNodeBlock.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlNodeCanvas.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlTableList.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\IPropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlDropdownPropertyDrawerBase.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlIDPropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlBindDataPropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlIntBindMultiDataPropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlIntPropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlPropertyDrawerBase.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlStringAreaPropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlStringPropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlPropertyInspector.cs" />
+    <Compile Include="Scr\Core\FGUI\FGUITools.cs" />
+    <Compile Include="Scr\Core\FGUI\WindowConfirmDialog.cs" />
+    <Compile Include="Scr\Core\FGUI\WindowDialogBase.cs" />
+    <Compile Include="Scr\Core\FGUI\WindowSelectorDialog.cs" />
+    <Compile Include="Scr\Core\FGUI\WindowStringInputDialog.cs" />
+    <Compile Include="Scr\Core\Patch\FungusClonePatch.cs" />
+    <Compile Include="Scr\Core\Utils\AccessExtension.cs" />
+    <Compile Include="Scr\Core\Utils\Vector2Converter.cs" />
+    <Compile Include="Scr\FairyGUI\**" />
+    <Compile Include="Scr\Core\AvatarNextData.cs" />
+    <Compile Include="Scr\Core\BytesAsset.cs" />
+    <Compile Include="Scr\Core\ConfigTarget.cs" />
+    <Compile Include="Scr\Core\ConfigurationManagerAttribute.cs" />
+    <Compile Include="Scr\Core\DialogAnalysis.cs" />
+    <Compile Include="Scr\Core\DialogAnalysis.Utils.cs" />
+    <Compile Include="Scr\Core\DialogEnvironment.cs" />
+    <Compile Include="Scr\Core\DialogEventData.cs" />
+    <Compile Include="Scr\Core\DialogEvent\AddComprehensionExp.cs" />
+    <Compile Include="Scr\Core\DialogEvent\AddCongenitalBuff.cs" />
+    <Compile Include="Scr\Core\DialogEvent\AddItem.cs" />
+    <Compile Include="Scr\Core\DialogEvent\AddNpcItem.cs" />
+    <Compile Include="Scr\Core\DialogEvent\AddRelation.cs" />
+    <Compile Include="Scr\Core\DialogEvent\AddThinking.cs" />
+    <Compile Include="Scr\Core\DialogEvent\AddTime.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeAbility.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeAge.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeBaseHpMax.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeBaseMoveSpeed.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeBaseSpirit.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeComprehensionPoint.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeDrugsPoison.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeExp.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeHp.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeInspiration.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeInt.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeLife.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeMentality.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeMoney.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeNpcFav.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeNpcLife.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeNpcSprite.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ChangeTalent.cs" />
+    <Compile Include="Scr\Core\DialogEvent\CloseTabUI.cs" />
+    <Compile Include="Scr\Core\DialogEvent\Death.cs" />
+    <Compile Include="Scr\Core\DialogEvent\DialogEventAttribute.cs" />
+    <Compile Include="Scr\Core\DialogEvent\Event.cs" />
+    <Compile Include="Scr\Core\DialogEvent\HideCG.cs" />
+    <Compile Include="Scr\Core\DialogEvent\IDialogEvent.cs" />
+    <Compile Include="Scr\Core\DialogEvent\If.cs" />
+    <Compile Include="Scr\Core\DialogEvent\Input.cs" />
+    <Compile Include="Scr\Core\DialogEvent\LearnSkill.cs" />
+    <Compile Include="Scr\Core\DialogEvent\LearnStaticSkill.cs" />
+    <Compile Include="Scr\Core\DialogEvent\LearnTrainSkill.cs" />
+    <Compile Include="Scr\Core\DialogEvent\Nothing.cs" />
+    <Compile Include="Scr\Core\DialogEvent\PlayEffect.cs" />
+    <Compile Include="Scr\Core\DialogEvent\PlayMusic.cs" />
+    <Compile Include="Scr\Core\DialogEvent\Print.cs" />
+    <Compile Include="Scr\Core\DialogEvent\RemoveCongenitalBuff.cs" />
+    <Compile Include="Scr\Core\DialogEvent\RemoveItem.cs" />
+    <Compile Include="Scr\Core\DialogEvent\RemoveRelation.cs" />
+    <Compile Include="Scr\Core\DialogEvent\RunLua.cs" />
+    <Compile Include="Scr\Core\DialogEvent\Say.cs" />
+    <Compile Include="Scr\Core\DialogEvent\SendMsg.cs" />
+    <Compile Include="Scr\Core\DialogEvent\SetChar.cs" />
+    <Compile Include="Scr\Core\DialogEvent\SetCustomFace.cs" />
+    <Compile Include="Scr\Core\DialogEvent\SetFace.cs" />
+    <Compile Include="Scr\Core\DialogEvent\SetInt.cs" />
+    <Compile Include="Scr\Core\DialogEvent\SetStr.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ShowCG.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ShowOption.cs" />
+    <Compile Include="Scr\Core\DialogEvent\ShowTip.cs" />
+    <Compile Include="Scr\Core\DialogEvent\StartFight.cs" />
+    <Compile Include="Scr\Core\DialogEvent\UseItem.cs" />
+    <Compile Include="Scr\Core\DialogTriggerData.cs" />
+    <Compile Include="Scr\Core\DialogTrigger\OnEnterGame.cs" />
+    <Compile Include="Scr\Core\DialogTrigger\OnFightStart.cs" />
+    <Compile Include="Scr\Core\DialogTrigger\OnQiYuClose.cs" />
+    <Compile Include="Scr\Core\DialogTrigger\OnQiYuOption.cs" />
+    <Compile Include="Scr\Core\DialogTrigger\OnQiYuShow.cs" />
+    <Compile Include="Scr\Core\DialogTrigger\OnTalk.cs" />
+    <Compile Include="Scr\Core\DialogTrigger\OnTimeChange.cs" />
+    <Compile Include="Scr\Core\DialogTrigger\OnUseItem.cs" />
+    <Compile Include="Scr\Core\DllTools.cs" />
+    <Compile Include="Scr\Core\ExpressionEvaluator\ExpressionEvaluator.cs" />
+    <Compile Include="Scr\Core\Extension\Utils.cs" />
+    <Compile Include="Scr\Core\FGUI\FGUIManager.cs" />
+    <Compile Include="Scr\Core\FGUI\FGUIWindowBase.cs" />
+    <Compile Include="Scr\Core\FGUI\ModPanelWindow.cs" />
+    <Compile Include="Scr\Core\FileAsset.cs" />
+    <Compile Include="Scr\Core\FCanvas\Command\Menu.cs" />
+    <Compile Include="Scr\Core\FCanvas\Command\Say.cs" />
+    <Compile Include="Scr\Core\FCanvas\FBlock.cs" />
+    <Compile Include="Scr\Core\FCanvas\FCommand.cs" />
+    <Compile Include="Scr\Core\FCanvas\FCommandBinderAttribute.cs" />
+    <Compile Include="Scr\Core\FCanvas\FFlowchart.cs" />
+    <Compile Include="Scr\Core\FCanvas\FFlowchartTools.cs" />
+    <Compile Include="Scr\Core\FCanvas\FVariable.cs" />
+    <Compile Include="Scr\Core\Lua\LuaFileCache.cs" />
+    <Compile Include="Scr\Core\Lua\LuaManager.cs" />
+    <Compile Include="Scr\Core\Main.cs" />
+    <Compile Include="Scr\Core\Main.ModPanel.cs" />
+    <Compile Include="Scr\Core\Mod\MainDataContainer.cs" />
+    <Compile Include="Scr\Core\Mod\ModConfig.cs" />
+    <Compile Include="Scr\Core\Mod\ModLoadException.cs" />
+    <Compile Include="Scr\Core\Mod\ModManager.cs" />
+    <Compile Include="Scr\Core\Mod\ModSetting.cs" />
+    <Compile Include="Scr\Core\Mod\ModState.cs" />
+    <Compile Include="Scr\Core\NextLanguage.cs" />
+    <Compile Include="Scr\Core\NextModSetting.cs" />
+    <Compile Include="Scr\Core\Patch\BagActiveSkillGetIconSprite.cs" />
+    <Compile Include="Scr\Core\Patch\BagPassiveSkillGetIconSprite.cs" />
+    <Compile Include="Scr\Core\Patch\GameExDataPatch.cs" />
+    <Compile Include="Scr\Core\Patch\ItemUIPatch.cs" />
+    <Compile Include="Scr\Core\Patch\JsonDataPatch.cs" />
+    <Compile Include="Scr\Core\Patch\MainUIPatch.cs" />
+    <Compile Include="Scr\Core\Patch\ModResourcesLoadSpritePatch.cs" />
+    <Compile Include="Scr\Core\Patch\ModResourcesLoadTexturePatch.cs" />
+    <Compile Include="Scr\Core\Patch\MusicMagPatch.cs" />
+    <Compile Include="Scr\Core\Patch\NpcJieSuanManagerPatch.cs" />
+    <Compile Include="Scr\Core\Patch\ResManagerLoadSpritePatch.cs" />
+    <Compile Include="Scr\Core\Patch\ResManagerLoadTexturePatch.cs" />
+    <Compile Include="Scr\Core\Patch\SetAvatarFacePatch.cs" />
+    <Compile Include="Scr\Core\Patch\SkillIconPatch.cs" />
+    <Compile Include="Scr\Core\Patch\UIFightWeaponItemPatch.cs" />
+    <Compile Include="Scr\Core\ResourcesManager.cs" />
+    <Compile Include="Scr\Core\SearchNpcData.cs" />
+    <Compile Include="Scr\Core\StaticFace\CustomStaticFaceInfo.cs" />
+    <Compile Include="Scr\Core\StaticFace\StaticFaceUtils.cs" />
+    <Compile Include="Scr\Core\Updater.cs" />
+    <Compile Include="Scr\Core\XiaoYeGUI\InterfaceMaker.cs" />
+    <Compile Include="Scr\Core\XiaoYeGUI\RayBlocker.cs" />
+    <Compile Include="Scr\Core\XiaoYeGUI\ResourceUtils.cs" />
+    <Compile Include="Scr\NextModEditor\Boot\Bootstrap.cs" />
+    <Compile Include="Scr\NextModEditor\Event\EventCenter.cs" />
+    <Compile Include="Scr\NextModEditor\Event\EventSubject.cs" />
+    <Compile Include="Scr\NextModEditor\Event\IEventArgs.cs" />
+    <Compile Include="Scr\NextModEditor\Event\LoadModProjectEventArgs.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\IModData.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\IModSeidDataGroup.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModAffixData.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModAffixDataAffixType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModAffixDataProjectType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModAttackType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModBuffData.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModBuffDataBuffType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModBuffDataOverlayType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModBuffDataRemoveTriggerType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModBuffDataTriggerType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModBuffSeidDataGroup.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModComparisonOperatorType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModCreateAvatarData.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModCreateAvatarDataLevelType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModCreateAvatarDataTalentType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModCreateAvatarSeidDataGroup.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModDataInitAttribute.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModElementType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModFolderFileData.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModItemData.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModItemDataGuideType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSeidData.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSeidDataGroup.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSeidDataGroupBase.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSeidMeta.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSeidProperty.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSeidToken.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSFloat.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSingleFileData.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSInt.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSIntArray.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSString.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModTargetType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\ModConfig.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\ModLoadException.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\ModMgr.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\ModProject.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\ModUtils.cs" />
+    <Compile Include="Scr\NextModEditor\PanelPage\PanelPageBase.cs" />
+    <Compile Include="Scr\NextModEditor\PanelPage\PanelBaseFungusPage.cs" />
+    <Compile Include="Scr\NextModEditor\PanelPage\PanelEmptyPage.cs" />
+    <Compile Include="Scr\NextModEditor\PanelPage\PanelTableModBuffInfoPage.cs" />
+    <Compile Include="Scr\NextModEditor\PanelPage\PanelEmptyTabModConfig.cs" />
+    <Compile Include="Scr\NextModEditor\PanelPage\PanelTableModCreateAvatarPage.cs" />
+    <Compile Include="Scr\NextModEditor\PanelPage\PanelTablePageBase.cs" />
+    <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeItemBaseFungus.cs" />
+    <Compile Include="Scr\NextModEditor\Panel\ModEditorMainPanel.cs" />
+    <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeBase.cs" />
+    <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeFolder.cs" />
+    <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeItem.cs" />
+    <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeItemModBuffInfo.cs" />
+    <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeItemModConfig.cs" />
+    <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeItemModCreateAvatar.cs" />
+    <Compile Include="Scr\StandaloneFileBrowser\IStandaloneFileBrowser.cs" />
+    <Compile Include="Scr\StandaloneFileBrowser\StandaloneFileBrowser.cs" />
+    <Compile Include="Scr\StandaloneFileBrowser\StandaloneFileBrowserEditor.cs" />
+    <Compile Include="Scr\StandaloneFileBrowser\StandaloneFileBrowserLinux.cs" />
+    <Compile Include="Scr\StandaloneFileBrowser\StandaloneFileBrowserMac.cs" />
+    <Compile Include="Scr\StandaloneFileBrowser\StandaloneFileBrowserWindows.cs" />
+    <Compile Include="Scr\Xlua\Src\CodeEmit.cs" />
+    <Compile Include="Scr\Xlua\Src\CopyByValue.cs" />
+    <Compile Include="Scr\Xlua\Src\DelegateBridge.cs" />
+    <Compile Include="Scr\Xlua\Src\GenAttributes.cs" />
+    <Compile Include="Scr\Xlua\Src\GenericDelegateBridge.cs" />
+    <Compile Include="Scr\Xlua\Src\InternalGlobals.cs" />
+    <Compile Include="Scr\Xlua\Src\LuaBase.cs" />
+    <Compile Include="Scr\Xlua\Src\LuaDLL.cs" />
+    <Compile Include="Scr\Xlua\Src\LuaEnv.cs" />
+    <Compile Include="Scr\Xlua\Src\LuaException.cs" />
+    <Compile Include="Scr\Xlua\Src\LuaFunction.cs" />
+    <Compile Include="Scr\Xlua\Src\LuaTable.cs" />
+    <Compile Include="Scr\Xlua\Src\MethodWarpsCache.cs" />
+    <Compile Include="Scr\Xlua\Src\ObjectCasters.cs" />
+    <Compile Include="Scr\Xlua\Src\ObjectPool.cs" />
+    <Compile Include="Scr\Xlua\Src\ObjectTranslator.cs" />
+    <Compile Include="Scr\Xlua\Src\ObjectTranslatorPool.cs" />
+    <Compile Include="Scr\Xlua\Src\RawObject.cs" />
+    <Compile Include="Scr\Xlua\Src\SignatureLoader.cs" />
+    <Compile Include="Scr\Xlua\Src\StaticLuaCallbacks.cs" />
+    <Compile Include="Scr\Xlua\Src\TemplateEngine\TemplateEngine.cs" />
+    <Compile Include="Scr\Xlua\Src\TypeExtensions.cs" />
+    <Compile Include="Scr\Xlua\Src\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NextConfig\language\english.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="NextConfig\**">
+      
     </Content>
-    <Content Include="NextConfig\language\chinese.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="NextLib\**">
+      
     </Content>
-    <Content Include="NextLib\Lua\libs\dialog.lua">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="NextLib\Lua\libs\eventRunner.lua">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="NextLib\Lua\libs\json.lua">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="NextLib\Lua\perf\memory.lua">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="NextLib\Lua\perf\profiler.lua">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="NextLib\Lua\tdr\tdr.lua">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="NextLib\Lua\xlua\util.lua">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="NextLib\Microsoft.CSharp.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="NextLib\xlua.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scr\ExpressionEvaluator\LICENSE.md" />
-    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\button_hover.png" />
-    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\button_normal.png" />
-    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\button_press.png" />
-    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\guisharp-box.png" />
-    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\guisharp-window.png" />
-    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\textfield hover.png" />
-    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\textfield on.png" />
-    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\textfield.png" />
-    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\toggle on.png" />
-    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\toggle.png" />
-    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\vertical scrollbar thumb.png" />
-    <EmbeddedResource Include="Scr\XiaoYeGUI\Skin\vertical scrollbar.png" />
+    <Content Include="Scr\Core\ExpressionEvaluator\LICENSE.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\button_hover.png" />
+    <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\button_normal.png" />
+    <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\button_press.png" />
+    <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\guisharp-box.png" />
+    <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\guisharp-window.png" />
+    <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\textfield hover.png" />
+    <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\textfield on.png" />
+    <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\textfield.png" />
+    <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\toggle on.png" />
+    <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\toggle.png" />
+    <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\vertical scrollbar thumb.png" />
+    <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\vertical scrollbar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scr\FairyGUI\Source" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

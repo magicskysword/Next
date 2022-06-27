@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="kvh7d0b3">
+  <resources>
+    <component id="nkvz30" name="ModEditorMainPanel.xml" path="/Panel/" exported="true"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

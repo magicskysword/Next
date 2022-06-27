@@ -1,0 +1,322 @@
+﻿{
+  "1" : {
+    "ID" : 1,
+    "IDName" : "id",
+    "Name" : "修改资质",
+    "Desc" :  "修改角色的初始资质",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "资质变化"
+      }
+    ]
+  },
+  "2" : {
+    "ID" : 2,
+    "IDName" : "id",
+    "Name" : "修改悟性",
+    "Desc" :  "修改角色的初始悟性",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "悟性变化"
+      }
+    ]
+  },
+  "3" : {
+    "ID" : 3,
+    "IDName" : "id",
+    "Name" : "修改灵根",
+    "Desc" :  "修改角色的灵根数",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "灵根变化"
+      }
+    ]
+  },
+  "4" : {
+    "ID" : 4,
+    "IDName" : "id",
+    "Name" : "修改心境",
+    "Desc" :  "修改角色的心境",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "心境变化"
+      }
+    ]
+  },
+  "5" : {
+    "ID" : 5,
+    "IDName" : "id",
+    "Name" : "修改寿元",
+    "Desc" :  "修改角色的寿元",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "寿元变化"
+      }
+    ]
+  },
+  "6" : {
+    "ID" : 6,
+    "IDName" : "id",
+    "Name" : "修改神识",
+    "Desc" :  "修改角色的神识",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "神识变化"
+      }
+    ]
+  },
+  "7" : {
+    "ID" : 7,
+    "IDName" : "id",
+    "Name" : "修改遁速",
+    "Desc" :  "修改角色的遁速",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "遁速变化"
+      }
+    ]
+  },
+  "8" : {
+    "ID" : 8,
+    "IDName" : "id",
+    "Name" : "修改血量上限",
+    "Desc" :  "修改角色的血量上限",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "血量上限变化"
+      }
+    ]
+  },
+  "9" : {
+    "ID" : 9,
+    "IDName" : "id",
+    "Name" : "修改初始功法",
+    "Desc" :  "修改角色的初始功法",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "IntArray",
+        "Desc" : "功法ID数组"
+      }
+    ]
+  },
+  "10" : {
+    "ID" : 10,
+    "IDName" : "id",
+    "Name" : "修改初始物品",
+    "Desc" :  "游戏开始时获得额外物品",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "IntArray",
+        "Desc" : "物品ID数组"
+      }
+    ]
+  },
+  "11" : {
+    "ID" : 11,
+    "IDName" : "id",
+    "Name" : "加减灵根",
+    "Desc" :  "增减角色的灵根属性",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "灵根属性"
+      },
+      {
+        "ID" : "value2",
+        "Type" : "Int",
+        "Desc" : "增加值"
+      }
+    ]
+  },
+  "12" : {
+    "ID" : 12,
+    "IDName" : "id",
+    "Name" : "修改修炼速度",
+    "Desc" :  "修改角色的修炼速度百分比",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "修炼速度百分比"
+      }
+    ]
+  },
+  "13" : {
+    "ID" : 13,
+    "IDName" : "id",
+    "Name" : "修改血量成长",
+    "Desc" :  "修改角色的血量成长百分比",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "血量成长百分比"
+      }
+    ]
+  },
+  "14" : {
+    "ID" : 14,
+    "IDName" : "id",
+    "Name" : "初始灵石",
+    "Desc" :  "游戏开始时获得额外灵石",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "获得灵石"
+      }
+    ]
+  },
+  "15" : {
+    "ID" : 15,
+    "IDName" : "id",
+    "Name" : "解锁药性",
+    "Desc" :  "游戏开始时解锁药性",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "解锁药性起始等级"
+      },
+      {
+        "ID" : "value2",
+        "Type" : "Int",
+        "Desc" : "解锁药性最高等级"
+      }
+    ]
+  },
+  "16" : {
+    "ID" : 16,
+    "IDName" : "id",
+    "Name" : "永久Buff",
+    "Desc" :  "每场战斗开始时获得Buff",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "BuffID",
+        "SpecialDrawer" : [
+          "BuffDrawer"
+        ]
+      }
+    ]
+  },
+  "17" : {
+    "ID" : 17,
+    "Name" : "服用废丹增加经验",
+    "Desc" :  "服用废丹增加经验",
+    "Properties" : [
+    ]
+  },
+  "18" : {
+    "ID" : 18,
+    "Name" : "服用废丹丹毒翻倍",
+    "Desc" :  "服用废丹丹毒翻倍",
+    "Properties" : [
+    ]
+  },
+  "19" : {
+    "ID" : 19,
+    "IDName" : "id",
+    "Name" : "初始天赋点",
+    "Desc" :  "修改初始天赋点",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "初始天赋点"
+      }
+    ]
+  },
+  "20" : {
+    "ID" : 20,
+    "IDName" : "id",
+    "Name" : "天赋互斥",
+    "Desc" :  "与其他天赋互斥",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "IntArray",
+        "Desc" : "互斥分组 数组"
+      }
+    ]
+  },
+  "21" : {
+    "ID" : 21,
+    "IDName" : "id",
+    "Name" : "增加采药收益",
+    "Desc" :  "增加采药收益",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "Int",
+        "Desc" : "采药收益(%)"
+      }
+    ]
+  },
+  "22" : {
+    "ID" : 22,
+    "IDName" : "id",
+    "Name" : "突破悟道点",
+    "Desc" :  "突破获得额外悟道点",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "IntArray",
+        "Desc" : "突破悟道点1"
+      },
+      {
+        "ID" : "value2",
+        "Type" : "IntArray",
+        "Desc" : "突破悟道点2"
+      },
+      {
+        "ID" : "value3",
+        "Type" : "IntArray",
+        "Desc" : "突破悟道点3"
+      },
+      {
+        "ID" : "value4",
+        "Type" : "IntArray",
+        "Desc" : "突破悟道点4"
+      }
+    ]
+  },
+  "23" : {
+    "ID" : 23,
+    "IDName" : "id",
+    "Name" : "大道经验",
+    "Desc" :  "开局获得额外大道经验",
+    "Properties" : [
+      {
+        "ID" : "value1",
+        "Type" : "IntArray",
+        "Desc" : "大道ID数组"
+      },
+      {
+        "ID" : "value2",
+        "Type" : "IntArray",
+        "Desc" : "增加经验数组"
+      }
+    ]
+  }
+}

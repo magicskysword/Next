@@ -1,5 +1,6 @@
 ﻿{
   "LanguageName": "English",
+  "ConfigDir" : "chinese",
   "Translation" : {
     "Config.Main.LanguageID.Name" : "Plugin Language",
     "Config.Main.LanguageID.Desc" : "Plugin's language，Corresponding to the language files in the NextConfig/language folder.",

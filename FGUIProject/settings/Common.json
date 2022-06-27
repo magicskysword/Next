@@ -1,0 +1,33 @@
+{
+  "font": "ui://028qk31hcnag2",
+  "fontSize": 12,
+  "textColor": "#000000",
+  "fontAdjustment": false,
+  "colorScheme": [
+    "背景色 #3E4247",
+    "菜单色 #21252B",
+    "分割线 #32363C",
+    "选中色 #4D78F0",
+    "编辑区域 #2C313C",
+    "按钮主色 #3D424B",
+    "按钮按下 #33383F",
+    "按钮突出 #484E59",
+    "突出色1 #FE381F",
+    "突出色2 #FF874D"
+  ],
+  "fontSizeScheme": [
+    "自定义字体大小 30"
+  ],
+  "fontScheme": [
+    "默认字体"
+  ],
+  "scrollBars": {
+    "horizontal": "ui://028qk31hnkvz2l",
+    "vertical": "ui://028qk31hnkvz27",
+    "defaultDisplay": "visible"
+  },
+  "tipsRes": "",
+  "buttonClickSound": "",
+  "pivot": "default",
+  "fileName": "Common"
+}

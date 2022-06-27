@@ -1,0 +1,62 @@
+[
+  {
+    "TypeID": 1,
+    "TypeName": "负面buff"
+  },
+  {
+    "TypeID": 2,
+    "TypeName": "正面buff"
+  },
+  {
+    "TypeID": 3,
+    "TypeName": "指示物"
+  },
+  {
+    "TypeID": 4,
+    "TypeName": "阵法"
+  },
+  {
+    "TypeID": 5,
+    "TypeName": "形态"
+  },
+  {
+    "TypeID": 6,
+    "TypeName": "功法被动"
+  },
+  {
+    "TypeID": 7,
+    "TypeName": "装备被动"
+  },
+  {
+    "TypeID": 8,
+    "TypeName": "丹药"
+  },
+  {
+    "TypeID": 9,
+    "TypeName": "结婴"
+  },
+  {
+    "TypeID": 10,
+    "TypeName": "结丹"
+  },
+  {
+    "TypeID": 11,
+    "TypeName": "暗劲"
+  },
+  {
+    "TypeID": 12,
+    "TypeName": "悟道"
+  },
+  {
+    "TypeID": 13,
+    "TypeName": "元婴"
+  },
+  {
+    "TypeID": 14,
+    "TypeName": "筑基"
+  },
+  {
+    "TypeID": 15,
+    "TypeName": "化神"
+  }
+]

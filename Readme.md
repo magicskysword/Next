@@ -20,11 +20,11 @@ github地址：https://github.com/magicskysword/Next
 
 Mod WiKi：
 
+* [文档附件](doc/Next文档.md) （保持最新）
+
 * [Bilibili Wiki](https://wiki.biligame.com/mcs/Next%E9%A6%96%E9%A1%B5)
 
-* [文档附件](doc/Next文档.md)
-
-* [Fandom Wiki](https://michangshengnext.fandom.com/zh/wiki/%E8%A7%85%E9%95%BF%E7%94%9FNext_Wiki)
+* [Fandom Wiki](https://michangshengnext.fandom.com/zh/wiki/%E8%A7%85%E9%95%BF%E7%94%9FNext_Wiki) （停止更新）
 
 在游戏内可以通过 F4 打开mod菜单（按键可修改）
 

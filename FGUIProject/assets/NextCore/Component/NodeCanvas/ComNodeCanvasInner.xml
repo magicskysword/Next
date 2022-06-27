@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="800,600" scroll="both">
+  <displayList>
+    <component id="n0_asvv" name="n0" src="f7x836" fileName="Component/NodeCanvas/ComNodeBlock.xml" xy="110,367"/>
+    <component id="n1_asvv" name="n1" src="f7x836" fileName="Component/NodeCanvas/ComNodeBlock.xml" xy="538,50"/>
+  </displayList>
+</component>

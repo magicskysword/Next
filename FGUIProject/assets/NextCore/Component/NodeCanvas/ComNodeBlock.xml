@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="222,134" extention="Label">
+  <displayList>
+    <graph id="n0_f7x8" name="bgbHeader" xy="20,0" pivot="0.5,0" size="182,32" type="rect" lineSize="0" fillColor="#ff21252b" corner="7">
+      <relation target="" sidePair="width-width"/>
+    </graph>
+    <graph id="n1_f7x8" name="bgBody" xy="0,24" size="222,110" type="rect" lineSize="3" fillColor="#ff2c313c" corner="7">
+      <relation target="" sidePair="width-width,height-height"/>
+      <relation target="n5_asvv" sidePair="bottomext-bottom"/>
+    </graph>
+    <text id="n3_asvv" name="title" xy="21,-2" size="180,29" fontSize="20" color="#ffffff" align="center" autoSize="ellipsis" text="标题">
+      <relation target="" sidePair="width-width"/>
+    </text>
+    <graph id="n2_f7x8" name="dragArea" xy="20,0" size="182,24" alpha="0" type="rect">
+      <relation target="" sidePair="width-width"/>
+    </graph>
+    <component id="n7_asvv" name="btnEdit" src="asvv38" fileName="Component/Button/BtnEditNoBg.xml" xy="179,2" size="20,20" aspect="true">
+      <relation target="" sidePair="right-right"/>
+    </component>
+    <list id="n5_asvv" name="content" xy="3,31" size="216,96">
+      <relation target="" sidePair="width-width"/>
+      <item url="ui://028qk31hasvv39"/>
+      <item url="ui://028qk31hasvv39"/>
+      <item url="ui://028qk31hasvv39"/>
+      <item url="ui://028qk31hasvv3a"/>
+    </list>
+  </displayList>
+  <relation target="n1_f7x8" sidePair="bottomext-bottom"/>
+</component>
