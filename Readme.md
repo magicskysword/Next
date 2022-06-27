@@ -18,7 +18,7 @@ github地址：https://github.com/magicskysword/Next
 
 参考贴：https://bbs.3dmgame.com/thread-6207429-1-1.html
 
-Mod WiKi：
+## **Next Mod 制作文档**
 
 * [文档附件](doc/Next文档.md) （保持最新）
 
