@@ -697,8 +697,8 @@ namespace SkySwordKill.Next.Mod
             {
                 try
                 {
-                    var jObject = LoadJObject(filePath);
-                    var fPatches = jObject.ToObject<List<FPatch>>();
+                    string json = File.ReadAllText(filePath);
+                    var fPatches = JArray.Parse(json).ToObject<List<FPatch>>();
                     foreach (var fPatch in fPatches)
                     {
                         Main.FPatch.AddPatch(fPatch);
