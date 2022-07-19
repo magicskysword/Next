@@ -4,7 +4,7 @@ using FairyGUI;
 using SkySwordKill.NextFGUI.NextCore;
 using UnityEngine;
 
-namespace SkySwordKill.Next.FGUI.ComponentCtl
+namespace SkySwordKill.Next.FGUI.Component
 {
     public class CtlTableList
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using Bag;
+using SkySwordKill.Next.DialogSystem;
 
 namespace SkySwordKill.Next.DialogEvent
 {

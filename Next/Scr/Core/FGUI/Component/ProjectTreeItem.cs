@@ -1,9 +1,9 @@
 ﻿using System;
-using SkySwordKill.NextEditor.PanelPage;
+using System.Collections.Generic;
 
-namespace SkySwordKill.NextEditor.PanelProject
+namespace SkySwordKill.Next.FGUI.Component
 {
-    public abstract class ProjectTreeItem : ProjectTreeBase
+    public abstract class ProjectTreeItem : ProjectTreeNodeBase
     {
         public virtual string ID => this.GetType().FullName;
         public abstract PanelPageBase CreatePage();

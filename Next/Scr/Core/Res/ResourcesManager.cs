@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using SkySwordKill.Next;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace SkySwordKill.Next
+namespace SkySwordKill.Next.Res
 {
     public class ResourcesManager : MonoBehaviour
     {

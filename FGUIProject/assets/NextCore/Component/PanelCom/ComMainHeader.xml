@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="800,30">
   <displayList>
-    <graph id="n0_hbj2" name="n0" xy="0,0" size="800,30" type="rect" lineSize="0" lineColor="#ff21252b" fillColor="#ff21252b">
+    <graph id="n0_hbj2" name="n0" xy="0,0" size="800,30" type="rect" lineColor="#ff32363c" fillColor="#ff21252b">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <list id="n1_hbj2" name="lstHeader" xy="0,0" size="800,30" layout="row" scroll="horizontal" margin="4,4,4,4" defaultItem="ui://028qk31hnkvz1h" autoClearItems="true">

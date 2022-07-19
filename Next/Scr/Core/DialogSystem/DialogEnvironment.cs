@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Fungus;
 using KBEngine;
+using SkySwordKill.Next;
 
-namespace SkySwordKill.Next
+namespace SkySwordKill.Next.DialogSystem
 {
     /// <summary>
     /// 脚本环境类

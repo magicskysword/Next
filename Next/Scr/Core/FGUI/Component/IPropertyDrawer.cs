@@ -1,6 +1,6 @@
 ﻿using FairyGUI;
 
-namespace SkySwordKill.Next.FGUI.ComponentCtl
+namespace SkySwordKill.Next.FGUI.Component
 {
     public interface IPropertyDrawer
     {

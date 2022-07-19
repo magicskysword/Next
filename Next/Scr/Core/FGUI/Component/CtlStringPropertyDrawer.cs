@@ -2,7 +2,7 @@
 using FairyGUI;
 using SkySwordKill.NextFGUI.NextCore;
 
-namespace SkySwordKill.Next.FGUI.ComponentCtl
+namespace SkySwordKill.Next.FGUI.Component
 {
     public class CtlStringPropertyDrawer : CtlPropertyDrawerBase
     {

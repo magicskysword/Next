@@ -1,34 +1,40 @@
 ﻿using System.Collections.Generic;
 using FairyGUI;
-using SkySwordKill.Next.FGUI.ComponentCtl;
+using SkySwordKill.Next.FGUI.Component;
+using SkySwordKill.NextEditor.Mod;
 using SkySwordKill.NextFGUI.NextCore;
 
 namespace SkySwordKill.NextEditor.PanelPage
 {
     public abstract class PanelTablePageBase : PanelPageBase
     {
+        public ModProject Project { get; set; }
         public List<TableInfo> TableInfos { get; } = new List<TableInfo>();
-        public CtlTableList TableList { get; set; }
+        public CtlTableEditor TableEditor { get; set; }
         public int CurInspectIndex { get; set; }
-    
-        public override void OnAdd()
+        public CtlTableList TableList => TableEditor.TableList;
+        public CtlPropertyInspector Inspector => TableEditor.Inspector;
+
+        protected override GObject OnAdd()
         {
-            TableList = new CtlTableList(UI_ComTableList.CreateInstance());
+            TableEditor = new CtlTableEditor(UI_ComTableEditor.CreateInstance());
             TableList.BindTable(TableInfos,GetData,GetDataCount,
                 TableItemRenderer,OnClickTableItem);
-            Content = TableList.MainView;
             CurInspectIndex = -1;
+            OnInit();
+            return TableEditor.MainView;
         }
-    
-        public override void OnOpen()
+
+        protected abstract void OnInit();
+
+        protected override void OnOpen()
         {
             RefreshTable();
             InspectItem(CurInspectIndex);
         }
-    
-        public override void OnRemove()
+
+        protected override void OnRemove()
         {
-            Content.Dispose();
             TableInfos.Clear();
         }
     

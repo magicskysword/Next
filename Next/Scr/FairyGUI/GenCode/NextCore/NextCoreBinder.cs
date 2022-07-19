@@ -12,7 +12,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             UIObjectFactory.SetPackageItemExtension(UI_ComCmdTextWithPort.URL, typeof(UI_ComCmdTextWithPort));
             UIObjectFactory.SetPackageItemExtension(UI_ComMainDocumentNodeView.URL, typeof(UI_ComMainDocumentNodeView));
             UIObjectFactory.SetPackageItemExtension(UI_ComNodeZoomArea.URL, typeof(UI_ComNodeZoomArea));
-            UIObjectFactory.SetPackageItemExtension(UI_WindowFrameTranslucency.URL, typeof(UI_WindowFrameTranslucency));
+            UIObjectFactory.SetPackageItemExtension(UI_ComTableEditor.URL, typeof(UI_ComTableEditor));
             UIObjectFactory.SetPackageItemExtension(UI_ComNodeCanvas.URL, typeof(UI_ComNodeCanvas));
             UIObjectFactory.SetPackageItemExtension(UI_ComNodeBlock.URL, typeof(UI_ComNodeBlock));
             UIObjectFactory.SetPackageItemExtension(UI_BtnTreeItem.URL, typeof(UI_BtnTreeItem));
@@ -35,9 +35,12 @@ namespace SkySwordKill.NextFGUI.NextCore
             UIObjectFactory.SetPackageItemExtension(UI_PopupMenu_item.URL, typeof(UI_PopupMenu_item));
             UIObjectFactory.SetPackageItemExtension(UI_PopupMenu.URL, typeof(UI_PopupMenu));
             UIObjectFactory.SetPackageItemExtension(UI_WindowFrame2.URL, typeof(UI_WindowFrame2));
+            UIObjectFactory.SetPackageItemExtension(UI_ModEditorMainPanel.URL, typeof(UI_ModEditorMainPanel));
             UIObjectFactory.SetPackageItemExtension(UI_WinStringInputDialog.URL, typeof(UI_WinStringInputDialog));
             UIObjectFactory.SetPackageItemExtension(UI_WinConfirmDialog.URL, typeof(UI_WinConfirmDialog));
             UIObjectFactory.SetPackageItemExtension(UI_WinSelectorDialog.URL, typeof(UI_WinSelectorDialog));
+            UIObjectFactory.SetPackageItemExtension(UI_WindowFrame3.URL, typeof(UI_WindowFrame3));
+            UIObjectFactory.SetPackageItemExtension(UI_ComMainModList.URL, typeof(UI_ComMainModList));
             UIObjectFactory.SetPackageItemExtension(UI_ModMainPanel.URL, typeof(UI_ModMainPanel));
         }
     }

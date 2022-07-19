@@ -5,7 +5,7 @@ using SkySwordKill.Next.FCanvas;
 using SkySwordKill.NextFGUI.NextCore;
 using Say = SkySwordKill.Next.FCanvas.FakerCommand.Say;
 
-namespace SkySwordKill.Next.FGUI.ComponentCtl
+namespace SkySwordKill.Next.FGUI.Component
 {
     public class CtlNodeBlock
     {
@@ -49,27 +49,27 @@ namespace SkySwordKill.Next.FGUI.ComponentCtl
                         : cmdSay.AvatarBindKey;
                     item.title = $"{id} : {cmdSay.StoryText}";
                 }
-                else if (command is FCanvas.FakerCommand.Menu cmdMenu)
+                else if (command is SkySwordKill.Next.FCanvas.FakerCommand.Menu cmdMenu)
                 {
                     item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
                     item.title = $"【选项】{cmdMenu.Text} => {cmdMenu.TargetBlockID}";
                 }
-                else if (command is FCanvas.FakerCommand.If cmdIf)
+                else if (command is SkySwordKill.Next.FCanvas.FakerCommand.If cmdIf)
                 {
                     item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
                     item.title = $"if ({cmdIf.Condition})";
                 }
-                else if (command is FCanvas.FakerCommand.ElseIf cmdElseIf)
+                else if (command is SkySwordKill.Next.FCanvas.FakerCommand.ElseIf cmdElseIf)
                 {
                     item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
                     item.title = $"else if ({cmdElseIf.Condition})";
                 }
-                else if (command is FCanvas.FakerCommand.Else cmdElse)
+                else if (command is SkySwordKill.Next.FCanvas.FakerCommand.Else cmdElse)
                 {
                     item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
                     item.title = "else";
                 }
-                else if (command is FCanvas.FakerCommand.Call cmdCall)
+                else if (command is SkySwordKill.Next.FCanvas.FakerCommand.Call cmdCall)
                 {
                     item = Content.AddItemFromPool("ui://NextCore/ComCmdText").asLabel;
                     item.title = $"=> {cmdCall.targetFlowchartName ?? "this"}:{cmdCall.targetBlockID}";

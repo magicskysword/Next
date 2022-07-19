@@ -1,9 +1,10 @@
 ﻿using System;
 using FairyGUI;
 using SkySwordKill.Next.Extension;
+using SkySwordKill.Next.FGUI;
 using SkySwordKill.NextFGUI.NextCore;
 
-namespace SkySwordKill.Next.FGUI.ComponentCtl
+namespace SkySwordKill.Next.FGUI.Component
 {
     public class CtlStringAreaPropertyDrawer : CtlPropertyDrawerBase
     {

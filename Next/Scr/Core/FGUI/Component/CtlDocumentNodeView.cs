@@ -3,7 +3,7 @@ using FairyGUI;
 using SkySwordKill.Next.FCanvas;
 using SkySwordKill.NextFGUI.NextCore;
 
-namespace SkySwordKill.Next.FGUI.ComponentCtl
+namespace SkySwordKill.Next.FGUI.Component
 {
     public class CtlDocumentNodeView
     {
@@ -12,10 +12,7 @@ namespace SkySwordKill.Next.FGUI.ComponentCtl
             MainView = com;
             TableList = new CtlTableList(MainView.m_list);
             NodeCanvas = new CtlNodeCanvas(MainView.m_nodeCanvas);
-            NodeCanvas.OnContentPosChange = () =>
-            {
-                RefreshNodeCanvasPos();
-            };
+            NodeCanvas.OnContentPosChange = RefreshNodeCanvasPos;
             RefreshNodeCanvasPos();
         }
 

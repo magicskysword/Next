@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SkySwordKill.Next
+namespace SkySwordKill.Next.DialogSystem
 {
     public class DialogTriggerData
     {

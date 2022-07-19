@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="800,600">
+  <displayList>
+    <component id="n0_eg8y" name="table" src="nkvz2b" fileName="Component/Table/ComTableList.xml" xy="0,0" size="551,600">
+      <relation target="" sidePair="height-height"/>
+      <relation target="n2_eg8y" sidePair="rightext-left"/>
+    </component>
+    <component id="n1_eg8y" name="inspector" src="nkvz2f" fileName="Component/PanelCom/ComMainInspector.xml" xy="551,0" size="249,600">
+      <relation target="" sidePair="width-width,height-height,right-right"/>
+      <relation target="n2_eg8y" sidePair="leftext-right"/>
+    </component>
+    <graph id="n2_eg8y" name="seg" xy="551,0" size="4,600" type="rect" lineSize="0" fillColor="#ff21252b">
+      <relation target="" sidePair="height-height,right-right"/>
+    </graph>
+  </displayList>
+</component>

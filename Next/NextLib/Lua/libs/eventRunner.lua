@@ -1,6 +1,9 @@
 ﻿---@class eventRunner
 local eventRunner = {}
 local meta = {}
+local DialogAnalysis = CS.SkySwordKill.Next.DialogSystem.DialogAnalysis
+local DialogCommand = CS.SkySwordKill.Next.DialogSystem.DialogCommand
+local Main = CS.SkySwordKill.Next.Main
 
 local function async_to_sync(async_func, callback_pos, failureCall)
     return function(...)
@@ -11,7 +14,7 @@ local function async_to_sync(async_func, callback_pos, failureCall)
             if waiting then
                 local state, info = coroutine.resume(_co, ...)
                 if not state then
-                    CS.SkySwordKill.Next.Main.LogError("Lua运行错误 --> " .. state)
+                    Main.LogError("Lua运行错误 --> " .. state)
                     failureCall()
                 end
             else
@@ -31,7 +34,7 @@ local function async_to_sync(async_func, callback_pos, failureCall)
     end
 end
 
-local syncRunEvent = async_to_sync(CS.SkySwordKill.Next.DialogAnalysis.RunDialogEventCommand,
+local syncRunEvent = async_to_sync(DialogAnalysis.RunDialogEventCommand,
     nil, function() eventRunner.cancelEvent() end)
 
 ---@param runner eventRunner
@@ -39,7 +42,7 @@ local syncRunEvent = async_to_sync(CS.SkySwordKill.Next.DialogAnalysis.RunDialog
 meta["__index"] = function(runner, key)
     return function(...)
         local params = { ... }
-        local command = CS.SkySwordKill.Next.DialogCommand(key, params,
+        local command = DialogCommand(key, params,
             runner.callCommand.BindEventData, runner.callCommand.IsEnd)
         syncRunEvent(command, runner.env)
     end
@@ -55,7 +58,7 @@ function eventRunner.getRunner(env, command)
 end
 
 function eventRunner.cancelEvent()
-    CS.SkySwordKill.Next.DialogAnalysis.CancelEvent()
+    DialogAnalysis.CancelEvent()
 end
 
 return eventRunner

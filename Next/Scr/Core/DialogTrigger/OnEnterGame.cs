@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using SkySwordKill.Next.DialogSystem;
 
 namespace SkySwordKill.Next.DialogTrigger
 {

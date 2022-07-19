@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FairyGUI;
-using SkySwordKill.Next.FGUI.ComponentCtl;
+using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.NextModEditor.Mod.Data;
 using SkySwordKill.NextFGUI.NextCore;
 

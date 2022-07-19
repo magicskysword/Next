@@ -10,6 +10,7 @@ using JetBrains.Annotations;
 using KBEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FCanvas;
 using SkySwordKill.Next.StaticFace;

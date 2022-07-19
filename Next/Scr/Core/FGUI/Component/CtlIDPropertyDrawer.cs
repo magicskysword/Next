@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using FairyGUI;
-using SkySwordKill.NextModEditor.Mod.Data;
+using SkySwordKill.Next.FGUI;
 using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextModEditor.Mod.Data;
 
-namespace SkySwordKill.Next.FGUI.ComponentCtl
+namespace SkySwordKill.Next.FGUI.Component
 {
     public class CtlIDPropertyDrawer : CtlPropertyDrawerBase
     {

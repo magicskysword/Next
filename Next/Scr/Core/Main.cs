@@ -11,6 +11,8 @@ using System.Linq;
 using System.Collections;
 using System.IO;
 using Fungus;
+using SkySwordKill.Next.DialogSystem;
+using SkySwordKill.Next.Res;
 using SkySwordKill.Next.FCanvas;
 
 namespace SkySwordKill.Next
@@ -18,7 +20,7 @@ namespace SkySwordKill.Next
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.5.0";
+        public const string MOD_VERSION = "0.5.2";
         
         public static Lazy<string> PathLocalModsDir;
         public static Lazy<string> PathLibraryDir;

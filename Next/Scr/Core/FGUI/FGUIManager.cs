@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FairyGUI;
+using SkySwordKill.Next.Res;
 using SkySwordKill.NextFGUI.NextCore;
-using SkySwordKill.NextFGUI.NextModEditor;
 using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI
@@ -31,9 +31,21 @@ namespace SkySwordKill.Next.FGUI
             AddPackage("NextCore");
             AddPackage("NextModEditor");
             NextCoreBinder.BindAll();
-            NextModEditorBinder.BindAll();
-            
+
             GRoot.inst.SetContentScaleFactor(1);
+            
+            // 将StageCamera的Layer设置为17层
+            StageCamera.CheckMainCamera();
+            GameObject.DontDestroyOnLoad(StageCamera.main.gameObject);
+            StageCamera.main.cullingMask = 1 << 17;
+            
+            // 将Stage和所有子物体的Layer设置为17层
+            GameObject stage = Stage.inst.gameObject;
+            stage.layer = 17;
+            foreach (Transform child in stage.transform)
+            {
+                child.gameObject.layer = 17;
+            }
         }
 
         public void Reset()

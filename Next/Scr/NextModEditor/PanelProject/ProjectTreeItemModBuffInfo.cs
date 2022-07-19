@@ -1,4 +1,5 @@
-﻿using SkySwordKill.NextEditor.PanelPage;
+﻿using SkySwordKill.Next.FGUI.Component;
+using SkySwordKill.NextEditor.PanelPage;
 
 namespace SkySwordKill.NextEditor.PanelProject
 {

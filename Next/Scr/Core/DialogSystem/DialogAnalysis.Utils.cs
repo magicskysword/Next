@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using SkySwordKill.Next;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.StaticFace;
 using UnityEngine;
@@ -11,7 +12,7 @@ using UnityEngine.Events;
 using YSGame;
 using GameObject = UnityEngine.GameObject;
 
-namespace SkySwordKill.Next
+namespace SkySwordKill.Next.DialogSystem
 {
     public partial class DialogAnalysis
     {
@@ -146,7 +147,7 @@ namespace SkySwordKill.Next
             var savePath = Paths.GetNewSavePath();
             var pathPre = YSNewSaveSystem.GetAvatarSavePathPre(id, index);
             var path = $"{savePath}/{pathPre}/{fileName}";
-            SaveAvatarNextData(path);
+            LoadAvatarNextData(path);
         }
         
         public static void LoadAvatarNextData(string path)

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using FairyGUI;
+using SkySwordKill.Next;
 using SkySwordKill.Next.FCanvas;
 using SkySwordKill.NextFGUI.NextCore;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace SkySwordKill.Next.FGUI.ComponentCtl
+namespace SkySwordKill.Next.FGUI.Component
 {
     public class CtlNodeCanvas
     {

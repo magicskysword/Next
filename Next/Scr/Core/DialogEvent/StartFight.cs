@@ -1,6 +1,7 @@
 ﻿using System;
 using GUIPackage;
 using HarmonyLib;
+using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.DialogTrigger;
 using UnityEngine;
 using UnityEngine.SceneManagement;

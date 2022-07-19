@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.Extension;
 using UnityEngine.Events;
 

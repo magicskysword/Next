@@ -1,12 +1,19 @@
-﻿using SkySwordKill.Next.Extension;
-using SkySwordKill.Next.FGUI.ComponentCtl;
+﻿using FairyGUI;
+using SkySwordKill.Next.FGUI.Component;
+using SkySwordKill.Next.Extension;
+using SkySwordKill.NextEditor.Mod;
+using SkySwordKill.NextFGUI.NextCore;
 
 namespace SkySwordKill.NextEditor.PanelPage
 {
-    public class PanelEmptyTabModConfig : PanelEmptyPage
+    public class PanelTabModConfig : PanelPageBase
     {
-        public override void OnOpen()
+        public ModProject Project { get; set; }
+        public CtlPropertyInspector Inspector { get; set; }
+
+        protected override GObject OnAdd()
         {
+            Inspector = new CtlPropertyInspector(UI_ComMainInspector.CreateInstance());
             var config = Project.Config;
 
             Inspector.AddDrawer(new CtlStringPropertyDrawer(
@@ -34,6 +41,17 @@ namespace SkySwordKill.NextEditor.PanelPage
             );
 
             Inspector.Refresh();
+            return Inspector.MainView;
+        }
+
+        protected override void OnRemove()
+        {
+            
+        }
+
+        protected override void OnOpen()
+        {
+            
         }
     }
 }

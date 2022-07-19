@@ -1,4 +1,5 @@
-﻿using SkySwordKill.NextEditor.PanelPage;
+﻿using SkySwordKill.Next.FGUI.Component;
+using SkySwordKill.NextEditor.PanelPage;
 
 namespace SkySwordKill.NextEditor.PanelProject
 {
@@ -6,7 +7,7 @@ namespace SkySwordKill.NextEditor.PanelProject
     {
         public override PanelPageBase CreatePage()
         {
-            return new PanelEmptyTabModConfig()
+            return new PanelTabModConfig()
             {
                 Name = Name
             };

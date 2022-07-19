@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="280,600" overflow="hidden" bgColor="#21252b">
   <displayList>
-    <graph id="n2_10zy0" name="n2" xy="0,0" size="280,600" type="rect" lineSize="0" fillColor="#ff21252b">
+    <graph id="n2_10zy0" name="n2" xy="0,0" size="280,600" type="rect" lineSize="0" lineColor="#ff1870b5" fillColor="#ff21252b">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <list id="n0_10zy0" name="list" xy="0,0" size="280,600" restrictSize="200,0,0,0" selectionMode="none" overflow="scroll" scrollBarFlags="132" scrollBar="visible" margin="5,5,5,5" scrollBarRes="ui://028qk31hnkvz27," autoClearItems="true">

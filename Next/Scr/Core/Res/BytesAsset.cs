@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SkySwordKill.Next
+namespace SkySwordKill.Next.Res
 {
     public class BytesAsset : TextAsset
     {

@@ -5,18 +5,18 @@ using FairyGUI.Utils;
 
 namespace SkySwordKill.NextFGUI.NextCore
 {
-    public partial class UI_WindowFrameTranslucency : GLabel
+    public partial class UI_WindowFrame3 : GLabel
     {
         public GGraph m_bgContent;
         public GGraph m_bgBar;
         public GGraph m_dragArea;
         public GGraph m_contentArea;
         public GButton m_closeButton;
-        public const string URL = "ui://028qk31hcnag3";
+        public const string URL = "ui://028qk31hq0gg3d";
 
-        public static UI_WindowFrameTranslucency CreateInstance()
+        public static UI_WindowFrame3 CreateInstance()
         {
-            return (UI_WindowFrameTranslucency)UIPackage.CreateObject("NextCore", "WindowFrameTranslucency");
+            return (UI_WindowFrame3)UIPackage.CreateObject("NextCore", "WindowFrame3");
         }
 
         public override void ConstructFromXML(XML xml)

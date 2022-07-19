@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.Mod;
@@ -887,19 +888,13 @@ namespace SkySwordKill.Next
                         }
                     }
                     GUILayout.EndHorizontal();
-                    
 
-                    
-                    // if (GUILayout.Button("导出FungusBase（实验性）"))
-                    // {
-                    //     FCanvas.FFlowchartTools.ExportAllFungusFlowchart(Main.PathBaseFungusDataDir.Value);
-                    // }
+                    if (GUILayout.Button("FGUI测试"))
+                    {
+                        var window = new ModPanelWindow();
+                        window.Show();
+                    }
                     //
-                    // if (GUILayout.Button("FGUI测试"))
-                    // {
-                    //     var window = new ModPanelWindow();
-                    //     window.Show();
-                    // }
                     //
                     // if (GUILayout.Button("FGUI编辑器测试"))
                     // {

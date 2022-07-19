@@ -3,7 +3,7 @@
   <resources>
     <component id="q7os0" name="ModMainPanel.xml" path="/Window/" exported="true"/>
     <component id="cnag1" name="WindowFrame.xml" path="/Component/Frame/"/>
-    <font id="cnag2" name="Alibaba-PuHuiTi-Medium.ttf" path="/Font/" renderMode="smooth" samplePointSize="16"/>
+    <font id="cnag2" name="Alibaba-PuHuiTi-Medium.ttf" path="/Font/" renderMode="smooth_hinted" samplePointSize="16"/>
     <component id="cnag3" name="WindowFrameTranslucency.xml" path="/Component/Frame/"/>
     <image id="nkvz4" name="icon_TrueAndFalse2.png" path="/Image/"/>
     <component id="nkvz5" name="BtnClose.xml" path="/Component/Button/"/>
@@ -76,6 +76,10 @@
     <component id="asvv3a" name="ComCmdTextWithPort.xml" path="/Component/NodeCanvas/Commands/" exported="true"/>
     <component id="asvv3b" name="ComMainDocumentNodeView.xml" path="/Component/PanelCom/" exported="true"/>
     <component id="asvv3c" name="ComNodeZoomArea.xml" path="/Component/NodeCanvas/" exported="true"/>
+    <component id="nkvz30" name="ModEditorMainPanel.xml" path="/Window/" exported="true"/>
+    <component id="q0gg3d" name="WindowFrame3.xml" path="/Component/Frame/"/>
+    <component id="q0gg3e" name="ComMainModList.xml" path="/Component/PanelCom/" exported="true"/>
+    <component id="eg8y3f" name="ComTableEditor.xml" path="/Component/Table/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

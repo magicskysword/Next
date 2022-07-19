@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using KBEngine;
+using SkySwordKill.Next.DialogSystem;
 
 namespace SkySwordKill.Next.Patch
 {

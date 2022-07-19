@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
+using SkySwordKill.Next;
 using UnityEngine;
 using UnityEngine.Networking;
 using Object = UnityEngine.Object;
 
-namespace SkySwordKill.Next
+namespace SkySwordKill.Next.Res
 {
     public class FileAsset
     {

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using script.Steam;
 using SkySwordKill.Next;
 using SkySwordKill.NextModEditor.Mod.Data;
 using UnityEngine;
@@ -155,6 +157,30 @@ namespace SkySwordKill.NextEditor.Mod
                     yield return type;
                 }
             }
+        }
+        
+        public static WorkShopItem ReadConfig(string path)
+        {
+            WorkShopItem result = new WorkShopItem();
+            try
+            {
+                FileStream fileStream = new FileStream(path + "/Mod.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
+                result = (WorkShopItem)new BinaryFormatter().Deserialize(fileStream);
+                fileStream.Close();
+            }
+            catch (Exception message)
+            {
+                Debug.LogError(message);
+                Debug.LogError("读取配置文件失败");
+            }
+            return result;
+        }
+        
+        public static void WriteConfig(string path, WorkShopItem item)
+        {
+            FileStream fileStream = new FileStream(item.ModPath + "/Mod.bin", FileMode.Create);
+            new BinaryFormatter().Serialize(fileStream, item);
+            fileStream.Close();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace SkySwordKill.Next
+﻿using SkySwordKill.Next.DialogSystem;
+
+namespace SkySwordKill.Next
 {
     public class SearchNpcData
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using SkySwordKill.Next.DialogSystem;
 using YSGame;
 
 namespace SkySwordKill.Next.DialogEvent

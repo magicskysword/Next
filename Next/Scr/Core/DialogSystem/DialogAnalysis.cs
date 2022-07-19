@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using SkySwordKill.Next;
 using SkySwordKill.Next.DialogEvent;
 using UnityEngine.Events;
 
-namespace SkySwordKill.Next
+namespace SkySwordKill.Next.DialogSystem
 {
     public static partial class DialogAnalysis
     {
@@ -389,7 +390,7 @@ namespace SkySwordKill.Next
                 if (haveOption)
                 {
                     // 有选项不执行回调
-                    RunDialogEventCommand(command, CurEnv, () => { });
+                    RunDialogEventCommand(command, CurEnv);
                 }
                 else
                 {

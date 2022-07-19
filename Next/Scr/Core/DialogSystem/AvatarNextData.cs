@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace SkySwordKill.Next
+namespace SkySwordKill.Next.DialogSystem
 {
     public class DataGroup<T> where T : IEquatable<T>
     {
@@ -75,7 +75,5 @@ namespace SkySwordKill.Next
     {
         public DataGroup<int> IntGroup { get; set; } = new DataGroup<int>();
         public DataGroup<string> StrGroup { get; set; } = new DataGroup<string>();
-
-        
     }
 }

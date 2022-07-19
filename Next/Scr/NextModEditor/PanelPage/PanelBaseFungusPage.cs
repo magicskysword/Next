@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using FairyGUI;
+using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.Next.FCanvas;
-using SkySwordKill.Next.FGUI.ComponentCtl;
 using SkySwordKill.NextEditor.Mod;
 using SkySwordKill.NextFGUI.NextCore;
 
@@ -11,7 +12,7 @@ namespace SkySwordKill.NextEditor.PanelPage
     {
         public CtlDocumentNodeView NodeView;
 
-        public override void OnAdd()
+        protected override GObject OnAdd()
         {
             NodeView = new CtlDocumentNodeView(UI_ComMainDocumentNodeView.CreateInstance());
             NodeView.Init(new List<TableInfo>()
@@ -25,17 +26,18 @@ namespace SkySwordKill.NextEditor.PanelPage
                         return flowchart.Name;
                     })
             }, ModMgr.I.DefaultFFlowchart.Values.ToList());
-            Content = NodeView.MainView;
+            
+            return NodeView.MainView;
         }
 
-        public override void OnOpen()
+        protected override void OnOpen()
         {
             
         }
 
-        public override void OnRemove()
+        protected override void OnRemove()
         {
-            Content.Dispose();
+            
         }
     }
 }

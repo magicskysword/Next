@@ -1,6 +1,7 @@
 local eventRunner = require("libs.eventRunner")
 
 local dialog = {}
+local Main = CS.SkySwordKill.Next.Main
 
 function dialog.runEvent(scr, funcName, command,
                          env, callback)
@@ -12,7 +13,7 @@ function dialog.runEvent(scr, funcName, command,
             func(runner, env)
             callback()
         end, function(error)
-            CS.SkySwordKill.Next.Main.LogError("Lua运行错误 --> " .. error .. "\n" .. debug.traceback(nil, 2))
+            Main.LogError("Lua运行错误 --> " .. error .. "\n" .. debug.traceback(nil, 2))
             eventRunner.cancelEvent()
         end)
 
@@ -21,7 +22,7 @@ function dialog.runEvent(scr, funcName, command,
     local eventCoroutine = coroutine.create(runEventCoroutine)
     local state, info = coroutine.resume(eventCoroutine)
     if not state then
-        CS.SkySwordKill.Next.Main.LogError(info)
+        Main.LogError(info)
     end
 end
 
