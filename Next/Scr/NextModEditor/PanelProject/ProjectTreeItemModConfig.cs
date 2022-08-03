@@ -1,16 +1,25 @@
-﻿using SkySwordKill.Next.FGUI.Component;
+﻿using SkySwordKill.Next.Extension;
+using SkySwordKill.Next.FGUI.Component;
+using SkySwordKill.NextEditor.Mod;
 using SkySwordKill.NextEditor.PanelPage;
 
 namespace SkySwordKill.NextEditor.PanelProject
 {
-    public class ProjectTreeItemModConfig : ProjectTreeItem
+    public class ProjectTreeItemModConfig : ProjectTreeEditorBaseItem
     {
         public override PanelPageBase CreatePage()
         {
-            return new PanelTabModConfig()
+            return new PanelModConfig(TabName)
             {
-                Name = Name
+                Project = Project,
+                Mod = Mod,
             };
+        }
+
+        public override string EditorName => "ModEditor.Main.project.modConfig".I18N();
+
+        public ProjectTreeItemModConfig(ModWorkshop mod,ModProject project) : base(mod, project)
+        {
         }
     }
 }

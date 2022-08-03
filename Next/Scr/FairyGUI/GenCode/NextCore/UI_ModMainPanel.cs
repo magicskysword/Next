@@ -7,7 +7,7 @@ namespace SkySwordKill.NextFGUI.NextCore
 {
     public partial class UI_ModMainPanel : GComponent
     {
-        public UI_WindowFrame3 m_frame;
+        public UI_WindowFrame_style2 m_frame;
         public const string URL = "ui://028qk31hq7os0";
 
         public static UI_ModMainPanel CreateInstance()
@@ -19,7 +19,7 @@ namespace SkySwordKill.NextFGUI.NextCore
         {
             base.ConstructFromXML(xml);
 
-            m_frame = (UI_WindowFrame3)GetChild("frame");
+            m_frame = (UI_WindowFrame_style2)GetChild("frame");
         }
     }
 }

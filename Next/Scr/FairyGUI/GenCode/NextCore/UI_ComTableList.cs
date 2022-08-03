@@ -8,6 +8,7 @@ namespace SkySwordKill.NextFGUI.NextCore
     public partial class UI_ComTableList : GComponent
     {
         public GList m_listHeader;
+        public GGraph m_bgList;
         public GList m_list;
         public const string URL = "ui://028qk31hnkvz2b";
 
@@ -21,6 +22,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             base.ConstructFromXML(xml);
 
             m_listHeader = (GList)GetChild("listHeader");
+            m_bgList = (GGraph)GetChild("bgList");
             m_list = (GList)GetChild("list");
         }
     }

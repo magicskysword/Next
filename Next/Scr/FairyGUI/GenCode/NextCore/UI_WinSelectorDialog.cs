@@ -7,12 +7,14 @@ namespace SkySwordKill.NextFGUI.NextCore
 {
     public partial class UI_WinSelectorDialog : GComponent
     {
-        public UI_WindowFrame2 m_frame;
+        public UI_WindowFrameDialog m_frame;
         public GButton m_btnOk;
         public GButton m_closeButton;
-        public GImage m_bg;
+        public GGraph m_bg;
+        public GGraph m_bgToolsBar;
         public GTextField m_txtTips;
         public UI_ComTableList m_table;
+        public UI_ComToolsBar m_toolsBar;
         public const string URL = "ui://028qk31hnkvz33";
 
         public static UI_WinSelectorDialog CreateInstance()
@@ -24,12 +26,14 @@ namespace SkySwordKill.NextFGUI.NextCore
         {
             base.ConstructFromXML(xml);
 
-            m_frame = (UI_WindowFrame2)GetChild("frame");
+            m_frame = (UI_WindowFrameDialog)GetChild("frame");
             m_btnOk = (GButton)GetChild("btnOk");
             m_closeButton = (GButton)GetChild("closeButton");
-            m_bg = (GImage)GetChild("bg");
+            m_bg = (GGraph)GetChild("bg");
+            m_bgToolsBar = (GGraph)GetChild("bgToolsBar");
             m_txtTips = (GTextField)GetChild("txtTips");
             m_table = (UI_ComTableList)GetChild("table");
+            m_toolsBar = (UI_ComToolsBar)GetChild("toolsBar");
         }
     }
 }

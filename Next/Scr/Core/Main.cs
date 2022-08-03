@@ -20,7 +20,7 @@ namespace SkySwordKill.Next
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.5.2";
+        public const string MOD_VERSION = "0.5.3.1";
         
         public static Lazy<string> PathLocalModsDir;
         public static Lazy<string> PathLibraryDir;
@@ -93,8 +93,8 @@ namespace SkySwordKill.Next
             // 加载运行时脚本所需DLL
             // load runtime dll
             Assembly.LoadFrom(Utility.CombinePaths(PathLibraryDir.Value, "Microsoft.CSharp.dll"));
-            Assembly.LoadFrom(Utility.CombinePaths(PathLibraryDir.Value, "System.Windows.Forms.dll"));
-            Assembly.LoadFrom(Utility.CombinePaths(PathLibraryDir.Value, "Ookii.Dialogs.dll"));
+            // Assembly.LoadFrom(Utility.CombinePaths(PathLibraryDir.Value, "System.Windows.Forms.dll"));
+            // Assembly.LoadFrom(Utility.CombinePaths(PathLibraryDir.Value, "Ookii.Dialogs.dll"));
 
             DialogAnalysis.Init();
 

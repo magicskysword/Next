@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="200,24">
+  <displayList>
+    <graph id="n0_d4rw" name="n0" xy="0,0" size="200,24" type="rect" lineSize="0" lineColor="#ff32363c" fillColor="#ff2c313c">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n2_d4rw" name="n2" xy="0,0" size="1,24" type="rect" lineSize="0" fillColor="#ff32363c">
+      <relation target="" sidePair="height-height,left-left"/>
+    </graph>
+    <graph id="n3_d4rw" name="n3" xy="199,0" size="1,24" type="rect" lineSize="0" fillColor="#ff32363c">
+      <relation target="" sidePair="height-height,right-right"/>
+    </graph>
+    <text id="n1_d4rw" name="inContent" xy="6,2" size="149,19" font="ui://028qk31hcnag2" fontSize="12" color="#ffffff" autoSize="none" singleLine="true" autoClearText="true" text="" input="true">
+      <relation target="" sidePair="width-width,height-height"/>
+    </text>
+    <component id="n5_d4rw" name="btnSearch" src="fqcb3t" fileName="Component/Button/BtnToolCommon.xml" xy="157,2" size="20,20" tooltips="搜索">
+      <Button icon="ui://028qk31hg1o641"/>
+    </component>
+    <component id="n4_d4rw" name="btnReset" src="fqcb3t" fileName="Component/Button/BtnToolCommon.xml" xy="179,2" size="20,20" tooltips="重置">
+      <Button icon="ui://028qk31hg1o640"/>
+    </component>
+  </displayList>
+</component>

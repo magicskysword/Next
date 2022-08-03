@@ -11,7 +11,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         }
     
         [JsonProperty(PropertyName = "id",Order = 0)]
-        public override int ID { get; set; }
+        public override int Id { get; set; }
         [JsonProperty(PropertyName = "name1",Order = 1)]
         public string ProjectTypeName { get; set; }
         [JsonProperty(PropertyName = "typenum",Order = 2)]

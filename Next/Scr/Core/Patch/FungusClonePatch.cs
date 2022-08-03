@@ -9,6 +9,11 @@ using Object = UnityEngine.Object;
 
 namespace SkySwordKill.Next.Patch
 {
+    public class PatchTag : MonoBehaviour
+    {
+        
+    }
+    
     [HarmonyPatch]
     public class FungusClonePatch
     {
@@ -32,7 +37,7 @@ namespace SkySwordKill.Next.Patch
         [HarmonyPostfix]
         public static void Postfix(ref Object __result)
         {
-            if (__result is GameObject go)
+            if (__result is GameObject go && go.GetComponent<PatchTag>() == null)
             {
                 var flowcharts = go.GetComponentsInChildren<Flowchart>();
                 if (flowcharts != null)
@@ -42,6 +47,31 @@ namespace SkySwordKill.Next.Patch
                         Main.FPatch.PatchFlowchart(flowchart);
                     }
                 }
+
+                go.AddComponent<PatchTag>();
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(talkCompont), "Start")]
+    public class FungusTalkPatch
+    {
+        [HarmonyPrefix]
+        public static void Prefix(talkCompont __instance)
+        {
+            var go = __instance.gameObject;
+            if (go.GetComponent<PatchTag>() == null)
+            {
+                var flowcharts = go.GetComponentsInChildren<Flowchart>();
+                if (flowcharts != null)
+                {
+                    foreach (var flowchart in flowcharts)
+                    {
+                        Main.FPatch.PatchFlowchart(flowchart);
+                    }
+                }
+
+                go.AddComponent<PatchTag>();
             }
         }
     }

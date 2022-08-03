@@ -10,10 +10,16 @@ namespace SkySwordKill.Next.FGUI.Component
             MainView = tableEditor;
             TableList = new CtlTableList(tableEditor.m_table);
             Inspector = new CtlPropertyInspector(tableEditor.m_inspector);
+            ToolsBar = new CtlToolsBar(tableEditor.m_toolsBar);
+            
+            FGUITools.BindHSeg(tableEditor.m_seg, 
+                () => MainView.width * 0.1f, 
+                () => MainView.width * 0.9f);
         }
         
-        public UI_ComTableEditor MainView { get; set; }
-        public CtlTableList TableList { get; set; }
-        public CtlPropertyInspector Inspector { get; set; }
+        public UI_ComTableEditor MainView { get; }
+        public CtlTableList TableList { get; }
+        public CtlPropertyInspector Inspector { get; }
+        public CtlToolsBar ToolsBar { get; }
     }
 }

@@ -7,7 +7,8 @@ namespace SkySwordKill.NextFGUI.NextCore
 {
     public partial class UI_WinConfirmDialog : GComponent
     {
-        public UI_WindowFrame2 m_frame;
+        public Controller m_type;
+        public UI_WindowFrameDialog m_frame;
         public GTextField m_text;
         public GButton m_btnOk;
         public GButton m_closeButton;
@@ -22,7 +23,8 @@ namespace SkySwordKill.NextFGUI.NextCore
         {
             base.ConstructFromXML(xml);
 
-            m_frame = (UI_WindowFrame2)GetChild("frame");
+            m_type = GetController("type");
+            m_frame = (UI_WindowFrameDialog)GetChild("frame");
             m_text = (GTextField)GetChild("text");
             m_btnOk = (GButton)GetChild("btnOk");
             m_closeButton = (GButton)GetChild("closeButton");

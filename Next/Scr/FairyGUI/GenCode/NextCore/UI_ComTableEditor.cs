@@ -7,9 +7,12 @@ namespace SkySwordKill.NextFGUI.NextCore
 {
     public partial class UI_ComTableEditor : GComponent
     {
+        public GGraph m_bg;
+        public GGraph m_bgTable;
         public UI_ComTableList m_table;
         public UI_ComMainInspector m_inspector;
         public GGraph m_seg;
+        public UI_ComToolsBar m_toolsBar;
         public const string URL = "ui://028qk31heg8y3f";
 
         public static UI_ComTableEditor CreateInstance()
@@ -21,9 +24,12 @@ namespace SkySwordKill.NextFGUI.NextCore
         {
             base.ConstructFromXML(xml);
 
+            m_bg = (GGraph)GetChild("bg");
+            m_bgTable = (GGraph)GetChild("bgTable");
             m_table = (UI_ComTableList)GetChild("table");
             m_inspector = (UI_ComMainInspector)GetChild("inspector");
             m_seg = (GGraph)GetChild("seg");
+            m_toolsBar = (UI_ComToolsBar)GetChild("toolsBar");
         }
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="432,450" designImageLayer="1">
   <displayList>
-    <component id="n0_tcay" name="frame" src="nkvz2m" fileName="Component/WindowFrame/WindowFrame.xml" xy="0,0" size="432,450" controller="hasCloseButton,1">
+    <component id="n0_tcay" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="432,450" controller="hasCloseButton,1">
       <relation target="" sidePair="width-width,height-height"/>
     </component>
     <component id="n4_tcay" name="btnOk" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="151,415">
@@ -10,10 +10,17 @@
     <component id="n5_tcay" name="closeButton" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="235,415">
       <Button title="取消"/>
     </component>
-    <image id="n7_tcay" name="bg" src="nkvz1i" fileName="Image/frame.png" xy="4,29" pivot="0.5,0.5" size="423,375" color="#2c313c">
+    <graph id="n7_tcay" name="bg" xy="4,29" pivot="0.5,0.5" size="423,375" type="rect" lineColor="#ff32363c" fillColor="#ff2c313c">
       <relation target="" sidePair="width-width,height-height"/>
-    </image>
+    </graph>
+    <graph id="n15_hc7r" name="bgToolsBar" xy="5,29" size="421,24" type="rect" lineSize="0" lineColor="#ff32363c" fillColor="#ff21252b">
+      <relation target="" sidePair="width-width,height-height,center-center,middle-middle"/>
+    </graph>
     <text id="n10_dxyi" name="txtTips" xy="10,415" size="134,25" fontSize="14" color="#ffffff" vAlign="middle" autoSize="none" singleLine="true" autoClearText="true" text=" 已选 0/0 项"/>
-    <component id="n12_of7d" name="table" src="nkvz2b" fileName="Component/Table/ComTableList.xml" xy="6,30" size="419,371"/>
+    <component id="n12_of7d" name="table" src="nkvz2b" fileName="Component/Table/ComTableList.xml" xy="5,54" size="421,348"/>
+    <component id="n13_rabj" name="toolsBar" src="d4rw3w" fileName="Component/ToolsBar/ComToolsBar.xml" xy="5,29" size="421,24">
+      <relation target="" sidePair="width-width"/>
+    </component>
+    <graph id="n14_rabj" name="n14" xy="5,53" size="421,1" type="rect" lineSize="0" lineColor="#ff32363c" fillColor="#ff32363c"/>
   </displayList>
 </component>

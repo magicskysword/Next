@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="62,29" extention="Label">
+  <displayList>
+    <graph id="n1_mv9q" name="n1" xy="0,0" size="62,29" type="rect" lineColor="#ff565656" fillColor="#ff3d424b">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <text id="n0_mv9q" name="title" xy="5,5" size="52,19" restrictSize="0,390,0,0" fontSize="12" color="#ffffff" vAlign="middle" text="文本提示"/>
+  </displayList>
+  <relation target="n0_mv9q" sidePair="width-width,height-height"/>
+</component>

@@ -1,22 +1,22 @@
 [
     {
-        "ID": 1,
-        "Name": "增益状态"
+        "TypeID": 1,
+        "TypeName": "增益状态"
     },
     {
-        "ID": 2,
-        "Name": "负面状态"
+        "TypeID": 2,
+        "TypeName": "负面状态"
     },
     {
-        "ID": 3,
-        "Name": "特殊状态"
+        "TypeID": 3,
+        "TypeName": "特殊状态"
     },
     {
-        "ID": 4,
-        "Name": "指示物"
+        "TypeID": 4,
+        "TypeName": "指示物"
     },
     {
-        "ID": 5,
-        "Name": "词缀"
+        "TypeID": 5,
+        "TypeName": "词缀"
     }
 ]

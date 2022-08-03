@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="300,30" extention="Label">
+  <displayList>
+    <text id="n2_10zy0" name="title" xy="0,0" size="125,30" fontSize="14" color="#ffffff" align="center" vAlign="middle" autoSize="none" autoClearText="true" text="String"/>
+    <text id="n3_spup" name="content" xy="125,0" size="175,30" fontSize="14" color="#ffffff" vAlign="middle" autoSize="none" autoClearText="true" text="String"/>
+  </displayList>
+</component>

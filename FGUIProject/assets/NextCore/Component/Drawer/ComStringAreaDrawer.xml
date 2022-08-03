@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="200,72" extention="Label">
+<component size="300,72" extention="Label">
   <displayList>
-    <image id="n1_10zy0" name="n1" src="nkvz1i" fileName="Image/frame.png" xy="75,0" size="125,72" color="#2c313c">
+    <graph id="n1_10zy0" name="n1" xy="125,0" size="175,72" type="rect" lineSize="2" fillColor="#ff2c313c">
       <relation target="" sidePair="width-width,height-height"/>
-    </image>
-    <text id="n2_10zy0" name="inContent" xy="81,5" size="113,61" fontSize="14" color="#ffffff" autoSize="none" autoClearText="true" text="TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest" input="true">
+    </graph>
+    <text id="n2_10zy0" name="inContent" xy="131,5" size="163,61" fontSize="14" color="#ffffff" autoSize="none" autoClearText="true" text="TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest" input="true">
       <relation target="" sidePair="width-width,top-top"/>
     </text>
-    <text id="n3_10zy0" name="title" xy="0,0" size="75,30" fontSize="14" color="#ffffff" align="center" vAlign="middle" autoSize="none" autoClearText="true" text="String"/>
-    <component id="n4_10zy0" name="btnEdit" src="nkvz1r" fileName="Component/Button/BtnEdit.xml" xy="174,46" size="20,20">
+    <text id="n3_10zy0" name="title" xy="0,0" size="125,30" fontSize="14" color="#ffffff" align="center" vAlign="middle" autoSize="none" autoClearText="true" text="String"/>
+    <component id="n4_10zy0" name="btnEdit" src="nkvz1r" fileName="Component/Button/BtnEdit.xml" xy="274,46" size="20,20">
       <relation target="" sidePair="right-right,bottom-bottom"/>
     </component>
   </displayList>

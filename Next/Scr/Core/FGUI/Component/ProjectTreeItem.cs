@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace SkySwordKill.Next.FGUI.Component
 {
-    public abstract class ProjectTreeItem : ProjectTreeNodeBase
+    public abstract class ProjectTreeItem : ProjectTreeNodeBase, IProjectItem
     {
-        public virtual string ID => this.GetType().FullName;
+        public abstract string ID { get; }
         public abstract PanelPageBase CreatePage();
         public override bool IsLeaf => true;
-        public virtual string Icon { get; } = String.Empty;
+        public override List<ProjectTreeNodeBase> Children { get; } = null;
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="200,22" extention="Label">
+  <displayList>
+    <graph id="n1_ro2x" name="left" xy="0,10" size="84,2" type="rect" lineSize="0" fillColor="#ff32363c">
+      <relation target="n0_ro2x" sidePair="rightext-left"/>
+    </graph>
+    <graph id="n2_ro2x" name="right" xy="117,11" size="83,2" type="rect" lineSize="0" fillColor="#ff32363c">
+      <relation target="n0_ro2x" sidePair="leftext-right"/>
+      <relation target="" sidePair="rightext-right"/>
+    </graph>
+    <text id="n0_ro2x" name="title" xy="83,0" pivot="0.5,0.5" size="33,22" fontSize="14" color="#ffffff" align="center" vAlign="middle" singleLine="true" text="Title">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </text>
+  </displayList>
+</component>

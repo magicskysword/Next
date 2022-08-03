@@ -4,6 +4,10 @@ namespace SkySwordKill.Next.FGUI.Component
 {
     public abstract class PanelEmptyPage : PanelPageBase
     {
+        protected PanelEmptyPage(string name) : base(name)
+        {
+        }
+        
         protected override GObject OnAdd()
         {
             var graph = new GGraph();
@@ -14,5 +18,7 @@ namespace SkySwordKill.Next.FGUI.Component
         {
             
         }
+
+        
     }
 }

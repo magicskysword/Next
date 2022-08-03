@@ -8,7 +8,7 @@ namespace SkySwordKill.NextFGUI.NextCore
     public partial class UI_ModEditorMainPanel : GComponent
     {
         public UI_ComMainHeader m_comHeader;
-        public UI_ComMainProject m_comProject;
+        public UI_ComTreeProject m_comProject;
         public UI_ComMainDocumentView m_comDocument;
         public GComponent m_comFooter;
         public GGraph m_seg;
@@ -24,7 +24,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             base.ConstructFromXML(xml);
 
             m_comHeader = (UI_ComMainHeader)GetChild("comHeader");
-            m_comProject = (UI_ComMainProject)GetChild("comProject");
+            m_comProject = (UI_ComTreeProject)GetChild("comProject");
             m_comDocument = (UI_ComMainDocumentView)GetChild("comDocument");
             m_comFooter = (GComponent)GetChild("comFooter");
             m_seg = (GGraph)GetChild("seg");

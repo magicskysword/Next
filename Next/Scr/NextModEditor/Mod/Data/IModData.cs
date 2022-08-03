@@ -2,6 +2,6 @@
 {
     public interface IModData
     {
-        int ID { get; set; }
+        int Id { get; set; }
     }
 }

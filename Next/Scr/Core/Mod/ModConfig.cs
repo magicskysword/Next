@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
+using BepInEx;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SkySwordKill.Next.Extension;
 
 namespace SkySwordKill.Next.Mod
@@ -24,7 +27,7 @@ namespace SkySwordKill.Next.Mod
         /// V2版本是新版本
         /// </summary>
         [JsonIgnore]
-        public int DataVersion { get; set; } = 1;
+        public int DataVersion { get; set; } = 2;
 
         [JsonIgnore]
         public Dictionary<string, string> jsonPathCache = new Dictionary<string, string>();
@@ -61,32 +64,48 @@ namespace SkySwordKill.Next.Mod
             return $"<color={colorCode}>{modState}</color>";
         }
 
-        /// <summary>
-        /// 游戏数据文件夹
-        /// </summary>
-        /// <returns></returns>
         public string GetDataDir()
         {
-            if (DataVersion == 2)
-            {
-                return $"{Path}/Data";
-            }
-
-            return Path;
+            return GetDataDir(DataVersion);
         }
         
         /// <summary>
-        /// Next数据文件夹
+        /// 根据版本号获取游戏数据文件夹
+        /// <br/> -1 - 最新版本
+        /// <br/> 1 - V1版本
+        /// <br/> 2 - V2版本
         /// </summary>
         /// <returns></returns>
-        public string GetNDataDir()
+        public string GetDataDir(int dataVersion)
         {
-            if (DataVersion == 2)
+            if (dataVersion == 1)
             {
-                return $"{Path}/NData";
+                return Path;
             }
 
-            return Path;
+            return $"{Path}/Data";
+        }
+        
+        public string GetNDataDir()
+        {
+            return GetNDataDir(DataVersion);
+        }
+        
+        /// <summary>
+        /// 根据版本号获取Next数据文件夹
+        /// <br/> -1 - 最新版本
+        /// <br/> 1 - V1版本
+        /// <br/> 2 - V2版本
+        /// </summary>
+        /// <returns></returns>
+        public string GetNDataDir(int dataVersion)
+        {
+            if (dataVersion == 1)
+            {
+                return Path;
+            }
+
+            return $"{Path}/NData";
         }
 
         /// <summary>
@@ -102,5 +121,40 @@ namespace SkySwordKill.Next.Mod
 
             return Path;
         }
+        
+        public static ModConfig Load(string dir)
+        {
+            ModConfig modConfig = null;
+            var dataVersion = 2;
+            string filePath = Utility.CombinePaths(dir, $"modConfig.json");
+            string filePathV2 = Utility.CombinePaths(dir, "Config", $"modConfig.json");
+            if (File.Exists(filePath))
+            {
+                modConfig = JObject.Parse(File.ReadAllText(filePath)).ToObject<ModConfig>();
+                dataVersion = 1;
+            }
+            else if (File.Exists(filePathV2))
+            {
+                modConfig = JObject.Parse(File.ReadAllText(filePathV2)).ToObject<ModConfig>();
+                dataVersion = 2;
+            }
+            else
+            {
+                Main.LogWarning("ModManager.ModConfigDontExist".I18N());
+            }
+
+            modConfig = modConfig ?? new ModConfig();
+            modConfig.DataVersion = dataVersion;
+            modConfig.Path = dir;
+            return modConfig;
+        }
+    
+        public static void Save(string dir,ModConfig modConfig)
+        {
+            string filePath = $"{dir}/modConfig.json";
+
+            var json = JsonConvert.SerializeObject(modConfig, Formatting.Indented);
+            File.WriteAllText(filePath, json);
+        }   
     }
 }

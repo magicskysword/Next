@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="300,600">
+  <displayList>
+    <graph id="n3_fqcb" name="n3" xy="0,24" size="300,1" type="rect" lineSize="0" fillColor="#ff32363c">
+      <relation target="" sidePair="width-width"/>
+    </graph>
+    <list id="n5_d4rw" name="treeView" xy="0,25" size="300,575" overflow="scroll" scrollBarFlags="128" scrollBar="visible" margin="5,5,5,5" defaultItem="ui://028qk31hnkvz1j" autoClearItems="true" treeView="true" indent="15" clickToExpand="0">
+      <relation target="" sidePair="width-width,height-height"/>
+      <item title="Mod1" level="0"/>
+      <item level="1"/>
+      <item title="Mod2" level="0"/>
+      <item level="1"/>
+      <item level="1"/>
+    </list>
+    <component id="n7_d4rw" name="toolsBar" src="d4rw3w" fileName="Component/ToolsBar/ComToolsBar.xml" xy="0,0" size="300,24">
+      <relation target="" sidePair="width-width"/>
+    </component>
+  </displayList>
+</component>

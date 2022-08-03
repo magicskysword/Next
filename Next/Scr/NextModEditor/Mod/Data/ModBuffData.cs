@@ -13,7 +13,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         }
 
         [JsonProperty(PropertyName = "buffid", Order = 0)]
-        public override int ID { get; set; }
+        public override int Id { get; set; }
 
         [JsonProperty(PropertyName = "BuffIcon", Order = 1)]
         public int Icon { get; set; }
@@ -71,7 +71,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
 
         public static ModBuffDataBuffType GetBuffType(int typeId)
         {
-            return ModMgr.I.BuffDataBuffTypes.Find(data => data.TypeID == typeId);
+            return ModEditorManager.I.BuffDataBuffTypes.Find(data => data.TypeID == typeId);
         }
     }
 }

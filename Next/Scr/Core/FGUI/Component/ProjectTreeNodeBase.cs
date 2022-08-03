@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FairyGUI;
 
 namespace SkySwordKill.Next.FGUI.Component
 {
-    public abstract class ProjectTreeNodeBase
+    public abstract class ProjectTreeNodeBase : ProjectBase
     {
-        public string Name { get; set; }
-        public int Layer { get; set; }
         public abstract bool IsLeaf { get; }
+        public abstract List<ProjectTreeNodeBase> Children { get; }
     }
 }

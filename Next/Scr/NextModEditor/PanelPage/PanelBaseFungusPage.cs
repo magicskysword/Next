@@ -10,6 +10,11 @@ namespace SkySwordKill.NextEditor.PanelPage
 {
     public class PanelBaseFungusPage : PanelPageBase
     {
+        public PanelBaseFungusPage(string name) : base(name)
+        {
+            
+        }
+        
         public CtlDocumentNodeView NodeView;
 
         protected override GObject OnAdd()
@@ -25,7 +30,7 @@ namespace SkySwordKill.NextEditor.PanelPage
                         var flowchart = (FFlowchart)data;
                         return flowchart.Name;
                     })
-            }, ModMgr.I.DefaultFFlowchart.Values.ToList());
+            }, ModEditorManager.I.DefaultFFlowchart.Values.ToList());
             
             return NodeView.MainView;
         }

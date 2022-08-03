@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="150,197">
   <displayList>
-    <image id="n2_of7d" name="n2" src="nkvz1v" fileName="Image/shadow_flat.png" xy="-6,-7" size="162,208" color="#000000">
+    <image id="n2_of7d" name="n2" src="nkvz1v" fileName="Image/shadow_flat.png" xy="-5,-5" size="160,207" color="#000000">
       <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <image id="n3_of7d" name="n3" src="nkvz1i" fileName="Image/frame.png" xy="-1,-3" size="152,199" color="#21252b">
+    <graph id="n3_of7d" name="n3" xy="0,0" size="150,197" type="rect" lineSize="2" fillColor="#ff21252b">
       <relation target="" sidePair="width-width,height-height"/>
-    </image>
-    <list id="n1_of7d" name="list" xy="2,0" size="146,193" overflow="scroll" lineGap="-1" defaultItem="ui://028qk31hnkvz1t">
+    </graph>
+    <list id="n1_of7d" name="list" xy="2,2" size="146,193" overflow="scroll" scrollBarFlags="4" lineGap="-1" defaultItem="ui://028qk31hnkvz1t">
       <relation target="" sidePair="width-width"/>
     </list>
   </displayList>

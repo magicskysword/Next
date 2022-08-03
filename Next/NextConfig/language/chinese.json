@@ -166,9 +166,9 @@
     "ModEditor.Main.modBuffInfo.affix" : "词缀",
 
     "ModEditor.Main.Header.File": "文件",
-    "ModEditor.Main.Header.File.Open": "打开",
-    "ModEditor.Main.Header.File.Save": "保存",
-    "ModEditor.Main.Header.File.Export": "导出",
+    "ModEditor.Main.Header.File.Open": "打开工程",
+    "ModEditor.Main.Header.File.Save": "保存工程",
+    "ModEditor.Main.Header.File.Export": "导出工程",
     "ModEditor.Main.Header.File.Exit": "退出",
 
     "ModEditor.Main.dialog.textEdit" : "文本编辑"

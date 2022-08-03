@@ -12,7 +12,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         }
 
         [JsonProperty(PropertyName = "id", Order = 0)]
-        public override int ID { get; set; }
+        public override int Id { get; set; }
 
         [JsonProperty(PropertyName = "ItemIcon", Order = 1)]
         public int ItemIcon { get; set; }

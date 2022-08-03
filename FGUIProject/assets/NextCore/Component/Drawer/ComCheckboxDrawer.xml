@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="300,30" extention="Label">
+  <displayList>
+    <text id="n2_rabj" name="title" xy="0,0" size="125,30" fontSize="14" color="#ffffff" align="center" vAlign="middle" autoSize="none" autoClearText="true" text="checkbox"/>
+    <component id="n3_rabj" name="checkbox" src="rabj49" fileName="Component/Button/BtnCheckbox.xml" xy="133,3"/>
+  </displayList>
+</component>

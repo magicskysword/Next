@@ -5,6 +5,11 @@ namespace SkySwordKill.Next.FGUI.Component
 {
     public abstract class PanelPageBase
     {
+        public PanelPageBase(string name)
+        {
+            Name = name;
+        }
+        
         public string ID { get; set; }
         public string Name { get; set; }
         public GObject Content { get; set; }

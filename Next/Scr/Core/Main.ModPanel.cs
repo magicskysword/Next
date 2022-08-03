@@ -337,8 +337,10 @@ namespace SkySwordKill.Next
                     if (GUILayout.Button("HeaderBar.ExportBase".I18N()))
                     {
                         Directory.CreateDirectory(PathExportOutputDir.Value);
-                        ModManager.GenerateBaseData();
-                        Process.Start(PathExportOutputDir.Value);
+                        ModManager.GenerateBaseData(() =>
+                        {
+                            Process.Start(PathExportOutputDir.Value);
+                        });
                     }
                 }
 
@@ -888,19 +890,21 @@ namespace SkySwordKill.Next
                         }
                     }
                     GUILayout.EndHorizontal();
+                    
 
-                    if (GUILayout.Button("FGUI测试"))
-                    {
-                        var window = new ModPanelWindow();
-                        window.Show();
-                    }
-                    //
-                    //
-                    // if (GUILayout.Button("FGUI编辑器测试"))
+                    // if (GUILayout.Button("FGUI测试"))
                     // {
-                    //     var window = new ModEditorMainPanel();
+                    //     var window = new ModPanelWindow();
                     //     window.Show();
                     // }
+                    //
+                    //
+                    if (GUILayout.Button("Next编辑器（预览版）"))
+                    {
+                        var window = new ModEditorMainPanel();
+                        window.Show();
+                        _isWinOpen = false;
+                    }
                 }
                 GUILayout.EndVertical();
             }

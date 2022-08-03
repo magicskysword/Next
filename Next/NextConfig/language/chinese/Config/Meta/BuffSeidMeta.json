@@ -92,7 +92,7 @@
         "ID": 7,
         "IDName": "id",
         "Name": "限制Buff层数",
-        "Desc": "层数上限为X",
+        "Desc": "限制指定Buff的层数上限为X",
         "Properties": [
             {
                 "ID": "value1",
@@ -176,7 +176,7 @@
     "15": {
         "ID": 15,
         "IDName": "id",
-        "Name": "受到属性伤害变化（百分比）",
+        "Name": "受到属性伤害变化(%)",
         "Desc": "受到X属性伤害减少Y%（负值为增加）",
         "Properties": [
             {
@@ -391,14 +391,14 @@
     "29": {
         "ID": 29,
         "IDName": "id",
-        "Name": "溢出的治疗量，转化为对敌人的伤害",
+        "Name": "溢出治疗转化伤害",
         "Desc": "溢出的治疗量，转化为对敌人的伤害",
         "Properties": []
     },
     "30": {
         "ID": 30,
         "IDName": "id",
-        "Name": "受伤未损失血量时，对敌人造成伤害",
+        "Name": "受伤未损血造成伤害",
         "Desc": "受到攻击时，若生命值不损失，对敌方造成X*层数点Y属性伤害",
         "Properties": [
             {
@@ -419,7 +419,7 @@
     "31": {
         "ID": 31,
         "IDName": "id",
-        "Name": "血量置为1，恢复等指定Buff总层数血量",
+        "Name": "血置1，恢复血量",
         "Desc": "将生命值置为1，随后恢复等同于自身Buff（A,B,C...）总层数*Y的血量。",
         "Properties": [
             {
@@ -440,7 +440,7 @@
     "32": {
         "ID": 32,
         "IDName": "id",
-        "Name": "吸收灵气后获得Buff",
+        "Name": "吸收灵气获得Buff",
         "Desc": "每吸收X点灵气，获得Y【Buff】*Z",
         "Properties": [
             {
@@ -466,7 +466,7 @@
     "33": {
         "ID": 33,
         "IDName": "id",
-        "Name": "消散灵气后获得Buff",
+        "Name": "消散灵气获得Buff",
         "Desc": "每消散X点灵气，获得Y【Buff】*Z",
         "Properties": [
             {
@@ -492,7 +492,7 @@
     "34": {
         "ID": 34,
         "IDName": "id",
-        "Name": "吸收指定属性灵气后获得Buff",
+        "Name": "吸收属性灵气获得Buff",
         "Desc": "每吸收X点A属性灵气，获得Y【Buff】*Z",
         "Properties": [
             {
@@ -526,7 +526,7 @@
     "35": {
         "ID": 35,
         "IDName": "id",
-        "Name": "消散指定属性灵气后获得Buff",
+        "Name": "消散属性灵气获得Buff",
         "Desc": "每消散X点A属性灵气，获得Y【Buff】*Z",
         "Properties": [
             {
@@ -560,7 +560,7 @@
     "36": {
         "ID": 36,
         "IDName": "id",
-        "Name": "根据持有灵气获得Buff",
+        "Name": "根据灵气获得Buff",
         "Desc": "每有X点灵气，获得Y【Buff】*Z",
         "Properties": [
             {
@@ -586,7 +586,7 @@
     "37": {
         "ID": 37,
         "IDName": "id",
-        "Name": "根据持有属性灵气获得Buff",
+        "Name": "根据属性灵气获得Buff",
         "Desc": "每有X点A属性灵气，获得Y【Buff】*Z",
         "Properties": [
             {
@@ -646,7 +646,7 @@
     "39": {
         "ID": 39,
         "IDName": "id",
-        "Name": "消耗指定属性灵气获得Buff",
+        "Name": "消耗属性灵气获得Buff",
         "Desc": "每消耗X点A属性灵气，获得Y【Buff】*Z",
         "Properties": [
             {
@@ -706,7 +706,7 @@
     "41": {
         "ID": 41,
         "IDName": "id",
-        "Name": "释放指定技能获得Buff",
+        "Name": "释放特定技能获得Buff",
         "Desc": "每释放X次A技能，获得Y【Buff】*Z",
         "Properties": [
             {
@@ -737,7 +737,7 @@
     "42": {
         "ID": 42,
         "IDName": "id",
-        "Name": "释放指定属性技能获得Buff",
+        "Name": "释放属性技能获得Buff",
         "Desc": "每释放X次A属性技能，获得Y【Buff】*Z",
         "Properties": [
             {
@@ -797,7 +797,7 @@
     "44": {
         "ID": 44,
         "IDName": "id",
-        "Name": "受到指定属性伤害获得Buff",
+        "Name": "受到属性伤害获得Buff",
         "Desc": "每受到X次A属性伤害，获得Y【Buff】*Z",
         "Properties": [
             {
@@ -831,7 +831,7 @@
     "45": {
         "ID": 45,
         "IDName": "id",
-        "Name": "【已删除】每获得X层A【Buff】，获得Y【Buff】*Z",
+        "Name": "【已删除】",
         "Desc": "每获得X层A【Buff】，获得Y【Buff】*Z",
         "Properties": []
     },
@@ -858,7 +858,7 @@
     "48": {
         "ID": 48,
         "IDName": "id",
-        "Name": "满足层数后移除自身，获得Buff",
+        "Name": "满足层数移除获得Buff",
         "Desc": "满X层后移除自身，获得Y【Buff】*Z",
         "Properties": [
             {
@@ -884,14 +884,14 @@
     "49": {
         "ID": 49,
         "IDName": "id",
-        "Name": "【已删除】从5种灵气中选择X股",
+        "Name": "【已删除】",
         "Desc": "【发现】从5种灵气中选择X张",
         "Properties": []
     },
     "50": {
         "ID": 50,
         "IDName": "id",
-        "Name": "指定属性技能伤害增加",
+        "Name": "指定属性伤害增加",
         "Desc": "X属性技能伤害+Y*层数",
         "Properties": [
             {
@@ -930,7 +930,7 @@
     "52": {
         "ID": 52,
         "IDName": "id",
-        "Name": "造成伤害一定次数后获得Buff",
+        "Name": "造成伤害次数获得Buff",
         "Desc": "每造成X次伤害，获得Y【Buff】*Z",
         "Properties": [
             {
@@ -956,7 +956,7 @@
     "53": {
         "ID": 53,
         "IDName": "id",
-        "Name": "敌方有对应Buff时，获得Buff",
+        "Name": "敌方对应Buff获得Buff",
         "Desc": "敌方每有X*A【Buff】，获得Z*B【Buff】",
         "Properties": [
             {
@@ -990,7 +990,7 @@
     "54": {
         "ID": 54,
         "IDName": "id",
-        "Name": "自身有对应Buff时，获得Buff",
+        "Name": "自身对应Buff获得Buff",
         "Desc": "自身每有X层A【Buff】，获得Z层B【Buff】",
         "Properties": [
             {
@@ -1050,7 +1050,7 @@
     "57": {
         "ID": 57,
         "IDName": "id",
-        "Name": "造成属性伤害增加（百分比）",
+        "Name": "造成属性伤害增加(%)",
         "Desc": "你造成的X属性技能伤害提升Y%",
         "Properties": [
             {
@@ -1071,14 +1071,14 @@
     "58": {
         "ID": 58,
         "IDName": "id",
-        "Name": "【已删除】抵挡Buff伤害",
+        "Name": "【已删除】",
         "Desc": "抵挡1（层数）次X【Buff】造成的伤害",
         "Properties": []
     },
     "59": {
         "ID": 59,
         "IDName": "id",
-        "Name": "【已删除】灵气替代打出",
+        "Name": "【已删除】",
         "Desc": "X属性灵气可以视作Y属性灵气打出",
         "Properties": []
     },
@@ -1111,7 +1111,7 @@
     "62": {
         "ID": 62,
         "IDName": "id",
-        "Name": "当血量低时触发后续特性",
+        "Name": "血量低时触发后续特性",
         "Desc": "当血量低于X%时触发后续特性",
         "Properties": [
             {
@@ -1137,7 +1137,7 @@
     "64": {
         "ID": 64,
         "IDName": "id",
-        "Name": "吸收对应属性灵气权重提升",
+        "Name": "吸收属性灵气权重提升",
         "Desc": "吸收X属性灵气的权重提升Y",
         "Properties": [
             {
@@ -1158,7 +1158,7 @@
     "65": {
         "ID": 65,
         "IDName": "id",
-        "Name": "有概率触发后续特性",
+        "Name": "概率触发后续特性",
         "Desc": "有X%的概率 触发后续特性",
         "Properties": [
             {
@@ -1171,7 +1171,7 @@
     "66": {
         "ID": 66,
         "IDName": "id",
-        "Name": "对敌方造对应Buff层数伤害。",
+        "Name": "造Buff层数伤害。",
         "Desc": "对敌方造成等同于其X【Buff】层数*（Y*层数）点伤害。",
         "Properties": [
             {
@@ -1192,7 +1192,7 @@
     "67": {
         "ID": 67,
         "IDName": "id",
-        "Name": "自身有对应Buff时，获得Buff（受层数影响）",
+        "Name": "有对应Buff时获得Buff",
         "Desc": "每有X层A【Buff】，获得（当前Buff层数*Z）层B【Buff】",
         "Properties": [
             {
@@ -1242,7 +1242,7 @@
     "69": {
         "ID": 69,
         "IDName": "id",
-        "Name": "使用技能时，若灵气消耗大于指定值，额外吸收灵气",
+        "Name": "灵气消耗大时额外吸收灵气",
         "Desc": "当你使用消耗大于X点灵气的技能时，吸收Y*层数点灵气",
         "Properties": [
             {
@@ -1278,7 +1278,7 @@
     "71": {
         "ID": 71,
         "IDName": "id",
-        "Name": "失去生命值（真实伤害：不触发其他Buff）",
+        "Name": "失去生命值（真实伤害）",
         "Desc": "失去（X*层数）点生命值（真实伤害：不触发受到伤害时触发的Buff）",
         "Properties": [
             {
@@ -1319,7 +1319,7 @@
     "74": {
         "ID": 74,
         "IDName": "id",
-        "Name": "如果敌方存在Buff，则触发后续特性",
+        "Name": "敌方存在Buff触发后续特性",
         "Desc": "如果敌方存在X【Buff】，则触发后续特性",
         "Properties": [
             {
@@ -1335,7 +1335,7 @@
     "75": {
         "ID": 75,
         "IDName": "id",
-        "Name": "如果自身存在所有指定Buff，则触发后续特性",
+        "Name": "自身存在Buff触发后续特性",
         "Desc": "如果自身存在所有指定Buff，则触发后续特性",
         "Properties": [
             {
@@ -1351,7 +1351,7 @@
     "76": {
         "ID": 76,
         "IDName": "id",
-        "Name": "使用对应技能时，触发后续特性",
+        "Name": "使用对应技能触发后续特性",
         "Desc": "每次使用X技能时，触发后续特性",
         "Properties": [
             {
@@ -1364,7 +1364,7 @@
     "77": {
         "ID": 77,
         "IDName": "id",
-        "Name": "如果是满血状态，则触发后续特性",
+        "Name": "满血状态触发后续特性",
         "Desc": "如果是满血状态，则触发后续特性",
         "Properties": []
     },
@@ -3580,21 +3580,21 @@
     "311": {
         "ID": 311,
         "IDName": "id",
-        "Name": "【已删除】受到等同于自身已损失生命值层数%的伤害",
+        "Name": "【已删除】",
         "Desc": "受到等同于自身已损失生命值层数%的伤害",
         "Properties": []
     },
     "312": {
         "ID": 312,
         "IDName": "id",
-        "Name": "【已删除】若本回合释放技能的次数（大于/等于/小于）X，跳过灵气消散阶段",
+        "Name": "【已删除】",
         "Desc": "若本回合释放技能的次数（大于/等于/小于）X，跳过灵气消散阶段",
         "Properties": []
     },
     "313": {
         "ID": 313,
         "IDName": "id",
-        "Name": "【已删除】随机移除（对手/自己）的一个X类Buff（所有层数）",
+        "Name": "【已删除】",
         "Desc": "随机移除（对手/自己）的一个X类Buff（所有层数）",
         "Properties": []
     },

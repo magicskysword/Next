@@ -16,6 +16,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             }
             m_list.ResizeToFit();
             width = Mathf.Max(m_list.width, frameWidth);
+            data = getData;
         }
     }
 }

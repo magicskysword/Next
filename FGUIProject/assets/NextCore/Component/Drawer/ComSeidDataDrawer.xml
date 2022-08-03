@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="300,119" extention="Label">
+  <displayList>
+    <text id="n2_7exm" name="title" xy="0,0" size="125,30" fontSize="14" color="#ffffff" align="center" vAlign="middle" autoSize="none" autoClearText="true" text="Seid"/>
+    <graph id="n4_7exm" name="n4" xy="125,32" size="175,85" type="rect" lineSize="2" fillColor="#ff2c313c">
+      <relation target="n5_7exm" sidePair="width-width,height-height,center-center,middle-middle"/>
+    </graph>
+    <list id="n5_7exm" name="lstSeid" xy="127,34" size="171,81" selectionMode="none" overflow="scroll" defaultItem="ui://028qk31hspup3r">
+      <relation target="" sidePair="width-width"/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+    </list>
+    <component id="n6_7exm" name="btnEdit" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="150,3" size="100,23">
+      <Button title="编辑"/>
+    </component>
+  </displayList>
+  <relation target="n5_7exm" sidePair="bottomext-bottom"/>
+</component>

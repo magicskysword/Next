@@ -7,7 +7,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
 {
     public abstract class ModFolderFileData<T> : IModData where T : ModFolderFileData<T>
     {
-        public abstract int ID { get; set; }
+        public abstract int Id { get; set; }
         public static string FolderName { get; set; }
 
         public static List<T> Load(string dir)
@@ -20,7 +20,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
             {
                 var data = JsonConvert.DeserializeObject<T>(File.ReadAllText(filePath));
 
-                if (Path.GetFileNameWithoutExtension(filePath) != data?.ID.ToString())
+                if (Path.GetFileNameWithoutExtension(filePath) != data?.Id.ToString())
                     throw new ModException("文件ID与定义ID不一致");
             
                 dataList.Add(data);
@@ -37,7 +37,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
             Directory.CreateDirectory(buffDir);
             foreach (var data in dataDic)
             {
-                var filePath = $"{buffDir}/{data.ID}.json";
+                var filePath = $"{buffDir}/{data.Id}.json";
                 var json = JsonConvert.SerializeObject(data, Formatting.Indented);
                 File.WriteAllText(filePath, json);
             }

@@ -6,13 +6,13 @@ namespace SkySwordKill.NextModEditor.Mod.Data
 {
     public class ModSeidData : IModData
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public Dictionary<string, ModSeidToken> DataList { get; set; } = new Dictionary<string, ModSeidToken>();
 
         public static ModSeidData LoadSeidData(ModSeidMeta meta, JObject jObject)
         {
             var data = new ModSeidData();
-            data.ID = jObject["id"].ToObject<int>();
+            data.Id = jObject["id"].ToObject<int>();
             foreach (var seidProperty in meta.Properties)
             {
                 JToken token = null;
@@ -61,7 +61,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         public static ModSeidData CreateSeidData(int ID,ModSeidMeta meta)
         {
             var data = new ModSeidData();
-            data.ID = ID;
+            data.Id = ID;
             foreach (var seidProperty in meta.Properties)
             {
                 switch (seidProperty.Type)
@@ -92,7 +92,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         public static JObject SaveSeidData(ModSeidMeta meta, ModSeidData seidData)
         {
             var data = new JObject();
-            data.Add(meta.IDName,seidData.ID);
+            data.Add(meta.IDName,seidData.Id);
             foreach (var seidProperty in meta.Properties)
             {
                 switch (seidProperty.Type)
@@ -104,6 +104,14 @@ namespace SkySwordKill.NextModEditor.Mod.Data
                         var jArray = JArray.FromObject(seidData.GetToken<ModSIntArray>(seidProperty.ID).Value);
                         data.Add(seidProperty.ID, jArray);
                         break;
+                    case ModSeidPropertyType.Float:
+                        data.Add(seidProperty.ID, seidData.GetToken<ModSFloat>(seidProperty.ID).Value);
+                        break;
+                    case ModSeidPropertyType.String:
+                        data.Add(seidProperty.ID, seidData.GetToken<ModSString>(seidProperty.ID).Value);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
 

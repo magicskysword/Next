@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="10,200" extention="ScrollBar">
   <displayList>
-    <graph id="n0_10zy0" name="n0" xy="0,0" size="10,200" alpha="0" touchable="false" type="rect" lineSize="0" fillColor="#ff3e4247">
+    <graph id="n0_10zy0" name="n0" xy="0,0" size="10,200" touchable="false" type="rect" lineSize="0" fillColor="#ff3e4247">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <graph id="n1_10zy0" name="bar" xy="0,0" size="10,200">

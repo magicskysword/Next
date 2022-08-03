@@ -144,6 +144,9 @@ namespace SkySwordKill.Next.DialogSystem
 
         public DialogOptionCommand[] GetOptionCommands()
         {
+            if (Option == null)
+                return Array.Empty<DialogOptionCommand>();
+            
             var optionCommands = new DialogOptionCommand[Option.Length];
             for (int i = 0; i < optionCommands.Length; i++)
             {

@@ -7,7 +7,7 @@ namespace SkySwordKill.Next.FGUI.Component
     public class CtlIntPropertyDrawer : CtlPropertyDrawerBase
     {
         private string _drawerName;
-        private UI_ComIntDrawer Drawer => (UI_ComIntDrawer)Component;
+        private UI_ComNumberDrawer Drawer => (UI_ComNumberDrawer)Component;
         private Action<int> _setter;
         private Func<int> _getter;
 
@@ -20,8 +20,8 @@ namespace SkySwordKill.Next.FGUI.Component
     
         protected override GComponent OnCreateCom()
         {
-            var drawer = UI_ComIntDrawer.CreateInstance();
-            drawer.BindEndEdit(OnSetProperty);
+            var drawer = UI_ComNumberDrawer.CreateInstance();
+            drawer.BindIntEndEdit(OnSetProperty);
             drawer.title = _drawerName;
             return drawer;
         }

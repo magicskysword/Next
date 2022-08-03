@@ -35,9 +35,24 @@ namespace SkySwordKill.Next.Extension
             return convertSrt;
         }
 
+        /// <summary>
+        /// 国际化文本
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static string I18N(this string key)
         {
             return NextLanguage.Get(Main.I.NextLanguage, key);
+        }
+        
+        /// <summary>
+        /// 待国际化的文本
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static string I18NTodo(this string key)
+        {
+            return key;
         }
 
         public static ConfigTarget<T> CreateConfig<T>(this ConfigFile config, string section, string key,

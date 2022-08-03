@@ -8,7 +8,7 @@ namespace SkySwordKill.NextFGUI.NextCore
     public partial class UI_PopupMenu_item : GButton
     {
         public Controller m_checked;
-        public GImage m_select;
+        public GGraph m_select;
         public GImage m_arrow;
         public const string URL = "ui://028qk31hnkvz2h";
 
@@ -22,7 +22,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             base.ConstructFromXML(xml);
 
             m_checked = GetController("checked");
-            m_select = (GImage)GetChild("select");
+            m_select = (GGraph)GetChild("select");
             m_arrow = (GImage)GetChild("arrow");
         }
     }

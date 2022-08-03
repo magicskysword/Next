@@ -13,7 +13,9 @@ using Newtonsoft.Json.Linq;
 using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FCanvas;
+using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.Next.StaticFace;
+using SkySwordKill.NextEditor.Mod;
 using UnityEngine.SceneManagement;
 
 namespace SkySwordKill.Next.Mod
@@ -65,7 +67,23 @@ namespace SkySwordKill.Next.Mod
             dataContainer = MainDataContainer.CloneMainData();
         }
 
-        public static void GenerateBaseData()
+        public static void GenerateBaseData(Action onComplete = null)
+        {
+            WindowWaitDialog.CreateDialog("提示", "正在导出数据...", 1f,
+                () =>
+                {
+                    GenerateBaseDataWithoutGUI();
+                }, 
+                () =>
+                {
+                    WindowConfirmDialog.CreateDialog("提示", "数据导出成功！", false, () =>
+                    {
+                        onComplete?.Invoke();
+                    });
+                });
+        }
+
+        public static void GenerateBaseDataWithoutGUI()
         {
             Main.LogInfo("ModManager.GenerateBaseData".I18N());
 
@@ -288,7 +306,6 @@ namespace SkySwordKill.Next.Mod
         public static ModConfig LoadModMetadata(string dir)
         {
             var modConfig = GetModConfig(dir);
-            modConfig.Path = dir;
             return modConfig;
         }
         
@@ -425,24 +442,9 @@ namespace SkySwordKill.Next.Mod
         private static ModConfig GetModConfig(string dir)
         {
             ModConfig modConfig = null;
-            int dataVersion = 1;
             try
             {
-                string filePath = Utility.CombinePaths(dir, $"modConfig.json");
-                string filePathV2 = Utility.CombinePaths(dir, "Config", $"modConfig.json");
-                if (File.Exists(filePath))
-                {
-                    modConfig = JObject.Parse(File.ReadAllText(filePath)).ToObject<ModConfig>();
-                }
-                else if (File.Exists(filePathV2))
-                {
-                    modConfig = JObject.Parse(File.ReadAllText(filePathV2)).ToObject<ModConfig>();
-                    dataVersion = 2;
-                }
-                else
-                {
-                    Main.LogWarning("ModManager.ModConfigDontExist".I18N());
-                }
+                modConfig = ModConfig.Load(dir);
             }
             catch (Exception)
             {
@@ -451,7 +453,6 @@ namespace SkySwordKill.Next.Mod
 
             modConfig = modConfig ?? new ModConfig();
             modConfig.State = ModState.Unload;
-            modConfig.DataVersion = dataVersion;
 
             return modConfig;
         }

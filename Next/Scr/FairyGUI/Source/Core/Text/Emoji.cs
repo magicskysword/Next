@@ -1,4 +1,7 @@
-﻿namespace FairyGUI
+﻿using System;
+using System.Collections.Generic;
+
+namespace FairyGUI
 {
     /// <summary>
     /// 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FairyGUI;
+using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.NextFGUI.NextCore;
 using SkySwordKill.NextModEditor.Mod.Data;
@@ -11,7 +12,7 @@ namespace SkySwordKill.Next.FGUI.Component
     public class CtlIDPropertyDrawer : CtlPropertyDrawerBase
     {
         private string _drawerName;
-        private UI_ComIntDrawer Drawer => (UI_ComIntDrawer)Component;
+        private UI_ComNumberDrawer Drawer => (UI_ComNumberDrawer)Component;
         private Func<IEnumerable<IModData>> _dataListGetter;
         private Action<int> _onChangeID;
         private IModData _modData;
@@ -32,15 +33,16 @@ namespace SkySwordKill.Next.FGUI.Component
 
             _onChangeID = num =>
             {
-                if (num == modData.ID)
+                if (num == modData.Id)
                     return;
 
-                var otherData = DataList.FirstOrDefault(data => data.ID == num && data != modData);
+                var otherData = DataList.FirstOrDefault(data => data.Id == num && data != modData);
 
                 if (otherData != null)
                 {
                     WindowConfirmDialog.CreateDialog("提示",
                         $"已经存在ID为 {num} 的数据，是否交换 {dataTitleGetter.Invoke(modData)} 与 {dataTitleGetter.Invoke(otherData)} ID？",
+                        true,
                         () =>
                         {
                             onSwiftId?.Invoke(modData, otherData);
@@ -53,6 +55,7 @@ namespace SkySwordKill.Next.FGUI.Component
                     WindowConfirmDialog.CreateDialog(
                         "提示",
                         $"即将把 {dataTitleGetter.Invoke(modData)} 的ID修改为 {num}，是否继续？",
+                        true,
                         () =>
                         {
                             onChangeId?.Invoke(modData, num);
@@ -65,16 +68,16 @@ namespace SkySwordKill.Next.FGUI.Component
 
         protected override GComponent OnCreateCom()
         {
-            var drawer = UI_ComIntDrawer.CreateInstance();
-            drawer.BindEndEdit(_onChangeID);
-            drawer.m_inContent.text = _modData.ID.ToString();
+            var drawer = UI_ComNumberDrawer.CreateInstance();
+            drawer.BindIntEndEdit(_onChangeID);
+            drawer.m_inContent.text = _modData.Id.ToString();
             drawer.title = _drawerName;
             return drawer;
         }
 
         protected override void OnRefresh()
         {
-            Drawer.m_inContent.text = _modData.ID.ToString();
+            Drawer.m_inContent.text = _modData.Id.ToString();
         }
     }
 }

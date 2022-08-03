@@ -90,6 +90,17 @@ namespace SkySwordKill.Next.FGUI.Component
             DocumentView.m_lstTab.numItems = Tabs.Count;
         }
 
+        public void TryAddAndSelectTab(IProjectItem item)
+        {
+            if (!TryGetTab(item.ID,out var tab))
+            {
+                tab = item.CreatePage();
+                tab.ID = item.ID;
+                AddTab(tab);
+            }
+            SelectTab(tab);
+        }
+        
         public bool TryGetTab(string tabID,out PanelPageBase page)
         {
             page = Tabs.Find(t => t.ID == tabID);
@@ -138,6 +149,16 @@ namespace SkySwordKill.Next.FGUI.Component
         {
             var index = Tabs.IndexOf(page);
             OnSwitchTab(index,true);
+        }
+
+        public void RemoveAllTab()
+        {
+            foreach (var tab in Tabs)
+            {
+                tab.Close();
+            }
+            Tabs.Clear();
+            RefreshTabs();
         }
     }
 }

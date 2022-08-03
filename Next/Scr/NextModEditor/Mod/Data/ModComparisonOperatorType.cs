@@ -2,7 +2,7 @@
 {
     public class ModComparisonOperatorType
     {
-        public string ID { get; set; }
-        public string Desc { get; set; }
+        public string TypeStrID { get; set; }
+        public string TypeName { get; set; }
     }
 }

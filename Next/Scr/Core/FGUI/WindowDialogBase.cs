@@ -1,4 +1,5 @@
 ﻿using FairyGUI;
+using SkySwordKill.Next.FGUI;
 using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI
@@ -7,6 +8,7 @@ namespace SkySwordKill.Next.FGUI
     {
         protected WindowDialogBase(string pkgName, string comName) : base(pkgName, comName)
         {
+            modal = true;
         }
     
         protected override void DoShowAnimation()

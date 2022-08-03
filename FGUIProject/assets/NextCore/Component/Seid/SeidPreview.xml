@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="150,20" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <graph id="n4_7exm" name="n4" xy="0,0" size="150,20" type="rect" lineSize="0" fillColor="#ff4d78f0">
+      <gearDisplay controller="button" pages="1,3"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <text id="n3_7exm" name="title" xy="35,0" size="108,20" fontSize="12" color="#ffffff" vAlign="middle" autoSize="ellipsis" singleLine="true" text="Seid Info">
+      <relation target="" sidePair="width-width,height-height"/>
+    </text>
+    <text id="n5_7exm" name="n5" xy="4,0" size="27,20" fontSize="12" color="#ffffff" vAlign="middle" autoSize="none" text="128"/>
+  </displayList>
+  <Button mode="Radio"/>
+</component>

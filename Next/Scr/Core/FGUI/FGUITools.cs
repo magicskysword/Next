@@ -16,9 +16,8 @@ namespace SkySwordKill.Next.FGUI
         {
             EventCallback1 onDragMove = context =>
             {
-                var posX = context.inputEvent.x;
-                posX = Mathf.Clamp(posX, xMinGetter.Invoke(), xMaxGetter.Invoke());
-                seg.x = posX;
+                var pos = new Vector2(context.inputEvent.x, 0);
+                seg.x = Mathf.Clamp(seg.parent.RootToLocal(pos, null).x, xMinGetter.Invoke(), xMaxGetter.Invoke());
             };
             
             EventCallback1 onDragStart = context =>

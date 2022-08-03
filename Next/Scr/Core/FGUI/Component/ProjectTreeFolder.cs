@@ -2,9 +2,9 @@
 
 namespace SkySwordKill.Next.FGUI.Component
 {
-    public class ProjectTreeFolder : ProjectTreeNodeBase
+    public abstract class ProjectTreeFolder : ProjectTreeNodeBase
     {
         public override bool IsLeaf => false;
-        public bool IsExpended { get; set; }
+        public override List<ProjectTreeNodeBase> Children { get; } = new List<ProjectTreeNodeBase>();
     }
 }

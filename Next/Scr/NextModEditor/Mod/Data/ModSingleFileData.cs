@@ -7,7 +7,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
 {
     public abstract class ModSingleFileData<T> : IModData where T : ModSingleFileData<T>
     {
-        public abstract int ID { get; set; }
+        public abstract int Id { get; set; }
         public static string FileName { get; set; }
 
         public static Dictionary<string, T> Load(string dir)
@@ -24,7 +24,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
 
             foreach (var pair in dataDic)
             {
-                if(pair.Key != pair.Value.ID.ToString())
+                if(pair.Key != pair.Value.Id.ToString())
                     throw new ModException($"{typeof(T)} ID与Key ID不一致");
             }
 

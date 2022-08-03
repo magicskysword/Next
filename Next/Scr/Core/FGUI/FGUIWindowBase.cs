@@ -1,5 +1,9 @@
-﻿using FairyGUI;
+﻿using System.IO;
+using FairyGUI;
+using SkySwordKill.Next.FGUI.Dialog;
+using SkySwordKill.Next.Mod;
 using SkySwordKill.Next.XiaoYeGUI;
+using SkySwordKill.NextEditor.Mod;
 using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI
@@ -48,7 +52,12 @@ namespace SkySwordKill.Next.FGUI
             RayBlocker.DestroySelf();
             Dispose();
         }
-        
+
+        protected override void closeEventHandler(EventContext context)
+        {
+            
+        }
+
         /// <summary>
         /// 按缩放因子设置缩放大小并居中
         /// </summary>
@@ -56,6 +65,7 @@ namespace SkySwordKill.Next.FGUI
         {
             this.SetSize(GRoot.inst.width * factor, GRoot.inst.height * factor);
             Center();
+            ResetRayBlocker();
         }
     }
 }

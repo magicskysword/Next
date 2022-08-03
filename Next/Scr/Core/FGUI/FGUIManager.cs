@@ -8,6 +8,8 @@ namespace SkySwordKill.Next.FGUI
 {
     public class FGUIManager
     {
+        public const string PKG_NEXT_CORE = "NextCore";
+        
         public AssetBundle FguiAB;
         public Dictionary<string, Shader> ShaderMap = new Dictionary<string, Shader>();
         public Dictionary<string, UIPackage> Packages = new Dictionary<string, UIPackage>();
@@ -22,14 +24,16 @@ namespace SkySwordKill.Next.FGUI
             UIConfig.horizontalScrollBar = "ui://NextCore/ScrollBarH";
             UIConfig.verticalScrollBar = "ui://NextCore/ScrollBarV";
             UIConfig.popupMenu = "ui://NextCore/PopupMenu";
+            UIConfig.popupMenu_seperator = "ui://NextCore/PopupMenu_separator";
+            UIConfig.tooltipsWin = "ui://NextCore/TooltipsWin";
 
             ShaderConfig.Get = GetShaderInAB;
             
             RegisterCursor("resizeH","Assets/Cursor/cursor_resize1.png");
             RegisterCursor("resizeV","Assets/Cursor/cursor_resize2.png");
             
-            AddPackage("NextCore");
-            AddPackage("NextModEditor");
+            AddPackage(PKG_NEXT_CORE);
+            
             NextCoreBinder.BindAll();
 
             GRoot.inst.SetContentScaleFactor(1);

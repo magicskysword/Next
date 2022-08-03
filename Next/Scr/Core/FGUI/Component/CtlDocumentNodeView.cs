@@ -33,7 +33,7 @@ namespace SkySwordKill.Next.FGUI.Component
         {
             FFlowcharts = fFlowcharts;
             TableInfos = tableInfos;
-            TableList.BindTable(tableInfos, OnGetFlowchart, OnGetFlowchartCount, OnItemRenderer, OnClickItem);
+            //TableList.BindTable(tableInfos, OnGetFlowchart, OnGetFlowchartCount, OnItemRenderer, OnClickItem);
         }
 
         private int OnGetFlowchartCount()
@@ -56,10 +56,7 @@ namespace SkySwordKill.Next.FGUI.Component
 
         private void OnItemRenderer(int index, UI_ComTableRow row)
         {
-            if (index != TableList.SelectedIndex)
-            {
-                row.GetController("button").selectedIndex = 0;
-            }
+            
         }
     }
 }

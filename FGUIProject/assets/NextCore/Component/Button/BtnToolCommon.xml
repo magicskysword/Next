@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="24,24" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver,4,disabled,5,selectedDisabled" selected="4"/>
+  <displayList>
+    <graph id="n1_10zy0" name="n1" xy="0,0" size="24,24" alpha="0.2" type="rect" lineSize="0">
+      <gearDisplay controller="button" pages="1,2,3"/>
+      <gearLook controller="button" pages="1,2,3" values="0.1,0,0,1|0.2,0,0,1|0.2,0,0,1" default="0.2,0,0,1"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <loader id="n0_10zy0" name="icon" xy="4,4" size="16,16" alpha="0.6" touchable="false" url="ui://028qk31hnkvz1s" fill="scale" color="#333333" clearOnPublish="true">
+      <gearLook controller="button" pages="0,4,5" values="0.6,0,0,0|0.6,0,0,0|0.6,0,0,0" default="1,0,0,0"/>
+      <gearColor controller="button" pages="4,5" values="#333333|#333333" default="#ffffff"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </loader>
+  </displayList>
+  <Button/>
+</component>

@@ -1,10 +1,10 @@
 [
     {
-        "ID": 1,
-        "Desc": "自身"
+        "TypeID": 1,
+        "TypeName": "自身"
     },
     {
-        "ID": 2,
-        "Desc": "敌方"
+        "TypeID": 2,
+        "TypeName": "敌方"
     }
 ]

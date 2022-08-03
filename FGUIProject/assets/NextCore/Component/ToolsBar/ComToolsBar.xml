@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="500,24">
+  <displayList>
+    <list id="n1_d4rw" name="tools" xy="0,0" size="500,24" layout="row" scroll="horizontal" margin="0,0,5,5" colGap="5" defaultItem="ui://028qk31hfqcb3t" autoClearItems="true">
+      <relation target="" sidePair="width-width,height-height"/>
+      <item icon="ui://028qk31hfqcb3v"/>
+      <item icon="ui://028qk31hfqcb3u"/>
+      <item url="ui://028qk31hd4rw3z"/>
+    </list>
+  </displayList>
+</component>

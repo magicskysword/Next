@@ -5,7 +5,7 @@ namespace SkySwordKill.Next.FGUI.Component
 {
     public abstract class CtlPropertyDrawerBase : IPropertyDrawer
     {
-        public Action OnChanged;
+        public Action OnChanged { get; set; } = () => { };
         public GComponent Component { get; set; }
         protected abstract GComponent OnCreateCom();
         protected virtual void OnRemoveCom(GComponent component) { }

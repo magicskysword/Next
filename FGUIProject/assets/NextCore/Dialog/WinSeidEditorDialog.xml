@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,768">
+  <displayList>
+    <component id="n0_7exm" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="1280,768" controller="hasCloseButton,1">
+      <relation target="" sidePair="width-width,height-height"/>
+    </component>
+    <graph id="n2_7exm" name="bgSeid" xy="9,30" size="585,723" type="rect" fillColor="#ff2c313c">
+      <relation target="n1_7exm" sidePair="width-width,height-height,center-center,middle-middle"/>
+    </graph>
+    <list id="n1_7exm" name="list" xy="9,30" size="585,723" overflow="scroll" margin="1,1,1,1" defaultItem="ui://028qk31hnkvz1j" autoClearItems="true" treeView="true" indent="15" clickToExpand="0">
+      <item title="已启用Seid" level="0"/>
+      <item title="1 增加血量" icon="ui://028qk31h7exm3p" level="1"/>
+      <item title="2 造成伤害" icon="ui://028qk31h7exm3p" level="1"/>
+      <item title="未启用Seid" level="0"/>
+      <item title="9 减少血量" icon="ui://028qk31h7exm3p" level="1"/>
+      <item title="10 造成治疗" icon="ui://028qk31h7exm3p" level="1"/>
+    </list>
+    <component id="n3_7exm" name="inspector" src="nkvz2f" fileName="Component/PanelCom/ComMainInspector.xml" xy="697,30" size="573,723"/>
+    <component id="n5_7exm" name="btnAdd" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="605,32" size="79,25">
+      <Button title="新增"/>
+    </component>
+    <component id="n6_7exm" name="btnRemove" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="605,297" size="79,25">
+      <Button title="删除"/>
+    </component>
+    <component id="n7_spup" name="btnEnable" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="605,97" size="79,25">
+      <Button title="启用"/>
+    </component>
+    <component id="n8_spup" name="btnDisable" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="605,132" size="79,25">
+      <Button title="禁用"/>
+    </component>
+    <component id="n9_spup" name="btnMoveUp" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="605,197" size="79,25">
+      <Button title="上移"/>
+    </component>
+    <component id="n10_spup" name="btnMoveDown" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="605,232" size="79,25">
+      <Button title="下移"/>
+    </component>
+  </displayList>
+</component>

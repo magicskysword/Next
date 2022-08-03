@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1600,900">
   <displayList>
-    <graph id="n1_hbj2" name="n1" xy="0,0" size="1600,900" type="rect" lineColor="#ff3e4247" fillColor="#ff3e4247">
+    <graph id="n1_hbj2" name="n1" xy="0,0" size="1600,900" type="rect" lineColor="#ff32363c" fillColor="#ff21252b">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <component id="n0_hbj2" name="comHeader" src="nkvz24" fileName="Component/PanelCom/ComMainHeader.xml" xy="0,0" size="1600,28">
       <relation target="" sidePair="width-width"/>
     </component>
-    <component id="n3_10zy0" name="comProject" src="nkvz25" fileName="Component/PanelCom/ComMainProject.xml" xy="0,27" size="303,854">
+    <component id="n3_10zy0" name="comProject" src="nkvz25" fileName="Component/PanelCom/ComTreeProject.xml" xy="1,28" size="301,852">
       <relation target="" sidePair="height-height"/>
       <relation target="n8_10zy0" sidePair="rightext-left"/>
     </component>

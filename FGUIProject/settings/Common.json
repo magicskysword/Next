@@ -14,7 +14,8 @@
     "按钮按下 #33383F",
     "按钮突出 #484E59",
     "突出色1 #FE381F",
-    "突出色2 #FF874D"
+    "突出色2 #FF874D",
+    "字体浅色 #959595"
   ],
   "fontSizeScheme": [
     "自定义字体大小 30"
@@ -27,7 +28,7 @@
     "vertical": "ui://028qk31hnkvz27",
     "defaultDisplay": "visible"
   },
-  "tipsRes": "",
+  "tipsRes": "ui://028qk31hmv9q42",
   "buttonClickSound": "",
   "pivot": "default",
   "fileName": "Common"

@@ -12,15 +12,21 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         public ModSeidMeta MetaData { get; set; }
         public List<ModSeidData> DataList { get; set; } = new List<ModSeidData>();
 
-        public ModSeidDataGroup(ModSeidMeta meta)
+        private ModSeidDataGroup(ModSeidMeta meta)
         {
             MetaData = meta;
         }
     
+        public static ModSeidDataGroup Create(ModSeidMeta meta)
+        {
+            ModSeidDataGroup data = new ModSeidDataGroup(meta);
+            return data;
+        }
+        
         public static ModSeidDataGroup Load(string dir,ModSeidMeta meta)
         {
             ModSeidDataGroup data = null;
-            string filePath = $"{dir}/{meta.ID}.json";
+            string filePath = $"{dir}/{meta.Id}.json";
             if (File.Exists(filePath))
             {
                 data = new ModSeidDataGroup(meta);
@@ -30,7 +36,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
                     try
                     {
                         var seidData = ModSeidData.LoadSeidData(meta,(JObject)property.Value);
-                        if (property.Name != seidData.ID.ToString())
+                        if (property.Name != seidData.Id.ToString())
                             throw new ModException("Seid ID与Key ID不一致");
                         data.DataList.Add(seidData);
                     }
@@ -49,12 +55,12 @@ namespace SkySwordKill.NextModEditor.Mod.Data
 
         public static void Save(string dir, ModSeidDataGroup dataGroup)
         {
-            string filePath = $"{dir}/{dataGroup.MetaData.ID}.json";
+            string filePath = $"{dir}/{dataGroup.MetaData.Id}.json";
             var jObject = new JObject();
             foreach (var seidData in dataGroup.DataList)
             {
                 var jsonData = ModSeidData.SaveSeidData(dataGroup.MetaData, seidData);
-                jObject.Add(seidData.ID.ToString(),jsonData);
+                jObject.Add(seidData.Id.ToString(),jsonData);
             }
 
             File.WriteAllText(filePath, jObject.ToString(Formatting.Indented));

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="64,10">
+  <displayList>
+    <graph id="n0_rabj" name="n0" xy="0,4" size="64,2" type="rect" lineSize="0" fillColor="#ff32363c">
+      <relation target="" sidePair="width-width"/>
+    </graph>
+  </displayList>
+</component>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="300,600">
+  <displayList>
+    <graph id="n3_fqcb" name="n3" xy="1,24" size="300,1" type="rect" lineSize="0" fillColor="#ff32363c">
+      <relation target="" sidePair="width-width"/>
+    </graph>
+    <component id="n7_d4rw" name="toolsBar" src="d4rw3w" fileName="Component/ToolsBar/ComToolsBar.xml" xy="5,0" size="289,24">
+      <relation target="" sidePair="width-width"/>
+    </component>
+    <list id="n8_ro2x" name="list" xy="0,25" size="300,575" overflow="scroll" margin="5,5,5,5" defaultItem="ui://028qk31hro2x4c" autoClearItems="true">
+      <relation target="" sidePair="width-width,height-height"/>
+      <item title="空白工程"/>
+      <item url="ui://028qk31hro2x4d" title="范例工程"/>
+      <item title="先天范例：第四天灾"/>
+      <item title="功法范例：回春功"/>
+      <item title="法宝范例：神鹰剑"/>
+      <item title="丹药范例：煮鸡蛋"/>
+    </list>
+  </displayList>
+</component>

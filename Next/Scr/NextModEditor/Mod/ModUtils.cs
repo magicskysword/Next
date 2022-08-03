@@ -7,15 +7,17 @@ using System.Text;
 using script.Steam;
 using SkySwordKill.Next;
 using SkySwordKill.NextModEditor.Mod.Data;
+using Steamworks;
 using UnityEngine;
 
 namespace SkySwordKill.NextEditor.Mod
 {
     public static class ModUtils
     {
-        public static void ModSort<T>(this List<T> list) where T : IModData
+        public static List<T> ModSort<T>(this List<T> list) where T : IModData
         {
-            list.Sort((dataX, dataY) => dataX.ID.CompareTo(dataY.ID));
+            list.Sort((dataX, dataY) => dataX.Id.CompareTo(dataY.Id));
+            return list;
         }
 
         public static int TryFind<T>(this List<T> list, Predicate<T> predicate)
@@ -173,12 +175,14 @@ namespace SkySwordKill.NextEditor.Mod
                 Debug.LogError(message);
                 Debug.LogError("读取配置文件失败");
             }
+            result.SteamID = SteamUser.GetSteamID().m_SteamID;
+            result.ModPath = path;
             return result;
         }
         
         public static void WriteConfig(string path, WorkShopItem item)
         {
-            FileStream fileStream = new FileStream(item.ModPath + "/Mod.bin", FileMode.Create);
+            FileStream fileStream = new FileStream(path, FileMode.Create);
             new BinaryFormatter().Serialize(fileStream, item);
             fileStream.Close();
         }

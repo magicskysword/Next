@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,768">
+  <displayList>
+    <component id="n0_nqml" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="1280,768" controller="hasCloseButton,1">
+      <relation target="" sidePair="width-width,height-height"/>
+    </component>
+    <graph id="n2_nqml" name="bg" xy="3,29" pivot="0.5,0.5" size="936,735" type="rect" lineSize="2" fillColor="#ff2c313c">
+      <relation target="n1_nqml" sidePair="width-width,height-height,center-center,middle-middle"/>
+    </graph>
+    <component id="n1_nqml" name="table" src="nkvz2b" fileName="Component/Table/ComTableList.xml" xy="5,30" size="932,731">
+      <relation target="" sidePair="width-width,height-height"/>
+    </component>
+    <component id="n3_nqml" name="inspector" src="nkvz2f" fileName="Component/PanelCom/ComMainInspector.xml" xy="948,30" size="320,696">
+      <relation target="" sidePair="height-height,right-right"/>
+    </component>
+    <component id="n4_nqml" name="btnConfirm" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="948,734" size="320,25">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+      <Button title="打开Mod"/>
+    </component>
+  </displayList>
+</component>

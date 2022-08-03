@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="350,100">
+  <controller name="type" pages="0,confirm,1,yes/no" selected="1"/>
+  <displayList>
+    <component id="n0_tcay" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="350,100">
+      <relation target="" sidePair="width-width,height-height"/>
+    </component>
+    <graph id="n4_d4rw" name="n4" xy="10,30" size="329,30" type="rect" lineSize="2" fillColor="#ff2c313c">
+      <relation target="n5_d4rw" sidePair="width-width,height-height,center-center,middle-middle"/>
+    </graph>
+    <text id="n5_d4rw" name="inContent" xy="16,34" size="317,22" fontSize="14" color="#ffffff" autoSize="none" singleLine="true" autoClearText="true" text="" input="true">
+      <relation target="" sidePair="width-width,height-height"/>
+    </text>
+    <component id="n2_tcay" name="btnOk" src="rabj44" fileName="Component/Button/BtnOk.xml" xy="219,65" pivot="0.5,0" anchor="true">
+      <gearXY controller="type" pages="0,1" values="301,65|219,65"/>
+      <relation target="" sidePair="bottom-bottom"/>
+      <Button title="确定"/>
+    </component>
+    <component id="n6_rabj" name="closeButton" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="303,65" pivot="0.5,0" anchor="true">
+      <gearDisplay controller="type" pages="1"/>
+      <Button title="取消"/>
+    </component>
+  </displayList>
+</component>

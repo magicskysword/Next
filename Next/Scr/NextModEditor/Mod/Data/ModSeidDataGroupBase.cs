@@ -8,6 +8,19 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         public Dictionary<int, ModSeidDataGroup> DataGroups { get; set; } = new Dictionary<int, ModSeidDataGroup>();
         public static string DirPath { get; set; }
 
+        public static TGroup Create(Dictionary<int, ModSeidMeta> metas)
+        {
+            var data = new TGroup();
+
+            foreach (var pair in metas)
+            {
+                if(pair.Value.Properties.Count == 0)
+                    continue;
+                data.DataGroups.Add(pair.Key, ModSeidDataGroup.Create(pair.Value));
+            }
+            return data;
+        }
+
         public static TGroup Load(string dir, Dictionary<int, ModSeidMeta> metas)
         {
             var data = new TGroup();
@@ -39,7 +52,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         {
             if (DataGroups.TryGetValue(seidId, out var dataGroup))
             {
-                return dataGroup.DataList.Find(data => data.ID == dataId);
+                return dataGroup.DataList.Find(data => data.Id == dataId);
             }
 
             return null;
@@ -49,10 +62,10 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         {
             if (DataGroups.TryGetValue(seidId, out var dataGroup))
             {
-                var data = dataGroup.DataList.Find(d => d.ID == dataId);
+                var data = dataGroup.DataList.Find(d => d.Id == dataId);
                 if (data == null)
                 {
-                    data = ModSeidData.CreateSeidData(dataId,dataGroup.MetaData);
+                    data = ModSeidData.CreateSeidData(dataId, dataGroup.MetaData);
                     dataGroup.DataList.Add(data);
                 }
                 return data;
@@ -65,7 +78,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         {
             if (DataGroups.TryGetValue(seidId, out var dataGroup))
             {
-                var index = dataGroup.DataList.FindIndex(data => data.ID == dataId);
+                var index = dataGroup.DataList.FindIndex(data => data.Id == dataId);
                 if (index >= 0)
                 {
                     dataGroup.DataList.RemoveAt(index);
@@ -85,9 +98,9 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         {
             foreach (var seidDataGroup in DataGroups.Values)
             {
-                var seidData = seidDataGroup.DataList.Find(data => data.ID == oldDataId);
+                var seidData = seidDataGroup.DataList.Find(data => data.Id == oldDataId);
                 if (seidData != null)
-                    seidData.ID = newDataId;
+                    seidData.Id = newDataId;
             }
         }
 
@@ -100,12 +113,12 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         {
             foreach (var seidDataGroup in DataGroups.Values)
             {
-                var seidData1 = seidDataGroup.DataList.Find(data => data.ID == dataId1);
-                var seidData2 = seidDataGroup.DataList.Find(data => data.ID == dataId2);
+                var seidData1 = seidDataGroup.DataList.Find(data => data.Id == dataId1);
+                var seidData2 = seidDataGroup.DataList.Find(data => data.Id == dataId2);
                 if (seidData1 != null)
-                    seidData1.ID = dataId2;
+                    seidData1.Id = dataId2;
                 if (seidData2 != null)
-                    seidData2.ID = dataId1;
+                    seidData2.Id = dataId1;
             }
         }
     }
