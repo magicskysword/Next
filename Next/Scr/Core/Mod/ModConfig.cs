@@ -125,7 +125,7 @@ namespace SkySwordKill.Next.Mod
         public static ModConfig Load(string dir)
         {
             ModConfig modConfig = null;
-            var dataVersion = 2;
+            int dataVersion;
             string filePath = Utility.CombinePaths(dir, $"modConfig.json");
             string filePathV2 = Utility.CombinePaths(dir, "Config", $"modConfig.json");
             if (File.Exists(filePath))
@@ -140,7 +140,8 @@ namespace SkySwordKill.Next.Mod
             }
             else
             {
-                Main.LogWarning("ModManager.ModConfigDontExist".I18N());
+                dataVersion = 1;
+                Main.LogWarning("ModManager.ModConfigDontExist".I18N() + $" dir : {dir}");
             }
 
             modConfig = modConfig ?? new ModConfig();

@@ -7,6 +7,7 @@ namespace SkySwordKill.NextFGUI.NextCore
 {
     public partial class UI_ComSeidDataDrawer : GLabel
     {
+        public Controller m_grayed;
         public GList m_lstSeid;
         public GButton m_btnEdit;
         public const string URL = "ui://028qk31h7exm3k";
@@ -20,6 +21,7 @@ namespace SkySwordKill.NextFGUI.NextCore
         {
             base.ConstructFromXML(xml);
 
+            m_grayed = GetController("grayed");
             m_lstSeid = (GList)GetChild("lstSeid");
             m_btnEdit = (GButton)GetChild("btnEdit");
         }

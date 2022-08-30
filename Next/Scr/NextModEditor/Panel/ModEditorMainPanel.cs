@@ -30,12 +30,15 @@ namespace SkySwordKill.NextEditor.Panel
         private CtlHeaderBar HeaderBar { get; set; }
         private CtlTreeProject TreeProject { get; set; }
         private CtlDocumentView DocumentView { get; set; }
+        private ModDataClipboard DataClipboard { get; set; }
         
         private ModWorkshop CurMod { get; set; }
 
         protected override void OnInit()
         {
             base.OnInit();
+            DataClipboard = new ModDataClipboard();
+            
             InitProject();
             InitHeader();
             
@@ -47,23 +50,20 @@ namespace SkySwordKill.NextEditor.Panel
         {
             base.OnShown();
 
-            if (!ModEditorManager.I.IsInit)
-            {
-                WindowWaitDialog.CreateDialog("提示", "正在初始化编辑器...", 1f,
-                    () =>
+            WindowWaitDialog.CreateDialog("提示", "正在初始化编辑器...", 0.5f,
+                () =>
+                {
+                    // 预加载管理器
+                    ModEditorManager.I.Init();
+                }, 
+                () =>
+                {
+                    if (!Directory.Exists(Main.PathExportOutputDir.Value))
                     {
-                        // 预加载管理器
-                        ModEditorManager.I.Init();
-                    }, 
-                    () =>
-                    {
-                        if (!Directory.Exists(Main.PathExportOutputDir.Value))
-                        {
-                            WindowConfirmDialog.CreateDialog("提示", "没有找到游戏数据导出目录，缺失导出数据会影响编辑器使用，是否导出游戏数据？", true,
-                                () => ModManager.GenerateBaseData());
-                        }
-                    });
-            }
+                        WindowConfirmDialog.CreateDialog("提示", "没有找到游戏数据导出目录，缺失导出数据会影响编辑器使用，是否导出游戏数据？", true,
+                            () => ModManager.GenerateBaseData());
+                    }
+                });
         }
 
         public void Clear()
@@ -74,7 +74,7 @@ namespace SkySwordKill.NextEditor.Panel
 
         protected override void OnHide()
         {
-            
+            Clear();
             base.OnHide();
         }
 
@@ -108,8 +108,16 @@ namespace SkySwordKill.NextEditor.Panel
                 var popup = ProjectPopupBuild(node);
                 popup.Show(null, PopupDirection.Down);
             });
+            
+            DocumentView.OnTabAdd += (page) =>
+            {
+                if (page is IModDataClipboardPage clipboardPage)
+                {
+                    clipboardPage.DataClipboard = DataClipboard;
+                }
+            };
 
-            TreeProject.ToolsBar.AddToolBtn("ui://NextCore/icon_add", "新建项目", OnCreateProject);
+            //TreeProject.ToolsBar.AddToolBtn("ui://NextCore/icon_add", "新建项目", OnCreateProject);
         }
 
         private PopupMenu ProjectPopupBuild(ProjectTreeNodeBase node)
@@ -167,7 +175,7 @@ namespace SkySwordKill.NextEditor.Panel
                 return;
             
             WindowConfirmDialog.CreateDialog("删除", 
-                $"确定删除项目【{project.ProjectPathName}】？该操作无法撤回。", 
+                $"确定删除项目【{project.ProjectName}】？该操作无法撤回。", 
                 true,
                 () =>
             {
@@ -184,7 +192,7 @@ namespace SkySwordKill.NextEditor.Panel
                 return;
             
             WindowStringInputDialog.CreateDialog("重命名", 
-                project.ProjectPathName,
+                project.ProjectName,
                 true,
                 rename =>
                 {
@@ -193,7 +201,7 @@ namespace SkySwordKill.NextEditor.Panel
                         WindowConfirmDialog.CreateDialog("重命名失败", "项目名称不能为空", false);
                         return;
                     }
-                    if (CurMod.Projects.Exists(p => p.ProjectPathName == rename))
+                    if (CurMod.Projects.Exists(p => p.ProjectDirectory == rename))
                     {
                         WindowConfirmDialog.CreateDialog("重命名失败", "目标目录已存在", false);
                         return;
@@ -290,12 +298,13 @@ namespace SkySwordKill.NextEditor.Panel
             Clear();
             
             CurMod = mod;
-            mod.LoadProjects();
+            CurMod.LoadProjects();
             
             TreeProject.AddProject(new ProjectTreeModWorkshop(CurMod));
+            TreeProject.AddProject(new ProjectTreeModProjectReferenced(CurMod, ModEditorManager.I.CreateReferencedProject()));
             foreach (var project in mod.Projects)
             {
-                var modProjNode = new ProjectTreeModProject(mod, project);
+                var modProjNode = new ProjectTreeModProject(CurMod, project);
                 TreeProject.AddProject(modProjNode);
             }
 

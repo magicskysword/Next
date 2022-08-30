@@ -2,12 +2,20 @@
 <component size="300,30" extention="Label">
   <displayList>
     <text id="n2_of7d" name="title" xy="0,0" size="125,30" fontSize="14" color="#ffffff" align="center" vAlign="middle" autoSize="shrink" autoClearText="true" text="文本上限六字"/>
-    <component id="n3_of7d" name="dropdown" src="nkvz1w" fileName="Component/ComboBox/ComboBox.xml" xy="125,0" size="175,30">
+    <component id="n3_of7d" name="searchDropdown" src="mdyt4j" fileName="Component/ComboBox/ComboSearchBox.xml" xy="125,0" size="175,30">
       <relation target="" sidePair="width-width,height-height"/>
       <ComboBox visibleItemCount="10" autoClearItems="true">
         <item title="选项一"/>
         <item title="选项二"/>
         <item title="选项三"/>
+        <item title="选项N1"/>
+        <item title="选项N2"/>
+        <item title="选项N3"/>
+        <item title="选项N4"/>
+        <item title="选项N5"/>
+        <item title="选项N6"/>
+        <item title="选项N7"/>
+        <item title="选项N8"/>
       </ComboBox>
     </component>
   </displayList>

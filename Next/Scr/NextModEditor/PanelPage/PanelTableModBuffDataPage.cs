@@ -9,9 +9,9 @@ using SkySwordKill.NextFGUI.NextCore;
 
 namespace SkySwordKill.NextEditor.PanelPage
 {
-    public class PanelTableModBuffInfoPage : PanelTablePageBase<ModBuffData>
+    public class PanelTableModBuffDataPage : PanelTablePageBase<ModBuffData>
     {
-        public PanelTableModBuffInfoPage(string name, ModWorkshop mod, ModProject project) : base(name, mod, project)
+        public PanelTableModBuffDataPage(string name, ModWorkshop mod, ModProject project) : base(name, mod, project)
         {
         }
         
@@ -19,10 +19,16 @@ namespace SkySwordKill.NextEditor.PanelPage
 
         protected override void OnInit()
         {
-            ModDataTableDataList = new ModDataTableDataList<ModBuffData>(Project.BuffData);
+            ModDataTableDataList = new ModDataTableDataList<ModBuffData>(Project.BuffData)
+            {
+                OnRemoveItem = data =>
+                {
+                    Project.BuffSeidDataGroup.RemoveAllSeid(data.Id);
+                }
+            };
             
             AddTableHeader(new TableInfo(
-                "ModEditor.Main.modBuffInfo.id".I18N(),
+                "ModEditor.Main.modBuffData.id".I18N(),
                 TableInfo.DEFAULT_GRID_WIDTH,
                 data =>
                 {
@@ -31,7 +37,7 @@ namespace SkySwordKill.NextEditor.PanelPage
                 }));
 
             AddTableHeader(new TableInfo(
-                "ModEditor.Main.modBuffInfo.name".I18N(),
+                "ModEditor.Main.modBuffData.name".I18N(),
                 TableInfo.DEFAULT_GRID_WIDTH,
                 data =>
                 {
@@ -40,7 +46,7 @@ namespace SkySwordKill.NextEditor.PanelPage
                 }));
 
             AddTableHeader(new TableInfo(
-                "ModEditor.Main.modBuffInfo.desc".I18N(),
+                "ModEditor.Main.modBuffData.desc".I18N(),
                 TableInfo.DEFAULT_GRID_WIDTH * 3,
                 data =>
                 {
@@ -59,13 +65,13 @@ namespace SkySwordKill.NextEditor.PanelPage
             var buffData = (ModBuffData)data;
 
             AddDrawer(new CtlIDPropertyDrawer(
-                    "ModEditor.Main.modBuffInfo.id".I18N(),
+                    "ModEditor.Main.modBuffData.id".I18N(),
                     buffData,
                     () => Project.BuffData,
                     theData =>
                     {
                         var curData = (ModBuffData)theData;
-                        return $"{curData.Id} {curData.Name}";
+                        return OnGetDataName(curData);
                     },
                     (theData, newId) =>
                     {
@@ -85,25 +91,25 @@ namespace SkySwordKill.NextEditor.PanelPage
             );
 
             AddDrawer(new CtlStringPropertyDrawer(
-                    "ModEditor.Main.modBuffInfo.name".I18N(),
+                    "ModEditor.Main.modBuffData.name".I18N(),
                     str => buffData.Name = str,
                     () => buffData.Name)
             );
 
             AddDrawer(new CtlStringPropertyDrawer(
-                "ModEditor.Main.modBuffInfo.skillEffect".I18N(),
+                "ModEditor.Main.modBuffData.skillEffect".I18N(),
                 str => buffData.SkillEffect = str,
                 () => buffData.SkillEffect)
             );
 
             AddDrawer(new CtlIntPropertyDrawer(
-                "ModEditor.Main.modBuffInfo.icon".I18N(),
+                "ModEditor.Main.modBuffData.icon".I18N(),
                 num => buffData.Icon = num,
                 () => buffData.Icon)
             );
 
             AddDrawer(new CtlStringAreaPropertyDrawer(
-                    "ModEditor.Main.modBuffInfo.desc".I18N(),
+                    "ModEditor.Main.modBuffData.desc".I18N(),
                     str => buffData.Desc = str,
                     () => buffData.Desc)
             );
@@ -152,11 +158,11 @@ namespace SkySwordKill.NextEditor.PanelPage
                 () => buffData.ShowOnlyOne == 1)
             );
 
-            AddDrawer(new CtlIntArrayBindDataPropertyDrawer(
-                "ModEditor.Main.modBuffInfo.affix".I18N(),
+            AddDrawer(new CtlIntArrayBindTablePropertyDrawer(
+                "ModEditor.Main.modBuffData.affix".I18N(),
                 list => buffData.AffixList = list,
                 () => buffData.AffixList,
-                list => Project.GetAffixDesc(list),
+                list => Mod.GetAffixDesc(list),
                 new List<TableInfo>()
                 {
                     new TableInfo("ModEditor.Main.modAffixData.id".I18N(),
@@ -169,7 +175,7 @@ namespace SkySwordKill.NextEditor.PanelPage
                         TableInfo.DEFAULT_GRID_WIDTH * 3,
                         getData => ((ModAffixData)getData).Desc),
                 },
-                () => new List<IModData>(Project.GetAllAffix())
+                () => new List<IModData>(Mod.GetAllAffixData())
             ));
             
             AddDrawer(new CtlSeidDataPropertyDrawer(
@@ -186,6 +192,22 @@ namespace SkySwordKill.NextEditor.PanelPage
                     return $"{seidId}  ???";
                 })
             );
+        }
+
+        public override string OnGetDataName(ModBuffData data)
+        {
+            return $"{data.Id} {data.Name}";
+        }
+
+        protected override void OnPaste(CopyData copyData, int targetId)
+        {
+            var oldId = copyData.Data.Id;
+            var json = copyData.Data.GetJsonData();
+            var buffData = json.ToObject<ModBuffData>();
+            buffData.Id = targetId;
+            Project.BuffData.Add(buffData);
+            Project.BuffSeidDataGroup.CopyAllSeid(copyData.Project.BuffSeidDataGroup, oldId, targetId);
+            Project.BuffData.ModSort();
         }
     }
 }

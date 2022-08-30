@@ -12,7 +12,7 @@ namespace SkySwordKill.Next.DialogEvent
             var condition = command.GetStr(1);
             if (DialogAnalysis.StringIsNullOrTrue(condition))
             {
-                DialogAnalysis.SwitchDialogEvent(id);
+                DialogAnalysis.SwitchDialogEvent(id, env);
                 return;
             }
             callback?.Invoke();

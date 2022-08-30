@@ -33,7 +33,7 @@ namespace SkySwordKill.Next.Res
         #endregion
 
         #region 公共方法
-
+        
         public void Init()
         {
             LoadInnerAsset();

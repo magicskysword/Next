@@ -48,5 +48,11 @@ namespace SkySwordKill.NextFGUI.NextCore
                 }
             });
         }
+
+        public void SetEditable(bool value)
+        {
+            grayed = !value;
+            m_inContent.editable = value;
+        }
     }
 }

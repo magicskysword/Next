@@ -4,18 +4,24 @@
     <component id="n0_nqml" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="1280,768" controller="hasCloseButton,1">
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <graph id="n2_nqml" name="bg" xy="3,29" pivot="0.5,0.5" size="936,735" type="rect" lineSize="2" fillColor="#ff2c313c">
+    <graph id="n2_nqml" name="bg" xy="3,29" pivot="0.5,0.5" size="892,735" type="rect" lineSize="2" fillColor="#ff2c313c">
       <relation target="n1_nqml" sidePair="width-width,height-height,center-center,middle-middle"/>
     </graph>
-    <component id="n1_nqml" name="table" src="nkvz2b" fileName="Component/Table/ComTableList.xml" xy="5,30" size="932,731">
+    <component id="n1_nqml" name="table" src="nkvz2b" fileName="Component/Table/ComTableList.xml" xy="5,30" size="888,731">
+      <relation target="" sidePair="height-height"/>
+      <relation target="n5_ohp7" sidePair="rightext-left"/>
+    </component>
+    <component id="n3_nqml" name="inspector" src="nkvz2f" fileName="Component/PanelCom/ComMainInspector.xml" xy="904,28" size="363,698">
       <relation target="" sidePair="width-width,height-height"/>
+      <relation target="n5_ohp7" sidePair="leftext-right"/>
     </component>
-    <component id="n3_nqml" name="inspector" src="nkvz2f" fileName="Component/PanelCom/ComMainInspector.xml" xy="948,30" size="320,696">
-      <relation target="" sidePair="height-height,right-right"/>
-    </component>
-    <component id="n4_nqml" name="btnConfirm" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="948,734" size="320,25">
+    <component id="n4_nqml" name="btnConfirm" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="904,734" size="363,25">
       <relation target="" sidePair="right-right,bottom-bottom"/>
+      <relation target="n3_nqml" sidePair="width-width"/>
       <Button title="打开Mod"/>
     </component>
+    <graph id="n5_ohp7" name="sep" xy="899,23" size="1,745" type="rect" lineSize="0" lineColor="#ff32363c" fillColor="#ff32363c">
+      <relation target="" sidePair="height-height,center-center%"/>
+    </graph>
   </displayList>
 </component>

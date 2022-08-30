@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1280,768">
+<component size="800,600">
   <displayList>
-    <component id="n0_dtat" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="1280,768" controller="hasCloseButton,1">
+    <component id="n0_dtat" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="800,600" controller="hasCloseButton,1">
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <graph id="n5_ro2x" name="sep" xy="400,22" size="1,746" type="rect" lineSize="0" lineColor="#ff32363c" fillColor="#ff32363c"/>
-    <component id="n1_ro2x" name="inspector" src="nkvz2f" fileName="Component/PanelCom/ComMainInspector.xml" xy="401,23" size="879,693">
+    <component id="n1_ro2x" name="inspector" src="nkvz2f" fileName="Component/PanelCom/ComMainInspector.xml" xy="250,23" size="549,525">
       <relation target="" sidePair="width-width,height-height"/>
+      <relation target="n5_ro2x" sidePair="leftext-right"/>
     </component>
-    <component id="n3_ro2x" name="btnCancel" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="1172,735" size="100,25">
+    <component id="n3_ro2x" name="btnCancel" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="692,567" size="100,25">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
       <Button title="取消"/>
     </component>
-    <component id="n4_ro2x" name="btnConfirm" src="rabj44" fileName="Component/Button/BtnOk.xml" xy="1052,735" size="100,25">
+    <component id="n4_ro2x" name="btnConfirm" src="rabj44" fileName="Component/Button/BtnOk.xml" xy="572,567" size="100,25">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
       <Button title="创建"/>
     </component>
-    <component id="n9_ro2x" name="projectList" src="ro2x4e" fileName="Component/PanelCom/ComListProject.xml" xy="0,23" size="400,745">
+    <component id="n9_ro2x" name="projectList" src="ro2x4e" fileName="Component/PanelCom/ComListProject.xml" xy="0,23" size="249,577">
       <relation target="" sidePair="height-height"/>
+      <relation target="n5_ro2x" sidePair="rightext-left"/>
     </component>
+    <graph id="n5_ro2x" name="sep" xy="249,22" size="1,578" type="rect" lineSize="0" lineColor="#ff32363c" fillColor="#ff32363c">
+      <relation target="" sidePair="height-height,center-center%"/>
+    </graph>
   </displayList>
 </component>

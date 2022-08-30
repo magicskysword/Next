@@ -39,6 +39,7 @@ namespace SkySwordKill.Next.DialogSystem
         public static string AnalysisInlineScript(string text,DialogEnvironment env = null)
         {
             StringBuilder finallyText = new StringBuilder(text);
+            // 匹配[&和&]之间的内容
             Regex regex = new Regex(@"\[&(?<expression>[\s\S]*?)&]");
             
             var matches = regex.Matches(text);
@@ -581,6 +582,14 @@ namespace SkySwordKill.Next.DialogSystem
         #endregion
 
 
-        
+        public static void BindNpc(DialogEnvironment env, int roleID)
+        {
+            var npc = new UINPCData(roleID);
+            npc.RefreshData();
+            env.bindNpc = npc;
+            env.roleBindID = npc.ZhongYaoNPCID;
+            env.roleID = npc.ID;
+            env.roleName = npc.Name;
+        }
     }
 }

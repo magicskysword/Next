@@ -8,9 +8,9 @@ using SkySwordKill.NextFGUI.NextCore;
 
 namespace SkySwordKill.NextEditor.PanelPage
 {
-    public class PanelTableModCreateAvatarPage : PanelTablePageBase<ModCreateAvatarData>
+    public class PanelTableModCreateAvatarDataPage : PanelTablePageBase<ModCreateAvatarData>
     {
-        public PanelTableModCreateAvatarPage(string name, ModWorkshop mod, ModProject project) : base(name, mod, project)
+        public PanelTableModCreateAvatarDataPage(string name, ModWorkshop mod, ModProject project) : base(name, mod, project)
         {
         }
         
@@ -18,10 +18,16 @@ namespace SkySwordKill.NextEditor.PanelPage
 
         protected override void OnInit()
         {
-            ModDataTableDataList = new ModDataTableDataList<ModCreateAvatarData>(Project.CreateAvatarData);
+            ModDataTableDataList = new ModDataTableDataList<ModCreateAvatarData>(Project.CreateAvatarData)
+            {
+                OnRemoveItem = data =>
+                {
+                    Project.CreateAvatarSeidDataGroup.RemoveAllSeid(data.Id);
+                }
+            };
             
             AddTableHeader(new TableInfo(
-                "ModEditor.Main.modCreateAvatar.id".I18N(),
+                "ModEditor.Main.modCreateAvatarData.id".I18N(),
                 TableInfo.DEFAULT_GRID_WIDTH,
                 data =>
                 {
@@ -30,7 +36,7 @@ namespace SkySwordKill.NextEditor.PanelPage
                 }));
 
             AddTableHeader(new TableInfo(
-                "ModEditor.Main.modCreateAvatar.name".I18N(),
+                "ModEditor.Main.modCreateAvatarData.name".I18N(),
                 TableInfo.DEFAULT_GRID_WIDTH,
                 data =>
                 {
@@ -39,7 +45,7 @@ namespace SkySwordKill.NextEditor.PanelPage
                 }));
 
             AddTableHeader(new TableInfo(
-                "ModEditor.Main.modCreateAvatar.createType".I18N(),
+                "ModEditor.Main.modCreateAvatarData.createType".I18N(),
                 TableInfo.DEFAULT_GRID_WIDTH,
                 data =>
                 {
@@ -49,7 +55,7 @@ namespace SkySwordKill.NextEditor.PanelPage
                 }));
 
             AddTableHeader(new TableInfo(
-                "ModEditor.Main.modCreateAvatar.group".I18N(),
+                "ModEditor.Main.modCreateAvatarData.group".I18N(),
                 TableInfo.DEFAULT_GRID_WIDTH * 0.5f,
                 data =>
                 {
@@ -58,7 +64,7 @@ namespace SkySwordKill.NextEditor.PanelPage
                 }));
 
             AddTableHeader(new TableInfo(
-                "ModEditor.Main.modCreateAvatar.desc".I18N(),
+                "ModEditor.Main.modCreateAvatarData.desc".I18N(),
                 TableInfo.DEFAULT_GRID_WIDTH * 3,
                 data =>
                 {
@@ -77,13 +83,13 @@ namespace SkySwordKill.NextEditor.PanelPage
             var createAvatarData = (ModCreateAvatarData)data;
 
             AddDrawer(new CtlIDPropertyDrawer(
-                    "ModEditor.Main.modCreateAvatar.id".I18N(),
+                    "ModEditor.Main.modCreateAvatarData.id".I18N(),
                     createAvatarData,
                     () => Project.CreateAvatarData,
                     theData =>
                     {
                         var curData = (ModCreateAvatarData)theData;
-                        return $"{curData.Id} {curData.Name}";
+                        return OnGetDataName(curData);
                     },
                     (theData, newId) =>
                     {
@@ -103,25 +109,25 @@ namespace SkySwordKill.NextEditor.PanelPage
             );
 
             AddDrawer(new CtlStringPropertyDrawer(
-                    "ModEditor.Main.modCreateAvatar.name".I18N(),
+                    "ModEditor.Main.modCreateAvatarData.name".I18N(),
                     str => createAvatarData.Name = str,
                     () => createAvatarData.Name)
             );
 
             AddDrawer(new CtlIntPropertyDrawer(
-                    "ModEditor.Main.modCreateAvatar.group".I18N(),
+                    "ModEditor.Main.modCreateAvatarData.group".I18N(),
                     value => createAvatarData.Group = value,
                     () => createAvatarData.Group)
             );
 
             AddDrawer(new CtlIntPropertyDrawer(
-                "ModEditor.Main.modCreateAvatar.cost".I18N(),
+                "ModEditor.Main.modCreateAvatarData.cost".I18N(),
                 value => createAvatarData.Cost = value,
                 () => createAvatarData.Cost)
             );
 
             AddDrawer(new CtlDropdownPropertyDrawer(
-                "ModEditor.Main.modCreateAvatar.createType".I18N(),
+                "ModEditor.Main.modCreateAvatarData.createType".I18N(),
                 () => ModEditorManager.I.CreateAvatarDataTalentTypes.Select(type => $"{type.TypeID} : {type.Desc}"),
                 index =>
                 {
@@ -133,12 +139,12 @@ namespace SkySwordKill.NextEditor.PanelPage
             
             AddDrawer(new CtlDropdownPropertyDrawer(
                 "解锁需求".I18NTodo(),
-                () => ModEditorManager.I.CreateAvatarDataLevelTypes.Select(type => $"{type.TypeID} : {type.Desc}"),
+                () => ModEditorManager.I.LevelTypes.Select(type => $"{type.TypeID} : {type.Desc}"),
                 index =>
                 {
-                    createAvatarData.RequireLevel = ModEditorManager.I.CreateAvatarDataLevelTypes[index].TypeID;
+                    createAvatarData.RequireLevel = ModEditorManager.I.LevelTypes[index].TypeID;
                 },
-                () => ModEditorManager.I.CreateAvatarDataLevelTypes.FindIndex(type =>
+                () => ModEditorManager.I.LevelTypes.FindIndex(type =>
                     type.TypeID == createAvatarData.TalentTypeRelation))
             );
 
@@ -168,6 +174,22 @@ namespace SkySwordKill.NextEditor.PanelPage
                 value => createAvatarData.Info = value,
                 () => createAvatarData.Info)
             );
+        }
+
+        public override string OnGetDataName(ModCreateAvatarData data)
+        {
+            return $"{data.Id} {data.Name}";
+        }
+
+        protected override void OnPaste(CopyData copyData, int targetId)
+        {
+            var oldId = copyData.Data.Id;
+            var json = copyData.Data.GetJsonData();
+            var createAvatar = json.ToObject<ModCreateAvatarData>();
+            createAvatar.Id = targetId;
+            Project.CreateAvatarData.Add(createAvatar);
+            Project.CreateAvatarSeidDataGroup.CopyAllSeid(copyData.Project.CreateAvatarSeidDataGroup, oldId, targetId);
+            Project.CreateAvatarData.ModSort();
         }
     }
 }

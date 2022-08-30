@@ -26,7 +26,6 @@
     <component id="nkvz1x" name="ComStringDrawer.xml" path="/Component/Drawer/" exported="true"/>
     <component id="nkvz1y" name="ComNumberDrawer.xml" path="/Component/Drawer/" exported="true"/>
     <image id="nkvz1z" name="icon_warning.png" path="/Icon/" exported="true"/>
-    <component id="nkvz20" name="ComFloatDrawer.xml" path="/Component/Drawer/" exported="true"/>
     <component id="nkvz21" name="ComStringAreaDrawer.xml" path="/Component/Drawer/" exported="true"/>
     <component id="nkvz22" name="ComNumberBindDataDrawer.xml" path="/Component/Drawer/" exported="true"/>
     <component id="nkvz23" name="ComDropdownDrawer.xml" path="/Component/Drawer/" exported="true"/>
@@ -54,7 +53,7 @@
     <image id="nkvz2y" name="shadow_radial.png" path="/Image/" scale="9grid"/>
     <component id="nkvz31" name="WinStringInputDialog.xml" path="/Dialog/" exported="true"/>
     <component id="nkvz32" name="WinConfirmDialog.xml" path="/Dialog/" exported="true"/>
-    <component id="nkvz33" name="WinSelectorDialog.xml" path="/Dialog/" exported="true"/>
+    <component id="nkvz33" name="WinTableDialog.xml" path="/Dialog/" exported="true"/>
     <component id="f7x834" name="ComNodeCanvas.xml" path="/Component/NodeCanvas/" exported="true"/>
     <component id="f7x835" name="ComNodeCanvasInner.xml" path="/Component/NodeCanvas/"/>
     <component id="f7x836" name="ComNodeBlock.xml" path="/Component/NodeCanvas/" exported="true"/>
@@ -101,6 +100,12 @@
     <component id="ro2x4d" name="LabGroupTitle.xml" path="/Component/Label/" exported="true"/>
     <component id="ro2x4e" name="ComListProject.xml" path="/Component/PanelCom/" exported="true"/>
     <component id="hc7r4f" name="WinWaitDialog.xml" path="/Dialog/" exported="true"/>
+    <image id="ohp74g" name="icon_link.png" path="/Icon/" exported="true"/>
+    <component id="v5ah4h" name="ComGroupDrawer.xml" path="/Component/Drawer/" exported="true"/>
+    <component id="mdyt4i" name="ComStringBindDataDrawer.xml" path="/Component/Drawer/" exported="true"/>
+    <component id="mdyt4j" name="ComboSearchBox.xml" path="/Component/ComboBox/" exported="true"/>
+    <component id="mdyt4k" name="ComboSearchBox_popup.xml" path="/Component/ComboBox/"/>
+    <component id="mdyt4m" name="ComboSearchBox_item.xml" path="/Component/ComboBox/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

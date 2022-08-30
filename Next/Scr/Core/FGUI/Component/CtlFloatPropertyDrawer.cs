@@ -31,7 +31,12 @@ namespace SkySwordKill.Next.FGUI.Component
         {
             Drawer.m_inContent.text = OnGetProperty().ToString(CultureInfo.InvariantCulture);
         }
-    
+
+        protected override void SetDrawerEditable(bool value)
+        {
+            Drawer.SetEditable(value);
+        }
+
         private void OnSetProperty(float text)
         {
             _setter.Invoke(text);

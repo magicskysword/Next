@@ -18,5 +18,10 @@ namespace SkySwordKill.Next.FGUI.Component
             drawer.title = _title;
             return drawer;
         }
+
+        protected override void SetDrawerEditable(bool value)
+        {
+            
+        }
     }
 }

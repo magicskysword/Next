@@ -56,6 +56,12 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         public static void Save(string dir, ModSeidDataGroup dataGroup)
         {
             string filePath = $"{dir}/{dataGroup.MetaData.Id}.json";
+            if(dataGroup.DataList.Count == 0)
+            {
+                File.Delete(filePath);
+                return;
+            }
+            
             var jObject = new JObject();
             foreach (var seidData in dataGroup.DataList)
             {

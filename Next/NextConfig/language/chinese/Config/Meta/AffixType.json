@@ -1,5 +1,9 @@
 [
     {
+        "TypeID": 0,
+        "TypeName": "无"
+    },
+    {
         "TypeID": 1,
         "TypeName": "增益状态"
     },

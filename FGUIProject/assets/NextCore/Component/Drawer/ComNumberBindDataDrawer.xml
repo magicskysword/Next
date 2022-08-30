@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="300,73" extention="Label">
   <controller name="warning" pages="0,,1," selected="0"/>
+  <controller name="grayed" pages="0,,1," selected="1"/>
   <displayList>
-    <graph id="n0_dxyi" name="n0" xy="125,0" size="175,30" type="rect" lineSize="2" fillColor="#ff2c313c">
+    <graph id="n0_dxyi" name="n0" xy="125,0" size="175,30" type="rect" lineSize="2" fillColor="#ff3e4247">
+      <gearColor controller="grayed" pages="0,1" values="#2c313c|#3e4247"/>
       <relation target="" sidePair="width-width"/>
     </graph>
-    <text id="n1_dxyi" name="inContent" xy="131,4" size="143,22" fontSize="14" color="#ffffff" autoSize="none" singleLine="true" autoClearText="true" text="0" input="true" restrict="[0-9-.]">
+    <text id="n1_dxyi" name="inContent" xy="131,4" size="143,22" fontSize="14" color="#959595" autoSize="none" singleLine="true" autoClearText="true" text="0" input="true" restrict="[0-9-.]">
       <gearSize controller="warning" pages="0,1" values="143,22,1,1|117,22,1,1" tween="true"/>
+      <gearColor controller="grayed" pages="1" values="#959595,#000000" default="#ffffff,#000000"/>
       <relation target="" sidePair="width-width"/>
     </text>
     <text id="n2_dxyi" name="title" xy="0,0" size="125,30" fontSize="14" color="#ffffff" align="center" vAlign="middle" autoSize="none" autoClearText="true" text="Float"/>
     <text id="n3_dxyi" name="txtDesc" xy="125,31" size="175,42" fontSize="14" color="#ffffff" autoSize="height" autoClearText="true" text="额外描述&#xA;额外描述2">
       <relation target="" sidePair="width-width"/>
     </text>
-    <component id="n4_dxyi" name="btnEdit" src="nkvz1r" fileName="Component/Button/BtnEdit.xml" xy="276,5" size="20,20">
+    <component id="n4_dxyi" name="btnEdit" src="nkvz1r" fileName="Component/Button/BtnEdit.xml" xy="276,5" size="20,20" grayed="true">
+      <gearLook controller="grayed" pages="1" values="1,0,1,1" default="1,0,0,1"/>
       <relation target="" sidePair="right-right"/>
     </component>
-    <image id="n5_of7d" name="n5" src="nkvz1z" fileName="Image/icon_warning.png" xy="248,3" size="25,25" alpha="0" color="#ff874d">
+    <image id="n5_of7d" name="n5" src="nkvz1z" fileName="Icon/icon_warning.png" xy="248,3" size="25,25" alpha="0" color="#ff874d">
       <gearLook controller="warning" pages="0" values="0,0,0,0" default="1,0,0,0" tween="true"/>
       <relation target="" sidePair="right-right"/>
     </image>

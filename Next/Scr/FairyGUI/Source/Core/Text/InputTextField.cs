@@ -1294,7 +1294,7 @@ namespace FairyGUI
                         break;
                     }
 
-                //Paste
+                //PasteCopyData
                 case KeyCode.V:
                     {
                         if (evt.ctrlOrCmd && _editable)

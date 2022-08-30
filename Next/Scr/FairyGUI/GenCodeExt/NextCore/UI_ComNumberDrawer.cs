@@ -70,5 +70,11 @@ namespace SkySwordKill.NextFGUI.NextCore
             get => GetController("warning").selectedIndex == 1;
             set => GetController("warning").selectedIndex = value ? 1 : 0;
         }
+
+        public void SetEditable(bool value)
+        {
+            grayed = !value;
+            m_inContent.editable = value;
+        }
     }
 }

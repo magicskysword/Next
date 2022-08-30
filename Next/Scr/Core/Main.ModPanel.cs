@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using FairyGUI;
+using JSONClass;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SkySwordKill.Next.DialogSystem;
@@ -905,6 +908,21 @@ namespace SkySwordKill.Next
                         window.Show();
                         _isWinOpen = false;
                     }
+
+                    GUILayout.BeginHorizontal();
+                    {
+                        GUILayout.Label("UI缩放比例");
+                        
+                        var scaler = Stage.inst.gameObject.GetComponent<UIContentScaler>();
+                        var factory = scaler.constantScaleFactor;
+                        var newFactory = GUILayout.HorizontalSlider(factory, 0.8f, 1.2f);
+                        if(Math.Abs(factory - newFactory) > 0.01f)
+                            GRoot.inst.SetContentScaleFactor(newFactory);
+                        
+                        GUILayout.Label(newFactory.ToString(CultureInfo.InvariantCulture));
+                    }
+                    GUILayout.EndHorizontal();
+                    GUILayout.Label("请先设置好缩放比例，再打开编辑器。注：过大的缩放比例可能导致部分界面显示异常。");
                 }
                 GUILayout.EndVertical();
             }

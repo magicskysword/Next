@@ -8,6 +8,7 @@ namespace SkySwordKill.NextFGUI.NextCore
     public partial class UI_ComNumberDrawer : GLabel
     {
         public Controller m_warning;
+        public Controller m_grayed;
         public GTextInput m_inContent;
         public const string URL = "ui://028qk31hnkvz1y";
 
@@ -21,6 +22,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             base.ConstructFromXML(xml);
 
             m_warning = GetController("warning");
+            m_grayed = GetController("grayed");
             m_inContent = (GTextInput)GetChild("inContent");
         }
     }

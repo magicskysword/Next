@@ -37,6 +37,16 @@ namespace SkySwordKill.NextEditor.Panel
         public List<int> SeidList { get;private set; }
         public List<int> DisableSeidList { get;private set; }
         public Action OnClose { get;private set; }
+        public bool Editable { 
+            get => _editable;
+            set
+            {
+                _editable = value;
+                Inspector.Editable = value;
+                Inspector.Refresh();
+                RefreshButtonState();
+            }
+        }
 
         public UI_WinSeidEditorDialog SeidEditor => contentPane as UI_WinSeidEditorDialog;
         public CtlPropertyInspector Inspector { get; set; }
@@ -47,9 +57,12 @@ namespace SkySwordKill.NextEditor.Panel
         public GButton BtnMoveUp => SeidEditor.m_btnMoveUp;
         public GButton BtnMoveDown => SeidEditor.m_btnMoveDown;
         
+        private int? CurrentSeidId { get; set; }
+        
         private List<GTreeNode> _seidNodeList = new List<GTreeNode>();
+        private bool _editable;
 
-        public static void CreateDialog(string title,ModWorkshop mod,int ownerId, IModSeidDataGroup seidGroup,Dictionary<int, ModSeidMeta> seidMetas,
+        public static WindowSeidEditorDialog CreateDialog(string title,ModWorkshop mod,int ownerId, IModSeidDataGroup seidGroup,Dictionary<int, ModSeidMeta> seidMetas,
             List<int> seidList, Action onClose)
         {
             var window = new WindowSeidEditorDialog();
@@ -64,6 +77,8 @@ namespace SkySwordKill.NextEditor.Panel
             window.OnClose = onClose;
 
             window.Show();
+            
+            return window;
         }
 
         protected override void OnInit()
@@ -106,7 +121,7 @@ namespace SkySwordKill.NextEditor.Panel
             AddSeidList("已启用特性", SeidList, _seidNodeList);
             AddSeidList("已禁用特性", DisableSeidList, _seidNodeList);
         }
-        
+
         private bool GetSelectedSeid(out int seidId)
         {
             var node = SeidEditor.m_list.GetSelectedNode();
@@ -142,7 +157,7 @@ namespace SkySwordKill.NextEditor.Panel
             var metas = SeidMetas.Select(pair => (IModData)pair.Value).ToList();
             metas.ModSort();
 
-            WindowSelectorDialog.CreateDialog("创建特性",
+            WindowTableSelectorDialog.CreateDialog("创建特性",
                 new List<TableInfo>()
                 {
                     new TableInfo("ID", TableInfo.DEFAULT_GRID_WIDTH * 0.4f, obj => ((ModSeidMeta)obj).Id.ToString()),
@@ -319,30 +334,55 @@ namespace SkySwordKill.NextEditor.Panel
             }
         }
 
+        private void RefreshButtonState()
+        {
+            if (Editable)
+            {
+                BtnAdd.enabled = true;
+                if (CurrentSeidId != null)
+                {
+                    BtnRemove.enabled = true;
+                    BtnMoveUp.enabled = true;
+                    BtnMoveDown.enabled = true;
+
+                    var isEnable = IsSeidEnable(CurrentSeidId.Value);
+            
+                    BtnEnable.enabled = !isEnable;
+                    BtnDisable.enabled = isEnable;
+                }
+                else
+                {
+                    BtnRemove.enabled = false;
+                    BtnMoveUp.enabled = false;
+                    BtnMoveDown.enabled = false;
+                    BtnEnable.enabled = false;
+                    BtnDisable.enabled = false;
+                }
+            }
+            else
+            {
+                BtnAdd.enabled = false;
+                BtnRemove.enabled = false;
+                BtnMoveUp.enabled = false;
+                BtnMoveDown.enabled = false;
+                BtnEnable.enabled = false;
+                BtnDisable.enabled = false;
+            }
+        }
+
         private void UnselectTargetSeid()
         {
             Inspector.Clear();
-            BtnRemove.enabled = false;
-            BtnMoveUp.enabled = false;
-            BtnMoveDown.enabled = false;
-            BtnEnable.enabled = false;
-            BtnDisable.enabled = false;
+            CurrentSeidId = null;
+            RefreshButtonState();
         }
 
         private void SetTargetSeid(int seidId)
         {
             Inspector.Clear();
-            
-            BtnRemove.enabled = true;
-            BtnMoveUp.enabled = true;
-            BtnMoveDown.enabled = true;
+            CurrentSeidId = seidId;
+            RefreshButtonState();
 
-            var isEnable = IsSeidEnable(seidId);
-            
-            BtnEnable.enabled = !isEnable;
-            BtnDisable.enabled = isEnable;
-            
-            
             if(SeidMetas.TryGetValue(seidId,out var seidMeta))
             {
                 Inspector.AddDrawer(new CtlTitleDrawer(seidMeta.Name));
@@ -388,7 +428,7 @@ namespace SkySwordKill.NextEditor.Panel
             var sInt = seidData.GetToken<ModSInt>(seidProperty.ID);
             if (seidProperty.SpecialDrawer.Contains("BuffDrawer"))
             {
-                var intPropertyDrawer = new CtlIntBindDataPropertyDrawer(seidProperty.Desc,
+                var intPropertyDrawer = new CtlIntBindTablePropertyDrawer(seidProperty.Desc,
                     value => sInt.Value = value,
                     () => sInt.Value,
                     buff =>
@@ -418,7 +458,7 @@ namespace SkySwordKill.NextEditor.Panel
             }
             else if (seidProperty.SpecialDrawer.Contains("SeidDrawer"))
             {
-                var intPropertyDrawer = new CtlIntBindDataPropertyDrawer(seidProperty.Desc,
+                var intPropertyDrawer = new CtlIntBindTablePropertyDrawer(seidProperty.Desc,
                     value => sInt.Value = value,
                     () => sInt.Value,
                     tagSeidId =>
@@ -464,6 +504,9 @@ namespace SkySwordKill.NextEditor.Panel
             {
                 switch (drawerId)
                 {
+                    case "SeidDrawer":
+                    case "BuffDrawer":
+                        continue;
                     case "BuffTypeDrawer":
                     {
                         var dropdownPropertyDrawer = new CtlDropdownPropertyDrawer("",
@@ -476,6 +519,22 @@ namespace SkySwordKill.NextEditor.Panel
                                 drawer.OnChanged?.Invoke();
                             },
                             () => ModEditorManager.I.BuffDataBuffTypes.FindIndex(type => type.TypeID == sInt.Value));
+                        Inspector.AddDrawer(dropdownPropertyDrawer);
+                        drawer.OnChanged += dropdownPropertyDrawer.Refresh;
+                        break;
+                    }
+                    case "LevelTypeDrawer":
+                    {
+                        var dropdownPropertyDrawer = new CtlDropdownPropertyDrawer("",
+                            () => ModEditorManager.I.LevelTypes.Select(type => $"{type.TypeID} {type.Desc}"),
+                            index =>
+                            {
+                                var typeId = ModEditorManager.I.LevelTypes[index].TypeID;
+                                sInt.Value = typeId;
+                                drawer.Refresh();
+                                drawer.OnChanged?.Invoke();
+                            },
+                            () => ModEditorManager.I.LevelTypes.FindIndex(type => type.TypeID == sInt.Value));
                         Inspector.AddDrawer(dropdownPropertyDrawer);
                         drawer.OnChanged += dropdownPropertyDrawer.Refresh;
                         break;
@@ -553,7 +612,7 @@ namespace SkySwordKill.NextEditor.Panel
                         break;
                     }
                     default:
-                        //Main.LogWarning($"未知的特殊绘制器 {drawerId}");
+                        Main.LogWarning($"未知的特殊绘制器 {drawerId}");
                         break;
                 }
             }
@@ -566,7 +625,7 @@ namespace SkySwordKill.NextEditor.Panel
 
             if (seidProperty.SpecialDrawer.Contains("BuffArrayDrawer"))
             {
-                var intArrayPropertyDrawer = new CtlIntArrayBindDataPropertyDrawer(seidProperty.Desc, 
+                var intArrayPropertyDrawer = new CtlIntArrayBindTablePropertyDrawer(seidProperty.Desc, 
                     value => sIntArray.Value = value,
                     () => sIntArray.Value,
                     buffs =>
@@ -602,12 +661,53 @@ namespace SkySwordKill.NextEditor.Panel
                             TableInfo.DEFAULT_GRID_WIDTH * 2,
                             getData => ((ModBuffData)getData).Desc),
                     },
-                    () => new List<IModData>(Mod.GetAllBuffData(true)));
+                    () => new List<IModData>(Mod.GetAllBuffData()));
+                drawer = intArrayPropertyDrawer;
+            }
+            else if (seidProperty.SpecialDrawer.Contains("ItemArrayDrawer"))
+            {
+                var intArrayPropertyDrawer = new CtlIntArrayBindTablePropertyDrawer(seidProperty.Desc, 
+                    value => sIntArray.Value = value,
+                    () => sIntArray.Value,
+                    items =>
+                    {
+                        var sb = new StringBuilder();
+                        for (var index = 0; index < items.Count; index++)
+                        {
+                            var item = items[index];
+                            var itemData = Mod.FindItem(item);
+                            if (itemData != null)
+                            {
+                                sb.Append($"【{item} {itemData.Name}】{itemData.Desc}");
+                            }
+                            else
+                            {
+                                sb.Append($"【{item}  ？】");
+                            }
+                            if(index != items.Count - 1)
+                                sb.Append("\n");
+                        }
+
+                        return sb.ToString();
+                    },
+                    new List<TableInfo>()
+                    {
+                        new TableInfo("ID",
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModItemData)getData).Id.ToString()),
+                        new TableInfo("名称",
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModItemData)getData).Name),
+                        new TableInfo("描述",
+                            TableInfo.DEFAULT_GRID_WIDTH * 2,
+                            getData => ((ModItemData)getData).Desc),
+                    },
+                    () => new List<IModData>(Mod.GetAllItemData()));
                 drawer = intArrayPropertyDrawer;
             }
             else if (seidProperty.SpecialDrawer.Contains("SeidArrayDrawer"))
             {
-                var intArrayPropertyDrawer = new CtlIntArrayBindDataPropertyDrawer(seidProperty.Desc, 
+                var intArrayPropertyDrawer = new CtlIntArrayBindTablePropertyDrawer(seidProperty.Desc, 
                     value => sIntArray.Value = value,
                     () => sIntArray.Value,
                     seidList =>
@@ -667,8 +767,12 @@ namespace SkySwordKill.NextEditor.Panel
             {
                 switch (drawerId)
                 {
+                    case "ItemArrayDrawer":
+                    case "SeidArrayDrawer":
+                    case "BuffArrayDrawer":
+                        continue;
                     default:
-                        //Main.LogWarning($"未知的特殊绘制器 {drawerId}");
+                        Main.LogWarning($"未知的特殊绘制器 {drawerId}");
                         break;
                 }
             }
@@ -712,7 +816,7 @@ namespace SkySwordKill.NextEditor.Panel
                         break;
                     }
                     default:
-                        //Main.LogWarning($"未知的特殊绘制器 {drawerId}");
+                        Main.LogWarning($"未知的特殊绘制器 {drawerId}");
                         break;
                 }
             }

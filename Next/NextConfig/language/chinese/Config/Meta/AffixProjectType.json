@@ -1,5 +1,37 @@
 [
   {
+    "TypeName": "草药",
+    "TypeNum": 1
+  },
+  {
+    "TypeName": "矿物",
+    "TypeNum": 2
+  },
+  {
+    "TypeName": "妖兽材料",
+    "TypeNum": 3
+  },
+  {
+    "TypeName": "丹药（具体丹方需解锁）",
+    "TypeNum": 4
+  },
+  {
+    "TypeName": "妖兽",
+    "TypeNum": 5
+  },
+  {
+    "TypeName": "神通",
+    "TypeNum": 6
+  },
+  {
+    "TypeName": "功法",
+    "TypeNum": 7
+  },
+  {
+    "TypeName": "秘术",
+    "TypeNum": 8
+  },
+  {
     "TypeName": "词缀",
     "TypeNum": 101
   },
@@ -17,6 +49,42 @@
   },
   {
     "TypeName": "状态",
-    "TypeNum": "109"
+    "TypeNum": 109
+  },
+  {
+    "TypeName": "宁州",
+    "TypeNum": 301
+  },
+  {
+    "TypeName": "无尽之海",
+    "TypeNum": 401
+  },
+  {
+    "TypeName": "大地图",
+    "TypeNum": 501
+  },
+  {
+    "TypeName": "战斗",
+    "TypeNum": 502
+  },
+  {
+    "TypeName": "游戏菜单",
+    "TypeNum": 503
+  },
+  {
+    "TypeName": "闭关",
+    "TypeNum": 504
+  },
+  {
+    "TypeName": "人物互动",
+    "TypeNum": 505
+  },
+  {
+    "TypeName": "玩法说明",
+    "TypeNum": 506
+  },
+  {
+    "TypeName": "境界突破",
+    "TypeNum": 507
   }
 ]

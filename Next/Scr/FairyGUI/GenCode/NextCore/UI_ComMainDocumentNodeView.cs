@@ -7,6 +7,7 @@ namespace SkySwordKill.NextFGUI.NextCore
 {
     public partial class UI_ComMainDocumentNodeView : GComponent
     {
+        public GGraph m_bgTable;
         public UI_ComTableList m_list;
         public UI_ComNodeCanvas m_nodeCanvas;
         public GTextField m_txtState;
@@ -21,6 +22,7 @@ namespace SkySwordKill.NextFGUI.NextCore
         {
             base.ConstructFromXML(xml);
 
+            m_bgTable = (GGraph)GetChild("bgTable");
             m_list = (UI_ComTableList)GetChild("list");
             m_nodeCanvas = (UI_ComNodeCanvas)GetChild("nodeCanvas");
             m_txtState = (GTextField)GetChild("txtState");

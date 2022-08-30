@@ -16,13 +16,15 @@ namespace SkySwordKill.NextEditor.PanelProject
         public ModWorkshop Mod { get; set; }
         public ModProject Project { get; set; }
 
-        public override string Name => Project.ProjectPathName;
+        public override string Name => Project.ProjectName;
         
         public void Init()
         {
             Children.Add(new ProjectTreeItemModConfig(Mod, Project));
-            Children.Add(new ProjectTreeItemModCreateAvatar(Mod, Project));
-            Children.Add(new ProjectTreeItemModBuffInfo(Mod, Project));
+            Children.Add(new ProjectTreeItemModAffixData(Mod, Project));
+            Children.Add(new ProjectTreeItemModCreateAvatarData(Mod, Project));
+            Children.Add(new ProjectTreeItemModItemData(Mod, Project));
+            Children.Add(new ProjectTreeItemModBuffData(Mod, Project));
         }
     }
 }

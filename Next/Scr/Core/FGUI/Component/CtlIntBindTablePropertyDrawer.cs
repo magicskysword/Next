@@ -5,24 +5,23 @@ using System.Linq;
 using FairyGUI;
 using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.Next.FGUI;
-using SkySwordKill.NextEditor.Mod;
 using SkySwordKill.NextFGUI.NextCore;
 using SkySwordKill.NextModEditor.Mod.Data;
 
 namespace SkySwordKill.Next.FGUI.Component
 {
-    public class CtlIntArrayBindDataPropertyDrawer : CtlPropertyDrawerBase
+    public class CtlIntBindTablePropertyDrawer : CtlPropertyDrawerBase
     {
         private string _drawerName;
         private UI_ComNumberBindDataDrawer Drawer => (UI_ComNumberBindDataDrawer)Component;
-        private Action<List<int>> _setter;
-        private Func<List<int>> _getter;
-        private Func<List<int>, string> _descGetter;
+        private Action<int> _setter;
+        private Func<int> _getter;
+        private Func<int, string> _descGetter;
         private List<TableInfo> _tableInfos;
         private Func<List<IModData>> _dataListGetter;
 
-        public CtlIntArrayBindDataPropertyDrawer(string drawerName, Action<List<int>> setter, Func<List<int>> getter,
-            Func<List<int>, string> descGetter, List<TableInfo> tableInfos, Func<List<IModData>> dataListGetter)
+        public CtlIntBindTablePropertyDrawer(string drawerName, Action<int> setter, Func<int> getter,
+            Func<int, string> descGetter, List<TableInfo> tableInfos, Func<List<IModData>> dataListGetter)
         {
             _drawerName = drawerName;
             _setter = setter;
@@ -36,55 +35,47 @@ namespace SkySwordKill.Next.FGUI.Component
         {
             var drawer = UI_ComNumberBindDataDrawer.CreateInstance();
             drawer.m_btnEdit.onClick.Set(OnClickEdit);
-            drawer.BindEndMultiEdit(OnEndMultiDataEdit);
+            drawer.BindEndEdit(OnSetProperty);
             drawer.title = _drawerName;
             return drawer;
         }
 
-        private void OnEndMultiDataEdit(bool success, List<int> ids)
-        {
-            if (success)
-            {
-                OnSetProperty(ids);
-                Refresh();
-            }
-            else
-            {
-                Drawer.m_txtDesc.text = "";
-            }
-        }
-
         protected override void OnRefresh()
         {
-            Drawer.m_inContent.text = OnGetProperty().ToFormatString();
-            Drawer.m_txtDesc.text = OnGetDesc();
+            Drawer.m_inContent.text = OnGetProperty().ToString();
+            Drawer.m_txtDesc.text = OnGetDesc() ?? "";
         }
 
-        private void OnSetProperty(List<int> list)
+        protected override void SetDrawerEditable(bool value)
         {
-            _setter.Invoke(list);
+            Drawer.SetEditable(value);
+        }
+
+        private void OnSetProperty(int value)
+        {
+            _setter.Invoke(value);
             OnChanged?.Invoke();
         }
 
-        private List<int> OnGetProperty()
+        private int OnGetProperty()
         {
             return _getter.Invoke();
         }
 
         private string OnGetDesc()
         {
-            return _descGetter.Invoke(OnGetProperty());
+            var id = _getter.Invoke();
+
+            return _descGetter.Invoke(id);
         }
 
         private void OnClickEdit()
         {
-            var ids = _getter.Invoke();
-
-            WindowSelectorDialog.CreateDialog(_drawerName, _tableInfos,
-                ids, true, _dataListGetter.Invoke(), true,
+            WindowTableSelectorDialog.CreateDialog(_drawerName, _tableInfos,
+                new[] { OnGetProperty() }, false, _dataListGetter.Invoke(), false,
                 list =>
                 {
-                    OnSetProperty(list.ToList());
+                    OnSetProperty(list.FirstOrDefault());
                     Refresh();
                 });
         }

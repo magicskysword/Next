@@ -17,7 +17,12 @@ namespace SkySwordKill.Next.FGUI.Component
             Drawer = UIPackage.CreateObject(FGUIManager.PKG_NEXT_CORE, "ComTextDrawer").As<UI_ComInfoDrawer>();
             return Drawer;
         }
-        
+
+        protected override void SetDrawerEditable(bool value)
+        {
+            
+        }
+
         public void SetTitle(string title)
         {
             Drawer.title = title;

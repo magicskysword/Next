@@ -1171,7 +1171,7 @@
     "66": {
         "ID": 66,
         "IDName": "id",
-        "Name": "造Buff层数伤害。",
+        "Name": "造成Buff层数伤害",
         "Desc": "对敌方造成等同于其X【Buff】层数*（Y*层数）点伤害。",
         "Properties": [
             {
@@ -2777,7 +2777,7 @@
         "Properties": [
             {
                 "ID": "value1",
-                "Type": "Int",
+                "Type": "IntArray",
                 "Desc": "X 技能特性"
             }
         ]

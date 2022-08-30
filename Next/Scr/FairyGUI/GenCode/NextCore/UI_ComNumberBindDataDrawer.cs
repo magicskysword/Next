@@ -8,6 +8,7 @@ namespace SkySwordKill.NextFGUI.NextCore
     public partial class UI_ComNumberBindDataDrawer : GLabel
     {
         public Controller m_warning;
+        public Controller m_grayed;
         public GTextInput m_inContent;
         public GTextField m_txtDesc;
         public GButton m_btnEdit;
@@ -23,6 +24,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             base.ConstructFromXML(xml);
 
             m_warning = GetController("warning");
+            m_grayed = GetController("grayed");
             m_inContent = (GTextInput)GetChild("inContent");
             m_txtDesc = (GTextField)GetChild("txtDesc");
             m_btnEdit = (GButton)GetChild("btnEdit");

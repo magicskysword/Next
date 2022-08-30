@@ -21,11 +21,11 @@ namespace SkySwordKill.Next.FGUI.Component
         
         private int _curTabIndex;
         private EventCallback1 _onRemoveTabItem;
-        
-        public Action<PanelPageBase> OnTabAdd { get; set; }
-        public Action<PanelPageBase> OnTabRemove { get; set; }
-        public Action<PanelPageBase> OnTabOpen { get; set; }
-        public Action<PanelPageBase> OnTabClose { get; set; }
+
+        public Action<PanelPageBase> OnTabAdd { get; set; } = _ => { };
+        public Action<PanelPageBase> OnTabRemove { get; set; } = _ => { };
+        public Action<PanelPageBase> OnTabOpen { get; set; } = _ => { };
+        public Action<PanelPageBase> OnTabClose { get; set; } = _ => { };
         
         
         private List<PanelPageBase> Tabs { get; } = new List<PanelPageBase>();

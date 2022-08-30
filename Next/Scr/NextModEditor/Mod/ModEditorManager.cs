@@ -21,21 +21,31 @@ namespace SkySwordKill.NextEditor.Mod
         public List<ModAffixDataAffixType> AffixDataAffixTypes { get; set; }
         public Dictionary<int, ModSeidMeta> CreateAvatarSeidMetas { get; set; }
         public List<ModCreateAvatarDataTalentType> CreateAvatarDataTalentTypes { get; set; }
-        public List<ModCreateAvatarDataLevelType> CreateAvatarDataLevelTypes { get; set; }
+        public List<ModLevelType> LevelTypes { get; set; }
         public Dictionary<int, ModSeidMeta> BuffSeidMetas { get; set; }
         public List<ModBuffDataBuffType> BuffDataBuffTypes { get; set; }
         public List<ModBuffDataTriggerType> BuffDataTriggerTypes { get; set; }
         public List<ModBuffDataRemoveTriggerType> BuffDataRemoveTriggerTypes { get; set; }
         public List<ModBuffDataOverlayType> BuffDataOverlayTypes { get; set; }
         public List<ModItemDataGuideType> ItemDataGuideTypes { get; set; }
+        public List<ModItemDataShopType> ItemDataShopTypes { get; set; }
+        public List<ModItemDataQualityType> ItemDataQualityTypes { get; set; }
+        public List<ModItemDataPhaseType> ItemDataPhaseTypes { get; set; }
+        public List<ModItemDataType> ItemDataTypes { get; set; }
+        public Dictionary<int, ModSeidMeta> ItemEquipSeidMetas { get; set; }
+        public Dictionary<int, ModSeidMeta> ItemUseSeidMetas { get; set; }
+        public List<ModItemDataUseType> ItemDataUseTypes { get; set; }
         public List<ModAttackType> AttackTypes { get; set; }
         public List<ModElementType> ElementTypes { get; set; }
         public List<ModComparisonOperatorType> ComparisonOperatorTypes { get; set; }
         public List<ModTargetType> TargetTypes { get; set; }
+        /// <summary>
+        /// 法宝类型组
+        /// </summary>
+        public ModItemDataArtifactTypeGroup ItemDataArtifactTypeGroup { get; set; }
 
         // Data
-        public Dictionary<int, ModAffixData> DefaultAffixData { get; set; }
-        public Dictionary<int, ModBuffData> DefaultBuffData { get; set; }
+        public ModProject ReferenceProject { get; set; }
         public Dictionary<string, FFlowchart> DefaultFFlowchart { get; set; }
         
         public bool IsInit { get; private set; }
@@ -47,7 +57,9 @@ namespace SkySwordKill.NextEditor.Mod
 
         public void Init()
         {
-            foreach (var type in ModUtils.GetTypesWithAttribute(Assembly.GetAssembly(typeof(ModDataInitAttribute)),
+            if (!IsInit)
+            {
+                foreach (var type in ModUtils.GetTypesWithAttribute(Assembly.GetAssembly(typeof(ModDataInitAttribute)),
                          typeof(ModDataInitAttribute)))
             {
                 var initMethod = type.GetMethod("Init", BindingFlags.Static | BindingFlags.Public);
@@ -66,9 +78,9 @@ namespace SkySwordKill.NextEditor.Mod
             CreateAvatarDataTalentTypes = JArray
                 .Parse(ModUtils.LoadConfig("Meta/CreateAvatarTalentType.json"))
                 .ToObject<List<ModCreateAvatarDataTalentType>>();
-            CreateAvatarDataLevelTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/CreateAvatarLevelType.json"))
-                .ToObject<List<ModCreateAvatarDataLevelType>>();
+            LevelTypes = JArray
+                .Parse(ModUtils.LoadConfig("Meta/LevelType.json"))
+                .ToObject<List<ModLevelType>>();
             BuffSeidMetas = JObject
                 .Parse(ModUtils.LoadConfig("Meta/BuffSeidMeta.json"))
                 .ToObject<Dictionary<int, ModSeidMeta>>();
@@ -87,6 +99,27 @@ namespace SkySwordKill.NextEditor.Mod
             ItemDataGuideTypes = JArray
                 .Parse(ModUtils.LoadConfig("Meta/ItemGuideType.json"))
                 .ToObject<List<ModItemDataGuideType>>();
+            ItemDataShopTypes = JArray
+                .Parse(ModUtils.LoadConfig("Meta/ItemShopType.json"))
+                .ToObject<List<ModItemDataShopType>>();
+            ItemDataQualityTypes = JArray
+                .Parse(ModUtils.LoadConfig("Meta/ItemQualityType.json"))
+                .ToObject<List<ModItemDataQualityType>>();
+            ItemDataPhaseTypes = JArray
+                .Parse(ModUtils.LoadConfig("Meta/ItemPhaseType.json"))
+                .ToObject<List<ModItemDataPhaseType>>();
+            ItemDataTypes = JArray
+                .Parse(ModUtils.LoadConfig("Meta/ItemType.json"))
+                .ToObject<List<ModItemDataType>>();
+            ItemEquipSeidMetas = JObject
+                .Parse(ModUtils.LoadConfig("Meta/ItemEquipSeidMeta.json"))
+                .ToObject<Dictionary<int, ModSeidMeta>>();
+            ItemUseSeidMetas = JObject
+                .Parse(ModUtils.LoadConfig("Meta/ItemUseSeidMeta.json"))
+                .ToObject<Dictionary<int, ModSeidMeta>>();
+            ItemDataUseTypes = JArray
+                .Parse(ModUtils.LoadConfig("Meta/ItemUseType.json"))
+                .ToObject<List<ModItemDataUseType>>();
             AttackTypes = JArray
                 .Parse(ModUtils.LoadConfig("Meta/AttackType.json"))
                 .ToObject<List<ModAttackType>>();
@@ -99,19 +132,32 @@ namespace SkySwordKill.NextEditor.Mod
             TargetTypes = JArray
                 .Parse(ModUtils.LoadConfig("Meta/TargetType.json"))
                 .ToObject<List<ModTargetType>>();
+            
+            ItemDataArtifactTypeGroup = JObject
+                .Parse(ModUtils.LoadConfig("Meta/ArtifactTypeGroup.json"))
+                .ToObject<ModItemDataArtifactTypeGroup>();
+            }
 
-            DefaultAffixData = ModAffixData.Load(ModUtils.GetBasePath())
-                .ToDictionary(pair => pair.Value.Id, pair => pair.Value);
-            DefaultBuffData = ModBuffData.Load(ModUtils.GetBasePath())
-                .ToDictionary(item => item.Id);
-            DefaultFFlowchart = FFlowchartTools.ImportAllFFlowchart(ModUtils.GetFungusDataPath());
+            LoadDefaultData();
 
             IsInit = true;
+        }
+
+        private void LoadDefaultData()
+        {
+            ReferenceProject = CreateReferencedProject();
+            DefaultFFlowchart = FFlowchartTools.ImportAllFFlowchart(ModUtils.GetFungusDataPath());
         }
 
         public ModProject CreateProject(string path)
         {
             var project = ModProject.Create(path);
+            return project;
+        }
+        public ModProject CreateReferencedProject()
+        {
+            var project = ModProject.Load(ModUtils.GetBasePath() ,ModUtils.GetBasePath());
+            project.ProjectName = "参考数据".I18NTodo();
             return project;
         }
 

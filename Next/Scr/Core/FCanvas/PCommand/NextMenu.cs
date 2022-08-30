@@ -15,22 +15,11 @@ namespace SkySwordKill.Next.FCanvas.PatchCommand
 
         public override void OnEnter()
         {
+            DialogEnvironment env = new DialogEnvironment();
             var roleID = GetFlowchart().GetVariable<IntegerVariable>("npcid")?.Value ?? 0;
-            DialogEnvironment env;
             if (roleID != 0)
             {
-                var npc = new UINPCData(roleID);
-                env = new DialogEnvironment()
-                {
-                    bindNpc = npc,
-                    roleBindID = npc.ZhongYaoNPCID,
-                    roleID = npc.ID,
-                    roleName = npc.Name
-                };
-            }
-            else
-            {
-                env = new DialogEnvironment();
+                DialogAnalysis.BindNpc(env, roleID);
             }
 
             env.flowchart = GetFlowchart();

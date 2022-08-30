@@ -79,5 +79,10 @@ namespace SkySwordKill.Next.FGUI.Component
         {
             Drawer.m_inContent.text = _modData.Id.ToString();
         }
+        
+        protected override void SetDrawerEditable(bool value)
+        {
+            Drawer.SetEditable(value);
+        }
     }
 }

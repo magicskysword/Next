@@ -8,7 +8,7 @@ using SkySwordKill.NextModEditor.Mod.Data;
 
 namespace SkySwordKill.Next.FGUI.Dialog
 {
-    public class WindowSelectorDialog : WindowDialogBase
+    public class WindowTableSelectorDialog : WindowDialogBase
     {
 
         private string _title;
@@ -20,11 +20,11 @@ namespace SkySwordKill.Next.FGUI.Dialog
         private Action _onCancel;
         private bool _allowEmpty;
 
-        private WindowSelectorDialog() : base("NextCore", "WinSelectorDialog")
+        private WindowTableSelectorDialog() : base("NextCore", "WinTableDialog")
         {
         }
 
-        public UI_WinSelectorDialog MainView => contentPane as UI_WinSelectorDialog;
+        public UI_WinTableDialog MainView => contentPane as UI_WinTableDialog;
         public CtlToolsBar ToolsBar { get; set; }
         public CtlTableList TableList { get; set; }
 
@@ -33,7 +33,7 @@ namespace SkySwordKill.Next.FGUI.Dialog
             bool allowEmpty,
             List<IModData> dataList, bool allowMulti, Action<List<int>> onConfirm = null, Action onCancel = null)
         {
-            var window = new WindowSelectorDialog();
+            var window = new WindowTableSelectorDialog();
             window._title = title;
             window._tableInfos.AddRange(tableInfos);
             window._onConfirm = onConfirm;
@@ -95,6 +95,7 @@ namespace SkySwordKill.Next.FGUI.Dialog
                 {
                     _curIds.Add(modData.Id);
                 }
+                TableList.RefreshRows();
             }
             else
             {

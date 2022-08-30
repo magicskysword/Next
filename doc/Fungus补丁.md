@@ -98,5 +98,6 @@ Command对象解释：
 目前可以插入的Command如下：
 |CmdType类型|说明|CmdParams参数|
 |-|-|-|
-|NextEvent|跳转到Next事件|目标事件#跳转条件<br>只有满足条件时才跳转，可不填写，默认为True
-|NextMenu|弹出选项框，选择后跳转到Next事件|选项名称#目标事件#显示条件<br>只有满足条件时才显示选项，可不填写，默认为True
+|NextEvent|跳转到Next事件，会中断当前Fungus，可使用RunFungusBlock重新跳回|目标事件#跳转条件<br>只有满足条件时才跳转，可不填写，默认为True
+|NextInnerEvent|执行内插Next事件，在执行完后会自动跳转回当前位置|目标事件#跳转条件<br>只有满足条件时才跳转，可不填写，默认为True
+|NextMenu|弹出选项框，选择后跳转到Next事件，会中断当前Fungus，可使用RunFungusBlock重新跳回|选项名称#目标事件#显示条件<br>只有满足条件时才显示选项，可不填写，默认为True

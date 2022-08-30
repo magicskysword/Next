@@ -1,8 +1,8 @@
 ﻿namespace SkySwordKill.NextModEditor.Mod.Data
 {
-    public class ModCreateAvatarDataLevelType
+    public class ModItemDataType : IModData
     {
-        public int TypeID { get; set; }
+        public int Id { get; set; }
         public string Desc { get; set; }
     }
 }

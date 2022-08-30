@@ -49,9 +49,21 @@ namespace SkySwordKill.Next.FGUI.Component
             }
         }
 
+        protected override void SetDrawerEditable(bool value)
+        {
+            Drawer.grayed = !value;
+        }
+
         private void OnClickEdit(EventContext context)
         {
-            WindowSeidEditorDialog.CreateDialog("特性编辑" ,Mod, OwnerId, SeidDataGroup,SeidMetas , SeidData, Refresh);
+            var window = WindowSeidEditorDialog.CreateDialog("特性编辑" ,Mod, OwnerId, SeidDataGroup,SeidMetas , SeidData, OnClose);
+            window.Editable = Editable;
+        }
+
+        private void OnClose()
+        {
+            Refresh();
+            OnChanged?.Invoke();
         }
     }
 }

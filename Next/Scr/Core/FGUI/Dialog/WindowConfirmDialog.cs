@@ -38,6 +38,7 @@ namespace SkySwordKill.Next.FGUI.Dialog
             MainView.m_btnOk.onClick.Set(Confirm);
             var typeCtl = MainView.GetController("type");
             typeCtl.selectedIndex = _canCancel ? 1 : 0;
+            MainView.Center();
         }
 
         private void Confirm()

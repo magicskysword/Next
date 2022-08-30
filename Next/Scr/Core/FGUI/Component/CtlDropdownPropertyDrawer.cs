@@ -14,6 +14,7 @@ namespace SkySwordKill.Next.FGUI.Component
         private readonly Func<int> _indexGetter;
 
         private UI_ComDropdownDrawer Drawer => (UI_ComDropdownDrawer)Component;
+        private CtlComboSearchBox SearchBox { get; set; }
 
         public CtlDropdownPropertyDrawer(string drawerName, Func<IEnumerable<string>> optionsGetter,
             Action<int> indexSetter, Func<int> indexGetter)
@@ -28,9 +29,10 @@ namespace SkySwordKill.Next.FGUI.Component
         {
             var drawer = UI_ComDropdownDrawer.CreateInstance();
             drawer.title = _drawerName;
-            drawer.m_dropdown.items = _optionsGetter.Invoke().ToArray();
-            drawer.m_dropdown.selectedIndex = OnGetPropertyIndex();
-            drawer.m_dropdown.onChanged.Add(OnDropdownChange);
+            SearchBox = new CtlComboSearchBox(drawer.m_searchDropdown);
+            SearchBox.SetItems(_optionsGetter.Invoke().ToArray()); 
+            SearchBox.SelectedIndex = OnGetPropertyIndex();
+            SearchBox.OnChanged += OnDropdownChange;
             return drawer;
         }
 
@@ -47,12 +49,17 @@ namespace SkySwordKill.Next.FGUI.Component
 
         private void OnDropdownChange()
         {
-            OnSetPropertyIndex(Drawer.m_dropdown.selectedIndex);
+            OnSetPropertyIndex(SearchBox.SelectedIndex);
         }
 
         protected override void OnRefresh()
         {
-            Drawer.m_dropdown.selectedIndex = OnGetPropertyIndex();
+            SearchBox.SelectedIndex = OnGetPropertyIndex();
+        }
+
+        protected override void SetDrawerEditable(bool value)
+        {
+            SearchBox.SetEditable(value);
         }
     }
 }

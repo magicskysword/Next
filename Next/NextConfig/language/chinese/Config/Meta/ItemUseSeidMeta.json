@@ -1,0 +1,489 @@
+{
+    "1": {
+        "ID": 1,
+        "IDName": "id",
+        "Name": "获得神通",
+        "Desc": "习得新神通",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 神通ID"
+            }
+        ]
+    },
+    "2": {
+        "ID": 2,
+        "IDName": "id",
+        "Name": "获得功法",
+        "Desc": "习得新功法",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 功法ID"
+            }
+        ]
+    },
+    "3": {
+        "ID": 3,
+        "IDName": "id",
+        "Name": "回复血量",
+        "Desc": "回复X点生命值",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 回复值"
+            }
+        ]
+    },
+    "4": {
+        "ID": 4,
+        "IDName": "id",
+        "Name": "提升修为",
+        "Desc": "提升X点修为",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 修为"
+            }
+        ]
+    },
+    "5": {
+        "ID": 5,
+        "IDName": "id",
+        "Name": "提升神识",
+        "Desc": "提升X点神识",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 神识"
+            }
+        ]
+    },
+    "6": {
+        "ID": 6,
+        "IDName": "id",
+        "Name": "提升血量上限",
+        "Desc": "提升X点血量上限",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 血量上限"
+            }
+        ]
+    },
+    "7": {
+        "ID": 7,
+        "IDName": "id",
+        "Name": "提升寿元",
+        "Desc": "提升X点寿元",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 寿元"
+            }
+        ]
+    },
+    "8": {
+        "ID": 8,
+        "IDName": "id",
+        "Name": "提升心境",
+        "Desc": "提升X点心境",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 心境"
+            }
+        ]
+    },
+    "9": {
+        "ID": 9,
+        "IDName": "id",
+        "Name": "提升资质",
+        "Desc": "提升X点资质",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 资质"
+            }
+        ]
+    },
+    "10": {
+        "ID": 10,
+        "IDName": "id",
+        "Name": "提升悟性",
+        "Desc": "提升X点悟性",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 悟性"
+            }
+        ]
+    },
+    "11": {
+        "ID": 11,
+        "IDName": "id",
+        "Name": "提升遁速",
+        "Desc": "提升X点遁速",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 遁速"
+            }
+        ]
+    },
+    "12": {
+        "ID": 12,
+        "IDName": "id",
+        "Name": "获得Buff",
+        "Desc": "下场战斗获得多个Buff",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "IntArray",
+                "Desc": "X BuffID 数组",
+                "SpecialDrawer": [
+                    "BuffArrayDrawer"
+                ]
+            },
+            {
+                "ID": "value2",
+                "Type": "IntArray",
+                "Desc": "Y Buff层数 数组"
+            }
+        ]
+    },
+    "13": {
+        "ID": 13,
+        "IDName": "id",
+        "Name": "获得丹方",
+        "Desc": "使用后获得丹方【X】",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 丹方ID"
+            }
+        ]
+    },
+    "14": {
+        "ID": 14,
+        "IDName": "id",
+        "Name": "化解丹毒",
+        "Desc": "使用后减少X点丹毒",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 丹毒量"
+            }
+        ]
+    },
+    "15": {
+        "ID": 15,
+        "IDName": "id",
+        "Name": "增加灵根",
+        "Desc": "使用后增加对应的灵根属性",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 灵根"
+            },
+            {
+                "ID": "value2",
+                "Type": "Int",
+                "Desc": "Y 增加值"
+            }
+        ]
+    },
+    "16": {
+        "ID": 16,
+        "IDName": "id",
+        "Name": "天赋特性17触发",
+        "Desc": "拥有天赋特性17【服用废丹增加经验】后触发",
+        "Properties": [
+        ]
+    },
+    "17": {
+        "ID": 17,
+        "IDName": "id",
+        "Name": "获得多个丹方",
+        "Desc": "使用后获得多个丹方",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "IntArray",
+                "Desc": "X 丹方数值"
+            }
+        ]
+    },
+    "18": {
+        "ID": 18,
+        "IDName": "id",
+        "Name": "打开图鉴",
+        "Desc": "使用后打开图鉴",
+        "Properties": [
+        ]
+    },
+    "19": {
+        "ID": 19,
+        "IDName": "id",
+        "Name": "增加悟道经验",
+        "Desc": "使用后增加【X】道Y点经验",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 道类型"
+            },
+            {
+                "ID": "value2",
+                "Type": "Int",
+                "Desc": "Y 经验"
+            }
+        ]
+    },
+    "20": {
+        "ID": 20,
+        "IDName": "id",
+        "Name": "获得多个物品",
+        "Desc": "使用后获得多个物品",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "IntArray",
+                "Desc": "X 物品ID 数组",
+                "SpecialDrawer": [
+                    "ItemArrayDrawer"
+                ]
+            },
+            {
+                "ID": "value2",
+                "Type": "IntArray",
+                "Desc": "Y 物品数量 数组"
+            }
+        ]
+    },
+    "21": {
+        "ID": 21,
+        "IDName": "id",
+        "Name": "获得后触发",
+        "Desc": "获得后立即触发后续效果",
+        "Properties": [
+        ]
+    },
+    "22": {
+        "ID": 22,
+        "IDName": "id",
+        "Name": "获得委托",
+        "Desc": "使用后获得委托任务",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 委托任务ID"
+            }
+        ]
+    },
+    "23": {
+        "ID": 23,
+        "IDName": "id",
+        "Name": "显示岛屿",
+        "Desc": "使用后显示X海域岛屿",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 海域ID"
+            }
+        ]
+    },
+    "24": {
+        "ID": 24,
+        "IDName": "id",
+        "Name": "打开海图",
+        "Desc": "使用后打开海图",
+        "Properties": [
+        ]
+    },
+    "25": {
+        "ID": 25,
+        "IDName": "id",
+        "Name": "增加悟道经验",
+        "Desc": "使用后增加【X】道Y点经验",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 道类型"
+            },
+            {
+                "ID": "value2",
+                "Type": "Int",
+                "Desc": "Y 经验"
+            }
+        ]
+    },
+    "26": {
+        "ID": 26,
+        "IDName": "id",
+        "Name": "增加悟道点",
+        "Desc": "使用后增加悟道点",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 悟道点"
+            }
+        ]
+    },
+    "27": {
+        "ID": 27,
+        "IDName": "id",
+        "Name": "影响海兽",
+        "Desc": "使用后影响海兽行为",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 行为类型"
+            },
+            {
+                "ID": "value2",
+                "Type": "Int",
+                "Desc": "Y 持续时间"
+            },
+            {
+                "ID": "value3",
+                "Type": "String",
+                "Desc": "Z 显示图标"
+            }
+        ]
+    },
+    "28": {
+        "ID": 28,
+        "IDName": "id",
+        "Name": "显示草药分布",
+        "Desc": "使用后显示指定草药分布",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "IntArray",
+                "Desc": "X 采集表ID"
+            }
+        ]
+    },
+    "29": {
+        "ID": 29,
+        "IDName": "id",
+        "Name": "不满境界获得丹毒",
+        "Desc": "当境界不满足下限时，获得丹毒",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 境界下限",
+                "SpecialDrawer": [
+                    "LevelTypeDrawer"
+                ]
+            },
+            {
+                "ID": "value2",
+                "Type": "Int",
+                "Desc": "Y 丹毒"
+            }
+        ]
+    },
+    "30": {
+        "ID": 30,
+        "IDName": "id",
+        "Name": "获得神通和功法",
+        "Desc": "使用后获得对应功法和技能",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 神通ID"
+            },
+            {
+                "ID": "value2",
+                "Type": "Int",
+                "Desc": "Y 功法ID"
+            }
+        ]
+    },
+    "31": {
+        "ID": 31,
+        "IDName": "id",
+        "Name": "仅能在突破时使用",
+        "Desc": "使物品只能在突破时使用",
+        "Properties": [
+        ]
+    },
+    "32": {
+        "ID": 32,
+        "IDName": "id",
+        "Name": "获得双修秘术",
+        "Desc": "使用后获得双修秘术",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 双修秘术ID"
+            }
+        ]
+    },
+    "33": {
+        "ID": 33,
+        "IDName": "id",
+        "Name": "提升海域探索度",
+        "Desc": "使用后提升对应海域探索度",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "Int",
+                "Desc": "X 海域ID"
+            },
+            {
+                "ID": "value2",
+                "Type": "Int",
+                "Desc": "Y 提升的探索度"
+            }
+        ]
+    },
+    "34": {
+        "ID": 34,
+        "IDName": "id",
+        "Name": "解锁药性",
+        "Desc": "使用后解锁对应药材药性",
+        "Properties": [
+            {
+                "ID": "value1",
+                "Type": "IntArray",
+                "Desc": "X 物品ID 数组",
+                "SpecialDrawer": [
+                    "ItemArrayDrawer"
+                ]
+            }
+        ]
+    },
+    "35": {
+        "ID": 35,
+        "IDName": "id",
+        "Name": "改变容貌",
+        "Desc": "在装扮时允许改变自身容貌",
+        "Properties": [
+        ]
+    }
+}

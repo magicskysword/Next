@@ -15,6 +15,7 @@ namespace SkySwordKill.Next.DialogEvent
             }
             else
             {
+                Main.LogInfo("FungusEvent : 跳转FungusBlock " + tagBlock);
                 env.flowchart.ExecuteBlock(tagBlock);
             }
             DialogAnalysis.CancelEvent();

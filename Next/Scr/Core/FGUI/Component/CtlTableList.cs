@@ -82,13 +82,21 @@ namespace SkySwordKill.Next.FGUI.Component
             // 绑定滚动
             MainView.m_list.scrollPane.onScroll.Add(OnListScroll);
             MainView.m_listHeader.scrollPane.onScroll.Add(OnListHeaderScroll);
+            
+            // 绑定大小变动
+            MainView.onSizeChanged.Add(OnSizeChanged);
 
             _searchText = "";
             _isSearching = false;
 
             Refresh();
         }
-        
+
+        private void OnSizeChanged()
+        {
+            Refresh();
+        }
+
         public void SetItemRenderer(OnTableItemRenderer renderer)
         {
             _tableItemRenderer = renderer;
@@ -226,7 +234,7 @@ namespace SkySwordKill.Next.FGUI.Component
             foreach (var info in _tableInfos)
             {
                 var str = info.Getter(data);
-                if (str.Contains(tagText))
+                if (str.IndexOf(tagText, StringComparison.OrdinalIgnoreCase) >= 0)
                     return true;
             }
 

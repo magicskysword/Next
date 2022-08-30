@@ -34,7 +34,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         public static void Save(string dir, Dictionary<string, T> dataDic)
         {
             string filePath = $"{dir}/{FileName}";
-            if (dataDic != null)
+            if (dataDic != null && dataDic.Count > 0)
             {
                 var json = JsonConvert.SerializeObject(dataDic, Formatting.Indented);
                 File.WriteAllText(filePath, json);

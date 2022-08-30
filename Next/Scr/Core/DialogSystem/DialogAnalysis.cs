@@ -31,6 +31,8 @@ namespace SkySwordKill.Next.DialogSystem
         /// 对话注册事件
         /// </summary>
         private static Dictionary<string, IDialogEvent> _registerEvents = new Dictionary<string, IDialogEvent>();
+        
+        public static event Action OnDialogComplete;
 
         #endregion
 
@@ -280,6 +282,8 @@ namespace SkySwordKill.Next.DialogSystem
             else
             {
                 IsRunningEvent = false;
+                OnDialogComplete?.Invoke();
+                OnDialogComplete = null;
             }
         }
 
@@ -398,8 +402,8 @@ namespace SkySwordKill.Next.DialogSystem
                     {
                         if (!command.IsEnd)
                             RunDialogEvent(rtEvent, index + 1);
-                        // 当不存在选项且有默认跳转事件时，进行跳转
-                        else if (!haveOption && !string.IsNullOrEmpty(jumpEvent))
+                        // 有默认跳转事件时，进行跳转
+                        else if (!string.IsNullOrEmpty(jumpEvent))
                             SwitchDialogEvent(jumpEvent);
                         else
                             CompleteEvent();

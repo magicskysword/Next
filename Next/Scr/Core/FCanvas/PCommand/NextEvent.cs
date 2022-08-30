@@ -18,11 +18,17 @@ namespace SkySwordKill.Next.FCanvas.PatchCommand
             {
                 flowchart = GetFlowchart()
             };
+            var roleID = GetFlowchart().GetVariable<IntegerVariable>("npcid")?.Value ?? 0;
+            if (roleID != 0)
+            {
+                DialogAnalysis.BindNpc(env, roleID);
+            }
+            
             var canExecute = DialogAnalysis.CheckCondition(condition, env);
             if (canExecute)
             {
-                DialogAnalysis.StartDialogEvent(nextEvent, env);
                 StopParentBlock();
+                DialogAnalysis.StartDialogEvent(nextEvent, env);
             }
             else
             {

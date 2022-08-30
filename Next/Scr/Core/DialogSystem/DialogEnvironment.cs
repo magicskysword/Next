@@ -44,8 +44,6 @@ namespace SkySwordKill.Next.DialogSystem
 
         #region 属性
 
-
-
         #endregion
 
         #region 回调方法
@@ -60,7 +58,7 @@ namespace SkySwordKill.Next.DialogSystem
         {
             player = Tools.instance.getPlayer();
         }
-        
+
         public DialogEnvironment Clone()
         {
             var newEnv = new DialogEnvironment();

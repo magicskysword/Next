@@ -5,7 +5,7 @@ using FairyGUI.Utils;
 
 namespace SkySwordKill.NextFGUI.NextCore
 {
-    public partial class UI_WinSelectorDialog : GComponent
+    public partial class UI_WinTableDialog : GComponent
     {
         public UI_WindowFrameDialog m_frame;
         public GButton m_btnOk;
@@ -17,9 +17,9 @@ namespace SkySwordKill.NextFGUI.NextCore
         public UI_ComToolsBar m_toolsBar;
         public const string URL = "ui://028qk31hnkvz33";
 
-        public static UI_WinSelectorDialog CreateInstance()
+        public static UI_WinTableDialog CreateInstance()
         {
-            return (UI_WinSelectorDialog)UIPackage.CreateObject("NextCore", "WinSelectorDialog");
+            return (UI_WinTableDialog)UIPackage.CreateObject("NextCore", "WinTableDialog");
         }
 
         public override void ConstructFromXML(XML xml)

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="100,24" extention="ComboBox">
   <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <controller name="grayed" pages="0,,1," selected="1"/>
   <displayList>
-    <graph id="n5_of7d" name="n5" xy="0,0" size="100,24" type="rect" lineSize="2" fillColor="#ff2c313c">
+    <graph id="n5_of7d" name="n5" xy="0,0" size="100,24" type="rect" lineSize="2" fillColor="#ff3e4247">
+      <gearColor controller="grayed" pages="1" values="#3e4247" default="#2c313c"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <text id="n3_of7d" name="title" xy="7,1" size="65,22" fontSize="14" color="#ffffff" vAlign="middle" autoSize="none" singleLine="true" text="Test">
+    <text id="n3_of7d" name="title" xy="7,1" size="65,22" fontSize="14" color="#959595" vAlign="middle" autoSize="none" singleLine="true" text="Test">
+      <gearColor controller="grayed" pages="1" values="#959595,#000000" default="#ffffff,#000000"/>
       <relation target="" sidePair="width-width,height-height"/>
     </text>
-    <image id="n4_of7d" name="n4" src="nkvz1m" fileName="Icon/icon_arrow2.png" xy="74,0">
+    <image id="n4_of7d" name="n4" src="nkvz1m" fileName="Icon/icon_arrow2.png" xy="74,0" color="#959595">
+      <gearColor controller="grayed" pages="1" values="#959595" default="#ffffff"/>
       <relation target="" sidePair="middle-middle,right-right"/>
     </image>
   </displayList>

@@ -12,6 +12,7 @@ namespace SkySwordKill.NextFGUI.NextCore
         public UI_ComTableList m_table;
         public UI_ComMainInspector m_inspector;
         public GButton m_btnConfirm;
+        public GGraph m_sep;
         public const string URL = "ui://028qk31hnqml3g";
 
         public static UI_WinModSelectorDialog CreateInstance()
@@ -28,6 +29,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             m_table = (UI_ComTableList)GetChild("table");
             m_inspector = (UI_ComMainInspector)GetChild("inspector");
             m_btnConfirm = (GButton)GetChild("btnConfirm");
+            m_sep = (GGraph)GetChild("sep");
         }
     }
 }

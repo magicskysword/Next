@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="24,24" extention="Button">
-  <Button mode="Check"/>
-  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver"/>
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver,4,disabled,5,selectedDisabled" selected="4"/>
   <displayList>
-    <image id="n0_rabj" src="rabj47" name="n0" xy="0,0">
-      <gearDisplay controller="button" pages="0,2"/>
-      <relation target="" sidePair="width,height"/>
+    <image id="n0_rabj" name="n0" src="rabj47" fileName="Icon/icon_checkbox_frame.png" xy="0,0" color="#959595">
+      <gearDisplay controller="button" pages="0,2,4"/>
+      <gearColor controller="button" pages="4" values="#959595" default="#ffffff"/>
+      <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <image id="n1_rabj" src="rabj46" name="n1" xy="0,0">
-      <gearDisplay controller="button" pages="1,3"/>
-      <relation target="" sidePair="width,height"/>
+    <image id="n1_rabj" name="n1" src="rabj46" fileName="Icon/icon_checkbox.png" xy="0,0" color="#959595">
+      <gearDisplay controller="button" pages="1,3,5"/>
+      <gearColor controller="button" pages="4,5" values="#959595|#999999" default="#ffffff"/>
+      <relation target="" sidePair="width-width,height-height"/>
     </image>
   </displayList>
+  <Button mode="Check"/>
 </component>

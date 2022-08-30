@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="150,197">
+  <displayList>
+    <image id="n2_of7d" name="n2" src="nkvz1v" fileName="Image/shadow_flat.png" xy="-5,-5" size="160,207" color="#000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <graph id="n3_of7d" name="n3" xy="0,0" size="150,197" type="rect" lineSize="2" fillColor="#ff21252b">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <list id="n1_of7d" name="list" xy="2,29" size="146,166" overflow="scroll" scrollBarFlags="4" lineGap="-1" defaultItem="ui://028qk31hmdyt4m">
+      <relation target="" sidePair="width-width"/>
+    </list>
+    <graph id="n5_mdyt" name="bg_searchBox" xy="2,2" size="146,27" type="rect" lineColor="#ff32363c" fillColor="#ff2c313c">
+      <relation target="n4_mdyt" sidePair="width-width,height-height"/>
+    </graph>
+    <component id="n4_mdyt" name="searchBox" src="d4rw3z" fileName="Component/ToolsBar/ComToolsSearchBox.xml" xy="2,3" size="146,24">
+      <relation target="" sidePair="width-width"/>
+    </component>
+  </displayList>
+  <relation target="n1_of7d" sidePair="height-height"/>
+</component>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="320,532" extention="Label">
+  <displayList>
+    <component id="n1_v5ah" name="btnExpand" src="nkvz1k" fileName="Component/Button/BtnExpand.xml" xy="17,3" size="16,16">
+      <Button checked="true"/>
+    </component>
+    <text id="n3_v5ah" name="title" xy="40,0" size="32,22" fontSize="14" color="#ffffff" text="标题"/>
+    <graph id="n4_v5ah" name="line" xy="77,10" size="243,1" type="rect" lineSize="0" lineColor="#ffffffff">
+      <relation target="n3_v5ah" sidePair="leftext-right"/>
+      <relation target="" sidePair="width-width"/>
+    </graph>
+    <list id="n0_v5ah" name="list" xy="0,22" size="320,510" restrictSize="200,0,0,0" selectionMode="none" overflow="scroll" scrollBarFlags="132" scrollBar="visible" scrollBarRes="ui://028qk31hnkvz27," lineGap="6" autoClearItems="true">
+      <relation target="" sidePair="width-width"/>
+      <item url="ui://028qk31hnkvz1x" title="ID"/>
+      <item url="ui://028qk31hnkvz1x" title="名称"/>
+      <item url="ui://028qk31hnkvz21" title="描述"/>
+      <item url="ui://028qk31hnkvz23" title="选项"/>
+      <item url="ui://028qk31hnkvz22" title="特性"/>
+      <item url="ui://028qk31h7exm3k"/>
+      <item url="ui://028qk31hrabj4a"/>
+    </list>
+  </displayList>
+  <relation target="n0_v5ah" sidePair="bottomext-bottom"/>
+</component>

@@ -17,6 +17,7 @@ namespace SkySwordKill.NextEditor.PanelProject
         public override string ID => $"projectItem_{Project.ProjectPath}_{GetType().FullName}";
         public override string Name => EditorName;
         public abstract string EditorName { get; }
-        public virtual string TabName => $"{EditorName} - {Project.ProjectPathName}";
+        public virtual string TabName => $"{EditorName} - {Project.ProjectName}";
+        public bool Editable { get; set; } = true;
     }
 }

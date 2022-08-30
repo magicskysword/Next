@@ -361,45 +361,52 @@ namespace SkySwordKill.Next.Mod
                 // 载入Mod Patch数据
                 foreach (var fieldInfo in jsonDataFields)
                 {
-                    if (IsBanField(fieldInfo))
-                        continue;
+                    try
+                    {
+                        if (IsBanField(fieldInfo))
+                            continue;
 
-                    var value = fieldInfo.GetValue(jsonInstance);
+                        var value = fieldInfo.GetValue(jsonInstance);
 
-                    // 普通数据
-                    if (value is JSONObject jsonObject)
-                    {
-                        string filePath = Utility.CombinePaths(modDataDir, $"{fieldInfo.Name}.json");
-                        modConfig.jsonPathCache.Add(fieldInfo.Name, filePath);
-                        PatchJsonObject(fieldInfo, filePath, jsonObject);
+                        // 普通数据
+                        if (value is JSONObject jsonObject)
+                        {
+                            string filePath = Utility.CombinePaths(modDataDir, $"{fieldInfo.Name}.json");
+                            modConfig.jsonPathCache.Add(fieldInfo.Name, filePath);
+                            PatchJsonObject(fieldInfo, filePath, jsonObject);
+                        }
+                        else if (value is JObject jObject)
+                        {
+                            string filePath = Utility.CombinePaths(modDataDir, $"{fieldInfo.Name}.json");
+                            modConfig.jsonPathCache.Add(fieldInfo.Name, filePath);
+                            PatchJObject(fieldInfo, filePath, jObject);
+                        }
+                        else if (value is jsonData.YSDictionary<string, JSONObject> dicData)
+                        {
+                            string dirPathForData = Utility.CombinePaths(modDataDir, fieldInfo.Name);
+                            JSONObject toJsonObject =
+                                typeof(jsonData).GetField($"_{fieldInfo.Name}").GetValue(jsonInstance) as JSONObject;
+                            modConfig.jsonPathCache.Add(fieldInfo.Name, dirPathForData);
+                            PatchDicData(fieldInfo, dirPathForData, dicData, toJsonObject);
+                        }
+                        // 功能函数配置数据
+                        else if (value is JSONObject[] jsonObjects)
+                        {
+                            string dirPathForData = Utility.CombinePaths(modDataDir, fieldInfo.Name);
+                            modConfig.jsonPathCache.Add(fieldInfo.Name, dirPathForData);
+                            PatchJsonObjectArray(fieldInfo, dirPathForData, jsonObjects);
+                        }
                     }
-                    else if (value is JObject jObject)
+                    catch (Exception e)
                     {
-                        string filePath = Utility.CombinePaths(modDataDir, $"{fieldInfo.Name}.json");
-                        modConfig.jsonPathCache.Add(fieldInfo.Name, filePath);
-                        PatchJObject(fieldInfo, filePath, jObject);
-                    }
-                    else if (value is jsonData.YSDictionary<string, JSONObject> dicData)
-                    {
-                        string dirPathForData = Utility.CombinePaths(modDataDir, fieldInfo.Name);
-                        JSONObject toJsonObject =
-                            typeof(jsonData).GetField($"_{fieldInfo.Name}").GetValue(jsonInstance) as JSONObject;
-                        modConfig.jsonPathCache.Add(fieldInfo.Name, dirPathForData);
-                        PatchDicData(fieldInfo, dirPathForData, dicData, toJsonObject);
-                    }
-                    // 功能函数配置数据
-                    else if (value is JSONObject[] jsonObjects)
-                    {
-                        string dirPathForData = Utility.CombinePaths(modDataDir, fieldInfo.Name);
-                        modConfig.jsonPathCache.Add(fieldInfo.Name, dirPathForData);
-                        PatchJsonObjectArray(fieldInfo, dirPathForData, jsonObjects);
+                        throw new ModLoadException($"加载 Data【{fieldInfo.Name}】数据失败", e);
                     }
                 }
 
                 // 载入Mod Dialog数据
                 LoadDialogEventData(modNDataDir);
                 LoadDialogTriggerData(modNDataDir);
-                
+
                 // 载入Mod Face数据
                 LoadCustomFaceData(modNDataDir);
                 
@@ -472,110 +479,122 @@ namespace SkySwordKill.Next.Mod
 
         public static void PatchJsonObject(FieldInfo fieldInfo,string filePath, JSONObject jsonObject, string dirName = "")
         {
-            JSONObject dataTemplate = null;
-            if(jsonObject.Count > 0)
+            try
             {
-                dataTemplate = jsonObject[0];
-            }
-
-            if (File.Exists(filePath))
-            {
-                var fileName = Path.GetFileNameWithoutExtension(filePath);
-                var jsonData = LoadJSONObject(filePath);
-
-                foreach (var key in jsonData.keys)
+                JSONObject dataTemplate = null;
+                if(jsonObject.Count > 0)
                 {
-                    var curData = jsonData.GetField(key);
-                    if (jsonObject.HasField(key))
-                    {
-                        // Old data
-                        var tagData = jsonObject.GetField(key);
-                        foreach (var fieldKey in curData.keys)
-                        {
-                            tagData.TryAddOrReplace(fieldKey,curData.GetField(fieldKey));
-                        }
-                    }
-                    else
-                    {
-                        // New data
-                        if(dataTemplate != null)
-                        {
-                            foreach (var fieldKey in dataTemplate.keys)
-                            {
-                                if (!curData.HasField(fieldKey))
-                                {
-                                    curData.AddField(fieldKey, dataTemplate[fieldKey].Clone());
-                                    Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
-                                        fieldInfo.Name,
-                                        fileName,
-                                        fieldKey,
-                                        dataTemplate[fieldKey]));
-
-                                }
-                            }
-                        }
-                        jsonObject.AddField(key, curData);
-                    }
+                    dataTemplate = jsonObject[0];
                 }
 
-                
-                Main.LogInfo(string.Format("ModManager.LoadData".I18N(),$"{dirName}{fileName}.json"));
+                if (File.Exists(filePath))
+                {
+                    var fileName = Path.GetFileNameWithoutExtension(filePath);
+                    var jsonData = LoadJSONObject(filePath);
+
+                    foreach (var key in jsonData.keys)
+                    {
+                        var curData = jsonData.GetField(key);
+                        if (jsonObject.HasField(key))
+                        {
+                            // Old data
+                            var tagData = jsonObject.GetField(key);
+                            foreach (var fieldKey in curData.keys)
+                            {
+                                tagData.TryAddOrReplace(fieldKey,curData.GetField(fieldKey));
+                            }
+                        }
+                        else
+                        {
+                            // New data
+                            if(dataTemplate != null)
+                            {
+                                foreach (var fieldKey in dataTemplate.keys)
+                                {
+                                    if (!curData.HasField(fieldKey))
+                                    {
+                                        curData.AddField(fieldKey, dataTemplate[fieldKey].Clone());
+                                        Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
+                                            fieldInfo.Name,
+                                            fileName,
+                                            fieldKey,
+                                            dataTemplate[fieldKey]));
+
+                                    }
+                                }
+                            }
+                            jsonObject.AddField(key, curData);
+                        }
+                    }
+                    Main.LogInfo(string.Format("ModManager.LoadData".I18N(),$"{dirName}{fileName}.json"));
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ModLoadException($"文件【{filePath}】加载失败", e);
             }
         }
 
         public static void PatchJObject(FieldInfo fieldInfo,string filePath, JObject jObject)
         {
-            var dataTemplate = jObject.Properties().First().Value;
-            
-            if (File.Exists(filePath))
+            try
             {
-                var jsonData = LoadJObject(filePath);
-                foreach (var property in jsonData.Properties())
+                var dataTemplate = jObject.Properties().First().Value;
+            
+                if (File.Exists(filePath))
                 {
-                    if (property.Value.Type !=  JTokenType.Object)
+                    var jsonData = LoadJObject(filePath);
+                    foreach (var property in jsonData.Properties())
                     {
-                        jObject.TryAddOrReplace(property.Name,property.Value);
-                        continue;
-                    }
-                    
-                    var curData = (JObject)property.Value;
-                    if (jObject.ContainsKey(property.Name))
-                    {
-                        var tagData = jObject.GetValue(property.Name);
-                        if (tagData?.Type == JTokenType.Object)
+                        if (property.Value.Type !=  JTokenType.Object)
                         {
-                            var tagDataObject = (JObject)tagData;
-                            foreach (var field in curData.Properties())
-                            {
-                                if (tagDataObject.ContainsKey(field.Name))
-                                    tagDataObject.Remove(field.Name);
-                                tagDataObject.Add(field.Name,curData.GetValue(field.Name));
-                            }
+                            jObject.TryAddOrReplace(property.Name,property.Value);
+                            continue;
                         }
-                    }
-                    else
-                    {
-                        if (dataTemplate.Type == JTokenType.Object)
+                    
+                        var curData = (JObject)property.Value;
+                        if (jObject.ContainsKey(property.Name))
                         {
-                            foreach (var field in JObject.FromObject(dataTemplate).Properties())
+                            var tagData = jObject.GetValue(property.Name);
+                            if (tagData?.Type == JTokenType.Object)
                             {
-                                if (!curData.ContainsKey(field.Name))
+                                var tagDataObject = (JObject)tagData;
+                                foreach (var field in curData.Properties())
                                 {
-                                    curData.Add(field.Value.DeepClone());
-                                    Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
-                                        fieldInfo.Name, 
-                                        property.Name, 
-                                        field.Name,
-                                        field.Value));
+                                    if (tagDataObject.ContainsKey(field.Name))
+                                        tagDataObject.Remove(field.Name);
+                                    tagDataObject.Add(field.Name,curData.GetValue(field.Name));
                                 }
                             }
                         }
-                        jObject.Add(property.Name, property.Value.DeepClone());
+                        else
+                        {
+                            if (dataTemplate.Type == JTokenType.Object)
+                            {
+                                foreach (var field in JObject.FromObject(dataTemplate).Properties())
+                                {
+                                    if (!curData.ContainsKey(field.Name))
+                                    {
+                                        curData.Add(field.Value.DeepClone());
+                                        Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
+                                            fieldInfo.Name, 
+                                            property.Name, 
+                                            field.Name,
+                                            field.Value));
+                                    }
+                                }
+                            }
+                            jObject.Add(property.Name, property.Value.DeepClone());
+                        }
                     }
-                }
                 
-                Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
-                    $"{Path.GetFileNameWithoutExtension(filePath)}.json"));
+                    Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
+                        $"{Path.GetFileNameWithoutExtension(filePath)}.json"));
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ModLoadException($"文件【{filePath}】加载失败", e);
             }
         }
 
@@ -588,37 +607,44 @@ namespace SkySwordKill.Next.Mod
             var dataTemplate = toJsonObject[0];
             foreach (var filePath in Directory.GetFiles(dirPathForData))
             {
-                var curData = LoadJSONObject(filePath);
-                var key = Path.GetFileNameWithoutExtension(filePath);
+                try
+                {
+                    var curData = LoadJSONObject(filePath);
+                    var key = Path.GetFileNameWithoutExtension(filePath);
                 
-                if (toJsonObject.HasField(key))
-                {
-                    var tagData = toJsonObject.GetField(key);
-                    foreach (var fieldKey in curData.keys)
+                    if (toJsonObject.HasField(key))
                     {
-                        tagData.TryAddOrReplace(fieldKey,curData.GetField(fieldKey));
-                    }
-                }
-                else
-                {
-                    foreach (var fieldKey in dataTemplate.keys)
-                    {
-                        if (!curData.HasField(fieldKey))
+                        var tagData = toJsonObject.GetField(key);
+                        foreach (var fieldKey in curData.keys)
                         {
-                            curData.AddField(fieldKey,dataTemplate[fieldKey].Clone());
-                            Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
-                                fieldInfo.Name, 
-                                key, 
-                                fieldKey,
-                                dataTemplate[fieldKey]));
+                            tagData.TryAddOrReplace(fieldKey,curData.GetField(fieldKey));
                         }
                     }
-                    dicData[key] = curData;
-                    toJsonObject.AddField(key, curData);
-                }
+                    else
+                    {
+                        foreach (var fieldKey in dataTemplate.keys)
+                        {
+                            if (!curData.HasField(fieldKey))
+                            {
+                                curData.AddField(fieldKey,dataTemplate[fieldKey].Clone());
+                                Main.LogWarning(string.Format("ModManager.DataMissingField".I18N(),
+                                    fieldInfo.Name, 
+                                    key, 
+                                    fieldKey,
+                                    dataTemplate[fieldKey]));
+                            }
+                        }
+                        dicData[key] = curData;
+                        toJsonObject.AddField(key, curData);
+                    }
                 
-                Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
-                    $"{Path.GetFileNameWithoutExtension(dirPathForData)}/{Path.GetFileNameWithoutExtension(filePath)}.json [{key}]"));
+                    Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
+                        $"{Path.GetFileNameWithoutExtension(dirPathForData)}/{Path.GetFileNameWithoutExtension(filePath)}.json [{key}]"));
+                }
+                catch (Exception e)
+                {
+                    throw new ModLoadException($"文件 {filePath} 解析失败", e);
+                }
             }
         }
         
@@ -731,7 +757,14 @@ namespace SkySwordKill.Next.Mod
                 var luaPath = Path.GetFileNameWithoutExtension(virtualPath)
                     .Replace(@"\", @"/");
 
-                Main.Lua.AddLuaCacheFile(luaPath, luaCache);
+                try
+                {
+                    Main.Lua.AddLuaCacheFile(luaPath, luaCache);
+                }
+                catch (Exception e)
+                {
+                    throw new ModLoadException($"Lua {luaPath} 加载失败。", e);
+                }
             });
         }
         

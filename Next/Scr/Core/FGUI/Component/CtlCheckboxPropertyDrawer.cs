@@ -47,5 +47,10 @@ namespace SkySwordKill.Next.FGUI.Component
         {
             Drawer.m_checkbox.selected = OnGetProperty();
         }
+
+        protected override void SetDrawerEditable(bool value)
+        {
+            Drawer.m_checkbox.enabled = value;
+        }
     }
 }

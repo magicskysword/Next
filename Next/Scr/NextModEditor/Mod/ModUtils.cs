@@ -4,6 +4,8 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using script.Steam;
 using SkySwordKill.Next;
 using SkySwordKill.NextModEditor.Mod.Data;
@@ -19,13 +21,30 @@ namespace SkySwordKill.NextEditor.Mod
             list.Sort((dataX, dataY) => dataX.Id.CompareTo(dataY.Id));
             return list;
         }
-
-        public static int TryFind<T>(this List<T> list, Predicate<T> predicate)
+        
+        public static bool TryFindData<T>(this List<T> list, int id, out T data) where T : IModData
         {
-            var index = list.FindIndex(predicate);
+            data = default;
+            var index = list.FindIndex(x => x.Id == id);
             if (index < 0)
-                index = 0;
-            return index;
+                return false;
+            data = list[index];
+            return true;
+        }
+        
+        public static bool HasId<T>(this List<T> list, int id) where T : IModData
+        {
+            return list.FindIndex(data => data.Id == id) != -1;
+        }
+        
+        public static int GetIndex<T>(this List<T> list, int id) where T : IModData
+        {
+            return list.FindIndex(data => data.Id == id);
+        }
+        
+        public static JObject GetJsonData(this IModData modData)
+        {
+            return JObject.FromObject(modData);
         }
 
         public static bool TryFormatToListInt(this string str, out List<int> list)
@@ -136,15 +155,109 @@ namespace SkySwordKill.NextEditor.Mod
                 return $"【{affixData.Name}】{affixData.Desc}";
             }
         }
+        
+        public static string GetItemFlagDesc(ModItemFlagData flagData)
+        {
+            if (flagData == null)
+            {
+                return "【？】";
+            }
+            else
+            {
+                return $"【{flagData.Id}】{flagData.Name}";
+            }
+        }
+        
+        public static string GetItemInfo(this ModWorkshop mod, ModItemData item)
+        {
+            if(item.ItemType == 3 || item.ItemType == 4)
+            {
+                return $"【技能描述】{(item.ItemType == 3 ? "神通" : "功法")}:{item.Desc}";
+            }
+            else
+            {
+                return item.Info;
+            }
+        }
 
-        public static string GetAffixDesc(this ModProject project, List<int> affixIntList)
+        public static string GetAffixDesc(this ModWorkshop mod, List<int> affixIntList)
         {
             var sb = new StringBuilder();
             foreach (var id in affixIntList)
             {
-                var affixData = project.FindAffix(id);
+                var affixData = mod.FindAffix(id);
                 sb.Append(GetAffixDesc(affixData));
                 sb.Append("\n");
+            }
+
+            return sb.ToString();
+        }
+        
+        public static string GetItemFlagDesc(this ModWorkshop mod, List<int> flagList)
+        {
+            var sb = new StringBuilder();
+            foreach (var id in flagList)
+            {
+                var flagData = mod.FindItemFlag(id);
+                sb.Append(GetItemFlagDesc(flagData));
+                sb.Append("\n");
+            }
+
+            return sb.ToString();
+        }
+        
+        public static string GetAlchemyElementDesc(this ModWorkshop mod, int id)
+        {
+            if (id == 0)
+                return "【0】无";
+            
+            var alchemyData = mod.FindAlchemyElement(id);
+            if (alchemyData == null)
+            {
+                return $"【{id}】未知";
+            }
+            else
+            {
+                return $"【{alchemyData.Id}】{alchemyData.Name}";
+            }
+        }
+        
+        public static string GetComprehensionWithPhaseDesc(this ModWorkshop mod, List<int> comList)
+        {
+            var sb = new StringBuilder();
+            for (var index = 0; index < comList.Count; index += 2)
+            {
+                var id = comList[index];
+                var comData = mod.FindComprehension(id);
+                
+                if(comData != null)
+                {
+                    sb.Append($"【{id} {comData.Desc}】");
+                }
+                else
+                {
+                    sb.Append($"【{id} 未知】");
+                }
+
+                var phase = 0;
+                if(index + 1 < comList.Count)
+                {
+                    phase = comList[index + 1];
+                }
+                var phaseData = mod.FindComprehensionPhase(phase);
+                if(phaseData != null)
+                {
+                    sb.Append($"({phase}){phaseData.Name}");
+                }
+                else
+                {
+                    sb.Append($"({phase})未知");
+                }
+                
+                if (index + 2 < comList.Count)
+                {
+                    sb.Append("\n");
+                }
             }
 
             return sb.ToString();

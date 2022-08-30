@@ -18,6 +18,11 @@ namespace SkySwordKill.Next.FGUI.Component
             return label;
         }
 
+        protected override void SetDrawerEditable(bool value)
+        {
+            
+        }
+
         public void SetText(string text)
         {
             _text = text;

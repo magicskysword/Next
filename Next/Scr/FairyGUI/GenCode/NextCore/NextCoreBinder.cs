@@ -24,13 +24,17 @@ namespace SkySwordKill.NextFGUI.NextCore
             UIObjectFactory.SetPackageItemExtension(UI_ComNodeBlock.URL, typeof(UI_ComNodeBlock));
             UIObjectFactory.SetPackageItemExtension(UI_ComTitleDrawer.URL, typeof(UI_ComTitleDrawer));
             UIObjectFactory.SetPackageItemExtension(UI_WinWaitDialog.URL, typeof(UI_WinWaitDialog));
+            UIObjectFactory.SetPackageItemExtension(UI_ComStringBindDataDrawer.URL, typeof(UI_ComStringBindDataDrawer));
+            UIObjectFactory.SetPackageItemExtension(UI_ComboSearchBox.URL, typeof(UI_ComboSearchBox));
+            UIObjectFactory.SetPackageItemExtension(UI_ComboSearchBox_popup.URL, typeof(UI_ComboSearchBox_popup));
+            UIObjectFactory.SetPackageItemExtension(UI_ComboSearchBox_item.URL, typeof(UI_ComboSearchBox_item));
             UIObjectFactory.SetPackageItemExtension(UI_BtnProjTreeItem.URL, typeof(UI_BtnProjTreeItem));
             UIObjectFactory.SetPackageItemExtension(UI_BtnTab.URL, typeof(UI_BtnTab));
             UIObjectFactory.SetPackageItemExtension(UI_ComboBox_item.URL, typeof(UI_ComboBox_item));
             UIObjectFactory.SetPackageItemExtension(UI_ComboBox_popup.URL, typeof(UI_ComboBox_popup));
+            UIObjectFactory.SetPackageItemExtension(UI_ComboBox.URL, typeof(UI_ComboBox));
             UIObjectFactory.SetPackageItemExtension(UI_ComStringDrawer.URL, typeof(UI_ComStringDrawer));
             UIObjectFactory.SetPackageItemExtension(UI_ComNumberDrawer.URL, typeof(UI_ComNumberDrawer));
-            UIObjectFactory.SetPackageItemExtension(UI_ComFloatDrawer.URL, typeof(UI_ComFloatDrawer));
             UIObjectFactory.SetPackageItemExtension(UI_ComStringAreaDrawer.URL, typeof(UI_ComStringAreaDrawer));
             UIObjectFactory.SetPackageItemExtension(UI_ComNumberBindDataDrawer.URL, typeof(UI_ComNumberBindDataDrawer));
             UIObjectFactory.SetPackageItemExtension(UI_ComDropdownDrawer.URL, typeof(UI_ComDropdownDrawer));
@@ -47,7 +51,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             UIObjectFactory.SetPackageItemExtension(UI_ModEditorMainPanel.URL, typeof(UI_ModEditorMainPanel));
             UIObjectFactory.SetPackageItemExtension(UI_WinStringInputDialog.URL, typeof(UI_WinStringInputDialog));
             UIObjectFactory.SetPackageItemExtension(UI_WinConfirmDialog.URL, typeof(UI_WinConfirmDialog));
-            UIObjectFactory.SetPackageItemExtension(UI_WinSelectorDialog.URL, typeof(UI_WinSelectorDialog));
+            UIObjectFactory.SetPackageItemExtension(UI_WinTableDialog.URL, typeof(UI_WinTableDialog));
             UIObjectFactory.SetPackageItemExtension(UI_WinModSelectorDialog.URL, typeof(UI_WinModSelectorDialog));
             UIObjectFactory.SetPackageItemExtension(UI_WindowFrame_style2.URL, typeof(UI_WindowFrame_style2));
             UIObjectFactory.SetPackageItemExtension(UI_ComMainModList.URL, typeof(UI_ComMainModList));
@@ -58,6 +62,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             UIObjectFactory.SetPackageItemExtension(UI_ComListProject.URL, typeof(UI_ComListProject));
             UIObjectFactory.SetPackageItemExtension(UI_ComInfoDrawer.URL, typeof(UI_ComInfoDrawer));
             UIObjectFactory.SetPackageItemExtension(UI_SeidPreviewLabel.URL, typeof(UI_SeidPreviewLabel));
+            UIObjectFactory.SetPackageItemExtension(UI_ComGroupDrawer.URL, typeof(UI_ComGroupDrawer));
         }
     }
 }

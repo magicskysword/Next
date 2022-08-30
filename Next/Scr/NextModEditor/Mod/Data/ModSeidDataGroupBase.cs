@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using SkySwordKill.NextEditor.Mod;
 
 namespace SkySwordKill.NextModEditor.Mod.Data
 {
@@ -88,6 +89,19 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         
             return false;
         }
+        
+        public void RemoveAllSeid(int dataId)
+        {
+            foreach (var pair in DataGroups)
+            {
+                var dataList = pair.Value.DataList;
+                var index = dataList.FindIndex(data => data.Id == dataId);
+                if (index >= 0)
+                {
+                    dataList.RemoveAt(index);
+                }
+            }
+        }
     
         /// <summary>
         /// 将data的所有Seid迁移至新ID
@@ -119,6 +133,22 @@ namespace SkySwordKill.NextModEditor.Mod.Data
                     seidData1.Id = dataId2;
                 if (seidData2 != null)
                     seidData2.Id = dataId1;
+            }
+        }
+        
+        public void CopyAllSeid(ModSeidDataGroupBase<TGroup> from, int oldId, int targetId)
+        {
+            foreach (var pair in from.DataGroups)
+            {
+                var dataList = pair.Value.DataList;
+                var index = dataList.FindIndex(data => data.Id == oldId);
+                if (index >= 0)
+                {
+                    var json = ModSeidData.SaveSeidData(pair.Value.MetaData ,dataList[index]);
+                    var data = ModSeidData.LoadSeidData(pair.Value.MetaData, json);
+                    data.Id = targetId;
+                    DataGroups[pair.Key].DataList.Add(data);
+                }
             }
         }
     }

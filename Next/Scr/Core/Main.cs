@@ -20,7 +20,7 @@ namespace SkySwordKill.Next
     [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
     public partial class Main : BaseUnityPlugin
     {
-        public const string MOD_VERSION = "0.5.3.1";
+        public const string MOD_VERSION = "0.6.0";
         
         public static Lazy<string> PathLocalModsDir;
         public static Lazy<string> PathLibraryDir;

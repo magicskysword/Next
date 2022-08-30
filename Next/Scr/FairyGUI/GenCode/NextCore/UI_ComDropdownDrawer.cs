@@ -7,7 +7,7 @@ namespace SkySwordKill.NextFGUI.NextCore
 {
     public partial class UI_ComDropdownDrawer : GLabel
     {
-        public GComboBox m_dropdown;
+        public UI_ComboSearchBox m_searchDropdown;
         public const string URL = "ui://028qk31hnkvz23";
 
         public static UI_ComDropdownDrawer CreateInstance()
@@ -19,7 +19,7 @@ namespace SkySwordKill.NextFGUI.NextCore
         {
             base.ConstructFromXML(xml);
 
-            m_dropdown = (GComboBox)GetChild("dropdown");
+            m_searchDropdown = (UI_ComboSearchBox)GetChild("searchDropdown");
         }
     }
 }
