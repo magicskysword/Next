@@ -122,6 +122,11 @@ namespace SkySwordKill.Next.Mod
             return Path;
         }
         
+        public string GetAssetDir()
+        {
+            return $"{Path}/Assets";
+        }
+        
         public static ModConfig Load(string dir)
         {
             ModConfig modConfig = null;
@@ -156,6 +161,6 @@ namespace SkySwordKill.Next.Mod
 
             var json = JsonConvert.SerializeObject(modConfig, Formatting.Indented);
             File.WriteAllText(filePath, json);
-        }   
+        }
     }
 }

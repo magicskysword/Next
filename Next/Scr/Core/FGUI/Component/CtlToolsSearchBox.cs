@@ -12,6 +12,7 @@ namespace SkySwordKill.Next.FGUI.Component
             SearchBox.m_btnReset.onClick.Add(OnClickReset);
             
             SearchBox.m_inContent.onSubmit.Add(OnClickSearch);
+            SearchBox.m_inContent.cursor = "text";
         }
         
         public UI_ComToolsSearchBox SearchBox { get; }

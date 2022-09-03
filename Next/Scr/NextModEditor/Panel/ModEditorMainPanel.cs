@@ -42,7 +42,7 @@ namespace SkySwordKill.NextEditor.Panel
             InitProject();
             InitHeader();
             
-            FGUITools.BindHSeg(MainView.m_seg, () => MainView.width * 0.1f, () => MainView.width * 0.9f);
+            FGUIUtils.BindHSeg(MainView.m_seg, () => MainView.width * 0.1f, () => MainView.width * 0.9f);
             MakeFullScreenAndCenter();
         }
 

@@ -165,6 +165,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\Component\CtlFloatPropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlGroupInspector.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlHeaderBar.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlIconDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlInfoDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlInspectorBase.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlIntArrayPropertyDrawer.cs" />
@@ -210,7 +211,8 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\Dialog\WindowStringInputDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowWaitDialog.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIPanelBase.cs" />
-    <Compile Include="Scr\Core\FGUI\FGUITools.cs" />
+    <Compile Include="Scr\Core\FGUI\FGUIUtils.cs" />
+    <Compile Include="Scr\Core\FGUI\NextGLoader.cs" />
     <Compile Include="Scr\Core\FGUI\WindowDialogBase.cs" />
     <Compile Include="Scr\Core\Patch\FungusClonePatch.cs" />
     <Compile Include="Scr\Core\Res\BytesAsset.cs" />

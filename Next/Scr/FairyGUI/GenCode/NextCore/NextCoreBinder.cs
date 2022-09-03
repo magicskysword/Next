@@ -56,6 +56,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             UIObjectFactory.SetPackageItemExtension(UI_WindowFrame_style2.URL, typeof(UI_WindowFrame_style2));
             UIObjectFactory.SetPackageItemExtension(UI_ComMainModList.URL, typeof(UI_ComMainModList));
             UIObjectFactory.SetPackageItemExtension(UI_ModMainPanel.URL, typeof(UI_ModMainPanel));
+            UIObjectFactory.SetPackageItemExtension(UI_ComIconPreviewDrawer.URL, typeof(UI_ComIconPreviewDrawer));
             UIObjectFactory.SetPackageItemExtension(UI_ComCheckboxDrawer.URL, typeof(UI_ComCheckboxDrawer));
             UIObjectFactory.SetPackageItemExtension(UI_BtnProjListItem.URL, typeof(UI_BtnProjListItem));
             UIObjectFactory.SetPackageItemExtension(UI_LabGroupTitle.URL, typeof(UI_LabGroupTitle));

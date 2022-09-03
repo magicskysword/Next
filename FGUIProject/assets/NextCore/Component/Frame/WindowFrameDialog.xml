@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="400,300" extention="Label" initName="frame">
-  <controller name="hasCloseButton" exported="true" pages="0,,1," selected="1"/>
+  <controller name="hasCloseButton" exported="true" pages="0,,1," selected="0"/>
+  <controller name="canResize" exported="true" pages="0,,1," selected="1"/>
   <displayList>
     <image id="n8_tcay" name="n8" src="nkvz1v" fileName="Image/shadow_flat.png" xy="-5,-5" size="410,310" color="#000000">
       <relation target="" sidePair="width-width,height-height"/>
@@ -20,12 +21,16 @@
     <graph id="n1_tcay" name="dragArea" xy="0,0" size="400,20">
       <relation target="" sidePair="width-width"/>
     </graph>
-    <graph id="n2_tcay" name="contentArea" xy="0,21" size="400,280">
+    <graph id="n2_tcay" name="contentArea" xy="0,21" size="400,279">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <component id="n10_of7d" name="closeButton" src="nkvz5" fileName="Component/Button/BtnClose.xml" xy="380,0" size="20,20">
       <gearDisplay controller="hasCloseButton" pages="1"/>
       <relation target="" sidePair="left-right,top-top"/>
     </component>
+    <loader id="n11_mbeq" name="resizeHandle" xy="392,292" size="8,8" url="ui://028qk31hmbeq4o" fill="scale">
+      <gearDisplay controller="canResize" pages="1"/>
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+    </loader>
   </displayList>
 </component>

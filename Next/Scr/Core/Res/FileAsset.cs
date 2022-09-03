@@ -17,7 +17,7 @@ namespace SkySwordKill.Next.Res
 
         private string filePath;
         private bool isDone = false;
-        private bool isLoaded = false;
+        private bool isLoading = false;
 
         public FileAsset(string path)
         {
@@ -29,7 +29,7 @@ namespace SkySwordKill.Next.Res
         #region 属性
 
         public bool IsDone => isDone;
-        public bool IsLoaded => isLoaded;
+        public bool IsLoading => isLoading;
         public string FileRawPath => filePath;
 
         #endregion
@@ -78,10 +78,9 @@ namespace SkySwordKill.Next.Res
 
         private IEnumerator LoadAsync()
         {
-            if (isLoaded || isDone)
+            if (isLoading || isDone)
                 yield break;
-            yield return null;
-            isLoaded = true;
+            isLoading = true;
             Object loadAsset = null;
             var extension = Path.GetExtension(filePath);
             switch (extension)
@@ -93,7 +92,9 @@ namespace SkySwordKill.Next.Res
                         yield return webRequest.SendWebRequest();
                         if (webRequest.isDone)
                         {
-                            loadAsset = DownloadHandlerTexture.GetContent(webRequest);
+                            var tex = DownloadHandlerTexture.GetContent(webRequest);
+                            tex.hideFlags = HideFlags.HideAndDontSave;
+                            loadAsset = tex;
                         }
                     }
 
@@ -136,12 +137,13 @@ namespace SkySwordKill.Next.Res
             if (asset != null)
             {
                 OnLoadedAsset?.Invoke(asset);
-                isLoaded = false;
+                isLoading = false;
                 isDone = true;
             }
             else
             {
-                isLoaded = false;
+                Debug.LogWarning($"{filePath}加载失败");
+                isLoading = false;
                 isDone = false;
             }
         }

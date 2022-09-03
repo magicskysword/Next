@@ -12,7 +12,7 @@ namespace SkySwordKill.Next.FGUI.Component
             Inspector = new CtlPropertyInspector(tableEditor.m_inspector);
             ToolsBar = new CtlToolsBar(tableEditor.m_toolsBar);
             
-            FGUITools.BindHSeg(tableEditor.m_seg, 
+            FGUIUtils.BindHSeg(tableEditor.m_seg, 
                 () => MainView.width * 0.1f, 
                 () => MainView.width * 0.9f);
         }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="800,600">
   <displayList>
-    <component id="n0_dtat" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="800,600" controller="hasCloseButton,1">
+    <component id="n0_dtat" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="800,600" controller="hasCloseButton,1,canResize,1">
       <relation target="" sidePair="width-width,height-height"/>
     </component>
     <component id="n1_ro2x" name="inspector" src="nkvz2f" fileName="Component/PanelCom/ComMainInspector.xml" xy="250,23" size="549,525">

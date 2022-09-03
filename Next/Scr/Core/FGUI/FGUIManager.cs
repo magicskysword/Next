@@ -26,11 +26,19 @@ namespace SkySwordKill.Next.FGUI
             UIConfig.popupMenu = "ui://NextCore/PopupMenu";
             UIConfig.popupMenu_seperator = "ui://NextCore/PopupMenu_separator";
             UIConfig.tooltipsWin = "ui://NextCore/TooltipsWin";
+            UIConfig.loaderErrorSign = "ui://NextCore/icon_false";
+            
+            UIObjectFactory.SetLoaderExtension(() => new NextGLoader());
 
             ShaderConfig.Get = GetShaderInAB;
             
             RegisterCursor("resizeH","Assets/Cursor/cursor_resize1.png");
             RegisterCursor("resizeV","Assets/Cursor/cursor_resize2.png");
+            // 右下方向
+            RegisterCursor("resizeRB","Assets/Cursor/cursor_resize3.png");
+            // 左下方向
+            RegisterCursor("resizeLB","Assets/Cursor/cursor_resize4.png");
+            RegisterCursor("text","Assets/Cursor/cursor_text.png");
             
             AddPackage(PKG_NEXT_CORE);
             

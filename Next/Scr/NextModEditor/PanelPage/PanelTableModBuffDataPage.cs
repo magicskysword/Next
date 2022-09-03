@@ -106,7 +106,12 @@ namespace SkySwordKill.NextEditor.PanelPage
                 "ModEditor.Main.modBuffData.icon".I18N(),
                 num => buffData.Icon = num,
                 () => buffData.Icon)
+                {
+                    OnChanged = Inspector.Refresh
+                }
             );
+            
+            AddDrawer(new CtlIconPreviewDrawer(() => Mod.GetBuffIconUrl(buffData)));
 
             AddDrawer(new CtlStringAreaPropertyDrawer(
                     "ModEditor.Main.modBuffData.desc".I18N(),

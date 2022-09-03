@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI
 {
-    public static class FGUITools
+    public static class FGUIUtils
     {
         public static T As<T>(this GObject obj) where T : GObject
         {
@@ -14,22 +14,22 @@ namespace SkySwordKill.Next.FGUI
 
         public static void BindHSeg(GObject seg, Func<float> xMinGetter, Func<float> xMaxGetter)
         {
-            EventCallback1 onDragMove = context =>
+            void OnDragMove(EventContext context)
             {
                 var pos = new Vector2(context.inputEvent.x, 0);
                 seg.x = Mathf.Clamp(seg.parent.RootToLocal(pos, null).x, xMinGetter.Invoke(), xMaxGetter.Invoke());
-            };
-            
-            EventCallback1 onDragStart = context =>
+            }
+
+            void OnDragStart(EventContext context)
             {
                 context.PreventDefault();
-                DragDropManager.inst.StartDrag(null, null,null, (int)context.data);
-                
-                DragDropManager.inst.dragAgent.onDragMove.Set(onDragMove);
-            };
-            
+                DragDropManager.inst.StartDrag(null, null, null, (int)context.data);
+
+                DragDropManager.inst.dragAgent.onDragMove.Set((EventCallback1)OnDragMove);
+            }
+
             seg.draggable = true;
-            seg.onDragStart.Set(onDragStart);
+            seg.onDragStart.Set((EventCallback1)OnDragStart);
             seg.cursor = "resizeH";
         }
     }

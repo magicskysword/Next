@@ -217,9 +217,9 @@ namespace SkySwordKill.Next.FGUI.Component
             }
             else
             {
-                for (int i = 0; i < GetDataCount(); i++)
+                for (int i = 0; i < _tableDataList.Count; i++)
                 {
-                    var data = GetData(i);
+                    var data = _tableDataList.GetObj(i);
                     if (CheckSearch(data, _searchText))
                     {
                         _searchList.Add(data);

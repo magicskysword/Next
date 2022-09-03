@@ -6,6 +6,7 @@
         {
             grayed = !value;
             m_inContent.editable = value;
+            m_inContent.cursor = value ? "text" : string.Empty;
         }
     }
 }

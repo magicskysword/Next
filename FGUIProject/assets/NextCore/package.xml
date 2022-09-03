@@ -106,6 +106,8 @@
     <component id="mdyt4j" name="ComboSearchBox.xml" path="/Component/ComboBox/" exported="true"/>
     <component id="mdyt4k" name="ComboSearchBox_popup.xml" path="/Component/ComboBox/"/>
     <component id="mdyt4m" name="ComboSearchBox_item.xml" path="/Component/ComboBox/"/>
+    <component id="r3ga4n" name="ComIconPreviewDrawer.xml" path="/Component/Drawer/" exported="true"/>
+    <image id="mbeq4o" name="icon_corner.png" path="/Icon/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

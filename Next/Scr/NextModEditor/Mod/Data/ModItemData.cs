@@ -15,7 +15,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         public override int Id { get; set; }
 
         [JsonProperty(PropertyName = "ItemIcon", Order = 1)]
-        public int ItemIcon { get; set; }
+        public int Icon { get; set; }
 
         /// <summary>
         /// 最大堆叠数量

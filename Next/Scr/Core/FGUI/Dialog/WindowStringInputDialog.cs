@@ -41,6 +41,7 @@ namespace SkySwordKill.Next.FGUI.Dialog
             InputDialog.GetController("type").selectedIndex = CanCancel ? 1 : 0;
             InputDialog.m_frame.title = Title;
             InputDialog.m_inContent.text = DefaultText;
+            InputDialog.m_inContent.cursor = "text";
             InputDialog.m_btnOk.onClick.Add(OnClickConfirm);
             InputDialog.m_frame.m_closeButton.onClick.Add(OnClickCancel);
             InputDialog.m_closeButton.onClick.Add(OnClickCancel);

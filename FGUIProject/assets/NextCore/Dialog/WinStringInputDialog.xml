@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="432,450" designImageLayer="1">
   <displayList>
-    <component id="n0_tcay" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="432,450" controller="hasCloseButton,1">
+    <component id="n0_tcay" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="432,450" controller="hasCloseButton,1,canResize,1">
       <relation target="" sidePair="width-width,height-height"/>
     </component>
     <component id="n4_tcay" name="btnOk" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="151,415">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
       <Button title="确定"/>
     </component>
     <component id="n5_tcay" name="closeButton" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="235,415">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
       <Button title="取消"/>
     </component>
     <graph id="n7_tcay" name="n7" xy="4,29" pivot="0.5,0.5" size="423,375" type="rect" lineSize="2" fillColor="#ff2c313c">
-      <relation target="" sidePair="width-width,height-height"/>
+      <relation target="n8_tcay" sidePair="width-width,height-height,center-center,middle-middle"/>
     </graph>
     <component id="n8_tcay" name="inContent" src="7exm3i" fileName="Component/InputArea/ComInputArea.xml" xy="10,34" size="411,364">
-      <relation target="n7_tcay" sidePair="width-width,height-height,center-center,middle-middle"/>
+      <relation target="" sidePair="width-width,height-height"/>
     </component>
   </displayList>
 </component>

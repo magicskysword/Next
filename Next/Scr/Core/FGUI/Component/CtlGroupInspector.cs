@@ -7,12 +7,18 @@ namespace SkySwordKill.Next.FGUI.Component
         public CtlGroupInspector(GList tagList)
         {
             MainView = tagList;
+            MainView.onSizeChanged.Add(OnSizeChanged);
         }
-        
+
         public GList MainView;
 
         protected override GList _drawerGList => MainView;
 
+        private void OnSizeChanged()
+        {
+            OnRefresh();
+        }
+        
         protected override void OnRefresh()
         {
             if(MainView.visible)

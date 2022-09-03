@@ -120,10 +120,15 @@ namespace SkySwordKill.NextEditor.PanelPage
             
             AddDrawer(new CtlIntPropertyDrawer(
                 "图标".I18NTodo(),
-                value => itemData.ItemIcon = value,
-                () => itemData.ItemIcon)
+                value => itemData.Icon = value,
+                () => itemData.Icon)
+                {
+                    OnChanged = Inspector.Refresh
+                }
             );
-
+            
+            AddDrawer(new CtlIconPreviewDrawer(() => Mod.GetItemIconUrl(itemData)));
+            
             AddDrawer(new CtlDropdownPropertyDrawer(
                 "物品类型".I18NTodo(),
                 () => ModEditorManager.I.ItemDataTypes.Select(type => $"{type.Id} : {type.Desc}"),
@@ -138,8 +143,8 @@ namespace SkySwordKill.NextEditor.PanelPage
             
             AddDrawer(new CtlIntPropertyDrawer(
                 "堆叠上限".I18NTodo(),
-                value => itemData.ItemIcon = value,
-                () => itemData.ItemIcon)
+                value => itemData.MaxStack = value,
+                () => itemData.MaxStack)
             );
             
             AddDrawer(new CtlGroupDrawer("法宝", itemData.ItemType == 0 || 
@@ -210,16 +215,7 @@ namespace SkySwordKill.NextEditor.PanelPage
 
                             itemData.StudyRequirement = list;
                         },
-                        () =>
-                        {
-                            var list = new List<int>();
-                            for (var index = 0; index < itemData.StudyRequirement.Count; index += 2)
-                            {
-                                list.Add(itemData.StudyRequirement[index]);
-                            }
-
-                            return list;
-                        },
+                        () => itemData.StudyRequirement,
                         list => Mod.GetComprehensionWithPhaseDesc(list),
                         new List<TableInfo>()
                         {

@@ -8,6 +8,7 @@ namespace SkySwordKill.Next.FGUI.Component
         public CtlTextInputArea(UI_ComInputArea inputArea)
         {
             InputArea = inputArea;
+            InputArea.m_input.cursor = "text";
         }
         
         public UI_ComInputArea InputArea { get; }

@@ -99,6 +99,12 @@ namespace SkySwordKill.NextEditor.Mod
             var findData = ComprehensionPhase.Find(data => data.Id == id);
             return findData;
         }
+        
+        public bool TryGetFilePath(string path, out string filePath)
+        {
+            filePath = Path.Combine(Config.GetAssetDir(), path);
+            return File.Exists(filePath);
+        }
 
         public static ModProject Create(string dir)
         {

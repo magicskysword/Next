@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using script.Steam;
+using SkySwordKill.Next.FGUI;
 using SkySwordKill.NextModEditor.Mod.Data;
 
 namespace SkySwordKill.NextEditor.Mod
@@ -373,5 +374,37 @@ namespace SkySwordKill.NextEditor.Mod
             return dataList;
         }
         
+        public string GetBuffIconUrl(ModBuffData buff)
+        {
+            if (buff.Icon == 0)
+            {
+                return GetImageUrl($"Buff Icon/{buff.Id}");
+            }
+            
+            return GetImageUrl($"Buff Icon/{buff.Icon}");
+        }
+        
+        public string GetItemIconUrl(ModItemData item)
+        {
+            if (item.Icon == 0)
+            {
+                return GetImageUrl($"Item Icon/{item.Id}");
+            }
+            
+            return GetImageUrl($"Item Icon/{item.Icon}");
+        }
+        
+        public string GetImageUrl(string resPath)
+        {
+            foreach (var project in Projects)
+            {
+                if (project.TryGetFilePath($"{resPath}.png", out var path))
+                {
+                    return $"{NextGLoader.UI_FILE_PREFIX}{path}";
+                }
+            }
+            
+            return resPath;
+        }
     }
 }

@@ -7,6 +7,7 @@
             grayed = !value;
             m_inContent.enabled = value;
             m_btnEdit.enabled = value;
+            m_inContent.cursor = value ? "text" : string.Empty;
         }
     }
 }
