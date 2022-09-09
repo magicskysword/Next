@@ -24,6 +24,7 @@ namespace SkySwordKill.NextEditor.PanelProject
             Children.Add(new ProjectTreeItemModAffixData(Mod, Project));
             Children.Add(new ProjectTreeItemModCreateAvatarData(Mod, Project));
             Children.Add(new ProjectTreeItemModItemData(Mod, Project));
+            //Children.Add(new ProjectTreeItemModSkillData(Mod, Project));
             Children.Add(new ProjectTreeItemModBuffData(Mod, Project));
         }
     }

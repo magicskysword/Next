@@ -18,13 +18,16 @@
     "2": {
         "ID": 2,
         "IDName": "id",
-        "Name": "装备技能",
-        "Desc": "装备的主动技能",
+        "Name": "装备神通",
+        "Desc": "装备对应的神通",
         "Properties": [
             {
                 "ID": "value1",
                 "Type": "Int",
-                "Desc": "X 技能ID"
+                "Desc": "X 神通唯一ID",
+                "SpecialDrawer":[
+                    "SkillDrawer"
+                ]
             }
         ]
     },

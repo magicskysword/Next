@@ -43,6 +43,9 @@ namespace SkySwordKill.NextEditor.Mod
         /// 法宝类型组
         /// </summary>
         public ModItemDataArtifactTypeGroup ItemDataArtifactTypeGroup { get; set; }
+        public List<ModSkillDataQuality> SkillDataQuality { get; set; }
+        public List<ModSkillDataPhase> SkillDataPhase { get; set; }
+        public List<ModSkillDataConsultType> SkillDataConsultTypes { get; set; }
 
         // Data
         public ModProject ReferenceProject { get; set; }
@@ -137,6 +140,15 @@ namespace SkySwordKill.NextEditor.Mod
                 .Parse(ModUtils.LoadConfig("Meta/ArtifactTypeGroup.json"))
                 .ToObject<ModItemDataArtifactTypeGroup>();
             }
+            SkillDataQuality = JArray
+                .Parse(ModUtils.LoadConfig("Meta/SkillQuality.json"))
+                .ToObject<List<ModSkillDataQuality>>();
+            SkillDataPhase = JArray
+                .Parse(ModUtils.LoadConfig("Meta/SkillPhase.json"))
+                .ToObject<List<ModSkillDataPhase>>();
+            SkillDataConsultTypes = JArray
+                .Parse(ModUtils.LoadConfig("Meta/SkillConsultType.json"))
+                .ToObject<List<ModSkillDataConsultType>>();
 
             LoadDefaultData();
 

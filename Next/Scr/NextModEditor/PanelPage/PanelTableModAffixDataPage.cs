@@ -67,18 +67,16 @@ namespace SkySwordKill.NextEditor.PanelPage
                 }));
         }
 
-        protected override void OnInspectItem(IModData data)
+        protected override void OnInspectItem(ModAffixData data)
         {
             if (data == null)
             {
                 return;
             }
-            
-            var affixData = (ModAffixData)data;
 
             AddDrawer(new CtlIDPropertyDrawer(
                 "ID".I18NTodo(),
-                affixData,
+                data,
                 () => Project.AffixData,
                 theData =>
                 {
@@ -102,28 +100,28 @@ namespace SkySwordKill.NextEditor.PanelPage
             
             AddDrawer(new CtlStringPropertyDrawer(
                 "名称".I18NTodo(),
-                str => affixData.Name = str,
-                () => affixData.Name)
+                str => data.Name = str,
+                () => data.Name)
             );
 
             AddDrawer(new CtlDropdownPropertyDrawer(
                 "词缀项目".I18NTodo(),
                 () => ModEditorManager.I.AffixDataProjectTypes.Select(p => $"{p.TypeNum} : {p.TypeName}"),
-                i => affixData.SetProjectType(ModEditorManager.I.AffixDataProjectTypes[i]),
-                () => ModEditorManager.I.AffixDataProjectTypes.FindIndex(p => p.TypeNum == affixData.ProjectTypeNum))
+                i => data.SetProjectType(ModEditorManager.I.AffixDataProjectTypes[i]),
+                () => ModEditorManager.I.AffixDataProjectTypes.FindIndex(p => p.TypeNum == data.ProjectTypeNum))
             );
             
             AddDrawer(new CtlDropdownPropertyDrawer(
                 "词缀类型".I18NTodo(),
                 () => ModEditorManager.I.AffixDataAffixTypes.Select(p => $"{p.TypeID} : {p.TypeName}"),
-                i => affixData.AffixType = ModEditorManager.I.AffixDataAffixTypes[i].TypeID,
-                () => ModEditorManager.I.AffixDataAffixTypes.FindIndex(p => p.TypeID == affixData.AffixType))
+                i => data.AffixType = ModEditorManager.I.AffixDataAffixTypes[i].TypeID,
+                () => ModEditorManager.I.AffixDataAffixTypes.FindIndex(p => p.TypeID == data.AffixType))
             );
             
             AddDrawer(new CtlStringAreaPropertyDrawer(
                 "描述".I18NTodo(),
-                str => affixData.Desc = str,
-                () => affixData.Desc)
+                str => data.Desc = str,
+                () => data.Desc)
             );
         }
 

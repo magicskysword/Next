@@ -149,7 +149,7 @@
 
     "ModEditor.Main.modAffixData.id" : "ID",
     "ModEditor.Main.modAffixData.name" : "名称",
-    "ModEditor.Main.modAffixData.desc" : "技能特效",
+    "ModEditor.Main.modAffixData.desc" : "特效",
 
     "ModEditor.Main.modCreateAvatarData.id" : "ID",
     "ModEditor.Main.modCreateAvatarData.name" : "名称",
@@ -160,7 +160,7 @@
 
     "ModEditor.Main.modBuffData.id" : "ID",
     "ModEditor.Main.modBuffData.name" : "名称",
-    "ModEditor.Main.modBuffData.skillEffect" : "技能特效",
+    "ModEditor.Main.modBuffData.skillEffect" : "特效",
     "ModEditor.Main.modBuffData.icon" : "图标",
     "ModEditor.Main.modBuffData.desc" : "描述",
     "ModEditor.Main.modBuffData.affix" : "词缀",

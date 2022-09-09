@@ -49,6 +49,7 @@ namespace SkySwordKill.NextEditor.Mod
         public List<ModComprehensionData> Comprehension { get; set; }
         public List<ModComprehensionPhaseData> ComprehensionPhase { get; set; }
         public ModItemUseSeidDataGroup ItemUseSeidDataGroup { get; set; }
+        public List<ModSkillData> SkillData { get; set; }
 
         private ModProject()
         {
@@ -62,9 +63,9 @@ namespace SkySwordKill.NextEditor.Mod
             return affixData;
         }
         
-        public ModItemData FindItem(int itemID)
+        public ModItemData FindItem(int id)
         {
-            var itemData = ItemData.Find(data => data.Id == itemID);
+            var itemData = ItemData.Find(data => data.Id == id);
 
             return itemData;
         }
@@ -76,6 +77,24 @@ namespace SkySwordKill.NextEditor.Mod
             return flagData;
         }
 
+        public ModSkillData FindSkill(int id)
+        {
+            var skillData = SkillData.Find(data => data.Id == id);
+
+            return skillData;
+        }
+        
+        /// <summary>
+        /// 根据技能Id返回技能，默认返回等级最高技能
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ModSkillData FindSkillBySkillId(int id)
+        {
+            var list = SkillData.FindAll(data => data.SkillId == id);
+            return list.OrderByDescending(data => data.SkillLv).FirstOrDefault();
+        }
+        
         public ModBuffData FindBuff(int buffID)
         {
             var buffData = BuffData.Find(data => data.Id == buffID);
@@ -125,7 +144,8 @@ namespace SkySwordKill.NextEditor.Mod
                 ForgeElement = new List<ModForgeElementData>(),
                 AlchemyElement = new List<ModAlchemyElementData>(),
                 Comprehension = new List<ModComprehensionData>(),
-                ComprehensionPhase = new List<ModComprehensionPhaseData>()
+                ComprehensionPhase = new List<ModComprehensionPhaseData>(),
+                SkillData = new List<ModSkillData>()
             };
             
             return project;
@@ -154,13 +174,15 @@ namespace SkySwordKill.NextEditor.Mod
                 ForgeElement = ModForgeElementData.Load(dataDir).Select(pair => pair.Value).ToList(),
                 AlchemyElement = ModAlchemyElementData.Load(dataDir).Select(pair => pair.Value).ToList(),
                 Comprehension = ModComprehensionData.Load(dataDir).Select(pair => pair.Value).ToList(),
-                ComprehensionPhase = ModComprehensionPhaseData.Load(dataDir).Select(pair => pair.Value).ToList()
+                ComprehensionPhase = ModComprehensionPhaseData.Load(dataDir).Select(pair => pair.Value).ToList(),
+                SkillData = ModSkillData.Load(dataDir)
             };
 
             project.CreateAvatarData.ModSort();
             project.BuffData.ModSort();
             project.ItemData.ModSort();
             project.AffixData.ModSort();
+            project.SkillData.ModSort();
 
             return project;
         }
@@ -190,6 +212,7 @@ namespace SkySwordKill.NextEditor.Mod
             ModAlchemyElementData.Save(config.GetDataDir(), project.AlchemyElement.ToDictionary(data => data.Id.ToString()));
             ModComprehensionData.Save(config.GetDataDir(), project.Comprehension.ToDictionary(data => data.Id.ToString()));
             ModComprehensionPhaseData.Save(config.GetDataDir(), project.ComprehensionPhase.ToDictionary(data => data.Id.ToString()));
+            ModSkillData.Save(config.GetDataDir(), project.SkillData);
         }
     }
 }

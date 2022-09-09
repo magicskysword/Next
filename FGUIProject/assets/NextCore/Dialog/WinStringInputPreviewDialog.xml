@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="450,450" designImageLayer="1">
+  <displayList>
+    <component id="n0_tcay" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="450,450" controller="hasCloseButton,1,canResize,1">
+      <relation target="" sidePair="width-width,height-height"/>
+    </component>
+    <graph id="n7_tcay" name="n7" xy="4,29" size="218,375" type="rect" lineSize="2" fillColor="#ff2c313c">
+      <relation target="n8_tcay" sidePair="width-width,height-height,center-center,middle-middle"/>
+    </graph>
+    <component id="n8_tcay" name="inContent" src="7exm3i" fileName="Component/StringArea/ComInputArea.xml" xy="10,34" size="206,364">
+      <relation target="" sidePair="height-height"/>
+      <relation target="n11_qiuf" sidePair="rightext-left"/>
+    </component>
+    <graph id="n9_qiuf" name="n9" xy="228,29" size="218,375" type="rect" lineSize="2" fillColor="#ff2c313c">
+      <relation target="n10_qiuf" sidePair="width-width,height-height,center-center,middle-middle"/>
+    </graph>
+    <component id="n10_qiuf" name="comTextPreview" src="qiuf4q" fileName="Component/StringArea/ComPreviewArea.xml" xy="234,34" size="206,364">
+      <relation target="" sidePair="width-width,height-height,right-right"/>
+      <relation target="n11_qiuf" sidePair="leftext-right"/>
+    </component>
+    <graph id="n11_qiuf" name="seg" xy="224,29" size="1,375" alpha="0" type="rect" lineSize="0">
+      <relation target="" sidePair="center-center"/>
+    </graph>
+    <component id="n4_tcay" name="btnOk" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="138,415" size="64,25">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
+      <Button title="确定"/>
+    </component>
+    <component id="n5_tcay" name="closeButton" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="247,415" size="64,25">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
+      <Button title="取消"/>
+    </component>
+  </displayList>
+</component>

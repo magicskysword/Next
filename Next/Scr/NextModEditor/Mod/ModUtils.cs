@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using script.Steam;
 using SkySwordKill.Next;
+using SkySwordKill.Next.Utils;
 using SkySwordKill.NextModEditor.Mod.Data;
 using Steamworks;
 using UnityEngine;
@@ -298,6 +299,101 @@ namespace SkySwordKill.NextEditor.Mod
             FileStream fileStream = new FileStream(path, FileMode.Create);
             new BinaryFormatter().Serialize(fileStream, item);
             fileStream.Close();
+        }
+
+        public static string GetSkillLevelName(int itemQuality, int itemPhase)
+        {
+            ModEditorManager.I.SkillDataQuality.TryFindData(itemQuality, out var quality);
+            ModEditorManager.I.SkillDataPhase.TryFindData(itemPhase, out var phase);
+            return $"{quality?.Desc ?? "？"}{phase?.Desc ?? "？"}";
+        }
+
+        public static string AnalysisRefData(ModWorkshop mod,string str)
+        {
+            if (str.StartsWith("GuideLink://", StringComparison.OrdinalIgnoreCase))
+            {
+                var sb = new StringBuilder();
+                sb.Append("【图鉴信息】");
+                sb.Append("\n");
+                var data = str.Substring("GuideLink://".Length);
+                var split = data.Split('_');
+                if (int.TryParse(split[0], out var type))
+                {
+                    switch (type)
+                    {
+                        case 1:
+                            sb.Append($"类型：【{type} 实体】");
+                            break;
+                        case 2:
+                            sb.Append($"类型：【{type} 规则】");
+                            
+                            sb.Append("\n");
+                            if(split.Length >= 2 && int.TryParse(split[1], out var subType))
+                            {
+                                var affixType = ModEditorManager.I.AffixDataProjectTypes.Find(
+                                    x => x.TypeNum == subType);
+                                if(affixType != null)
+                                    sb.Append($"标签：【{affixType.TypeNum} {affixType.TypeName}】");
+                                else 
+                                    sb.Append($"标签：【{subType} 未知】");
+                            }
+                            else
+                            {
+                                subType = 0;
+                                sb.Append($"标签：【{subType} 未知】");
+                            }
+                            
+                            sb.Append("\n");
+                            if(split.Length >= 3 && int.TryParse(split[2], out var affixSubType))
+                            {
+                                var affixType = ModEditorManager.I.AffixDataAffixTypes.Find(
+                                    x => x.TypeID == affixSubType);
+                                if(affixType != null)
+                                    sb.Append($"子类：【{affixType.TypeID} {affixType.TypeName}】");
+                                else
+                                    sb.Append($"子类：【{affixSubType} 未知】");
+                            }
+                            else
+                            {
+                                affixSubType = 0;
+                                sb.Append($"子类：【{affixSubType} 未知】");
+                            }
+                    
+                            sb.Append("\n");
+                            if(split.Length >= 4 && int.TryParse(split[3], out var affixID))
+                            {
+                                var affix = mod.FindAffix(affixID);
+                                if(affix != null)
+                                    sb.Append($"词缀：【{affixID} {affix.Name}】{affix.Desc}");
+                                else
+                                    sb.Append($"词缀：【{affixID} 未知】");
+                            }
+                            else
+                            {
+                                affixID = 0;
+                                sb.Append($"词缀：【{affixID} 未知】");
+                            }
+                            break;
+                        case 3:
+                            sb.Append($"类型：【{type} 地图】");
+                            break;
+                        default:
+                            sb.Append($"类型：【{type} 未知】");
+                            break;
+                    }
+                }
+                else
+                {
+                    type = 0;
+                    sb.Append($"类型：【{type} 未知】");
+                }
+
+                return sb.ToString();
+            }
+            else
+            {
+                return str;
+            }
         }
     }
 }

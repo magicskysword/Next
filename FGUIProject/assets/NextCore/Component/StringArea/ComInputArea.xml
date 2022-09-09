@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="400,300" overflow="scroll" scrollBarFlags="36" scrollBar="visible">
   <displayList>
-    <text id="n3_7exm" name="input" xy="0,0" size="400,300" fontSize="14" color="#ffffff" autoSize="none" autoClearText="true" text="" input="true">
+    <text id="n3_7exm" name="input" xy="0,0" size="400,300" fontSize="14" color="#ffffff" autoSize="none" autoClearText="true" text="233#ff0000 2333#n 666" input="true">
       <relation target="" sidePair="width-width,height-height"/>
     </text>
   </displayList>

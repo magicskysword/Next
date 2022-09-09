@@ -17,6 +17,7 @@ namespace SkySwordKill.Next.FGUI.Dialog
         private TableDataList<IModData> _tableDataList;
         private bool _allowMulti;
         private Action<List<int>> _onConfirm;
+        private Func<IModData, int> _idGetter;
         private Action _onCancel;
         private bool _allowEmpty;
 
@@ -31,13 +32,15 @@ namespace SkySwordKill.Next.FGUI.Dialog
 
         public static void CreateDialog(string title, List<TableInfo> tableInfos, IEnumerable<int> curIds,
             bool allowEmpty,
-            List<IModData> dataList, bool allowMulti, Action<List<int>> onConfirm = null, Action onCancel = null)
+            List<IModData> dataList, bool allowMulti, Action<List<int>> onConfirm = null, Action onCancel = null, 
+            Func<IModData, int> idGetter = null)
         {
             var window = new WindowTableSelectorDialog();
             window._title = title;
             window._tableInfos.AddRange(tableInfos);
             window._onConfirm = onConfirm;
             window._onCancel = onCancel;
+            window._idGetter = idGetter;
             window._allowEmpty = allowEmpty;
             window._allowMulti = allowMulti;
             if (curIds != null)
@@ -87,30 +90,40 @@ namespace SkySwordKill.Next.FGUI.Dialog
             var modData = (IModData)o;
             if(_allowMulti)
             {
-                if (_curIds.Contains(modData.Id))
+                if (_curIds.Contains(GetId(modData)))
                 {
-                    _curIds.Remove(modData.Id);
+                    _curIds.Remove(GetId(modData));
                 }
                 else
                 {
-                    _curIds.Add(modData.Id);
+                    _curIds.Add(GetId(modData));
                 }
                 TableList.RefreshRows();
             }
             else
             {
                 _curIds.Clear();
-                _curIds.Add(modData.Id);
+                _curIds.Add(GetId(modData));
             }
 
             RefreshTipText();
             RefreshConfirm();
         }
+
+        public int GetId(IModData data)
+        {
+            if (_idGetter != null)
+            {
+                return _idGetter.Invoke(data);
+            }
+
+            return data.Id;
+        }
         
         private void OnItemRenderer(int index, UI_ComTableRow row, object o)
         {
             var modData = (IModData)o;
-            row.selected = _curIds.Contains(modData.Id);
+            row.selected = _curIds.Contains(GetId(modData));
             row.GetController("button").selectedIndex = row.selected ? 1 : 0;
         }
 

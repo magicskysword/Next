@@ -73,18 +73,16 @@ namespace SkySwordKill.NextEditor.PanelPage
                 }));
         }
 
-        protected override void OnInspectItem(IModData data)
+        protected override void OnInspectItem(ModCreateAvatarData data)
         {
             if (data == null)
             {
                 return;
             }
-
-            var createAvatarData = (ModCreateAvatarData)data;
-
+            
             AddDrawer(new CtlIDPropertyDrawer(
                     "ModEditor.Main.modCreateAvatarData.id".I18N(),
-                    createAvatarData,
+                    data,
                     () => Project.CreateAvatarData,
                     theData =>
                     {
@@ -110,20 +108,20 @@ namespace SkySwordKill.NextEditor.PanelPage
 
             AddDrawer(new CtlStringPropertyDrawer(
                     "ModEditor.Main.modCreateAvatarData.name".I18N(),
-                    str => createAvatarData.Name = str,
-                    () => createAvatarData.Name)
+                    str => data.Name = str,
+                    () => data.Name)
             );
 
             AddDrawer(new CtlIntPropertyDrawer(
                     "ModEditor.Main.modCreateAvatarData.group".I18N(),
-                    value => createAvatarData.Group = value,
-                    () => createAvatarData.Group)
+                    value => data.Group = value,
+                    () => data.Group)
             );
 
             AddDrawer(new CtlIntPropertyDrawer(
                 "ModEditor.Main.modCreateAvatarData.cost".I18N(),
-                value => createAvatarData.Cost = value,
-                () => createAvatarData.Cost)
+                value => data.Cost = value,
+                () => data.Cost)
             );
 
             AddDrawer(new CtlDropdownPropertyDrawer(
@@ -131,10 +129,10 @@ namespace SkySwordKill.NextEditor.PanelPage
                 () => ModEditorManager.I.CreateAvatarDataTalentTypes.Select(type => $"{type.TypeID} : {type.Desc}"),
                 index =>
                 {
-                    createAvatarData.SetTalentType(ModEditorManager.I.CreateAvatarDataTalentTypes[index]);
+                    data.SetTalentType(ModEditorManager.I.CreateAvatarDataTalentTypes[index]);
                 },
                 () => ModEditorManager.I.CreateAvatarDataTalentTypes.FindIndex(type =>
-                    type.TypeID == createAvatarData.TalentTypeRelation))
+                    type.TypeID == data.TalentTypeRelation))
             );
             
             AddDrawer(new CtlDropdownPropertyDrawer(
@@ -142,16 +140,16 @@ namespace SkySwordKill.NextEditor.PanelPage
                 () => ModEditorManager.I.LevelTypes.Select(type => $"{type.TypeID} : {type.Desc}"),
                 index =>
                 {
-                    createAvatarData.RequireLevel = ModEditorManager.I.LevelTypes[index].TypeID;
+                    data.RequireLevel = ModEditorManager.I.LevelTypes[index].TypeID;
                 },
                 () => ModEditorManager.I.LevelTypes.FindIndex(type =>
-                    type.TypeID == createAvatarData.TalentTypeRelation))
+                    type.TypeID == data.TalentTypeRelation))
             );
 
             AddDrawer(new CtlSeidDataPropertyDrawer(
                 "特性",
-                createAvatarData.Id,
-                createAvatarData.SeidList,
+                data.Id,
+                data.SeidList,
                 Mod,
                 Project.CreateAvatarSeidDataGroup,
                 ModEditorManager.I.CreateAvatarSeidMetas,
@@ -165,14 +163,14 @@ namespace SkySwordKill.NextEditor.PanelPage
             
             AddDrawer(new CtlStringAreaPropertyDrawer(
                 "效果".I18N(),
-                value => createAvatarData.Desc = value,
-                () => createAvatarData.Desc)
+                value => data.Desc = value,
+                () => data.Desc)
             );
             
             AddDrawer(new CtlStringAreaPropertyDrawer(
                 "背景描述".I18N(),
-                value => createAvatarData.Info = value,
-                () => createAvatarData.Info)
+                value => data.Info = value,
+                () => data.Info)
             );
         }
 

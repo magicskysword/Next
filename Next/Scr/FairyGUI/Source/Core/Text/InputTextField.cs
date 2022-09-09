@@ -1543,6 +1543,8 @@ namespace FairyGUI
                 _textField.caretPosition = caretPos + dlen;
             _currentText = text;
             _lock = false;
+            
+            textField.DispatchEvent("onChanged", null);
         }
 
         public void Redo(InputTextField textField)
@@ -1564,6 +1566,8 @@ namespace FairyGUI
                 _textField.caretPosition = caretPos + dlen;
             _currentText = text;
             _lock = false;
+            
+            textField.DispatchEvent("onChanged", null);
         }
     }
 }

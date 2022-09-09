@@ -13,12 +13,17 @@ namespace SkySwordKill.Next.FGUI.Component
         private UI_ComStringAreaDrawer Drawer => (UI_ComStringAreaDrawer)Component;
         private Action<string> _setter;
         private Func<string> _getter;
-    
-        public CtlStringAreaPropertyDrawer(string drawerName,Action<string> setter,Func<string> getter)
+        private bool _hasPreview;
+        private Func<string, string> _onAnalysisRef;
+
+        public CtlStringAreaPropertyDrawer(string drawerName,Action<string> setter,Func<string> getter, 
+            bool hasPreview = false, Func<string, string> onAnalysisRef = null)
         {
             _drawerName = drawerName;
             _setter = setter;
             _getter = getter;
+            _hasPreview = hasPreview;
+            _onAnalysisRef = onAnalysisRef;
         }
         
         protected override GComponent OnCreateCom()
@@ -28,10 +33,21 @@ namespace SkySwordKill.Next.FGUI.Component
             drawer.title = _drawerName;
             drawer.m_btnEdit.onClick.Set(()=>
             {
-                WindowStringAreaInputDialog.CreateDialog(
-                    "ModEditor.Main.dialog.textEdit".I18N(),
-                    OnGetProperty(), 
-                    OnConfirmEdit);
+                if (_hasPreview)
+                {
+                    WindowStringAreaInputPreviewDialog.CreateDialog(
+                        "ModEditor.Main.dialog.textEdit".I18N(),
+                        OnGetProperty(), 
+                        OnConfirmEdit,
+                        onAnalysisRef: _onAnalysisRef);
+                }
+                else
+                {
+                    WindowStringAreaInputDialog.CreateDialog(
+                        "ModEditor.Main.dialog.textEdit".I18N(),
+                        OnGetProperty(), 
+                        OnConfirmEdit);
+                }
             });
             return drawer;
         }

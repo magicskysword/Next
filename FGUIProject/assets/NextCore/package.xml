@@ -69,7 +69,7 @@
     <component id="eg8y3f" name="ComTableEditor.xml" path="/Component/Table/" exported="true"/>
     <component id="nqml3g" name="WinModSelectorDialog.xml" path="/Dialog/" exported="true"/>
     <component id="7exm3h" name="ComTextDrawer.xml" path="/Component/Drawer/" exported="true"/>
-    <component id="7exm3i" name="ComInputArea.xml" path="/Component/InputArea/" exported="true"/>
+    <component id="7exm3i" name="ComInputArea.xml" path="/Component/StringArea/" exported="true"/>
     <component id="7exm3k" name="ComSeidDataDrawer.xml" path="/Component/Drawer/" exported="true"/>
     <component id="7exm3m" name="SeidPreview.xml" path="/Component/Seid/"/>
     <component id="7exm3n" name="WinSeidEditorDialog.xml" path="/Dialog/" exported="true"/>
@@ -108,6 +108,8 @@
     <component id="mdyt4m" name="ComboSearchBox_item.xml" path="/Component/ComboBox/"/>
     <component id="r3ga4n" name="ComIconPreviewDrawer.xml" path="/Component/Drawer/" exported="true"/>
     <image id="mbeq4o" name="icon_corner.png" path="/Icon/" exported="true"/>
+    <component id="qiuf4p" name="WinStringInputPreviewDialog.xml" path="/Dialog/" exported="true"/>
+    <component id="qiuf4q" name="ComTextPreviewArea.xml" path="/Component/StringArea/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

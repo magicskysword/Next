@@ -1,26 +1,26 @@
 [
     {
-        "TypeID": 0,
-        "TypeName": "金"
+        "Id": 0,
+        "Desc": "金"
     },
     {
-        "TypeID": 1,
-        "TypeName": "木"
+        "Id": 1,
+        "Desc": "木"
     },
     {
-        "TypeID": 2,
-        "TypeName": "水"
+        "Id": 2,
+        "Desc": "水"
     },
     {
-        "TypeID": 3,
-        "TypeName": "火"
+        "Id": 3,
+        "Desc": "火"
     },
     {
-        "TypeID": 4,
-        "TypeName": "土"
+        "Id": 4,
+        "Desc": "土"
     },
     {
-        "TypeID": 5,
-        "TypeName": "魔"
+        "Id": 5,
+        "Desc": "魔"
     }
 ]

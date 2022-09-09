@@ -57,6 +57,7 @@ namespace SkySwordKill.Next.DialogSystem
 
         private static ExpressionEvaluator CurEvaluator  { get; set; }
         public static bool IsRunningEvent { get;private set; } = false;
+        public static bool IsBreakTalk { get;private set; } = false;
 
         #endregion
 
@@ -268,8 +269,9 @@ namespace SkySwordKill.Next.DialogSystem
 
         public static void CancelEvent()
         {
-            IsRunningEvent = false;
             EventQueue.Clear();
+            OnDialogComplete = null;
+            CompleteEvent();
         }
 
         public static void CompleteEvent()
@@ -284,6 +286,8 @@ namespace SkySwordKill.Next.DialogSystem
                 IsRunningEvent = false;
                 OnDialogComplete?.Invoke();
                 OnDialogComplete = null;
+                Tools.instance.isNeedSetTalk = IsBreakTalk;
+                IsBreakTalk = false;
             }
         }
 
@@ -346,6 +350,11 @@ namespace SkySwordKill.Next.DialogSystem
             CurEnv = rtEvent.BindEnv;
             var eventData = rtEvent.BindEventData;
             IsRunningEvent = true;
+            if (Tools.instance.isNeedSetTalk)
+            {
+                Tools.instance.isNeedSetTalk = false;
+                IsBreakTalk = true;
+            }
 
             CurEnv.curDialogID = eventData.ID;
             CurEnv.curDialogIndex = index;

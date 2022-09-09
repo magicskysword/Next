@@ -55,18 +55,16 @@ namespace SkySwordKill.NextEditor.PanelPage
                 }));
         }
 
-        protected override void OnInspectItem(IModData data)
+        protected override void OnInspectItem(ModBuffData data)
         {
             if (data == null)
             {
                 return;
             }
 
-            var buffData = (ModBuffData)data;
-
             AddDrawer(new CtlIDPropertyDrawer(
                     "ModEditor.Main.modBuffData.id".I18N(),
-                    buffData,
+                    data,
                     () => Project.BuffData,
                     theData =>
                     {
@@ -92,81 +90,81 @@ namespace SkySwordKill.NextEditor.PanelPage
 
             AddDrawer(new CtlStringPropertyDrawer(
                     "ModEditor.Main.modBuffData.name".I18N(),
-                    str => buffData.Name = str,
-                    () => buffData.Name)
+                    str => data.Name = str,
+                    () => data.Name)
             );
 
             AddDrawer(new CtlStringPropertyDrawer(
                 "ModEditor.Main.modBuffData.skillEffect".I18N(),
-                str => buffData.SkillEffect = str,
-                () => buffData.SkillEffect)
+                str => data.SkillEffect = str,
+                () => data.SkillEffect)
             );
 
             AddDrawer(new CtlIntPropertyDrawer(
                 "ModEditor.Main.modBuffData.icon".I18N(),
-                num => buffData.Icon = num,
-                () => buffData.Icon)
+                num => data.Icon = num,
+                () => data.Icon)
                 {
                     OnChanged = Inspector.Refresh
                 }
             );
             
-            AddDrawer(new CtlIconPreviewDrawer(() => Mod.GetBuffIconUrl(buffData)));
+            AddDrawer(new CtlIconPreviewDrawer(() => Mod.GetBuffIconUrl(data)));
 
             AddDrawer(new CtlStringAreaPropertyDrawer(
                     "ModEditor.Main.modBuffData.desc".I18N(),
-                    str => buffData.Desc = str,
-                    () => buffData.Desc)
+                    str => data.Desc = str,
+                    () => data.Desc)
             );
             
             AddDrawer(new CtlDropdownPropertyDrawer(
                 "类型".I18NTodo(),
                 () => ModEditorManager.I.BuffDataBuffTypes.Select(type => $"{type.TypeID} : {type.TypeName}"),
-                index => buffData.BuffType = ModEditorManager.I.BuffDataBuffTypes[index].TypeID,
+                index => data.BuffType = ModEditorManager.I.BuffDataBuffTypes[index].TypeID,
                 () => ModEditorManager.I.BuffDataBuffTypes.FindIndex(type =>
-                    type.TypeID == buffData.BuffType))
+                    type.TypeID == data.BuffType))
             );
             
             AddDrawer(new CtlDropdownPropertyDrawer(
                 "叠加类型".I18NTodo(),
                 () => ModEditorManager.I.BuffDataOverlayTypes.Select(type => $"{type.ID} : {type.Desc}"),
-                index => buffData.BuffOverlayType = ModEditorManager.I.BuffDataOverlayTypes[index].ID,
+                index => data.BuffOverlayType = ModEditorManager.I.BuffDataOverlayTypes[index].ID,
                 () => ModEditorManager.I.BuffDataOverlayTypes.FindIndex(type =>
-                    type.ID == buffData.BuffOverlayType))
+                    type.ID == data.BuffOverlayType))
             );
             
             AddDrawer(new CtlDropdownPropertyDrawer(
                 "触发方式".I18NTodo(),
                 () => ModEditorManager.I.BuffDataTriggerTypes.Select(type => $"{type.ID} : {type.Desc}"),
-                index => buffData.Trigger = ModEditorManager.I.BuffDataTriggerTypes[index].ID,
+                index => data.Trigger = ModEditorManager.I.BuffDataTriggerTypes[index].ID,
                 () => ModEditorManager.I.BuffDataTriggerTypes.FindIndex(type =>
-                    type.ID == buffData.Trigger))
+                    type.ID == data.Trigger))
             );
             
             AddDrawer(new CtlDropdownPropertyDrawer(
                 "移除方式".I18NTodo(),
                 () => ModEditorManager.I.BuffDataRemoveTriggerTypes.Select(type => $"{type.TypeID} : {type.TypeName}"),
-                index => buffData.RemoverTrigger = ModEditorManager.I.BuffDataRemoveTriggerTypes[index].TypeID,
+                index => data.RemoverTrigger = ModEditorManager.I.BuffDataRemoveTriggerTypes[index].TypeID,
                 () => ModEditorManager.I.BuffDataRemoveTriggerTypes.FindIndex(type =>
-                    type.TypeID == buffData.RemoverTrigger))
+                    type.TypeID == data.RemoverTrigger))
             );
 
             AddDrawer(new CtlCheckboxPropertyDrawer(
                 "是否隐藏".I18NTodo(),
-                isOn => buffData.IsHide = isOn ? 1 : 0,
-                () => buffData.IsHide == 1)
+                isOn => data.IsHide = isOn ? 1 : 0,
+                () => data.IsHide == 1)
             );
             
             AddDrawer(new CtlCheckboxPropertyDrawer(
                 "只显示一层".I18NTodo(),
-                isOn => buffData.ShowOnlyOne = isOn ? 1 : 0,
-                () => buffData.ShowOnlyOne == 1)
+                isOn => data.ShowOnlyOne = isOn ? 1 : 0,
+                () => data.ShowOnlyOne == 1)
             );
 
             AddDrawer(new CtlIntArrayBindTablePropertyDrawer(
                 "ModEditor.Main.modBuffData.affix".I18N(),
-                list => buffData.AffixList = list,
-                () => buffData.AffixList,
+                list => data.AffixList = list,
+                () => data.AffixList,
                 list => Mod.GetAffixDesc(list),
                 new List<TableInfo>()
                 {
@@ -185,8 +183,8 @@ namespace SkySwordKill.NextEditor.PanelPage
             
             AddDrawer(new CtlSeidDataPropertyDrawer(
                 "特性",
-                buffData.Id,
-                buffData.SeidList,
+                data.Id,
+                data.SeidList,
                 Mod,
                 Project.BuffSeidDataGroup,
                 ModEditorManager.I.BuffSeidMetas,

@@ -192,7 +192,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             {
                 BtnRemove.enabled = true;
                 CurInspectIndex = index;
-                var data = (IModData)TableList.GetData(index);
+                var data = (T)TableList.GetData(index);
                 Inspector.Clear();
                 OnInspectItem(data);
                 Inspector.Refresh();
@@ -261,7 +261,7 @@ namespace SkySwordKill.NextEditor.PanelPage
         protected void TryRemoveData(int id)
         {
             var index = CurInspectIndex;
-            WindowConfirmDialog.CreateDialog("提示", $"即将删除ID为【{id}】的数据，是否确认删除？", true, () =>
+            WindowConfirmDialog.CreateDialog("提示", $"即将删除数据【{OnGetDataName(GetItem(id))}】，是否确认删？", true, () =>
             {
                 ModDataTableDataList.RemoveItem(id);
                 RefreshTable();
@@ -283,7 +283,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             Inspector.AddDrawer(drawer);
         }
         
-        protected abstract void OnInspectItem(IModData data);
+        protected abstract void OnInspectItem(T data);
         
         public void ReloadInspector()
         {
@@ -372,9 +372,9 @@ namespace SkySwordKill.NextEditor.PanelPage
             return TableList.GetDataCount();
         }
         
-        public IModData GetItem(int index)
+        public T GetItem(int index)
         {
-            return (IModData)TableList.GetData(index);
+            return (T)TableList.GetData(index);
         }
     }
 }

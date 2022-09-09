@@ -47,6 +47,7 @@ namespace SkySwordKill.Next.FCanvas.PatchCommand
         {
             menuName = fPatchCommand.GetParamString(0);
             tagEvent = fPatchCommand.GetParamString(1);
+            condition = fPatchCommand.GetParamString(2);
         }
 
     }

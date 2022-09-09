@@ -145,6 +145,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\DialogSystem\DialogEnvironment.cs" />
     <Compile Include="Scr\Core\DialogSystem\DialogEventData.cs" />
     <Compile Include="Scr\Core\DialogSystem\DialogTriggerData.cs" />
+    <Compile Include="Scr\Core\DialogTrigger\OnLoadMapScene.cs" />
     <Compile Include="Scr\Core\FCanvas\Command\Call.cs" />
     <Compile Include="Scr\Core\FCanvas\Command\VariableCondition.cs" />
     <Compile Include="Scr\Core\FCanvas\FCommandConverter.cs" />
@@ -173,6 +174,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\Component\CtlNodeBlock.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlNodeCanvas.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlStringBindDataPropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlTextPreviewArea.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlTreeProject.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlSeidDataDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlTableEditor.cs" />
@@ -206,6 +208,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\Component\ProjectTreeItem.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowConfirmDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowIntInputDialog.cs" />
+    <Compile Include="Scr\Core\FGUI\Dialog\WindowStringAreaInputPreviewDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowTableSelectorDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowStringAreaInputDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowStringInputDialog.cs" />
@@ -386,6 +389,10 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSingleFileData.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSInt.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSIntArray.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSkillData.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSkillDataConsultType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSkillDataPhase.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSkillDataQuality.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSString.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModTargetType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\IModDataClipboardPage.cs" />
@@ -402,6 +409,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\NextModEditor\PanelPage\PanelModConfig.cs" />
     <Compile Include="Scr\NextModEditor\PanelPage\PanelTableModCreateAvatarDataPage.cs" />
     <Compile Include="Scr\NextModEditor\PanelPage\PanelTableModItemDataPage.cs" />
+    <Compile Include="Scr\NextModEditor\PanelPage\PanelTableModSkillDataPage.cs" />
     <Compile Include="Scr\NextModEditor\PanelPage\PanelTablePageBase.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\CreateWorkshopException.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectListCreateWorkshopItem.cs" />
@@ -413,6 +421,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeItemModConfig.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeItemModCreateAvatarData.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeItemModItemData.cs" />
+    <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeItemModSkillData.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeModProject.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeModProjectReferenced.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeModWorkshop.cs" />

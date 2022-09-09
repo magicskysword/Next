@@ -129,6 +129,36 @@ namespace SkySwordKill.NextEditor.Mod
             return ModEditorManager.I.ReferenceProject.FindItemFlag(id);
         }
         
+        public ModSkillData FindSkill(int id)
+        {
+            ModSkillData data = null;
+            foreach (var project in Projects)
+            {
+                data = project.FindSkill(id);
+                if(data != null)
+                {
+                    return data;
+                }
+            }
+            
+            return ModEditorManager.I.ReferenceProject.FindSkill(id);
+        }
+        
+        public ModSkillData FindSkillBySkillId(int id)
+        {
+            ModSkillData data = null;
+            foreach (var project in Projects)
+            {
+                data = project.FindSkillBySkillId(id);
+                if(data != null)
+                {
+                    return data;
+                }
+            }
+            
+            return ModEditorManager.I.ReferenceProject.FindSkillBySkillId(id);
+        }
+        
         public ModComprehensionData FindComprehension(int id)
         {
             ModComprehensionData data = null;
@@ -370,6 +400,31 @@ namespace SkySwordKill.NextEditor.Mod
             }
 
             var dataList = new List<ModComprehensionData>(dataDic.Values);
+            dataList.ModSort();
+            return dataList;
+        }
+        
+        public List<ModSkillData> GetAllSkillData(bool containRefData = true)
+        {
+            Dictionary<int, ModSkillData> dataDic = new Dictionary<int, ModSkillData>();
+
+            if (containRefData)
+            {
+                foreach (var data in ModEditorManager.I.ReferenceProject.SkillData)
+                {
+                    dataDic.Add(data.Id, data);
+                }
+            }
+            
+            foreach (var project in Projects)
+            {
+                foreach (var data in project.SkillData)
+                {
+                    dataDic[data.Id] = data;
+                }
+            }
+
+            var dataList = new List<ModSkillData>(dataDic.Values);
             dataList.ModSort();
             return dataList;
         }

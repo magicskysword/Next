@@ -16,12 +16,29 @@ namespace SkySwordKill.Next.DialogSystem
     {
         #region 字段
         
+        /// <summary>
+        /// 当前执行对话ID
+        /// </summary>
         public string curDialogID;
+        
+        /// <summary>
+        /// 当前执行对话行数
+        /// </summary>
         public int curDialogIndex = 0;
 
+        /// <summary>
+        /// 主角
+        /// </summary>
         public Avatar player;
         
+        /// <summary>
+        /// 角色ID
+        /// </summary>
         public int roleID;
+        
+        /// <summary>
+        /// 角色绑定唯一ID
+        /// </summary>
         public int roleBindID;
         public string roleName = string.Empty;
         public UINPCData bindNpc;
@@ -39,6 +56,11 @@ namespace SkySwordKill.Next.DialogSystem
         public Flowchart flowchart;
 
         public Dictionary<string, int> tmpArgs = new Dictionary<string, int>();
+        
+        /// <summary>
+        /// 当前正在加载的场景
+        /// </summary>
+        public string mapScene;
 
         #endregion
 

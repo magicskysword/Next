@@ -9,6 +9,7 @@ namespace SkySwordKill.Next.DialogEvent
         public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
         {
             var tagBlock = command.GetStr(0);
+            DialogAnalysis.CancelEvent();
             if (env.flowchart == null)
             {
                 Main.LogError("FungusEvent : 对应flowchart不存在");
@@ -18,7 +19,6 @@ namespace SkySwordKill.Next.DialogEvent
                 Main.LogInfo("FungusEvent : 跳转FungusBlock " + tagBlock);
                 env.flowchart.ExecuteBlock(tagBlock);
             }
-            DialogAnalysis.CancelEvent();
         }
     }
 }

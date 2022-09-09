@@ -16,6 +16,7 @@ namespace SkySwordKill.NextEditor.PanelPage
         }
         
         public override ModDataTableDataList<ModItemData> ModDataTableDataList { get; set; }
+
         protected override void OnInit()
         {
             ModDataTableDataList = new ModDataTableDataList<ModItemData>(Project.ItemData)
@@ -26,7 +27,7 @@ namespace SkySwordKill.NextEditor.PanelPage
                     Project.ItemUseSeidDataGroup.RemoveAllSeid(data.Id);
                 }
             };
-            
+
             AddTableHeader(new TableInfo(
                 "ID".I18NTodo(),
                 TableInfo.DEFAULT_GRID_WIDTH,
@@ -44,7 +45,7 @@ namespace SkySwordKill.NextEditor.PanelPage
                     var item = (ModItemData)data;
                     return item.Name;
                 }));
-            
+
             AddTableHeader(new TableInfo(
                 "类型".I18NTodo(),
                 TableInfo.DEFAULT_GRID_WIDTH,
@@ -57,6 +58,7 @@ namespace SkySwordKill.NextEditor.PanelPage
                         var itemType = ModEditorManager.I.ItemDataTypes[index];
                         return $"{itemType.Id} : {itemType.Desc}";
                     }
+
                     return $"{item.ItemType} : 未知";
                 }));
 
@@ -68,7 +70,7 @@ namespace SkySwordKill.NextEditor.PanelPage
                     var item = (ModItemData)data;
                     return Mod.GetItemInfo(item);
                 }));
-            
+
             AddTableHeader(new TableInfo(
                 "描述".I18NTodo(),
                 TableInfo.DEFAULT_GRID_WIDTH * 3,
@@ -79,18 +81,16 @@ namespace SkySwordKill.NextEditor.PanelPage
                 }));
         }
 
-        protected override void OnInspectItem(IModData data)
+        protected override void OnInspectItem(ModItemData data)
         {
             if (data == null)
             {
                 return;
             }
-
-            var itemData = (ModItemData)data;
             
             AddDrawer(new CtlIDPropertyDrawer(
                 "ID".I18NTodo(),
-                itemData,
+                data,
                 () => Project.BuffData,
                 theData =>
                 {
@@ -99,12 +99,16 @@ namespace SkySwordKill.NextEditor.PanelPage
                 },
                 (theData, newId) =>
                 {
+                    Project.ItemEquipSeidDataGroup.ChangeSeidID(theData.Id, newId);
+                    Project.ItemUseSeidDataGroup.ChangeSeidID(theData.Id, newId);
                     theData.Id = newId;
                     Project.ItemData.ModSort();
                     CurInspectIndex = Project.ItemData.FindIndex(modData => modData == theData);
                 },
                 (theData, otherData) =>
                 {
+                    Project.ItemEquipSeidDataGroup.SwiftSeidID(theData.Id, otherData.Id);
+                    Project.ItemUseSeidDataGroup.SwiftSeidID(theData.Id, otherData.Id);
                     (otherData.Id, theData.Id) = (theData.Id, otherData.Id);
                     Project.ItemData.ModSort();
                     CurInspectIndex = Project.ItemData.FindIndex(modData => modData == theData);
@@ -114,27 +118,27 @@ namespace SkySwordKill.NextEditor.PanelPage
             
             AddDrawer(new CtlStringPropertyDrawer(
                 "名称".I18NTodo(),
-                str => itemData.Name = str,
-                () => itemData.Name)
+                str => data.Name = str,
+                () => data.Name)
             );
             
             AddDrawer(new CtlIntPropertyDrawer(
                 "图标".I18NTodo(),
-                value => itemData.Icon = value,
-                () => itemData.Icon)
+                value => data.Icon = value,
+                () => data.Icon)
                 {
                     OnChanged = Inspector.Refresh
                 }
             );
             
-            AddDrawer(new CtlIconPreviewDrawer(() => Mod.GetItemIconUrl(itemData)));
+            AddDrawer(new CtlIconPreviewDrawer(() => Mod.GetItemIconUrl(data)));
             
             AddDrawer(new CtlDropdownPropertyDrawer(
                 "物品类型".I18NTodo(),
                 () => ModEditorManager.I.ItemDataTypes.Select(type => $"{type.Id} : {type.Desc}"),
-                index => itemData.ItemType = ModEditorManager.I.ItemDataTypes[index].Id,
+                index => data.ItemType = ModEditorManager.I.ItemDataTypes[index].Id,
                 () => ModEditorManager.I.ItemDataTypes.FindIndex(type =>
-                    type.Id == itemData.ItemType)
+                    type.Id == data.ItemType)
                 )
                 {
                     OnChanged = ReloadInspector
@@ -143,17 +147,17 @@ namespace SkySwordKill.NextEditor.PanelPage
             
             AddDrawer(new CtlIntPropertyDrawer(
                 "堆叠上限".I18NTodo(),
-                value => itemData.MaxStack = value,
-                () => itemData.MaxStack)
+                value => data.MaxStack = value,
+                () => data.MaxStack)
             );
             
-            AddDrawer(new CtlGroupDrawer("法宝", itemData.ItemType == 0 || 
-                                               itemData.ItemType == 1 || 
-                                               itemData.ItemType == 2,
+            AddDrawer(new CtlGroupDrawer("法宝", data.ItemType == 0 || 
+                                               data.ItemType == 1 || 
+                                               data.ItemType == 2,
                 new CtlStringBindDataPropertyDrawer(
                     "武器外形",
-                    value => itemData.ArtifactType = value,
-                    () => itemData.ArtifactType,
+                    value => data.ArtifactType = value,
+                    () => data.ArtifactType,
                     value => ModEditorManager.I.ItemDataArtifactTypeGroup.GetDescription(value),
                     value =>
                     {
@@ -164,8 +168,8 @@ namespace SkySwordKill.NextEditor.PanelPage
                 },
                 new CtlSeidDataPropertyDrawer(
                     "装备特性",
-                    itemData.Id,
-                    itemData.SeidList,
+                    data.Id,
+                    data.SeidList,
                     Mod,
                     Project.ItemEquipSeidDataGroup,
                     ModEditorManager.I.ItemEquipSeidMetas,
@@ -181,13 +185,13 @@ namespace SkySwordKill.NextEditor.PanelPage
                 )
             );
 
-            AddDrawer(new CtlGroupDrawer("领悟书籍", itemData.ItemType == 3 ||
-                                                 itemData.ItemType == 4 ||
-                                                 itemData.ItemType == 13,
+            AddDrawer(new CtlGroupDrawer("领悟书籍", data.ItemType == 3 ||
+                                                 data.ItemType == 4 ||
+                                                 data.ItemType == 13,
                     new CtlIntPropertyDrawer(
                         "领悟时间".I18NTodo(),
-                        value => itemData.StudyCostTime = value,
-                        () => itemData.StudyCostTime
+                        value => data.StudyCostTime = value,
+                        () => data.StudyCostTime
                     ),
                     new CtlIntArrayBindTablePropertyDrawer(
                         "领悟前置条件".I18NTodo(),
@@ -199,11 +203,11 @@ namespace SkySwordKill.NextEditor.PanelPage
                                 dict[compression] = 0;
                             }
 
-                            for (var index = 0; index < itemData.StudyRequirement.Count; index += 2)
+                            for (var index = 0; index < data.StudyRequirement.Count; index += 2)
                             {
-                                var id = itemData.StudyRequirement[index];
-                                if (index + 1 < itemData.StudyRequirement.Count && dict.ContainsKey(id))
-                                    dict[id] = itemData.StudyRequirement[index + 1];
+                                var id = data.StudyRequirement[index];
+                                if (index + 1 < data.StudyRequirement.Count && dict.ContainsKey(id))
+                                    dict[id] = data.StudyRequirement[index + 1];
                             }
 
                             var list = new List<int>();
@@ -213,9 +217,9 @@ namespace SkySwordKill.NextEditor.PanelPage
                                 list.Add(pair.Value);
                             }
 
-                            itemData.StudyRequirement = list;
+                            data.StudyRequirement = list;
                         },
-                        () => itemData.StudyRequirement,
+                        () => data.StudyRequirement,
                         list => Mod.GetComprehensionWithPhaseDesc(list),
                         new List<TableInfo>()
                         {
@@ -254,36 +258,36 @@ namespace SkySwordKill.NextEditor.PanelPage
 
             var forgeElementList = Mod.GetAllForgeElementData();
             var forgePropertyList = Mod.GetAllForgePropertyData();
-            AddDrawer(new CtlGroupDrawer("材料", itemData.ItemType == 8,
+            AddDrawer(new CtlGroupDrawer("材料", data.ItemType == 8,
                     new CtlDropdownPropertyDrawer("五维类别",
                         () => forgeElementList
                             .Select(type => $"{type.Id} : {type.Desc}"),
-                        index => itemData.ForgeElementType = forgeElementList[index].Id,
-                        () => forgeElementList.GetIndex(itemData.ForgeElementType)
+                        index => data.ForgeElementType = forgeElementList[index].Id,
+                        () => forgeElementList.GetIndex(data.ForgeElementType)
                     ),
                     new CtlDropdownPropertyDrawer("属性类别",
                         () => forgePropertyList
                             .Select(type => $"{type.Id} : {type.Desc}"),
-                        index => itemData.ForgePropertyType = forgePropertyList[index].Id,
-                        () => forgePropertyList.GetIndex(itemData.ForgePropertyType)
+                        index => data.ForgePropertyType = forgePropertyList[index].Id,
+                        () => forgePropertyList.GetIndex(data.ForgePropertyType)
                     )
                 )
             );
             
-            AddDrawer(new CtlGroupDrawer("丹药", itemData.ItemType == 5,
+            AddDrawer(new CtlGroupDrawer("丹药", data.ItemType == 5,
                     new CtlIntPropertyDrawer(
                         "丹毒".I18NTodo(),
-                        value => itemData.DrugPoison = value,
-                        () => itemData.DrugPoison
+                        value => data.DrugPoison = value,
+                        () => data.DrugPoison
                     ),
                     new CtlIntPropertyDrawer(
                         "可用次数".I18NTodo(), 
-                        value => itemData.CanUseCount = value, 
-                        () => itemData.CanUseCount),
+                        value => data.CanUseCount = value, 
+                        () => data.CanUseCount),
                     new CtlCheckboxPropertyDrawer(
                         "NPC可使用".I18NTodo(),
-                        value => itemData.NpcCanUse = value ? 1 : 0,
-                        () => itemData.NpcCanUse == 1
+                        value => data.NpcCanUse = value ? 1 : 0,
+                        () => data.NpcCanUse == 1
                     )
                 )
             );
@@ -293,17 +297,17 @@ namespace SkySwordKill.NextEditor.PanelPage
                 3,4,5,6,7,10,12,13,15,16
             };
             
-            AddDrawer(new CtlGroupDrawer("消耗品", customTypeList.Contains(itemData.ItemType),
+            AddDrawer(new CtlGroupDrawer("消耗品", customTypeList.Contains(data.ItemType),
                     new CtlDropdownPropertyDrawer(
                         "使用类型".I18NTodo(),
                         () => ModEditorManager.I.ItemDataUseTypes.Select(type => $"{type.Id} : {type.Desc}"),
-                        index => itemData.SpecialType = ModEditorManager.I.ItemDataUseTypes[index].Id,
-                        () => ModEditorManager.I.ItemDataUseTypes.GetIndex(itemData.SpecialType)
+                        index => data.SpecialType = ModEditorManager.I.ItemDataUseTypes[index].Id,
+                        () => ModEditorManager.I.ItemDataUseTypes.GetIndex(data.SpecialType)
                     ),
                     new CtlSeidDataPropertyDrawer(
                         "消耗品特性",
-                        itemData.Id,
-                        itemData.SeidList,
+                        data.Id,
+                        data.SeidList,
                         Mod,
                         Project.ItemUseSeidDataGroup,
                         ModEditorManager.I.ItemUseSeidMetas,
@@ -334,27 +338,27 @@ namespace SkySwordKill.NextEditor.PanelPage
                     getData => ((ModAlchemyElementData)getData).Desc),
             };
             
-            AddDrawer(new CtlGroupDrawer("药材", itemData.ItemType == 6,
+            AddDrawer(new CtlGroupDrawer("药材", data.ItemType == 6,
                     new CtlIntBindTablePropertyDrawer(
                         "药引".I18NTodo(),
-                        value => itemData.AlchemyGuiding = value,
-                        () => itemData.AlchemyGuiding,
+                        value => data.AlchemyGuiding = value,
+                        () => data.AlchemyGuiding,
                         id => Mod.GetAlchemyElementDesc(id),
                         alchemyTableInfoList,
                         () => new List<IModData>(Mod.GetAllAlchemyElementData())
                     ),
                     new CtlIntBindTablePropertyDrawer(
                         "主药".I18NTodo(),
-                        value => itemData.AlchemyMain = value,
-                        () => itemData.AlchemyMain,
+                        value => data.AlchemyMain = value,
+                        () => data.AlchemyMain,
                         id => Mod.GetAlchemyElementDesc(id),
                         alchemyTableInfoList,
                         () => new List<IModData>(Mod.GetAllAlchemyElementData())
                     ),
                     new CtlIntBindTablePropertyDrawer(
                         "辅药".I18NTodo(),
-                        value => itemData.AlchemySub = value,
-                        () => itemData.AlchemySub,
+                        value => data.AlchemySub = value,
+                        () => data.AlchemySub,
                         id => Mod.GetAlchemyElementDesc(id),
                         alchemyTableInfoList,
                         () => new List<IModData>(Mod.GetAllAlchemyElementData())
@@ -366,41 +370,41 @@ namespace SkySwordKill.NextEditor.PanelPage
                 new CtlDropdownPropertyDrawer(
                     "品阶".I18NTodo(),
                     () => ModEditorManager.I.ItemDataQualityTypes.Select(type => $"{type.Id} : {type.Desc}"),
-                    index => itemData.Quality = ModEditorManager.I.ItemDataQualityTypes[index].Id,
-                    () => ModEditorManager.I.ItemDataQualityTypes.GetIndex(itemData.Quality)
+                    index => data.Quality = ModEditorManager.I.ItemDataQualityTypes[index].Id,
+                    () => ModEditorManager.I.ItemDataQualityTypes.GetIndex(data.Quality)
                     ),
                 new CtlDropdownPropertyDrawer(
                     "功法/武器品质".I18NTodo(),
                     () => ModEditorManager.I.ItemDataPhaseTypes.Select(type => $"{type.Id} : {type.Desc}"),
-                    index => itemData.Phase = ModEditorManager.I.ItemDataPhaseTypes[index].Id,
-                    () => ModEditorManager.I.ItemDataPhaseTypes.GetIndex(itemData.Phase)
+                    index => data.Phase = ModEditorManager.I.ItemDataPhaseTypes[index].Id,
+                    () => ModEditorManager.I.ItemDataPhaseTypes.GetIndex(data.Phase)
                 ),
                 new CtlDropdownPropertyDrawer(
                     "图鉴类型".I18NTodo(),
                     () => ModEditorManager.I.ItemDataGuideTypes.Select(type => $"{type.Id} : {type.Desc}"),
-                    index => itemData.GuideType = ModEditorManager.I.ItemDataGuideTypes[index].Id,
-                    () => ModEditorManager.I.ItemDataGuideTypes.GetIndex(itemData.GuideType)
+                    index => data.GuideType = ModEditorManager.I.ItemDataGuideTypes[index].Id,
+                    () => ModEditorManager.I.ItemDataGuideTypes.GetIndex(data.GuideType)
                     ),
                 new CtlIntPropertyDrawer(
                     "价格".I18NTodo(),
-                    value => itemData.Price = value,
-                    () => itemData.Price
+                    value => data.Price = value,
+                    () => data.Price
                     ),
                 new CtlDropdownPropertyDrawer(
                     "商店投放类型".I18NTodo(),
                     () => ModEditorManager.I.ItemDataShopTypes.Select(type => $"{type.Id} : {type.Desc}"),
-                    index => itemData.ShopType = ModEditorManager.I.ItemDataShopTypes[index].Id,
-                    () => ModEditorManager.I.ItemDataShopTypes.GetIndex(itemData.ShopType)
+                    index => data.ShopType = ModEditorManager.I.ItemDataShopTypes[index].Id,
+                    () => ModEditorManager.I.ItemDataShopTypes.GetIndex(data.ShopType)
                     ),
                 new CtlCheckboxPropertyDrawer(
                     "不可出售".I18NTodo(),
-                    value => itemData.CanNotSale = value ? 1 : 0,
-                    () => itemData.CanNotSale == 1
+                    value => data.CanNotSale = value ? 1 : 0,
+                    () => data.CanNotSale == 1
                     ),
                 new CtlIntArrayBindTablePropertyDrawer(
                     "物品标识".I18NTodo(),
-                    list => itemData.ItemFlagList = list,
-                    () => itemData.ItemFlagList,
+                    list => data.ItemFlagList = list,
+                    () => data.ItemFlagList,
                     list => Mod.GetItemFlagDesc(list),
                     new List<TableInfo>()
                     {
@@ -415,8 +419,8 @@ namespace SkySwordKill.NextEditor.PanelPage
                 ) { OnChanged = () => Inspector.Refresh() },
                 new CtlIntArrayBindTablePropertyDrawer(
                     "词缀".I18NTodo(),
-                    list => itemData.AffixList = list,
-                    () => itemData.AffixList,
+                    list => data.AffixList = list,
+                    () => data.AffixList,
                     list => Mod.GetAffixDesc(list),
                     new List<TableInfo>()
                     {
@@ -434,13 +438,13 @@ namespace SkySwordKill.NextEditor.PanelPage
                 ) { OnChanged = () => Inspector.Refresh() },
                 new CtlStringAreaPropertyDrawer(
                         "功能描述".I18NTodo(),
-                        value => itemData.Info = value,
-                        () => itemData.Info
+                        value => data.Info = value,
+                        () => data.Info
                         ),
                 new CtlStringAreaPropertyDrawer(
                         "物品简介".I18NTodo(),
-                        value => itemData.Desc = value,
-                        () => itemData.Desc
+                        value => data.Desc = value,
+                        () => data.Desc
                         )
             ));
         }

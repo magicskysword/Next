@@ -1,8 +1,8 @@
 ﻿namespace SkySwordKill.NextModEditor.Mod.Data
 {
-    public class ModElementType
+    public class ModElementType : IModData
     {
-        public int TypeID { get; set; }
-        public string TypeName { get; set; }
+        public int Id { get; set; }
+        public string Desc { get; set; }
     }
 }

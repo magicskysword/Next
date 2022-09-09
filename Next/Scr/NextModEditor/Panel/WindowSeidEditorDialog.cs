@@ -456,6 +456,45 @@ namespace SkySwordKill.NextEditor.Panel
                     () => new List<IModData>(Mod.GetAllBuffData(true)));
                 drawer = intPropertyDrawer;
             }
+            else if (seidProperty.SpecialDrawer.Contains("SkillDrawer"))
+            {
+                var intPropertyDrawer = new CtlIntBindTablePropertyDrawer(seidProperty.Desc,
+                    value => sInt.Value = value,
+                    () => sInt.Value,
+                    value =>
+                    {
+                        var skillData = Mod.FindSkillBySkillId(value);
+                        if (skillData != null)
+                        {
+                            return $"【{value} {skillData.Name}】{skillData.Desc}";
+                        }
+
+                        return $"【{value}  ？】";
+                    },
+                    new List<TableInfo>()
+                    {
+                        new TableInfo("ID",
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModSkillData)getData).Id.ToString()),
+                        new TableInfo("神通ID",
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModSkillData)getData).SkillId.ToString()),
+                        new TableInfo("名称",
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModSkillData)getData).Name),
+                        new TableInfo("描述",
+                            TableInfo.DEFAULT_GRID_WIDTH * 2,
+                            getData => ((ModSkillData)getData).Desc),
+                    },
+                    () => new List<IModData>(Mod
+                        .GetAllSkillData(true)
+                        .GroupBy(skillData => skillData.SkillId)
+                        .Select(d => 
+                            d.OrderByDescending(skill => skill.SkillLv).First())
+                        ),
+                    modData => ((ModSkillData)modData).SkillId);
+                drawer = intPropertyDrawer;
+            }
             else if (seidProperty.SpecialDrawer.Contains("SeidDrawer"))
             {
                 var intPropertyDrawer = new CtlIntBindTablePropertyDrawer(seidProperty.Desc,
@@ -505,6 +544,7 @@ namespace SkySwordKill.NextEditor.Panel
                 switch (drawerId)
                 {
                     case "SeidDrawer":
+                    case "SkillDrawer":
                     case "BuffDrawer":
                         continue;
                     case "BuffTypeDrawer":
@@ -561,16 +601,16 @@ namespace SkySwordKill.NextEditor.Panel
                     {
                         var dropdownPropertyDrawer = new CtlDropdownPropertyDrawer("",
                             () => ModEditorManager.I.AttackTypes.Select(type =>
-                                $"{type.TypeID} {type.TypeName}"),
+                                $"{type.Id} {type.Desc}"),
                             index =>
                             {
-                                var typeId = ModEditorManager.I.AttackTypes[index].TypeID;
+                                var typeId = ModEditorManager.I.AttackTypes[index].Id;
                                 sInt.Value = typeId;
                                 drawer.Refresh();
                                 drawer.OnChanged?.Invoke();
                             },
                             () => ModEditorManager.I.AttackTypes.FindIndex(type =>
-                                type.TypeID == sInt.Value));
+                                type.Id == sInt.Value));
                         Inspector.AddDrawer(dropdownPropertyDrawer);
                         drawer.OnChanged += dropdownPropertyDrawer.Refresh;
                         break;
@@ -579,16 +619,16 @@ namespace SkySwordKill.NextEditor.Panel
                     {
                         var dropdownPropertyDrawer = new CtlDropdownPropertyDrawer("",
                             () => ModEditorManager.I.ElementTypes.Select(type =>
-                                $"{type.TypeID} {type.TypeName}"),
+                                $"{type.Id} {type.Desc}"),
                             index =>
                             {
-                                var typeId = ModEditorManager.I.ElementTypes[index].TypeID;
+                                var typeId = ModEditorManager.I.ElementTypes[index].Id;
                                 sInt.Value = typeId;
                                 drawer.Refresh();
                                 drawer.OnChanged?.Invoke();
                             },
                             () => ModEditorManager.I.ElementTypes.FindIndex(type =>
-                                type.TypeID == sInt.Value));
+                                type.Id == sInt.Value));
                         Inspector.AddDrawer(dropdownPropertyDrawer);
                         drawer.OnChanged += dropdownPropertyDrawer.Refresh;
                         break;
@@ -663,6 +703,56 @@ namespace SkySwordKill.NextEditor.Panel
                     },
                     () => new List<IModData>(Mod.GetAllBuffData()));
                 drawer = intArrayPropertyDrawer;
+            }
+            else if (seidProperty.SpecialDrawer.Contains("SkillArrayDrawer"))
+            {
+                var intPropertyDrawer = new CtlIntArrayBindTablePropertyDrawer(seidProperty.Desc,
+                    value => sIntArray.Value = value,
+                    () => sIntArray.Value,
+                    value =>
+                    {
+                        var sb = new StringBuilder();
+                        for (var index = 0; index < value.Count; index++)
+                        {
+                            var skillId = value[index];
+                            var skillData = Mod.FindSkillBySkillId(skillId);
+                            if (skillData != null)
+                            {
+                                sb.Append($"【{skillData.Name}({skillData.SkillId})】{skillData.Desc}");
+                            }
+                            else
+                            {
+                                sb.Append($"【？({skillId})】");
+                            }
+                            if(index != value.Count - 1)
+                                sb.Append("\n");
+                        }
+
+                        return sb.ToString();
+                    },
+                    new List<TableInfo>()
+                    {
+                        new TableInfo("ID",
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModSkillData)getData).Id.ToString()),
+                        new TableInfo("神通ID",
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModSkillData)getData).SkillId.ToString()),
+                        new TableInfo("名称",
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModSkillData)getData).Name),
+                        new TableInfo("描述",
+                            TableInfo.DEFAULT_GRID_WIDTH * 2,
+                            getData => ((ModSkillData)getData).Desc),
+                    },
+                    () => new List<IModData>(Mod
+                        .GetAllSkillData(true)
+                        .GroupBy(skillData => skillData.SkillId)
+                        .Select(d => 
+                            d.OrderByDescending(skill => skill.SkillLv).First())
+                    ),
+                    modData => ((ModSkillData)modData).SkillId);
+                drawer = intPropertyDrawer;
             }
             else if (seidProperty.SpecialDrawer.Contains("ItemArrayDrawer"))
             {
@@ -769,6 +859,7 @@ namespace SkySwordKill.NextEditor.Panel
                 {
                     case "ItemArrayDrawer":
                     case "SeidArrayDrawer":
+                    case "SkillArrayDrawer":
                     case "BuffArrayDrawer":
                         continue;
                     default:

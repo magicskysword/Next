@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="400,300" overflow="scroll" scrollBarFlags="36" scrollBar="visible">
+  <displayList>
+    <richtext id="n4_qiuf" name="txtPreview" xy="0,0" size="400,300" fontSize="14" color="#ffffff" autoSize="none" autoClearText="true" text="233&lt;font color=&apos;#ff0000&apos;&gt; &lt;a href=&apos;https://www.baidu.com&apos;&gt;2333&lt;/a&gt; &lt;/font&gt; 6666">
+      <relation target="" sidePair="width-width,height-height"/>
+    </richtext>
+  </displayList>
+</component>

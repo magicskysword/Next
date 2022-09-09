@@ -19,9 +19,11 @@ namespace SkySwordKill.Next.FGUI.Component
         private Func<int, string> _descGetter;
         private List<TableInfo> _tableInfos;
         private Func<List<IModData>> _dataListGetter;
+        private Func<IModData, int> _idGetter;
 
         public CtlIntBindTablePropertyDrawer(string drawerName, Action<int> setter, Func<int> getter,
-            Func<int, string> descGetter, List<TableInfo> tableInfos, Func<List<IModData>> dataListGetter)
+            Func<int, string> descGetter, List<TableInfo> tableInfos, Func<List<IModData>> dataListGetter, 
+            Func<IModData,int> idGetter = null)
         {
             _drawerName = drawerName;
             _setter = setter;
@@ -29,6 +31,7 @@ namespace SkySwordKill.Next.FGUI.Component
             _descGetter = descGetter;
             _tableInfos = tableInfos;
             _dataListGetter = dataListGetter;
+            _idGetter = idGetter;
         }
 
         protected override GComponent OnCreateCom()
@@ -73,11 +76,12 @@ namespace SkySwordKill.Next.FGUI.Component
         {
             WindowTableSelectorDialog.CreateDialog(_drawerName, _tableInfos,
                 new[] { OnGetProperty() }, false, _dataListGetter.Invoke(), false,
-                list =>
+                 onConfirm: list =>
                 {
                     OnSetProperty(list.FirstOrDefault());
                     Refresh();
-                });
+                }, 
+                idGetter: _idGetter);
         }
     }
 }

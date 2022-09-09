@@ -6,8 +6,16 @@ namespace SkySwordKill.Next.DialogTrigger
     public class OnEnterGame
     {
         public static bool IsEnterGame { get; set; } = false;
+        public static bool IsFirstEnterGame { get; set; } = false;
 
-        public static void Trigger()
+        public static void TriggerFirstEnterGame()
+        {
+            Main.LogInfo($"首次进入游戏触发");
+            var env = new DialogEnvironment();
+            DialogAnalysis.TryTrigger(new[] { "首次进入游戏", "FirstEnterGame" }, env, true);
+        }
+        
+        public static void TriggerEnterGame()
         {
             Main.LogInfo($"进入游戏触发");
             var env = new DialogEnvironment();
@@ -22,6 +30,7 @@ namespace SkySwordKill.Next.DialogTrigger
         public static void Prefix()
         {
             OnEnterGame.IsEnterGame = true;
+            OnEnterGame.IsFirstEnterGame = true;
             Main.LogInfo($"创建角色");
         }
     }
@@ -49,17 +58,23 @@ namespace SkySwordKill.Next.DialogTrigger
     }
 
     [HarmonyPatch(typeof(GUIPackage.UI_Manager), "Update")]
-    public class AfterBattleDialogPatch
+    public class CheckEnterGame
     {
         [HarmonyPrefix]
         public static void Prefix()
         {
-            if (!Tools.instance.isNeedSetTalk)
-                return;
-            if (OnEnterGame.IsEnterGame)
+            if (Tools.instance.isNeedSetTalk)
             {
-                OnEnterGame.IsEnterGame = false;
-                OnEnterGame.Trigger();
+                if (OnEnterGame.IsFirstEnterGame)
+                {
+                    OnEnterGame.IsFirstEnterGame = false;
+                    OnEnterGame.TriggerFirstEnterGame();
+                }
+                if (OnEnterGame.IsEnterGame)
+                {
+                    OnEnterGame.IsEnterGame = false;
+                    OnEnterGame.TriggerEnterGame();
+                }
             }
         }
     }

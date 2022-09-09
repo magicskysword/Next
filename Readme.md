@@ -12,11 +12,7 @@ github地址：https://github.com/magicskysword/Next
 可以通过编写json文件，以在游戏里插入额外的功能与数据。
 
 ## 使用方法
-从Steam创意工坊安装：
-
-下载压缩包，将文件解压至 `觅长生\BepInEx\plugins` 文件夹
-
-参考贴：https://bbs.3dmgame.com/thread-6207429-1-1.html
+从Steam创意工坊安装：[创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=2824845357)
 
 ## **Next Mod 制作文档**
 

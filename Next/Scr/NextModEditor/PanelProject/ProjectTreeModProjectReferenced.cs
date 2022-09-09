@@ -30,6 +30,10 @@ namespace SkySwordKill.NextEditor.PanelProject
             {
                 Editable = false,
             });
+            // Children.Add(new ProjectTreeItemModSkillData(Mod, Project)
+            // {
+            //     Editable = false,
+            // });
             Children.Add(new ProjectTreeItemModBuffData(Mod, Project)
             {
                 Editable = false,

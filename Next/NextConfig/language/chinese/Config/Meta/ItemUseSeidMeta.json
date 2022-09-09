@@ -8,7 +8,10 @@
             {
                 "ID": "value1",
                 "Type": "Int",
-                "Desc": "X 神通ID"
+                "Desc": "X 神通唯一ID",
+                "SpecialDrawer": [
+                    "SkillDrawer"
+                ]
             }
         ]
     },
@@ -409,12 +412,15 @@
         "ID": 30,
         "IDName": "id",
         "Name": "获得神通和功法",
-        "Desc": "使用后获得对应功法和技能",
+        "Desc": "使用后获得对应功法和神通",
         "Properties": [
             {
                 "ID": "value1",
                 "Type": "Int",
-                "Desc": "X 神通ID"
+                "Desc": "X 神通唯一ID",
+                "SpecialDrawer": [
+                    "SkillDrawer"
+                ]
             },
             {
                 "ID": "value2",
