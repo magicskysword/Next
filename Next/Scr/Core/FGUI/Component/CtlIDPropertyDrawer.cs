@@ -9,6 +9,56 @@ using SkySwordKill.NextModEditor.Mod.Data;
 
 namespace SkySwordKill.Next.FGUI.Component
 {
+    public class ChangeIdUndoCommand : IUndoCommand
+    {
+        private int _oldId;
+        private int _newId;
+        private IModData _modData;
+        private Action<IModData, int> _onChangeId;
+        
+        public ChangeIdUndoCommand(IModData modData,int oldId, int newId, Action<IModData, int> onChangeId)
+        {
+            _modData = modData;
+            _oldId = oldId;
+            _newId = newId;
+            _onChangeId = onChangeId;
+        }
+        
+        public void Execute()
+        {
+            _onChangeId(_modData, _newId);
+        }
+        
+        public void Undo()
+        {
+            _onChangeId(_modData, _oldId);
+        }
+    }
+    
+    public class SwiftIdUndoCommand : IUndoCommand
+    {
+        private IModData _modDataA;
+        private IModData _modDataB;
+        private Action<IModData, IModData> _onSwiftId;
+        
+        public SwiftIdUndoCommand(IModData modDataA,IModData modDataB,Action<IModData, IModData> onChangeId)
+        {
+            _modDataA = modDataA;
+            _modDataB = modDataB;
+            _onSwiftId = onChangeId;
+        }
+        
+        public void Execute()
+        {
+            _onSwiftId(_modDataA, _modDataB);
+        }
+        
+        public void Undo()
+        {
+            _onSwiftId(_modDataB, _modDataA);
+        }
+    }
+    
     public class CtlIDPropertyDrawer : CtlPropertyDrawerBase
     {
         private string _drawerName;
@@ -45,7 +95,7 @@ namespace SkySwordKill.Next.FGUI.Component
                         true,
                         () =>
                         {
-                            onSwiftId?.Invoke(modData, otherData);
+                            this.Record(new SwiftIdUndoCommand(modData, otherData, onSwiftId));
                             OnChanged?.Invoke();
                         },
                         () => { onCancel?.Invoke(); });
@@ -58,7 +108,7 @@ namespace SkySwordKill.Next.FGUI.Component
                         true,
                         () =>
                         {
-                            onChangeId?.Invoke(modData, num);
+                            this.Record(new ChangeIdUndoCommand(modData, modData.Id, num, onChangeId));
                             OnChanged?.Invoke();
                         },
                         () => { onCancel?.Invoke(); });

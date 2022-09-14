@@ -21,6 +21,7 @@ namespace SkySwordKill.Next.FGUI.Component
             Inspector = new CtlGroupInspector(drawer.m_list);
             foreach (var propertyDrawer in Drawers)
             {
+                propertyDrawer.UndoManager = UndoManager;
                 Inspector.AddDrawer(propertyDrawer);
             }
             var btnExpand = drawer.m_btnExpand;

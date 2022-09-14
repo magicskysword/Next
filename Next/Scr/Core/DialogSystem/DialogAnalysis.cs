@@ -286,8 +286,11 @@ namespace SkySwordKill.Next.DialogSystem
                 IsRunningEvent = false;
                 OnDialogComplete?.Invoke();
                 OnDialogComplete = null;
-                Tools.instance.isNeedSetTalk = IsBreakTalk;
-                IsBreakTalk = false;
+                if(IsBreakTalk)
+                {
+                    Tools.instance.isNeedSetTalk = IsBreakTalk;
+                    IsBreakTalk = false;
+                }
             }
         }
 

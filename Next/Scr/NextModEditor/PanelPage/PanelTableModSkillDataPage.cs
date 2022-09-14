@@ -231,7 +231,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             return $"{data.Id} {data.Name}";
         }
 
-        protected override void OnPaste(CopyData copyData, int targetId)
+        protected override ModSkillData OnPasteData(CopyData copyData, int targetId)
         {
             var oldId = copyData.Data.Id;
             var json = copyData.Data.GetJsonData();
@@ -239,6 +239,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             skillData.Id = targetId;
             Project.SkillData.Add(skillData);
             Project.SkillData.ModSort();
+            return skillData;
         }
     }
 }

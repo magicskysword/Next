@@ -56,7 +56,7 @@ namespace SkySwordKill.Next.FGUI.Component
 
         private void OnSetProperty(int value)
         {
-            _setter.Invoke(value);
+            this.Record(new ValueChangedCommand<int>(OnGetProperty(), value, _setter));
             OnChanged?.Invoke();
         }
 

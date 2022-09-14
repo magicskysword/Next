@@ -38,7 +38,7 @@ namespace SkySwordKill.Next.FGUI.Component
 
         private void OnSetPropertyIndex(int value)
         {
-            _indexSetter.Invoke(value);
+            this.Record(new ValueChangedCommand<int>(OnGetPropertyIndex(), value, _indexSetter));
             OnChanged?.Invoke();
         }
 

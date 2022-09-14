@@ -130,13 +130,14 @@ namespace SkySwordKill.NextEditor.PanelPage
             return $"{data.Id} {data.Name}";
         }
 
-        protected override void OnPaste(CopyData copyData, int targetId)
+        protected override ModAffixData OnPasteData(CopyData copyData, int targetId)
         {
             var json = copyData.Data.GetJsonData();
             var affixData = json.ToObject<ModAffixData>();
             affixData.Id = targetId;
             Project.AffixData.Add(affixData);
             Project.AffixData.ModSort();
+            return affixData;
         }
     }
 }

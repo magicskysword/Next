@@ -17,6 +17,7 @@ namespace SkySwordKill.Next.FGUI.Component
             }
         }
 
+        public UndoInstManager UndoManager { get; set; }
         public Action OnChanged { get; set; } = () => { };
         public GComponent Component { get; set; }
         protected abstract GComponent OnCreateCom();

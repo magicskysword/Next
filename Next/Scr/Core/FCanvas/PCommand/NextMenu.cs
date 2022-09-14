@@ -31,7 +31,7 @@ namespace SkySwordKill.Next.FCanvas.PatchCommand
             {
                 menuDialog.SetActive(true);
                 string text = DialogAnalysis.AnalysisInlineScript(menuName, env);
-                Main.LogDebug($"载入额外选项: {text} => {tagEvent}");
+                Main.LogDebug($"Fungus 满足条件{condition} 载入额外选项: {text} => {tagEvent}");
                 DialogAnalysis.AddMenu(text, () =>
                 {
                     if(!string.IsNullOrEmpty(tagEvent))
@@ -39,6 +39,10 @@ namespace SkySwordKill.Next.FCanvas.PatchCommand
                     else
                         DialogAnalysis.CompleteEvent();
                 });
+            }
+            else
+            {
+                Main.LogDebug($"Fungus 不满足条件{condition} 额外选项不显示");
             }
             Continue();
         }

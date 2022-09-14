@@ -31,9 +31,9 @@ namespace SkySwordKill.Next.FGUI.Component
             Drawer.m_inContent.text = OnGetProperty().ToString();
         }
     
-        private void OnSetProperty(int text)
+        private void OnSetProperty(int value)
         {
-            _setter.Invoke(text);
+            this.Record(new ValueChangedCommand<int>(OnGetProperty(), value, _setter));
             OnChanged?.Invoke();
         }
 

@@ -18,6 +18,11 @@ namespace SkySwordKill.Next.FGUI.Component
         protected abstract void OnOpen();
         protected abstract void OnRemove();
 
+        public virtual bool OnHandleKey(InputEvent evt)
+        {
+            return false;
+        }
+
         public void Create()
         {
             if (Content == null)

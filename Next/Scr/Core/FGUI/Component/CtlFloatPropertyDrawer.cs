@@ -37,9 +37,9 @@ namespace SkySwordKill.Next.FGUI.Component
             Drawer.SetEditable(value);
         }
 
-        private void OnSetProperty(float text)
+        private void OnSetProperty(float value)
         {
-            _setter.Invoke(text);
+            this.Record(new ValueChangedCommand<float>(OnGetProperty(),value, _setter));
             OnChanged?.Invoke();
         }
 

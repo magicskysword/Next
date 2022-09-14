@@ -158,6 +158,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FCanvas\PCommand\NextEvent.cs" />
     <Compile Include="Scr\Core\FCanvas\PCommand\NextInnerEvent.cs" />
     <Compile Include="Scr\Core\FCanvas\PCommand\NextMenu.cs" />
+    <Compile Include="Scr\Core\FGUI\CommonUndoCommand.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlComboSearchBox.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlGroupDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlCheckboxPropertyDrawer.cs" />
@@ -215,7 +216,11 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\Dialog\WindowWaitDialog.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIPanelBase.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIUtils.cs" />
+    <Compile Include="Scr\Core\FGUI\IUndoCommand.cs" />
+    <Compile Include="Scr\Core\FGUI\IUndoInst.cs" />
     <Compile Include="Scr\Core\FGUI\NextGLoader.cs" />
+    <Compile Include="Scr\Core\FGUI\UndoInstManager.cs" />
+    <Compile Include="Scr\Core\FGUI\ValueChangedCommand.cs" />
     <Compile Include="Scr\Core\FGUI\WindowDialogBase.cs" />
     <Compile Include="Scr\Core\Patch\FungusClonePatch.cs" />
     <Compile Include="Scr\Core\Res\BytesAsset.cs" />

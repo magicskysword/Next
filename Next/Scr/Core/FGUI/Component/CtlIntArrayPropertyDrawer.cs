@@ -43,9 +43,9 @@ namespace SkySwordKill.Next.FGUI.Component
             Drawer.SetEditable(value);
         }
 
-        private void OnSetProperty(List<int> text)
+        private void OnSetProperty(List<int> value)
         {
-            _setter.Invoke(text);
+            this.Record(new ValueChangedCommand<List<int>>(OnGetProperty(), value, _setter));
             OnChanged?.Invoke();
         }
 

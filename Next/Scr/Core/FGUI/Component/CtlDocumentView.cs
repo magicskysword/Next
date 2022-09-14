@@ -14,11 +14,12 @@ namespace SkySwordKill.Next.FGUI.Component
             _onRemoveTabItem = OnRemoveTabItem;
             DocumentView = documentView;
             
+            DocumentView.onKeyDown.Add(OnKeyDown);
             var lstTab = DocumentView.m_lstTab;
             lstTab.itemRenderer = TabItemRenderer;
             lstTab.onClickItem.Set(OnClickTabItem);
         }
-        
+
         private int _curTabIndex;
         private EventCallback1 _onRemoveTabItem;
 
@@ -73,6 +74,18 @@ namespace SkySwordKill.Next.FGUI.Component
             var tab = (PanelPageBase)tabItem.data;
             OnTabRemove?.Invoke(tab);
             RemoveTab(tab);
+        }
+        
+        private void OnKeyDown(EventContext context)
+        {
+            if(CurTabIndex >= 0 && CurTabIndex < Tabs.Count)
+            {
+                var tab = Tabs[CurTabIndex];
+                if(tab.OnHandleKey(context.inputEvent))
+                {
+                    context.StopPropagation();
+                }
+            }
         }
 
         private void TabItemRenderer(int index, GObject item)

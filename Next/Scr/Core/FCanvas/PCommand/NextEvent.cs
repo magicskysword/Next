@@ -11,9 +11,7 @@ namespace SkySwordKill.Next.FCanvas.PatchCommand
         public string condition;
         
         public override void OnEnter()
-        { 
-            Main.LogInfo($"Fungus 跳转NextEvent: {nextEvent}");
-            
+        {
             var env = new DialogEnvironment()
             {
                 flowchart = GetFlowchart()
@@ -28,10 +26,12 @@ namespace SkySwordKill.Next.FCanvas.PatchCommand
             if (canExecute)
             {
                 StopParentBlock();
+                Main.LogDebug($"Fungus 满足条件{condition} 跳转NextEvent: {nextEvent}");
                 DialogAnalysis.StartDialogEvent(nextEvent, env);
             }
             else
             {
+                Main.LogDebug($"Fungus 不满足条件{condition} 继续执行指令");
                 Continue();
             }
         }

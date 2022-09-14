@@ -91,8 +91,8 @@
     <component id="rabj43" name="PopupMenu_separator.xml" path="/Component/Popup/" exported="true"/>
     <component id="rabj44" name="BtnOk.xml" path="/Component/Button/"/>
     <image id="rabj45" name="icon_folder1.png" path="/Icon/" exported="true"/>
-    <image id="rabj46" name="icon_checkbox.png" path="/Icon/"/>
-    <image id="rabj47" name="icon_checkbox_frame.png" path="/Icon/"/>
+    <image id="rabj46" name="icon_checkbox.png" path="/Icon/" exported="true"/>
+    <image id="rabj47" name="icon_checkbox_frame.png" path="/Icon/" exported="true"/>
     <component id="rabj49" name="BtnCheckbox.xml" path="/Component/Button/"/>
     <component id="rabj4a" name="ComCheckboxDrawer.xml" path="/Component/Drawer/" exported="true"/>
     <component id="dtat4b" name="WinCreateWorkshopModDialog.xml" path="/Dialog/" exported="true"/>
@@ -110,6 +110,11 @@
     <image id="mbeq4o" name="icon_corner.png" path="/Icon/" exported="true"/>
     <component id="qiuf4p" name="WinStringInputPreviewDialog.xml" path="/Dialog/" exported="true"/>
     <component id="qiuf4q" name="ComTextPreviewArea.xml" path="/Component/StringArea/" exported="true"/>
+    <image id="aqkd4r" name="icon_redo.png" path="/Icon/" exported="true"/>
+    <image id="aqkd4s" name="icon_undo.png" path="/Icon/" exported="true"/>
+    <image id="aqkd4t" name="icon_copy.png" path="/Icon/" exported="true"/>
+    <image id="aqkd4u" name="icon_paste_as_new.png" path="/Icon/" exported="true"/>
+    <image id="aqkd4v" name="icon_paste.png" path="/Icon/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

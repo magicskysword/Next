@@ -4,6 +4,30 @@ using SkySwordKill.NextFGUI.NextCore;
 
 namespace SkySwordKill.Next.FGUI.Component
 {
+    public class StringPropertyDrawerUndoCommand : IUndoCommand
+    {
+        private string _oldValue;
+        private string _newValue;
+        private Action<string> _onValueChanged;
+
+        public StringPropertyDrawerUndoCommand(string oldValue, string newValue, Action<string> onValueChanged)
+        {
+            _oldValue = oldValue;
+            _newValue = newValue;
+            _onValueChanged = onValueChanged;
+        }
+
+        public void Execute()
+        {
+            _onValueChanged?.Invoke(_newValue);
+        }
+
+        public void Undo()
+        {
+            _onValueChanged?.Invoke(_oldValue);
+        }
+    }
+
     public class CtlStringPropertyDrawer : CtlPropertyDrawerBase
     {
         private string _drawerName;
@@ -38,7 +62,7 @@ namespace SkySwordKill.Next.FGUI.Component
 
         private void OnSetProperty(string text)
         {
-            _setter.Invoke(text);
+            this.Record(new ValueChangedCommand<string>(OnGetProperty(),text, _setter));
             OnChanged?.Invoke();
         }
 

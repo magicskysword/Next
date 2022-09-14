@@ -202,7 +202,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             return $"{data.Id} {data.Name}";
         }
 
-        protected override void OnPaste(CopyData copyData, int targetId)
+        protected override ModBuffData OnPasteData(CopyData copyData, int targetId)
         {
             var oldId = copyData.Data.Id;
             var json = copyData.Data.GetJsonData();
@@ -211,6 +211,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             Project.BuffData.Add(buffData);
             Project.BuffSeidDataGroup.CopyAllSeid(copyData.Project.BuffSeidDataGroup, oldId, targetId);
             Project.BuffData.ModSort();
+            return buffData;
         }
     }
 }
