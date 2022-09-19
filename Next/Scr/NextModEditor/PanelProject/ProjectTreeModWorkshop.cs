@@ -1,8 +1,8 @@
 ﻿using SkySwordKill.Next.FGUI.Component;
-using SkySwordKill.NextEditor.Mod;
-using SkySwordKill.NextEditor.PanelPage;
+using SkySwordKill.NextModEditor.Mod;
+using SkySwordKill.NextModEditor.PanelPage;
 
-namespace SkySwordKill.NextEditor.PanelProject
+namespace SkySwordKill.NextModEditor.PanelProject
 {
     public class ProjectTreeModWorkshop : ProjectTreeItem
     {

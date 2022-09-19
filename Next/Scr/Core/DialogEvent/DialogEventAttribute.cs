@@ -5,11 +5,11 @@ namespace SkySwordKill.Next.DialogEvent
     [AttributeUsage(AttributeTargets.Class,AllowMultiple = true)]
     public class DialogEventAttribute : Attribute
     {
-        public string registerCommand;
+        public string RegisterCommand { get; set; }
 
         public DialogEventAttribute(string command)
         {
-            registerCommand = command;
+            RegisterCommand = command;
         }
     }
 }

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using FairyGUI;
 using SkySwordKill.Next.Extension;
-using SkySwordKill.NextEditor.Mod;
-using SkySwordKill.NextEditor.PanelProject;
+using SkySwordKill.NextModEditor.Mod;
+using SkySwordKill.NextModEditor.PanelProject;
 using SkySwordKill.NextFGUI.NextCore;
 
 namespace SkySwordKill.Next.FGUI.Component

@@ -5,7 +5,7 @@
     <component id="n0_tcay" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="350,100">
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <text id="n1_tcay" name="text" xy="11,32" size="330,22" fontSize="14" color="#ffffff" autoSize="height" autoClearText="true" text=""/>
+    <text id="n1_tcay" name="text" xy="11,32" size="330,22" restrictSize="0,0,0,600" fontSize="14" color="#ffffff" autoSize="height" autoClearText="true" text=""/>
     <component id="n2_tcay" name="btnOk" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="143,65">
       <gearDisplay controller="type" pages="0,1"/>
       <gearXY controller="type" pages="0" values="143,65" default="107,65"/>

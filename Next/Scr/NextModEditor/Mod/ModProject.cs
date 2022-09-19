@@ -4,7 +4,7 @@ using System.Linq;
 using SkySwordKill.Next.Mod;
 using SkySwordKill.NextModEditor.Mod.Data;
 
-namespace SkySwordKill.NextEditor.Mod
+namespace SkySwordKill.NextModEditor.Mod
 {
     public class ModProject
     {
@@ -50,6 +50,7 @@ namespace SkySwordKill.NextEditor.Mod
         public List<ModComprehensionPhaseData> ComprehensionPhase { get; set; }
         public ModItemUseSeidDataGroup ItemUseSeidDataGroup { get; set; }
         public List<ModSkillData> SkillData { get; set; }
+        public ModSkillSeidDataGroup SkillSeidDataGroup { get; set; }
 
         private ModProject()
         {
@@ -89,9 +90,9 @@ namespace SkySwordKill.NextEditor.Mod
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ModSkillData FindSkillBySkillId(int id)
+        public ModSkillData FindSkillBySkillPkId(int id)
         {
-            var list = SkillData.FindAll(data => data.SkillId == id);
+            var list = SkillData.FindAll(data => data.SkillPkId == id);
             return list.OrderByDescending(data => data.SkillLv).FirstOrDefault();
         }
         
@@ -145,15 +146,16 @@ namespace SkySwordKill.NextEditor.Mod
                 AlchemyElement = new List<ModAlchemyElementData>(),
                 Comprehension = new List<ModComprehensionData>(),
                 ComprehensionPhase = new List<ModComprehensionPhaseData>(),
-                SkillData = new List<ModSkillData>()
+                SkillData = new List<ModSkillData>(),
+                SkillSeidDataGroup = ModSkillSeidDataGroup.Create(ModEditorManager.I.SkillSeidMetas)
             };
             
             return project;
         }
         
-        public static ModProject Load(string dir, string dataDir = null)
+        public static ModProject Load(string dir, string dataDir = null, bool ignoreWarning = false)
         {
-            var config = ModConfig.Load(dir);
+            var config = ModConfig.Load(dir, ignoreWarning);
             dataDir = dataDir ?? config.GetDataDir();
 
             ModProject project = new ModProject
@@ -175,7 +177,8 @@ namespace SkySwordKill.NextEditor.Mod
                 AlchemyElement = ModAlchemyElementData.Load(dataDir).Select(pair => pair.Value).ToList(),
                 Comprehension = ModComprehensionData.Load(dataDir).Select(pair => pair.Value).ToList(),
                 ComprehensionPhase = ModComprehensionPhaseData.Load(dataDir).Select(pair => pair.Value).ToList(),
-                SkillData = ModSkillData.Load(dataDir)
+                SkillData = ModSkillData.Load(dataDir),
+                SkillSeidDataGroup = ModSkillSeidDataGroup.Load(dataDir, ModEditorManager.I.SkillSeidMetas)
             };
 
             project.CreateAvatarData.ModSort();
@@ -213,6 +216,7 @@ namespace SkySwordKill.NextEditor.Mod
             ModComprehensionData.Save(config.GetDataDir(), project.Comprehension.ToDictionary(data => data.Id.ToString()));
             ModComprehensionPhaseData.Save(config.GetDataDir(), project.ComprehensionPhase.ToDictionary(data => data.Id.ToString()));
             ModSkillData.Save(config.GetDataDir(), project.SkillData);
+            ModSkillSeidDataGroup.Save(config.GetDataDir(), project.SkillSeidDataGroup);
         }
     }
 }

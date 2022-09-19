@@ -1,6 +1,6 @@
-﻿using SkySwordKill.NextEditor.Mod;
+﻿using SkySwordKill.NextModEditor.Mod;
 
-namespace SkySwordKill.NextEditor.Event
+namespace SkySwordKill.NextModEditor.Event
 {
     public class LoadModProjectEventArgs : EventArgs
     {

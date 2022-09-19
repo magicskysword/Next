@@ -4,11 +4,11 @@ using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.Next.FGUI.Dialog;
-using SkySwordKill.NextEditor.Mod;
-using SkySwordKill.NextEditor.PanelProject;
 using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextModEditor.Mod;
+using SkySwordKill.NextModEditor.PanelProject;
 
-namespace SkySwordKill.NextEditor.Panel
+namespace SkySwordKill.NextModEditor.Panel
 {
     public class WindowCreateWorkshopModDialog : WindowDialogBase
     {

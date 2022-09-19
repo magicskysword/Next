@@ -54,10 +54,6 @@ namespace SkySwordKill.Next.FGUI
 
         protected override void FreeExternal(NTexture texture)
         {
-            if(texture.nativeTexture != null && texture.nativeTexture.hideFlags == HideFlags.HideAndDontSave)
-            {
-                Object.Destroy(texture.nativeTexture);
-            }
             texture.Dispose();
         }
     }

@@ -15,7 +15,7 @@ using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FCanvas;
 using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.Next.StaticFace;
-using SkySwordKill.NextEditor.Mod;
+using SkySwordKill.NextModEditor.Mod;
 using UnityEngine.SceneManagement;
 
 namespace SkySwordKill.Next.Mod
@@ -70,16 +70,34 @@ namespace SkySwordKill.Next.Mod
         public static void GenerateBaseData(Action onComplete = null)
         {
             WindowWaitDialog.CreateDialog("提示", "正在导出数据...", 1f,
-                () =>
+                context =>
                 {
-                    GenerateBaseDataWithoutGUI();
-                }, 
-                () =>
-                {
-                    WindowConfirmDialog.CreateDialog("提示", "数据导出成功！", false, () =>
+                    try
                     {
-                        onComplete?.Invoke();
-                    });
+                        GenerateBaseDataWithoutGUI();
+                    }
+                    catch (Exception e)
+                    {
+                        Main.LogError(e);
+                        context.Exception = e;
+                    }
+                }, 
+                context =>
+                {
+                    if (context.Exception != null)
+                    {
+                        WindowConfirmDialog.CreateDialog("提示", $"数据导出失败！错误信息：\n{context.Exception}", false, () =>
+                        {
+                            onComplete?.Invoke();
+                        });
+                    }
+                    else
+                    {
+                        WindowConfirmDialog.CreateDialog("提示", "数据导出成功！", false, () =>
+                        {
+                            onComplete?.Invoke();
+                        });
+                    }
                 });
         }
 

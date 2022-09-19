@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SkySwordKill.NextEditor.Boot
+namespace SkySwordKill.NextModEditor.Boot
 {
     public class Bootstrap : MonoBehaviour
     {

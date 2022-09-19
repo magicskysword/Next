@@ -4,14 +4,22 @@ using SkySwordKill.NextFGUI.NextCore;
 
 namespace SkySwordKill.Next.FGUI.Dialog
 {
+    public class WaitContext
+    {
+        public object Data { get; set; }
+        public string Message { get; set; }
+        public Exception Exception { get; set; }
+    }
+    
     public class WindowWaitDialog : WindowDialogBase
     {
         private string _title;
         private string _showText;
-        private Action _onWait;
-        private Action<Action> _onWaitComplete;
-        private Action _onComplete;
+        private Action<WaitContext> _onWait;
+        private Action<Action, WaitContext> _onWaitAsync;
+        private Action<WaitContext> _onComplete;
         private float _hideDelay;
+        private WaitContext _context = new WaitContext();
 
         private WindowWaitDialog() : base("NextCore", "WinWaitDialog")
         {
@@ -26,7 +34,7 @@ namespace SkySwordKill.Next.FGUI.Dialog
         /// <param name="onWait"></param>
         /// <param name="onComplete"></param>
         /// <returns></returns>
-        public static WindowWaitDialog CreateDialog(string title,string showText,float hideDelay = 1f,Action onWait = null,Action onComplete = null)
+        public static WindowWaitDialog CreateDialog(string title,string showText,float hideDelay = 1f,Action<WaitContext> onWait = null,Action<WaitContext> onComplete = null)
         {
             var window = new WindowWaitDialog();
             window._title = title;
@@ -48,12 +56,13 @@ namespace SkySwordKill.Next.FGUI.Dialog
         /// <param name="onWaitComplete"></param>
         /// <param name="onComplete"></param>
         /// <returns></returns>
-        public static WindowWaitDialog CreateDialog(string title,string showText,float hideDelay = 1f,Action<Action> onWaitComplete = null,Action onComplete = null)
+        public static WindowWaitDialog CreateDialogAsync(string title,string showText,float hideDelay = 1f,
+            Action<Action, WaitContext> onWaitComplete = null,Action<WaitContext> onComplete = null)
         {
             var window = new WindowWaitDialog();
             window._title = title;
             window._showText = showText;
-            window._onWaitComplete = onWaitComplete;
+            window._onWaitAsync = onWaitComplete;
             window._onComplete = onComplete;
             window._hideDelay = hideDelay;
             window.Show();
@@ -78,16 +87,16 @@ namespace SkySwordKill.Next.FGUI.Dialog
 
         private void OnWait()
         {
-            if (_onWaitComplete != null)
+            if (_onWaitAsync != null)
             {
-                _onWaitComplete.Invoke(() =>
+                _onWaitAsync.Invoke(() =>
                 {
                     Timers.inst.Add(_hideDelay / 2f, 1, _ => Hide());
-                });
+                }, _context);
             }
             else
             {
-                _onWait?.Invoke();
+                _onWait?.Invoke(_context);
                 Timers.inst.Add(_hideDelay / 2f, 1, _ => Hide());
             }
         }
@@ -95,7 +104,7 @@ namespace SkySwordKill.Next.FGUI.Dialog
         protected override void OnHide()
         {
             base.OnHide();
-            _onComplete?.Invoke();
+            _onComplete?.Invoke(_context);
         }
     }
 }

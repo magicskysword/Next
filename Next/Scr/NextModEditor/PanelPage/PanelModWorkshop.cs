@@ -1,10 +1,10 @@
 ﻿using FairyGUI;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI.Component;
-using SkySwordKill.NextEditor.Mod;
 using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextModEditor.Mod;
 
-namespace SkySwordKill.NextEditor.PanelPage
+namespace SkySwordKill.NextModEditor.PanelPage
 {
     public class PanelModWorkshop : PanelPageBase
     {

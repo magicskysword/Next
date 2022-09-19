@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using SkySwordKill.Next;
 
 namespace SkySwordKill.NextModEditor.Mod.Data
 {
     public class ModSeidData : IModData
     {
         public int Id { get; set; }
-        public Dictionary<string, ModSeidToken> DataList { get; set; } = new Dictionary<string, ModSeidToken>();
+        public Dictionary<string, ModSeidToken> DataDic { get; set; } = new Dictionary<string, ModSeidToken>();
 
         public static ModSeidData LoadSeidData(ModSeidMeta meta, JObject jObject)
         {
             var data = new ModSeidData();
-            data.Id = jObject["id"].ToObject<int>();
+            data.Id = jObject[meta.IDName].ToObject<int>();
             foreach (var seidProperty in meta.Properties)
             {
                 JToken token = null;
@@ -22,7 +23,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
                         var sInt = new ModSInt();
                         if (jObject.TryGetValue(seidProperty.ID, out token))
                             sInt.Value = token.ToObject<int>();
-                        data.DataList.Add(seidProperty.ID,sInt);
+                        data.DataDic.Add(seidProperty.ID,sInt);
                         break;
                     case ModSeidPropertyType.IntArray:
                         var sIntArray = new ModSIntArray();
@@ -33,19 +34,19 @@ namespace SkySwordKill.NextModEditor.Mod.Data
                                 sIntArray.Value.Add(item.ToObject<int>());
                             }
                         }
-                        data.DataList.Add(seidProperty.ID,sIntArray);
+                        data.DataDic.Add(seidProperty.ID,sIntArray);
                         break;
                     case ModSeidPropertyType.Float:
                         var sFloat = new ModSFloat();
                         if (jObject.TryGetValue(seidProperty.ID, out token))
                             sFloat.Value = token.ToObject<float>();
-                        data.DataList.Add(seidProperty.ID,sFloat);
+                        data.DataDic.Add(seidProperty.ID,sFloat);
                         break;
                     case ModSeidPropertyType.String:
                         var sString = new ModSString();
                         if (jObject.TryGetValue(seidProperty.ID, out token))
                             sString.Value = token.ToObject<string>();
-                        data.DataList.Add(seidProperty.ID,sString);
+                        data.DataDic.Add(seidProperty.ID,sString);
                         break;
                 }
             }
@@ -55,7 +56,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
 
         public T GetToken<T>(string dataId) where T : ModSeidToken
         {
-            return DataList[dataId] as T;
+            return DataDic[dataId] as T;
         }
 
         public static ModSeidData CreateSeidData(int ID,ModSeidMeta meta)
@@ -68,19 +69,19 @@ namespace SkySwordKill.NextModEditor.Mod.Data
                 {
                     case ModSeidPropertyType.Int:
                         var sInt = new ModSInt();
-                        data.DataList.Add(seidProperty.ID,sInt);
+                        data.DataDic.Add(seidProperty.ID,sInt);
                         break;
                     case ModSeidPropertyType.IntArray:
                         var sIntArray = new ModSIntArray();
-                        data.DataList.Add(seidProperty.ID,sIntArray);
+                        data.DataDic.Add(seidProperty.ID,sIntArray);
                         break;
                     case ModSeidPropertyType.Float:
                         var sFloat = new ModSFloat();
-                        data.DataList.Add(seidProperty.ID,sFloat);
+                        data.DataDic.Add(seidProperty.ID,sFloat);
                         break;
                     case ModSeidPropertyType.String:
                         var sString = new ModSString();
-                        data.DataList.Add(seidProperty.ID,sString);
+                        data.DataDic.Add(seidProperty.ID,sString);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -116,6 +117,18 @@ namespace SkySwordKill.NextModEditor.Mod.Data
             }
 
             return data;
+        }
+
+        public void SetValue(string key, int data)
+        {
+            if (DataDic.TryGetValue(key, out var token) && token is ModSInt sInt)
+            {
+                sInt.Value = data;
+            }
+            else
+            {
+                Main.LogError($"无法将Seid：{Id}的{key}设置为{data}，因为该属性不存在或者类型不匹配");
+            }
         }
     }
 }

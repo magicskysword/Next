@@ -10,7 +10,7 @@
                 "Type": "Int",
                 "Desc": "X 神通唯一ID",
                 "SpecialDrawer": [
-                    "SkillDrawer"
+                    "SkillPKDrawer"
                 ]
             }
         ]
@@ -154,7 +154,7 @@
             {
                 "ID": "value1",
                 "Type": "IntArray",
-                "Desc": "X BuffID 数组",
+                "Desc": "X BuffID[数组]",
                 "SpecialDrawer": [
                     "BuffArrayDrawer"
                 ]
@@ -162,7 +162,7 @@
             {
                 "ID": "value2",
                 "Type": "IntArray",
-                "Desc": "Y Buff层数 数组"
+                "Desc": "Y Buff层数[数组]"
             }
         ]
     },
@@ -419,7 +419,7 @@
                 "Type": "Int",
                 "Desc": "X 神通唯一ID",
                 "SpecialDrawer": [
-                    "SkillDrawer"
+                    "SkillPKDrawer"
                 ]
             },
             {

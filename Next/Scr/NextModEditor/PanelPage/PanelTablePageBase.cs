@@ -5,12 +5,12 @@ using SkySwordKill.Next;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.Next.FGUI.Dialog;
-using SkySwordKill.NextEditor.Mod;
 using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextModEditor.Mod;
 using SkySwordKill.NextModEditor.Mod.Data;
 using UnityEngine;
 
-namespace SkySwordKill.NextEditor.PanelPage
+namespace SkySwordKill.NextModEditor.PanelPage
 {
     public class ModDataTableDataList<T> : TableDataList<T> where T : IModData, new()
     {
@@ -345,8 +345,14 @@ namespace SkySwordKill.NextEditor.PanelPage
             menu.AddItem("复制", () => OnCopy(modData)).enabled = CanCopy(modData);
             menu.AddItem("粘贴", OnClickPaste).enabled = Editable && CanPaste(DataClipboard.CurCopyData);
             menu.AddItem("另存为", OnClickPasteAsNew).enabled = Editable && CanPaste(DataClipboard.CurCopyData);
+            OnBuildCustomPopupMenu(menu, modData);
             menu.AddItem("删除", () => TryRemoveData(modData)).enabled = Editable && modData != null;
             return menu;
+        }
+
+        protected virtual void OnBuildCustomPopupMenu(PopupMenu menu, T modData)
+        {
+            
         }
 
         private void InspectItem(int index)
@@ -442,7 +448,7 @@ namespace SkySwordKill.NextEditor.PanelPage
 
         protected void TryRemoveData(T modData)
         {
-            WindowConfirmDialog.CreateDialog("提示", $"即将删除数据【{OnGetDataName(modData)}】，删除后Seid数据无法恢复，是否确认？", true, () =>
+            WindowConfirmDialog.CreateDialog("提示", $"即将删除数据【{OnGetDataName(modData)}】，是否确认？", true, () =>
             {
                 this.Record(new RemoveDataUndoCommand(
                         modData,

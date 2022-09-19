@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI.Component;
-using SkySwordKill.NextEditor.Mod;
 using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextModEditor.Mod;
 using SkySwordKill.NextModEditor.Mod.Data;
 
-namespace SkySwordKill.NextEditor.PanelPage
+namespace SkySwordKill.NextModEditor.PanelPage
 {
     public class PanelTableModAffixDataPage : PanelTablePageBase<ModAffixData>
     {

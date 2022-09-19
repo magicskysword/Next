@@ -1,4 +1,4 @@
-﻿namespace SkySwordKill.NextEditor.Event
+﻿namespace SkySwordKill.NextModEditor.Event
 {
     public interface IEventArgs
     {

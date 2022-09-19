@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using SkySwordKill.Next.FGUI.Component;
-using SkySwordKill.NextEditor.Mod;
+using SkySwordKill.NextModEditor.Mod;
 
-namespace SkySwordKill.NextEditor.PanelProject
+namespace SkySwordKill.NextModEditor.PanelProject
 {
     public class ProjectTreeModProject : ProjectTreeFolder
     {
@@ -24,7 +24,7 @@ namespace SkySwordKill.NextEditor.PanelProject
             Children.Add(new ProjectTreeItemModAffixData(Mod, Project));
             Children.Add(new ProjectTreeItemModCreateAvatarData(Mod, Project));
             Children.Add(new ProjectTreeItemModItemData(Mod, Project));
-            //Children.Add(new ProjectTreeItemModSkillData(Mod, Project));
+            Children.Add(new ProjectTreeItemModSkillData(Mod, Project));
             Children.Add(new ProjectTreeItemModBuffData(Mod, Project));
         }
     }

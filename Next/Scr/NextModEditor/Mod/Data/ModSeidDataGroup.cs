@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SkySwordKill.NextEditor.Mod;
+using SkySwordKill.NextModEditor.Mod;
 
 namespace SkySwordKill.NextModEditor.Mod.Data
 {

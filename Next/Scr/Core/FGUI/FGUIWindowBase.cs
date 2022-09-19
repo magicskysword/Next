@@ -3,7 +3,7 @@ using FairyGUI;
 using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.Next.Mod;
 using SkySwordKill.Next.XiaoYeGUI;
-using SkySwordKill.NextEditor.Mod;
+using SkySwordKill.NextModEditor.Mod;
 using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI

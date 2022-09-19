@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace SkySwordKill.NextEditor.Mod
+namespace SkySwordKill.NextModEditor.Mod
 {
     [Serializable]
     public class ModException : Exception

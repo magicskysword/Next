@@ -1,13 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FairyGUI;
+using HarmonyLib;
 using SkySwordKill.Next.Extension;
+using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
-using SkySwordKill.NextEditor.Mod;
+using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextModEditor.Mod;
 using SkySwordKill.NextModEditor.Mod.Data;
 
-namespace SkySwordKill.NextEditor.PanelPage
+namespace SkySwordKill.NextModEditor.PanelPage
 {
     public class PanelTableModSkillDataPage : PanelTablePageBase<ModSkillData>
     {
@@ -18,13 +22,7 @@ namespace SkySwordKill.NextEditor.PanelPage
         public override ModDataTableDataList<ModSkillData> ModDataTableDataList { get; set; }
         protected override void OnInit()
         {
-            ModDataTableDataList = new ModDataTableDataList<ModSkillData>(Project.SkillData)
-            {
-                OnRemoveItem = data =>
-                {
-                    
-                }
-            };
+            ModDataTableDataList = new ModDataTableDataList<ModSkillData>(Project.SkillData);
             
             AddTableHeader(new TableInfo(
                 "ID".I18NTodo(),
@@ -36,17 +34,17 @@ namespace SkySwordKill.NextEditor.PanelPage
                 }));
             
             AddTableHeader(new TableInfo(
-                "神通ID".I18NTodo(),
+                "神通唯一ID".I18NTodo(),
                 TableInfo.DEFAULT_GRID_WIDTH,
                 data =>
                 {
                     var skill = (ModSkillData)data;
-                    return $"{skill.SkillId.ToString()}(lv.{skill.SkillLv})";
+                    return $"{skill.SkillPkId.ToString()}(lv.{skill.SkillLv})";
                 }));
             
             AddTableHeader(new TableInfo(
-                "等阶".I18NTodo(),
-                TableInfo.DEFAULT_GRID_WIDTH * 2,
+                "品阶".I18NTodo(),
+                TableInfo.DEFAULT_GRID_WIDTH,
                 data =>
                 {
                     var skill = (ModSkillData)data;
@@ -64,7 +62,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             
             AddTableHeader(new TableInfo(
                 "描述".I18NTodo(),
-                TableInfo.DEFAULT_GRID_WIDTH * 2,
+                TableInfo.DEFAULT_GRID_WIDTH * 3,
                 data =>
                 {
                     var skill = (ModSkillData)data;
@@ -104,16 +102,43 @@ namespace SkySwordKill.NextEditor.PanelPage
             );
 
             AddDrawer(new CtlIntPropertyDrawer(
-                    "神通ID".I18NTodo(),
-                    value => data.SkillId = value,
-                    () => data.SkillId
+                    "神通唯一ID".I18NTodo(),
+                    value => data.SkillPkId = value,
+                    () => data.SkillPkId
                 )
             );
+            
+            AddDrawer(new CtlIntPropertyDrawer(
+                    "图标".I18NTodo(),
+                    value => data.Icon = value,
+                    () => data.Icon)
+                {
+                    OnChanged = Inspector.Refresh
+                }
+            );
+            
+            AddDrawer(new CtlIconPreviewDrawer(() => Mod.GetSkillIconUrl(data)));
 
             AddDrawer(new CtlIntPropertyDrawer(
                     "神通等级".I18NTodo(),
                     value => data.SkillLv = value,
                     () => data.SkillLv
+                )
+            );
+            
+            AddDrawer(new CtlDropdownPropertyDrawer(
+                    "神通品阶".I18NTodo(),
+                    () => ModEditorManager.I.SkillDataQuality.Select(s => $"{s.Id} : {s.Desc}"),
+                    index => data.Quality = ModEditorManager.I.SkillDataQuality[index].Id,
+                    () => ModEditorManager.I.SkillDataQuality.FindIndex(s => s.Id == data.Quality)
+                )
+            );
+            
+            AddDrawer(new CtlDropdownPropertyDrawer(
+                    "神通品质".I18NTodo(),
+                    () => ModEditorManager.I.SkillDataPhase.Select(s => $"{s.Id} : {s.Desc}"),
+                    index => data.Phase = ModEditorManager.I.SkillDataPhase[index].Id,
+                    () => ModEditorManager.I.SkillDataPhase.FindIndex(s => s.Id == data.Phase)
                 )
             );
 
@@ -138,6 +163,143 @@ namespace SkySwordKill.NextEditor.PanelPage
                 )
             );
 
+            AddDrawer(new CtlIntArrayBindTablePropertyDrawer(
+                    "攻击类型".I18NTodo(),
+                    value => data.AttackTypeList = value,
+                    () => data.AttackTypeList,
+                    value =>
+                    {
+                        var sb = new StringBuilder();
+                        for (var index = 0; index < value.Count; index++)
+                        {
+                            var id = value[index];
+                            var attackType = ModEditorManager.I.AttackTypes.Find(type => type.Id == id);
+                            if (attackType != null)
+                            {
+                                sb.Append($"【{attackType.Id}】{attackType.Desc}");
+                            }
+                            else
+                            {
+                                sb.Append($"【{id}】？");
+                            }
+
+                            if (index != value.Count - 1)
+                                sb.Append("\n");
+                        }
+
+                        return sb.ToString();
+                    },
+                    new List<TableInfo>()
+                    {
+                        new TableInfo(
+                            "ID".I18NTodo(),
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            value => ((ModAttackType)value).Id.ToString()
+                        ),
+                        new TableInfo(
+                            "类型".I18NTodo(),
+                            TableInfo.DEFAULT_GRID_WIDTH * 1.5f,
+                            value => ((ModAttackType)value).Desc
+                        ),
+                    },
+                    () => new List<IModData>(ModEditorManager.I.AttackTypes)
+                )
+            );
+
+            AddDrawer(new CtlIntPropertyDrawer(
+                    "基础伤害".I18NTodo(),
+                    value => data.BaseDamage = value,
+                    () => data.BaseDamage
+                )
+            );
+
+            AddDrawer(new CtlDropdownPropertyDrawer(
+                "攻击目标",
+                () => ModEditorManager.I.SkillDataAttackScriptTypes.Select(s => $"{s.Id} : {s.Desc}"),
+                index => data.AttackScript = ModEditorManager.I.SkillDataAttackScriptTypes[index].Id,
+                () => ModEditorManager.I.SkillDataAttackScriptTypes.FindIndex(s => s.Id == data.AttackScript)
+                )
+            );
+            
+            AddDrawer(new CtlIntArrayPropertyDrawer(
+                "同系灵气消耗[数组]".I18NTodo(),
+                value => data.SkillSameCostNumList = value,
+                () => data.SkillSameCostNumList
+                )
+            );
+            
+            AddDrawer(new CtlIntArrayBindTablePropertyDrawer(
+                    "灵气消耗类型[数组]".I18NTodo(),
+                    value => data.SkillCostTypeList = value,
+                    () => data.SkillCostTypeList,
+                    value =>
+                    {
+                        var sb = new StringBuilder();
+                        for (var index = 0; index < value.Count; index++)
+                        {
+                            var id = value[index];
+                            var elementType = ModEditorManager.I.ElementTypes.Find(type => type.Id == id);
+                            if (elementType != null)
+                            {
+                                sb.Append($"【{elementType.Id}】{elementType.Desc}");
+                            }
+                            else
+                            {
+                                sb.Append($"【{id}】？");
+                            }
+
+                            if (index != value.Count - 1)
+                                sb.Append("\n");
+                        }
+
+                        return sb.ToString();
+                    },
+                    new List<TableInfo>()
+                    {
+                        new TableInfo(
+                            "ID".I18NTodo(),
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            value => ((ModElementType)value).Id.ToString()
+                        ),
+                        new TableInfo(
+                            "类型".I18NTodo(),
+                            TableInfo.DEFAULT_GRID_WIDTH * 1.5f,
+                            value => ((ModElementType)value).Desc
+                        ),
+                    },
+                    () => new List<IModData>(ModEditorManager.I.ElementTypes)
+                )
+            );
+            
+            AddDrawer(new CtlIntArrayPropertyDrawer(
+                    "灵气消耗数量[数组]".I18NTodo(),
+                    value => data.SkillCostList = value,
+                    () => data.SkillCostList
+                )
+            );
+            
+            AddDrawer(new CtlSeidDataPropertyDrawer(
+                "特性",
+                data.Id, 
+                data.SeidList,
+                Mod,
+                Project.SkillSeidDataGroup,
+                ModEditorManager.I.SkillSeidMetas,
+                seidId =>
+                {
+                    if (ModEditorManager.I.SkillSeidMetas.TryGetValue(seidId, out var seidData))
+                        return $"{seidId}  {seidData.Name}";
+                    return $"{seidId}  ???";
+                })
+            );
+            
+            AddDrawer(new CtlCheckboxPropertyDrawer(
+                "斗法可用".I18NTodo(),
+                value => data.Battle = value ? 1 : 0,
+                () => data.Battle == 1
+                )
+            );
+
             AddDrawer(new CtlStringAreaPropertyDrawer(
                     "描述".I18NTodo(),
                     value => data.Desc = value,
@@ -159,48 +321,6 @@ namespace SkySwordKill.NextEditor.PanelPage
                     () => ModEditorManager.I.SkillDataConsultTypes.Select(type => $"{type.Id} : {type.Desc}"),
                     index => data.ConsultType = ModEditorManager.I.SkillDataConsultTypes[index].Id,
                     () => ModEditorManager.I.SkillDataConsultTypes.FindIndex(type => type.Id == data.ConsultType)
-                )
-            );
-            
-            AddDrawer(new CtlIntArrayBindTablePropertyDrawer(
-                "攻击类型".I18NTodo(),
-                value => data.AttackTypeList = value,
-                () => data.AttackTypeList,
-                value =>
-                {
-                    var sb = new StringBuilder();
-                    for (var index = 0; index < value.Count; index++)
-                    {
-                        var id = value[index];
-                        var attackType = ModEditorManager.I.AttackTypes.Find(type => type.Id == id);
-                        if (attackType != null)
-                        {
-                            sb.Append($"【{attackType.Id}】{attackType.Desc}");
-                        }
-                        else
-                        {
-                            sb.Append($"【{id}】？");
-                        }
-                        if(index != value.Count - 1)
-                            sb.Append("\n");
-                    }
-
-                    return sb.ToString();
-                },
-                new List<TableInfo>()
-                {
-                    new TableInfo(
-                        "ID".I18NTodo(),
-                        TableInfo.DEFAULT_GRID_WIDTH,
-                        value => ((ModAttackType)value).Id.ToString()
-                        ),
-                    new TableInfo(
-                        "类型".I18NTodo(),
-                        TableInfo.DEFAULT_GRID_WIDTH * 1.5f,
-                        value => ((ModAttackType)value).Desc
-                    ),
-                },
-                () => new List<IModData>(ModEditorManager.I.AttackTypes)
                 )
             );
 
@@ -231,6 +351,107 @@ namespace SkySwordKill.NextEditor.PanelPage
             return $"{data.Id} {data.Name}";
         }
 
+        protected override void OnBuildCustomPopupMenu(PopupMenu menu, ModSkillData modData)
+        {
+            menu.AddSeperator();
+            menu.AddItem("生成神通组".I18NTodo(), () => OnGenerateSkillGroup(modData))
+                .enabled = Editable && modData != null;
+            menu.AddItem("生成神通书籍".I18NTodo(), () => OnGenerateSkillBook(modData))
+                .enabled = Editable && modData != null;
+            menu.AddSeperator();
+        }
+
+        private void OnGenerateSkillBook(ModSkillData modData)
+        {
+            if(!Editable)
+                return;
+            
+            if(modData == null)
+                return;
+
+            var itemId = modData.SkillPkId + 3000;
+            if (Project.ItemData.HasId(itemId))
+            {
+                WindowConfirmDialog.CreateDialog("提示", $"ID为{itemId}的物品已经存在！", false);
+                return;
+            }
+            
+            WindowConfirmDialog.CreateDialog("提示", $"是否创建ID为{itemId}的神通书籍？",true, 
+                () =>
+            {
+                var itemData = new ModItemData();
+                itemData.Id = itemId;
+                itemData.Icon = 3001;
+                itemData.Name = modData.Name;
+                itemData.Desc = modData.Desc;
+                itemData.Quality = modData.Quality;
+                itemData.Phase = modData.Phase;
+                itemData.ItemType = 3;
+                itemData.MaxStack = 1;
+                itemData.ShopType = 99;
+                itemData.StudyCostTime = ((modData.Quality - 1) * 3 + modData.Phase) * 12;
+                itemData.SpecialType = 1;
+                itemData.SeidList.Add(1);
+                Project.ItemData.Add(itemData);
+            
+                var seid = Project.ItemUseSeidDataGroup.GetOrCreateSeid(itemData.Id, 1);
+                seid.SetValue("value1", modData.SkillPkId);
+            });
+        }
+
+        private void OnGenerateSkillGroup(ModSkillData modData)
+        {
+            if(!Editable)
+                return;
+            
+            if(modData == null)
+                return;
+            
+            if (modData.SkillLv != 1)
+            {
+                WindowConfirmDialog.CreateDialog("提示", "只有神通等级为1的神通才能生成神通组".I18NTodo(), false);
+                return;
+            }
+
+            for (int i = 1; i < 5; i++)
+            {
+                var id = modData.Id + i;
+                if (ModDataTableDataList.HasId(id))
+                {
+                    WindowConfirmDialog.CreateDialog("提示", 
+                        $"已经存在id为{id}的神通，请确保从{modData.Id + 1} ~ {modData.Id + 5}范围没有相应技能。".I18NTodo(), false);
+                    return;
+                }
+            }
+            
+            WindowConfirmDialog.CreateDialog("提示", 
+                $"是否生成从{modData.Id} ~ {modData.Id + 5}的技能组？".I18NTodo(), true, () =>
+                {
+                    var copyData = GetCopyData(modData);
+                    if (!modData.Name.EndsWith("1"))
+                    {
+                        modData.Name += "1";
+                    }
+                    for (int i = 1; i < 5; i++)
+                    {
+                        var id = modData.Id + i;
+                        var tagLv = i + 1;
+                        this.Record(new AddDataUndoCommand(
+                            () =>
+                            {
+                                var tagData = OnPasteData(copyData, id);
+                                tagData.SkillLv = tagLv;
+                                tagData.Name = modData.Name.Substring(0, modData.Name.Length - 1) + $"{tagLv}";
+                                return tagData;
+                            },
+                            data => AddData((ModSkillData)data),
+                            data => RemoveData(data.Id)));
+                        
+                    }
+                    Refresh();
+                });
+        }
+
         protected override ModSkillData OnPasteData(CopyData copyData, int targetId)
         {
             var oldId = copyData.Data.Id;
@@ -238,6 +459,7 @@ namespace SkySwordKill.NextEditor.PanelPage
             var skillData = json.ToObject<ModSkillData>();
             skillData.Id = targetId;
             Project.SkillData.Add(skillData);
+            Project.SkillSeidDataGroup.CopyAllSeid(copyData.Project.SkillSeidDataGroup, oldId, targetId);
             Project.SkillData.ModSort();
             return skillData;
         }

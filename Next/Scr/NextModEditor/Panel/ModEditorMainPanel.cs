@@ -2,22 +2,18 @@
 using System.Collections.Generic;
 using System.IO;
 using FairyGUI;
-using script.Steam;
 using SkySwordKill.Next;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.Next.Mod;
-using SkySwordKill.Next.Utils;
-using SkySwordKill.NextEditor.Event;
-using SkySwordKill.NextEditor.Mod;
-using SkySwordKill.NextEditor.PanelPage;
-using SkySwordKill.NextEditor.PanelProject;
 using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextModEditor.Mod;
+using SkySwordKill.NextModEditor.PanelProject;
 using UnityEngine;
 
-namespace SkySwordKill.NextEditor.Panel
+namespace SkySwordKill.NextModEditor.Panel
 {
     public class ModEditorMainPanel : FGUIPanelBase
     {
@@ -51,18 +47,39 @@ namespace SkySwordKill.NextEditor.Panel
             base.OnShown();
 
             WindowWaitDialog.CreateDialog("提示", "正在初始化编辑器...", 0.5f,
-                () =>
+                context =>
                 {
                     // 预加载管理器
-                    ModEditorManager.I.Init();
-                }, 
-                () =>
-                {
-                    if (!Directory.Exists(Main.PathExportOutputDir.Value))
+                    try
                     {
-                        WindowConfirmDialog.CreateDialog("提示", "没有找到游戏数据导出目录，缺失导出数据会影响编辑器使用，是否导出游戏数据？", true,
-                            () => ModManager.GenerateBaseData());
+                        ModEditorManager.I.Init();
+                        ModEditorManager.I.LoadDefaultData();
                     }
+                    catch (Exception e)
+                    {
+                        Main.LogError(e);
+                        context.Exception = e;
+                    }
+                }, 
+                context =>
+                {
+                    if (context.Exception != null)
+                    {
+                        WindowConfirmDialog.CreateDialog("提示", $"初始化失败！错误信息：\n{context.Exception}", false);
+                    }
+                    else
+                    {
+                        if (!Directory.Exists(Main.PathExportOutputDir.Value))
+                        {
+                            WindowConfirmDialog.CreateDialog("提示", "没有找到游戏数据导出目录，缺失导出数据会影响编辑器使用，是否导出游戏数据？", true,
+                                () =>
+                                {
+                                    ModManager.GenerateBaseData();
+                                    ModEditorManager.I.LoadDefaultData();
+                                });
+                        }
+                    }
+                    
                 });
         }
 
@@ -268,6 +285,7 @@ namespace SkySwordKill.NextEditor.Panel
             catch (Exception e)
             {
                 Main.LogError(e);
+                WindowConfirmDialog.CreateDialog("工程打开失败", "打开工程失败，请检查日志", false);
             }
         }
         
@@ -283,25 +301,36 @@ namespace SkySwordKill.NextEditor.Panel
         {
             if(CurMod == null)
                 return;
+            //
+            // var dialog = new FolderPicker();
+            // dialog.Title = "导出工坊工程";
+            // dialog.InputPath = Main.PathLocalModsDir.Value;
+            // if (dialog.ShowDialog(IntPtr.Zero) == true)
+            // {
+            //     
+            // }
             
-            var dialog = new FolderPicker();
-            dialog.Title = "导出工坊工程";
-            dialog.InputPath = Main.PathLocalModsDir.Value;
-            if (dialog.ShowDialog(IntPtr.Zero) == true)
+            var folderPicker = new FolderPicker();
+            folderPicker.Title = "Mod选择文件夹";
+            bool? flag = folderPicker.ShowDialog(IntPtr.Zero, false);
+            if (flag == null || !flag.Value)
             {
-                OnSaveMod(CurMod, dialog.ResultPath);
+                return;
             }
+            string resultPath = folderPicker.ResultPath;
+            OnSaveMod(CurMod, resultPath);
+            Main.LogInfo("Mod导出路径：" + resultPath);
         }
 
         private void OnOpenMod(ModWorkshop mod)
         {
             Clear();
-            
+
             CurMod = mod;
             CurMod.LoadProjects();
             
             TreeProject.AddProject(new ProjectTreeModWorkshop(CurMod));
-            TreeProject.AddProject(new ProjectTreeModProjectReferenced(CurMod, ModEditorManager.I.CreateReferencedProject()));
+            TreeProject.AddProject(new ProjectTreeModProjectReferenced(CurMod, ModEditorManager.I.ReferenceProject));
             foreach (var project in mod.Projects)
             {
                 var modProjNode = new ProjectTreeModProject(CurMod, project);
@@ -313,30 +342,27 @@ namespace SkySwordKill.NextEditor.Panel
 
         private void OnSaveMod(ModWorkshop mod, string path)
         {
-            var isSuccess = false;
-            Exception exception = null;
             WindowWaitDialog.CreateDialog("提示", "正在保存Mod...", 0.5f,
-                () =>
+                context =>
                 {
                     try
                     {
                         ModEditorManager.I.SaveWorkshop(mod, path);
-                        isSuccess = true;
                     }
                     catch (Exception e)
                     {
-                        exception = e;
+                        context.Exception = e;
                     }
-                }, 
-                () =>
+                },
+                context =>
                 {
-                    if (isSuccess)
+                    if (context.Exception != null)
                     {
-                        WindowConfirmDialog.CreateDialog("提示", "保存完毕！", false);
+                        WindowConfirmDialog.CreateDialog("提示", $"Mod保存失败！错误信息：\n{context.Exception}", false);
                     }
                     else
                     {
-                        WindowConfirmDialog.CreateDialog("提示", $"Mod保存失败！错误信息：\n{exception}", false);
+                        WindowConfirmDialog.CreateDialog("提示", "保存完毕！", false);
                     }
                 });
         }

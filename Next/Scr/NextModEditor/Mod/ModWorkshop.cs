@@ -4,7 +4,7 @@ using script.Steam;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.NextModEditor.Mod.Data;
 
-namespace SkySwordKill.NextEditor.Mod
+namespace SkySwordKill.NextModEditor.Mod
 {
     public class ModWorkshop
     {
@@ -144,19 +144,19 @@ namespace SkySwordKill.NextEditor.Mod
             return ModEditorManager.I.ReferenceProject.FindSkill(id);
         }
         
-        public ModSkillData FindSkillBySkillId(int id)
+        public ModSkillData FindSkillBySkillPkId(int id)
         {
             ModSkillData data = null;
             foreach (var project in Projects)
             {
-                data = project.FindSkillBySkillId(id);
+                data = project.FindSkillBySkillPkId(id);
                 if(data != null)
                 {
                     return data;
                 }
             }
             
-            return ModEditorManager.I.ReferenceProject.FindSkillBySkillId(id);
+            return ModEditorManager.I.ReferenceProject.FindSkillBySkillPkId(id);
         }
         
         public ModComprehensionData FindComprehension(int id)
@@ -439,14 +439,24 @@ namespace SkySwordKill.NextEditor.Mod
             return GetImageUrl($"Buff Icon/{buff.Icon}");
         }
         
-        public string GetItemIconUrl(ModItemData item)
+        public string GetItemIconUrl(ModItemData data)
         {
-            if (item.Icon == 0)
+            if (data.Icon == 0)
             {
-                return GetImageUrl($"Item Icon/{item.Id}");
+                return GetImageUrl($"Item Icon/{data.Id}");
             }
             
-            return GetImageUrl($"Item Icon/{item.Icon}");
+            return GetImageUrl($"Item Icon/{data.Icon}");
+        }
+        
+        public string GetSkillIconUrl(ModSkillData data)
+        {
+            if (data.Icon == 0)
+            {
+                return GetImageUrl($"Skill Icon/{data.SkillPkId}");
+            }
+            
+            return GetImageUrl($"Skill Icon/{data.Icon}");
         }
         
         public string GetImageUrl(string resPath)

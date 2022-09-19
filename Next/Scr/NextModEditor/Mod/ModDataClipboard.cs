@@ -1,6 +1,6 @@
 ﻿using SkySwordKill.NextModEditor.Mod.Data;
 
-namespace SkySwordKill.NextEditor.Mod
+namespace SkySwordKill.NextModEditor.Mod
 {
     public class CopyData
     {

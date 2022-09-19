@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SkySwordKill.NextEditor.Mod;
+using SkySwordKill.NextModEditor.Mod;
 
 namespace SkySwordKill.NextFGUI.NextCore
 {

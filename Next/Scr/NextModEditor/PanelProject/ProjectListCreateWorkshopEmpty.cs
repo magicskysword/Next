@@ -4,9 +4,9 @@ using script.Steam;
 using SkySwordKill.Next;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI.Component;
-using SkySwordKill.NextEditor.Mod;
+using SkySwordKill.NextModEditor.Mod;
 
-namespace SkySwordKill.NextEditor.PanelProject
+namespace SkySwordKill.NextModEditor.PanelProject
 {
     public class ProjectListCreateWorkshopEmpty : ProjectListCreateWorkshopItem
     {

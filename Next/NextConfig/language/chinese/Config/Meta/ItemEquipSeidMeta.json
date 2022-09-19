@@ -24,7 +24,7 @@
             {
                 "ID": "value1",
                 "Type": "Int",
-                "Desc": "X 神通唯一ID",
+                "Desc": "X 神通ID",
                 "SpecialDrawer":[
                     "SkillDrawer"
                 ]

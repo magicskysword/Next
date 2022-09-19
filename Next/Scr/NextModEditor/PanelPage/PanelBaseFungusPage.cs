@@ -3,10 +3,10 @@ using System.Linq;
 using FairyGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.Next.FCanvas;
-using SkySwordKill.NextEditor.Mod;
 using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextModEditor.Mod;
 
-namespace SkySwordKill.NextEditor.PanelPage
+namespace SkySwordKill.NextModEditor.PanelPage
 {
     public class PanelBaseFungusPage : PanelPageBase
     {

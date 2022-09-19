@@ -127,7 +127,7 @@ namespace SkySwordKill.Next.Mod
             return $"{Path}/Assets";
         }
         
-        public static ModConfig Load(string dir)
+        public static ModConfig Load(string dir, bool ignoreWarning = false)
         {
             ModConfig modConfig = null;
             int dataVersion;
@@ -146,7 +146,8 @@ namespace SkySwordKill.Next.Mod
             else
             {
                 dataVersion = 1;
-                Main.LogWarning("ModManager.ModConfigDontExist".I18N() + $" dir : {dir}");
+                if(!ignoreWarning)
+                    Main.LogWarning("ModManager.ModConfigDontExist".I18N() + $" dir : {dir}");
             }
 
             modConfig = modConfig ?? new ModConfig();

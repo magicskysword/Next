@@ -145,6 +145,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\DialogSystem\DialogEnvironment.cs" />
     <Compile Include="Scr\Core\DialogSystem\DialogEventData.cs" />
     <Compile Include="Scr\Core\DialogSystem\DialogTriggerData.cs" />
+    <Compile Include="Scr\Core\DialogSystem\IDialogEnvExtension.cs" />
     <Compile Include="Scr\Core\DialogTrigger\OnLoadMapScene.cs" />
     <Compile Include="Scr\Core\FCanvas\Command\Call.cs" />
     <Compile Include="Scr\Core\FCanvas\Command\VariableCondition.cs" />
@@ -219,6 +220,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\IUndoCommand.cs" />
     <Compile Include="Scr\Core\FGUI\IUndoInst.cs" />
     <Compile Include="Scr\Core\FGUI\NextGLoader.cs" />
+    <Compile Include="Scr\Core\FGUI\UndoExtension.cs" />
     <Compile Include="Scr\Core\FGUI\UndoInstManager.cs" />
     <Compile Include="Scr\Core\FGUI\ValueChangedCommand.cs" />
     <Compile Include="Scr\Core\FGUI\WindowDialogBase.cs" />
@@ -395,9 +397,11 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSInt.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSIntArray.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSkillData.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSkillDataAttackScriptType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSkillDataConsultType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSkillDataPhase.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSkillDataQuality.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModSkillSeidDataGroup.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSString.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModTargetType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\IModDataClipboardPage.cs" />

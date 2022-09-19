@@ -14,8 +14,11 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         [JsonProperty("id", Order = 1)]
         public override int Id { get; set; }
         
+        /// <summary>
+        /// 技能唯一ID
+        /// </summary>
         [JsonProperty("Skill_ID", Order = 2)]
-        public int SkillId { get; set; }
+        public int SkillPkId { get; set; }
 
         [JsonProperty("Skill_Lv", Order = 3)]
         public int SkillLv { get; set; } = 1;
@@ -59,7 +62,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         /// SkillSelf（对自己）
         /// </summary>
         [JsonProperty("script", Order = 14)]
-        public string Script { get; set; } = "SkillAttack";
+        public string AttackScript { get; set; } = "SkillAttack";
         
         [JsonProperty("HP", Order = 15)]
         public int BaseDamage { get; set; }
@@ -83,19 +86,19 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         /// 同系灵气消耗
         /// </summary>
         [JsonProperty("skill_SameCastNum", Order = 19)]
-        public List<int> SkillSameCastNumList { get; set; } = new List<int>();
+        public List<int> SkillSameCostNumList { get; set; } = new List<int>();
         
         /// <summary>
         /// 灵气消耗类型
         /// </summary>
         [JsonProperty("skill_CastType", Order = 20)]
-        public List<int> SkillCastTypeList { get; set; } = new List<int>();
+        public List<int> SkillCostTypeList { get; set; } = new List<int>();
         
         /// <summary>
         /// 灵气消耗
         /// </summary>
         [JsonProperty("skill_Cast", Order = 21)]
-        public List<int> SkillCastList { get; set; } = new List<int>();
+        public List<int> SkillCostList { get; set; } = new List<int>();
 
         /// <summary>
         /// 品阶
@@ -110,7 +113,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         public int Phase { get; set; } = 1;
         
         /// <summary>
-        /// 斗法
+        /// 斗法可用
         /// </summary>
         [JsonProperty("DF", Order = 22)]
         public int Battle { get; set; }

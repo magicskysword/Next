@@ -36,6 +36,16 @@ namespace SkySwordKill.Next.DialogSystem
 
         #region 公共方法
 
+        public static IDialogEnvExtension GetEnvExtMethod(string method)
+        {
+            if(_registerEnvMethods.TryGetValue(method, out var ext))
+            {
+                return ext;
+            }
+            
+            return null;
+        }
+        
         public static string AnalysisInlineScript(string text,DialogEnvironment env = null)
         {
             StringBuilder finallyText = new StringBuilder(text);
@@ -572,16 +582,6 @@ namespace SkySwordKill.Next.DialogSystem
             UINPCJiaoHu.Inst.ShowJiaoHuPop();
         }
         
-        
-        #endregion
-
-        #region 私有方法
-
-
-
-        #endregion
-
-
         public static void BindNpc(DialogEnvironment env, int roleID)
         {
             var npc = new UINPCData(roleID);
@@ -591,5 +591,13 @@ namespace SkySwordKill.Next.DialogSystem
             env.roleID = npc.ID;
             env.roleName = npc.Name;
         }
+        
+        #endregion
+
+        #region 私有方法
+
+
+
+        #endregion
     }
 }

@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using JetBrains.Annotations;
 
-namespace SkySwordKill.NextEditor.PanelProject
+namespace SkySwordKill.NextModEditor.PanelProject
 {
     public class CreateWorkshopException : Exception
     {

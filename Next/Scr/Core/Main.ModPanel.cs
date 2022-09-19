@@ -14,7 +14,7 @@ using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.Mod;
 using SkySwordKill.Next.StaticFace;
 using SkySwordKill.Next.XiaoYeGUI;
-using SkySwordKill.NextEditor.Panel;
+using SkySwordKill.NextModEditor.Panel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

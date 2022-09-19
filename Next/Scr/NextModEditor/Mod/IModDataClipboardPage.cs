@@ -1,4 +1,4 @@
-﻿namespace SkySwordKill.NextEditor.Mod
+﻿namespace SkySwordKill.NextModEditor.Mod
 {
     public interface IModDataClipboardPage
     {

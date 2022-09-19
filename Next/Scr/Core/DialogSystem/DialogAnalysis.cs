@@ -31,6 +31,7 @@ namespace SkySwordKill.Next.DialogSystem
         /// 对话注册事件
         /// </summary>
         private static Dictionary<string, IDialogEvent> _registerEvents = new Dictionary<string, IDialogEvent>();
+        private static Dictionary<string, IDialogEnvExtension> _registerEnvMethods = new Dictionary<string, IDialogEnvExtension>();
         
         public static event Action OnDialogComplete;
 
@@ -81,8 +82,16 @@ namespace SkySwordKill.Next.DialogSystem
                     {
                         foreach (var attribute in type.GetCustomAttributes<DialogEventAttribute>())
                         {
-                            var command = attribute.registerCommand;
+                            var command = attribute.RegisterCommand;
                             RegisterCommand(command,Activator.CreateInstance(type) as IDialogEvent);
+                        }
+                    }
+                    else if (typeof(IDialogEnvExtension).IsAssignableFrom(type))
+                    {
+                        foreach (var attribute in type.GetCustomAttributes<DialogEnvExtensionAttribute>())
+                        {
+                            var command = attribute.RegisterMethod;
+                            RegisterEnvMethod(command,Activator.CreateInstance(type) as IDialogEnvExtension);
                         }
                     }
 
@@ -94,11 +103,27 @@ namespace SkySwordKill.Next.DialogSystem
         {
             _registerEvents[command] = cEvent;
         }
+        
+        private static void RegisterEnvMethod(string method, IDialogEnvExtension cExtension)
+        {
+            _registerEnvMethods[method] = cExtension;
+        }
 
+        private static void Evaluator_PreEvaluateFunction(object sender, FunctionPreEvaluationEventArg e)
+        {
+            var ext = GetEnvExtMethod(e.Name);
+            if (ext != null && e.This is DialogEnvironment env)
+            {
+                e.Value = ext.Execute(env, e.Args.ToArray());
+                e.CancelEvaluation = true;
+            }
+        }
+        
         public static ExpressionEvaluator GetEvaluate(DialogEnvironment env)
         {
             CurEvaluator = CurEvaluator ?? new ExpressionEvaluator();
             CurEvaluator.Context = env;
+            CurEvaluator.PreEvaluateFunction += Evaluator_PreEvaluateFunction;
             return CurEvaluator;
         }
 
@@ -109,6 +134,8 @@ namespace SkySwordKill.Next.DialogSystem
             var triggers = DialogTriggerDataDic.Values
                 .Where(triggerData => triggerTypes.Contains(triggerData.Type))
                 .OrderByDescending(triggerData => triggerData.Priority);
+            
+            var triggerSuccess = false;
             foreach (var trigger in triggers)
             {
                 try
@@ -126,6 +153,7 @@ namespace SkySwordKill.Next.DialogSystem
                         {
                             // 队列触发，添加事件
                             StartDialogEvent(trigger.TriggerEvent,newEnv);
+                            triggerSuccess = true;
                         }
                     }
                 }
@@ -135,8 +163,7 @@ namespace SkySwordKill.Next.DialogSystem
                     Main.LogError(e);
                 }
             }
-
-            return false;
+            return triggerSuccess;
         }
 
         public static void StartDialogEvent(string eventID,DialogEnvironment env = null)

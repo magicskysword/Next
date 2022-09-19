@@ -8,6 +8,7 @@
     "ui://028qk31hro2x4e",
     "ui://028qk31hnkvz32",
     "ui://028qk31hdtat4b",
+    "ui://028qk31hfqcb3s",
     "ui://028qk31hd4rw3y",
     "ui://028qk31hnqml3g",
     "ui://028qk31hnkvz2m",
@@ -39,7 +40,7 @@
     "ui://028qk31hq7os0",
     "ui://028qk31hasvv3b"
   ],
-  "libview.firstColumnWidth": 361,
+  "libview.firstColumnWidth": 275,
   "libview.syncEditor": 0,
   "auxline1": true,
   "canvasColor": 10066329,
@@ -85,7 +86,7 @@
     "028qk31h",
     "/Window/"
   ],
-  "doc.activeDoc": "ui://028qk31h7exm3i",
+  "doc.activeDoc": "ui://028qk31hnkvz32",
   "libview.twoColumn": false,
   "auxline2": true,
   "snapToGrid": true,

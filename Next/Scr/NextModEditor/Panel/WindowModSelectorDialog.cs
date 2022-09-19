@@ -8,13 +8,13 @@ using SkySwordKill.Next;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
-using SkySwordKill.NextEditor.Mod;
 using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextModEditor.Mod;
 using Steamworks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SkySwordKill.NextEditor.Panel
+namespace SkySwordKill.NextModEditor.Panel
 {
     [Flags]
     public enum ModFilter

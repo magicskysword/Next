@@ -13,7 +13,7 @@ using SkySwordKill.NextModEditor.Mod.Data;
 using Steamworks;
 using UnityEngine;
 
-namespace SkySwordKill.NextEditor.Mod
+namespace SkySwordKill.NextModEditor.Mod
 {
     public static class ModUtils
     {

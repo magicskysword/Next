@@ -7,11 +7,11 @@ using SkySwordKill.Next;
 using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
-using SkySwordKill.NextEditor.Mod;
 using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextModEditor.Mod;
 using SkySwordKill.NextModEditor.Mod.Data;
 
-namespace SkySwordKill.NextEditor.Panel
+namespace SkySwordKill.NextModEditor.Panel
 {
     public class WindowSeidEditorDialog : WindowDialogBase
     {
@@ -22,11 +22,11 @@ namespace SkySwordKill.NextEditor.Panel
             public string NodeIcon;
             public int SeidID;
         }
-        
-        private WindowSeidEditorDialog() 
+
+        private WindowSeidEditorDialog()
             : base("NextCore", "WinSeidEditorDialog")
         {
-            
+
         }
 
         public string Title { get; set; }
@@ -37,7 +37,7 @@ namespace SkySwordKill.NextEditor.Panel
         public List<int> SeidList { get;private set; }
         public List<int> DisableSeidList { get;private set; }
         public Action OnClose { get;private set; }
-        public bool Editable { 
+        public bool Editable {
             get => _editable;
             set
             {
@@ -56,9 +56,9 @@ namespace SkySwordKill.NextEditor.Panel
         public GButton BtnDisable => SeidEditor.m_btnDisable;
         public GButton BtnMoveUp => SeidEditor.m_btnMoveUp;
         public GButton BtnMoveDown => SeidEditor.m_btnMoveDown;
-        
+
         private int? CurrentSeidId { get; set; }
-        
+
         private List<GTreeNode> _seidNodeList = new List<GTreeNode>();
         private bool _editable;
 
@@ -77,7 +77,7 @@ namespace SkySwordKill.NextEditor.Panel
             window.OnClose = onClose;
 
             window.Show();
-            
+
             return window;
         }
 
@@ -87,7 +87,7 @@ namespace SkySwordKill.NextEditor.Panel
 
             SeidEditor.m_frame.title = Title;
             SeidEditor.m_frame.m_closeButton.onClick.Add(Hide);
-            
+
             Inspector = new CtlPropertyInspector(SeidEditor.m_inspector);
 
             foreach (var pair in SeidGroup.DataGroups)
@@ -99,17 +99,17 @@ namespace SkySwordKill.NextEditor.Panel
                     DisableSeidList.Add(pair.Key);
                 }
             }
-            
+
             SeidEditor.m_list.treeNodeRender = OnTreeNodeRender;
             SeidEditor.m_list.onClickItem.Add(OnClickSeidItem);
-            
+
             BtnAdd.onClick.Add(OnClickAdd);
             BtnRemove.onClick.Add(OnClickRemove);
             BtnEnable.onClick.Add(OnClickEnable);
             BtnDisable.onClick.Add(OnClickDisable);
             BtnMoveUp.onClick.Add(OnClickMoveUp);
             BtnMoveDown.onClick.Add(OnClickMoveDown);
-            
+
             Refresh();
             UnselectTargetSeid();
         }
@@ -130,7 +130,7 @@ namespace SkySwordKill.NextEditor.Panel
             // 非Seid节点不能删除
             if (!(node?.data is SeidNodeInfo nodeInfo) || !nodeInfo.IsSeid)
             {
-                
+
                 return false;
             }
 
@@ -199,7 +199,7 @@ namespace SkySwordKill.NextEditor.Panel
                 SelectSeid(seidId);
             }
         }
-        
+
         private void OnClickMoveUp(EventContext context)
         {
             if (GetSelectedSeid(out var seidId))
@@ -229,7 +229,7 @@ namespace SkySwordKill.NextEditor.Panel
             SeidGroup.GetOrCreateSeid(OwnerId, seidId);
             Refresh();
         }
-        
+
         private void RemoveSeid(int seidId)
         {
             if (SeidList.Contains(seidId))
@@ -243,7 +243,7 @@ namespace SkySwordKill.NextEditor.Panel
             SeidGroup.RemoveSeid(OwnerId, seidId);
             Refresh();
         }
-        
+
         private void EnableSeid(int seidId)
         {
             if(DisableSeidList.Contains(seidId))
@@ -254,7 +254,7 @@ namespace SkySwordKill.NextEditor.Panel
             }
             Refresh();
         }
-        
+
         private void DisableSeid(int seidId)
         {
             if(SeidList.Contains(seidId))
@@ -265,7 +265,7 @@ namespace SkySwordKill.NextEditor.Panel
             }
             Refresh();
         }
-        
+
         private void SeidMoveUp(int seidId)
         {
             List<int> list;
@@ -288,7 +288,7 @@ namespace SkySwordKill.NextEditor.Panel
             list.Insert(index - 1, seidId);
             Refresh();
         }
-        
+
         private void SeidMoveDown(int seidId)
         {
             List<int> list;
@@ -323,7 +323,7 @@ namespace SkySwordKill.NextEditor.Panel
             var item = context.data as GObject;
             var node = item?.treeNode;
 
-            
+
             if (node.data is SeidNodeInfo nodeInfo && nodeInfo.IsSeid)
             {
                 SetTargetSeid(nodeInfo.SeidID);
@@ -346,7 +346,7 @@ namespace SkySwordKill.NextEditor.Panel
                     BtnMoveDown.enabled = true;
 
                     var isEnable = IsSeidEnable(CurrentSeidId.Value);
-            
+
                     BtnEnable.enabled = !isEnable;
                     BtnDisable.enabled = isEnable;
                 }
@@ -418,7 +418,7 @@ namespace SkySwordKill.NextEditor.Panel
                     }
                 }
             }
-            
+
             Inspector.Refresh();
         }
 
@@ -463,22 +463,56 @@ namespace SkySwordKill.NextEditor.Panel
                     () => sInt.Value,
                     value =>
                     {
-                        var skillData = Mod.FindSkillBySkillId(value);
+                        var skillData = Mod.FindSkill(value);
                         if (skillData != null)
                         {
-                            return $"【{value} {skillData.Name}】{skillData.Desc}";
+                            return $"【{skillData.Id}({skillData.SkillPkId}) {skillData.Name}】{skillData.Desc}";
                         }
 
-                        return $"【{value}  ？】";
+                        return $"【{value}(?)  ？】";
                     },
                     new List<TableInfo>()
                     {
                         new TableInfo("ID",
                             TableInfo.DEFAULT_GRID_WIDTH,
                             getData => ((ModSkillData)getData).Id.ToString()),
-                        new TableInfo("神通ID",
+                        new TableInfo("神通唯一ID",
                             TableInfo.DEFAULT_GRID_WIDTH,
-                            getData => ((ModSkillData)getData).SkillId.ToString()),
+                            getData => ((ModSkillData)getData).SkillPkId.ToString()),
+                        new TableInfo("名称",
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModSkillData)getData).Name),
+                        new TableInfo("描述",
+                            TableInfo.DEFAULT_GRID_WIDTH * 2,
+                            getData => ((ModSkillData)getData).Desc),
+                    },
+                    () => new List<IModData>(Mod.GetAllSkillData(true)),
+                    modData => ((ModSkillData)modData).Id);
+                drawer = intPropertyDrawer;
+            }
+            else if (seidProperty.SpecialDrawer.Contains("SkillPKDrawer"))
+            {
+                var intPropertyDrawer = new CtlIntBindTablePropertyDrawer(seidProperty.Desc,
+                    value => sInt.Value = value,
+                    () => sInt.Value,
+                    value =>
+                    {
+                        var skillData = Mod.FindSkillBySkillPkId(value);
+                        if (skillData != null)
+                        {
+                            return $"【{skillData.Id}({skillData.SkillPkId}) {skillData.Name}】{skillData.Desc}";
+                        }
+
+                        return $"【?({value})  ？】";
+                    },
+                    new List<TableInfo>()
+                    {
+                        new TableInfo("ID",
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModSkillData)getData).Id.ToString()),
+                        new TableInfo("神通唯一ID",
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModSkillData)getData).SkillPkId.ToString()),
                         new TableInfo("名称",
                             TableInfo.DEFAULT_GRID_WIDTH,
                             getData => ((ModSkillData)getData).Name),
@@ -488,11 +522,11 @@ namespace SkySwordKill.NextEditor.Panel
                     },
                     () => new List<IModData>(Mod
                         .GetAllSkillData(true)
-                        .GroupBy(skillData => skillData.SkillId)
-                        .Select(d => 
+                        .GroupBy(skillData => skillData.SkillPkId)
+                        .Select(d =>
                             d.OrderByDescending(skill => skill.SkillLv).First())
                         ),
-                    modData => ((ModSkillData)modData).SkillId);
+                    modData => ((ModSkillData)modData).SkillPkId);
                 drawer = intPropertyDrawer;
             }
             else if (seidProperty.SpecialDrawer.Contains("SeidDrawer"))
@@ -545,6 +579,7 @@ namespace SkySwordKill.NextEditor.Panel
                 {
                     case "SeidDrawer":
                     case "SkillDrawer":
+                    case "SkillPKDrawer":
                     case "BuffDrawer":
                         continue;
                     case "BuffTypeDrawer":
@@ -665,7 +700,7 @@ namespace SkySwordKill.NextEditor.Panel
 
             if (seidProperty.SpecialDrawer.Contains("BuffArrayDrawer"))
             {
-                var intArrayPropertyDrawer = new CtlIntArrayBindTablePropertyDrawer(seidProperty.Desc, 
+                var intArrayPropertyDrawer = new CtlIntArrayBindTablePropertyDrawer(seidProperty.Desc,
                     value => sIntArray.Value = value,
                     () => sIntArray.Value,
                     buffs =>
@@ -704,7 +739,7 @@ namespace SkySwordKill.NextEditor.Panel
                     () => new List<IModData>(Mod.GetAllBuffData()));
                 drawer = intArrayPropertyDrawer;
             }
-            else if (seidProperty.SpecialDrawer.Contains("SkillArrayDrawer"))
+            else if (seidProperty.SpecialDrawer.Contains("SkillPkArrayDrawer"))
             {
                 var intPropertyDrawer = new CtlIntArrayBindTablePropertyDrawer(seidProperty.Desc,
                     value => sIntArray.Value = value,
@@ -715,10 +750,10 @@ namespace SkySwordKill.NextEditor.Panel
                         for (var index = 0; index < value.Count; index++)
                         {
                             var skillId = value[index];
-                            var skillData = Mod.FindSkillBySkillId(skillId);
+                            var skillData = Mod.FindSkillBySkillPkId(skillId);
                             if (skillData != null)
                             {
-                                sb.Append($"【{skillData.Name}({skillData.SkillId})】{skillData.Desc}");
+                                sb.Append($"【{skillData.Name}({skillData.SkillPkId})】{skillData.Desc}");
                             }
                             else
                             {
@@ -737,7 +772,7 @@ namespace SkySwordKill.NextEditor.Panel
                             getData => ((ModSkillData)getData).Id.ToString()),
                         new TableInfo("神通ID",
                             TableInfo.DEFAULT_GRID_WIDTH,
-                            getData => ((ModSkillData)getData).SkillId.ToString()),
+                            getData => ((ModSkillData)getData).SkillPkId.ToString()),
                         new TableInfo("名称",
                             TableInfo.DEFAULT_GRID_WIDTH,
                             getData => ((ModSkillData)getData).Name),
@@ -747,16 +782,16 @@ namespace SkySwordKill.NextEditor.Panel
                     },
                     () => new List<IModData>(Mod
                         .GetAllSkillData(true)
-                        .GroupBy(skillData => skillData.SkillId)
-                        .Select(d => 
+                        .GroupBy(skillData => skillData.SkillPkId)
+                        .Select(d =>
                             d.OrderByDescending(skill => skill.SkillLv).First())
                     ),
-                    modData => ((ModSkillData)modData).SkillId);
+                    modData => ((ModSkillData)modData).SkillPkId);
                 drawer = intPropertyDrawer;
             }
             else if (seidProperty.SpecialDrawer.Contains("ItemArrayDrawer"))
             {
-                var intArrayPropertyDrawer = new CtlIntArrayBindTablePropertyDrawer(seidProperty.Desc, 
+                var intArrayPropertyDrawer = new CtlIntArrayBindTablePropertyDrawer(seidProperty.Desc,
                     value => sIntArray.Value = value,
                     () => sIntArray.Value,
                     items =>
@@ -797,7 +832,7 @@ namespace SkySwordKill.NextEditor.Panel
             }
             else if (seidProperty.SpecialDrawer.Contains("SeidArrayDrawer"))
             {
-                var intArrayPropertyDrawer = new CtlIntArrayBindTablePropertyDrawer(seidProperty.Desc, 
+                var intArrayPropertyDrawer = new CtlIntArrayBindTablePropertyDrawer(seidProperty.Desc,
                     value => sIntArray.Value = value,
                     () => sIntArray.Value,
                     seidList =>
@@ -837,15 +872,53 @@ namespace SkySwordKill.NextEditor.Panel
                         SeidGroup.DataGroups.Values.Select(seidDataGroup => seidDataGroup.MetaData)).ModSort());
                 drawer = intArrayPropertyDrawer;
             }
+            else if (seidProperty.SpecialDrawer.Contains("ElementTypeArrayDrawer"))
+            {
+                var intArrayPropertyDrawer = new CtlIntArrayBindTablePropertyDrawer(seidProperty.Desc,
+                    value => sIntArray.Value = value,
+                    () => sIntArray.Value,
+                    items =>
+                    {
+                        var sb = new StringBuilder();
+                        for (var index = 0; index < items.Count; index++)
+                        {
+                            var item = items[index];
+                            var itemData = ModEditorManager.I.ElementTypes.Find(elementType => elementType.Id == item);
+                            if (itemData != null)
+                            {
+                                sb.Append($"【{itemData.Id}】{itemData.Desc}");
+                            }
+                            else
+                            {
+                                sb.Append($"【{item}】？");
+                            }
+                            if(index != items.Count - 1)
+                                sb.Append("\n");
+                        }
+
+                        return sb.ToString();
+                    },
+                    new List<TableInfo>()
+                    {
+                        new TableInfo("ID",
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModElementType)getData).Id.ToString()),
+                        new TableInfo("描述",
+                            TableInfo.DEFAULT_GRID_WIDTH * 2,
+                            getData => ((ModElementType)getData).Desc),
+                    },
+                    () => new List<IModData>(ModEditorManager.I.ElementTypes));
+                drawer = intArrayPropertyDrawer;
+            }
             else
             {
                 var intArrayPropertyDrawer = new CtlIntArrayPropertyDrawer(seidProperty.Desc,
                     value => sIntArray.Value = value,
                     () => sIntArray.Value);
-                
+
                 drawer = intArrayPropertyDrawer;
             }
-            
+
             Inspector.AddDrawer(drawer);
             CreateIntArraySpecialDrawer(drawer, seidProperty, sIntArray);
         }
@@ -859,8 +932,9 @@ namespace SkySwordKill.NextEditor.Panel
                 {
                     case "ItemArrayDrawer":
                     case "SeidArrayDrawer":
-                    case "SkillArrayDrawer":
+                    case "SkillPkArrayDrawer":
                     case "BuffArrayDrawer":
+                    case "ElementTypeArrayDrawer":
                         continue;
                     default:
                         Main.LogWarning($"未知的特殊绘制器 {drawerId}");
@@ -873,7 +947,7 @@ namespace SkySwordKill.NextEditor.Panel
         {
             CtlPropertyDrawerBase drawer;
             var sString = seidData.GetToken<ModSString>(seidProperty.ID);
-            
+
             var stringPropertyDrawer = new CtlStringPropertyDrawer(seidProperty.Desc,
                 value => sString.Value = value,
                 () => sString.Value);
@@ -917,11 +991,11 @@ namespace SkySwordKill.NextEditor.Panel
         {
             CtlPropertyDrawerBase drawer;
             var sFloat = seidData.GetToken<ModSFloat>(seidProperty.ID);
-            
+
             var floatPropertyDrawer = new CtlFloatPropertyDrawer(seidProperty.Desc,
                 value => sFloat.Value = value,
                 () => sFloat.Value);
-            
+
             Inspector.AddDrawer(floatPropertyDrawer);
             drawer = floatPropertyDrawer;
         }
@@ -935,7 +1009,7 @@ namespace SkySwordKill.NextEditor.Panel
         {
             var btn = item.asButton;
             var nodeData = (SeidNodeInfo)node.data;
-            
+
             btn.title = nodeData.NodeName;
             btn.icon = nodeData.NodeIcon;
         }
@@ -948,7 +1022,7 @@ namespace SkySwordKill.NextEditor.Panel
                 NodeName = listName,
                 NodeIcon = "",
             };
-            
+
             var listNode = new GTreeNode(true)
             {
                 data = listData
@@ -962,7 +1036,7 @@ namespace SkySwordKill.NextEditor.Panel
                     NodeIcon = "ui://NextCore/icon_dao",
                     SeidID = seidId,
                 };
-                
+
                 if(SeidMetas.TryGetValue(seidId,out var seidMeta))
                 {
                     seidData.NodeName = $"{seidId} {seidMeta.Name}";
@@ -971,12 +1045,12 @@ namespace SkySwordKill.NextEditor.Panel
                 {
                     seidData.NodeName = $"{seidId}";
                 }
-                
+
                 var seidNode = new GTreeNode(false)
                 {
                     data = seidData
                 };
-                
+
                 seidNodes.Add(seidNode);
                 listNode.AddChild(seidNode);
             }

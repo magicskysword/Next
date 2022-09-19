@@ -55,8 +55,16 @@ namespace SkySwordKill.Next.DialogSystem
         
         public Flowchart flowchart;
 
+        /// <summary>
+        /// 临时参数
+        /// </summary>
         public Dictionary<string, int> tmpArgs = new Dictionary<string, int>();
         
+        /// <summary>
+        /// 自定义数据字典
+        /// </summary>
+        public Dictionary<string, object> customData = new Dictionary<string, object>();
+
         /// <summary>
         /// 当前正在加载的场景
         /// </summary>

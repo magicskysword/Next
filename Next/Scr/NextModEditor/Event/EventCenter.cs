@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SkySwordKill.NextEditor.Event
+namespace SkySwordKill.NextModEditor.Event
 {
     public static class EventCenter
     {

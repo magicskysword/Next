@@ -3,10 +3,10 @@ using FairyGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.NextModEditor.Mod.Data;
 using SkySwordKill.Next.Extension;
-using SkySwordKill.NextEditor.Mod;
 using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextModEditor.Mod;
 
-namespace SkySwordKill.NextEditor.PanelPage
+namespace SkySwordKill.NextModEditor.PanelPage
 {
     public class PanelTableModCreateAvatarDataPage : PanelTablePageBase<ModCreateAvatarData>
     {
@@ -18,13 +18,7 @@ namespace SkySwordKill.NextEditor.PanelPage
 
         protected override void OnInit()
         {
-            ModDataTableDataList = new ModDataTableDataList<ModCreateAvatarData>(Project.CreateAvatarData)
-            {
-                OnRemoveItem = data =>
-                {
-                    Project.CreateAvatarSeidDataGroup.RemoveAllSeid(data.Id);
-                }
-            };
+            ModDataTableDataList = new ModDataTableDataList<ModCreateAvatarData>(Project.CreateAvatarData);
             
             AddTableHeader(new TableInfo(
                 "ModEditor.Main.modCreateAvatarData.id".I18N(),

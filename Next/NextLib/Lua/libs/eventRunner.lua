@@ -1,6 +1,7 @@
 ﻿---@class eventRunner
 local eventRunner = {}
 local meta = {}
+local newEnvMeta = {}
 local DialogAnalysis = CS.SkySwordKill.Next.DialogSystem.DialogAnalysis
 local DialogCommand = CS.SkySwordKill.Next.DialogSystem.DialogCommand
 local Main = CS.SkySwordKill.Next.Main

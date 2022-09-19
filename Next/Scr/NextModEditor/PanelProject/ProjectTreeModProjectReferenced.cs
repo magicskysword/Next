@@ -1,8 +1,8 @@
 ﻿using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI.Component;
-using SkySwordKill.NextEditor.Mod;
+using SkySwordKill.NextModEditor.Mod;
 
-namespace SkySwordKill.NextEditor.PanelProject
+namespace SkySwordKill.NextModEditor.PanelProject
 {
     public class ProjectTreeModProjectReferenced : ProjectTreeFolder
     {
@@ -30,10 +30,10 @@ namespace SkySwordKill.NextEditor.PanelProject
             {
                 Editable = false,
             });
-            // Children.Add(new ProjectTreeItemModSkillData(Mod, Project)
-            // {
-            //     Editable = false,
-            // });
+            Children.Add(new ProjectTreeItemModSkillData(Mod, Project)
+            {
+                Editable = false,
+            });
             Children.Add(new ProjectTreeItemModBuffData(Mod, Project)
             {
                 Editable = false,

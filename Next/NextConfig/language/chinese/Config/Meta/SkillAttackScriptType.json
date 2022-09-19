@@ -1,0 +1,10 @@
+[
+    {
+        "Id": "SkillAttack",
+        "Desc": "对方"
+    },
+    {
+        "Id": "SkillSelf",
+        "Desc": "自身"
+    }
+]

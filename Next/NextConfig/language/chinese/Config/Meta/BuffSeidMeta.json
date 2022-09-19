@@ -119,7 +119,7 @@
                 "Type": "IntArray",
                 "Desc": "X 神通唯一ID 数组",
                 "SpecialDrawer" :[
-                    "SkillArrayDrawer"
+                    "SkillPkArrayDrawer"
                 ]
             },
             {
@@ -305,7 +305,7 @@
                 "Type": "Int",
                 "Desc": "X 神通唯一ID",
                 "SpecialDrawer":[
-                    "SkillDrawer"
+                    "SkillPKDrawer"
                 ]
             }
         ]
@@ -725,7 +725,7 @@
                 "Type": "IntArray",
                 "Desc": "A 神通唯一ID 数组",
                 "SpecialDrawer" :[
-                    "SkillArrayDrawer"
+                    "SkillPkArrayDrawer"
                 ]
             },
             {
@@ -1368,7 +1368,7 @@
                 "Type": "Int",
                 "Desc": "X 神通唯一ID",
                 "SpecialDrawer":[
-                    "SkillDrawer"
+                    "SkillPKDrawer"
                 ]
             }
         ]
@@ -1832,7 +1832,7 @@
                 "Type": "IntArray",
                 "Desc": "X 神通唯一ID 数组",
                 "SpecialDrawer" :[
-                    "SkillArrayDrawer"
+                    "SkillPkArrayDrawer"
                 ]
             }
         ]
@@ -2167,7 +2167,7 @@
             {
                 "ID": "value2",
                 "Type": "IntArray",
-                "Desc": "Y 特性 数组",
+                "Desc": "Y 特性[数组]",
                 "SpecialDrawer" :[
                     "SeidArrayDrawer"
                 ]
@@ -2175,7 +2175,7 @@
             {
                 "ID": "value3",
                 "Type": "IntArray",
-                "Desc": "Z 特性 数组",
+                "Desc": "Z 特性[数组]",
                 "SpecialDrawer" :[
                     "SeidArrayDrawer"
                 ]
@@ -2496,7 +2496,7 @@
                 "Type": "Int",
                 "Desc": "X 神通唯一ID",
                 "SpecialDrawer": [
-                    "SkillDrawer"
+                    "SkillPKDrawer"
                 ]
             },
             {

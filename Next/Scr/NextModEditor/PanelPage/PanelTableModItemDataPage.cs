@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FairyGUI;
 using SkySwordKill.Next.Extension;
+using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
-using SkySwordKill.NextEditor.Mod;
+using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextModEditor.Mod;
 using SkySwordKill.NextModEditor.Mod.Data;
 
-namespace SkySwordKill.NextEditor.PanelPage
+namespace SkySwordKill.NextModEditor.PanelPage
 {
     public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
     {
@@ -19,14 +22,7 @@ namespace SkySwordKill.NextEditor.PanelPage
 
         protected override void OnInit()
         {
-            ModDataTableDataList = new ModDataTableDataList<ModItemData>(Project.ItemData)
-            {
-                OnRemoveItem = data =>
-                {
-                    Project.ItemEquipSeidDataGroup.RemoveAllSeid(data.Id);
-                    Project.ItemUseSeidDataGroup.RemoveAllSeid(data.Id);
-                }
-            };
+            ModDataTableDataList = new ModDataTableDataList<ModItemData>(Project.ItemData);
 
             AddTableHeader(new TableInfo(
                 "ID".I18NTodo(),
@@ -452,6 +448,60 @@ namespace SkySwordKill.NextEditor.PanelPage
         public override string OnGetDataName(ModItemData data)
         {
             return $"{data.Id} {data.Name}";
+        }
+
+        protected override void OnBuildCustomPopupMenu(PopupMenu menu, ModItemData modData)
+        {
+            menu.AddSeperator();
+            menu.AddItem("生成请教书籍".I18NTodo(), () => OnGenerateSkillLearnBook(modData))
+                .enabled = Editable && modData != null && (modData.ItemType == 3 || modData.ItemType == 4);
+            menu.AddSeperator();
+        }
+
+        private void OnGenerateSkillLearnBook(ModItemData modData)
+        {
+            if(!Editable)
+                return;
+            
+            if(modData == null)
+                return;
+
+            if (modData.Id > 1000000000)
+            {
+                WindowConfirmDialog.CreateDialog("提示", $"当前物品ID超出1000000000，无法创建对应请教书籍", false);
+                return;
+            }
+            
+            if(modData.ItemType != 3 && modData.ItemType != 4)
+            {
+                WindowConfirmDialog.CreateDialog("提示", $"当前物品类型不为神通或功法书籍，无法创建对应请教书籍", false);
+                return;
+            }
+            
+            var bookId = modData.Id + 1000000000;
+            if(ModDataTableDataList.HasId(bookId))
+            {
+                WindowConfirmDialog.CreateDialog("提示", $"当前物品ID对应的请教书籍已存在，无法创建对应请教书籍", false);
+                return;
+            }
+            
+            WindowConfirmDialog.CreateDialog("提示", $"是否创建ID为{bookId}的请教书籍？",true, 
+                () =>
+                {
+                    var copyData = GetCopyData(modData);
+                    this.Record(new AddDataUndoCommand(
+                        () =>
+                        {
+                            var data = OnPasteData(copyData, bookId);
+                            data.ShopType = 99;
+                            data.ItemFlagList.Clear();
+                            data.Price = 0;
+                            return data;
+                        },
+                        data => AddData((ModItemData)data),
+                        data => RemoveData(data.Id)));
+                    Refresh();
+                });
         }
 
         protected override ModItemData OnPasteData(CopyData copyData, int targetId)

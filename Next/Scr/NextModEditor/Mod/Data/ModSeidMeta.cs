@@ -7,7 +7,7 @@ namespace SkySwordKill.NextModEditor.Mod.Data
         public int Id { get; set; }
         public string Name { get; set; }
         public string Desc { get; set; }
-        public List<ModSeidProperty> Properties { get; set; }
+        public List<ModSeidProperty> Properties { get; set; } = new List<ModSeidProperty>();
         public string IDName { get; set; }
     }
 }
