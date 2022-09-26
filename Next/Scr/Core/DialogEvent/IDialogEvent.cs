@@ -1,10 +1,9 @@
 ﻿using System;
 using SkySwordKill.Next.DialogSystem;
 
-namespace SkySwordKill.Next.DialogEvent
+namespace SkySwordKill.Next.DialogEvent;
+
+public interface IDialogEvent
 {
-    public interface IDialogEvent
-    {
-        void Execute(DialogCommand command,DialogEnvironment env,Action callback);
-    }
+    void Execute(DialogCommand command,DialogEnvironment env,Action callback);
 }

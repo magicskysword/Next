@@ -1,17 +1,16 @@
 ﻿using System;
 using SkySwordKill.Next.DialogSystem;
 
-namespace SkySwordKill.Next.DialogEvent
+namespace SkySwordKill.Next.DialogEvent;
+
+[DialogEvent("SetChar")]
+public class SetChar : IDialogEvent
 {
-    [DialogEvent("SetChar")]
-    public class SetChar : IDialogEvent
+    public void Execute(DialogCommand command,DialogEnvironment env,Action callback)
     {
-        public void Execute(DialogCommand command,DialogEnvironment env,Action callback)
-        {
-            string name = command.GetStr(0);
-            int id = command.GetInt(1);
-            DialogAnalysis.TryAddTmpChar(name,id);
-            callback?.Invoke();
-        }
+        string name = command.GetStr(0);
+        int id = command.GetInt(1);
+        DialogAnalysis.TryAddTmpChar(name,id);
+        callback?.Invoke();
     }
 }

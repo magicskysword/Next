@@ -1,7 +1,6 @@
-﻿namespace SkySwordKill.Next.FGUI.Component
+﻿namespace SkySwordKill.Next.FGUI.Component;
+
+public abstract class ProjectListItemBase : ProjectListBase
 {
-    public abstract class ProjectListItemBase : ProjectListBase
-    {
-        public override bool CanClick => true;
-    }
+    public override bool CanClick => true;
 }

@@ -1,12 +1,11 @@
-﻿namespace SkySwordKill.NextModEditor.Event
-{
-    public interface IEventArgs
-    {
-        object Sender { get; set; }
-    }
+﻿namespace SkySwordKill.NextModEditor.Event;
 
-    public class EventArgs : IEventArgs
-    {
-        public object Sender { get; set; }
-    }
+public interface IEventArgs
+{
+    object Sender { get; set; }
+}
+
+public class EventArgs : IEventArgs
+{
+    public object Sender { get; set; }
 }

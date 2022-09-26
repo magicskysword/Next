@@ -1,12 +1,11 @@
 ﻿using FairyGUI;
 
-namespace SkySwordKill.Next.FGUI.Component
+namespace SkySwordKill.Next.FGUI.Component;
+
+public interface IPropertyDrawer : IUndoInst
 {
-    public interface IPropertyDrawer : IUndoInst
-    {
-        bool Editable { get; set; }
-        GComponent CreateCom();
-        void RemoveCom();
-        void Refresh();
-    }
+    bool Editable { get; set; }
+    GComponent CreateCom();
+    void RemoveCom();
+    void Refresh();
 }

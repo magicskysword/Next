@@ -1,18 +1,17 @@
-﻿namespace SkySwordKill.NextModEditor.Mod.Data
+﻿namespace SkySwordKill.NextModEditor.Mod.Data;
+
+public class ModSFloat : ModSeidToken
 {
-    public class ModSFloat : ModSeidToken
+    public float Value { get; set; } = 0;
+
+    public ModSFloat()
     {
-        public float Value { get; set; } = 0;
-
-        public ModSFloat()
-        {
-            PropertyType = ModSeidPropertyType.Float;
-        }
-
-        public ModSFloat(float value) : this()
-        {
-            Value = value;
-        }
-        
+        PropertyType = ModSeidPropertyType.Float;
     }
+
+    public ModSFloat(float value) : this()
+    {
+        Value = value;
+    }
+        
 }

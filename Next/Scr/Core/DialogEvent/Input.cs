@@ -1,19 +1,18 @@
 ﻿using System;
 using SkySwordKill.Next.DialogSystem;
 
-namespace SkySwordKill.Next.DialogEvent
+namespace SkySwordKill.Next.DialogEvent;
+
+[DialogEvent("Input")]
+public class Input : IDialogEvent
 {
-    [DialogEvent("Input")]
-    public class Input : IDialogEvent
+    public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
     {
-        public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
+        var inputTip = command.GetStr(0);
+        UInputBox.Show(inputTip, str =>
         {
-            var inputTip = command.GetStr(0);
-            UInputBox.Show(inputTip, str =>
-            {
-                env.input = str;
-                callback?.Invoke();
-            });
-        }
+            env.input = str;
+            callback?.Invoke();
+        });
     }
 }

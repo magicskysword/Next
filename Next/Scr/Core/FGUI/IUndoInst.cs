@@ -1,7 +1,6 @@
-﻿namespace SkySwordKill.Next.FGUI
+﻿namespace SkySwordKill.Next.FGUI;
+
+public interface IUndoInst
 {
-    public interface IUndoInst
-    {
-        UndoInstManager UndoManager { get; set; }
-    }
+    UndoInstManager UndoManager { get; set; }
 }

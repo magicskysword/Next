@@ -19,72 +19,72 @@ using LuaCSFunction = XLua.LuaDLL.lua_CSFunction;
 using System;
 using System.Collections.Generic;
 
-namespace XLua
+namespace XLua;
+
+public abstract class DelegateBridgeBase : LuaBase
 {
-    public abstract class DelegateBridgeBase : LuaBase
+    private Type firstKey = null;
+
+    private Delegate firstValue = null;
+
+    private Dictionary<Type, Delegate> bindTo = null;
+
+    protected int errorFuncRef;
+
+    public DelegateBridgeBase(int reference, LuaEnv luaenv) : base(reference, luaenv)
     {
-        private Type firstKey = null;
+        errorFuncRef = luaenv.errorFuncRef;
+    }
 
-        private Delegate firstValue = null;
-
-        private Dictionary<Type, Delegate> bindTo = null;
-
-        protected int errorFuncRef;
-
-        public DelegateBridgeBase(int reference, LuaEnv luaenv) : base(reference, luaenv)
+    public bool TryGetDelegate(Type key, out Delegate value)
+    {
+        if(key == firstKey)
         {
-            errorFuncRef = luaenv.errorFuncRef;
+            value = firstValue;
+            return true;
+        }
+        if (bindTo != null)
+        {
+            return bindTo.TryGetValue(key, out value);
+        }
+        value = null;
+        return false;
+    }
+
+    public void AddDelegate(Type key, Delegate value)
+    {
+        if (key == firstKey)
+        {
+            throw new ArgumentException("An element with the same key already exists in the dictionary.");
         }
 
-        public bool TryGetDelegate(Type key, out Delegate value)
+        if (firstKey == null && bindTo == null) // nothing 
         {
-            if(key == firstKey)
-            {
-                value = firstValue;
-                return true;
-            }
-            if (bindTo != null)
-            {
-                return bindTo.TryGetValue(key, out value);
-            }
-            value = null;
-            return false;
+            firstKey = key;
+            firstValue = value;
         }
-
-        public void AddDelegate(Type key, Delegate value)
+        else if (firstKey != null && bindTo == null) // one key existed
         {
-            if (key == firstKey)
-            {
-                throw new ArgumentException("An element with the same key already exists in the dictionary.");
-            }
-
-            if (firstKey == null && bindTo == null) // nothing 
-            {
-                firstKey = key;
-                firstValue = value;
-            }
-            else if (firstKey != null && bindTo == null) // one key existed
-            {
-                bindTo = new Dictionary<Type, Delegate>();
-                bindTo.Add(firstKey, firstValue);
-                firstKey = null;
-                firstValue = null;
-                bindTo.Add(key, value);
-            }
-            else
-            {
-                bindTo.Add(key, value);
-            }
+            bindTo = new Dictionary<Type, Delegate>();
+            bindTo.Add(firstKey, firstValue);
+            firstKey = null;
+            firstValue = null;
+            bindTo.Add(key, value);
         }
-
-        public virtual Delegate GetDelegateByType(Type type)
+        else
         {
-            return null;
+            bindTo.Add(key, value);
         }
     }
 
-    public static class HotfixDelegateBridge
+    public virtual Delegate GetDelegateByType(Type type)
     {
+        return null;
+    }
+}
+
+public static class HotfixDelegateBridge
+{
 #if (UNITY_IPHONE || UNITY_TVOS) && !UNITY_EDITOR
         [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool xlua_get_hotfix_flag(int idx);
@@ -93,50 +93,50 @@ namespace XLua
         [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
         public static extern void xlua_set_hotfix_flag(int idx, bool flag);
 #else
-        public static bool xlua_get_hotfix_flag(int idx)
-        {
-            return (idx < DelegateBridge.DelegateBridgeList.Length) && (DelegateBridge.DelegateBridgeList[idx] != null);
-        }
+    public static bool xlua_get_hotfix_flag(int idx)
+    {
+        return (idx < DelegateBridge.DelegateBridgeList.Length) && (DelegateBridge.DelegateBridgeList[idx] != null);
+    }
 #endif
 
-        public static DelegateBridge Get(int idx)
-        {
-            return DelegateBridge.DelegateBridgeList[idx];
-        }
+    public static DelegateBridge Get(int idx)
+    {
+        return DelegateBridge.DelegateBridgeList[idx];
+    }
 
-        public static void Set(int idx, DelegateBridge val)
+    public static void Set(int idx, DelegateBridge val)
+    {
+        if (idx >= DelegateBridge.DelegateBridgeList.Length)
         {
-            if (idx >= DelegateBridge.DelegateBridgeList.Length)
+            DelegateBridge[] newList = new DelegateBridge[idx + 1];
+            for (int i = 0; i < DelegateBridge.DelegateBridgeList.Length; i++)
             {
-                DelegateBridge[] newList = new DelegateBridge[idx + 1];
-                for (int i = 0; i < DelegateBridge.DelegateBridgeList.Length; i++)
-                {
-                    newList[i] = DelegateBridge.DelegateBridgeList[i];
-                }
-                DelegateBridge.DelegateBridgeList = newList;
+                newList[i] = DelegateBridge.DelegateBridgeList[i];
             }
-            DelegateBridge.DelegateBridgeList[idx] = val;
+            DelegateBridge.DelegateBridgeList = newList;
+        }
+        DelegateBridge.DelegateBridgeList[idx] = val;
 #if (UNITY_IPHONE || UNITY_TVOS) && !UNITY_EDITOR
             xlua_set_hotfix_flag(idx, val != null);
 #endif
-        }
+    }
+}
+
+public partial class DelegateBridge : DelegateBridgeBase
+{
+    internal static DelegateBridge[] DelegateBridgeList = new DelegateBridge[0];
+
+    public static bool Gen_Flag = false;
+
+    public DelegateBridge(int reference, LuaEnv luaenv) : base(reference, luaenv)
+    {
     }
 
-    public partial class DelegateBridge : DelegateBridgeBase
+    public void PCall(IntPtr L, int nArgs, int nResults, int errFunc)
     {
-        internal static DelegateBridge[] DelegateBridgeList = new DelegateBridge[0];
-
-        public static bool Gen_Flag = false;
-
-        public DelegateBridge(int reference, LuaEnv luaenv) : base(reference, luaenv)
-        {
-        }
-
-        public void PCall(IntPtr L, int nArgs, int nResults, int errFunc)
-        {
-            if (LuaAPI.lua_pcall(L, nArgs, nResults, errFunc) != 0)
-                luaEnv.ThrowExceptionFromError(errFunc - 1);
-        }
+        if (LuaAPI.lua_pcall(L, nArgs, nResults, errFunc) != 0)
+            luaEnv.ThrowExceptionFromError(errFunc - 1);
+    }
 
 #if HOTFIX_ENABLE
 
@@ -241,5 +241,4 @@ namespace XLua
             }
         }
 #endif
-    }
 }

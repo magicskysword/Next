@@ -2,6 +2,7 @@
 local eventRunner = {}
 local meta = {}
 local newEnvMeta = {}
+local DialogSystem = CS.SkySwordKill.Next.DialogSystem
 local DialogAnalysis = CS.SkySwordKill.Next.DialogSystem.DialogAnalysis
 local DialogCommand = CS.SkySwordKill.Next.DialogSystem.DialogCommand
 local Main = CS.SkySwordKill.Next.Main
@@ -36,7 +37,7 @@ local function async_to_sync(async_func, callback_pos, failureCall)
 end
 
 local syncRunEvent = async_to_sync(DialogAnalysis.RunDialogEventCommand,
-    nil, function() eventRunner.cancelEvent() end)
+        nil, function() eventRunner.cancelEvent() end)
 
 ---@param runner eventRunner
 ---@param key string
@@ -44,14 +45,55 @@ meta["__index"] = function(runner, key)
     return function(...)
         local params = { ... }
         local command = DialogCommand(key, params,
-            runner.callCommand.BindEventData, runner.callCommand.IsEnd)
+                runner.callCommand.BindEventData, runner.callCommand.IsEnd)
         syncRunEvent(command, runner.env)
+    end
+end
+
+newEnvMeta["__index"] = function(runner, key)
+    local value = runner.rawEnv[key]
+    local extMethod = DialogAnalysis.GetEnvQuery(key)
+
+    if extMethod == nil and value == nil then
+        Main.LogError("Lua运行错误 --> " .. "env没有找到扩展方法：" .. key)
+        return nil
+    end
+
+    if extMethod ~= nil then
+        return function(curRunner, ...)
+            local params = { ... }
+            if type(curRunner) ~= "table" then
+                Main.LogError("Lua运行错误 --> " .. "env需要使用:调用函数！")
+                return nil
+            end
+
+            local context = DialogSystem.DialogEnvQueryContext(curRunner.rawEnv, params)
+            return extMethod:Execute(context)
+        end
+    else
+        if type(value) == "function" then
+            return function(curRunner ,...)
+                local params = { ... }
+                if type(curRunner) ~= "table" then
+                    Main.LogError("Lua运行错误 --> " .. "env需要使用:调用函数！")
+                    return nil
+                end
+                return value(curRunner.rawEnv, table.unpack(params))
+            end
+        else
+            return runner.rawEnv[key]
+        end
     end
 end
 
 function eventRunner.getRunner(env, command)
     local runner = {}
-    runner.env = env
+
+    local newEnv = {}
+    newEnv.rawEnv = env
+    setmetatable(newEnv, newEnvMeta)
+
+    runner.env = newEnv
     runner.bindEventData = bindEventData
     runner.callCommand = command
     setmetatable(runner, meta)

@@ -1,20 +1,19 @@
 ﻿using System;
 using SkySwordKill.Next.DialogSystem;
 
-namespace SkySwordKill.Next.DialogEvent
+namespace SkySwordKill.Next.DialogEvent;
+
+[DialogEvent("ShowTip")]
+public class ShowTip : IDialogEvent
 {
-    [DialogEvent("ShowTip")]
-    public class ShowTip : IDialogEvent
+    public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
     {
-        public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
-        {
-            var text = command.GetStr(0);
-            var popType = (PopTipIconType)command.GetInt(1);
+        var text = command.GetStr(0);
+        var popType = (PopTipIconType)command.GetInt(1);
             
-            UIPopTip.Inst.Pop(text, popType);
+        UIPopTip.Inst.Pop(text, popType);
             
-            callback?.Invoke();
-        }
-        
+        callback?.Invoke();
     }
+        
 }

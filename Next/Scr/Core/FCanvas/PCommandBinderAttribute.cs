@@ -1,14 +1,13 @@
 ﻿using System;
 
-namespace SkySwordKill.Next.FCanvas
+namespace SkySwordKill.Next.FCanvas;
+
+public class PCommandBinderAttribute : Attribute
 {
-    public class PCommandBinderAttribute : Attribute
-    {
-        public string BindType;
+    public string BindType;
         
-        public PCommandBinderAttribute(string bindType)
-        {
-            BindType = bindType;
-        }
+    public PCommandBinderAttribute(string bindType)
+    {
+        BindType = bindType;
     }
 }

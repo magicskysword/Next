@@ -2,72 +2,71 @@
 using KBEngine;
 using SkySwordKill.Next.DialogSystem;
 
-namespace SkySwordKill.Next.Patch
+namespace SkySwordKill.Next.Patch;
+
+public class GameExDataPatch
 {
-    public class GameExDataPatch
+    [HarmonyPatch(typeof(YSNewSaveSystem))]
+    public class NewSaveSystemPatch
     {
-        [HarmonyPatch(typeof(YSNewSaveSystem))]
-        public class NewSaveSystemPatch
+        [HarmonyPatch("LoadSave")]
+        [HarmonyPostfix]
+        public static void AfterLoad(int avatarIndex, int slot, int DFIndex)
         {
-            [HarmonyPatch("LoadSave")]
-            [HarmonyPostfix]
-            public static void AfterLoad(int avatarIndex, int slot, int DFIndex)
-            {
-                Main.LogInfo($"NextData 读取存档数据");
-                DialogAnalysis.LoadAvatarNextData(avatarIndex, slot);
-            }
-        
-            [HarmonyPatch("SaveGame")]
-            [HarmonyPostfix]
-            public static void AfterSave(int avatarIndex, int slot, Avatar _avatar, bool ignoreSlot0Time)
-            {
-                Main.LogInfo($"NextData 保存存档数据");
-                DialogAnalysis.SaveAvatarNextData(avatarIndex, slot);
-            }
+            Main.LogInfo($"NextData 读取存档数据");
+            DialogAnalysis.LoadAvatarNextData(avatarIndex, slot);
         }
         
-        [HarmonyPatch(typeof(Tools),"saveGame")]
-        public class OldSaveGamePatch
+        [HarmonyPatch("SaveGame")]
+        [HarmonyPostfix]
+        public static void AfterSave(int avatarIndex, int slot, Avatar _avatar, bool ignoreSlot0Time)
         {
-            [HarmonyPostfix]
-            public static void Postfix(Tools __instance,int id, int index, KBEngine.Avatar _avatar)
-            {
-                Main.LogInfo($"NextData 保存旧版存档数据");
-                DialogAnalysis.SaveAvatarNextDataOld(id, index);
-            }
+            Main.LogInfo($"NextData 保存存档数据");
+            DialogAnalysis.SaveAvatarNextData(avatarIndex, slot);
         }
+    }
         
-        [HarmonyPatch(typeof(CreateNewPlayerFactory),"createPlayer")]
-        public class OldCreatePlayer
+    [HarmonyPatch(typeof(Tools),"saveGame")]
+    public class OldSaveGamePatch
+    {
+        [HarmonyPostfix]
+        public static void Postfix(Tools __instance,int id, int index, KBEngine.Avatar _avatar)
         {
-            [HarmonyPrefix]
-            public static void Prefix()
-            {
-                Main.LogInfo($"NextData 创建新角色数据");
-                DialogAnalysis.ResetAvatarNextData();
-            }
+            Main.LogInfo($"NextData 保存旧版存档数据");
+            DialogAnalysis.SaveAvatarNextDataOld(id, index);
         }
+    }
         
-        [HarmonyPatch(typeof(StartGame),"addAvatar")]
-        public class OldLoadInStart
+    [HarmonyPatch(typeof(CreateNewPlayerFactory),"createPlayer")]
+    public class OldCreatePlayer
+    {
+        [HarmonyPrefix]
+        public static void Prefix()
         {
-            [HarmonyPostfix]
-            public static void Postfix(int id, int index)
-            {
-                Main.LogInfo($"NextData 读取旧版存档数据");
-                DialogAnalysis.LoadAvatarNextDataOld(id,index);
-            }
+            Main.LogInfo($"NextData 创建新角色数据");
+            DialogAnalysis.ResetAvatarNextData();
         }
+    }
+        
+    [HarmonyPatch(typeof(StartGame),"addAvatar")]
+    public class OldLoadInStart
+    {
+        [HarmonyPostfix]
+        public static void Postfix(int id, int index)
+        {
+            Main.LogInfo($"NextData 读取旧版存档数据");
+            DialogAnalysis.LoadAvatarNextDataOld(id,index);
+        }
+    }
     
-        [HarmonyPatch(typeof(MainUIMag),"addAvatar")]
-        public class OldLoadInMain
+    [HarmonyPatch(typeof(MainUIMag),"addAvatar")]
+    public class OldLoadInMain
+    {
+        [HarmonyPostfix]
+        public static void Postfix(int id, int index)
         {
-            [HarmonyPostfix]
-            public static void Postfix(int id, int index)
-            {
-                Main.LogInfo($"NextData 读取旧版存档数据");
-                DialogAnalysis.LoadAvatarNextDataOld(id,index);
-            }
+            Main.LogInfo($"NextData 读取旧版存档数据");
+            DialogAnalysis.LoadAvatarNextDataOld(id,index);
         }
     }
 }

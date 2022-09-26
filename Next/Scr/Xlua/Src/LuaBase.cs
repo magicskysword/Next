@@ -18,13 +18,13 @@ using LuaCSFunction = XLua.LuaDLL.lua_CSFunction;
 
 using System;
 
-namespace XLua
+namespace XLua;
+
+public abstract class LuaBase : IDisposable
 {
-    public abstract class LuaBase : IDisposable
-    {
-        protected bool disposed;
-        protected readonly int luaReference;
-        protected readonly LuaEnv luaEnv;
+    protected bool disposed;
+    protected readonly int luaReference;
+    protected readonly LuaEnv luaEnv;
 
 #if UNITY_EDITOR || XLUA_GENERAL
         protected int _errorFuncRef { get { return luaEnv.errorFuncRef; } }
@@ -32,86 +32,85 @@ namespace XLua
         protected ObjectTranslator _translator { get { return luaEnv.translator; } }
 #endif
 
-        public LuaBase(int reference, LuaEnv luaenv)
-        {
-            luaReference = reference;
-            luaEnv = luaenv;
-        }
+    public LuaBase(int reference, LuaEnv luaenv)
+    {
+        luaReference = reference;
+        luaEnv = luaenv;
+    }
 
-        ~LuaBase()
-        {
-            Dispose(false);
-        }
+    ~LuaBase()
+    {
+        Dispose(false);
+    }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
-        public virtual void Dispose(bool disposeManagedResources)
+    public virtual void Dispose(bool disposeManagedResources)
+    {
+        if (!disposed)
         {
-            if (!disposed)
+            if (luaReference != 0)
             {
-                if (luaReference != 0)
-                {
 #if THREAD_SAFE || HOTFIX_ENABLE
                     lock (luaEnv.luaEnvLock)
                     {
 #endif
-                        bool is_delegate = this is DelegateBridgeBase;
-                        if (disposeManagedResources)
-                        {
-                            luaEnv.translator.ReleaseLuaBase(luaEnv.L, luaReference, is_delegate);
-                        }
-                        else //will dispse by LuaEnv.GC
-                        {
-                            luaEnv.equeueGCAction(new LuaEnv.GCAction { Reference = luaReference, IsDelegate = is_delegate });
-                        }
+                bool is_delegate = this is DelegateBridgeBase;
+                if (disposeManagedResources)
+                {
+                    luaEnv.translator.ReleaseLuaBase(luaEnv.L, luaReference, is_delegate);
+                }
+                else //will dispse by LuaEnv.GC
+                {
+                    luaEnv.equeueGCAction(new LuaEnv.GCAction { Reference = luaReference, IsDelegate = is_delegate });
+                }
 #if THREAD_SAFE || HOTFIX_ENABLE
                     }
 #endif
-                }
-                disposed = true;
             }
+            disposed = true;
         }
+    }
 
-        public override bool Equals(object o)
+    public override bool Equals(object o)
+    {
+        if (o != null && this.GetType() == o.GetType())
         {
-            if (o != null && this.GetType() == o.GetType())
-            {
 #if THREAD_SAFE || HOTFIX_ENABLE
                 lock (luaEnv.luaEnvLock)
                 {
 #endif
-                    LuaBase rhs = (LuaBase)o;
-                    var L = luaEnv.L;
-                    if (L != rhs.luaEnv.L)
-                        return false;
-                    int top = LuaAPI.lua_gettop(L);
-                    LuaAPI.lua_getref(L, rhs.luaReference);
-                    LuaAPI.lua_getref(L, luaReference);
-                    int equal = LuaAPI.lua_rawequal(L, -1, -2);
-                    LuaAPI.lua_settop(L, top);
-                    return (equal != 0);
+            LuaBase rhs = (LuaBase)o;
+            var L = luaEnv.L;
+            if (L != rhs.luaEnv.L)
+                return false;
+            int top = LuaAPI.lua_gettop(L);
+            LuaAPI.lua_getref(L, rhs.luaReference);
+            LuaAPI.lua_getref(L, luaReference);
+            int equal = LuaAPI.lua_rawequal(L, -1, -2);
+            LuaAPI.lua_settop(L, top);
+            return (equal != 0);
 #if THREAD_SAFE || HOTFIX_ENABLE
                 }
 #endif
-            }
-            else return false;
         }
+        else return false;
+    }
 
-        public override int GetHashCode()
-        {
-            LuaAPI.lua_getref(luaEnv.L, luaReference);
-            var pointer = LuaAPI.lua_topointer(luaEnv.L, -1);
-            LuaAPI.lua_pop(luaEnv.L, 1);
-            return pointer.ToInt32();
-        }
+    public override int GetHashCode()
+    {
+        LuaAPI.lua_getref(luaEnv.L, luaReference);
+        var pointer = LuaAPI.lua_topointer(luaEnv.L, -1);
+        LuaAPI.lua_pop(luaEnv.L, 1);
+        return pointer.ToInt32();
+    }
 
-        internal virtual void push(RealStatePtr L)
-        {
-            LuaAPI.lua_getref(L, luaReference);
-        }
+    internal virtual void push(RealStatePtr L)
+    {
+        LuaAPI.lua_getref(L, luaReference);
     }
 }

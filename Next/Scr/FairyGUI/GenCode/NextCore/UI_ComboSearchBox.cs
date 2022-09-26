@@ -3,23 +3,22 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace SkySwordKill.NextFGUI.NextCore
+namespace SkySwordKill.NextFGUI.NextCore;
+
+public partial class UI_ComboSearchBox : GComboBox
 {
-    public partial class UI_ComboSearchBox : GComboBox
+    public Controller m_grayed;
+    public const string URL = "ui://028qk31hmdyt4j";
+
+    public static UI_ComboSearchBox CreateInstance()
     {
-        public Controller m_grayed;
-        public const string URL = "ui://028qk31hmdyt4j";
+        return (UI_ComboSearchBox)UIPackage.CreateObject("NextCore", "ComboSearchBox");
+    }
 
-        public static UI_ComboSearchBox CreateInstance()
-        {
-            return (UI_ComboSearchBox)UIPackage.CreateObject("NextCore", "ComboSearchBox");
-        }
+    public override void ConstructFromXML(XML xml)
+    {
+        base.ConstructFromXML(xml);
 
-        public override void ConstructFromXML(XML xml)
-        {
-            base.ConstructFromXML(xml);
-
-            m_grayed = GetController("grayed");
-        }
+        m_grayed = GetController("grayed");
     }
 }

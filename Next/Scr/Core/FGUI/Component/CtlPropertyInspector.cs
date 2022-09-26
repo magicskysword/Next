@@ -2,17 +2,16 @@
 using FairyGUI;
 using SkySwordKill.NextFGUI.NextCore;
 
-namespace SkySwordKill.Next.FGUI.Component
+namespace SkySwordKill.Next.FGUI.Component;
+
+public class CtlPropertyInspector : CtlInspectorBase
 {
-    public class CtlPropertyInspector : CtlInspectorBase
+    public CtlPropertyInspector(UI_ComMainInspector uiCom)
     {
-        public CtlPropertyInspector(UI_ComMainInspector uiCom)
-        {
-            MainView = uiCom;
-        }
-        
-        public UI_ComMainInspector MainView;
-        
-        protected override GList _drawerGList => MainView.m_list;
+        MainView = uiCom;
     }
+        
+    public UI_ComMainInspector MainView;
+        
+    protected override GList _drawerGList => MainView.m_list;
 }

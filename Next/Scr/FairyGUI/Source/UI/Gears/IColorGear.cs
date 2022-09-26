@@ -1,26 +1,25 @@
 ﻿using UnityEngine;
 
-namespace FairyGUI
+namespace FairyGUI;
+
+/// <summary>
+/// 
+/// </summary>
+public interface IColorGear
 {
     /// <summary>
     /// 
     /// </summary>
-    public interface IColorGear
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        Color color { get; set; }
-    }
+    Color color { get; set; }
+}
 
+/// <summary>
+/// 
+/// </summary>
+public interface ITextColorGear : IColorGear
+{
     /// <summary>
     /// 
     /// </summary>
-    public interface ITextColorGear : IColorGear
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        Color strokeColor { get; set; }
-    }
+    Color strokeColor { get; set; }
 }

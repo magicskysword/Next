@@ -1,100 +1,99 @@
 ﻿using System;
 using System.Linq;
 
-namespace XLua
-{
+namespace XLua;
 
-    internal static class TypeExtensions
+internal static class TypeExtensions
+{
+    public static bool IsValueType(this Type type)
     {
-        public static bool IsValueType(this Type type)
-        {
 #if !UNITY_WSA || UNITY_EDITOR
-            return type.IsValueType;
+        return type.IsValueType;
 #else
             return type.GetTypeInfo().IsValueType;
 #endif
-        }
+    }
 
-        public static bool IsEnum(this Type type)
-        {
+    public static bool IsEnum(this Type type)
+    {
 #if !UNITY_WSA || UNITY_EDITOR
-            return type.IsEnum;
+        return type.IsEnum;
 #else
             return type.GetTypeInfo().IsEnum;
 #endif
-        }
+    }
 
-        public static bool IsPrimitive(this Type type)
-        {
+    public static bool IsPrimitive(this Type type)
+    {
 #if !UNITY_WSA || UNITY_EDITOR
-            return type.IsPrimitive;
+        return type.IsPrimitive;
 #else
             return type.GetTypeInfo().IsPrimitive;
 #endif
-        }
+    }
 
-        public static bool IsAbstract(this Type type)
-        {
+    public static bool IsAbstract(this Type type)
+    {
 #if !UNITY_WSA || UNITY_EDITOR
-            return type.IsAbstract;
+        return type.IsAbstract;
 #else
             return type.GetTypeInfo().IsAbstract;
 #endif
-        }
+    }
 
-        public static bool IsSealed(this Type type)
-        {
+    public static bool IsSealed(this Type type)
+    {
 #if !UNITY_WSA || UNITY_EDITOR
-            return type.IsSealed;
+        return type.IsSealed;
 #else
             return type.GetTypeInfo().IsSealed;
 #endif
-        }
+    }
 
-        public static bool IsInterface(this Type type)
-        {
+    public static bool IsInterface(this Type type)
+    {
 #if !UNITY_WSA || UNITY_EDITOR
-            return type.IsInterface;
+        return type.IsInterface;
 #else
             return type.GetTypeInfo().IsInterface;
 #endif
-        }
+    }
 
-        public static bool IsClass(this Type type)
-        {
+    public static bool IsClass(this Type type)
+    {
 #if !UNITY_WSA || UNITY_EDITOR
-            return type.IsClass;
+        return type.IsClass;
 #else
             return type.GetTypeInfo().IsClass;
 #endif
-        }
+    }
 
-        public static Type BaseType(this Type type)
-        {
+    public static Type BaseType(this Type type)
+    {
 #if !UNITY_WSA || UNITY_EDITOR
-            return type.BaseType;
+        return type.BaseType;
 #else
             return type.GetTypeInfo().BaseType;
 #endif
-        }
+    }
 
-        public static bool IsGenericType(this Type type)
-        {
+    public static bool IsGenericType(this Type type)
+    {
 #if !UNITY_WSA || UNITY_EDITOR
-            return type.IsGenericType;
+        return type.IsGenericType;
 #else
             return type.GetTypeInfo().IsGenericType;
 #endif
-        }
+    }
 
-        public static bool IsGenericTypeDefinition(this Type type)
-        {
+    public static bool IsGenericTypeDefinition(this Type type)
+    {
 #if !UNITY_WSA || UNITY_EDITOR
-            return type.IsGenericTypeDefinition;
+        return type.IsGenericTypeDefinition;
 #else
             return type.GetTypeInfo().IsGenericTypeDefinition;
 #endif
-        }
+    }
 
 #if UNITY_WSA && !UNITY_EDITOR
         public static bool IsSubclassOf(this Type type, Type c)
@@ -113,49 +112,48 @@ namespace XLua
         }
 #endif
 
-        public static bool IsNestedPublic(this Type type)
-        {
+    public static bool IsNestedPublic(this Type type)
+    {
 #if !UNITY_WSA || UNITY_EDITOR
-            return type.IsNestedPublic;
+        return type.IsNestedPublic;
 #else
             return type.GetTypeInfo().IsNestedPublic;
 #endif        
-        }
+    }
 
-        public static bool IsPublic(this Type type)
-        {
+    public static bool IsPublic(this Type type)
+    {
 #if !UNITY_WSA || UNITY_EDITOR
-            return type.IsPublic;
+        return type.IsPublic;
 #else
             return type.GetTypeInfo().IsPublic;
 #endif        
-        }
+    }
 
-        public static string GetFriendlyName(this Type type)
-        {
-            if (type == typeof(int))
-                return "int";
-            else if (type == typeof(short))
-                return "short";
-            else if (type == typeof(byte))
-                return "byte";
-            else if (type == typeof(bool))
-                return "bool";
-            else if (type == typeof(long))
-                return "long";
-            else if (type == typeof(float))
-                return "float";
-            else if (type == typeof(double))
-                return "double";
-            else if (type == typeof(decimal))
-                return "decimal";
-            else if (type == typeof(string))
-                return "string";
-            else if (type.IsGenericType())
-                return type.FullName.Split('`')[0] + "<" + string.Join(", ", type.GetGenericArguments()
-                    .Select(x => GetFriendlyName(x)).ToArray()) + ">";
-            else
-                return type.FullName;
-        }
+    public static string GetFriendlyName(this Type type)
+    {
+        if (type == typeof(int))
+            return "int";
+        else if (type == typeof(short))
+            return "short";
+        else if (type == typeof(byte))
+            return "byte";
+        else if (type == typeof(bool))
+            return "bool";
+        else if (type == typeof(long))
+            return "long";
+        else if (type == typeof(float))
+            return "float";
+        else if (type == typeof(double))
+            return "double";
+        else if (type == typeof(decimal))
+            return "decimal";
+        else if (type == typeof(string))
+            return "string";
+        else if (type.IsGenericType())
+            return type.FullName.Split('`')[0] + "<" + string.Join(", ", type.GetGenericArguments()
+                .Select(x => GetFriendlyName(x)).ToArray()) + ">";
+        else
+            return type.FullName;
     }
 }

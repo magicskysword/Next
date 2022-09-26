@@ -1,11 +1,10 @@
-﻿namespace SkySwordKill.NextModEditor.Mod.Data
+﻿namespace SkySwordKill.NextModEditor.Mod.Data;
+
+[ModDataInit]
+public class ModItemUseSeidDataGroup : ModSeidDataGroupBase<ModItemUseSeidDataGroup>
 {
-    [ModDataInit]
-    public class ModItemUseSeidDataGroup : ModSeidDataGroupBase<ModItemUseSeidDataGroup>
+    public static void Init()
     {
-        public static void Init()
-        {
-            DirPath = "ItemsSeidJsonData";
-        }
+        DirPath = "ItemsSeidJsonData";
     }
 }

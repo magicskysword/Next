@@ -1,9 +1,8 @@
-﻿namespace SkySwordKill.Next.FGUI.Component
+﻿namespace SkySwordKill.Next.FGUI.Component;
+
+public abstract class ProjectListInspectItem : ProjectListItemBase
 {
-    public abstract class ProjectListInspectItem : ProjectListItemBase
-    {
-        public CtlPropertyInspector Inspector { get; set; }
+    public CtlPropertyInspector Inspector { get; set; }
         
-        public abstract void OnInspect();
-    }
+    public abstract void OnInspect();
 }

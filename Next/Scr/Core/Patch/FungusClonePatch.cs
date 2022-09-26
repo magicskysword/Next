@@ -7,72 +7,71 @@ using HarmonyLib;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace SkySwordKill.Next.Patch
+namespace SkySwordKill.Next.Patch;
+
+public class PatchTag : MonoBehaviour
 {
-    public class PatchTag : MonoBehaviour
-    {
         
-    }
+}
     
-    [HarmonyPatch]
-    public class FungusClonePatch
+[HarmonyPatch]
+public class FungusClonePatch
+{
+    static IEnumerable<MethodBase> TargetMethods()
     {
-        static IEnumerable<MethodBase> TargetMethods()
+        var methods = new List<MethodBase>();
+        var normalTypes = typeof(Object)
+            .GetMethods(BindingFlags.Static | BindingFlags.Public)
+            .Where(method => method.Name == "Instantiate" && !method.IsGenericMethod);
+        methods.AddRange(normalTypes);
+        var genericTypes = typeof(Object)
+            .GetMethods(BindingFlags.Static | BindingFlags.Public)
+            .Where(method => method.Name == "Instantiate" && method.IsGenericMethod);
+        foreach (var type in genericTypes)
         {
-            var methods = new List<MethodBase>();
-            var normalTypes = typeof(Object)
-                .GetMethods(BindingFlags.Static | BindingFlags.Public)
-                .Where(method => method.Name == "Instantiate" && !method.IsGenericMethod);
-            methods.AddRange(normalTypes);
-            var genericTypes = typeof(Object)
-                .GetMethods(BindingFlags.Static | BindingFlags.Public)
-                .Where(method => method.Name == "Instantiate" && method.IsGenericMethod);
-            foreach (var type in genericTypes)
-            {
-                methods.Add(type.MakeGenericMethod(typeof(Object)));
-            }
-            return methods;
+            methods.Add(type.MakeGenericMethod(typeof(Object)));
         }
-
-        [HarmonyPostfix]
-        public static void Postfix(ref Object __result)
-        {
-            if (__result is GameObject go && go.GetComponent<PatchTag>() == null)
-            {
-                var flowcharts = go.GetComponentsInChildren<Flowchart>();
-                if (flowcharts != null)
-                {
-                    foreach (var flowchart in flowcharts)
-                    {
-                        Main.FPatch.PatchFlowchart(flowchart);
-                    }
-                }
-
-                go.AddComponent<PatchTag>();
-            }
-        }
+        return methods;
     }
 
-    [HarmonyPatch(typeof(talkCompont), "Start")]
-    public class FungusTalkPatch
+    [HarmonyPostfix]
+    public static void Postfix(ref Object __result)
     {
-        [HarmonyPrefix]
-        public static void Prefix(talkCompont __instance)
+        if (__result is GameObject go && go.GetComponent<PatchTag>() == null)
         {
-            var go = __instance.gameObject;
-            if (go.GetComponent<PatchTag>() == null)
+            var flowcharts = go.GetComponentsInChildren<Flowchart>();
+            if (flowcharts != null)
             {
-                var flowcharts = go.GetComponentsInChildren<Flowchart>();
-                if (flowcharts != null)
+                foreach (var flowchart in flowcharts)
                 {
-                    foreach (var flowchart in flowcharts)
-                    {
-                        Main.FPatch.PatchFlowchart(flowchart);
-                    }
+                    Main.FPatch.PatchFlowchart(flowchart);
                 }
-
-                go.AddComponent<PatchTag>();
             }
+
+            go.AddComponent<PatchTag>();
+        }
+    }
+}
+
+[HarmonyPatch(typeof(talkCompont), "Start")]
+public class FungusTalkPatch
+{
+    [HarmonyPrefix]
+    public static void Prefix(talkCompont __instance)
+    {
+        var go = __instance.gameObject;
+        if (go.GetComponent<PatchTag>() == null)
+        {
+            var flowcharts = go.GetComponentsInChildren<Flowchart>();
+            if (flowcharts != null)
+            {
+                foreach (var flowchart in flowcharts)
+                {
+                    Main.FPatch.PatchFlowchart(flowchart);
+                }
+            }
+
+            go.AddComponent<PatchTag>();
         }
     }
 }

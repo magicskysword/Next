@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 
-namespace SkySwordKill.Next.FCanvas
+namespace SkySwordKill.Next.FCanvas;
+
+public class FPatchRecord : MonoBehaviour
 {
-    public class FPatchRecord : MonoBehaviour
-    {
 
         
-    }
 }

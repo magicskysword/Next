@@ -3,25 +3,24 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace SkySwordKill.NextFGUI.NextCore
+namespace SkySwordKill.NextFGUI.NextCore;
+
+public partial class UI_BtnProjListItem : GButton
 {
-    public partial class UI_BtnProjListItem : GButton
+    public GGraph m_selected;
+    public GGraph m_hover;
+    public const string URL = "ui://028qk31hro2x4c";
+
+    public static UI_BtnProjListItem CreateInstance()
     {
-        public GGraph m_selected;
-        public GGraph m_hover;
-        public const string URL = "ui://028qk31hro2x4c";
+        return (UI_BtnProjListItem)UIPackage.CreateObject("NextCore", "BtnProjListItem");
+    }
 
-        public static UI_BtnProjListItem CreateInstance()
-        {
-            return (UI_BtnProjListItem)UIPackage.CreateObject("NextCore", "BtnProjListItem");
-        }
+    public override void ConstructFromXML(XML xml)
+    {
+        base.ConstructFromXML(xml);
 
-        public override void ConstructFromXML(XML xml)
-        {
-            base.ConstructFromXML(xml);
-
-            m_selected = (GGraph)GetChild("selected");
-            m_hover = (GGraph)GetChild("hover");
-        }
+        m_selected = (GGraph)GetChild("selected");
+        m_hover = (GGraph)GetChild("hover");
     }
 }

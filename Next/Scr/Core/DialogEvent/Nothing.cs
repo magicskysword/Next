@@ -1,14 +1,13 @@
 ﻿using System;
 using SkySwordKill.Next.DialogSystem;
 
-namespace SkySwordKill.Next.DialogEvent
+namespace SkySwordKill.Next.DialogEvent;
+
+[DialogEvent("Nothing")]
+public class Nothing : IDialogEvent
 {
-    [DialogEvent("Nothing")]
-    public class Nothing : IDialogEvent
+    public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
     {
-        public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
-        {
-            callback?.Invoke();
-        }
+        callback?.Invoke();
     }
 }

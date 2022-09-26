@@ -2,16 +2,15 @@
 using SkySwordKill.Next.DialogSystem;
 using Tab;
 
-namespace SkySwordKill.Next.DialogEvent
+namespace SkySwordKill.Next.DialogEvent;
+
+[DialogEvent("CloseTabUI")]
+public class CloseTabUI : IDialogEvent
 {
-    [DialogEvent("CloseTabUI")]
-    public class CloseTabUI : IDialogEvent
+    public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
     {
-        public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
-        {
-            if(TabUIMag.Instance != null)
-                TabUIMag.Instance.TryEscClose();
-            callback?.Invoke();
-        }
+        if(TabUIMag.Instance != null)
+            TabUIMag.Instance.TryEscClose();
+        callback?.Invoke();
     }
 }

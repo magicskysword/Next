@@ -1,34 +1,34 @@
 ﻿using UnityEngine;
 
-namespace FairyGUI
+namespace FairyGUI;
+
+/// <summary>
+/// 
+/// </summary>
+public class StageEngine : MonoBehaviour
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class StageEngine : MonoBehaviour
+    public int ObjectsOnStage;
+    public int GraphicsOnStage;
+
+    public static bool beingQuit;
+
+    void Start()
     {
-        public int ObjectsOnStage;
-        public int GraphicsOnStage;
+        useGUILayout = false;
+    }
 
-        public static bool beingQuit;
+    void LateUpdate()
+    {
+        Stage.inst.InternalUpdate();
 
-        void Start()
-        {
-            useGUILayout = false;
-        }
+        ObjectsOnStage = Stats.ObjectCount;
+        GraphicsOnStage = Stats.GraphicsCount;
+    }
 
-        void LateUpdate()
-        {
-            Stage.inst.InternalUpdate();
-
-            ObjectsOnStage = Stats.ObjectCount;
-            GraphicsOnStage = Stats.GraphicsCount;
-        }
-
-        void OnGUI()
-        {
-            Stage.inst.HandleGUIEvents(Event.current);
-        }
+    void OnGUI()
+    {
+        Stage.inst.HandleGUIEvents(Event.current);
+    }
 
 #if !UNITY_5_4_OR_NEWER
         void OnLevelWasLoaded()
@@ -37,13 +37,12 @@ namespace FairyGUI
         }
 #endif
 
-        void OnApplicationQuit()
+    void OnApplicationQuit()
+    {
+        if (Application.isEditor)
         {
-            if (Application.isEditor)
-            {
-                beingQuit = true;
-                UIPackage.RemoveAllPackages();
-            }
+            beingQuit = true;
+            UIPackage.RemoveAllPackages();
         }
     }
 }

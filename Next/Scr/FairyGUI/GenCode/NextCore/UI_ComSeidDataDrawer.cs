@@ -3,27 +3,26 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace SkySwordKill.NextFGUI.NextCore
+namespace SkySwordKill.NextFGUI.NextCore;
+
+public partial class UI_ComSeidDataDrawer : GLabel
 {
-    public partial class UI_ComSeidDataDrawer : GLabel
+    public Controller m_grayed;
+    public GList m_lstSeid;
+    public GButton m_btnEdit;
+    public const string URL = "ui://028qk31h7exm3k";
+
+    public static UI_ComSeidDataDrawer CreateInstance()
     {
-        public Controller m_grayed;
-        public GList m_lstSeid;
-        public GButton m_btnEdit;
-        public const string URL = "ui://028qk31h7exm3k";
+        return (UI_ComSeidDataDrawer)UIPackage.CreateObject("NextCore", "ComSeidDataDrawer");
+    }
 
-        public static UI_ComSeidDataDrawer CreateInstance()
-        {
-            return (UI_ComSeidDataDrawer)UIPackage.CreateObject("NextCore", "ComSeidDataDrawer");
-        }
+    public override void ConstructFromXML(XML xml)
+    {
+        base.ConstructFromXML(xml);
 
-        public override void ConstructFromXML(XML xml)
-        {
-            base.ConstructFromXML(xml);
-
-            m_grayed = GetController("grayed");
-            m_lstSeid = (GList)GetChild("lstSeid");
-            m_btnEdit = (GButton)GetChild("btnEdit");
-        }
+        m_grayed = GetController("grayed");
+        m_lstSeid = (GList)GetChild("lstSeid");
+        m_btnEdit = (GButton)GetChild("btnEdit");
     }
 }

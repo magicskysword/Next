@@ -1,8 +1,7 @@
-﻿namespace SkySwordKill.Next.FGUI.Component
+﻿namespace SkySwordKill.Next.FGUI.Component;
+
+public abstract class ProjectListSeparator : ProjectListBase
 {
-    public abstract class ProjectListSeparator : ProjectListBase
-    {
 
         
-    }
 }

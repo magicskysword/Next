@@ -1,11 +1,10 @@
-﻿namespace SkySwordKill.Next.Mod
+﻿namespace SkySwordKill.Next.Mod;
+
+public enum ModState
 {
-    public enum ModState
-    {
-        Unload,
-        Disable,
-        Loading,
-        LoadSuccess,
-        LoadFail
-    }
+    Unload,
+    Disable,
+    Loading,
+    LoadSuccess,
+    LoadFail
 }

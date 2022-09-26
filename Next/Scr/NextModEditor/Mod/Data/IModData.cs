@@ -1,7 +1,6 @@
-﻿namespace SkySwordKill.NextModEditor.Mod.Data
+﻿namespace SkySwordKill.NextModEditor.Mod.Data;
+
+public interface IModData
 {
-    public interface IModData
-    {
-        int Id { get; set; }
-    }
+    int Id { get; set; }
 }

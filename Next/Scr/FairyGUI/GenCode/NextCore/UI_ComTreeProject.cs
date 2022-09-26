@@ -3,25 +3,24 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace SkySwordKill.NextFGUI.NextCore
+namespace SkySwordKill.NextFGUI.NextCore;
+
+public partial class UI_ComTreeProject : GComponent
 {
-    public partial class UI_ComTreeProject : GComponent
+    public GTree m_treeView;
+    public UI_ComToolsBar m_toolsBar;
+    public const string URL = "ui://028qk31hnkvz25";
+
+    public static UI_ComTreeProject CreateInstance()
     {
-        public GTree m_treeView;
-        public UI_ComToolsBar m_toolsBar;
-        public const string URL = "ui://028qk31hnkvz25";
+        return (UI_ComTreeProject)UIPackage.CreateObject("NextCore", "ComTreeProject");
+    }
 
-        public static UI_ComTreeProject CreateInstance()
-        {
-            return (UI_ComTreeProject)UIPackage.CreateObject("NextCore", "ComTreeProject");
-        }
+    public override void ConstructFromXML(XML xml)
+    {
+        base.ConstructFromXML(xml);
 
-        public override void ConstructFromXML(XML xml)
-        {
-            base.ConstructFromXML(xml);
-
-            m_treeView = (GTree)GetChild("treeView");
-            m_toolsBar = (UI_ComToolsBar)GetChild("toolsBar");
-        }
+        m_treeView = (GTree)GetChild("treeView");
+        m_toolsBar = (UI_ComToolsBar)GetChild("toolsBar");
     }
 }

@@ -1,8 +1,7 @@
-﻿namespace SkySwordKill.Next.FCanvas
+﻿namespace SkySwordKill.Next.FCanvas;
+
+public class FVariable
 {
-    public class FVariable
-    {
 
         
-    }
 }

@@ -1,38 +1,37 @@
 ﻿using System;
 using SkySwordKill.NextFGUI.NextCore;
 
-namespace SkySwordKill.Next.FGUI.Component
+namespace SkySwordKill.Next.FGUI.Component;
+
+public class CtlToolsSearchBox
 {
-    public class CtlToolsSearchBox
+    public CtlToolsSearchBox(UI_ComToolsSearchBox searchBox)
     {
-        public CtlToolsSearchBox(UI_ComToolsSearchBox searchBox)
-        {
-            SearchBox = searchBox;
-            SearchBox.m_btnSearch.onClick.Add(OnClickSearch);
-            SearchBox.m_btnReset.onClick.Add(OnClickReset);
+        SearchBox = searchBox;
+        SearchBox.m_btnSearch.onClick.Add(OnClickSearch);
+        SearchBox.m_btnReset.onClick.Add(OnClickReset);
             
-            SearchBox.m_inContent.onSubmit.Add(OnClickSearch);
-            SearchBox.m_inContent.cursor = "text";
-        }
+        SearchBox.m_inContent.onSubmit.Add(OnClickSearch);
+        SearchBox.m_inContent.cursor = "text";
+    }
         
-        public UI_ComToolsSearchBox SearchBox { get; }
-        public Action<string> OnSearch { get; set; }
+    public UI_ComToolsSearchBox SearchBox { get; }
+    public Action<string> OnSearch { get; set; }
 
-        public string SearchContent
-        {
-            get => SearchBox.m_inContent.text;
-            set => SearchBox.m_inContent.text = value;
-        }
+    public string SearchContent
+    {
+        get => SearchBox.m_inContent.text;
+        set => SearchBox.m_inContent.text = value;
+    }
 
-        private void OnClickSearch()
-        {
-            OnSearch?.Invoke(SearchContent);
-        }
+    private void OnClickSearch()
+    {
+        OnSearch?.Invoke(SearchContent);
+    }
         
-        private void OnClickReset()
-        {
-            SearchContent = string.Empty;
-            OnSearch?.Invoke(string.Empty);
-        }
+    private void OnClickReset()
+    {
+        SearchContent = string.Empty;
+        OnSearch?.Invoke(string.Empty);
     }
 }

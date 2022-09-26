@@ -1,13 +1,12 @@
-﻿namespace SkySwordKill.NextFGUI.NextCore
+﻿namespace SkySwordKill.NextFGUI.NextCore;
+
+public partial class UI_ComStringAreaDrawer
 {
-    public partial class UI_ComStringAreaDrawer
+    public void SetEditable(bool value)
     {
-        public void SetEditable(bool value)
-        {
-            grayed = !value;
-            m_inContent.editable = value;
-            m_btnEdit.enabled = value;
-            m_inContent.cursor = value ? "text" : string.Empty;
-        }
+        grayed = !value;
+        m_inContent.editable = value;
+        m_btnEdit.enabled = value;
+        m_inContent.cursor = value ? "text" : string.Empty;
     }
 }

@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace SkySwordKill.NextModEditor.Mod.Data
+namespace SkySwordKill.NextModEditor.Mod.Data;
+
+[AttributeUsage(AttributeTargets.Class)]
+public class ModDataInitAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Class)]
-    public class ModDataInitAttribute : Attribute
-    {
     
-    }
 }

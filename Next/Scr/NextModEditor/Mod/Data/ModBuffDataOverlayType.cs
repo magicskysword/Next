@@ -1,8 +1,7 @@
-﻿namespace SkySwordKill.NextModEditor.Mod.Data
+﻿namespace SkySwordKill.NextModEditor.Mod.Data;
+
+public class ModBuffDataOverlayType
 {
-    public class ModBuffDataOverlayType
-    {
-        public int ID { get; set; }
-        public string Desc { get; set; }
-    }
+    public int ID { get; set; }
+    public string Desc { get; set; }
 }

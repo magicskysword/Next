@@ -1,16 +1,15 @@
 ﻿using System;
 using SkySwordKill.Next.DialogSystem;
 
-namespace SkySwordKill.Next.DialogEvent
+namespace SkySwordKill.Next.DialogEvent;
+
+[DialogEvent("ChangeMentality")]
+public class ChangeMentality : IDialogEvent
 {
-    [DialogEvent("ChangeMentality")]
-    public class ChangeMentality : IDialogEvent
+    public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
     {
-        public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
-        {
-            int num = command.GetInt(0);
-            Tools.instance.getPlayer().xinjin += num;
-            callback?.Invoke();
-        }
+        int num = command.GetInt(0);
+        Tools.instance.getPlayer().xinjin += num;
+        callback?.Invoke();
     }
 }

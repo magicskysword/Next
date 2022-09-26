@@ -1,7 +1,6 @@
-﻿namespace SkySwordKill.NextModEditor.Mod.Data
+﻿namespace SkySwordKill.NextModEditor.Mod.Data;
+
+public class ModSeidToken
 {
-    public class ModSeidToken
-    {
-        public ModSeidPropertyType PropertyType;
-    }
+    public ModSeidPropertyType PropertyType;
 }

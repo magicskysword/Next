@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using FairyGUI;
 
-namespace SkySwordKill.Next.FGUI.Component
+namespace SkySwordKill.Next.FGUI.Component;
+
+public abstract class ProjectTreeNodeBase : ProjectBase
 {
-    public abstract class ProjectTreeNodeBase : ProjectBase
-    {
-        public abstract bool IsLeaf { get; }
-        public abstract List<ProjectTreeNodeBase> Children { get; }
-    }
+    public abstract bool IsLeaf { get; }
+    public abstract List<ProjectTreeNodeBase> Children { get; }
 }

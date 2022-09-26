@@ -1,23 +1,22 @@
 ﻿using System;
 using SkySwordKill.Next.DialogSystem;
 
-namespace SkySwordKill.Next.DialogEvent
+namespace SkySwordKill.Next.DialogEvent;
+
+[DialogEvent("ChangeInspiration")]
+public class ChangeInspiration : IDialogEvent
 {
-    [DialogEvent("ChangeInspiration")]
-    public class ChangeInspiration : IDialogEvent
+    public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
     {
-        public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
+        int num = command.GetInt(0);
+        if (num >= 0)
         {
-            int num = command.GetInt(0);
-            if (num >= 0)
-            {
-                env.player.AddLingGan(num);
-            }
-            else
-            {
-                env.player.ReduceLingGan(-num);
-            }
-            callback?.Invoke();
+            env.player.AddLingGan(num);
         }
+        else
+        {
+            env.player.ReduceLingGan(-num);
+        }
+        callback?.Invoke();
     }
 }

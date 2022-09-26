@@ -1,8 +1,7 @@
-﻿namespace SkySwordKill.Next.FGUI.Component
+﻿namespace SkySwordKill.Next.FGUI.Component;
+
+public interface IProjectItem
 {
-    public interface IProjectItem
-    {
-        string ID { get; }
-        PanelPageBase CreatePage();
-    }
+    string ID { get; }
+    PanelPageBase CreatePage();
 }

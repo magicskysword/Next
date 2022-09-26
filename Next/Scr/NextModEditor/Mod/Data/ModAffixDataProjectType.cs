@@ -1,8 +1,7 @@
-﻿namespace SkySwordKill.NextModEditor.Mod.Data
+﻿namespace SkySwordKill.NextModEditor.Mod.Data;
+
+public class ModAffixDataProjectType
 {
-    public class ModAffixDataProjectType
-    {
-        public string TypeName { get; set; }
-        public int TypeNum { get; set; }
-    }
+    public string TypeName { get; set; }
+    public int TypeNum { get; set; }
 }

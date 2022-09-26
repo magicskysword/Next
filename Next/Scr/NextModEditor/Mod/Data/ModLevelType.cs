@@ -1,8 +1,7 @@
-﻿namespace SkySwordKill.NextModEditor.Mod.Data
+﻿namespace SkySwordKill.NextModEditor.Mod.Data;
+
+public class ModLevelType
 {
-    public class ModLevelType
-    {
-        public int TypeID { get; set; }
-        public string Desc { get; set; }
-    }
+    public int TypeID { get; set; }
+    public string Desc { get; set; }
 }

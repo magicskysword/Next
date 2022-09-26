@@ -1,16 +1,15 @@
 ﻿using System;
 using SkySwordKill.Next.DialogSystem;
 
-namespace SkySwordKill.Next.DialogEvent
+namespace SkySwordKill.Next.DialogEvent;
+
+[DialogEvent("ChangeBaseSpirit")]
+public class ChangeBaseSpirit : IDialogEvent
 {
-    [DialogEvent("ChangeBaseSpirit")]
-    public class ChangeBaseSpirit : IDialogEvent
+    public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
     {
-        public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
-        {
-            int num = command.GetInt(0);
-            env.player.addShenShi(num);
-            callback?.Invoke();
-        }
+        int num = command.GetInt(0);
+        env.player.addShenShi(num);
+        callback?.Invoke();
     }
 }

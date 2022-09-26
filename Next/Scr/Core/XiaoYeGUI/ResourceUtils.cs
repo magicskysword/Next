@@ -3,50 +3,49 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace SkySwordKill.Next.XiaoYeGUI
+namespace SkySwordKill.Next.XiaoYeGUI;
+
+public static class ResourceUtils
 {
-    public static class ResourceUtils
+    public static byte[] ReadAllBytes(this Stream input)
     {
-        public static byte[] ReadAllBytes(this Stream input)
+        byte[] array = new byte[2000000];
+        byte[] result;
+        using (MemoryStream memoryStream = new MemoryStream())
         {
-            byte[] array = new byte[2000000];
-            byte[] result;
-            using (MemoryStream memoryStream = new MemoryStream())
+            int count;
+            while ((count = input.Read(array, 0, array.Length)) > 0)
             {
-                int count;
-                while ((count = input.Read(array, 0, array.Length)) > 0)
-                {
-                    memoryStream.Write(array, 0, count);
-                }
-
-                result = memoryStream.ToArray();
+                memoryStream.Write(array, 0, count);
             }
 
-            return result;
+            result = memoryStream.ToArray();
         }
 
-        public static byte[] GetEmbeddedResource(string resourceFileName, Assembly containingAssembly = null)
+        return result;
+    }
+
+    public static byte[] GetEmbeddedResource(string resourceFileName, Assembly containingAssembly = null)
+    {
+        if (containingAssembly == null)
         {
-            if (containingAssembly == null)
-            {
-                containingAssembly = Assembly.GetCallingAssembly();
-            }
-
-            string name = containingAssembly.GetManifestResourceNames()
-                .Single((string str) => str.EndsWith(resourceFileName));
-            byte[] result;
-            using (Stream manifestResourceStream = containingAssembly.GetManifestResourceStream(name))
-            {
-                Stream stream = manifestResourceStream;
-                if (stream == null)
-                {
-                    throw new InvalidOperationException("The resource " + resourceFileName + " was not found");
-                }
-
-                result = stream.ReadAllBytes();
-            }
-
-            return result;
+            containingAssembly = Assembly.GetCallingAssembly();
         }
+
+        string name = containingAssembly.GetManifestResourceNames()
+            .Single((string str) => str.EndsWith(resourceFileName));
+        byte[] result;
+        using (Stream manifestResourceStream = containingAssembly.GetManifestResourceStream(name))
+        {
+            Stream stream = manifestResourceStream;
+            if (stream == null)
+            {
+                throw new InvalidOperationException("The resource " + resourceFileName + " was not found");
+            }
+
+            result = stream.ReadAllBytes();
+        }
+
+        return result;
     }
 }

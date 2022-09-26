@@ -1,19 +1,18 @@
 ﻿using System;
 using SkySwordKill.Next.DialogSystem;
 
-namespace SkySwordKill.Next.DialogEvent
+namespace SkySwordKill.Next.DialogEvent;
+
+[DialogEvent("LearnTrainSkill")]
+public class LearnTrainSkill: IDialogEvent
 {
-    [DialogEvent("LearnTrainSkill")]
-    public class LearnTrainSkill: IDialogEvent
+    public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
     {
-        public void Execute(DialogCommand command, DialogEnvironment env, Action callback)
-        {
-            int id = command.GetInt(0);
+        int id = command.GetInt(0);
             
-            PlayerEx.StudyShuangXiuSkill(id);
+        PlayerEx.StudyShuangXiuSkill(id);
             
-            MessageMag.Instance.Send(MessageName.MSG_PLAYER_USE_ITEM, null);
-            callback?.Invoke();
-        }
+        MessageMag.Instance.Send(MessageName.MSG_PLAYER_USE_ITEM, null);
+        callback?.Invoke();
     }
 }

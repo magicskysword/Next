@@ -1,8 +1,7 @@
-﻿namespace SkySwordKill.Next.FGUI.Component
+﻿namespace SkySwordKill.Next.FGUI.Component;
+
+public abstract class ProjectBase
 {
-    public abstract class ProjectBase
-    {
-        public abstract string Name { get; }
-        public virtual string Icon { get; } = string.Empty;
-    }
+    public abstract string Name { get; }
+    public virtual string Icon { get; } = string.Empty;
 }

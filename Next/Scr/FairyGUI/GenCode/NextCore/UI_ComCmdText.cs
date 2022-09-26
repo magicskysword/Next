@@ -3,25 +3,24 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace SkySwordKill.NextFGUI.NextCore
+namespace SkySwordKill.NextFGUI.NextCore;
+
+public partial class UI_ComCmdText : GLabel
 {
-    public partial class UI_ComCmdText : GLabel
+    public Controller m_bg;
+    public GGraph m_bg_2;
+    public const string URL = "ui://028qk31hasvv39";
+
+    public static UI_ComCmdText CreateInstance()
     {
-        public Controller m_bg;
-        public GGraph m_bg_2;
-        public const string URL = "ui://028qk31hasvv39";
+        return (UI_ComCmdText)UIPackage.CreateObject("NextCore", "ComCmdText");
+    }
 
-        public static UI_ComCmdText CreateInstance()
-        {
-            return (UI_ComCmdText)UIPackage.CreateObject("NextCore", "ComCmdText");
-        }
+    public override void ConstructFromXML(XML xml)
+    {
+        base.ConstructFromXML(xml);
 
-        public override void ConstructFromXML(XML xml)
-        {
-            base.ConstructFromXML(xml);
-
-            m_bg = GetController("bg");
-            m_bg_2 = (GGraph)GetChild("bg");
-        }
+        m_bg = GetController("bg");
+        m_bg_2 = (GGraph)GetChild("bg");
     }
 }

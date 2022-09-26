@@ -5,78 +5,77 @@ using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.NextFGUI.NextCore;
 
-namespace SkySwordKill.Next.FGUI.Component
+namespace SkySwordKill.Next.FGUI.Component;
+
+public class CtlStringAreaPropertyDrawer : CtlPropertyDrawerBase
 {
-    public class CtlStringAreaPropertyDrawer : CtlPropertyDrawerBase
+    private string _drawerName;
+    private UI_ComStringAreaDrawer Drawer => (UI_ComStringAreaDrawer)Component;
+    private Action<string> _setter;
+    private Func<string> _getter;
+    private bool _hasPreview;
+    private Func<string, string> _onAnalysisRef;
+
+    public CtlStringAreaPropertyDrawer(string drawerName,Action<string> setter,Func<string> getter, 
+        bool hasPreview = false, Func<string, string> onAnalysisRef = null)
     {
-        private string _drawerName;
-        private UI_ComStringAreaDrawer Drawer => (UI_ComStringAreaDrawer)Component;
-        private Action<string> _setter;
-        private Func<string> _getter;
-        private bool _hasPreview;
-        private Func<string, string> _onAnalysisRef;
-
-        public CtlStringAreaPropertyDrawer(string drawerName,Action<string> setter,Func<string> getter, 
-            bool hasPreview = false, Func<string, string> onAnalysisRef = null)
-        {
-            _drawerName = drawerName;
-            _setter = setter;
-            _getter = getter;
-            _hasPreview = hasPreview;
-            _onAnalysisRef = onAnalysisRef;
-        }
+        _drawerName = drawerName;
+        _setter = setter;
+        _getter = getter;
+        _hasPreview = hasPreview;
+        _onAnalysisRef = onAnalysisRef;
+    }
         
-        protected override GComponent OnCreateCom()
+    protected override GComponent OnCreateCom()
+    {
+        var drawer = UI_ComStringAreaDrawer.CreateInstance();
+        drawer.m_inContent.onFocusOut.Add(() => OnSetProperty(drawer.m_inContent.text));
+        drawer.title = _drawerName;
+        drawer.m_btnEdit.onClick.Set(()=>
         {
-            var drawer = UI_ComStringAreaDrawer.CreateInstance();
-            drawer.m_inContent.onFocusOut.Add(() => OnSetProperty(drawer.m_inContent.text));
-            drawer.title = _drawerName;
-            drawer.m_btnEdit.onClick.Set(()=>
+            if (_hasPreview)
             {
-                if (_hasPreview)
-                {
-                    WindowStringAreaInputPreviewDialog.CreateDialog(
-                        "ModEditor.Main.dialog.textEdit".I18N(),
-                        OnGetProperty(), 
-                        OnConfirmEdit,
-                        onAnalysisRef: _onAnalysisRef);
-                }
-                else
-                {
-                    WindowStringAreaInputDialog.CreateDialog(
-                        "ModEditor.Main.dialog.textEdit".I18N(),
-                        OnGetProperty(), 
-                        OnConfirmEdit);
-                }
-            });
-            return drawer;
-        }
+                WindowStringAreaInputPreviewDialog.CreateDialog(
+                    "ModEditor.Main.dialog.textEdit".I18N(),
+                    OnGetProperty(), 
+                    OnConfirmEdit,
+                    onAnalysisRef: _onAnalysisRef);
+            }
+            else
+            {
+                WindowStringAreaInputDialog.CreateDialog(
+                    "ModEditor.Main.dialog.textEdit".I18N(),
+                    OnGetProperty(), 
+                    OnConfirmEdit);
+            }
+        });
+        return drawer;
+    }
     
-        private void OnConfirmEdit(string str)
-        {
-            OnSetProperty(str);
-            Refresh();
-        }
+    private void OnConfirmEdit(string str)
+    {
+        OnSetProperty(str);
+        Refresh();
+    }
     
-        protected override void OnRefresh()
-        {
-            Drawer.m_inContent.text = OnGetProperty();
-        }
+    protected override void OnRefresh()
+    {
+        Drawer.m_inContent.text = OnGetProperty();
+    }
 
-        protected override void SetDrawerEditable(bool value)
-        {
-            Drawer.SetEditable(value);
-        }
+    protected override void SetDrawerEditable(bool value)
+    {
+        Drawer.SetEditable(value);
+    }
 
-        private void OnSetProperty(string text)
-        {
-            this.Record(new ValueChangedCommand<string>(OnGetProperty(),text, _setter));
-            OnChanged?.Invoke();
-        }
+    private void OnSetProperty(string text)
+    {
+        this.Record(new ValueChangedCommand<string>(OnGetProperty(),text, _setter));
+        OnChanged?.Invoke();
+    }
     
-        private string OnGetProperty()
-        {
-            return _getter.Invoke();
-        }
+    private string OnGetProperty()
+    {
+        return _getter.Invoke();
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace SkySwordKill.NextModEditor.Mod
+﻿namespace SkySwordKill.NextModEditor.Mod;
+
+public interface IModDataClipboardPage
 {
-    public interface IModDataClipboardPage
-    {
-        ModDataClipboard DataClipboard { get; set; }
-    }
+    ModDataClipboard DataClipboard { get; set; }
 }

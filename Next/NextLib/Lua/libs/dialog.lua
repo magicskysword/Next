@@ -10,7 +10,7 @@ function dialog.runEvent(scr, funcName, command,
     local runner = eventRunner.getRunner(env, command)
     local function runEventCoroutine()
         xpcall(function()
-            func(runner, env)
+            func(runner, runner.env)
             callback()
         end, function(error)
             Main.LogError("Lua运行错误 --> " .. error .. "\n" .. debug.traceback(nil, 2))

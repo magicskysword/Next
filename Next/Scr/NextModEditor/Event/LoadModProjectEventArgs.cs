@@ -1,9 +1,8 @@
 ﻿using SkySwordKill.NextModEditor.Mod;
 
-namespace SkySwordKill.NextModEditor.Event
+namespace SkySwordKill.NextModEditor.Event;
+
+public class LoadModProjectEventArgs : EventArgs
 {
-    public class LoadModProjectEventArgs : EventArgs
-    {
-        public ModProject ModProject { get; set; }
-    }
+    public ModProject ModProject { get; set; }
 }

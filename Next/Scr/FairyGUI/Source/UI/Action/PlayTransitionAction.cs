@@ -1,52 +1,51 @@
 ﻿using FairyGUI.Utils;
 
-namespace FairyGUI
+namespace FairyGUI;
+
+public class PlayTransitionAction : ControllerAction
 {
-    public class PlayTransitionAction : ControllerAction
+    public string transitionName;
+    public int playTimes;
+    public float delay;
+    public bool stopOnExit;
+
+    private Transition _currentTransition;
+
+    public PlayTransitionAction()
     {
-        public string transitionName;
-        public int playTimes;
-        public float delay;
-        public bool stopOnExit;
+        playTimes = 1;
+        delay = 0;
+    }
 
-        private Transition _currentTransition;
-
-        public PlayTransitionAction()
+    override protected void Enter(Controller controller)
+    {
+        Transition trans = controller.parent.GetTransition(transitionName);
+        if (trans != null)
         {
-            playTimes = 1;
-            delay = 0;
+            if (_currentTransition != null && _currentTransition.playing)
+                trans.ChangePlayTimes(playTimes);
+            else
+                trans.Play(playTimes, delay, null);
+            _currentTransition = trans;
         }
+    }
 
-        override protected void Enter(Controller controller)
+    override protected void Leave(Controller controller)
+    {
+        if (stopOnExit && _currentTransition != null)
         {
-            Transition trans = controller.parent.GetTransition(transitionName);
-            if (trans != null)
-            {
-                if (_currentTransition != null && _currentTransition.playing)
-                    trans.ChangePlayTimes(playTimes);
-                else
-                    trans.Play(playTimes, delay, null);
-                _currentTransition = trans;
-            }
+            _currentTransition.Stop();
+            _currentTransition = null;
         }
+    }
 
-        override protected void Leave(Controller controller)
-        {
-            if (stopOnExit && _currentTransition != null)
-            {
-                _currentTransition.Stop();
-                _currentTransition = null;
-            }
-        }
+    override public void Setup(ByteBuffer buffer)
+    {
+        base.Setup(buffer);
 
-        override public void Setup(ByteBuffer buffer)
-        {
-            base.Setup(buffer);
-
-            transitionName = buffer.ReadS();
-            playTimes = buffer.ReadInt();
-            delay = buffer.ReadFloat();
-            stopOnExit = buffer.ReadBool();
-        }
+        transitionName = buffer.ReadS();
+        playTimes = buffer.ReadInt();
+        delay = buffer.ReadFloat();
+        stopOnExit = buffer.ReadBool();
     }
 }

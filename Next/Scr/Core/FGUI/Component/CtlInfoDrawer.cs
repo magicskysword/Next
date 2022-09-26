@@ -1,36 +1,35 @@
 ﻿using FairyGUI;
 using SkySwordKill.NextFGUI.NextCore;
 
-namespace SkySwordKill.Next.FGUI.Component
+namespace SkySwordKill.Next.FGUI.Component;
+
+public class CtlInfoDrawer : CtlPropertyDrawerBase
 {
-    public class CtlInfoDrawer : CtlPropertyDrawerBase
+    public CtlInfoDrawer()
     {
-        public CtlInfoDrawer()
-        {
 
-        }
+    }
 
-        private UI_ComInfoDrawer Drawer { get; set; }
+    private UI_ComInfoDrawer Drawer { get; set; }
 
-        protected override GComponent OnCreateCom()
-        {
-            Drawer = UIPackage.CreateObject(FGUIManager.PKG_NEXT_CORE, "ComTextDrawer").As<UI_ComInfoDrawer>();
-            return Drawer;
-        }
+    protected override GComponent OnCreateCom()
+    {
+        Drawer = UIPackage.CreateObject(FGUIManager.PKG_NEXT_CORE, "ComTextDrawer").As<UI_ComInfoDrawer>();
+        return Drawer;
+    }
 
-        protected override void SetDrawerEditable(bool value)
-        {
+    protected override void SetDrawerEditable(bool value)
+    {
             
-        }
+    }
 
-        public void SetTitle(string title)
-        {
-            Drawer.title = title;
-        }
+    public void SetTitle(string title)
+    {
+        Drawer.title = title;
+    }
 
-        public void SetContent(string content)
-        {
-            Drawer.m_content.text = content;
-        }
+    public void SetContent(string content)
+    {
+        Drawer.m_content.text = content;
     }
 }

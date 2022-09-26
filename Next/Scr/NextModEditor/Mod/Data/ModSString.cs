@@ -1,17 +1,16 @@
-﻿namespace SkySwordKill.NextModEditor.Mod.Data
+﻿namespace SkySwordKill.NextModEditor.Mod.Data;
+
+public class ModSString : ModSeidToken
 {
-    public class ModSString : ModSeidToken
+    public string Value { get; set; } = string.Empty;
+
+    public ModSString()
     {
-        public string Value { get; set; } = string.Empty;
+        PropertyType = ModSeidPropertyType.String;
+    }
 
-        public ModSString()
-        {
-            PropertyType = ModSeidPropertyType.String;
-        }
-
-        public ModSString(string value) : this()
-        {
-            Value = value;
-        }
+    public ModSString(string value) : this()
+    {
+        Value = value;
     }
 }

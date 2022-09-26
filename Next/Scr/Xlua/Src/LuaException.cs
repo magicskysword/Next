@@ -8,12 +8,11 @@
 
 using System;
 
-namespace XLua
+namespace XLua;
+
+[Serializable]
+public class LuaException : Exception
 {
-    [Serializable]
-    public class LuaException : Exception
-    {
-        public LuaException(string message) : base(message)
-        {}
-    }
+    public LuaException(string message) : base(message)
+    {}
 }

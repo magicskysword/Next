@@ -2,23 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FairyGUI
+namespace FairyGUI;
+
+public interface IFilter
 {
-    public interface IFilter
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        DisplayObject target { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    DisplayObject target { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        void Update();
+    /// <summary>
+    /// 
+    /// </summary>
+    void Update();
 
-        /// <summary>
-        /// 
-        /// </summary>
-        void Dispose();
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    void Dispose();
 }

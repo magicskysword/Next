@@ -1,8 +1,7 @@
-﻿namespace SkySwordKill.NextModEditor.Mod.Data
+﻿namespace SkySwordKill.NextModEditor.Mod.Data;
+
+public class ModSkillDataAttackScriptType
 {
-    public class ModSkillDataAttackScriptType
-    {
-        public string Id { get; set; }
-        public string Desc { get; set; }
-    }
+    public string Id { get; set; }
+    public string Desc { get; set; }
 }
