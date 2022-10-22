@@ -3,22 +3,23 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace SkySwordKill.NextFGUI.NextCore;
-
-public partial class UI_ComTitleDrawer : GLabel
+namespace SkySwordKill.NextFGUI.NextCore
 {
-    public GGraph m_underline;
-    public const string URL = "ui://028qk31hfqcb3s";
-
-    public static UI_ComTitleDrawer CreateInstance()
+    public partial class UI_ComTitleDrawer : GLabel
     {
-        return (UI_ComTitleDrawer)UIPackage.CreateObject("NextCore", "ComTitleDrawer");
-    }
+        public GGraph m_underline;
+        public const string URL = "ui://028qk31hfqcb3s";
 
-    public override void ConstructFromXML(XML xml)
-    {
-        base.ConstructFromXML(xml);
+        public static UI_ComTitleDrawer CreateInstance()
+        {
+            return (UI_ComTitleDrawer)UIPackage.CreateObject("NextCore", "ComTitleDrawer");
+        }
 
-        m_underline = (GGraph)GetChild("underline");
+        public override void ConstructFromXML(XML xml)
+        {
+            base.ConstructFromXML(xml);
+
+            m_underline = (GGraph)GetChild("underline");
+        }
     }
 }

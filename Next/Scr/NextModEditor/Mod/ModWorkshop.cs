@@ -2,7 +2,9 @@
 using System.IO;
 using script.Steam;
 using SkySwordKill.Next.FGUI;
+using SkySwordKill.Next.Mod;
 using SkySwordKill.NextModEditor.Mod.Data;
+using Steamworks;
 
 namespace SkySwordKill.NextModEditor.Mod;
 
@@ -28,7 +30,9 @@ public class ModWorkshop
 
     public void SaveWorkshopItem()
     {
-        ModUtils.WriteConfig(ModInfoPath, ModInfo);
+        ModInfo.SteamID = SteamUser.GetSteamID().m_SteamID;
+        ModInfo.ModPath = Path;
+        ModManager.WriteConfig(ModInfoPath, ModInfo);
     }
         
     public void SaveProjects()

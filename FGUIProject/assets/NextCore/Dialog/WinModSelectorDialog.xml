@@ -4,7 +4,7 @@
     <component id="n0_nqml" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="1280,768" controller="hasCloseButton,1,canResize,1">
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <graph id="n2_nqml" name="bg" xy="3,29" pivot="0.5,0.5" size="892,735" type="rect" lineSize="2" fillColor="#ff2c313c">
+    <graph id="n2_nqml" name="bg" xy="3,29" pivot="0.5,0.5" size="892,738" type="rect" lineSize="2" fillColor="#ff2c313c">
       <relation target="n1_nqml" sidePair="width-width,height-height,center-center,middle-middle"/>
     </graph>
     <component id="n1_nqml" name="table" src="nkvz2b" fileName="Component/Table/ComTableList.xml" xy="5,30" size="888,731">

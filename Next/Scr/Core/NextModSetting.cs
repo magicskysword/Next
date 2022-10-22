@@ -8,6 +8,7 @@ namespace SkySwordKill.Next;
 
 public class NextModSetting
 {
+    public Dictionary<string, ModGroupSetting> groupSettings = new Dictionary<string, ModGroupSetting>();
     public Dictionary<string, ModSetting> modSettings = new Dictionary<string, ModSetting>();
 
     public static NextModSetting LoadSetting()
@@ -26,7 +27,7 @@ public class NextModSetting
                 // ignored
             }
         }
-        nextModSetting = nextModSetting ?? new NextModSetting();
+        nextModSetting ??= new NextModSetting();
             
         return nextModSetting;
     }
@@ -45,20 +46,35 @@ public class NextModSetting
         }
     }
 
-    public ModSetting GetOrCreateModSetting(ModConfig modConfig)
+    public ModGroupSetting GetOrCreateModGroupSetting(ModGroup modGroup)
     {
-        var modId = Path.GetFileNameWithoutExtension(modConfig.Path);
-        return GetOrCreateModSetting(modId);
+        if (!groupSettings.TryGetValue(modGroup.GroupKey, out var modSetting))
+        {
+            modSetting = new ModGroupSetting();
+            groupSettings.Add(modGroup.GroupKey, modSetting);
+        }
+        modSetting.BindGroup = modGroup;
+        return modSetting;
     }
-
-    public ModSetting GetOrCreateModSetting(string modId)
+    
+    public ModSetting GetOrCreateModSetting(ModConfig config)
     {
-            
-        if (!modSettings.TryGetValue(modId, out var modSetting))
+        var key = config.SettingKey;
+        if (!modSettings.TryGetValue(key, out var modSetting))
         {
             modSetting = new ModSetting();
-            modSettings.Add(modId, modSetting);
+            modSettings.Add(key, modSetting);
         }
+        modSetting.BindMod = config;
         return modSetting;
+    }
+
+    public void ClearPriority()
+    {
+        var priority = 0;
+        foreach (var pair in groupSettings)
+        {
+            pair.Value.priority = priority++;
+        }
     }
 }

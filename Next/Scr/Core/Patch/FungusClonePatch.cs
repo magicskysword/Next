@@ -13,10 +13,11 @@ public class PatchTag : MonoBehaviour
 {
         
 }
-    
+
 [HarmonyPatch]
 public class FungusClonePatch
 {
+    [HarmonyTargetMethod]
     static IEnumerable<MethodBase> TargetMethods()
     {
         var methods = new List<MethodBase>();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="200,30" extention="Label">
   <displayList>
-    <text id="n0_7exm" name="title" xy="16,4" size="168,22" fontSize="14" color="#ffffff" vAlign="middle" autoSize="height" autoClearText="true" text="String">
+    <text id="n0_7exm" name="title" xy="16,4" size="168,22" fontSize="14" color="#ffffff" vAlign="middle" ubb="true" autoSize="height" autoClearText="true" text="String">
       <relation target="" sidePair="width-width"/>
     </text>
   </displayList>

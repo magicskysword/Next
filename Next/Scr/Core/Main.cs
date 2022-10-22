@@ -20,7 +20,7 @@ namespace SkySwordKill.Next;
 [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
 public partial class Main : BaseUnityPlugin
 {
-    public const string MOD_VERSION = "0.6.5";
+    public const string MOD_VERSION = "0.7.0.2";
         
     public static Lazy<string> PathLocalModsDir;
     public static Lazy<string> PathLibraryDir;
@@ -45,7 +45,6 @@ public partial class Main : BaseUnityPlugin
         
     public ConfigTarget<string> LanguageID;
     public ConfigTarget<bool> DebugMode;
-    public ConfigTarget<bool> OpenInStart;
     public ConfigTarget<KeyCode> WinKeyCode;
         
     public NextLanguage NextLanguage;
@@ -75,8 +74,6 @@ public partial class Main : BaseUnityPlugin
         LanguageID = Config.CreateConfig("Main.Language", "Plugin Language", "",
             "");
         WinKeyCode = Config.CreateConfig("Main.OpenKeyCode", "Window HotKey", KeyCode.F4,
-            "");
-        OpenInStart = Config.CreateConfig("Main.OpenInStart", "Open Window In Game Start", true,
             "");
         DebugMode = Config.CreateConfig("Debug.Mode", "Debug Mode", false,
             "");
@@ -119,9 +116,7 @@ public partial class Main : BaseUnityPlugin
         // Check Update
         Updater.CheckVersion();
         
-        // 根据设置显示窗口
-        // show window by config
-        _isWinOpen = OpenInStart.Value;
+        _isWinOpen = false;
     }
 
     private void InitDir()
@@ -186,10 +181,7 @@ public partial class Main : BaseUnityPlugin
             
         WinKeyCode.SetName("Config.Main.OpenKeyCode.Name".I18N());
         WinKeyCode.SetDesc("Config.Main.OpenKeyCode.Desc".I18N());
-            
-        OpenInStart.SetName("Config.Main.OpenInStart.Name".I18N());
-        OpenInStart.SetDesc("Config.Main.OpenInStart.Desc".I18N());
-            
+
         DebugMode.SetName("Config.Debug.Mode.Name".I18N());
         DebugMode.SetDesc("Config.Debug.Mode.Desc".I18N());
     }
@@ -208,11 +200,6 @@ public partial class Main : BaseUnityPlugin
     public void SaveModSetting()
     {
         NextModSetting.SaveSetting(NextModSetting);
-    }
-
-    public static Coroutine InvokeCoroutine(IEnumerator enumerator)
-    {
-        return I.StartCoroutine(enumerator);
     }
 
     public static void LogLua(object obj)

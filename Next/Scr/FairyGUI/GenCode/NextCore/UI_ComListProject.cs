@@ -3,24 +3,27 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace SkySwordKill.NextFGUI.NextCore;
-
-public partial class UI_ComListProject : GComponent
+namespace SkySwordKill.NextFGUI.NextCore
 {
-    public UI_ComToolsBar m_toolsBar;
-    public GList m_list;
-    public const string URL = "ui://028qk31hro2x4e";
-
-    public static UI_ComListProject CreateInstance()
+    public partial class UI_ComListProject : GComponent
     {
-        return (UI_ComListProject)UIPackage.CreateObject("NextCore", "ComListProject");
-    }
+        public Controller m_showToolbar;
+        public UI_ComToolsBar m_toolsBar;
+        public GList m_list;
+        public const string URL = "ui://028qk31hro2x4e";
 
-    public override void ConstructFromXML(XML xml)
-    {
-        base.ConstructFromXML(xml);
+        public static UI_ComListProject CreateInstance()
+        {
+            return (UI_ComListProject)UIPackage.CreateObject("NextCore", "ComListProject");
+        }
 
-        m_toolsBar = (UI_ComToolsBar)GetChild("toolsBar");
-        m_list = (GList)GetChild("list");
+        public override void ConstructFromXML(XML xml)
+        {
+            base.ConstructFromXML(xml);
+
+            m_showToolbar = GetController("showToolbar");
+            m_toolsBar = (UI_ComToolsBar)GetChild("toolsBar");
+            m_list = (GList)GetChild("list");
+        }
     }
 }

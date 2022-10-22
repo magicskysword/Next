@@ -171,12 +171,14 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\Component\CtlHeaderBar.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlIconDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlInfoDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlInfoLinkDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlInspectorBase.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlIntArrayPropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlListProject.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlNodeBlock.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlNodeCanvas.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlStringBindDataPropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlTextLinkDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlTextPreviewArea.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlTreeProject.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlSeidDataDrawer.cs" />
@@ -187,7 +189,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\Component\CtlTitleDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlToolsBar.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlToolsSearchBox.cs" />
-    <Compile Include="Scr\Core\FGUI\Component\IProjectItem.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\IDocumentItem.cs" />
     <Compile Include="Scr\Core\FGUI\Component\IPropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlDropdownPropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlIDPropertyDrawer.cs" />
@@ -225,7 +227,14 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\UndoInstManager.cs" />
     <Compile Include="Scr\Core\FGUI\ValueChangedCommand.cs" />
     <Compile Include="Scr\Core\FGUI\WindowDialogBase.cs" />
+    <Compile Include="Scr\Core\ModGUI\ModMainWindow.cs" />
+    <Compile Include="Scr\Core\ModGUI\ProjectTreeFolderModGroup.cs" />
+    <Compile Include="Scr\Core\ModGUI\ProjectTreeItemMod.cs" />
+    <Compile Include="Scr\Core\Mod\ModGroup.cs" />
+    <Compile Include="Scr\Core\Mod\ModSetting.cs" />
+    <Compile Include="Scr\Core\Mod\ModType.cs" />
     <Compile Include="Scr\Core\Patch\FungusClonePatch.cs" />
+    <Compile Include="Scr\Core\Patch\MainUIModBtnPatch.cs" />
     <Compile Include="Scr\Core\Res\BytesAsset.cs" />
     <Compile Include="Scr\Core\Res\FileAsset.cs" />
     <Compile Include="Scr\Core\Res\ResourcesManager.cs" />
@@ -303,7 +312,6 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\Extension\Utils.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIManager.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIWindowBase.cs" />
-    <Compile Include="Scr\Core\FGUI\ModPanelWindow.cs" />
     <Compile Include="Scr\Core\FCanvas\Command\Menu.cs" />
     <Compile Include="Scr\Core\FCanvas\Command\Say.cs" />
     <Compile Include="Scr\Core\FCanvas\FBlock.cs" />
@@ -320,7 +328,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\Mod\ModConfig.cs" />
     <Compile Include="Scr\Core\Mod\ModLoadException.cs" />
     <Compile Include="Scr\Core\Mod\ModManager.cs" />
-    <Compile Include="Scr\Core\Mod\ModSetting.cs" />
+    <Compile Include="Scr\Core\Mod\ModGroupSetting.cs" />
     <Compile Include="Scr\Core\Mod\ModState.cs" />
     <Compile Include="Scr\Core\NextLanguage.cs" />
     <Compile Include="Scr\Core\NextModSetting.cs" />

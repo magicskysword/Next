@@ -3,22 +3,23 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace SkySwordKill.NextFGUI.NextCore;
-
-public partial class UI_BtnTab : GButton
+namespace SkySwordKill.NextFGUI.NextCore
 {
-    public GButton m_closeButton;
-    public const string URL = "ui://028qk31hnkvz1o";
-
-    public static UI_BtnTab CreateInstance()
+    public partial class UI_BtnTab : GButton
     {
-        return (UI_BtnTab)UIPackage.CreateObject("NextCore", "BtnTab");
-    }
+        public GButton m_closeButton;
+        public const string URL = "ui://028qk31hnkvz1o";
 
-    public override void ConstructFromXML(XML xml)
-    {
-        base.ConstructFromXML(xml);
+        public static UI_BtnTab CreateInstance()
+        {
+            return (UI_BtnTab)UIPackage.CreateObject("NextCore", "BtnTab");
+        }
 
-        m_closeButton = (GButton)GetChild("closeButton");
+        public override void ConstructFromXML(XML xml)
+        {
+            base.ConstructFromXML(xml);
+
+            m_closeButton = (GButton)GetChild("closeButton");
+        }
     }
 }

@@ -59,6 +59,7 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AStringEnumConverter_002Ecs_002Fl_003AC_0021_003FUsers_003Fskysw_003FAppData_003FRoaming_003FJetBrains_003FRider2021_002E3_003Fresharper_002Dhost_003FSourcesCache_003F48dba9bd9a1fbac39f4d4c75535ec4c5ea7b9153e64d11ae211ac9e78628d73_003FStringEnumConverter_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="D:\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\Assembly-CSharp.dll" /&gt;&#xD;
+  &lt;Assembly Path="D:\soft\steam\steamapps\workshop\content\1189490\2824349934\BepInEx\core\BepInEx.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	
 	

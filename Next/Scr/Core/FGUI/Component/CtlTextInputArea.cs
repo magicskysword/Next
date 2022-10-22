@@ -9,7 +9,7 @@ public class CtlTextInputArea
     public CtlTextInputArea(UI_ComInputArea inputArea)
     {
         InputArea = inputArea;
-        InputArea.m_input.cursor = "text";
+        InputArea.m_input.cursor = FGUIManager.MOUSE_TEXT;
         InputArea.m_input.onChanged.Add(OnInputChanged);
     }
         

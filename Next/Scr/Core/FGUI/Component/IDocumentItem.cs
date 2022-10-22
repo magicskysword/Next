@@ -1,6 +1,6 @@
 ﻿namespace SkySwordKill.Next.FGUI.Component;
 
-public interface IProjectItem
+public interface IDocumentItem
 {
     string ID { get; }
     PanelPageBase CreatePage();

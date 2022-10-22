@@ -20,11 +20,11 @@ public class ProjectTreeModProject : ProjectTreeFolder
         
     public void Init()
     {
-        Children.Add(new ProjectTreeItemModConfig(Mod, Project));
-        Children.Add(new ProjectTreeItemModAffixData(Mod, Project));
-        Children.Add(new ProjectTreeItemModCreateAvatarData(Mod, Project));
-        Children.Add(new ProjectTreeItemModItemData(Mod, Project));
-        Children.Add(new ProjectTreeItemModSkillData(Mod, Project));
-        Children.Add(new ProjectTreeItemModBuffData(Mod, Project));
+        AddChild(new ProjectTreeItemModConfig(Mod, Project));
+        AddChild(new ProjectTreeItemModAffixData(Mod, Project));
+        AddChild(new ProjectTreeItemModCreateAvatarData(Mod, Project));
+        AddChild(new ProjectTreeItemModItemData(Mod, Project));
+        AddChild(new ProjectTreeItemModSkillData(Mod, Project));
+        AddChild(new ProjectTreeItemModBuffData(Mod, Project));
     }
 }

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="200,24" extention="Button">
-  <controller name="expanded" pages="0,,1," selected="0"/>
+  <controller name="expanded" pages="0,,1," selected="1"/>
   <controller name="leaf" pages="0,,1," selected="1"/>
   <controller name="button" pages="2,up,3,down,4,over,5,selectedOver" selected="0"/>
   <displayList>
+    <graph id="n7_ol2b" name="bg" xy="0,0" size="200,24" type="rect" lineSize="0" fillColor="#00ffffff">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
     <graph id="n5_10zy0" name="selected" xy="0,0" size="200,24" type="rect" lineColor="#ff3b4e6d" fillColor="#ff3b4e6d">
       <gearDisplay controller="button" pages="3,5"/>
       <relation target="" sidePair="width-width,height-height"/>
@@ -19,16 +22,21 @@
       <gearDisplay controller="leaf" pages="0"/>
       <relation target="n1_10zy0" sidePair="left-right"/>
       <relation target="" sidePair="middle-middle"/>
-      <Button controller="expanded" page="1"/>
+      <Button checked="true" controller="expanded" page="1"/>
     </component>
-    <text id="n3_10zy0" name="title" xy="60,0" size="140,24" font="ui://028qk31hcnag2" fontSize="12" color="#ffffff" vAlign="middle" autoSize="none" autoClearText="true" text="Title">
+    <text id="n3_10zy0" name="title" xy="73,0" size="127,24" font="ui://028qk31hcnag2" fontSize="12" color="#ffffff" vAlign="middle" autoSize="none" autoClearText="true" text="Title">
       <relation target="" sidePair="width-width,height-height"/>
       <relation target="n6_10zy0" sidePair="leftext-right"/>
     </text>
-    <loader id="n6_10zy0" name="icon" xy="40,3" size="18,18" url="ui://028qk31hnkvz1n" fill="scale" clearOnPublish="true">
+    <loader id="n6_10zy0" name="icon" xy="53,3" size="18,18" url="ui://028qk31hnkvz1n" fill="scale" clearOnPublish="true">
       <relation target="n1_10zy0" sidePair="left-right"/>
       <relation target="" sidePair="middle-middle"/>
     </loader>
+    <component id="n8_ol2b" name="tglEnable" src="rabj49" fileName="Component/Button/BtnCheckbox.xml" xy="34,4" size="16,16">
+      <gearDisplay controller="leaf" pages="1"/>
+      <relation target="" sidePair="middle-middle"/>
+      <relation target="n1_10zy0" sidePair="left-right"/>
+    </component>
   </displayList>
   <Button mode="Radio"/>
 </component>

@@ -3,22 +3,23 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace SkySwordKill.NextFGUI.NextCore;
-
-public partial class UI_ComInputArea : GComponent
+namespace SkySwordKill.NextFGUI.NextCore
 {
-    public GTextInput m_input;
-    public const string URL = "ui://028qk31h7exm3i";
-
-    public static UI_ComInputArea CreateInstance()
+    public partial class UI_ComInputArea : GComponent
     {
-        return (UI_ComInputArea)UIPackage.CreateObject("NextCore", "ComInputArea");
-    }
+        public GTextInput m_input;
+        public const string URL = "ui://028qk31h7exm3i";
 
-    public override void ConstructFromXML(XML xml)
-    {
-        base.ConstructFromXML(xml);
+        public static UI_ComInputArea CreateInstance()
+        {
+            return (UI_ComInputArea)UIPackage.CreateObject("NextCore", "ComInputArea");
+        }
 
-        m_input = (GTextInput)GetChild("input");
+        public override void ConstructFromXML(XML xml)
+        {
+            base.ConstructFromXML(xml);
+
+            m_input = (GTextInput)GetChild("input");
+        }
     }
 }

@@ -13,6 +13,15 @@ public class FGUIManager
     public AssetBundle FguiAB;
     public Dictionary<string, Shader> ShaderMap = new Dictionary<string, Shader>();
     public Dictionary<string, UIPackage> Packages = new Dictionary<string, UIPackage>();
+    
+    public const string MOUSE_RESIZE_H = "resizeH";
+    public const string MOUSE_RESIZE_V = "resizeV";
+    public const string MOUSE_RESIZE_BR = "resizeBR";
+    public const string MOUSE_RESIZE_BL = "resizeBL";
+
+    public const string MOUSE_TEXT = "text";
+    public const string MOUSE_HAND = "hand";
+    
 
     public void Init()
     {
@@ -32,13 +41,14 @@ public class FGUIManager
 
         ShaderConfig.Get = GetShaderInAB;
             
-        RegisterCursor("resizeH","Assets/Cursor/cursor_resize1.png");
-        RegisterCursor("resizeV","Assets/Cursor/cursor_resize2.png");
+        RegisterCursor(MOUSE_RESIZE_H,"Assets/Cursor/cursor_resize1.png");
+        RegisterCursor(MOUSE_RESIZE_V,"Assets/Cursor/cursor_resize2.png");
         // 右下方向
-        RegisterCursor("resizeRB","Assets/Cursor/cursor_resize3.png");
+        RegisterCursor(MOUSE_RESIZE_BR,"Assets/Cursor/cursor_resize3.png");
         // 左下方向
-        RegisterCursor("resizeLB","Assets/Cursor/cursor_resize4.png");
-        RegisterCursor("text","Assets/Cursor/cursor_text.png");
+        RegisterCursor(MOUSE_RESIZE_BL,"Assets/Cursor/cursor_resize4.png");
+        RegisterCursor(MOUSE_TEXT,"Assets/Cursor/cursor_text.png");
+        RegisterCursor(MOUSE_HAND,"Assets/Cursor/cursor_hand.png");
             
         AddPackage(PKG_NEXT_CORE);
             

@@ -3,22 +3,23 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace SkySwordKill.NextFGUI.NextCore;
-
-public partial class UI_ComTextPreviewArea : GComponent
+namespace SkySwordKill.NextFGUI.NextCore
 {
-    public GRichTextField m_txtPreview;
-    public const string URL = "ui://028qk31hqiuf4q";
-
-    public static UI_ComTextPreviewArea CreateInstance()
+    public partial class UI_ComTextPreviewArea : GComponent
     {
-        return (UI_ComTextPreviewArea)UIPackage.CreateObject("NextCore", "ComTextPreviewArea");
-    }
+        public GRichTextField m_txtPreview;
+        public const string URL = "ui://028qk31hqiuf4q";
 
-    public override void ConstructFromXML(XML xml)
-    {
-        base.ConstructFromXML(xml);
+        public static UI_ComTextPreviewArea CreateInstance()
+        {
+            return (UI_ComTextPreviewArea)UIPackage.CreateObject("NextCore", "ComTextPreviewArea");
+        }
 
-        m_txtPreview = (GRichTextField)GetChild("txtPreview");
+        public override void ConstructFromXML(XML xml)
+        {
+            base.ConstructFromXML(xml);
+
+            m_txtPreview = (GRichTextField)GetChild("txtPreview");
+        }
     }
 }

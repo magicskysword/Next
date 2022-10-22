@@ -46,12 +46,12 @@ meta["__index"] = function(runner, key)
         local params = { ... }
         local command = DialogCommand(key, params,
                 runner.callCommand.BindEventData, runner.callCommand.IsEnd)
-        syncRunEvent(command, runner.env)
+        syncRunEvent(command, runner.env.rawEnv)
     end
 end
 
-newEnvMeta["__index"] = function(runner, key)
-    local value = runner.rawEnv[key]
+newEnvMeta["__index"] = function(env, key)
+    local value = env.rawEnv[key]
     local extMethod = DialogAnalysis.GetEnvQuery(key)
 
     if extMethod == nil and value == nil then
@@ -60,28 +60,28 @@ newEnvMeta["__index"] = function(runner, key)
     end
 
     if extMethod ~= nil then
-        return function(curRunner, ...)
+        return function(curEnv, ...)
             local params = { ... }
-            if type(curRunner) ~= "table" then
+            if type(curEnv) ~= "table" then
                 Main.LogError("Lua运行错误 --> " .. "env需要使用:调用函数！")
                 return nil
             end
 
-            local context = DialogSystem.DialogEnvQueryContext(curRunner.rawEnv, params)
+            local context = DialogSystem.DialogEnvQueryContext(curEnv.rawEnv, params)
             return extMethod:Execute(context)
         end
     else
         if type(value) == "function" then
-            return function(curRunner ,...)
+            return function(curEnv ,...)
                 local params = { ... }
-                if type(curRunner) ~= "table" then
+                if type(curEnv) ~= "table" then
                     Main.LogError("Lua运行错误 --> " .. "env需要使用:调用函数！")
                     return nil
                 end
-                return value(curRunner.rawEnv, table.unpack(params))
+                return value(curEnv.rawEnv, table.unpack(params))
             end
         else
-            return runner.rawEnv[key]
+            return env.rawEnv[key]
         end
     end
 end

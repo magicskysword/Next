@@ -63,7 +63,7 @@ public abstract class WindowDialogBase : FGUIWindowBase
             var resizeHandle = frame.GetChild("resizeHandle");
             if (resizeHandle != null)
             {
-                resizeHandle.cursor = "resizeRB";
+                resizeHandle.cursor = FGUIManager.MOUSE_RESIZE_BR;
                 resizeHandle.draggable = true;
                 resizeHandle.onDragStart.Add(OnDragStartEvent);
             }

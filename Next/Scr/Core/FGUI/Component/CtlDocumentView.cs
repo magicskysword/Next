@@ -103,7 +103,7 @@ public class CtlDocumentView
         DocumentView.m_lstTab.numItems = Tabs.Count;
     }
 
-    public void TryAddAndSelectTab(IProjectItem item)
+    public void TryAddAndSelectTab(IDocumentItem item)
     {
         if (!TryGetTab(item.ID,out var tab))
         {

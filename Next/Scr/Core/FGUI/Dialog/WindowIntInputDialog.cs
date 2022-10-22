@@ -36,7 +36,7 @@ public class WindowIntInputDialog : WindowDialogBase
             
         InputDialog.m_frame.title = Title;
         InputDialog.m_inContent.restrict = "[0-9-]";
-        InputDialog.m_inContent.cursor = "text";
+        InputDialog.m_inContent.cursor = FGUIManager.MOUSE_TEXT;
         InputDialog.m_btnOk.onClick.Add(OnClickConfirm);
         InputDialog.m_frame.m_closeButton.onClick.Add(OnClickCancel);
         InputDialog.m_closeButton.onClick.Add(OnClickCancel);

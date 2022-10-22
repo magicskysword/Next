@@ -114,7 +114,7 @@ public class ModEditorMainPanel : FGUIPanelBase
             if(CurMod == null)
                 return;
                 
-            if (node is IProjectItem item)
+            if (node is IDocumentItem item)
             {
                 DocumentView.TryAddAndSelectTab(item);
             }

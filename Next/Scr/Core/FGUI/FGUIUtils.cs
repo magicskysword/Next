@@ -32,7 +32,7 @@ public static class FGUIUtils
 
         seg.draggable = true;
         seg.onDragStart.Set((EventCallback1)OnDragStart);
-        seg.cursor = "resizeH";
+        seg.cursor = FGUIManager.MOUSE_RESIZE_H;
     }
 
     public class HyLabel

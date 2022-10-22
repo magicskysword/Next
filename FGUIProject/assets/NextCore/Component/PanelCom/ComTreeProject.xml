@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="300,600">
+  <controller name="showToolbar" exported="true" pages="0,no,1,yes" selected="0"/>
   <displayList>
     <graph id="n3_fqcb" name="n3" xy="0,24" size="300,1" type="rect" lineSize="0" fillColor="#ff32363c">
+      <gearDisplay controller="showToolbar" pages="1"/>
       <relation target="" sidePair="width-width"/>
     </graph>
-    <list id="n5_d4rw" name="treeView" xy="0,25" size="300,575" overflow="scroll" scrollBarFlags="128" scrollBar="visible" margin="5,5,5,5" defaultItem="ui://028qk31hnkvz1j" autoClearItems="true" treeView="true" indent="15" clickToExpand="0">
+    <list id="n5_d4rw" name="treeView" xy="0,0" size="300,600" overflow="scroll" scrollBarFlags="128" scrollBar="visible" margin="5,5,5,5" defaultItem="ui://028qk31hnkvz1j" autoClearItems="true" treeView="true" indent="15" clickToExpand="0">
+      <gearXY controller="showToolbar" pages="0" values="0,0" default="0,25"/>
+      <gearSize controller="showToolbar" pages="0" values="300,600,1,1" default="300,575,1,1"/>
       <relation target="" sidePair="width-width,height-height"/>
       <item title="Mod1" level="0"/>
       <item level="1"/>
@@ -13,6 +17,7 @@
       <item level="1"/>
     </list>
     <component id="n7_d4rw" name="toolsBar" src="d4rw3w" fileName="Component/ToolsBar/ComToolsBar.xml" xy="0,0" size="300,24">
+      <gearDisplay controller="showToolbar" pages="1"/>
       <relation target="" sidePair="width-width"/>
     </component>
   </displayList>

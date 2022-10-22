@@ -114,7 +114,7 @@
     "ModManager.StartReloadMod": "开始重载Mod......",
     "ModManager.ReloadComplete": "重载Mod完毕，耗时：{0} s",
     "ModManager.LoadingModData": "正在加载Mod数据",
-    "ModManager.LoadFail": "加载mod json数据出错！地址：{0}",
+    "ModManager.LoadFail": "加载mod 数据出错！Mod名：{0} ；目录：{1}",
     "ModManager.StartLoadMod": "开始载入Mod数据",
     "ModManager.LoadModComplete": "载入Mod数据完成",
     "ModManager.ModConfigDontExist": "Mod配置不存在！",

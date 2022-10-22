@@ -3,22 +3,23 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace SkySwordKill.NextFGUI.NextCore;
-
-public partial class UI_LabelTableGridHeader : GLabel
+namespace SkySwordKill.NextFGUI.NextCore
 {
-    public GGraph m_dragable;
-    public const string URL = "ui://028qk31hnkvz2c";
-
-    public static UI_LabelTableGridHeader CreateInstance()
+    public partial class UI_LabelTableGridHeader : GLabel
     {
-        return (UI_LabelTableGridHeader)UIPackage.CreateObject("NextCore", "LabelTableGridHeader");
-    }
+        public GGraph m_dragable;
+        public const string URL = "ui://028qk31hnkvz2c";
 
-    public override void ConstructFromXML(XML xml)
-    {
-        base.ConstructFromXML(xml);
+        public static UI_LabelTableGridHeader CreateInstance()
+        {
+            return (UI_LabelTableGridHeader)UIPackage.CreateObject("NextCore", "LabelTableGridHeader");
+        }
 
-        m_dragable = (GGraph)GetChild("dragable");
+        public override void ConstructFromXML(XML xml)
+        {
+            base.ConstructFromXML(xml);
+
+            m_dragable = (GGraph)GetChild("dragable");
+        }
     }
 }

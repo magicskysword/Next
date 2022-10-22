@@ -12,7 +12,7 @@ public class CtlToolsSearchBox
         SearchBox.m_btnReset.onClick.Add(OnClickReset);
             
         SearchBox.m_inContent.onSubmit.Add(OnClickSearch);
-        SearchBox.m_inContent.cursor = "text";
+        SearchBox.m_inContent.cursor = FGUIManager.MOUSE_TEXT;
     }
         
     public UI_ComToolsSearchBox SearchBox { get; }

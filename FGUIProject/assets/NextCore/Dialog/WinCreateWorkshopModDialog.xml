@@ -16,7 +16,7 @@
       <relation target="" sidePair="right-right,bottom-bottom"/>
       <Button title="创建"/>
     </component>
-    <component id="n9_ro2x" name="projectList" src="ro2x4e" fileName="Component/PanelCom/ComListProject.xml" xy="0,23" size="249,577">
+    <component id="n9_ro2x" name="projectList" src="ro2x4e" fileName="Component/PanelCom/ComListProject.xml" xy="0,23" size="249,577" controller="showToolbar,0">
       <relation target="" sidePair="height-height"/>
       <relation target="n5_ro2x" sidePair="rightext-left"/>
     </component>

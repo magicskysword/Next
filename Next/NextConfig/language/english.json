@@ -114,7 +114,7 @@
     "ModManager.StartReloadMod": "Start reload mod......",
     "ModManager.ReloadComplete": "Reload mod complete，cost ：{0} s",
     "ModManager.LoadingModData": "Loading mod data",
-    "ModManager.LoadFail": "load mod fail! path : {0}",
+    "ModManager.LoadFail": "load mod fail!mod name : {0} ;path : {1}",
     "ModManager.StartLoadMod": "Start Load Mod Data",
     "ModManager.LoadModComplete": "Load Mod Data Complete",
     "ModManager.ModConfigDontExist": "Mod configuration dont exist！",

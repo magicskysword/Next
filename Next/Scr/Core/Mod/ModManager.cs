@@ -5,17 +5,20 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
 using BepInEx;
 using JetBrains.Annotations;
 using KBEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using script.Steam;
 using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FCanvas;
 using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.Next.StaticFace;
 using SkySwordKill.NextModEditor.Mod;
+using Steamworks;
 using UnityEngine.SceneManagement;
 
 namespace SkySwordKill.Next.Mod;
@@ -25,7 +28,7 @@ public static class ModManager
         
     #region 字段
 
-    public static List<ModConfig> modConfigs = new List<ModConfig>();
+    public static List<ModGroup> modGroups = new List<ModGroup>();
     public static MainDataContainer dataContainer;
     public static FieldInfo[] jsonDataFields = typeof(jsonData).GetFields();
 
@@ -33,8 +36,6 @@ public static class ModManager
 
     #region 属性
 
-    public static bool ModDataDirty { get; private set; } = false;
-        
     #endregion
 
     #region 回调方法
@@ -133,7 +134,6 @@ public static class ModManager
             LoadAllMod();
             InitJSONClassData();
             SceneManager.LoadScene("MainMenu");
-            ModDataDirty = false;
             OnModLoadComplete();
         }
         sw.Stop();
@@ -205,70 +205,34 @@ public static class ModManager
 
     public static void LoadAllMod()
     {
-        modConfigs.Clear();
-
         Main.LogInfo($"===================" + "ModManager.LoadingModData".I18N() + "=====================");
         jsonData jsonInstance = jsonData.instance;
-        DirectoryInfo testModPath = new DirectoryInfo(Main.PathLocalModsDir.Value);
-        List<DirectoryInfo> dirInfoList = new List<DirectoryInfo>();
-        // 加载工坊模组
-        foreach (var dir in WorkshopTool.GetAllModDirectory())
-        {
-            string workshopID = dir.Name;
-            bool disable = WorkshopTool.CheckModIsDisable(workshopID);
-            if (disable)
-            {
-                Main.LogInfo($"{workshopID}是关闭的，跳过");
-                continue;
-            }
-            if (Directory.Exists(dir + @"\plugins\Next"))
-            {
-                dirInfoList.Add(new DirectoryInfo(dir + @"\plugins\Next"));
-            }
-        }
-        // 加载本地模组
-        foreach (var dir in testModPath.GetDirectories())
-        {
-            if (Directory.Exists(dir + @"\plugins\Next"))
-            {
-                dirInfoList.Add(new DirectoryInfo(dir + @"\plugins\Next"));
-            }
-        }
-        // 加载元数据
-        foreach (DirectoryInfo dirInfo in dirInfoList)
-        {
-            foreach (DirectoryInfo modDirInfo in dirInfo.GetDirectories("mod*"))
-            {
-                Main.LogInfo(string.Format("ModManager.LoadMod".I18N(), modDirInfo.Name));
-                ModConfig item = LoadModMetadata(modDirInfo.FullName);
-                modConfigs.Add(item);
-            }
-        }
 
-        // 排序
-        modConfigs = SortMod(modConfigs).ToList();
-        ResetModPriority();
-            
+        ReloadModMeta(true, true);
+        
         // 加载Mod数据
-        foreach (var modConfig in modConfigs)
+        foreach (var modGroup in modGroups)
         {
-            var modSetting = Main.I.NextModSetting.GetOrCreateModSetting(modConfig);
+            foreach (var modConfig in modGroup.ModConfigs)
+            {
+                var modSetting = Main.I.NextModSetting.GetOrCreateModSetting(modConfig);
 
-            if (!modSetting.enable)
-            {
-                modConfig.State = ModState.Disable;
-                continue;
-            }
+                if (!modSetting.enable)
+                {
+                    modConfig.State = ModState.Disable;
+                    continue;
+                }
                 
-            try
-            {
-                LoadModData(modConfig);
-            }
-            catch (Exception e)
-            {
-                Main.LogError(string.Format("ModManager.LoadFail".I18N(),modConfig.Path));
-                Main.LogError(e);
-                modConfig.Exception = e;
+                try
+                {
+                    LoadModData(modConfig);
+                }
+                catch (Exception e)
+                {
+                    Main.LogError(string.Format("ModManager.LoadFail".I18N(),modGroup.GroupKey,modConfig.Path));
+                    Main.LogError(e);
+                    modConfig.Exception = e;
+                }
             }
         }
             
@@ -292,6 +256,102 @@ public static class ModManager
         }
     }
         
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="resetModState">是否重置Mod状态</param>
+    public static void ReloadModMeta(bool resetModState,bool showLog = false)
+    {
+        if (resetModState)
+        {
+            modGroups.Clear();
+        }
+        
+        DirectoryInfo testModPath = new DirectoryInfo(Main.PathLocalModsDir.Value);
+        // 加载工坊模组
+        foreach (var dir in WorkshopTool.GetAllModDirectory())
+        {
+            string workshopID = dir.Name;
+            bool disable = WorkshopTool.CheckModIsDisable(workshopID);
+            if (disable)
+            {
+                continue;
+            }
+
+            if (resetModState)
+            {
+                if (Directory.Exists(dir + @"\plugins\Next"))
+                {
+                    var modConfigGroup = new ModGroup(dir, ModType.Workshop);
+                    modGroups.Add(modConfigGroup);
+                }
+            }
+            else
+            {
+                if (Directory.Exists(dir + @"\plugins\Next"))
+                {
+                    var modConfigGroup = modGroups.Find(x => x.ModDir.FullName == dir.FullName);
+                    if (modConfigGroup == null)
+                    {
+                        modConfigGroup = new ModGroup(dir, ModType.Workshop);
+                        modGroups.Add(modConfigGroup);
+                    }
+                }
+                else
+                {
+                    var modConfigGroup = modGroups.Find(x => x.ModDir.FullName == dir.FullName);
+                    if (modConfigGroup != null)
+                    {
+                        modGroups.Remove(modConfigGroup);
+                    }
+                }
+            }
+        }
+        
+        // 加载本地模组
+        foreach (var dir in testModPath.GetDirectories())
+        {
+            if (resetModState)
+            {
+                if (Directory.Exists(dir + @"\plugins\Next"))
+                {
+                    var modConfigGroup = new ModGroup(dir, ModType.Local);
+                    modGroups.Add(modConfigGroup);
+                }
+            }
+            else
+            {
+                if (Directory.Exists(dir + @"\plugins\Next"))
+                {
+                    var modConfigGroup = modGroups.Find(x => x.ModDir.FullName == dir.FullName);
+                    if (modConfigGroup == null)
+                    {
+                        modConfigGroup = new ModGroup(dir, ModType.Local);
+                        modGroups.Add(modConfigGroup);
+                    }
+                }
+                else
+                {
+                    var modConfigGroup = modGroups.Find(x => x.ModDir.FullName == dir.FullName);
+                    if (modConfigGroup != null)
+                    {
+                        modGroups.Remove(modConfigGroup);
+                    }
+                }
+            }
+        }
+        
+        // 加载元数据
+        foreach (var modGroup in modGroups)
+        {
+            modGroup.Init(resetModState, showLog);
+        }
+
+        // 排序
+        modGroups = SortModGroup(modGroups).ToList();
+        ApplyModSetting(true);
+    }
+    
     private static void InitJSONClassData()
     {
         // 重新初始化所有继承IJSONClass的类型
@@ -321,39 +381,53 @@ public static class ModManager
         }
     }
 
-    public static ModConfig LoadModMetadata(string dir)
+    public static ModConfig LoadModMetadata(string dir,bool showLog)
     {
         var modConfig = GetModConfig(dir);
+        if (showLog)
+        {
+            Main.LogInfo(string.Format("ModManager.LoadMod".I18N(), dir));
+        }
         return modConfig;
     }
         
+    public static IEnumerable<ModGroup> SortModGroup(IEnumerable<ModGroup> modEnumerable)
+    {
+        var mods = modEnumerable.ToArray();
+        var nextModSetting = Main.I.NextModSetting;
+
+        var modSortList = mods
+            .Select(modGroup => nextModSetting.GetOrCreateModGroupSetting(modGroup))
+            .OrderBy(modSetting => modSetting.priority)
+            .ThenBy(modSetting => modSetting.BindGroup.GroupKey);
+
+        return modSortList.Select(data => data.BindGroup);
+    }
+    
     public static IEnumerable<ModConfig> SortMod(IEnumerable<ModConfig> modEnumerable)
     {
         var mods = modEnumerable.ToArray();
         var nextModSetting = Main.I.NextModSetting;
 
         var modSortList = mods
-            .Select(modConfig =>
-            {
-                var modId = Path.GetFileNameWithoutExtension(modConfig.Path);
-                var modSetting = nextModSetting.GetOrCreateModSetting(modId);
+            .Select(modConfig => nextModSetting.GetOrCreateModSetting(modConfig))
+            .OrderBy(modSetting => modSetting.priority)
+            .ThenBy(modSetting => modSetting.BindMod.SettingKey);
 
-                return new { id = modId, setting = modSetting, config = modConfig };
-            })
-            .OrderBy(data => data.setting.priority)
-            .ThenBy(data => data.id)
-            .ToArray();
-
-        return modSortList.Select(data => data.config);
+        return modSortList.Select(data => data.BindMod);
     }
 
-    public static void ResetModPriority()
+    public static void ApplyModSetting(bool applySubMod)
     {
-        var index = 0;
+        var groupIndex = 0;
         var nextModSetting = Main.I.NextModSetting;
-        foreach (var modConfig in modConfigs)
+        foreach (var group in modGroups)
         {
-            nextModSetting.GetOrCreateModSetting(modConfig).priority = index++;
+            var setting = nextModSetting.GetOrCreateModGroupSetting(group);
+            setting.priority = groupIndex++;
+            
+            if(applySubMod)
+                group.ApplyModSetting();
         }
         Main.I.SaveModSetting();
     }
@@ -477,6 +551,7 @@ public static class ModManager
         }
 
         modConfig = modConfig ?? new ModConfig();
+        modConfig.Path = dir;
         modConfig.State = ModState.Unload;
 
         return modConfig;
@@ -796,91 +871,54 @@ public static class ModManager
         DialogAnalysis.DialogTriggerDataDic[dialogTriggerData.ID] = dialogTriggerData;
     }
 
-    public static void ModMoveUp(ref int curIndex)
+    public static void ModGroupMoveUp(ModGroup modGroup)
     {
-        if(!TryGetModConfig(curIndex,out var curMod))
+        var index = modGroups.IndexOf(modGroup);
+        if (index == 0)
             return;
-        if(curIndex == 0)
-            return;
-
-        modConfigs.RemoveAt(curIndex);
-        curIndex -= 1;
-        modConfigs.Insert(curIndex, curMod);
-        ResetModPriority();
-        ModDataDirty = true;
+        ModGroupSetIndex(modGroup, index - 1);
     }
-        
-    public static void ModMoveDown(ref int curIndex)
+    
+    public static void ModGroupMoveDown(ModGroup modGroup)
     {
-        if(!TryGetModConfig(curIndex,out var curMod))
+        var index = modGroups.IndexOf(modGroup);
+        if (index == modGroups.Count - 1)
             return;
-        if(curIndex == modConfigs.Count-1)
-            return;
-            
-        modConfigs.RemoveAt(curIndex);
-        curIndex += 1;
-        modConfigs.Insert(curIndex, curMod);
-        ResetModPriority();
-        ModDataDirty = true;
-    }
-        
-    public static void ModMoveToTop(ref int curIndex)
-    {
-        if(!TryGetModConfig(curIndex,out var curMod))
-            return;
-        if(curIndex == 0)
-            return;
-
-        modConfigs.RemoveAt(curIndex);
-        curIndex = 0;
-        modConfigs.Insert(curIndex, curMod);
-        ResetModPriority();
-        ModDataDirty = true;
-    }
-        
-    public static void ModMoveToBottom(ref int curIndex)
-    {
-        if(!TryGetModConfig(curIndex,out var curMod))
-            return;
-        if(curIndex == modConfigs.Count-1)
-            return;
-            
-        modConfigs.RemoveAt(curIndex);
-        modConfigs.Add(curMod);
-        curIndex = modConfigs.Count-1;
-        ResetModPriority();
-        ModDataDirty = true;
+        ModGroupSetIndex(modGroup, index + 1);
     }
 
-    public static void ModSetEnable(int curIndex,bool enable)
+    public static void ModGroupSetIndex(ModGroup group,int index)
     {
-        if(!TryGetModConfig(curIndex,out var curMod))
-            return;
-        Main.I.NextModSetting.GetOrCreateModSetting(curMod).enable = enable;
+        var oldIndex = modGroups.IndexOf(group);
+        modGroups.RemoveAt(oldIndex);
+        modGroups.Insert(index, group);
+        ApplyModSetting(false);
+    }
+
+    public static void ModSetEnable(ModConfig modConfig,bool enable)
+    {
+        Main.I.NextModSetting.GetOrCreateModSetting(modConfig).enable = enable;
         Main.I.SaveModSetting();
-        ModDataDirty = true;
     }
         
-    public static bool ModGetEnable(int curIndex)
+    public static bool ModGetEnable(ModConfig modConfig)
     {
-        if(!TryGetModConfig(curIndex,out var curMod))
-            return true;
-        return Main.I.NextModSetting.GetOrCreateModSetting(curMod).enable;
+        return Main.I.NextModSetting.GetOrCreateModSetting(modConfig).enable;
     }
-        
-        
-    public static bool TryGetModConfig(int curIndex,out ModConfig modConfig)
+    
+    public static void ModSetEnableAll(bool b)
     {
-        if (curIndex < 0 || curIndex >= modConfigs.Count)
+        var nextModSetting = Main.I.NextModSetting;
+        foreach (var modGroup in modGroups)
         {
-            modConfig = null;
-            return false;
+            foreach (var modConfig in modGroup.ModConfigs)
+            {
+                nextModSetting.GetOrCreateModSetting(modConfig).enable = b;
+            }
         }
-
-        modConfig = modConfigs[curIndex];
-        return true;
+        Main.I.SaveModSetting();
     }
-
+    
     public static JSONObject LoadJSONObject(string filePath)
     {
         try
@@ -908,12 +946,40 @@ public static class ModManager
             throw new ModLoadException($"文件 {filePath} 加载失败。", e);
         }
     }
+    
+    public static WorkShopItem ReadConfig(string path)
+    {
+        WorkShopItem result = new WorkShopItem();
+        var configPath = path + "/Mod.bin";
+        if (File.Exists(configPath))
+        {
+            try
+            {
+                FileStream fileStream = new FileStream(configPath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                result = (WorkShopItem)new BinaryFormatter().Deserialize(fileStream);
+                fileStream.Close();
+            }
+            catch (Exception message)
+            {
+                Main.LogError(message);
+                Main.LogError("读取配置文件失败");
+            }
+        }
+        // result.SteamID = SteamUser.GetSteamID().m_SteamID;
+        // result.ModPath = path;
+        return result;
+    }
+        
+    public static void WriteConfig(string path, WorkShopItem item)
+    {
+        FileStream fileStream = new FileStream(path, FileMode.Create);
+        new BinaryFormatter().Serialize(fileStream, item);
+        fileStream.Close();
+    }
 
     #endregion
 
     #region 私有方法
 
     #endregion
-
-
 }

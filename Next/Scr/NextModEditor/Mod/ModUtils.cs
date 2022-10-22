@@ -274,32 +274,6 @@ public static class ModUtils
             }
         }
     }
-        
-    public static WorkShopItem ReadConfig(string path)
-    {
-        WorkShopItem result = new WorkShopItem();
-        try
-        {
-            FileStream fileStream = new FileStream(path + "/Mod.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
-            result = (WorkShopItem)new BinaryFormatter().Deserialize(fileStream);
-            fileStream.Close();
-        }
-        catch (Exception message)
-        {
-            Debug.LogError(message);
-            Debug.LogError("读取配置文件失败");
-        }
-        result.SteamID = SteamUser.GetSteamID().m_SteamID;
-        result.ModPath = path;
-        return result;
-    }
-        
-    public static void WriteConfig(string path, WorkShopItem item)
-    {
-        FileStream fileStream = new FileStream(path, FileMode.Create);
-        new BinaryFormatter().Serialize(fileStream, item);
-        fileStream.Close();
-    }
 
     public static string GetSkillLevelName(int itemQuality, int itemPhase)
     {

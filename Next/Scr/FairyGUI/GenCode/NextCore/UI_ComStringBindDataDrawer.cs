@@ -3,30 +3,31 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace SkySwordKill.NextFGUI.NextCore;
-
-public partial class UI_ComStringBindDataDrawer : GLabel
+namespace SkySwordKill.NextFGUI.NextCore
 {
-    public Controller m_warning;
-    public Controller m_grayed;
-    public GTextInput m_inContent;
-    public GTextField m_txtDesc;
-    public GButton m_btnEdit;
-    public const string URL = "ui://028qk31hmdyt4i";
-
-    public static UI_ComStringBindDataDrawer CreateInstance()
+    public partial class UI_ComStringBindDataDrawer : GLabel
     {
-        return (UI_ComStringBindDataDrawer)UIPackage.CreateObject("NextCore", "ComStringBindDataDrawer");
-    }
+        public Controller m_warning;
+        public Controller m_grayed;
+        public GTextInput m_inContent;
+        public GTextField m_txtDesc;
+        public GButton m_btnEdit;
+        public const string URL = "ui://028qk31hmdyt4i";
 
-    public override void ConstructFromXML(XML xml)
-    {
-        base.ConstructFromXML(xml);
+        public static UI_ComStringBindDataDrawer CreateInstance()
+        {
+            return (UI_ComStringBindDataDrawer)UIPackage.CreateObject("NextCore", "ComStringBindDataDrawer");
+        }
 
-        m_warning = GetController("warning");
-        m_grayed = GetController("grayed");
-        m_inContent = (GTextInput)GetChild("inContent");
-        m_txtDesc = (GTextField)GetChild("txtDesc");
-        m_btnEdit = (GButton)GetChild("btnEdit");
+        public override void ConstructFromXML(XML xml)
+        {
+            base.ConstructFromXML(xml);
+
+            m_warning = GetController("warning");
+            m_grayed = GetController("grayed");
+            m_inContent = (GTextInput)GetChild("inContent");
+            m_txtDesc = (GTextField)GetChild("txtDesc");
+            m_btnEdit = (GButton)GetChild("btnEdit");
+        }
     }
 }

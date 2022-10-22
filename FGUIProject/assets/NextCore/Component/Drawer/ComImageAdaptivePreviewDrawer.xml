@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="85,66" extention="Label">
+  <displayList>
+    <graph id="n2_r3ga" name="bg" xy="19,0" size="66,66" type="rect" lineColor="#ff32363c" fillColor="#ff2c313c">
+      <relation target="n1_r3ga" sidePair="width-width,height-height,center-center,middle-middle"/>
+    </graph>
+    <loader id="n1_r3ga" name="icon" xy="20,1" size="64,64" url="ui://028qk31hnkvz4" fill="scale"/>
+  </displayList>
+  <relation target="n1_r3ga" sidePair="rightext-right,bottomext-bottom"/>
+</component>

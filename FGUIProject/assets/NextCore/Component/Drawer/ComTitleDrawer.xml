@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="300,40" extention="Label">
   <displayList>
-    <text id="n0_fqcb" name="title" xy="3,2" size="292,26" fontSize="18" color="#ffffff" vAlign="middle" autoSize="height" autoClearText="true" text="String">
+    <text id="n0_fqcb" name="title" xy="3,2" size="292,26" fontSize="18" color="#ffffff" vAlign="middle" ubb="true" autoSize="height" autoClearText="true" text="String">
       <relation target="" sidePair="width-width"/>
     </text>
     <graph id="n2_fqcb" name="underline" xy="3,33" size="292,2" type="rect" lineSize="0">

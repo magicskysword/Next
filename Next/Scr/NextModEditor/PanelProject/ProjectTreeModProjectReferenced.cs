@@ -18,23 +18,23 @@ public class ProjectTreeModProjectReferenced : ProjectTreeFolder
 
     public void Init()
     {
-        Children.Add(new ProjectTreeItemModAffixData(Mod, Project)
+        AddChild(new ProjectTreeItemModAffixData(Mod, Project)
         {
             Editable = false,
         });
-        Children.Add(new ProjectTreeItemModCreateAvatarData(Mod, Project)
+        AddChild(new ProjectTreeItemModCreateAvatarData(Mod, Project)
         {
             Editable = false,
         });
-        Children.Add(new ProjectTreeItemModItemData(Mod, Project)
+        AddChild(new ProjectTreeItemModItemData(Mod, Project)
         {
             Editable = false,
         });
-        Children.Add(new ProjectTreeItemModSkillData(Mod, Project)
+        AddChild(new ProjectTreeItemModSkillData(Mod, Project)
         {
             Editable = false,
         });
-        Children.Add(new ProjectTreeItemModBuffData(Mod, Project)
+        AddChild(new ProjectTreeItemModBuffData(Mod, Project)
         {
             Editable = false,
         });

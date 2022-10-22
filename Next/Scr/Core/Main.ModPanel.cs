@@ -12,6 +12,7 @@ using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.Mod;
+using SkySwordKill.Next.ModGUI;
 using SkySwordKill.Next.StaticFace;
 using SkySwordKill.Next.XiaoYeGUI;
 using SkySwordKill.NextModEditor.Panel;
@@ -58,8 +59,6 @@ namespace SkySwordKill.Next
         private bool isSelectedLanguage;
 
         private RayBlocker rayBlocker;
-
-        private int curModSelectedIndex;
 
         private int curNpcSelectedIndex;
         private int curNpcSelectedPage;
@@ -234,16 +233,16 @@ namespace SkySwordKill.Next
 
             switch (toolbarSelected)
             {
+                // case 0:
+                //     DrawModList();
+                //     break;
                 case 0:
-                    DrawModList();
-                    break;
-                case 1:
                     DrawDramaDebug();
                     break;
-                case 2:
+                case 1:
                     DrawNpcDebug();
                     break;
-                case 3:
+                case 2:
                     DrawMiscDebug();
                     break;
             }
@@ -267,7 +266,7 @@ namespace SkySwordKill.Next
                 {
                     string[] toolbarList =
                     {
-                        "HeaderBar.ModList".I18N(),
+                        //"HeaderBar.ModList".I18N(),
                         "HeaderBar.DramaDebug".I18N(),
                         "HeaderBar.NpcDebug".I18N(),
                         "HeaderBar.MiscDebug".I18N()
@@ -280,11 +279,6 @@ namespace SkySwordKill.Next
                 }
 
                 GUILayout.FlexibleSpace();
-
-                // 该部分不简化是为了避免反复操作 openInStart.Value 属性
-                bool isPop = GUILayout.Toggle(OpenInStart.Value, "HeaderBar.OpenInStart".I18N());
-                if (isPop != OpenInStart.Value)
-                    OpenInStart.Value = isPop;
 
                 if (GUILayout.Button("HeaderBar.Close".I18N()))
                     _isWinOpen = false;
@@ -307,6 +301,7 @@ namespace SkySwordKill.Next
             GUILayout.EndHorizontal();
         }
 
+        /*
         private void DrawModList()
         {
             GUILayout.BeginHorizontal();
@@ -398,7 +393,7 @@ namespace SkySwordKill.Next
                         GUILayout.MinWidth(winRect.width * 0.6f - 40),
                         GUILayout.MaxWidth(winRect.width * 0.6f - 40));
                     {
-                        var mods = ModManager.modConfigs.Select(config =>
+                        var mods = ModManager.modGroups.Select(config =>
                         {
                             var configName = config.Name ?? "Mod.Unknown".I18N();
                             var modSetting = I.NextModSetting.GetOrCreateModSetting(config);
@@ -433,7 +428,7 @@ namespace SkySwordKill.Next
 
                     if (GUILayout.Button("Mod.Panel.EnableAllMod".I18N()))
                     {
-                        for (int i = 0; i < ModManager.modConfigs.Count; i++)
+                        for (int i = 0; i < ModManager.modGroups.Count; i++)
                         {
                             ModManager.ModSetEnable(i, true);
                         }
@@ -441,7 +436,7 @@ namespace SkySwordKill.Next
 
                     if (GUILayout.Button("Mod.Panel.DisableAllMod".I18N()))
                     {
-                        for (int i = 0; i < ModManager.modConfigs.Count; i++)
+                        for (int i = 0; i < ModManager.modGroups.Count; i++)
                         {
                             ModManager.ModSetEnable(i, false);
                         }
@@ -511,6 +506,7 @@ namespace SkySwordKill.Next
             }
             GUILayout.EndHorizontal();
         }
+         */
 
         private void DrawDramaDebug()
         {
@@ -879,6 +875,16 @@ namespace SkySwordKill.Next
 
                 GUILayout.BeginVertical();
                 {
+                    if (GUILayout.Button("HeaderBar.ExportBase".I18N()))
+                    {
+                        _isWinOpen = false;
+                        Directory.CreateDirectory(PathExportOutputDir.Value);
+                        ModManager.GenerateBaseData(() =>
+                        {
+                            Process.Start(PathExportOutputDir.Value);
+                        });
+                    }
+                    
                     GUILayout.BeginHorizontal();
                     {
                         if (GUILayout.Button("清空Lua已载入文件"))
@@ -895,11 +901,11 @@ namespace SkySwordKill.Next
                     GUILayout.EndHorizontal();
                     
 
-                    // if (GUILayout.Button("FGUI测试"))
-                    // {
-                    //     var window = new ModPanelWindow();
-                    //     window.Show();
-                    // }
+                    if (GUILayout.Button("NextMod面板"))
+                    {
+                        var window = new ModMainWindow();
+                        window.Show();
+                    }
                     //
                     //
                     if (GUILayout.Button("Next编辑器（预览版）"))

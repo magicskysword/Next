@@ -28,7 +28,11 @@ public class ModConfig
     /// </summary>
     [JsonIgnore]
     public int DataVersion { get; set; } = 2;
-
+    /// <summary>
+    /// 设置Key，由ModConfigGroup初始化
+    /// </summary>
+    [JsonIgnore]
+    public string SettingKey { get; set; }
     [JsonIgnore]
     public Dictionary<string, string> jsonPathCache = new Dictionary<string, string>();
 
@@ -61,7 +65,7 @@ public class ModConfig
                 break;
         }
 
-        return $"<color={colorCode}>{modState}</color>";
+        return $"[color={colorCode}]{modState}[/color]";
     }
 
     public string GetDataDir()

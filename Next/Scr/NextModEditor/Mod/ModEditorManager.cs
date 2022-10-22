@@ -9,6 +9,7 @@ using SkySwordKill.Next;
 using SkySwordKill.NextModEditor.Mod.Data;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FCanvas;
+using SkySwordKill.Next.Mod;
 using Steamworks;
 
 namespace SkySwordKill.NextModEditor.Mod;
@@ -210,8 +211,7 @@ public class ModEditorManager
     public ModWorkshop LoadWorkshop(string path)
     {
         WorkShopItem modInfo = null;
-        if (File.Exists($"{path}/Mod.bin"))
-            modInfo = ModUtils.ReadConfig(path);
+        modInfo = ModManager.ReadConfig(path);
         var mod = new ModWorkshop(modInfo, path);
         return mod;
     }

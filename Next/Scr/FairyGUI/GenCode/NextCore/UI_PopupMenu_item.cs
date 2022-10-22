@@ -3,26 +3,27 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace SkySwordKill.NextFGUI.NextCore;
-
-public partial class UI_PopupMenu_item : GButton
+namespace SkySwordKill.NextFGUI.NextCore
 {
-    public Controller m_checked;
-    public GGraph m_select;
-    public GImage m_arrow;
-    public const string URL = "ui://028qk31hnkvz2h";
-
-    public static UI_PopupMenu_item CreateInstance()
+    public partial class UI_PopupMenu_item : GButton
     {
-        return (UI_PopupMenu_item)UIPackage.CreateObject("NextCore", "PopupMenu_item");
-    }
+        public Controller m_checked;
+        public GGraph m_select;
+        public GImage m_arrow;
+        public const string URL = "ui://028qk31hnkvz2h";
 
-    public override void ConstructFromXML(XML xml)
-    {
-        base.ConstructFromXML(xml);
+        public static UI_PopupMenu_item CreateInstance()
+        {
+            return (UI_PopupMenu_item)UIPackage.CreateObject("NextCore", "PopupMenu_item");
+        }
 
-        m_checked = GetController("checked");
-        m_select = (GGraph)GetChild("select");
-        m_arrow = (GImage)GetChild("arrow");
+        public override void ConstructFromXML(XML xml)
+        {
+            base.ConstructFromXML(xml);
+
+            m_checked = GetController("checked");
+            m_select = (GGraph)GetChild("select");
+            m_arrow = (GImage)GetChild("arrow");
+        }
     }
 }
