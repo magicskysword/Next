@@ -138,6 +138,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scr\Core\DataGroup.cs" />
     <Compile Include="Scr\Core\DialogEvent\BindNpc.cs" />
     <Compile Include="Scr\Core\DialogEvent\RunFungusBlock.cs" />
     <Compile Include="Scr\Core\DialogSystem\AvatarNextData.cs" />
@@ -162,6 +163,9 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FCanvas\PCommand\NextMenu.cs" />
     <Compile Include="Scr\Core\FGUI\CommonUndoCommand.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlComboSearchBox.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlDoublePropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlDoubleSliderDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlFloatSliderDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlGroupDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlCheckboxPropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlDocumentNodeView.cs" />
@@ -174,7 +178,9 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\Component\CtlInfoLinkDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlInspectorBase.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlIntArrayPropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlIntSliderDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlListProject.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlLongSliderDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlNodeBlock.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlNodeCanvas.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlStringBindDataPropertyDrawer.cs" />
@@ -190,6 +196,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\Component\CtlToolsBar.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlToolsSearchBox.cs" />
     <Compile Include="Scr\Core\FGUI\Component\IDocumentItem.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\IInspector.cs" />
     <Compile Include="Scr\Core\FGUI\Component\IPropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlDropdownPropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlIDPropertyDrawer.cs" />
@@ -211,6 +218,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\Component\ProjectTreeNodeBase.cs" />
     <Compile Include="Scr\Core\FGUI\Component\ProjectTreeFolder.cs" />
     <Compile Include="Scr\Core\FGUI\Component\ProjectTreeItem.cs" />
+    <Compile Include="Scr\Core\FGUI\CtlLongPropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowConfirmDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowIntInputDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowStringAreaInputPreviewDialog.cs" />
@@ -227,18 +235,33 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\UndoInstManager.cs" />
     <Compile Include="Scr\Core\FGUI\ValueChangedCommand.cs" />
     <Compile Include="Scr\Core\FGUI\WindowDialogBase.cs" />
+    <Compile Include="Scr\Core\I18N\NextLanguage.cs" />
+    <Compile Include="Scr\Core\I18N\NextLanguageConfig.cs" />
     <Compile Include="Scr\Core\ModGUI\ModMainWindow.cs" />
     <Compile Include="Scr\Core\ModGUI\ProjectTreeFolderModGroup.cs" />
     <Compile Include="Scr\Core\ModGUI\ProjectTreeItemMod.cs" />
+    <Compile Include="Scr\Core\Mod\ICustomSetting.cs" />
+    <Compile Include="Scr\Core\Mod\ModSettingDefinition_Custom.cs" />
+    <Compile Include="Scr\Core\Mod\ModSettingDefinition_DoubleFloatInput.cs" />
+    <Compile Include="Scr\Core\Mod\ModSettingDefinition_DoubleFloatSlider.cs" />
+    <Compile Include="Scr\Core\Mod\ModSettingDefinition_Dropdown.cs" />
+    <Compile Include="Scr\Core\Mod\ModSettingDefinition_LongIntegerSlider.cs" />
+    <Compile Include="Scr\Core\Mod\ModSettingDefinition_LongIntegerInput.cs" />
+    <Compile Include="Scr\Core\Mod\ModSettingDefinition_StringInput.cs" />
+    <Compile Include="Scr\Core\Mod\ModSettingDefinition_Toggle.cs" />
     <Compile Include="Scr\Core\Mod\ModGroup.cs" />
-    <Compile Include="Scr\Core\Mod\ModSetting.cs" />
+    <Compile Include="Scr\Core\Mod\ModConfigSetting.cs" />
+    <Compile Include="Scr\Core\Mod\ModSettingDefinition.cs" />
+    <Compile Include="Scr\Core\Mod\ModSettingDefinitionConverter.cs" />
     <Compile Include="Scr\Core\Mod\ModType.cs" />
+    <Compile Include="Scr\Core\Mod\SettingTypeAttribute.cs" />
     <Compile Include="Scr\Core\Patch\FungusClonePatch.cs" />
     <Compile Include="Scr\Core\Patch\MainUIModBtnPatch.cs" />
     <Compile Include="Scr\Core\Res\BytesAsset.cs" />
     <Compile Include="Scr\Core\Res\FileAsset.cs" />
     <Compile Include="Scr\Core\Res\ResourcesManager.cs" />
     <Compile Include="Scr\Core\Utils\AccessExtension.cs" />
+    <Compile Include="Scr\Core\Utils\MathTools.cs" />
     <Compile Include="Scr\Core\Utils\Vector2Converter.cs" />
     <Compile Include="Scr\FairyGUI\**" />
     <Compile Include="Scr\Core\ConfigTarget.cs" />
@@ -309,7 +332,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\DialogTrigger\OnUseItem.cs" />
     <Compile Include="Scr\Core\DllTools.cs" />
     <Compile Include="Scr\Core\ExpressionEvaluator\ExpressionEvaluator.cs" />
-    <Compile Include="Scr\Core\Extension\Utils.cs" />
+    <Compile Include="Scr\Core\Extension\ExtensionUtils.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIManager.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIWindowBase.cs" />
     <Compile Include="Scr\Core\FCanvas\Command\Menu.cs" />
@@ -330,7 +353,6 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\Mod\ModManager.cs" />
     <Compile Include="Scr\Core\Mod\ModGroupSetting.cs" />
     <Compile Include="Scr\Core\Mod\ModState.cs" />
-    <Compile Include="Scr\Core\NextLanguage.cs" />
     <Compile Include="Scr\Core\NextModSetting.cs" />
     <Compile Include="Scr\Core\Patch\BagActiveSkillGetIconSprite.cs" />
     <Compile Include="Scr\Core\Patch\BagPassiveSkillGetIconSprite.cs" />

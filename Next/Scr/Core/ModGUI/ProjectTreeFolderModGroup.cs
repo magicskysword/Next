@@ -39,14 +39,14 @@ public class ProjectTreeFolderModGroup : ProjectTreeFolder
         }
     }
 
-    public void RefreshModConfigs()
+    public void RefreshModConfigs(bool recreate = false)
     {
         var oldChildren = Children.ToList();
         RemoveAllChildren();
         foreach (var modConfig in ModGroup.ModConfigs)
         {
             var modItem = oldChildren.Find(x => x is ProjectTreeItemModConfig item && item.ModConfig == modConfig);
-            if (modItem != null)
+            if (modItem != null && !recreate)
             {
                 AddChild(modItem);
             }
@@ -55,8 +55,6 @@ public class ProjectTreeFolderModGroup : ProjectTreeFolder
                 AddChild(new ProjectTreeItemModConfig(modConfig, ModGroup));
             }
         }
-        
-        
     }
 
     public void OnInspector(CtlPropertyInspector inspector)
@@ -65,12 +63,12 @@ public class ProjectTreeFolderModGroup : ProjectTreeFolder
         var source = ModGroup.Type == ModType.Local ? "本地Mod" : "工坊Mod";
         var path = ModGroup.ModDir.FullName;
         var desc = ModGroup.SteamModInfo.Des;
-
+        
         inspector.AddDrawer(new CtlTitleDrawer(Name));
-        inspector.AddDrawer(new CtlInfoDrawer($"ID", id, 16));
-        inspector.AddDrawer(new CtlInfoDrawer($"来源",source, 16));
-        inspector.AddDrawer(new CtlInfoLinkDrawer($"路径", path,16, path));
-        inspector.AddDrawer(new CtlInfoDrawer($"包含Mod数量",ModGroup.ModConfigs.Count.ToString(), 16));
-        inspector.AddDrawer(new CtlInfoDrawer($"描述", desc, 16));
+        inspector.AddDrawer(new CtlInfoDrawer($"ID".I18NTodo(), id, 16));
+        inspector.AddDrawer(new CtlInfoDrawer($"来源".I18NTodo(),source, 16));
+        inspector.AddDrawer(new CtlInfoLinkDrawer($"路径".I18NTodo(), path,16, path));
+        inspector.AddDrawer(new CtlInfoDrawer($"包含Mod数量".I18NTodo(),ModGroup.ModConfigs.Count.ToString(), 16));
+        inspector.AddDrawer(new CtlInfoDrawer($"描述".I18NTodo(), desc, 16));
     }
 }

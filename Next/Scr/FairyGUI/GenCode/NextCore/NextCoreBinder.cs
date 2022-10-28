@@ -66,6 +66,8 @@ namespace SkySwordKill.NextFGUI.NextCore
             UIObjectFactory.SetPackageItemExtension(UI_ComListProject.URL, typeof(UI_ComListProject));
             UIObjectFactory.SetPackageItemExtension(UI_ComInfoDrawer.URL, typeof(UI_ComInfoDrawer));
             UIObjectFactory.SetPackageItemExtension(UI_SeidPreviewLabel.URL, typeof(UI_SeidPreviewLabel));
+            UIObjectFactory.SetPackageItemExtension(UI_ComSliderDrawer.URL, typeof(UI_ComSliderDrawer));
+            UIObjectFactory.SetPackageItemExtension(UI_ComSliderDrawer_slider.URL, typeof(UI_ComSliderDrawer_slider));
             UIObjectFactory.SetPackageItemExtension(UI_ComGroupDrawer.URL, typeof(UI_ComGroupDrawer));
         }
     }

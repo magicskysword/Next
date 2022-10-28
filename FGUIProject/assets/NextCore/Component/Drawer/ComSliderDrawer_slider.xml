@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="108,24" extention="Slider">
+  <displayList>
+    <graph id="n5_txbi" name="bg" xy="9,3" size="90,18" type="rect" lineSize="2" fillColor="#ff2c313c" corner="6">
+      <relation target="" sidePair="width-width"/>
+    </graph>
+    <graph id="n1_tp22" name="bar" xy="12,6" pivot="0,0.5" size="84,12" type="rect" lineSize="0" fillColor="#ff5c6472" corner="6">
+      <relation target="" sidePair="width-width,middle-middle"/>
+    </graph>
+    <component id="n2_tp22" name="grip" src="tp2259" fileName="Component/Drawer/ComSliderDrawer_grip.xml" xy="84,0">
+      <relation target="n1_tp22" sidePair="middle-middle,right-right"/>
+    </component>
+  </displayList>
+  <Slider titleType="value" wholeNumbers="true"/>
+</component>

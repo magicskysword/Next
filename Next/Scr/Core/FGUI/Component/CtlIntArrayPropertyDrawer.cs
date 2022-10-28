@@ -23,7 +23,7 @@ public class CtlIntArrayPropertyDrawer : CtlPropertyDrawerBase
     protected override GComponent OnCreateCom()
     {
         var drawer = UI_ComNumberDrawer.CreateInstance();
-        drawer.BindArrayEndEdit(OnEndEdit);
+        drawer.BindIntArrayEndEdit(OnEndEdit);
         drawer.title = _drawerName;
         return drawer;
     }

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="320,800" overflow="hidden" bgColor="#21252b">
   <displayList>
-    <list id="n0_10zy0" name="list" xy="0,0" size="320,800" restrictSize="200,0,0,0" selectionMode="none" overflow="scroll" scrollBarFlags="132" scrollBar="visible" margin="5,5,5,5" scrollBarRes="ui://028qk31hnkvz27," lineGap="6" autoClearItems="true">
+    <list id="n0_10zy0" name="list" xy="0,0" size="320,800" restrictSize="300,0,0,0" selectionMode="none" overflow="scroll" scrollBarFlags="132" scrollBar="visible" margin="5,5,5,5" scrollBarRes="ui://028qk31hnkvz27," lineGap="6" autoClearItems="true">
       <relation target="" sidePair="width-width,height-height"/>
       <item url="ui://028qk31hnkvz1x" title="ID"/>
       <item url="ui://028qk31hnkvz1x" title="名称"/>
       <item url="ui://028qk31hnkvz21" title="描述"/>
+      <item url="ui://028qk31hspup3q"/>
       <item url="ui://028qk31hr3ga4n"/>
       <item url="ui://028qk31hnkvz23" title="选项"/>
       <item url="ui://028qk31hnkvz22" title="特性"/>
       <item url="ui://028qk31h7exm3k"/>
       <item url="ui://028qk31hrabj4a"/>
       <item url="ui://028qk31hol2b52"/>
+      <item url="ui://028qk31htp225a"/>
       <item url="ui://028qk31hv5ah4h"/>
     </list>
   </displayList>

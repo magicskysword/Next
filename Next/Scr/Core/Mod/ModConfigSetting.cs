@@ -2,7 +2,7 @@
 
 namespace SkySwordKill.Next.Mod;
 
-public class ModSetting
+public class ModConfigSetting
 {
     public int priority = 0;
     public bool enable = false;

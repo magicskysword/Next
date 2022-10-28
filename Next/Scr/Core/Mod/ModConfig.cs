@@ -15,6 +15,9 @@ public class ModConfig
     public string Author { get; set; } = string.Empty;
     public string Version { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
+    [JsonConverter(typeof(ModSettingDefinitionListConverter))]
+    public List<ModSettingDefinition> Settings { get; set; } = new();
+    
     [JsonIgnore]
     public ModState State { get; set; }
     [JsonIgnore]
@@ -34,7 +37,7 @@ public class ModConfig
     [JsonIgnore]
     public string SettingKey { get; set; }
     [JsonIgnore]
-    public Dictionary<string, string> jsonPathCache = new Dictionary<string, string>();
+    public Dictionary<string, string> JsonPathCache = new Dictionary<string, string>();
 
     public string GetModStateDescription()
     {
@@ -129,6 +132,16 @@ public class ModConfig
     public string GetAssetDir()
     {
         return $"{Path}/Assets";
+    }
+    
+    public void Reload()
+    {
+        var newConfig = Load(Path, true);
+        Name = newConfig.Name;
+        Author = newConfig.Author;
+        Version = newConfig.Version;
+        Description = newConfig.Description;
+        Settings = newConfig.Settings;
     }
         
     public static ModConfig Load(string dir, bool ignoreWarning = false)

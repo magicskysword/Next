@@ -9,7 +9,11 @@ namespace SkySwordKill.Next;
 public class NextModSetting
 {
     public Dictionary<string, ModGroupSetting> groupSettings = new Dictionary<string, ModGroupSetting>();
-    public Dictionary<string, ModSetting> modSettings = new Dictionary<string, ModSetting>();
+    public Dictionary<string, ModConfigSetting> modSettings = new Dictionary<string, ModConfigSetting>();
+    public DataGroup<bool> BoolGroup = new DataGroup<bool>();
+    public DataGroup<long> LongIntegerGroup = new DataGroup<long>();
+    public DataGroup<double> DoubleFloatGroup = new DataGroup<double>();
+    public DataGroup<string> StringGroup = new DataGroup<string>();
 
     public static NextModSetting LoadSetting()
     {
@@ -22,9 +26,10 @@ public class NextModSetting
                 var json = File.ReadAllText(filePath);
                 nextModSetting = JsonConvert.DeserializeObject<NextModSetting>(json);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // ignored
+                Main.LogError("加载Next Mod设置文件失败！");
+                Main.LogError(e);
             }
         }
         nextModSetting ??= new NextModSetting();
@@ -57,12 +62,12 @@ public class NextModSetting
         return modSetting;
     }
     
-    public ModSetting GetOrCreateModSetting(ModConfig config)
+    public ModConfigSetting GetOrCreateModSetting(ModConfig config)
     {
         var key = config.SettingKey;
         if (!modSettings.TryGetValue(key, out var modSetting))
         {
-            modSetting = new ModSetting();
+            modSetting = new ModConfigSetting();
             modSettings.Add(key, modSetting);
         }
         modSetting.BindMod = config;

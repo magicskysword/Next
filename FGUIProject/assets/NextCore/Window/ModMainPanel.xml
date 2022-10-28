@@ -1,37 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1600,900" designImageLayer="1">
+<component size="1600,900">
   <displayList>
     <component id="n0_n15k" name="frame" src="q0gg3d" fileName="Component/Frame/WindowFrameDialogStyle2.xml" xy="0,0" size="1600,900">
       <relation target="" sidePair="width-width,height-height"/>
       <Label title="Next Mod管理器"/>
     </component>
-    <graph id="n8_ol2b" name="bgTable" xy="0,32" size="801,868" type="rect" lineColor="#ff32363c" fillColor="#ff21252b">
+    <graph id="n8_ol2b" name="bgTable" xy="0,32" size="799,868" type="rect" lineColor="#ff32363c" fillColor="#ff21252b">
       <relation target="n2_n15k" sidePair="width-width,height-height,center-center,middle-middle"/>
     </graph>
-    <graph id="n9_ol2b" name="bgTools" xy="1,32" size="799,25" type="rect" lineSize="0" fillColor="#ff21252b">
+    <graph id="n9_ol2b" name="bgTools" xy="1,32" size="797,25" type="rect" lineSize="0" fillColor="#ff21252b">
       <relation target="n2_n15k" sidePair="width-width,center-center,top-top"/>
     </graph>
-    <component id="n2_n15k" name="mods" src="nkvz25" fileName="Component/PanelCom/ComTreeProject.xml" xy="1,32" size="799,867" controller="showToolbar,1">
+    <component id="n2_n15k" name="mods" src="nkvz25" fileName="Component/PanelCom/ComTreeProject.xml" xy="1,32" size="797,867" controller="showToolbar,1">
       <relation target="" sidePair="height-height"/>
       <relation target="n5_n15k" sidePair="rightext-left"/>
     </component>
-    <component id="n3_n15k" name="inspector" src="nkvz2f" fileName="Component/PanelCom/ComMainInspector.xml" xy="805,37" size="788,810">
+    <component id="n3_n15k" name="inspector" src="nkvz2f" fileName="Component/PanelCom/ComMainInspector.xml" xy="806,37" size="785,810">
       <relation target="" sidePair="width-width,height-height"/>
       <relation target="n5_n15k" sidePair="leftext-right"/>
     </component>
-    <graph id="n5_n15k" name="seg" xy="800,32" size="1,867" type="rect" lineSize="0" lineColor="#ff32363c" fillColor="#ff32363c">
+    <graph id="n5_n15k" name="seg" xy="798,32" size="4,867" type="rect" lineSize="0" lineColor="#ff32363c" fillColor="#ff32363c">
       <relation target="" sidePair="height-height,center-center%"/>
     </graph>
     <component id="n10_ol2b" name="btnApply" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="1469,860" size="117,25">
       <relation target="" sidePair="right-right,bottom-bottom"/>
-      <Button title="应用"/>
+      <Button title="重载"/>
     </component>
-    <list id="n11_rpgf" name="listLink" xy="816,865" size="638,26" layout="row" overflow="scroll" scrollBarFlags="160" scrollBar="hidden" colGap="20" defaultItem="ui://028qk31hrpgf53" vAlign="middle" autoClearItems="true">
+    <list id="n11_rpgf" name="listLink" xy="817,865" size="635,26" layout="row" overflow="scroll" scrollBarFlags="160" scrollBar="hidden" colGap="20" defaultItem="ui://028qk31hrpgf53" vAlign="middle" autoClearItems="true">
       <relation target="n3_n15k" sidePair="width-width"/>
       <relation target="" sidePair="right-right,top-bottom"/>
       <item title="觅长生Wiki"/>
       <item/>
       <item/>
     </list>
+    <component id="n12_9ngz" name="btnSetting" src="fqcb3t" fileName="Component/Button/BtnToolCommon.xml" xy="1537,4" tooltips="设置">
+      <relation target="" sidePair="right-right,top-top"/>
+      <Button icon="ui://028qk31h9ngz56"/>
+    </component>
   </displayList>
 </component>

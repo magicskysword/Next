@@ -12,6 +12,6 @@ public class CtlPropertyInspector : CtlInspectorBase
     }
         
     public UI_ComMainInspector MainView;
-        
+    
     protected override GList _drawerGList => MainView.m_list;
 }

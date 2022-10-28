@@ -1,20 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FairyGUI;
 
 namespace SkySwordKill.Next.FGUI.Component;
 
-public abstract class CtlInspectorBase
+public abstract class CtlInspectorBase : IInspector
 {
     protected abstract GList _drawerGList { get; }
     protected List<IPropertyDrawer> _drawers = new List<IPropertyDrawer>();
+    public event Action OnPropertyChanged;
         
     public bool Editable { get; set; } = true;
 
     public void AddDrawer(IPropertyDrawer drawer)
     {
+        drawer.AddChangeListener(OnDrawerChanged);
         _drawers.Add(drawer);
         _drawerGList.AddChild(drawer.CreateCom());
         OnAddDrawer(drawer);
+    }
+
+    private void OnDrawerChanged()
+    {
+        OnPropertyChanged?.Invoke();
     }
 
     public void Clear()
@@ -37,7 +45,7 @@ public abstract class CtlInspectorBase
         }
         OnRefresh();
     }
-        
+
     protected virtual void OnAddDrawer(IPropertyDrawer drawer)
     {
             

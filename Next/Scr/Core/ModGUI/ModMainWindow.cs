@@ -1,4 +1,5 @@
 ﻿using FairyGUI;
+using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.Next.FGUI.Dialog;
@@ -15,23 +16,53 @@ public class ModMainWindow : FGUIWindowBase
         
     }
     
+    private bool _modLoadSettingDirty;
+    private bool _modDataSettingDirty;
+
     public UI_ModMainPanel MainView => (UI_ModMainPanel)contentPane;
     public CtlTreeProject ModTree { get; set; }
     public CtlPropertyInspector Inspector { get; set; }
 
-    public bool SettingDirty { get; set; } = false;
+    /// <summary>
+    /// Mod加载设置脏标记
+    /// 为True时，Mod加载设置发生了改变，需要重载所有Mod
+    /// </summary>
+    public bool ModLoadSettingDirty
+    {
+        get => _modLoadSettingDirty;
+        set
+        {
+            _modLoadSettingDirty = value;
+            RefreshTitle();
+        }
+    }
+
+    public bool ModDataSettingDirty
+    {
+        get => _modDataSettingDirty;
+        set
+        {
+            _modDataSettingDirty = value;
+            RefreshTitle();
+        }
+    }
+    
+    public bool ModSettingDirty => ModLoadSettingDirty || ModDataSettingDirty;
 
     protected override void OnInit()
     {
         base.OnInit();
 
         modal = true;
-        frame.asLabel.title = $"Next  v{Main.MOD_VERSION}";
         
-        SettingDirty = false;
+        _modLoadSettingDirty = false;
+        _modDataSettingDirty = false;
+        RefreshTitle();
         
         MainView.m_frame.m_closeButton.onClick.Add(OnClickClose);
         MainView.m_btnApply.onClick.Add(OnClickApply);
+        MainView.m_btnApply.text = "应用".I18NTodo();
+        
         InitProject();
         InitInspector();
         InitLink();
@@ -43,9 +74,27 @@ public class ModMainWindow : FGUIWindowBase
         Refresh();
     }
 
+    protected override void OnHide()
+    {
+        base.OnHide();
+        Main.I.LoadModSetting();
+    }
+
+    private void RefreshTitle()
+    {
+        if(!ModSettingDirty)
+            frame.asLabel.title = $"Next  v{Main.MOD_VERSION}";
+        else
+            frame.asLabel.title = $"* Next  v{Main.MOD_VERSION}";
+    }
+
     private void InitInspector()
     {
         Inspector = new CtlPropertyInspector(MainView.m_inspector);
+        Inspector.OnPropertyChanged += () =>
+        {
+            ModDataSettingDirty = true;
+        };
     }
 
     private void InitProject()
@@ -85,9 +134,11 @@ public class ModMainWindow : FGUIWindowBase
         foreach (var modGroup in ModManager.modGroups)
         {
             var projectGroup = new ProjectTreeFolderModGroup(modGroup);
-            projectGroup.RefreshModConfigs();
+            projectGroup.RefreshModConfigs(true);
             ModTree.AddProject(projectGroup);
         }
+        
+        RefreshTitle();
     }
     
     private void OnInspectMod(EventContext context, ProjectTreeNodeBase node)
@@ -101,6 +152,7 @@ public class ModMainWindow : FGUIWindowBase
         {
             modGroup.OnInspector(Inspector);
         }
+        Inspector.Refresh();
     }
 
     private void OnRenderTreeItem(GTreeNode gTreeNode, ProjectTreeNodeBase node)
@@ -116,7 +168,7 @@ public class ModMainWindow : FGUIWindowBase
                 item.m_tglEnable.onChanged.Set(() =>
                 {
                     ModManager.ModSetEnable(modItem.ModConfig, item.m_tglEnable.selected);
-                    SettingDirty = true;
+                    ModLoadSettingDirty = true;
                 });
             }
             else
@@ -129,7 +181,14 @@ public class ModMainWindow : FGUIWindowBase
     
     private void OnClickClose(EventContext context)
     {
-        Hide();
+        if (ModSettingDirty)
+        {
+            WindowConfirmDialog.CreateDialog("提示", "检测到Mod设置已经发生变更，是否不保存并退出？", true,Hide);
+        }
+        else
+        {
+            Hide();
+        }
     }
     
     private void OnClickApply(EventContext context)
@@ -139,10 +198,16 @@ public class ModMainWindow : FGUIWindowBase
             WindowWaitDialog.CreateDialog("提示","正在应用更改...", 1f, 
                 context =>
             {
-                ModManager.ReloadAllMod();
+                Main.I.SaveModSetting();
+                if (ModLoadSettingDirty)
+                {
+                    ModManager.ReloadAllMod();
+                }
             }, 
                 context=>
             {
+                _modLoadSettingDirty = false;
+                _modDataSettingDirty = false;
                 Refresh();
             });
         });
@@ -162,13 +227,13 @@ public class ModMainWindow : FGUIWindowBase
             modItem.ModGroup.MoveModUp(modItem.ModConfig);
             var nodeParent = (ProjectTreeFolderModGroup)modItem.Parent;
             nodeParent.RefreshModConfigs();
-            SettingDirty = true;
+            ModLoadSettingDirty = true;
         }
         else if(node is ProjectTreeFolderModGroup modGroup)
         {
             ModManager.ModGroupMoveUp(modGroup.ModGroup);
             ModTree.MoveProjectUp(modGroup);
-            SettingDirty = true;
+            ModLoadSettingDirty = true;
         }
         
         if(node != null)
@@ -185,13 +250,13 @@ public class ModMainWindow : FGUIWindowBase
             modItem.ModGroup.MoveModDown(modItem.ModConfig);
             var nodeParent = (ProjectTreeFolderModGroup)modItem.Parent;
             nodeParent.RefreshModConfigs();
-            SettingDirty = true;
+            ModLoadSettingDirty = true;
         }
         else if(node is ProjectTreeFolderModGroup modGroup)
         {
             ModManager.ModGroupMoveDown(modGroup.ModGroup);
             ModTree.MoveProjectDown(modGroup);
-            SettingDirty = true;
+            ModLoadSettingDirty = true;
         }
         
         if(node != null)
@@ -204,13 +269,13 @@ public class ModMainWindow : FGUIWindowBase
     {
         ModManager.ModSetEnableAll(false);
         Refresh();
-        SettingDirty = true;
+        ModLoadSettingDirty = true;
     }
 
     private void OnClickEnableAllMod()
     {
         ModManager.ModSetEnableAll(true);
         Refresh();
-        SettingDirty = true;
+        ModLoadSettingDirty = true;
     }
 }

@@ -7,17 +7,18 @@ namespace SkySwordKill.Next.ModGUI;
 
 public class ProjectTreeItemModConfig : ProjectTreeItem
 {
-    public ProjectTreeItemModConfig(ModConfig config,ModGroup group)
+    public ProjectTreeItemModConfig(ModConfig config, ModGroup group)
     {
         ModConfig = config;
         ModGroup = group;
     }
-    
+
     public ModConfig ModConfig { get; }
     public ModGroup ModGroup { get; }
     public override string ResURL => "ui://NextCore/BtnTreeItemMod";
 
-    public override string Name => $"{ModConfig.Name} - {ModConfig.Version} ({Path.GetFileNameWithoutExtension(ModConfig.Path)})";
+    public override string Name =>
+        $"{ModConfig.Name} - {ModConfig.Version} ({Path.GetFileNameWithoutExtension(ModConfig.Path)})";
 
 
     public void OnInspector(CtlInspectorBase inspector)
@@ -28,11 +29,32 @@ public class ProjectTreeItemModConfig : ProjectTreeItem
         var modVersion = ModConfig.Version ?? "Mod.Unknown".I18N();
         var modDesc = ModConfig.Description ?? "Mod.Unknown".I18N();
         
-        inspector.AddDrawer(new CtlTitleDrawer($"{"Mod.Name".I18N()} : {modName}"));
-        inspector.AddDrawer(new CtlInfoDrawer("Mod.State".I18N(),ModConfig.GetModStateDescription(), 16));
-        inspector.AddDrawer(new CtlInfoDrawer("Mod.Author".I18N(), modAuthor, 16));
-        inspector.AddDrawer(new CtlInfoDrawer("Mod.Version".I18N(), modVersion, 16));
-        inspector.AddDrawer(new CtlInfoDrawer("Mod.Description".I18N(), modDesc, 16));
-        inspector.AddDrawer(new CtlInfoLinkDrawer("Mod.Directory".I18N(), modPath, 16, modPath));
+        inspector.AddDrawer(new CtlTitleDrawer(modName));
+
+        var groupInfo = new CtlGroupDrawer("Mod信息".I18NTodo(), true,
+            new CtlInfoDrawer("Mod.State".I18N(), ModConfig.GetModStateDescription(), 16),
+            new CtlInfoDrawer("Mod.Author".I18N(), modAuthor, 16),
+            new CtlInfoDrawer("Mod.Version".I18N(), modVersion, 16),
+            new CtlInfoDrawer("Mod.Description".I18N(), modDesc, 16),
+            new CtlInfoLinkDrawer("Mod.Directory".I18N(), modPath, 16, modPath)
+        );
+
+        var groupSetting = new CtlGroupDrawer("Mod设置".I18NTodo(), true);
+        foreach (var settingDefinition in ModConfig.Settings)
+        {
+            if (settingDefinition is ModSettingDefinition_Custom customDefinition)
+            {
+                var customSetting = ModManager.GetCustomSetting(customDefinition.CustomType);
+                customSetting.OnDrawer(customDefinition, groupSetting);
+            }
+            else
+            {
+                settingDefinition.OnDrawer(groupSetting);
+            }
+        }
+        
+        inspector.AddDrawer(groupInfo);
+        if(groupSetting.Drawers.Count > 0)
+            inspector.AddDrawer(groupSetting);
     }
 }

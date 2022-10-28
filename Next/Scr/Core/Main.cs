@@ -14,13 +14,15 @@ using Fungus;
 using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.Res;
 using SkySwordKill.Next.FCanvas;
+using SkySwordKill.Next.I18N;
+using SkySwordKill.Next.Mod;
 
 namespace SkySwordKill.Next;
 
 [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
 public partial class Main : BaseUnityPlugin
 {
-    public const string MOD_VERSION = "0.7.0.2";
+    public const string MOD_VERSION = "0.7.1";
         
     public static Lazy<string> PathLocalModsDir;
     public static Lazy<string> PathLibraryDir;
@@ -43,11 +45,11 @@ public partial class Main : BaseUnityPlugin
         
     public static int LogIndent = 0;
         
-    public ConfigTarget<string> LanguageID;
+    public ConfigTarget<string> LanguageDir;
     public ConfigTarget<bool> DebugMode;
     public ConfigTarget<KeyCode> WinKeyCode;
-        
-    public NextLanguage NextLanguage;
+
+    public NextLanguage CurrentLanguage { get; private set; }
     public NextModSetting NextModSetting;
         
     private ResourcesManager _resourcesManager;
@@ -71,7 +73,7 @@ public partial class Main : BaseUnityPlugin
             
         InitDir();
 
-        LanguageID = Config.CreateConfig("Main.Language", "Plugin Language", "",
+        LanguageDir = Config.CreateConfig("Main.Language", "Plugin Language", "",
             "");
         WinKeyCode = Config.CreateConfig("Main.OpenKeyCode", "Window HotKey", KeyCode.F4,
             "");
@@ -102,15 +104,17 @@ public partial class Main : BaseUnityPlugin
         // Init language and config
         NextLanguage.InitLanguage();
         LoadDefaultLanguage();
-        NextModSetting = NextModSetting.LoadSetting();
+        LoadModSetting();
 
         // ModManager 启动由 JsonDataPatch 进行引导
         // ModManager startup is booted by JsonDataPatch
     }
-    
+
     private void AfterInit()
     {
         DialogAnalysis.Init();
+        
+        ModSettingDefinitionListConverter.Init();
         
         // 检查更新
         // Check Update
@@ -164,11 +168,11 @@ public partial class Main : BaseUnityPlugin
 
     private void LoadDefaultLanguage()
     {
-        if (string.IsNullOrEmpty(LanguageID.Value) || !NextLanguage.languages.TryGetValue(LanguageID.Value, out var language))
+        if (string.IsNullOrEmpty(LanguageDir.Value) || !NextLanguage.TryGetLanguageByDir(LanguageDir.Value, out var language))
         {
             // 选择一个语言作为默认语言
             // Choose Default Language
-            SelectLanguage(NextLanguage.languages.Values.FirstOrDefault());
+            SelectLanguage(NextLanguage.Languages.FirstOrDefault());
             isSelectedLanguage = true;
         }
         else
@@ -176,8 +180,8 @@ public partial class Main : BaseUnityPlugin
             SelectLanguage(language);
         }
             
-        LanguageID.SetName("Config.Main.LanguageID.Name".I18N());
-        LanguageID.SetDesc("Config.Main.LanguageID.Desc".I18N());
+        LanguageDir.SetName("Config.Main.LanguageID.Name".I18N());
+        LanguageDir.SetDesc("Config.Main.LanguageID.Desc".I18N());
             
         WinKeyCode.SetName("Config.Main.OpenKeyCode.Name".I18N());
         WinKeyCode.SetDesc("Config.Main.OpenKeyCode.Desc".I18N());
@@ -188,15 +192,20 @@ public partial class Main : BaseUnityPlugin
 
     public void SelectLanguage(NextLanguage language)
     {
-        NextLanguage = language;
+        CurrentLanguage = language;
 
         if (language == null)
             return;
             
-        LanguageID.Value = language.FileName;
-        LogInfo($"{"Misc.CurrentLanguage".I18N()} : {language.LanguageName}");
+        LanguageDir.Value = language.LanguageDir;
+        LogInfo($"{"Misc.CurrentLanguage".I18N()} : {language.Config.LanguageName}");
     }
 
+    public void LoadModSetting()
+    {
+        NextModSetting = NextModSetting.LoadSetting();
+    }
+    
     public void SaveModSetting()
     {
         NextModSetting.SaveSetting(NextModSetting);

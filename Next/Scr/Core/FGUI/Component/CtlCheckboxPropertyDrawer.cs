@@ -7,7 +7,7 @@ namespace SkySwordKill.Next.FGUI.Component;
 public class CtlCheckboxPropertyDrawer : CtlPropertyDrawerBase
 {
     public UI_ComCheckboxDrawer Drawer => (UI_ComCheckboxDrawer)Component;
-        
+
     private string _drawerName;
     private Action<bool> _setter;
     private Func<bool> _getter;

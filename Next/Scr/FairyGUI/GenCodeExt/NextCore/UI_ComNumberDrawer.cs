@@ -1,70 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using SkySwordKill.Next.FGUI;
 using SkySwordKill.NextModEditor.Mod;
 
 namespace SkySwordKill.NextFGUI.NextCore;
 
 public partial class UI_ComNumberDrawer
 {
-    public void SetInputRestrict(string regex)
-    {
-        m_inContent.restrict = regex;
-    }
-        
-    public void BindIntEndEdit(Action<int> endEdit)
-    {
-        SetInputRestrict("[0-9-]");
-        m_inContent.onFocusOut.Set(() =>
-        {
-            var str = m_inContent.text;
-            if(int.TryParse(str,out var num))
-            {
-                endEdit?.Invoke(num);
-                Warning = false;
-            }
-            else
-            {
-                Warning = true;
-            }
-        });
-    }
-        
-    public void BindFloatEndEdit(Action<float> endEdit)
-    {
-        SetInputRestrict("[0-9-.eE]");
-        m_inContent.onFocusOut.Set(() =>
-        {
-            var str = m_inContent.text;
-            if(float.TryParse(str,out var num))
-            {
-                endEdit?.Invoke(num);
-                Warning = false;
-            }
-            else
-            {
-                Warning = true;
-            }
-        });
-    }
-        
-    public void BindArrayEndEdit(Action<List<int>> endEdit)
-    {
-        SetInputRestrict("[0-9-,，]");
-        m_inContent.onFocusOut.Set(() =>
-        {
-            var strArr = m_inContent.text;
-            if(strArr.TryFormatToListInt(out var list))
-            {
-                endEdit?.Invoke(list);
-                Warning = false;
-            }
-            else
-            {
-                Warning = true;
-            }
-        });
-    }
-
     public bool Warning
     {
         get => GetController("warning").selectedIndex == 1;
@@ -76,5 +18,65 @@ public partial class UI_ComNumberDrawer
         grayed = !value;
         m_inContent.editable = value;
         m_inContent.cursor = value ? "text" : string.Empty;
+    }
+
+    public void BindLongEndEdit(Action<long> onSetProperty)
+    {
+        m_inContent.BindLongEndEdit(value =>
+        {
+            onSetProperty?.Invoke(value);
+            Warning = false;
+        }, value =>
+        {
+            Warning = true;
+        });
+    }
+    
+    public void BindFloatEndEdit(Action<float> onSetProperty)
+    {
+        m_inContent.BindFloatEndEdit(value =>
+        {
+            onSetProperty?.Invoke(value);
+            Warning = false;
+        }, value =>
+        {
+            Warning = true;
+        });
+    }
+    
+    public void BindDoubleEndEdit(Action<double> onSetProperty)
+    {
+        m_inContent.BindDoubleEndEdit(value =>
+        {
+            onSetProperty?.Invoke(value);
+            Warning = false;
+        }, value =>
+        {
+            Warning = true;
+        });
+    }
+    
+    public void BindIntEndEdit(Action<int> onSetProperty)
+    {
+        m_inContent.BindIntEndEdit(value =>
+        {
+            onSetProperty?.Invoke(value);
+            Warning = false;
+        }, value =>
+        {
+            Warning = true;
+        });
+    }
+
+    public void BindIntArrayEndEdit(Action<List<int>> onSetProperty)
+    {
+        m_inContent.BindIntArrayEndEdit(value =>
+        {
+            onSetProperty?.Invoke(value);
+            Warning = false;
+        }, value =>
+        {
+            Warning = true;
+        });
     }
 }

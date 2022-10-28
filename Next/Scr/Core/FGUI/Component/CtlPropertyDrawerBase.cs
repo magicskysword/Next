@@ -17,6 +17,20 @@ public abstract class CtlPropertyDrawerBase : IPropertyDrawer
         }
     }
 
+    private string _tooltips;
+    public string Tooltips
+    {
+        get => _tooltips;
+        set
+        {
+            _tooltips = value;
+            if (Component != null)
+            {
+                Component.tooltips = value;
+            }
+        }
+    }
+
     public UndoInstManager UndoManager { get; set; }
     public Action OnChanged { get; set; } = () => { };
     public GComponent Component { get; set; }
@@ -31,6 +45,7 @@ public abstract class CtlPropertyDrawerBase : IPropertyDrawer
         {
             Component = OnCreateCom();
         }
+        Component.tooltips = Tooltips;
         return Component;
     }
 
@@ -48,5 +63,20 @@ public abstract class CtlPropertyDrawerBase : IPropertyDrawer
     public void Refresh()
     {
         OnRefresh();
+    }
+
+    public void AddChangeListener(Action OnChanged)
+    {
+        this.OnChanged += OnChanged;
+    }
+    
+    public void RemoveChangeListener(Action OnChange)
+    {
+        OnChanged -= OnChange;
+    }
+    
+    public void ClearChangeListener()
+    {
+        OnChanged = () => { };
     }
 }

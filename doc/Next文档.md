@@ -41,9 +41,12 @@ modConfig.json
     "Name" : "测试Mod",
     "Author" : "佚名",
     "Version" : "1.0.0",
-    "Description" : "测试用的Mod。"
+    "Description" : "测试用的Mod。",
+    "Settings" : [ ... ]
 }
 ```
+
+详见[**描述文件设置**](描述文件设置.md)
 
 ## 4 数据Patch
 数据Patch是指对游戏原版数据进行修改与增加。（目前未提供删除功能）

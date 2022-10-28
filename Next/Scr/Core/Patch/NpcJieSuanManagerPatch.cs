@@ -22,7 +22,7 @@ public class NpcJieSuanManagerPatch
             {
                 if(modConfig.State != ModState.LoadSuccess)
                     continue;
-                if (modConfig.jsonPathCache.TryGetValue("AvatarJsonData",out var path))
+                if (modConfig.JsonPathCache.TryGetValue("AvatarJsonData",out var path))
                 {
                     ModManager.PatchJsonObject(fieldInfo,path,jsonInstance.AvatarJsonData);
                 }

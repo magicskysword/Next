@@ -4,6 +4,7 @@ using System.Linq;
 using Fungus;
 using KBEngine;
 using SkySwordKill.Next;
+using SkySwordKill.Next.Mod;
 
 namespace SkySwordKill.Next.DialogSystem;
 
@@ -151,6 +152,13 @@ public class DialogEnvironment
     {
         return DialogAnalysis.GetStr(key);
     }
+    
+    public bool GetBoolSetting(string key) => ModManager.TryGetModSetting(key, out bool value) && value;
+    public int GetIntSetting(string key) => ModManager.TryGetModSetting(key, out long value) ? (int)value : 0;
+    public long GetLongSetting(string key) => ModManager.TryGetModSetting(key, out long value) ? value : 0L;
+    public float GetFloatSetting(string key) => ModManager.TryGetModSetting(key, out double value) ? (float)value : 0f;
+    public double GetDoubleSetting(string key) => ModManager.TryGetModSetting(key, out double value) ? value : 0d;
+    public string GetStringSetting(string key) => ModManager.TryGetModSetting(key, out string value) ? value : string.Empty;
 
     public bool Before(int year, int month = 12, int day = 31)
     {

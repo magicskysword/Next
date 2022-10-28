@@ -15,6 +15,7 @@ namespace SkySwordKill.NextFGUI.NextCore
         public GGraph m_seg;
         public GButton m_btnApply;
         public GList m_listLink;
+        public GButton m_btnSetting;
         public const string URL = "ui://028qk31hn15k4w";
 
         public static UI_ModMainPanel CreateInstance()
@@ -34,6 +35,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             m_seg = (GGraph)GetChild("seg");
             m_btnApply = (GButton)GetChild("btnApply");
             m_listLink = (GList)GetChild("listLink");
+            m_btnSetting = (GButton)GetChild("btnSetting");
         }
     }
 }

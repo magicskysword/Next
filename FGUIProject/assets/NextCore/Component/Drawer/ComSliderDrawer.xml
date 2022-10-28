@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="300,30">
+  <displayList>
+    <text id="n3_tp22" name="txt_title" xy="0,0" size="125,30" fontSize="14" color="#ffffff" align="center" vAlign="middle" autoSize="none" autoClearText="true" text="Slider"/>
+    <graph id="n7_9lou" name="bg_input" xy="215,0" size="85,30" type="rect" lineSize="2" fillColor="#ff2c313c">
+      <relation target="n4_tp22" sidePair="width-width,height-height,center-center,middle-middle"/>
+    </graph>
+    <text id="n4_tp22" name="txt_input" xy="221,0" size="73,30" fontSize="14" color="#ffffff" vAlign="middle" autoSize="none" autoClearText="true" text="100" input="true">
+      <relation target="" sidePair="right-right"/>
+    </text>
+    <component id="n6_txbi" name="slider" src="txbi5b" fileName="Component/Drawer/ComSliderDrawer_slider.xml" xy="125,3" size="90,24">
+      <relation target="" sidePair="width-width,middle-middle"/>
+      <Slider value="50" max="100"/>
+    </component>
+  </displayList>
+</component>

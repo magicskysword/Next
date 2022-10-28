@@ -74,88 +74,88 @@ public class ModEditorManager
             }
 
             AffixDataProjectTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/AffixProjectType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/AffixProjectType.json"))
                 .ToObject<List<ModAffixDataProjectType>>();
             AffixDataAffixTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/AffixType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/AffixType.json"))
                 .ToObject<List<ModAffixDataAffixType>>();
             CreateAvatarSeidMetas = JObject
-                .Parse(ModUtils.LoadConfig("Meta/CreateAvatarSeidMeta.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/CreateAvatarSeidMeta.json"))
                 .ToObject<Dictionary<int, ModSeidMeta>>();
             CreateAvatarDataTalentTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/CreateAvatarTalentType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/CreateAvatarTalentType.json"))
                 .ToObject<List<ModCreateAvatarDataTalentType>>();
             LevelTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/LevelType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/LevelType.json"))
                 .ToObject<List<ModLevelType>>();
             BuffSeidMetas = JObject
-                .Parse(ModUtils.LoadConfig("Meta/BuffSeidMeta.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/BuffSeidMeta.json"))
                 .ToObject<Dictionary<int, ModSeidMeta>>();
             BuffDataBuffTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/BuffType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/BuffType.json"))
                 .ToObject<List<ModBuffDataBuffType>>();
             BuffDataTriggerTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/BuffTriggerType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/BuffTriggerType.json"))
                 .ToObject<List<ModBuffDataTriggerType>>();
             BuffDataRemoveTriggerTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/BuffRemoveTriggerType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/BuffRemoveTriggerType.json"))
                 .ToObject<List<ModBuffDataRemoveTriggerType>>();
             BuffDataOverlayTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/BuffOverlayType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/BuffOverlayType.json"))
                 .ToObject<List<ModBuffDataOverlayType>>();
             ItemDataGuideTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/ItemGuideType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/ItemGuideType.json"))
                 .ToObject<List<ModItemDataGuideType>>();
             ItemDataShopTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/ItemShopType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/ItemShopType.json"))
                 .ToObject<List<ModItemDataShopType>>();
             ItemDataQualityTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/ItemQualityType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/ItemQualityType.json"))
                 .ToObject<List<ModItemDataQualityType>>();
             ItemDataPhaseTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/ItemPhaseType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/ItemPhaseType.json"))
                 .ToObject<List<ModItemDataPhaseType>>();
             ItemDataTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/ItemType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/ItemType.json"))
                 .ToObject<List<ModItemDataType>>();
             ItemEquipSeidMetas = JObject
-                .Parse(ModUtils.LoadConfig("Meta/ItemEquipSeidMeta.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/ItemEquipSeidMeta.json"))
                 .ToObject<Dictionary<int, ModSeidMeta>>();
             ItemUseSeidMetas = JObject
-                .Parse(ModUtils.LoadConfig("Meta/ItemUseSeidMeta.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/ItemUseSeidMeta.json"))
                 .ToObject<Dictionary<int, ModSeidMeta>>();
             ItemDataUseTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/ItemUseType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/ItemUseType.json"))
                 .ToObject<List<ModItemDataUseType>>();
             SkillSeidMetas = JObject
-                .Parse(ModUtils.LoadConfig("Meta/SkillSeidMeta.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/SkillSeidMeta.json"))
                 .ToObject<Dictionary<int, ModSeidMeta>>();
             AttackTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/AttackType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/AttackType.json"))
                 .ToObject<List<ModAttackType>>();
             ElementTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/ElementType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/ElementType.json"))
                 .ToObject<List<ModElementType>>();
             ComparisonOperatorTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/ComparisonOperatorType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/ComparisonOperatorType.json"))
                 .ToObject<List<ModComparisonOperatorType>>();
             TargetTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/TargetType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/TargetType.json"))
                 .ToObject<List<ModTargetType>>();
             ItemDataArtifactTypeGroup = JObject
-                .Parse(ModUtils.LoadConfig("Meta/ArtifactTypeGroup.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/ArtifactTypeGroup.json"))
                 .ToObject<ModItemDataArtifactTypeGroup>();
             SkillDataQuality = JArray
-                .Parse(ModUtils.LoadConfig("Meta/SkillQuality.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/SkillQuality.json"))
                 .ToObject<List<ModSkillDataQuality>>();
             SkillDataPhase = JArray
-                .Parse(ModUtils.LoadConfig("Meta/SkillPhase.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/SkillPhase.json"))
                 .ToObject<List<ModSkillDataPhase>>();
             SkillDataConsultTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/SkillConsultType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/SkillConsultType.json"))
                 .ToObject<List<ModSkillDataConsultType>>();
             SkillDataAttackScriptTypes = JArray
-                .Parse(ModUtils.LoadConfig("Meta/SkillAttackScriptType.json"))
+                .Parse(ModUtils.LoadEditorConfig("Meta/SkillAttackScriptType.json"))
                 .ToObject<List<ModSkillDataAttackScriptType>>();
         }
 

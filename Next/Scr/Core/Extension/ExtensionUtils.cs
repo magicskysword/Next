@@ -2,10 +2,11 @@
 using System.Text.RegularExpressions;
 using BepInEx.Configuration;
 using Newtonsoft.Json.Linq;
+using SkySwordKill.Next.I18N;
 
 namespace SkySwordKill.Next.Extension;
 
-public static class Utils
+public static class ExtensionUtils
 {
     public static void TryAddOrReplace(this JSONObject jsonObject, string key, JSONObject value)
     {
@@ -42,7 +43,7 @@ public static class Utils
     /// <returns></returns>
     public static string I18N(this string key)
     {
-        return NextLanguage.Get(Main.I.NextLanguage, key);
+        return NextLanguage.Get(Main.I.CurrentLanguage, key);
     }
         
     /// <summary>

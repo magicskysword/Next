@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="300,30" restrictSize="0,0,30,0" extention="Label">
+<component size="300,110" restrictSize="0,0,30,0" extention="Label">
   <displayList>
     <text id="n2_10zy0" name="title" xy="0,0" size="125,30" fontSize="14" color="#ffffff" align="center" vAlign="middle" ubb="true" autoSize="none" autoClearText="true" text="String"/>
-    <text id="n3_spup" name="content" xy="125,4" size="175,22" fontSize="14" color="#ffffff" vAlign="middle" ubb="true" autoSize="height" autoClearText="true" text="String">
+    <text id="n3_spup" name="content" xy="125,4" size="175,102" fontSize="14" color="#ffffff" vAlign="middle" ubb="true" autoSize="height" autoClearText="true" text="StringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringString">
       <relation target="" sidePair="width-width"/>
     </text>
-    <graph id="n4_rpgf" name="mask" xy="125,4" size="175,22" type="rect" lineSize="0" fillColor="#00ffffff">
+    <graph id="n4_rpgf" name="mask" xy="125,4" size="175,102" type="rect" lineSize="0" fillColor="#00ffffff">
       <relation target="n3_spup" sidePair="width-width,height-height,center-center,middle-middle"/>
     </graph>
   </displayList>

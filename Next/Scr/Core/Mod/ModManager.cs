@@ -15,6 +15,7 @@ using script.Steam;
 using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FCanvas;
+using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.Next.StaticFace;
 using SkySwordKill.NextModEditor.Mod;
@@ -43,12 +44,14 @@ public static class ModManager
     public static event Action ModLoadStart;
     public static event Action ModLoadComplete;
     public static event Action ModReload;
+    public static event Action ModSettingChanged;
+    private static Dictionary<string, ICustomSetting> _customSetting = new Dictionary<string, ICustomSetting>();
         
     private static void OnModLoadStart()
     {
         ModLoadStart?.Invoke();
     }
-        
+    
     private static void OnModLoadComplete()
     {
         ModLoadComplete?.Invoke();
@@ -57,6 +60,11 @@ public static class ModManager
     private static void OnModReload()
     {
         ModReload?.Invoke();
+    }
+    
+    private static void OnModSettingChanged()
+    {
+        ModSettingChanged?.Invoke();
     }
 
     #endregion
@@ -87,14 +95,15 @@ public static class ModManager
             {
                 if (context.Exception != null)
                 {
-                    WindowConfirmDialog.CreateDialog("提示", $"数据导出失败！错误信息：\n{context.Exception}", false, () =>
+                    WindowConfirmDialog.CreateDialog("提示".I18NTodo(), 
+                        $"数据导出失败！错误信息：".I18NTodo() + $"\n{context.Exception}", false, () =>
                     {
                         onComplete?.Invoke();
                     });
                 }
                 else
                 {
-                    WindowConfirmDialog.CreateDialog("提示", "数据导出成功！", false, () =>
+                    WindowConfirmDialog.CreateDialog("提示".I18NTodo(), "数据导出成功！".I18NTodo(), false, () =>
                     {
                         onComplete?.Invoke();
                     });
@@ -115,10 +124,10 @@ public static class ModManager
         var fungusCost = sw.ElapsedMilliseconds - dataCost;
 
         sw.Stop();
-        Main.LogInfo($"所有数据导出完毕，总耗时 {sw.ElapsedMilliseconds / 1000f} s");
+        Main.LogInfo(string.Format("所有数据导出完毕，总耗时\t {0} s".I18NTodo(), sw.ElapsedMilliseconds / 1000f));
         Main.LogIndent += 1;
-        Main.LogInfo($"Data导出耗时\t：{dataCost / 1000f} s");
-        Main.LogInfo($"Fungus导出耗时\t：{fungusCost / 1000f} s");
+        Main.LogInfo(string.Format("Data导出耗时\t：{0} s".I18NTodo(), dataCost / 1000f));
+        Main.LogInfo(string.Format("Fungus导出耗时\t：{0} s".I18NTodo(), fungusCost / 1000f));
         Main.LogIndent -= 1;
     }
 
@@ -135,6 +144,7 @@ public static class ModManager
             InitJSONClassData();
             SceneManager.LoadScene("MainMenu");
             OnModLoadComplete();
+            OnModSettingChanged();
         }
         sw.Stop();
         Main.LogInfo(string.Format("ModManager.ReloadComplete".I18N(), sw.ElapsedMilliseconds / 1000f));
@@ -257,7 +267,7 @@ public static class ModManager
     }
         
     /// <summary>
-    /// 
+    /// 重载mod元数据
     /// </summary>
     /// <param name="resetModState">是否重置Mod状态</param>
     public static void ReloadModMeta(bool resetModState,bool showLog = false)
@@ -345,11 +355,17 @@ public static class ModManager
         foreach (var modGroup in modGroups)
         {
             modGroup.Init(resetModState, showLog);
+            foreach (var modConfig in modGroup.ModConfigs)
+            {
+                InitSettingData(modConfig);
+            }
         }
 
         // 排序
         modGroups = SortModGroup(modGroups).ToList();
         ApplyModSetting(true);
+        if(resetModState)
+            Main.I.SaveModSetting();
     }
     
     private static void InitJSONClassData()
@@ -381,7 +397,13 @@ public static class ModManager
         }
     }
 
-    public static ModConfig LoadModMetadata(string dir,bool showLog)
+    /// <summary>
+    /// 加载Mod配置
+    /// </summary>
+    /// <param name="dir"></param>
+    /// <param name="showLog"></param>
+    /// <returns></returns>
+    public static ModConfig LoadModConfig(string dir,bool showLog)
     {
         var modConfig = GetModConfig(dir);
         if (showLog)
@@ -390,7 +412,12 @@ public static class ModManager
         }
         return modConfig;
     }
-        
+    
+    /// <summary>
+    /// Mod组排序
+    /// </summary>
+    /// <param name="modEnumerable"></param>
+    /// <returns></returns>
     public static IEnumerable<ModGroup> SortModGroup(IEnumerable<ModGroup> modEnumerable)
     {
         var mods = modEnumerable.ToArray();
@@ -404,6 +431,11 @@ public static class ModManager
         return modSortList.Select(data => data.BindGroup);
     }
     
+    /// <summary>
+    /// Mod排序
+    /// </summary>
+    /// <param name="modEnumerable"></param>
+    /// <returns></returns>
     public static IEnumerable<ModConfig> SortMod(IEnumerable<ModConfig> modEnumerable)
     {
         var mods = modEnumerable.ToArray();
@@ -417,6 +449,10 @@ public static class ModManager
         return modSortList.Select(data => data.BindMod);
     }
 
+    /// <summary>
+    /// 应用并重设Mod排序优先级
+    /// </summary>
+    /// <param name="applySubMod"></param>
     public static void ApplyModSetting(bool applySubMod)
     {
         var groupIndex = 0;
@@ -429,7 +465,6 @@ public static class ModManager
             if(applySubMod)
                 group.ApplyModSetting();
         }
-        Main.I.SaveModSetting();
     }
 
     private static void LoadModData(ModConfig modConfig)
@@ -464,13 +499,13 @@ public static class ModManager
                     if (value is JSONObject jsonObject)
                     {
                         string filePath = Utility.CombinePaths(modDataDir, $"{fieldInfo.Name}.json");
-                        modConfig.jsonPathCache.Add(fieldInfo.Name, filePath);
+                        modConfig.JsonPathCache.Add(fieldInfo.Name, filePath);
                         PatchJsonObject(fieldInfo, filePath, jsonObject);
                     }
                     else if (value is JObject jObject)
                     {
                         string filePath = Utility.CombinePaths(modDataDir, $"{fieldInfo.Name}.json");
-                        modConfig.jsonPathCache.Add(fieldInfo.Name, filePath);
+                        modConfig.JsonPathCache.Add(fieldInfo.Name, filePath);
                         PatchJObject(fieldInfo, filePath, jObject);
                     }
                     else if (value is jsonData.YSDictionary<string, JSONObject> dicData)
@@ -478,20 +513,20 @@ public static class ModManager
                         string dirPathForData = Utility.CombinePaths(modDataDir, fieldInfo.Name);
                         JSONObject toJsonObject =
                             typeof(jsonData).GetField($"_{fieldInfo.Name}").GetValue(jsonInstance) as JSONObject;
-                        modConfig.jsonPathCache.Add(fieldInfo.Name, dirPathForData);
+                        modConfig.JsonPathCache.Add(fieldInfo.Name, dirPathForData);
                         PatchDicData(fieldInfo, dirPathForData, dicData, toJsonObject);
                     }
                     // 功能函数配置数据
                     else if (value is JSONObject[] jsonObjects)
                     {
                         string dirPathForData = Utility.CombinePaths(modDataDir, fieldInfo.Name);
-                        modConfig.jsonPathCache.Add(fieldInfo.Name, dirPathForData);
+                        modConfig.JsonPathCache.Add(fieldInfo.Name, dirPathForData);
                         PatchJsonObjectArray(fieldInfo, dirPathForData, jsonObjects);
                     }
                 }
                 catch (Exception e)
                 {
-                    throw new ModLoadException($"加载 Data【{fieldInfo.Name}】数据失败", e);
+                    throw new ModLoadException(string.Format("加载 Data【{0}】数据失败".I18NTodo(), fieldInfo.Name), e);
                 }
             }
 
@@ -545,9 +580,10 @@ public static class ModManager
         {
             modConfig = ModConfig.Load(dir);
         }
-        catch (Exception)
+        catch (Exception e)
         {
             Main.LogWarning($"ModManager.ModConfigLoadFail".I18N());
+            Main.LogError(e);
         }
 
         modConfig = modConfig ?? new ModConfig();
@@ -758,7 +794,7 @@ public static class ModManager
             }
             catch (Exception e)
             {
-                throw new ModLoadException($"DialogEvent {filePath} 加载失败。", e);
+                throw new ModLoadException(string.Format("DialogEvent {0} 加载失败。".I18NTodo(), filePath), e);
             }
         }
     }
@@ -780,7 +816,7 @@ public static class ModManager
             }
             catch (Exception e)
             {
-                throw new ModLoadException($"DialogTrigger {filePath} 加载失败。", e);
+                throw new ModLoadException(string.Format("DialogTrigger {0} 加载失败。".I18NTodo(), filePath), e);
             }
         }
     }
@@ -803,7 +839,7 @@ public static class ModManager
             }
             catch (Exception e)
             {
-                throw new ModLoadException($"StaticFace {filePath} 转换失败。", e);
+                throw new ModLoadException(string.Format("StaticFace {0} 转换失败。".I18NTodo(), filePath), e);
             }
         }
     }
@@ -829,7 +865,7 @@ public static class ModManager
             }
             catch (Exception e)
             {
-                throw new ModLoadException($"FPatch {filePath} 加载失败。", e);
+                throw new ModLoadException(string.Format("FPatch {0} 加载失败。".I18NTodo(), filePath), e);
             }
         }
     }
@@ -856,9 +892,27 @@ public static class ModManager
             }
             catch (Exception e)
             {
-                throw new ModLoadException($"Lua {luaPath} 加载失败。", e);
+                throw new ModLoadException(string.Format("Lua {0} 加载失败。".I18NTodo(), luaPath), e);
             }
         });
+    }
+    
+    private static void InitSettingData(ModConfig modConfig)
+    {
+        foreach (var settingDefinition in modConfig.Settings)
+        {
+            if (settingDefinition is ModSettingDefinition_Custom customDefinition)
+            {
+                var customSetting = GetCustomSetting(customDefinition.CustomType);
+                if(customSetting == null)
+                    throw new ModLoadException(string.Format("自定义Mod设置类型：{0}不存在".I18NTodo(), customDefinition.CustomType));
+                customSetting.OnInit(customDefinition);
+            }
+            else
+            {
+                settingDefinition.OnInit();
+            }
+        }
     }
         
     public static void TryAddEventData(DialogEventData dialogEventData)
@@ -898,7 +952,6 @@ public static class ModManager
     public static void ModSetEnable(ModConfig modConfig,bool enable)
     {
         Main.I.NextModSetting.GetOrCreateModSetting(modConfig).enable = enable;
-        Main.I.SaveModSetting();
     }
         
     public static bool ModGetEnable(ModConfig modConfig)
@@ -916,7 +969,6 @@ public static class ModManager
                 nextModSetting.GetOrCreateModSetting(modConfig).enable = b;
             }
         }
-        Main.I.SaveModSetting();
     }
     
     public static JSONObject LoadJSONObject(string filePath)
@@ -929,7 +981,7 @@ public static class ModManager
         }
         catch (Exception e)
         {
-            throw new ModLoadException($"文件 {filePath} 加载失败。", e);
+            throw new ModLoadException(string.Format("文件 {0} 加载失败。".I18NTodo(), filePath), e);
         }
     }
         
@@ -943,7 +995,7 @@ public static class ModManager
         }
         catch (Exception e)
         {
-            throw new ModLoadException($"文件 {filePath} 加载失败。", e);
+            throw new ModLoadException(string.Format("文件 {0} 加载失败。".I18NTodo(), filePath), e);
         }
     }
     
@@ -962,7 +1014,7 @@ public static class ModManager
             catch (Exception message)
             {
                 Main.LogError(message);
-                Main.LogError("读取配置文件失败");
+                Main.LogError("读取配置文件失败".I18NTodo());
             }
         }
         // result.SteamID = SteamUser.GetSteamID().m_SteamID;
@@ -975,6 +1027,97 @@ public static class ModManager
         FileStream fileStream = new FileStream(path, FileMode.Create);
         new BinaryFormatter().Serialize(fileStream, item);
         fileStream.Close();
+    }
+    
+    public static void RegisterCustomSetting(string customType, ICustomSetting drawer)
+    {
+        _customSetting[customType] = drawer;
+    }
+    
+    public static ICustomSetting GetCustomSetting(string customType)
+    {
+        if (_customSetting.TryGetValue(customType, out var drawer))
+        {
+            return drawer;
+        }
+        
+        return null;
+    }
+    
+    public static bool TryGetModSetting(string key, out bool value)
+    {
+        var setting = Main.I.NextModSetting;
+        if(setting.BoolGroup.Has(key))
+        {
+            value = setting.BoolGroup.Get(key);
+            return true;
+        }
+        value = false;
+        return false;
+    }
+    
+    public static void SetModSetting(string key, bool value)
+    {
+        var setting = Main.I.NextModSetting;
+        setting.BoolGroup.Set(key, value);
+        OnModSettingChanged();
+    }
+    
+    public static bool TryGetModSetting(string key, out long value)
+    {
+        var setting = Main.I.NextModSetting;
+        if(setting.LongIntegerGroup.Has(key))
+        {
+            value = setting.LongIntegerGroup.Get(key);
+            return true;
+        }
+        value = 0L;
+        return false;
+    }
+    
+    public static void SetModSetting(string key, long value)
+    {
+        var setting = Main.I.NextModSetting;
+        setting.LongIntegerGroup.Set(key, value);
+        OnModSettingChanged();
+    }
+
+    public static bool TryGetModSetting(string key, out double value)
+    {
+        var setting = Main.I.NextModSetting;
+        if(setting.DoubleFloatGroup.Has(key))
+        {
+            value = setting.DoubleFloatGroup.Get(key);
+            return true;
+        }
+        value = 0.0;
+        return false;
+    }
+    
+    public static void SetModSetting(string key, double value)
+    {
+        var setting = Main.I.NextModSetting;
+        setting.DoubleFloatGroup.Set(key, value);
+        OnModSettingChanged();
+    }
+    
+    public static bool TryGetModSetting(string key, out string value)
+    {
+        var setting = Main.I.NextModSetting;
+        if(setting.StringGroup.Has(key))
+        {
+            value = setting.StringGroup.Get(key);
+            return true;
+        }
+        value = null;
+        return false;
+    }
+    
+    public static void SetModSetting(string key, string value)
+    {
+        var setting = Main.I.NextModSetting;
+        setting.StringGroup.Set(key, value);
+        OnModSettingChanged();
     }
 
     #endregion

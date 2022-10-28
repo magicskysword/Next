@@ -19,7 +19,7 @@
     <graph id="n3_cnag" name="contentArea" xy="0,32" size="800,569">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <component id="n6_nkvz" name="closeButton" src="nkvz5" fileName="Component/Button/BtnClose.xml" xy="762,0" size="32,32">
+    <component id="n6_nkvz" name="closeButton" src="nkvz5" fileName="Component/Button/BtnClose.xml" xy="768,0" size="32,32">
       <relation target="" sidePair="right-right,top-top"/>
     </component>
     <graph id="n7_j2qm" name="line" xy="0,31" size="800,1" type="rect" lineSize="0" fillColor="#ff32363c">

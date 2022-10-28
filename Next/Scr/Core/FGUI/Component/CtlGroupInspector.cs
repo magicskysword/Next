@@ -38,4 +38,9 @@ public class CtlGroupInspector : CtlInspectorBase
         MainView.visible = false;
         Refresh();
     }
+
+    public void Resize()
+    {
+        MainView.ResizeToFit();
+    }
 }

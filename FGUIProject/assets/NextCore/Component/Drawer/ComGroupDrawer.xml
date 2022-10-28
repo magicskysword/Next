@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="320,532" extention="Label">
+<component size="320,558" extention="Label">
   <displayList>
     <component id="n1_v5ah" name="btnExpand" src="nkvz1k" fileName="Component/Button/BtnExpand.xml" xy="17,3" size="16,16">
       <Button checked="true"/>
@@ -9,9 +9,10 @@
       <relation target="n3_v5ah" sidePair="leftext-right"/>
       <relation target="" sidePair="width-width"/>
     </graph>
-    <list id="n0_v5ah" name="list" xy="0,22" size="320,510" restrictSize="200,0,0,0" selectionMode="none" overflow="scroll" scrollBarFlags="132" scrollBar="visible" scrollBarRes="ui://028qk31hnkvz27," lineGap="6" autoClearItems="true">
+    <list id="n0_v5ah" name="list" xy="0,22" size="320,536" restrictSize="300,0,0,0" selectionMode="none" overflow="hidden" scrollBarRes="ui://028qk31hnkvz27," lineGap="6" autoClearItems="true">
       <relation target="" sidePair="width-width"/>
       <item url="ui://028qk31hnkvz1x" title="ID"/>
+      <item url="ui://028qk31hspup3q"/>
       <item url="ui://028qk31hnkvz1x" title="名称"/>
       <item url="ui://028qk31hnkvz21" title="描述"/>
       <item url="ui://028qk31hnkvz23" title="选项"/>

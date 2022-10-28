@@ -118,6 +118,12 @@
     <component id="ol2b52" name="ComImageAdaptivePreviewDrawer.xml" path="/Component/Drawer/" exported="true"/>
     <component id="rpgf53" name="BtnTextLink.xml" path="/Component/Button/" exported="true"/>
     <image id="rpgf54" name="icon_steam.png" path="/Icon/" exported="true"/>
+    <image id="9ngz56" name="icon_setting.png" path="/Icon/" exported="true"/>
+    <component id="9ngz57" name="WinSettingDialog.xml" path="/Dialog/"/>
+    <image id="tp2258" name="icon_circle.png" path="/Icon/"/>
+    <component id="tp2259" name="ComSliderDrawer_grip.xml" path="/Component/Drawer/"/>
+    <component id="tp225a" name="ComSliderDrawer.xml" path="/Component/Drawer/" exported="true"/>
+    <component id="txbi5b" name="ComSliderDrawer_slider.xml" path="/Component/Drawer/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

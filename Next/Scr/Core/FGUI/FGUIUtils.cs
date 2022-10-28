@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using FairyGUI;
+using SkySwordKill.NextModEditor.Mod;
 using UnityEngine;
+using Action = UltimateSurvival.AI.Actions.Action;
 
 namespace SkySwordKill.Next.FGUI;
 
@@ -33,6 +35,91 @@ public static class FGUIUtils
         seg.draggable = true;
         seg.onDragStart.Set((EventCallback1)OnDragStart);
         seg.cursor = FGUIManager.MOUSE_RESIZE_H;
+    }
+
+    public static void BindIntEndEdit(this GTextInput input, Action<int> endEdit, Action<string> onParseFail = null)
+    {
+        input.restrict = "[0-9-]";
+        input.onFocusOut.Set(() =>
+        {
+            var str = input.text;
+            if(int.TryParse(str,out var num))
+            {
+                endEdit?.Invoke(num);
+            }
+            else
+            {
+                onParseFail?.Invoke(str);
+            }
+        });
+    }
+        
+    public static void BindFloatEndEdit(this GTextInput input,Action<float> endEdit, Action<string> onParseFail = null)
+    {
+        input.restrict = "[0-9-.eE]";
+        input.onFocusOut.Set(() =>
+        {
+            var str = input.text;
+            if(float.TryParse(str,out var num))
+            {
+                endEdit?.Invoke(num);
+            }
+            else
+            {
+                onParseFail?.Invoke(str);
+            }
+        });
+    }
+    
+    public static void BindLongEndEdit(this GTextInput input,Action<long> endEdit, Action<string> onParseFail = null)
+    {
+        input.restrict = "[0-9-]";
+        input.onFocusOut.Set(() =>
+        {
+            var str = input.text;
+            if(long.TryParse(str,out var num))
+            {
+                endEdit?.Invoke(num);
+            }
+            else
+            {
+                onParseFail?.Invoke(str);
+            }
+        });
+    }
+    
+    public static void BindDoubleEndEdit(this GTextInput input,Action<double> endEdit, Action<string> onParseFail = null)
+    {
+        input.restrict = "[0-9-.eE]";
+        input.onFocusOut.Set(() =>
+        {
+            var str = input.text;
+            if(double.TryParse(str,out var num))
+            {
+                endEdit?.Invoke(num);
+            }
+            else
+            {
+                onParseFail?.Invoke(str);
+            }
+        });
+    }
+        
+    public static void BindIntArrayEndEdit(this GTextInput input,Action<List<int>> endEdit, Action<string> onParseFail = null)
+    {
+        input.restrict = "[0-9-,，]";
+        input.onFocusOut.Set(() =>
+        {
+            var strArr = input.text;
+            if(strArr.TryFormatToListInt(out var list))
+            {
+                endEdit?.Invoke(list);
+            }
+            else
+            {
+                onParseFail?.Invoke(strArr);
+            }
+        });
     }
 
     public class HyLabel

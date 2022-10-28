@@ -32,7 +32,7 @@ public class ModGroup
                 var nextDir = new DirectoryInfo(ModDir + @"/plugins/Next/");
                 foreach (DirectoryInfo modDirInfo in nextDir.GetDirectories("mod*", SearchOption.TopDirectoryOnly))
                 {
-                    ModConfig item = ModManager.LoadModMetadata(modDirInfo.FullName, showLog);
+                    ModConfig item = ModManager.LoadModConfig(modDirInfo.FullName, showLog);
                     item.SettingKey = $"{GroupKey}.{Path.GetFileNameWithoutExtension(item.Path)}";
                     ModConfigs.Add(item);
                 }
@@ -54,8 +54,12 @@ public class ModGroup
                     var item = ModConfigs.Find(x => x.Path == modDirInfo.FullName);
                     if(item == null)
                     {
-                        item = ModManager.LoadModMetadata(modDirInfo.FullName, showLog);
+                        item = ModManager.LoadModConfig(modDirInfo.FullName, showLog);
                         item.SettingKey = $"{GroupKey}.{Path.GetFileNameWithoutExtension(item.Path)}";
+                    }
+                    else
+                    {
+                        item.Reload();
                     }
                     newModConfigs.Add(item);
                 }

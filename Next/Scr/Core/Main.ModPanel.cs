@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
+using SkySwordKill.Next.I18N;
 using SkySwordKill.Next.Mod;
 using SkySwordKill.Next.ModGUI;
 using SkySwordKill.Next.StaticFace;
@@ -86,7 +87,7 @@ namespace SkySwordKill.Next
 
             if (rayBlocker == null)
                 return;
-            if (isSelectedLanguage || NextLanguage == null)
+            if (isSelectedLanguage || CurrentLanguage == null)
             {
                 rayBlocker.SetSize(languageRect);
                 rayBlocker.OpenBlocker();
@@ -189,7 +190,7 @@ namespace SkySwordKill.Next
             var oldSkin = GUI.skin;
             GUI.skin = InterfaceMaker.CustomSkin;
 
-            if (isSelectedLanguage || NextLanguage == null)
+            if (isSelectedLanguage || CurrentLanguage == null)
             {
                 GUILayout.Window(20, languageRect, DrawLanguageSelectWindow, $"Next v{MOD_VERSION}");
             }
@@ -203,7 +204,7 @@ namespace SkySwordKill.Next
 
         private void DrawLanguageSelectWindow(int id)
         {
-            if (NextLanguage.languages.Count == 0)
+            if (NextLanguage.Languages.Count == 0)
             {
                 GUILayout.Label("请重写下载该Mod或下载Mod语言文件！", labelTitleStyle);
                 GUILayout.Label("Please re-download the Mod or download the Mod language file！", labelTitleStyle);
@@ -215,11 +216,11 @@ namespace SkySwordKill.Next
 
             scrollRollLanguages = GUILayout.BeginScrollView(scrollRollLanguages);
             {
-                foreach (var pair in NextLanguage.languages)
+                foreach (var language in NextLanguage.Languages)
                 {
-                    if (GUILayout.Button($"{pair.Key} ({pair.Value.LanguageName})"))
+                    if (GUILayout.Button(language.Config.LanguageName))
                     {
-                        SelectLanguage(pair.Value);
+                        SelectLanguage(language);
                         isSelectedLanguage = false;
                     }
                 }
@@ -291,11 +292,11 @@ namespace SkySwordKill.Next
             GUILayout.BeginHorizontal();
             {
                 GUILayout.FlexibleSpace();
-                GUILayout.Label($"{"Misc.CurrentLanguage".I18N()} : {NextLanguage.LanguageName}");
+                GUILayout.Label($"{"Misc.CurrentLanguage".I18N()} : {CurrentLanguage.Config.LanguageName}");
                 if (GUILayout.Button("Language"))
                 {
                     NextLanguage.InitLanguage();
-                    NextLanguage = null;
+                    CurrentLanguage = null;
                 }
             }
             GUILayout.EndHorizontal();

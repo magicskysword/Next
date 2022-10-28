@@ -1,4 +1,5 @@
-﻿using FairyGUI;
+﻿using System;
+using FairyGUI;
 
 namespace SkySwordKill.Next.FGUI.Component;
 
@@ -8,4 +9,7 @@ public interface IPropertyDrawer : IUndoInst
     GComponent CreateCom();
     void RemoveCom();
     void Refresh();
+    void AddChangeListener(Action onChanged);
+    void RemoveChangeListener(Action onChanged);
+    void ClearChangeListener();
 }

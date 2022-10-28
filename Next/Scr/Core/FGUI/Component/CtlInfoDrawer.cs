@@ -27,7 +27,7 @@ public class CtlInfoDrawer : CtlPropertyDrawerBase
         Drawer = UIPackage.CreateObject(FGUIManager.PKG_NEXT_CORE, "ComInfoDrawer").As<UI_ComInfoDrawer>();
         Drawer.title = _title;
         Drawer.m_content.text = _content;
-        if(_fontSize != Int32.MinValue)
+        if(_fontSize > 0)
         {
             Drawer.titleFontSize = _fontSize;
             Drawer.m_content.textFormat.size = _fontSize;

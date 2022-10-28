@@ -107,9 +107,9 @@ public static class ModUtils
         }
     }
 
-    public static string LoadConfig(string path)
+    public static string LoadEditorConfig(string path)
     {
-        var targetPath = GetConfigPath(path);
+        var targetPath = GetEditorConfigPath(path);
         if (File.Exists(targetPath))
             return File.ReadAllText(targetPath);
         Debug.LogWarning($"目标文件 {targetPath} 不存在！");
@@ -124,13 +124,12 @@ public static class ModUtils
         Debug.LogWarning($"目标文件 {targetPath} 不存在！");
         return string.Empty;
     }
-        
-        
-    public static string GetConfigPath(string path)
+    
+    public static string GetEditorConfigPath(string path)
     {
         if (string.IsNullOrWhiteSpace(path))
-            return $"{Main.PathLanguageDir}/{Main.I.NextLanguage.ConfigDir}";
-        return $"{Main.PathLanguageDir}/{Main.I.NextLanguage.ConfigDir}/Config/{path}";
+            return $"{Main.I.CurrentLanguage.LanguageDir}";
+        return $"{Main.I.CurrentLanguage.LanguageDir}/Editor/{path}";
     }
         
     public static string GetBasePath(string path = "")
