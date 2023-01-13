@@ -64,7 +64,10 @@ public static partial class DialogAnalysis
 
     #region 回调方法
 
-
+    public static void OnEnterWorld()
+    {
+        CancelEvent();
+    }
 
     #endregion
 

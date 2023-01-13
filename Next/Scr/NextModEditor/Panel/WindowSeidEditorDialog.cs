@@ -18,6 +18,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
     public class SeidNodeInfo
     {
         public bool IsSeid;
+        public bool InSeidList;
         public string NodeName;
         public string NodeIcon;
         public int SeidID;
@@ -35,7 +36,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
     public Dictionary<int, ModSeidMeta> SeidMetas { get;private set; }
     public IModSeidDataGroup SeidGroup { get;private set; }
     public List<int> SeidList { get;private set; }
-    public List<int> DisableSeidList { get;private set; }
+    public List<int> AllSeidList { get;private set; }
     public Action OnClose { get;private set; }
     public bool Editable {
         get => _editable;
@@ -58,9 +59,9 @@ public class WindowSeidEditorDialog : WindowDialogBase
     public GButton BtnMoveDown => SeidEditor.m_btnMoveDown;
 
     private int? CurrentSeidId { get; set; }
-
-    private List<GTreeNode> _seidNodeList = new List<GTreeNode>();
     private bool _editable;
+    private GTreeNode _nodeSeidList;
+    private GTreeNode _nodeAllSeidList;
 
     public static WindowSeidEditorDialog CreateDialog(string title,ModWorkshop mod,int ownerId, IModSeidDataGroup seidGroup,Dictionary<int, ModSeidMeta> seidMetas,
         List<int> seidList, Action onClose)
@@ -73,7 +74,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
         window.SeidGroup = seidGroup;
         window.SeidMetas = seidMetas;
         window.SeidList = seidList;
-        window.DisableSeidList = new List<int>();
+        window.AllSeidList = new List<int>();
         window.OnClose = onClose;
 
         window.Show();
@@ -90,15 +91,26 @@ public class WindowSeidEditorDialog : WindowDialogBase
 
         Inspector = new CtlPropertyInspector(SeidEditor.m_inspector);
 
+
+        foreach (var seid in SeidList)
+        {
+            if (!AllSeidList.Contains(seid))
+            {
+                AllSeidList.Add(seid);
+            }
+        }
+        
         foreach (var pair in SeidGroup.DataGroups)
         {
             var seidId = pair.Key;
             var seid = SeidGroup.GetSeid(OwnerId, seidId);
-            if (seid != null && !SeidList.Contains(pair.Key))
+            if (seid != null && !AllSeidList.Contains(seidId))
             {
-                DisableSeidList.Add(pair.Key);
+                AllSeidList.Add(seidId);
             }
         }
+        
+        AllSeidList.Sort();
 
         SeidEditor.m_list.treeNodeRender = OnTreeNodeRender;
         SeidEditor.m_list.onClickItem.Add(OnClickSeidItem);
@@ -117,15 +129,19 @@ public class WindowSeidEditorDialog : WindowDialogBase
     private void Refresh()
     {
         SeidEditor.m_list.rootNode.RemoveChildren();
-        _seidNodeList.Clear();
-        AddSeidList("已启用特性", SeidList, _seidNodeList);
-        AddSeidList("已禁用特性", DisableSeidList, _seidNodeList);
+        _nodeSeidList = AddSeidList("特性列表", SeidList, true);
+        _nodeAllSeidList = AddSeidList("所有特性", AllSeidList, false);
     }
 
-    private bool GetSelectedSeid(out int seidId)
+    /// <summary>
+    /// 获取选中的特性位置
+    /// </summary>
+    /// <param name="info"></param>
+    /// <returns></returns>
+    private bool GetSelectedSeid(out SeidNodeInfo info)
     {
         var node = SeidEditor.m_list.GetSelectedNode();
-        seidId = -1;
+        info = null;
 
         // 非Seid节点不能删除
         if (!(node?.data is SeidNodeInfo nodeInfo) || !nodeInfo.IsSeid)
@@ -134,21 +150,75 @@ public class WindowSeidEditorDialog : WindowDialogBase
             return false;
         }
 
-        seidId = nodeInfo.SeidID;
+        info = nodeInfo;
+        return true;
+    }
+    
+    /// <summary>
+    /// 获取特性在SeidList里的位置，不存在则返回-1
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    private bool GetSeidIndexInSeidList(out int index)
+    {
+        var node = SeidEditor.m_list.GetSelectedNode();
+        index = -1;
+
+        // 非Seid节点不能删除
+        if (!(node?.data is SeidNodeInfo nodeInfo) || !nodeInfo.IsSeid)
+        {
+
+            return false;
+        }
+
+        index = _nodeSeidList.GetChildIndex(node);
         return true;
     }
 
     private void SelectSeid(int seidId)
     {
-        foreach (var node in _seidNodeList)
+        foreach (var nodeList in new []{_nodeSeidList, _nodeAllSeidList})
         {
+            for (int index = 0;index < nodeList.numChildren;index++)
+            {
+                var node = nodeList.GetChildAt(index);
+                if(node.data is SeidNodeInfo nodeInfo && nodeInfo.IsSeid && nodeInfo.SeidID == seidId)
+                {
+                    SeidEditor.m_list.SelectNode(node);
+                    SetTargetSeid(seidId);
+                    return;
+                }
+            }
+        }
+        UnselectTargetSeid();
+    }
+    
+    private void SelectSeidInSeidListByIndex(int index)
+    {
+        var node = _nodeSeidList.GetChildAt(index);
+        if(node.data is SeidNodeInfo nodeInfo && nodeInfo.IsSeid)
+        {
+            SeidEditor.m_list.SelectNode(node);
+            SetTargetSeid(nodeInfo.SeidID);
+            return;
+        }
+        
+        UnselectTargetSeid();
+    }
+
+    private void SelectSeidInAllSeidList(int seidId)
+    {
+        for (int i = 0; i < _nodeAllSeidList.numChildren; i++)
+        {
+            var node = _nodeAllSeidList.GetChildAt(i);
             if(node.data is SeidNodeInfo nodeInfo && nodeInfo.IsSeid && nodeInfo.SeidID == seidId)
             {
                 SeidEditor.m_list.SelectNode(node);
-                SetTargetSeid(seidId);
+                SetTargetSeid(nodeInfo.SeidID);
                 return;
             }
         }
+        
         UnselectTargetSeid();
     }
 
@@ -178,54 +248,70 @@ public class WindowSeidEditorDialog : WindowDialogBase
 
     private void OnClickRemove(EventContext context)
     {
-        if (GetSelectedSeid(out var seidId))
-            RemoveSeid(seidId);
+        if (GetSelectedSeid(out var nodeInfo))
+        {
+            WindowConfirmDialog.CreateDialog("提示",$"即将完全删除特性【{nodeInfo}】，是否确认？", true,
+                () => RemoveSeid(nodeInfo.SeidID)
+                );
+        }
     }
 
     private void OnClickDisable(EventContext context)
     {
-        if (GetSelectedSeid(out var seidId))
+        if (GetSeidIndexInSeidList(out var index))
         {
-            DisableSeid(seidId);
-            SelectSeid(seidId);
+            var seidId = SeidList[index];
+            DisableSeidByIndex(index);
+            SelectSeidInAllSeidList(seidId);
         }
     }
 
     private void OnClickEnable(EventContext context)
     {
-        if (GetSelectedSeid(out var seidId))
+        if (GetSelectedSeid(out var nodeInfo))
         {
-            EnableSeid(seidId);
-            SelectSeid(seidId);
+            EnableSeid(nodeInfo.SeidID);
+            SelectSeidInSeidListByIndex(SeidList.Count - 1);
         }
     }
 
     private void OnClickMoveUp(EventContext context)
     {
-        if (GetSelectedSeid(out var seidId))
+        if (GetSeidIndexInSeidList(out var index))
         {
-            SeidMoveUp(seidId);
-            SelectSeid(seidId);
+            SelectSeidInSeidListByIndex(SeidMoveUpByIndex(index));
         }
     }
 
     private void OnClickMoveDown(EventContext context)
     {
-        if (GetSelectedSeid(out var seidId))
+        if (GetSeidIndexInSeidList(out var index))
         {
-            SeidMoveDown(seidId);
-            SelectSeid(seidId);
+            SelectSeidInSeidListByIndex(SeidMoveDownByIndex(index));
         }
     }
 
     private void AddSeid(int seidId)
     {
-        if(SeidList.Contains(seidId) || DisableSeidList.Contains(seidId))
+        if(SeidList.Contains(seidId))
         {
-            WindowConfirmDialog.CreateDialog("提示", "该特性已存在！", false);
+            WindowConfirmDialog.CreateDialog("提示", "该特性已存在！是否继续添加？", true, () =>
+            {
+                AddSeidWithoutCheck(seidId);
+            });
             return;
         }
+        AddSeidWithoutCheck(seidId);
+    }
+
+    private void AddSeidWithoutCheck(int seidId)
+    {
         SeidList.Add(seidId);
+        if (!AllSeidList.Contains(seidId))
+        {
+            AllSeidList.Add(seidId);
+            AllSeidList.Sort();
+        }
         SeidGroup.GetOrCreateSeid(OwnerId, seidId);
         Refresh();
     }
@@ -234,82 +320,56 @@ public class WindowSeidEditorDialog : WindowDialogBase
     {
         if (SeidList.Contains(seidId))
         {
-            SeidList.Remove(seidId);
+            SeidList.RemoveAll(target => target == seidId);
         }
-        else if(DisableSeidList.Contains(seidId))
+
+        if (AllSeidList.Contains(seidId))
         {
-            DisableSeidList.Remove(seidId);
+            AllSeidList.RemoveAll(target => target == seidId);
         }
+
         SeidGroup.RemoveSeid(OwnerId, seidId);
         Refresh();
     }
 
     private void EnableSeid(int seidId)
     {
-        if(DisableSeidList.Contains(seidId))
+        if(AllSeidList.Contains(seidId))
         {
-            DisableSeidList.Remove(seidId);
-            if(!SeidList.Contains(seidId))
-                SeidList.Add(seidId);
+            SeidList.Add(seidId);
         }
         Refresh();
     }
 
-    private void DisableSeid(int seidId)
+    private void DisableSeidByIndex(int index)
     {
-        if(SeidList.Contains(seidId))
+        if (index >= 0 && index < SeidList.Count)
         {
-            SeidList.Remove(seidId);
-            if(!DisableSeidList.Contains(seidId))
-                DisableSeidList.Add(seidId);
+            SeidList.RemoveAt(index);
+            Refresh();
         }
-        Refresh();
     }
 
-    private void SeidMoveUp(int seidId)
+    private int SeidMoveUpByIndex(int index)
     {
-        List<int> list;
-        if (SeidList.Contains(seidId))
-        {
-            list = SeidList;
-        }
-        else if(DisableSeidList.Contains(seidId))
-        {
-            list = DisableSeidList;
-        }
-        else
-        {
-            return;
-        }
-        var index = list.IndexOf(seidId);
-        if(index == 0)
-            return;
-        list.RemoveAt(index);
-        list.Insert(index - 1, seidId);
+        if(index == 0 || index >= SeidList.Count)
+            return 0;
+        var seidId = SeidList[index];
+        SeidList.RemoveAt(index);
+        SeidList.Insert(index - 1, seidId);
         Refresh();
+        return index - 1;
     }
 
-    private void SeidMoveDown(int seidId)
+    private int SeidMoveDownByIndex(int index)
     {
-        List<int> list;
-        if (SeidList.Contains(seidId))
-        {
-            list = SeidList;
-        }
-        else if(DisableSeidList.Contains(seidId))
-        {
-            list = DisableSeidList;
-        }
-        else
-        {
-            return;
-        }
-        var index = list.IndexOf(seidId);
-        if(index == list.Count - 1)
-            return;
-        list.RemoveAt(index);
-        list.Insert(index + 1, seidId);
+        if(index < 0 || index == SeidList.Count - 1)
+            return SeidList.Count - 1;
+        var seidId = SeidList[index];
+        SeidList.RemoveAt(index);
+        SeidList.Insert(index + 1, seidId);
         Refresh();
+        return index + 1;
     }
 
     protected override void OnHide()
@@ -339,16 +399,16 @@ public class WindowSeidEditorDialog : WindowDialogBase
         if (Editable)
         {
             BtnAdd.enabled = true;
-            if (CurrentSeidId != null)
+            if (GetSelectedSeid(out var seidInfo))
             {
                 BtnRemove.enabled = true;
-                BtnMoveUp.enabled = true;
-                BtnMoveDown.enabled = true;
 
-                var isEnable = IsSeidEnable(CurrentSeidId.Value);
-
-                BtnEnable.enabled = !isEnable;
-                BtnDisable.enabled = isEnable;
+                var inSeidList = seidInfo.InSeidList;
+                
+                BtnMoveUp.enabled = inSeidList;
+                BtnMoveDown.enabled = inSeidList;
+                BtnEnable.enabled = !inSeidList;
+                BtnDisable.enabled = inSeidList;
             }
             else
             {
@@ -1000,11 +1060,6 @@ public class WindowSeidEditorDialog : WindowDialogBase
         drawer = floatPropertyDrawer;
     }
 
-    private bool IsSeidEnable(int seidId)
-    {
-        return SeidList.Contains(seidId);
-    }
-
     private void OnTreeNodeRender(GTreeNode node, GComponent item)
     {
         var btn = item.asButton;
@@ -1014,7 +1069,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
         btn.icon = nodeData.NodeIcon;
     }
 
-    private void AddSeidList(string listName, List<int> seidList, List<GTreeNode> seidNodes)
+    private GTreeNode AddSeidList(string listName, List<int> seidList, bool inSeidList)
     {
         var listData = new SeidNodeInfo()
         {
@@ -1033,6 +1088,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
             var seidData = new SeidNodeInfo()
             {
                 IsSeid = true,
+                InSeidList = inSeidList,
                 NodeIcon = "ui://NextCore/icon_dao",
                 SeidID = seidId,
             };
@@ -1050,12 +1106,12 @@ public class WindowSeidEditorDialog : WindowDialogBase
             {
                 data = seidData
             };
-
-            seidNodes.Add(seidNode);
+            
             listNode.AddChild(seidNode);
         }
 
         listNode.expanded = true;
         SeidEditor.m_list.rootNode.AddChild(listNode);
+        return listNode;
     }
 }

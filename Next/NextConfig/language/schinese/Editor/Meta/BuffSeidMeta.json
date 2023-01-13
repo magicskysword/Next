@@ -970,28 +970,28 @@
         "Properties": [
             {
                 "ID": "value1",
-                "Type": "Int",
-                "Desc": "X Buff层数"
+                "Type": "IntArray",
+                "Desc": "X Buff层数 数组"
             },
             {
                 "ID": "value2",
-                "Type": "Int",
-                "Desc": "A BuffID",
+                "Type": "IntArray",
+                "Desc": "A BuffID 数组",
                 "SpecialDrawer": [
-                    "BuffDrawer"
+                    "BuffArrayDrawer"
                 ]
             },
             {
                 "ID": "value3",
-                "Type": "Int",
-                "Desc": "Z Buff层数"
+                "Type": "IntArray",
+                "Desc": "Z Buff层数 数组"
             },
             {
                 "ID": "value4",
-                "Type": "Int",
-                "Desc": "B BuffID",
+                "Type": "IntArray",
+                "Desc": "B BuffID 数组",
                 "SpecialDrawer": [
-                    "BuffDrawer"
+                    "BuffArrayDrawer"
                 ]
             }
         ]

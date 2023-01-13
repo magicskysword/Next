@@ -189,33 +189,50 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
                     value => data.StudyCostTime = value,
                     () => data.StudyCostTime
                 ),
-                new CtlIntArrayBindTablePropertyDrawer(
+                new CtlIntArrayBindTableExPropertyDrawer(
                     "领悟前置条件".I18NTodo(),
-                    comList =>
+                    (comList, fromTable) =>
                     {
-                        var dict = new Dictionary<int, int>();
-                        foreach (var compression in comList)
+                        if (fromTable)
                         {
-                            dict[compression] = 0;
-                        }
+                            var dict = new Dictionary<int, int>();
+                            foreach (var compression in comList)
+                            {
+                                dict[compression] = 0;
+                            }
 
-                        for (var index = 0; index < data.StudyRequirement.Count; index += 2)
+                            for (var index = 0; index < data.StudyRequirement.Count; index += 2)
+                            {
+                                var id = data.StudyRequirement[index];
+                                if (index + 1 < data.StudyRequirement.Count && dict.ContainsKey(id))
+                                    dict[id] = data.StudyRequirement[index + 1];
+                            }
+
+                            var list = new List<int>();
+                            foreach (var pair in dict)
+                            {
+                                list.Add(pair.Key);
+                                list.Add(pair.Value);
+                            }
+                            
+                            data.StudyRequirement = list;
+                        }
+                        else
                         {
-                            var id = data.StudyRequirement[index];
-                            if (index + 1 < data.StudyRequirement.Count && dict.ContainsKey(id))
-                                dict[id] = data.StudyRequirement[index + 1];
+                            data.StudyRequirement = comList.ToList();
                         }
-
-                        var list = new List<int>();
-                        foreach (var pair in dict)
-                        {
-                            list.Add(pair.Key);
-                            list.Add(pair.Value);
-                        }
-
-                        data.StudyRequirement = list;
                     },
-                    () => data.StudyRequirement,
+                    (fromTable) =>
+                    {
+                        if (fromTable)
+                        {
+                            return data.StudyRequirement.Where((_, index) => index % 2 == 0).ToList();
+                        }
+                        else
+                        {
+                            return data.StudyRequirement;
+                        }
+                    },
                     list => Mod.GetComprehensionWithPhaseDesc(list),
                     new List<TableInfo>()
                     {

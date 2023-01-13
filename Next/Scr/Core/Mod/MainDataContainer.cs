@@ -12,18 +12,24 @@ namespace SkySwordKill.Next.Mod;
 public class MainDataContainer
 {
     public Dictionary<string, JObject> dataJObjects = new Dictionary<string, JObject>();
+    
     public Dictionary<string, JSONObject> dataJSONObjects = new Dictionary<string, JSONObject>();
 
     public Dictionary<string, jsonData.YSDictionary<string, JSONObject>> dataYSDics =
         new Dictionary<string, jsonData.YSDictionary<string, JSONObject>>();
-
+    
     public Dictionary<string, JSONObject[]> dataJSONObjectArrays = new Dictionary<string, JSONObject[]>();
+    
+    public Dictionary<int, JSONObject> AIJsonDate = new Dictionary<int, JSONObject>();
+    
+    public Dictionary<int, List<JSONObject>> FuBenJsonData = new Dictionary<int, List<JSONObject>>();
 
     public static MainDataContainer CloneMainData()
     {
         var dataContainer = new MainDataContainer();
 
         jsonData jsonInstance = jsonData.instance;
+        
         foreach (var fieldInfo in ModManager.jsonDataFields)
         {
             if (ModManager.IsBanField(fieldInfo))
@@ -59,6 +65,21 @@ public class MainDataContainer
 
                     jsonArray[i] = jsonObjects[i].Copy();
                 }
+            }
+        }
+
+        foreach (var pair in jsonInstance.AIJsonDate)
+        {
+            dataContainer.AIJsonDate.Add(pair.Key, pair.Value.Copy());
+        }
+
+        foreach (var pair in jsonInstance.FuBenJsonData)
+        {
+            var list = new List<JSONObject>();
+            dataContainer.FuBenJsonData.Add(pair.Key, list);
+            foreach (var jsonObject in pair.Value)
+            {
+                list.Add(jsonObject.Copy());
             }
         }
             
@@ -111,6 +132,23 @@ public class MainDataContainer
 
                     jsonArray[i] = jsonObjects[i].Copy();
                 }
+            }
+        }
+        
+        jsonInstance.AIJsonDate.Clear();
+        foreach (var pair in dataContainer.AIJsonDate)
+        {
+            jsonInstance.AIJsonDate.Add(pair.Key, pair.Value.Copy());
+        }
+        
+        jsonInstance.FuBenJsonData.Clear();
+        foreach (var pair in dataContainer.FuBenJsonData)
+        {
+            var list = new List<JSONObject>();
+            jsonInstance.FuBenJsonData.Add(pair.Key, list);
+            foreach (var jsonObject in pair.Value)
+            {
+                list.Add(jsonObject.Copy());
             }
         }
             
@@ -173,6 +211,41 @@ public class MainDataContainer
                 string filePath = Utility.CombinePaths(dirPathForData, $"{i}.json");
                 File.WriteAllText(filePath, jsonObjects[i].Print(true).DecodeJsonUnicode());
             }
+        }
+        
+        // 导出AI
+        string dirPathForAI = Utility.CombinePaths(dirPath, "AIJsonDate");
+        if (!Directory.Exists(dirPathForAI))
+            Directory.CreateDirectory(dirPathForAI);
+        var aiJsonDate = dataContainer.AIJsonDate;
+        foreach (var pair in aiJsonDate)
+        {
+            string filePath = Utility.CombinePaths(dirPathForAI, $"{pair.Key}.json");
+            File.WriteAllText(filePath, pair.Value.Print(true).DecodeJsonUnicode());
+        }
+        
+        // 导出副本
+        string dirPathForFuben = Utility.CombinePaths(dirPath, "FuBenJsonData");
+        if (!Directory.Exists(dirPathForFuben))
+            Directory.CreateDirectory(dirPathForFuben);
+        var fubenJsonData = dataContainer.FuBenJsonData;
+        foreach (var pair in fubenJsonData)
+        {
+            string dirPathForFubenData = Utility.CombinePaths(dirPathForFuben, pair.Key.ToString());
+            if (!Directory.Exists(dirPathForFubenData))
+                Directory.CreateDirectory(dirPathForFubenData);
+            var jsonObjects = pair.Value;
+            string filePath = Utility.CombinePaths(dirPathForFubenData, $"RandomMap.json");
+            File.WriteAllText(filePath, jsonObjects[0].Print(true).DecodeJsonUnicode());
+            
+            filePath = Utility.CombinePaths(dirPathForFubenData, $"ShiJian.json");
+            File.WriteAllText(filePath, jsonObjects[1].Print(true).DecodeJsonUnicode());
+            
+            filePath = Utility.CombinePaths(dirPathForFubenData, $"XuanXiang.json");
+            File.WriteAllText(filePath, jsonObjects[2].Print(true).DecodeJsonUnicode());
+            
+            filePath = Utility.CombinePaths(dirPathForFubenData, $"fubentime.json");
+            File.WriteAllText(filePath, jsonObjects[3].Print(true).DecodeJsonUnicode());
         }
     }
 

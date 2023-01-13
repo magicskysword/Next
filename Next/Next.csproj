@@ -177,6 +177,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\Component\CtlInfoDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlInfoLinkDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlInspectorBase.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlIntArrayBindTableExPropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlIntArrayPropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlIntSliderDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlListProject.cs" />
@@ -220,6 +221,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\Component\ProjectTreeItem.cs" />
     <Compile Include="Scr\Core\FGUI\CtlLongPropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowConfirmDialog.cs" />
+    <Compile Include="Scr\Core\FGUI\Dialog\WindowConfirmDialogExtra.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowIntInputDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowStringAreaInputPreviewDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowTableSelectorDialog.cs" />
@@ -227,10 +229,12 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\Dialog\WindowStringInputDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowWaitDialog.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIPanelBase.cs" />
+    <Compile Include="Scr\Core\FGUI\FGUISceneComponentBase.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIUtils.cs" />
     <Compile Include="Scr\Core\FGUI\IUndoCommand.cs" />
     <Compile Include="Scr\Core\FGUI\IUndoInst.cs" />
     <Compile Include="Scr\Core\FGUI\NextGLoader.cs" />
+    <Compile Include="Scr\Core\FGUI\ScenePanel\ScenePanelNextButton.cs" />
     <Compile Include="Scr\Core\FGUI\UndoExtension.cs" />
     <Compile Include="Scr\Core\FGUI\UndoInstManager.cs" />
     <Compile Include="Scr\Core\FGUI\ValueChangedCommand.cs" />
@@ -256,7 +260,6 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\Mod\ModType.cs" />
     <Compile Include="Scr\Core\Mod\SettingTypeAttribute.cs" />
     <Compile Include="Scr\Core\Patch\FungusClonePatch.cs" />
-    <Compile Include="Scr\Core\Patch\MainUIModBtnPatch.cs" />
     <Compile Include="Scr\Core\Res\BytesAsset.cs" />
     <Compile Include="Scr\Core\Res\FileAsset.cs" />
     <Compile Include="Scr\Core\Res\ResourcesManager.cs" />
@@ -376,7 +379,6 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\XiaoYeGUI\InterfaceMaker.cs" />
     <Compile Include="Scr\Core\XiaoYeGUI\RayBlocker.cs" />
     <Compile Include="Scr\Core\XiaoYeGUI\ResourceUtils.cs" />
-    <Compile Include="Scr\NextModEditor\Boot\Bootstrap.cs" />
     <Compile Include="Scr\NextModEditor\Event\EventCenter.cs" />
     <Compile Include="Scr\NextModEditor\Event\EventSubject.cs" />
     <Compile Include="Scr\NextModEditor\Event\IEventArgs.cs" />
@@ -434,6 +436,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSkillDataQuality.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSkillSeidDataGroup.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSString.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModStaticSkillData.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModTargetType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\IModDataClipboardPage.cs" />
     <Compile Include="Scr\NextModEditor\Mod\ModDataClipboard.cs" />
@@ -450,6 +453,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\NextModEditor\PanelPage\PanelTableModCreateAvatarDataPage.cs" />
     <Compile Include="Scr\NextModEditor\PanelPage\PanelTableModItemDataPage.cs" />
     <Compile Include="Scr\NextModEditor\PanelPage\PanelTableModSkillDataPage.cs" />
+    <Compile Include="Scr\NextModEditor\PanelPage\PanelTableModStaticSkillDataPage.cs" />
     <Compile Include="Scr\NextModEditor\PanelPage\PanelTablePageBase.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\CreateWorkshopException.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectListCreateWorkshopItem.cs" />
@@ -462,6 +466,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeItemModCreateAvatarData.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeItemModItemData.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeItemModSkillData.cs" />
+    <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeItemModStaticSkillData.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeModProject.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeModProjectReferenced.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeModWorkshop.cs" />
@@ -517,6 +522,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\vertical scrollbar.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Scr\Core\FGUI\Panel" />
     <Folder Include="Scr\FairyGUI\Source" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

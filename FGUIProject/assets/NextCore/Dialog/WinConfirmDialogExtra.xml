@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="350,125">
+  <controller name="type" pages="0,confirm,1,yes/no" selected="0"/>
+  <displayList>
+    <component id="n0_tcay" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="350,125">
+      <relation target="" sidePair="width-width,height-height"/>
+    </component>
+    <component id="n1_tcay" name="text" src="1143j5c" fileName="Component/Label/LabText.xml" xy="11,32" size="330,22">
+      <Label title="Text"/>
+    </component>
+    <component id="n2_tcay" name="btnOk" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="143,90">
+      <gearDisplay controller="type" pages="0,1"/>
+      <gearXY controller="type" pages="0,1" values="143,90|107,90"/>
+      <relation target="" sidePair="bottom-bottom"/>
+      <Button title="确定"/>
+    </component>
+    <component id="n3_tcay" name="closeButton" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="191,90">
+      <gearDisplay controller="type" pages="1"/>
+      <relation target="" sidePair="bottom-bottom"/>
+      <Button title="取消"/>
+    </component>
+    <component id="n4_pk2i" name="tglExtra" src="rabj49" fileName="Component/Button/BtnCheckbox.xml" xy="112,59">
+      <relation target="" sidePair="bottom-bottom"/>
+      <relation target="n7_pk2i" sidePair="right-left"/>
+    </component>
+    <text id="n7_pk2i" name="txtExtra" xy="143,60" pivot="0.5,0" size="88,22" fontSize="14" color="#ffffff" singleLine="true" autoClearText="true" text="额外确认选项">
+      <relation target="" sidePair="bottom-bottom"/>
+    </text>
+  </displayList>
+  <relation target="n1_tcay" sidePair="height-height"/>
+</component>

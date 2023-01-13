@@ -47,6 +47,25 @@ public static class ModUtils
     {
         return JObject.FromObject(modData);
     }
+    
+    public static IEnumerable<int> ModLoadIntArray(this JToken token)
+    {
+        if (token == null)
+            yield break;
+        if (token is JArray)
+        {
+            foreach (var item in token)
+            {
+                if (item.Type == JTokenType.Integer)
+                    yield return item.Value<int>();
+            }
+        }
+        else if(token is JValue)
+        {
+            if (token.Type == JTokenType.Integer)
+                yield return token.Value<int>();
+        }
+    }
 
     public static bool TryFormatToListInt(this string str, out List<int> list)
     {

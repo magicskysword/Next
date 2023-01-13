@@ -886,6 +886,16 @@ namespace SkySwordKill.Next
                         });
                     }
                     
+                    if (GUILayout.Button("导出当前场景Fungus".I18NTodo()))
+                    {
+                        _isWinOpen = false;
+                        Directory.CreateDirectory(PathExportOutputDir.Value);
+                        ModManager.GenerateCurrentSceneFungusData(() =>
+                        {
+                            Process.Start(PathExportOutputDir.Value);
+                        });
+                    }
+                    
                     GUILayout.BeginHorizontal();
                     {
                         if (GUILayout.Button("清空Lua已载入文件"))

@@ -7,6 +7,7 @@ using Fungus;
 using Newtonsoft.Json;
 using SkySwordKill.Next.FCanvas.PatchCommand;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SkySwordKill.Next.FCanvas;
 
@@ -82,18 +83,43 @@ public static class FFlowchartTools
 
             try
             {
-                var fFlowchart = flowchart.ConvertToFFlowchart();
-                var json = JsonConvert.SerializeObject(fFlowchart, Formatting.Indented);
-                var pathName = $"{outputPath}/{fFlowchart.Name}.json";
-                    
-                File.WriteAllText(pathName ,json);
-                Main.LogInfo($"导出：{pathName}");
+                ExportFungusFlowchart(flowchart, outputPath);
             }
             catch (Exception e)
             {
                 Main.LogError(e);
             }
         }
+    }
+    
+    public static void ExportCurrentSceneFungusFlowchart(string outputPath)
+    {
+        var flowchartsInScene = new List<Flowchart>();
+        foreach (var rootGameObject in Resources.FindObjectsOfTypeAll<Flowchart>())
+        {
+            rootGameObject.GetComponentsInChildren(true,  flowchartsInScene);
+            foreach (var flowchart in flowchartsInScene)
+            {
+                try
+                {
+                    ExportFungusFlowchart(flowchart, outputPath);
+                }
+                catch (Exception e)
+                {
+                    Main.LogError(e);
+                }
+            }
+        }
+    }
+
+    private static void ExportFungusFlowchart(Flowchart flowchart, string outputPath)
+    {
+        var fFlowchart = flowchart.ConvertToFFlowchart();
+        var json = JsonConvert.SerializeObject(fFlowchart, Formatting.Indented);
+        var pathName = $"{outputPath}/{fFlowchart.Name}.json";
+                    
+        File.WriteAllText(pathName ,json);
+        Main.LogInfo($"Export Fungus {fFlowchart.Name} to {pathName}");
     }
 
     public static Dictionary<string, FFlowchart> ImportAllFFlowchart(string dir)

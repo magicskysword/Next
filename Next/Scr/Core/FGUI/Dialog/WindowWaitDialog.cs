@@ -42,6 +42,7 @@ public class WindowWaitDialog : WindowDialogBase
         window._onWait = onWait;
         window._onComplete = onComplete;
         window._hideDelay = hideDelay;
+        window.modal = true;
         window.Show();
 
         return window;
@@ -65,6 +66,7 @@ public class WindowWaitDialog : WindowDialogBase
         window._onWaitAsync = onWaitComplete;
         window._onComplete = onComplete;
         window._hideDelay = hideDelay;
+        window.modal = true;
         window.Show();
 
         return window;

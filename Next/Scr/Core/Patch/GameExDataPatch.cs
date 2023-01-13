@@ -15,6 +15,7 @@ public class GameExDataPatch
         {
             Main.LogInfo($"NextData 读取存档数据");
             DialogAnalysis.LoadAvatarNextData(avatarIndex, slot);
+            DialogAnalysis.OnEnterWorld();
         }
         
         [HarmonyPatch("SaveGame")]
@@ -45,6 +46,7 @@ public class GameExDataPatch
         {
             Main.LogInfo($"NextData 创建新角色数据");
             DialogAnalysis.ResetAvatarNextData();
+            DialogAnalysis.OnEnterWorld();
         }
     }
         
@@ -56,6 +58,7 @@ public class GameExDataPatch
         {
             Main.LogInfo($"NextData 读取旧版存档数据");
             DialogAnalysis.LoadAvatarNextDataOld(id,index);
+            DialogAnalysis.OnEnterWorld();
         }
     }
     
@@ -67,6 +70,7 @@ public class GameExDataPatch
         {
             Main.LogInfo($"NextData 读取旧版存档数据");
             DialogAnalysis.LoadAvatarNextDataOld(id,index);
+            DialogAnalysis.OnEnterWorld();
         }
     }
 }

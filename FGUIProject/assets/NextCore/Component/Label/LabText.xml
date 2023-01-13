@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="330,22" restrictSize="0,0,0,600" overflow="scroll" scrollBarFlags="132" extention="Label">
+  <displayList>
+    <text id="n0_1143j" name="title" xy="0,0" size="330,22" fontSize="14" color="#ffffff" autoSize="height" autoClearText="true" text=""/>
+  </displayList>
+  <relation target="n0_1143j" sidePair="width-width,bottomext-bottom"/>
+</component>

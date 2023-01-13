@@ -9,20 +9,23 @@ using System.Reflection;
 using System.Text;
 using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using Fungus;
+using Next.Scr.Core.FGUI.ScenePanel;
 using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.Res;
 using SkySwordKill.Next.FCanvas;
 using SkySwordKill.Next.I18N;
 using SkySwordKill.Next.Mod;
+using UnityEngine.SceneManagement;
 
 namespace SkySwordKill.Next;
 
 [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
 public partial class Main : BaseUnityPlugin
 {
-    public const string MOD_VERSION = "0.7.1";
+    public const string MOD_VERSION = "0.7.3";
         
     public static Lazy<string> PathLocalModsDir;
     public static Lazy<string> PathLibraryDir;
@@ -56,6 +59,8 @@ public partial class Main : BaseUnityPlugin
     private LuaManager _luaManager;
     private FGUIManager _fguiManager;
     private FPatchManager _fPatchManager;
+    
+    private Dictionary<string, List<Action<Scene>>> _sceneLoadActions = new Dictionary<string, List<Action<Scene>>>();
 
     private void Awake()
     {
@@ -106,6 +111,14 @@ public partial class Main : BaseUnityPlugin
         LoadDefaultLanguage();
         LoadModSetting();
 
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        
+        RegisterSceneLoadEvent("MainMenu", scene =>
+        {
+            // 加载按钮
+            new ScenePanelNextButton().Show();
+        });
+        
         // ModManager 启动由 JsonDataPatch 进行引导
         // ModManager startup is booted by JsonDataPatch
     }
@@ -201,16 +214,43 @@ public partial class Main : BaseUnityPlugin
         LogInfo($"{"Misc.CurrentLanguage".I18N()} : {language.Config.LanguageName}");
     }
 
-    public void LoadModSetting()
+    internal void LoadModSetting()
     {
         NextModSetting = NextModSetting.LoadSetting();
     }
     
-    public void SaveModSetting()
+    internal void SaveModSetting()
     {
         NextModSetting.SaveSetting(NextModSetting);
     }
 
+    private void OnSceneLoaded(Scene loadScene, LoadSceneMode loadSceneMode)
+    {
+        if(_sceneLoadActions.TryGetValue(loadScene.name, out var actions))
+        {
+            foreach (var action in actions)
+            {
+                try
+                {
+                    action(loadScene);
+                }
+                catch (Exception e)
+                {
+                    LogError(e);
+                }
+            }
+        }
+    }
+
+    public void RegisterSceneLoadEvent(string sceneName, Action<Scene> action)
+    {
+        if (!_sceneLoadActions.TryGetValue(sceneName, out var list))
+        {
+            _sceneLoadActions.Add(sceneName, list = new List<Action<Scene>>());
+        }
+        list.Add(action);
+    }
+    
     public static void LogLua(object obj)
     {
         I.Logger.LogInfo($"Lua:\t{obj}");

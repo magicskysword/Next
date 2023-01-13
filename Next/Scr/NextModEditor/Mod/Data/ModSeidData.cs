@@ -27,12 +27,9 @@ public class ModSeidData : IModData
                     break;
                 case ModSeidPropertyType.IntArray:
                     var sIntArray = new ModSIntArray();
-                    if (jObject.TryGetValue(seidProperty.ID, out token) && token is JArray jArray)
+                    if (jObject.TryGetValue(seidProperty.ID, out token))
                     {
-                        foreach (var item in jArray)
-                        {
-                            sIntArray.Value.Add(item.ToObject<int>());
-                        }
+                        sIntArray.Value.AddRange(token.ModLoadIntArray());
                     }
                     data.DataDic.Add(seidProperty.ID,sIntArray);
                     break;

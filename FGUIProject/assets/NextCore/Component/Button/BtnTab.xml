@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="82,32" overflow="hidden" extention="Button">
-  <controller name="button" pages="2,up,3,down,4,over,5,selectedOver" selected="0"/>
+  <controller name="button" pages="2,up,3,down,4,over,5,selectedOver" selected="1"/>
   <displayList>
-    <graph id="n0_10zy0" name="n0" xy="0,0" size="82,32" type="rect" lineSize="0" lineColor="#ff292828" fillColor="#ff21252b">
-      <gearColor controller="button" pages="2,3,5" values="#21252b|#33383f|#2b3139" default="#21252b"/>
+    <graph id="n0_10zy0" name="n0" xy="0,0" size="82,32" type="rect" lineSize="0" lineColor="#ff292828" fillColor="#ff2b3139">
+      <gearColor controller="button" pages="2,3,5" values="#21252b|#2b3139|#33383f" default="#21252b"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <graph id="n3_10zy0" name="n3" xy="0,30" size="82,2" type="rect" lineColor="#ff4992e0" fillColor="#ff4992e0">
       <gearDisplay controller="button" pages="3,5"/>
       <relation target="" sidePair="width-width"/>
     </graph>
-    <component id="n1_10zy0" name="closeButton" src="nkvz1p" fileName="Component/Button/BtnCloseTab.xml" xy="61,6" size="20,20" alpha="0.5">
-      <gearLook controller="button" pages="2" values="0.5,0,0,1" default="1,0,0,1"/>
+    <component id="n1_10zy0" name="closeButton" src="nkvz1p" fileName="Component/Button/BtnCloseTab.xml" xy="61,6" size="20,20">
+      <gearLook controller="button" pages="2,4" values="0,0,0,1|0.5,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="right-right"/>
     </component>
     <loader id="n2_10zy0" name="icon" xy="7,8" size="16,16" url="ui://028qk31hnkvz1n" fill="scale">
       <relation target="" sidePair="middle-middle"/>
     </loader>
-    <text id="n4_10zy0" name="title" xy="29,5" size="33,22" fontSize="14" color="#959595" text="Title">
+    <text id="n4_10zy0" name="title" xy="29,5" size="33,22" fontSize="14" color="#ffffff" text="Title">
       <gearColor controller="button" pages="3,4,5" values="#ffffff,#000000|#ffffff,#000000|#ffffff,#000000" default="#959595,#000000"/>
       <relation target="" sidePair="middle-middle"/>
     </text>

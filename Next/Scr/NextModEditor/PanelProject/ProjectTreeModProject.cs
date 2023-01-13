@@ -25,6 +25,7 @@ public class ProjectTreeModProject : ProjectTreeFolder
         AddChild(new ProjectTreeItemModCreateAvatarData(Mod, Project));
         AddChild(new ProjectTreeItemModItemData(Mod, Project));
         AddChild(new ProjectTreeItemModSkillData(Mod, Project));
+        //AddChild(new ProjectTreeItemModStaticSkillData(Mod, Project));
         AddChild(new ProjectTreeItemModBuffData(Mod, Project));
     }
 }

@@ -96,10 +96,39 @@ public static class ModManager
                 if (context.Exception != null)
                 {
                     WindowConfirmDialog.CreateDialog("提示".I18NTodo(), 
-                        $"数据导出失败！错误信息：".I18NTodo() + $"\n{context.Exception}", false, () =>
+                        $"数据导出失败！错误信息：".I18NTodo() + $"\n{context.Exception}", false);
+                }
+                else
+                {
+                    WindowConfirmDialog.CreateDialog("提示".I18NTodo(), "数据导出成功！".I18NTodo(), false, () =>
                     {
                         onComplete?.Invoke();
                     });
+                }
+            });
+    }
+
+    public static void GenerateCurrentSceneFungusData(Action onComplete = null)
+    {
+        WindowWaitDialog.CreateDialog("提示", "正在导出数据...", 1f,
+            context =>
+            {
+                try
+                {
+                    FFlowchartTools.ExportCurrentSceneFungusFlowchart(Main.PathBaseFungusDataDir.Value);
+                }
+                catch (Exception e)
+                {
+                    Main.LogError(e);
+                    context.Exception = e;
+                }
+            }, 
+            context =>
+            {
+                if (context.Exception != null)
+                {
+                    WindowConfirmDialog.CreateDialog("提示".I18NTodo(), 
+                        $"数据导出失败！错误信息：".I18NTodo() + $"\n{context.Exception}", false);
                 }
                 else
                 {
@@ -365,7 +394,7 @@ public static class ModManager
         modGroups = SortModGroup(modGroups).ToList();
         ApplyModSetting(true);
         if(resetModState)
-            Main.I.SaveModSetting();
+            SaveSetting();
     }
     
     private static void InitJSONClassData()
@@ -471,7 +500,6 @@ public static class ModManager
     {
         Main.LogInfo($"===================" + "ModManager.StartLoadMod".I18N() + "=====================");
         // 获取版本地址
-        var modConfigDir = modConfig.GetConfigDir();
         var modDataDir = modConfig.GetDataDir();
         var modNDataDir = modConfig.GetNDataDir();
             
@@ -514,7 +542,7 @@ public static class ModManager
                         JSONObject toJsonObject =
                             typeof(jsonData).GetField($"_{fieldInfo.Name}").GetValue(jsonInstance) as JSONObject;
                         modConfig.JsonPathCache.Add(fieldInfo.Name, dirPathForData);
-                        PatchDicData(fieldInfo, dirPathForData, dicData, toJsonObject);
+                        PatchStrDicData(fieldInfo, dirPathForData, dicData, toJsonObject);
                     }
                     // 功能函数配置数据
                     else if (value is JSONObject[] jsonObjects)
@@ -528,6 +556,18 @@ public static class ModManager
                 {
                     throw new ModLoadException(string.Format("加载 Data【{0}】数据失败".I18NTodo(), fieldInfo.Name), e);
                 }
+            }
+            
+            // 加载AI数据
+            {
+                var dirPathForData = Utility.CombinePaths(modDataDir, "AIJsonDate");
+                PatchIntDicData(dirPathForData, jsonInstance.AIJsonDate);
+            }
+            
+            // 加载副本数据
+            {
+                var dirPathForData = Utility.CombinePaths(modDataDir, "FuBenJsonData");
+                PatchFubenDicData(dirPathForData, jsonInstance.FuBenJsonData);
             }
 
             // 载入Mod Dialog数据
@@ -727,7 +767,7 @@ public static class ModManager
         }
     }
 
-    public static void PatchDicData(FieldInfo fieldInfo,string dirPathForData, 
+    public static void PatchStrDicData(FieldInfo fieldInfo,string dirPathForData, 
         jsonData.YSDictionary<string, JSONObject> dicData,
         JSONObject toJsonObject)
     {
@@ -776,7 +816,97 @@ public static class ModManager
             }
         }
     }
+    
+    private static void PatchIntDicData(string dirPathForData, 
+        Dictionary<int,JSONObject> dictionary)
+    {
+        if (!Directory.Exists(dirPathForData))
+            return;
+        foreach (var filePath in Directory.GetFiles(dirPathForData))
+        {
+            try
+            {
+                var curData = LoadJSONObject(filePath);
+                var key = Path.GetFileNameWithoutExtension(filePath);
+
+                if (!int.TryParse(key, out var intKey))
+                {
+                    throw new ModLoadException($"不合法的文件ID {filePath} ，文件名必须为数字");
+                }
+                
+                if (dictionary.TryGetValue(intKey, out var tagData))
+                {
+                    foreach (var fieldKey in curData.keys)
+                    {
+                        tagData.TryAddOrReplace(fieldKey,curData.GetField(fieldKey));
+                    }
+                }
+                else
+                {
+                    dictionary[intKey] = curData;
+                }
+                
+                Main.LogInfo(string.Format("ModManager.LoadData".I18N(),
+                    $"{Path.GetFileNameWithoutExtension(dirPathForData)}/{Path.GetFileNameWithoutExtension(filePath)}.json [{key}]"));
+            }
+            catch (Exception e)
+            {
+                throw new ModLoadException($"文件 {filePath} 解析失败", e);
+            }
+        }
+    }
+    
+    private static void PatchFubenDicData(string dirPathForData, Dictionary<int,List<JSONObject>> fuBenJsonData)
+    {
+        if (!Directory.Exists(dirPathForData))
+            return;
         
+        foreach (var dirPath in Directory.GetDirectories(dirPathForData))
+        {
+            var key = Path.GetFileNameWithoutExtension(dirPath);
+
+            if (!int.TryParse(key, out var intKey))
+            {
+                throw new ModLoadException($"不合法的文件夹ID {dirPath} ，文件名必须为数字");
+            }
+            
+            if(!fuBenJsonData.TryGetValue(intKey,out var list))
+            {
+                list = new List<JSONObject>();
+                fuBenJsonData[intKey] = list;
+                for (int i = 0; i < 4; i++)
+                {
+                    list.Add(new JSONObject());
+                }
+            }
+            
+            string filePath = Utility.CombinePaths(dirPathForData, $"RandomMap.json");
+            PatchFubenJsonData(list[0], filePath);
+            filePath = Utility.CombinePaths(dirPathForData, $"ShiJian.json");
+            PatchFubenJsonData(list[1], filePath);
+            filePath = Utility.CombinePaths(dirPathForData, $"RandomMap.json");
+            PatchFubenJsonData(list[2], filePath);
+            filePath = Utility.CombinePaths(dirPathForData, $"RandomMap.json");
+            PatchFubenJsonData(list[3], filePath);
+        }
+    }
+
+    private static void PatchFubenJsonData(JSONObject jsonData, string filePath)
+    {
+        try
+        {
+            var curData = LoadJSONObject(filePath);
+            foreach (var fieldKey in curData.keys)
+            {
+                jsonData.TryAddOrReplace(fieldKey,curData.GetField(fieldKey));
+            }
+        }
+        catch (Exception e)
+        {
+            throw new ModLoadException($"文件 {filePath} 解析失败", e);
+        }
+    }
+
     public static void LoadDialogEventData(string dirPath)
     {
         var dirName = "DialogEvent";
@@ -1060,7 +1190,6 @@ public static class ModManager
     {
         var setting = Main.I.NextModSetting;
         setting.BoolGroup.Set(key, value);
-        OnModSettingChanged();
     }
     
     public static bool TryGetModSetting(string key, out long value)
@@ -1079,7 +1208,6 @@ public static class ModManager
     {
         var setting = Main.I.NextModSetting;
         setting.LongIntegerGroup.Set(key, value);
-        OnModSettingChanged();
     }
 
     public static bool TryGetModSetting(string key, out double value)
@@ -1098,7 +1226,6 @@ public static class ModManager
     {
         var setting = Main.I.NextModSetting;
         setting.DoubleFloatGroup.Set(key, value);
-        OnModSettingChanged();
     }
     
     public static bool TryGetModSetting(string key, out string value)
@@ -1117,9 +1244,20 @@ public static class ModManager
     {
         var setting = Main.I.NextModSetting;
         setting.StringGroup.Set(key, value);
+    }
+
+    public static void SaveSetting()
+    {
+        Main.I.SaveModSetting();
         OnModSettingChanged();
     }
 
+    public static void LoadSetting()
+    {
+        Main.I.LoadModSetting();
+        OnModSettingChanged();
+    }
+    
     #endregion
 
     #region 私有方法

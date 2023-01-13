@@ -56,6 +56,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             UIObjectFactory.SetPackageItemExtension(UI_WinModSelectorDialog.URL, typeof(UI_WinModSelectorDialog));
             UIObjectFactory.SetPackageItemExtension(UI_BtnTreeItemMod.URL, typeof(UI_BtnTreeItemMod));
             UIObjectFactory.SetPackageItemExtension(UI_ComImageAdaptivePreviewDrawer.URL, typeof(UI_ComImageAdaptivePreviewDrawer));
+            UIObjectFactory.SetPackageItemExtension(UI_WinConfirmDialogExtra.URL, typeof(UI_WinConfirmDialogExtra));
             UIObjectFactory.SetPackageItemExtension(UI_WindowFrameDialogStyle2.URL, typeof(UI_WindowFrameDialogStyle2));
             UIObjectFactory.SetPackageItemExtension(UI_WinStringInputPreviewDialog.URL, typeof(UI_WinStringInputPreviewDialog));
             UIObjectFactory.SetPackageItemExtension(UI_ComTextPreviewArea.URL, typeof(UI_ComTextPreviewArea));

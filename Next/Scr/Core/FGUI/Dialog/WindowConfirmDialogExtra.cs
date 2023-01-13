@@ -3,24 +3,29 @@ using SkySwordKill.NextFGUI.NextCore;
 
 namespace SkySwordKill.Next.FGUI.Dialog;
 
-public class WindowConfirmDialog : WindowDialogBase
+public class WindowConfirmDialogExtra : WindowDialogBase
 {
     private string _title;
     private string _showText;
+    private string _extraText;
     private bool _canCancel;
-    private Action _onConfirm;
+    private bool _defaultExtra;
+    private Action<bool> _onConfirm;
     private Action _onCancel;
 
-    private WindowConfirmDialog() : base("NextCore", "WinConfirmDialog")
+    private WindowConfirmDialogExtra() : base("NextCore", "WinConfirmDialogExtra")
     {
     }
 
-    public UI_WinConfirmDialog MainView => contentPane as UI_WinConfirmDialog;
+    public UI_WinConfirmDialogExtra MainView => contentPane as UI_WinConfirmDialogExtra;
 
-    public static void CreateDialog(string title,string text,bool canCancel,Action onConfirm = null,Action onCancel = null)
+    public static void CreateDialog(string title,string text,string extraText,bool canCancel,bool defaultExtra = false,
+        Action<bool> onConfirm = null, Action onCancel = null)
     {
-        var window = new WindowConfirmDialog();
+        var window = new WindowConfirmDialogExtra();
         window._showText = text;
+        window._extraText = extraText;
+        window._defaultExtra = defaultExtra;
         window._canCancel = canCancel;
         window._onConfirm = onConfirm;
         window._onCancel = onCancel;
@@ -35,6 +40,8 @@ public class WindowConfirmDialog : WindowDialogBase
         base.OnInit();
         MainView.m_frame.title = _title;
         MainView.m_text.text = _showText;
+        MainView.m_txtExtra.text = _extraText;
+        MainView.m_tglExtra.selected = _defaultExtra;
         MainView.m_closeButton.onClick.Set(Cancel);
         MainView.m_btnOk.onClick.Set(Confirm);
         var typeCtl = MainView.GetController("type");
@@ -44,7 +51,7 @@ public class WindowConfirmDialog : WindowDialogBase
 
     private void Confirm()
     {
-        _onConfirm?.Invoke();
+        _onConfirm?.Invoke(MainView.m_tglExtra.selected);
         Hide();
     }
 

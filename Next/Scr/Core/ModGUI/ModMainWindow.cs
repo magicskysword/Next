@@ -77,7 +77,7 @@ public class ModMainWindow : FGUIWindowBase
     protected override void OnHide()
     {
         base.OnHide();
-        Main.I.LoadModSetting();
+        ModManager.LoadSetting();
     }
 
     private void RefreshTitle()
@@ -198,7 +198,7 @@ public class ModMainWindow : FGUIWindowBase
             WindowWaitDialog.CreateDialog("提示","正在应用更改...", 1f, 
                 context =>
             {
-                Main.I.SaveModSetting();
+                ModManager.SaveSetting();
                 if (ModLoadSettingDirty)
                 {
                     ModManager.ReloadAllMod();

@@ -4,27 +4,27 @@
     <graph id="n10_hc7r" name="bg" xy="0,0" size="800,600" type="rect" lineSize="0" fillColor="#ff21252b">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <graph id="n11_hc7r" name="bgTable" xy="0,25" size="500,575" type="rect" lineSize="0" fillColor="#ff2c313c">
+    <graph id="n11_hc7r" name="bgTable" xy="0,25" size="450,575" type="rect" lineSize="0" fillColor="#ff2c313c">
       <relation target="n0_eg8y" sidePair="width-width,height-height,center-center,middle-middle"/>
     </graph>
-    <component id="n0_eg8y" name="table" src="nkvz2b" fileName="Component/Table/ComTableList.xml" xy="0,25" size="500,575">
+    <component id="n0_eg8y" name="table" src="nkvz2b" fileName="Component/Table/ComTableList.xml" xy="0,25" size="450,575">
       <relation target="" sidePair="height-height"/>
       <relation target="n2_eg8y" sidePair="rightext-left"/>
     </component>
-    <component id="n1_eg8y" name="inspector" src="nkvz2f" fileName="Component/PanelCom/ComMainInspector.xml" xy="500,0" size="300,600">
+    <component id="n1_eg8y" name="inspector" src="nkvz2f" fileName="Component/PanelCom/ComMainInspector.xml" xy="450,0" size="350,600">
       <relation target="" sidePair="width-width,height-height,right-right"/>
       <relation target="n2_eg8y" sidePair="leftext-right"/>
     </component>
-    <graph id="n2_eg8y" name="seg" xy="500,0" size="4,600" type="rect" lineSize="0" fillColor="#ff21252b">
+    <graph id="n2_eg8y" name="seg" xy="450,0" size="4,600" type="rect" lineSize="0" fillColor="#ff21252b">
       <relation target="" sidePair="height-height,right-right"/>
     </graph>
-    <component id="n9_d4rw" name="toolsBar" src="d4rw3w" fileName="Component/ToolsBar/ComToolsBar.xml" xy="0,0">
+    <component id="n9_d4rw" name="toolsBar" src="d4rw3w" fileName="Component/ToolsBar/ComToolsBar.xml" xy="0,0" size="450,24">
       <relation target="n0_eg8y" sidePair="width-width"/>
     </component>
-    <graph id="n6_d4rw" name="n6" xy="0,24" size="500,1" type="rect" lineSize="0" fillColor="#ff32363c">
+    <graph id="n6_d4rw" name="n6" xy="0,24" size="450,1" type="rect" lineSize="0" fillColor="#ff32363c">
       <relation target="n0_eg8y" sidePair="width-width"/>
     </graph>
-    <graph id="n7_d4rw" name="n7" xy="499,0" size="1,24" type="rect" lineSize="0" fillColor="#ff32363c">
+    <graph id="n7_d4rw" name="n7" xy="449,0" size="1,24" type="rect" lineSize="0" fillColor="#ff32363c">
       <relation target="n0_eg8y" sidePair="right-right"/>
     </graph>
   </displayList>

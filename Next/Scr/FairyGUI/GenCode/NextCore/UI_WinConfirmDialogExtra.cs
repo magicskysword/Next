@@ -5,18 +5,20 @@ using FairyGUI.Utils;
 
 namespace SkySwordKill.NextFGUI.NextCore
 {
-    public partial class UI_WinConfirmDialog : GComponent
+    public partial class UI_WinConfirmDialogExtra : GComponent
     {
         public Controller m_type;
         public UI_WindowFrameDialog m_frame;
         public GLabel m_text;
         public GButton m_btnOk;
         public GButton m_closeButton;
-        public const string URL = "ui://028qk31hnkvz32";
+        public GButton m_tglExtra;
+        public GTextField m_txtExtra;
+        public const string URL = "ui://028qk31hpk2ij5d";
 
-        public static UI_WinConfirmDialog CreateInstance()
+        public static UI_WinConfirmDialogExtra CreateInstance()
         {
-            return (UI_WinConfirmDialog)UIPackage.CreateObject("NextCore", "WinConfirmDialog");
+            return (UI_WinConfirmDialogExtra)UIPackage.CreateObject("NextCore", "WinConfirmDialogExtra");
         }
 
         public override void ConstructFromXML(XML xml)
@@ -28,6 +30,8 @@ namespace SkySwordKill.NextFGUI.NextCore
             m_text = (GLabel)GetChild("text");
             m_btnOk = (GButton)GetChild("btnOk");
             m_closeButton = (GButton)GetChild("closeButton");
+            m_tglExtra = (GButton)GetChild("tglExtra");
+            m_txtExtra = (GTextField)GetChild("txtExtra");
         }
     }
 }

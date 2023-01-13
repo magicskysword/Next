@@ -8,7 +8,7 @@ public abstract class WindowDialogBase : FGUIWindowBase
 {
     protected WindowDialogBase(string pkgName, string comName) : base(pkgName, comName)
     {
-        modal = true;
+        
     }
         
     public Vector2 MinSize { get; set; } = new Vector2(20, 20);

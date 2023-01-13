@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using FairyGUI;
+using Next.Scr.Core.FGUI;
 using SkySwordKill.Next.Res;
 using SkySwordKill.NextFGUI.NextCore;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SkySwordKill.Next.FGUI;
 
@@ -13,7 +15,8 @@ public class FGUIManager
     public AssetBundle FguiAB;
     public Dictionary<string, Shader> ShaderMap = new Dictionary<string, Shader>();
     public Dictionary<string, UIPackage> Packages = new Dictionary<string, UIPackage>();
-    
+    public List<FGUIScenePanelBase> ScenePanels = new List<FGUIScenePanelBase>();
+
     public const string MOUSE_RESIZE_H = "resizeH";
     public const string MOUSE_RESIZE_V = "resizeV";
     public const string MOUSE_RESIZE_BR = "resizeBR";
@@ -68,8 +71,25 @@ public class FGUIManager
         {
             child.gameObject.layer = 17;
         }
+        
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        var mainCamera = Camera.main;
+        if(mainCamera == null)
+            return;
+        // 将主摄像机的Layer设置为排除17层
+        mainCamera.cullingMask &= ~(1 << 17);
+        // 清除场景UI
+        foreach (var sceneComponent in ScenePanels)
+        {
+            sceneComponent.Hide();
+        }
+        ScenePanels.Clear();
+    }
+ 
     public void Reset()
     {
         Packages.Clear();
@@ -154,5 +174,15 @@ public class FGUIManager
         }
         Main.LogWarning($"[FGUI]不存在文件：<{type}> {tagPath}");
         return null;
+    }
+
+    public void RegisterScenePanel(FGUIScenePanelBase scenePanel)
+    {
+        ScenePanels.Add(scenePanel);
+    }
+
+    public void RemoveScenePanel(FGUIScenePanelBase scenePanel)
+    {
+        ScenePanels.Remove(scenePanel);
     }
 }
