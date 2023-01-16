@@ -47,9 +47,8 @@ public class FungusClonePatch
                 {
                     Main.FPatch.PatchFlowchart(flowchart);
                 }
+                go.AddComponent<PatchTag>();
             }
-
-            go.AddComponent<PatchTag>();
         }
     }
 }

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Next</RootNamespace>
     <AssemblyName>Next</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <LangVersion>10</LangVersion>
   </PropertyGroup>
@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_STANDALONE_WIN;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Next.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,111 +32,13 @@
     <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_STANDALONE_WIN;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Next.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>XCOPY "$(SolutionDir)NextAssets\**" "$(OutDir)NextAssets" /s /r /f /y /i
 XCOPY "$(SolutionDir)Next\NextConfig\**" "$(OutDir)NextConfig" /s /r /f /y /i
 XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBuildEvent>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="0Harmony, Version=2.5.5.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\workshop\content\1189490\2824349934\BepInEx\core\0Harmony.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="BepInEx, Version=5.4.17.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\workshop\content\1189490\2824349934\BepInEx\core\BepInEx.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <HintPath>NextLib\Microsoft.CSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml" />
-    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.InputModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.InputModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.UIModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestAudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestTextureModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestWWWModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scr\Core\DataGroup.cs" />
@@ -234,7 +137,6 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\IUndoCommand.cs" />
     <Compile Include="Scr\Core\FGUI\IUndoInst.cs" />
     <Compile Include="Scr\Core\FGUI\NextGLoader.cs" />
-    <Compile Include="Scr\Core\FGUI\ScenePanel\ScenePanelNextButton.cs" />
     <Compile Include="Scr\Core\FGUI\UndoExtension.cs" />
     <Compile Include="Scr\Core\FGUI\UndoInstManager.cs" />
     <Compile Include="Scr\Core\FGUI\ValueChangedCommand.cs" />
@@ -264,7 +166,9 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\Res\FileAsset.cs" />
     <Compile Include="Scr\Core\Res\ResourcesManager.cs" />
     <Compile Include="Scr\Core\Utils\AccessExtension.cs" />
+    <Compile Include="Scr\Core\Utils\MainPanelButtonAnimation.cs" />
     <Compile Include="Scr\Core\Utils\MathTools.cs" />
+    <Compile Include="Scr\Core\Utils\UnityUtils.cs" />
     <Compile Include="Scr\Core\Utils\Vector2Converter.cs" />
     <Compile Include="Scr\FairyGUI\**" />
     <Compile Include="Scr\Core\ConfigTarget.cs" />
@@ -362,7 +266,6 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\Patch\GameExDataPatch.cs" />
     <Compile Include="Scr\Core\Patch\ItemUIPatch.cs" />
     <Compile Include="Scr\Core\Patch\JsonDataPatch.cs" />
-    <Compile Include="Scr\Core\Patch\MainUIPatch.cs" />
     <Compile Include="Scr\Core\Patch\ModResourcesLoadSpritePatch.cs" />
     <Compile Include="Scr\Core\Patch\ModResourcesLoadTexturePatch.cs" />
     <Compile Include="Scr\Core\Patch\MusicMagPatch.cs" />
@@ -522,8 +425,145 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <EmbeddedResource Include="Scr\Core\XiaoYeGUI\Skin\vertical scrollbar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Scr\Core\FGUI\Panel" />
     <Folder Include="Scr\FairyGUI\Source" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\..\soft\steam\steamapps\workshop\content\1189490\2824349934\BepInEx\core\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx">
+      <HintPath>..\..\..\..\soft\steam\steamapps\workshop\content\1189490\2824349934\BepInEx\core\BepInEx.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\DOTween.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DOTweenPro">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\DOTweenPro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\Microsoft.CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\System.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\System.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\System.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\System.Drawing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\System.Xml.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UniTask">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UniTask.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UniTask.DOTween">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UniTask.DOTween.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UniTask.Linq">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UniTask.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UniTask.TextMeshPro">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UniTask.TextMeshPro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.InputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -11,14 +11,18 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using DG.Tweening;
 using Fungus;
-using Next.Scr.Core.FGUI.ScenePanel;
 using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.Res;
 using SkySwordKill.Next.FCanvas;
 using SkySwordKill.Next.I18N;
 using SkySwordKill.Next.Mod;
+using SkySwordKill.Next.ModGUI;
+using SkySwordKill.Next.Utils;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace SkySwordKill.Next;
 
@@ -115,8 +119,26 @@ public partial class Main : BaseUnityPlugin
         
         RegisterSceneLoadEvent("MainMenu", scene =>
         {
-            // 加载按钮
-            new ScenePanelNextButton().Show();
+            var nextBtnGo = scene.FindGameObject("新主界面/Panel/btn/神仙斗法").CopyGameObject(name : "Next");
+            nextBtnGo.transform.MoveLocal(new Vector3(0, 90, 0));
+            var nextBtn = nextBtnGo.GetComponent<FpBtn>();
+            nextBtn.mouseUpEvent = new UnityEvent();
+            nextBtn.mouseUpEvent.AddListener(() =>
+            {
+                var window = new ModMainWindow();
+                window.Show();
+            });
+            
+            Res.TryGetAsset<Texture2D>("Assets/Next/MCS_DLJM_btn_next.png", tex =>
+            {
+                var spr = tex.ToSprite();
+                nextBtnGo.GetComponent<Image>().sprite = spr;
+                nextBtn.nomalSprite = spr;
+            });
+            Res.TryGetAsset<Texture2D>("Assets/Next/MCS_DLJM_btn_next_bk.png", tex => nextBtn.mouseDownSprite = tex.ToSprite());
+            Res.TryGetAsset<Texture2D>("Assets/Next/MCS_DLJM_btn_next_hlg.png", tex => nextBtn.mouseEnterSprite = tex.ToSprite());
+
+            nextBtnGo.AddComponent<MainPanelButtonAnimation>();
         });
         
         // ModManager 启动由 JsonDataPatch 进行引导
@@ -292,3 +314,4 @@ public partial class Main : BaseUnityPlugin
         return sb.ToString();
     }
 }
+

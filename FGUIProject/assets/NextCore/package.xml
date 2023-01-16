@@ -126,9 +126,6 @@
     <component id="txbi5b" name="ComSliderDrawer_slider.xml" path="/Component/Drawer/"/>
     <component id="1143j5c" name="LabText.xml" path="/Component/Label/" exported="true"/>
     <component id="pk2ij5d" name="WinConfirmDialogExtra.xml" path="/Dialog/" exported="true"/>
-    <image id="tcf5j5g" name="NextBtn_2.png" path="/Image/"/>
-    <image id="tcf5j5h" name="NextBtn_1.png" path="/Image/"/>
-    <component id="tcf5j5i" name="BtnNext.xml" path="/Component/Button/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

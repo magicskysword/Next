@@ -250,9 +250,12 @@ public class WindowSeidEditorDialog : WindowDialogBase
     {
         if (GetSelectedSeid(out var nodeInfo))
         {
-            WindowConfirmDialog.CreateDialog("提示",$"即将完全删除特性【{nodeInfo}】，是否确认？", true,
-                () => RemoveSeid(nodeInfo.SeidID)
-                );
+            WindowConfirmDialog.CreateDialog("提示",$"即将完全删除特性【{nodeInfo.SeidID} {nodeInfo.NodeName}】，是否确认？", true,
+                () =>
+                {
+                    RemoveSeid(nodeInfo.SeidID);
+                    Refresh();
+                });
         }
     }
 

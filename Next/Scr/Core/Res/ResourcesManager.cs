@@ -91,6 +91,16 @@ public class ResourcesManager : MonoBehaviour
         }
         return false;
     }
+    
+    public bool TryGetAsset<T>(string path,Action<T> callback) where T : Object
+    {
+        if (fileAssets.TryGetValue(path, out var fileAsset))
+        {
+            fileAsset.LoadAssetAsync(asset => callback.Invoke(asset as T));
+            return true;
+        }
+        return false;
+    }
         
     /// <summary>
     /// 同步加载资源，返回值表示资源是否存在且加载完毕
@@ -112,6 +122,26 @@ public class ResourcesManager : MonoBehaviour
                 return false;
             }
         }
+        asset = null;
+        return false;
+    }
+    
+    /// <summary>
+    /// 同步加载泛型接口
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="asset"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public bool TryGetAsset<T>(string path,out T asset) where T : Object
+    {
+        Object loadAsset;
+        if (TryGetAsset(path,out loadAsset) && loadAsset is T tAsset)
+        {
+            asset = tAsset;
+            return true;
+        }
+
         asset = null;
         return false;
     }

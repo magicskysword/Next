@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
+using Cysharp.Threading.Tasks;
 using SkySwordKill.Next;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -45,7 +46,7 @@ public class FileAsset
         if (!isDone)
         {
             OnLoadedAsset += callback;
-            Main.Res.StartCoroutine(LoadAsync());
+            LoadAsync().Forget();
         }
         else
         {
@@ -76,73 +77,75 @@ public class FileAsset
 
     #region 私有方法
 
-    private IEnumerator LoadAsync()
+    private async UniTaskVoid LoadAsync()
     {
         if (isLoading || isDone)
-            yield break;
+            return;
         isLoading = true;
         Object loadAsset = null;
         var extension = Path.GetExtension(filePath);
-        switch (extension)
+        try
         {
-            case ".jpg":
-            case ".png":
-                using (UnityWebRequest webRequest = UnityWebRequestTexture.GetTexture(filePath))
-                {
-                    yield return webRequest.SendWebRequest();
-                    if (webRequest.isDone)
+            switch (extension)
+            {
+                case ".jpg":
+                case ".png":
+                    using (UnityWebRequest webRequest = UnityWebRequestTexture.GetTexture(filePath))
                     {
+                        await webRequest.SendWebRequest();
                         var tex = DownloadHandlerTexture.GetContent(webRequest);
                         tex.hideFlags = HideFlags.HideAndDontSave;
                         loadAsset = tex;
                     }
-                }
 
-                break;
-            case ".mp3":
-                using (UnityWebRequest webRequest =
-                       UnityWebRequestMultimedia.GetAudioClip(filePath, AudioType.UNKNOWN))
-                {
-                    yield return webRequest.SendWebRequest();
-                    if (webRequest.isDone)
+                    break;
+                case ".mp3":
+                    using (UnityWebRequest webRequest =
+                           UnityWebRequestMultimedia.GetAudioClip(filePath, AudioType.UNKNOWN))
                     {
+                        await webRequest.SendWebRequest();
                         loadAsset = DownloadHandlerAudioClip.GetContent(webRequest);
                     }
-                }
 
-                break;
-            case ".ab":
-                using (UnityWebRequest webRequest = UnityWebRequestAssetBundle.GetAssetBundle(filePath))
-                {
-                    yield return webRequest.SendWebRequest();
-                    if (webRequest.isDone)
+                    break;
+                case ".ab":
+                    using (UnityWebRequest webRequest = UnityWebRequestAssetBundle.GetAssetBundle(filePath))
                     {
+                        await webRequest.SendWebRequest();
                         var ab = DownloadHandlerAssetBundle.GetContent(webRequest);
                         loadAsset = ab;
                     }
-                }
-
-                break;
-            case ".bytes":
-                var bytes = File.ReadAllBytes(filePath);
-                loadAsset = new BytesAsset(bytes);
-                break;
+                    break;
+                case ".bytes":
+                    var bytes = File.ReadAllBytes(filePath);
+                    loadAsset = new BytesAsset(bytes);
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            Main.LogError(e);
+            Debug.LogWarning($"{filePath}加载失败");
+            isLoading = false;
+            isDone = false;
+            return;
         }
 
-        if (!isDone && asset != null)
+        if (!isDone && loadAsset != null)
         {
             asset = loadAsset;
         }
 
         if (asset != null)
         {
+            asset.name = filePath;
             OnLoadedAsset?.Invoke(asset);
             isLoading = false;
             isDone = true;
         }
         else
         {
-            Debug.LogWarning($"{filePath}加载失败");
+            Main.LogWarning($"{filePath}加载失败");
             isLoading = false;
             isDone = false;
         }
@@ -159,6 +162,7 @@ public class FileAsset
             {
                 var bytes = File.ReadAllBytes(filePath);
                 var texture = new Texture2D(1, 1, TextureFormat.ARGB32, false);
+                texture.hideFlags = HideFlags.HideAndDontSave;
                 texture.LoadImage(bytes);
                 loadAsset = texture;
             }

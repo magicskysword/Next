@@ -24,8 +24,9 @@ public class FGUIManager
 
     public const string MOUSE_TEXT = "text";
     public const string MOUSE_HAND = "hand";
-    
 
+    private bool _inClearScenePanel = false;
+    
     public void Init()
     {
         LoadFGUIAB();
@@ -77,17 +78,32 @@ public class FGUIManager
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        var mainCamera = Camera.main;
-        if(mainCamera == null)
-            return;
-        // 将主摄像机的Layer设置为排除17层
-        mainCamera.cullingMask &= ~(1 << 17);
-        // 清除场景UI
-        foreach (var sceneComponent in ScenePanels)
+        var cameras = GameObject.FindObjectsOfType<Camera>();
+        foreach (var camera in cameras)
         {
-            sceneComponent.Hide();
+            // 为场景所有相机设置遮罩
+            if(camera != StageCamera.main.GetComponent<Camera>())
+            {
+                // 将主摄像机的Layer设置为排除17层
+                camera.cullingMask &= ~(1 << 17);
+            }
         }
-        ScenePanels.Clear();
+
+
+        try
+        {
+            _inClearScenePanel = true;
+            // 清除场景UI
+            foreach (var sceneComponent in ScenePanels)
+            {
+                sceneComponent.Hide();
+            }
+            ScenePanels.Clear();
+        }
+        finally
+        {
+            _inClearScenePanel = false;
+        }
     }
  
     public void Reset()
@@ -183,6 +199,8 @@ public class FGUIManager
 
     public void RemoveScenePanel(FGUIScenePanelBase scenePanel)
     {
+        if(_inClearScenePanel)
+            return;
         ScenePanels.Remove(scenePanel);
     }
 }
