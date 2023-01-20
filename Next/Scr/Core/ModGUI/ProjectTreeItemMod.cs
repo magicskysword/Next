@@ -38,6 +38,9 @@ public class ProjectTreeItemModConfig : ProjectTreeItem
             new CtlInfoDrawer("Mod.Description".I18N(), modDesc, 16),
             new CtlInfoLinkDrawer("Mod.Directory".I18N(), modPath, 16, modPath)
         );
+        
+        if(ModConfig.Exception != null)
+            groupInfo.AddDrawer(new CtlInfoDrawer("Mod.Exception".I18N(), ModConfig.Exception.ToString(), 16));
 
         var groupSetting = new CtlGroupDrawer("Mod设置".I18NTodo(), true);
         foreach (var settingDefinition in ModConfig.Settings)

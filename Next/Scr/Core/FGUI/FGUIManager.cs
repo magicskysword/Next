@@ -78,17 +78,7 @@ public class FGUIManager
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        var cameras = GameObject.FindObjectsOfType<Camera>();
-        foreach (var camera in cameras)
-        {
-            // 为场景所有相机设置遮罩
-            if(camera != StageCamera.main.GetComponent<Camera>())
-            {
-                // 将主摄像机的Layer设置为排除17层
-                camera.cullingMask &= ~(1 << 17);
-            }
-        }
-
+        ResetCamera();
 
         try
         {
@@ -103,6 +93,21 @@ public class FGUIManager
         finally
         {
             _inClearScenePanel = false;
+        }
+    }
+    
+    public void ResetCamera()
+    {
+        StageCamera.main.cullingMask = 1 << 17;
+        var cameras = GameObject.FindObjectsOfType<Camera>();
+        foreach (var camera in cameras)
+        {
+            // 为场景所有相机设置遮罩
+            if(camera != StageCamera.main.GetComponent<Camera>())
+            {
+                // 将主摄像机的Layer设置为排除17层
+                camera.cullingMask &= ~(1 << 17);
+            }
         }
     }
  

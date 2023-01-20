@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SkySwordKill.Next.FCanvas;
+﻿namespace SkySwordKill.Next.FCanvas;
 
 public class FPatchCommand
 {

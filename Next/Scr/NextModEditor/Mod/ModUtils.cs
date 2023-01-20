@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using script.Steam;
 using SkySwordKill.Next;
-using SkySwordKill.Next.Utils;
 using SkySwordKill.NextModEditor.Mod.Data;
-using Steamworks;
 using UnityEngine;
 
 namespace SkySwordKill.NextModEditor.Mod;

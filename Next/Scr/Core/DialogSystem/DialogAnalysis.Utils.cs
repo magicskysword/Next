@@ -4,7 +4,6 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
-using SkySwordKill.Next;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.StaticFace;
 using UnityEngine;

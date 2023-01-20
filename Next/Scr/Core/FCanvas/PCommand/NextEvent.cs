@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Fungus;
+﻿using Fungus;
 using SkySwordKill.Next.DialogSystem;
 
 namespace SkySwordKill.Next.FCanvas.PatchCommand;

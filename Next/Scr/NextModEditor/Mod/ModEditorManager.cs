@@ -41,6 +41,7 @@ public class ModEditorManager
     public List<ModAttackType> AttackTypes { get; set; }
     public List<ModElementType> ElementTypes { get; set; }
     public List<ModComparisonOperatorType> ComparisonOperatorTypes { get; set; }
+    public List<ModArithmeticOperatorType> ArithmeticOperatorTypes { get; set; }
     public List<ModTargetType> TargetTypes { get; set; }
     /// <summary>
     /// 法宝类型组
@@ -139,6 +140,9 @@ public class ModEditorManager
             ComparisonOperatorTypes = JArray
                 .Parse(ModUtils.LoadEditorConfig("Meta/ComparisonOperatorType.json"))
                 .ToObject<List<ModComparisonOperatorType>>();
+            ArithmeticOperatorTypes = JArray
+                .Parse(ModUtils.LoadEditorConfig("Meta/ArithmeticOperatorType.json"))
+                .ToObject<List<ModArithmeticOperatorType>>();
             TargetTypes = JArray
                 .Parse(ModUtils.LoadEditorConfig("Meta/TargetType.json"))
                 .ToObject<List<ModTargetType>>();

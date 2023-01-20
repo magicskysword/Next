@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using script.Steam;
+﻿using System.IO;
 using SkySwordKill.Next;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI.Component;

@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FairyGUI;
-using SkySwordKill.Next;
-using SkySwordKill.Next.FGUI.Dialog;
-using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.NextFGUI.NextCore;
 using SkySwordKill.NextModEditor.Mod;
 using SkySwordKill.NextModEditor.Mod.Data;
 
-namespace SkySwordKill.NextModEditor.Panel;
+namespace SkySwordKill.Next.FGUI.Dialog;
 
 public class WindowSeidEditorDialog : WindowDialogBase
 {
@@ -68,6 +65,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
     {
         var window = new WindowSeidEditorDialog();
 
+        window.modal = true;
         window.Title = title;
         window.Mod = mod;
         window.OwnerId = ownerId;
@@ -631,10 +629,10 @@ public class WindowSeidEditorDialog : WindowDialogBase
             drawer = intPropertyDrawer;
         }
         Inspector.AddDrawer(drawer);
-        CreateIntSpecialDrawer(drawer, seidProperty, sInt);
+        CreateIntExtraDrawer(drawer, seidProperty, sInt);
     }
 
-    private void CreateIntSpecialDrawer(CtlPropertyDrawerBase drawer, ModSeidProperty seidProperty, ModSInt sInt)
+    private void CreateIntExtraDrawer(CtlPropertyDrawerBase drawer, ModSeidProperty seidProperty, ModSInt sInt)
     {
         foreach (var drawerId in seidProperty.SpecialDrawer)
         {
@@ -654,11 +652,10 @@ public class WindowSeidEditorDialog : WindowDialogBase
                             var typeId = ModEditorManager.I.BuffDataBuffTypes[index].TypeID;
                             sInt.Value = typeId;
                             drawer.Refresh();
-                            drawer.OnChanged?.Invoke();
                         },
                         () => ModEditorManager.I.BuffDataBuffTypes.FindIndex(type => type.TypeID == sInt.Value));
                     Inspector.AddDrawer(dropdownPropertyDrawer);
-                    drawer.OnChanged += dropdownPropertyDrawer.Refresh;
+                    drawer.ChainDrawer(dropdownPropertyDrawer);
                     break;
                 }
                 case "LevelTypeDrawer":
@@ -670,11 +667,10 @@ public class WindowSeidEditorDialog : WindowDialogBase
                             var typeId = ModEditorManager.I.LevelTypes[index].TypeID;
                             sInt.Value = typeId;
                             drawer.Refresh();
-                            drawer.OnChanged?.Invoke();
                         },
                         () => ModEditorManager.I.LevelTypes.FindIndex(type => type.TypeID == sInt.Value));
                     Inspector.AddDrawer(dropdownPropertyDrawer);
-                    drawer.OnChanged += dropdownPropertyDrawer.Refresh;
+                    drawer.ChainDrawer(dropdownPropertyDrawer);
                     break;
                 }
                 case "BuffRemoveTriggerTypeDrawer":
@@ -687,12 +683,11 @@ public class WindowSeidEditorDialog : WindowDialogBase
                             var typeId = ModEditorManager.I.BuffDataRemoveTriggerTypes[index].TypeID;
                             sInt.Value = typeId;
                             drawer.Refresh();
-                            drawer.OnChanged?.Invoke();
                         },
                         () => ModEditorManager.I.BuffDataRemoveTriggerTypes.FindIndex(type =>
                             type.TypeID == sInt.Value));
                     Inspector.AddDrawer(dropdownPropertyDrawer);
-                    drawer.OnChanged += dropdownPropertyDrawer.Refresh;
+                    drawer.ChainDrawer(dropdownPropertyDrawer);
                     break;
                 }
                 case "AttackTypeDrawer":
@@ -705,12 +700,11 @@ public class WindowSeidEditorDialog : WindowDialogBase
                             var typeId = ModEditorManager.I.AttackTypes[index].Id;
                             sInt.Value = typeId;
                             drawer.Refresh();
-                            drawer.OnChanged?.Invoke();
                         },
                         () => ModEditorManager.I.AttackTypes.FindIndex(type =>
                             type.Id == sInt.Value));
                     Inspector.AddDrawer(dropdownPropertyDrawer);
-                    drawer.OnChanged += dropdownPropertyDrawer.Refresh;
+                    drawer.ChainDrawer(dropdownPropertyDrawer);
                     break;
                 }
                 case "ElementTypeDrawer":
@@ -723,12 +717,11 @@ public class WindowSeidEditorDialog : WindowDialogBase
                             var typeId = ModEditorManager.I.ElementTypes[index].Id;
                             sInt.Value = typeId;
                             drawer.Refresh();
-                            drawer.OnChanged?.Invoke();
                         },
                         () => ModEditorManager.I.ElementTypes.FindIndex(type =>
                             type.Id == sInt.Value));
                     Inspector.AddDrawer(dropdownPropertyDrawer);
-                    drawer.OnChanged += dropdownPropertyDrawer.Refresh;
+                    drawer.ChainDrawer(dropdownPropertyDrawer);
                     break;
                 }
                 case "TargetTypeDrawer":
@@ -741,12 +734,11 @@ public class WindowSeidEditorDialog : WindowDialogBase
                             var typeId = ModEditorManager.I.TargetTypes[index].TypeID;
                             sInt.Value = typeId;
                             drawer.Refresh();
-                            drawer.OnChanged?.Invoke();
                         },
                         () => ModEditorManager.I.TargetTypes.FindIndex(type =>
                             type.TypeID == sInt.Value));
                     Inspector.AddDrawer(dropdownPropertyDrawer);
-                    drawer.OnChanged += dropdownPropertyDrawer.Refresh;
+                    drawer.ChainDrawer(dropdownPropertyDrawer);
                     break;
                 }
                 default:
@@ -983,10 +975,10 @@ public class WindowSeidEditorDialog : WindowDialogBase
         }
 
         Inspector.AddDrawer(drawer);
-        CreateIntArraySpecialDrawer(drawer, seidProperty, sIntArray);
+        CreateIntArrayExtraDrawer(drawer, seidProperty, sIntArray);
     }
 
-    private void CreateIntArraySpecialDrawer(CtlPropertyDrawerBase drawer, ModSeidProperty seidProperty,
+    private void CreateIntArrayExtraDrawer(CtlPropertyDrawerBase drawer, ModSeidProperty seidProperty,
         ModSIntArray sIntArray)
     {
         foreach (var drawerId in seidProperty.SpecialDrawer)
@@ -1016,10 +1008,10 @@ public class WindowSeidEditorDialog : WindowDialogBase
             () => sString.Value);
         Inspector.AddDrawer(stringPropertyDrawer);
         drawer = stringPropertyDrawer;
-        CreateStringSpecialDrawer(drawer, seidProperty, sString);
+        CreateStringExtraDrawer(drawer, seidProperty, sString);
     }
 
-    private void CreateStringSpecialDrawer(CtlPropertyDrawerBase drawer, ModSeidProperty seidProperty, ModSString sString)
+    private void CreateStringExtraDrawer(CtlPropertyDrawerBase drawer, ModSeidProperty seidProperty, ModSString sString)
     {
         foreach (var drawerId in seidProperty.SpecialDrawer)
         {
@@ -1035,12 +1027,28 @@ public class WindowSeidEditorDialog : WindowDialogBase
                             var typeId = ModEditorManager.I.ComparisonOperatorTypes[index].TypeStrID;
                             sString.Value = typeId;
                             drawer.Refresh();
-                            drawer.OnChanged?.Invoke();
                         },
                         () => ModEditorManager.I.ComparisonOperatorTypes.FindIndex(type =>
                             type.TypeStrID == sString.Value));
                     Inspector.AddDrawer(buffTypeDrawer);
-                    drawer.OnChanged += buffTypeDrawer.Refresh;
+                    drawer.ChainDrawer(buffTypeDrawer);
+                    break;
+                }
+                case "ArithmeticOperatorTypeDrawer":
+                {
+                    var buffTypeDrawer = new CtlDropdownPropertyDrawer("",
+                        () => ModEditorManager.I.ArithmeticOperatorTypes.Select(type =>
+                            $"{type.TypeStrID} {type.TypeName}"),
+                        index =>
+                        {
+                            var typeId = ModEditorManager.I.ArithmeticOperatorTypes[index].TypeStrID;
+                            sString.Value = typeId;
+                            drawer.Refresh();
+                        },
+                        () => ModEditorManager.I.ArithmeticOperatorTypes.FindIndex(type =>
+                            type.TypeStrID == sString.Value));
+                    Inspector.AddDrawer(buffTypeDrawer);
+                    drawer.ChainDrawer(buffTypeDrawer);
                     break;
                 }
                 default:

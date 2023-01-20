@@ -1,73 +1,73 @@
 {
-    "1": {
-        "ID": 1,
-        "IDName": "id",
-        "Name": "装备Buff",
-        "Desc": "装备在战斗开始时提供的Buff",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            }
+  "1": {
+    "ID": 1,
+    "IDName": "id",
+    "Name": "装备Buff",
+    "Desc": "装备在战斗开始时提供的Buff",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
         ]
-    },
-    "2": {
-        "ID": 2,
-        "IDName": "id",
-        "Name": "装备神通",
-        "Desc": "装备对应的神通",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 神通ID",
-                "SpecialDrawer":[
-                    "SkillDrawer"
-                ]
-            }
+      }
+    ]
+  },
+  "2": {
+    "ID": 2,
+    "IDName": "id",
+    "Name": "装备神通",
+    "Desc": "装备对应的神通",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 神通ID",
+        "SpecialDrawer": [
+          "SkillDrawer"
         ]
-    },
-    "3": {
-        "ID": 3,
-        "IDName": "id",
-        "Name": "增加血量",
-        "Desc": "装备提供的血量加成",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 血量"
-            }
-        ]
-    },
-    "4": {
-        "ID": 4,
-        "IDName": "id",
-        "Name": "增加神识",
-        "Desc": "装备提供的神识加成",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 神识"
-            }
-        ]
-    },
-    "8": {
-        "ID": 8,
-        "IDName": "id",
-        "Name": "增加遁速",
-        "Desc": "装备提供的遁速加成",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 遁速"
-            }
-        ]
-    }
+      }
+    ]
+  },
+  "3": {
+    "ID": 3,
+    "IDName": "id",
+    "Name": "增加生命",
+    "Desc": "装备提供的生命加成",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 生命"
+      }
+    ]
+  },
+  "4": {
+    "ID": 4,
+    "IDName": "id",
+    "Name": "增加神识",
+    "Desc": "装备提供的神识加成",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 神识"
+      }
+    ]
+  },
+  "8": {
+    "ID": 8,
+    "IDName": "id",
+    "Name": "增加遁速",
+    "Desc": "装备提供的遁速加成",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 遁速"
+      }
+    ]
+  }
 }

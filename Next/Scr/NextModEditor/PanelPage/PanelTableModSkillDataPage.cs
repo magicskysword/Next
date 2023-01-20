@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Text;
 using FairyGUI;
-using HarmonyLib;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
@@ -111,10 +110,7 @@ public class PanelTableModSkillDataPage : PanelTablePageBase<ModSkillData>
         AddDrawer(new CtlIntPropertyDrawer(
                 "图标".I18NTodo(),
                 value => data.Icon = value,
-                () => data.Icon)
-            {
-                OnChanged = Inspector.Refresh
-            }
+                () => data.Icon).AddChangeListener(Inspector.Refresh)
         );
             
         AddDrawer(new CtlIconPreviewDrawer(() => Mod.GetSkillIconUrl(data)));

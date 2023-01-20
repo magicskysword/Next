@@ -3,9 +3,9 @@
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://028qk31hnkvz30",
+    "ui://028qk31hnkvz25",
     "ui://028qk31hhc7r4f",
     "ui://028qk31h9ngz57",
-    "ui://028qk31htcf5j5i",
     "ui://028qk31hnkvz32",
     "ui://028qk31hpk2ij5d",
     "ui://028qk31h7exm3n",
@@ -17,7 +17,7 @@
     "ui://028qk31hv5ah4h",
     "ui://028qk31hspup3q"
   ],
-  "libview.firstColumnWidth": 427,
+  "libview.firstColumnWidth": 363,
   "libview.syncEditor": 0,
   "auxline1": true,
   "canvasColor": 10066329,
@@ -43,7 +43,7 @@
     "028qk31h",
     "/Window/"
   ],
-  "doc.activeDoc": "ui://028qk31hnkvz30",
+  "doc.activeDoc": "ui://028qk31hnkvz25",
   "libview.twoColumn": false,
   "auxline2": true,
   "snapToGrid": true,

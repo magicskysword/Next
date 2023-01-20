@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using FairyGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.NextModEditor.Mod.Data;
 using SkySwordKill.Next.Extension;

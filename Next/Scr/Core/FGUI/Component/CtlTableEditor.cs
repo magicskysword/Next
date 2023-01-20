@@ -1,5 +1,4 @@
-﻿using FairyGUI;
-using SkySwordKill.NextFGUI.NextCore;
+﻿using SkySwordKill.NextFGUI.NextCore;
 
 namespace SkySwordKill.Next.FGUI.Component;
 

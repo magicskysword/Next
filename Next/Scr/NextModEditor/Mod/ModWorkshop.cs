@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using script.Steam;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.Mod;
@@ -46,16 +48,52 @@ public class ModWorkshop
 
     public void LoadProjects()
     {
+        Dictionary<string, Exception> exceptions = new Dictionary<string, Exception>();
+
         if(Directory.Exists(ProjectDirPath))
         {
             foreach (var dir in Directory.GetDirectories(ProjectDirPath))
             {
-                var project = ModEditorManager.I.OpenProject(dir);
+                ModProject project = null;
+                try
+                {
+                    project = ModEditorManager.I.OpenProject(dir);
+                }
+                catch (Exception e)
+                {
+                    exceptions.Add(dir, e);
+                    continue;
+                }
                 if (project != null)
                 {
                     Projects.Add(project);
                 }
             }
+        }
+
+        if (exceptions.Count > 0)
+        {
+            var sb = new StringBuilder();
+            foreach (var pair in exceptions)
+            {
+                sb.Append("Mod: 【");
+                sb.Append(System.IO.Path.GetFileNameWithoutExtension(pair.Key));
+                sb.Append("】加载失败。错误消息：");
+                sb.Append(pair.Value.Message);
+                sb.Append("\n");
+            }
+
+            sb.Append("\n完整错误信息：\n");
+            foreach (var pair in exceptions)
+            {
+                sb.Append("Mod: 【");
+                sb.Append(System.IO.Path.GetFileNameWithoutExtension(pair.Key));
+                sb.Append("】\n");
+                sb.Append(pair.Value);
+                sb.Append("\n");
+            }
+
+            throw new ModLoadException(sb.ToString());
         }
     }
         

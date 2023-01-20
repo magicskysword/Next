@@ -2,19 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using FairyGUI;
-using SkySwordKill.Next.FGUI.Dialog;
-using script.Steam;
-using SkySwordKill.Next;
-using SkySwordKill.Next.Extension;
-using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.NextFGUI.NextCore;
 using SkySwordKill.NextModEditor.Mod;
 using Steamworks;
-using UnityEngine;
-using UnityEngine.UI;
 
-namespace SkySwordKill.NextModEditor.Panel;
+namespace SkySwordKill.Next.FGUI.Dialog;
 
 [Flags]
 public enum ModFilter
@@ -40,7 +33,8 @@ public class WindowModSelectorDialog : WindowDialogBase
         window.Filter = filter;
         window.OnConfirm = onConfirm;
         window.TableInfos.AddRange(tableInfos);
-            
+
+        window.modal = true;
         window.Show();
         return window;
     }

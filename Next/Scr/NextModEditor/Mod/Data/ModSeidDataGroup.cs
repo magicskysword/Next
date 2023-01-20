@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SkySwordKill.NextModEditor.Mod;
+using SkySwordKill.Next.Extension;
+using SkySwordKill.Next.Mod;
 
 namespace SkySwordKill.NextModEditor.Mod.Data;
 
@@ -35,10 +36,14 @@ public class ModSeidDataGroup
             {
                 try
                 {
-                    var seidData = ModSeidData.LoadSeidData(meta,(JObject)property.Value);
+                    var seidData = ModSeidData.LoadSeidData(meta, (JObject)property.Value);
                     if (property.Name != seidData.Id.ToString())
                         throw new ModException("Seid ID与Key ID不一致");
                     data.DataList.Add(seidData);
+                }
+                catch (ModDataIdNotExistException idNotExistModException)
+                {
+                    throw new ModException(string.Format("{0}中的{1}的ID不存在".I18NTodo(), meta.Id, property.Name));
                 }
                 catch (Exception e)
                 {

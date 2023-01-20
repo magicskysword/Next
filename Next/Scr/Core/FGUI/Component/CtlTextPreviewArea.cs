@@ -2,7 +2,6 @@
 using FairyGUI;
 using FairyGUI.Utils;
 using SkySwordKill.NextFGUI.NextCore;
-using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI.Component;
 

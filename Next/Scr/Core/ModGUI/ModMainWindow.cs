@@ -1,4 +1,5 @@
-﻿using FairyGUI;
+﻿using System;
+using FairyGUI;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
@@ -196,18 +197,30 @@ public class ModMainWindow : FGUIWindowBase
         WindowConfirmDialog.CreateDialog("提示", "是否应用更改？", true,() =>
         {
             WindowWaitDialog.CreateDialog("提示","正在应用更改...", 1f, 
-                context =>
+                waitContext =>
             {
-                ModManager.SaveSetting();
-                if (ModLoadSettingDirty)
+                try
                 {
-                    ModManager.ReloadAllMod();
+                    ModManager.SaveSetting();
+                    if (ModLoadSettingDirty)
+                    {
+                        ModManager.ReloadAllMod();
+                    }
+                }
+                catch (Exception e)
+                {
+                    waitContext.Exception = e;
                 }
             }, 
                 context=>
             {
                 _modLoadSettingDirty = false;
                 _modDataSettingDirty = false;
+                if (context.Exception != null)
+                {
+                    Main.LogError(context.Exception);
+                    WindowConfirmDialog.CreateDialog("提示", "应用更改失败！发生未知异常！Mod加载发生错误！请检查Mod内容并重启游戏！\n错误信息：" + context.Exception, true);
+                }
                 Refresh();
             });
         });

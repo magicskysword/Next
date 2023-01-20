@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace FairyGUI;
+﻿namespace FairyGUI;
 
 public interface IFilter
 {

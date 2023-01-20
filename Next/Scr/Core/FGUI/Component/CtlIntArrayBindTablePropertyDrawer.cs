@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FairyGUI;
 using SkySwordKill.Next.FGUI.Dialog;
-using SkySwordKill.Next.FGUI;
 using SkySwordKill.NextModEditor.Mod;
 using SkySwordKill.NextFGUI.NextCore;
 using SkySwordKill.NextModEditor.Mod.Data;

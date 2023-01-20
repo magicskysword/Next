@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Fungus;
 using KBEngine;
-using SkySwordKill.Next;
 using SkySwordKill.Next.Mod;
 
 namespace SkySwordKill.Next.DialogSystem;

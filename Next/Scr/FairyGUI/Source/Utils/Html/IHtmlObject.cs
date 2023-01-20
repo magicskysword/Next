@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace FairyGUI.Utils;
+﻿namespace FairyGUI.Utils;
 
 /// <summary>
 /// Create->SetPosition->(Add<->Remove)->Release->Dispose

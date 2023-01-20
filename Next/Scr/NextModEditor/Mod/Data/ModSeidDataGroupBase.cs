@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using SkySwordKill.NextModEditor.Mod;
 
 namespace SkySwordKill.NextModEditor.Mod.Data;
 

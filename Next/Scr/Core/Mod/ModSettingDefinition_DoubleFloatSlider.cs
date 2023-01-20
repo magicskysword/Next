@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using SkySwordKill.Next.FGUI.Component;
+﻿using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.Next.Utils;
 
 namespace SkySwordKill.Next.Mod;

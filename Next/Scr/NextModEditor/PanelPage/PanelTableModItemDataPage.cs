@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FairyGUI;
 using SkySwordKill.Next.Extension;
@@ -122,10 +121,7 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
                 "图标".I18NTodo(),
                 value => data.Icon = value,
                 () => data.Icon)
-            {
-                OnChanged = Inspector.Refresh
-            }
-        );
+        ).AddChangeListener(Inspector.Refresh);
             
         AddDrawer(new CtlIconPreviewDrawer(() => Mod.GetItemIconUrl(data)));
             
@@ -136,10 +132,7 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
                 () => ModEditorManager.I.ItemDataTypes.FindIndex(type =>
                     type.Id == data.ItemType)
             )
-            {
-                OnChanged = ReloadInspector
-            }
-        );
+        ).AddChangeListener(ReloadInspector);
             
         AddDrawer(new CtlIntPropertyDrawer(
             "堆叠上限".I18NTodo(),
@@ -158,11 +151,9 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
                     value =>
                     {
                     
-                    })
-                {
-                    OnChanged = Inspector.Refresh
-                },
-                new CtlSeidDataPropertyDrawer(
+                    }).AddChangeListener(Inspector.Refresh)
+                ,
+        new CtlSeidDataPropertyDrawer(
                     "装备特性",
                     data.Id,
                     data.SeidList,
@@ -174,10 +165,7 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
                         if (ModEditorManager.I.ItemEquipSeidMetas.TryGetValue(seidId, out var seidData))
                             return $"{seidId} {seidData.Name}";
                         return $"{seidId} ???";
-                    })
-                {
-                    OnChanged = ReloadInspector
-                }
+                    }).AddChangeListener(ReloadInspector)
             )
         );
 
@@ -262,10 +250,7 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
                             }),
                     },
                     () => new List<IModData>(Mod.GetAllComprehensionData())
-                )
-                {
-                    OnChanged = Inspector.Refresh
-                }
+                ).AddChangeListener(Inspector.Refresh)
             )
         );
 
@@ -330,10 +315,7 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
                             return $"{seidId} {seidData.Name}";
                         return $"{seidId} ???";
                     }
-                )
-                {
-                    OnChanged = ReloadInspector
-                }
+                ).AddChangeListener(ReloadInspector)
             )
         );
             
@@ -429,7 +411,7 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
                         getData => ((ModItemFlagData)getData).Name),
                 },
                 () => new List<IModData>(Mod.GetAllItemFlagData())
-            ) { OnChanged = () => Inspector.Refresh() },
+            ).AddChangeListener(Inspector.Refresh),
             new CtlIntArrayBindTablePropertyDrawer(
                 "词缀".I18NTodo(),
                 list => data.AffixList = list,
@@ -448,7 +430,7 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
                         getData => ((ModAffixData)getData).Desc),
                 },
                 () => new List<IModData>(Mod.GetAllAffixData())
-            ) { OnChanged = () => Inspector.Refresh() },
+            ).AddChangeListener(Inspector.Refresh),
             new CtlStringAreaPropertyDrawer(
                 "功能描述".I18NTodo(),
                 value => data.Info = value,

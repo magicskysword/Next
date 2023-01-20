@@ -2,18 +2,42 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using SkySwordKill.Next;
+using SkySwordKill.Next.Mod;
 
 namespace SkySwordKill.NextModEditor.Mod.Data;
 
 public class ModSeidData : IModData
 {
+    private static readonly string[] _FallbackSeidIds = new string[]
+    {
+        "id",
+        "skillid"
+    };
+    
     public int Id { get; set; }
     public Dictionary<string, ModSeidToken> DataDic { get; set; } = new Dictionary<string, ModSeidToken>();
 
     public static ModSeidData LoadSeidData(ModSeidMeta meta, JObject jObject)
     {
         var data = new ModSeidData();
-        data.Id = jObject[meta.IDName].ToObject<int>();
+        if (!jObject.TryGetValue(meta.IDName, out JToken idToken))
+        {
+            foreach (var fallbackSeidId in _FallbackSeidIds)
+            {
+                if (jObject.TryGetValue(fallbackSeidId, out idToken))
+                {
+                    break;
+                }
+            }
+            
+            if (idToken == null)
+            {
+                throw new ModDataIdNotExistException();
+            }
+        }
+        
+        
+        data.Id = idToken.ToObject<int>();
         foreach (var seidProperty in meta.Properties)
         {
             JToken token = null;

@@ -6,20 +6,16 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 using BepInEx;
-using JetBrains.Annotations;
 using KBEngine;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using script.Steam;
 using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FCanvas;
-using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.Next.StaticFace;
-using SkySwordKill.NextModEditor.Mod;
-using Steamworks;
 using UnityEngine.SceneManagement;
 
 namespace SkySwordKill.Next.Mod;
@@ -46,6 +42,7 @@ public static class ModManager
     public static event Action ModReload;
     public static event Action ModSettingChanged;
     private static Dictionary<string, ICustomSetting> _customSetting = new Dictionary<string, ICustomSetting>();
+    private static bool _buildCacheSuccess = false;
         
     private static void OnModLoadStart()
     {
@@ -191,6 +188,32 @@ public static class ModManager
         OnModLoadComplete();
     }
 
+    public static void CheckModLoadState()
+    {
+        bool hasError = false;
+        var errorInfoSb = new StringBuilder();
+        
+        if (!_buildCacheSuccess)
+        {
+            errorInfoSb.AppendLine("Mod缓存构建失败！请检查Mod数据内容！");
+            hasError = true;
+        }
+        
+        var loadErrorMods = modGroups.SelectMany(g => g.ModConfigs).Where(c => c.Exception != null).ToArray();
+        if (loadErrorMods.Length > 0)
+        {
+            errorInfoSb.AppendLine($"Mod加载出错！以下Mod加载出现异常，具体信息请查看Mod面板：\n" + 
+                                   string.Join("\n", loadErrorMods.Select(mod => $"{Path.GetFileNameWithoutExtension(mod.Path)}({mod.Name ?? "Mod.Unknown".I18N() })"))
+                                   );
+            hasError = true;
+        }
+
+        if (hasError)
+        {
+            WindowConfirmDialog.CreateDialog("提示".I18NTodo(),errorInfoSb.ToString(), false);
+        }
+    }
+
     public static void RestoreBaseData()
     {
         // 读取所有继承自IJSONClass的类型
@@ -274,19 +297,28 @@ public static class ModManager
                 }
             }
         }
-            
-        foreach (JSONObject jsonobject in jsonInstance._BuffJsonData.list)
+
+        _buildCacheSuccess = false;
+        try
         {
-            var key = (int)jsonobject["buffid"].n;
-            if (!jsonInstance.Buff.ContainsKey(key))
+            foreach (JSONObject jsonobject in jsonInstance._BuffJsonData.list)
             {
-                jsonInstance.Buff.Add(key, new Buff(key));
+                var key = (int)jsonobject["buffid"].n;
+                if (!jsonInstance.Buff.ContainsKey(key))
+                {
+                    jsonInstance.Buff.Add(key, new Buff(key));
+                }
             }
-        }
             
-        // 重建Buff缓存
-        jsonInstance.Buff.Clear();
-        jsonInstance.InitBuff();
+            // 重建Buff缓存
+            jsonInstance.Buff.Clear();
+            jsonInstance.InitBuff();
+            _buildCacheSuccess = true;
+        }
+        catch (Exception e)
+        {
+            Main.LogError(e);
+        }
 
         // 检查数据
         if (!CheckData.Check())
@@ -704,7 +736,7 @@ public static class ModManager
         }
     }
 
-    public static void PatchJObject(FieldInfo fieldInfo,string filePath, JObject jObject)
+    public static void PatchJObject(FieldInfo fieldInfo, string filePath, JObject jObject)
     {
         try
         {

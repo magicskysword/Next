@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace FairyGUI;
+﻿namespace FairyGUI;
 
 /// <summary>
 /// Helper for drag and drop.

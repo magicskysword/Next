@@ -6,7 +6,7 @@ namespace SkySwordKill.Next.FGUI.Component;
 
 public class CtlGroupDrawer : CtlPropertyDrawerBase, IInspector
 {
-    public CtlGroupDrawer(string title,bool isExpend ,params CtlPropertyDrawerBase[] drawers)
+    public CtlGroupDrawer(string title,bool isExpend ,params IPropertyDrawer[] drawers)
     {
         DrawerName = title;
         IsExpand = isExpend;

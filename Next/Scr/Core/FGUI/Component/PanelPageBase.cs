@@ -1,5 +1,4 @@
 ﻿using FairyGUI;
-using SkySwordKill.NextModEditor.Mod;
 
 namespace SkySwordKill.Next.FGUI.Component;
 

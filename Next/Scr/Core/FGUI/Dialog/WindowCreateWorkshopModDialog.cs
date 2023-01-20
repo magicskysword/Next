@@ -1,14 +1,11 @@
-﻿using System;
-using FairyGUI;
+﻿using FairyGUI;
 using SkySwordKill.Next.Extension;
-using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
-using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.NextFGUI.NextCore;
 using SkySwordKill.NextModEditor.Mod;
 using SkySwordKill.NextModEditor.PanelProject;
 
-namespace SkySwordKill.NextModEditor.Panel;
+namespace SkySwordKill.Next.FGUI.Dialog;
 
 public class WindowCreateWorkshopModDialog : WindowDialogBase
 {
@@ -23,6 +20,7 @@ public class WindowCreateWorkshopModDialog : WindowDialogBase
         window.Title = title;
         window.OnConfirm = confirm;
 
+        window.modal = true;
         window.Show();
         return window;
     }

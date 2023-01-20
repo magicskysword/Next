@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using FairyGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.NextModEditor.Mod.Data;
 using SkySwordKill.Next.Extension;
@@ -98,10 +97,7 @@ namespace SkySwordKill.NextModEditor.PanelPage
                 "ModEditor.Main.modBuffData.icon".I18N(),
                 num => data.Icon = num,
                 () => data.Icon)
-                {
-                    OnChanged = Inspector.Refresh
-                }
-            );
+            ).AddChangeListener(Inspector.Refresh);
             
             AddDrawer(new CtlIconPreviewDrawer(() => Mod.GetBuffIconUrl(data)));
 

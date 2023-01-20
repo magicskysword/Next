@@ -1,2677 +1,2742 @@
 {
-    "1": {
-        "ID": 1,
-        "IDName": "skillid",
-        "Name": "吸血",
-        "Desc": "恢复相当于造成伤害量的生命值（固定在判定后触发）",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Float",
-                "Desc": "X 吸血比例"
-            }
-        ]
-    },
-    "2": {
-        "ID": 2,
-        "IDName": "skillid",
-        "Name": "吸收灵气",
-        "Desc": "吸收X点灵气",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 吸收灵气数量"
-            }
-        ]
-    },
-    "3": {
-        "ID": 3,
-        "IDName": "skillid",
-        "Name": "触发目标buff",
-        "Desc": "为目标触发XBuff Y层效果",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y Buff层数"
-            }
-        ]
-    },
-    "4": {
-        "ID": 4,
-        "IDName": "skillid",
-        "Name": "给目标加buff",
-        "Desc": "为目标施加XBuff Y层",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y Buff层数"
-            }
-        ]
-    },
-    "5": {
-        "ID": 5,
-        "IDName": "skillid",
-        "Name": "阵法",
-        "Desc": "该技能一场战斗中只能使用一次",
-        "Properties": []
-    },
-    "6": {
-        "ID": 6,
-        "IDName": "skillid",
-        "Name": "后继无力",
-        "Desc": "该技能每回合只能使用一次",
-        "Properties": []
-    },
-    "7": {
-        "ID": 7,
-        "IDName": "skillid",
-        "Name": "精确吸收灵气",
-        "Desc": "吸收X属性灵气Y点",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X 属性灵气[数组]",
-                "SpecialDrawer": [
-                    "ElementTypeArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y 灵气数量[数组]"
-            }
-        ]
-    },
-    "8": {
-        "ID": 8,
-        "IDName": "skillid",
-        "Name": "消散灵气",
-        "Desc": "消散X点灵气",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 消散灵气数量"
-            }
-        ]
-    },
-    "9": {
-        "ID": 9,
-        "IDName": "skillid",
-        "Name": "指示物攻击",
-        "Desc": "指示物攻击",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID"
-            }
-        ]
-    },
-    "10": {
-        "ID": 10,
-        "IDName": "skillid",
-        "Name": "神识",
-        "Desc": "如果神识比敌方高，触发后续的特效",
-        "Properties": []
-    },
-    "11": {
-        "ID": 11,
-        "IDName": "skillid",
-        "Name": "多段伤害",
-        "Desc": "造成X段伤害（对神通12508有特殊处理）",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 重复释放次数"
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 神通ID",
-                "SpecialDrawer": [
-                    "SkillDrawer"
-                ]
-            },
-            {
-                "ID": "value3",
-                "Type": "Int",
-                "Desc": "A 技能伤害(神通12508为BuffID)"
-            }
-        ]
-    },
-    "12": {
-        "ID": 12,
-        "IDName": "skillid",
-        "Name": "焚烧",
-        "Desc": "消散对方X点灵气",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气数量"
-            }
-        ]
-    },
-    "13": {
-        "ID": 13,
-        "IDName": "skillid",
-        "Name": "提升吸收灵气概率",
-        "Desc": "本场战斗中，吸收X系灵气权重提升Y",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气属性",
-                "SpecialDrawer": [
-                    "ElementTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 权重变化数值"
-            }
-        ]
-    },
-    "14": {
-        "ID": 14,
-        "IDName": "skillid",
-        "Name": "选择吸收",
-        "Desc": "从五行灵气中，选择X点吸收",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 吸收数量"
-            }
-        ]
-    },
-    "15": {
-        "ID": 15,
-        "IDName": "skillid",
-        "Name": "精确消散灵气",
-        "Desc": "消散X点Y属性灵气",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 消散数量"
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 灵气属性",
-                "SpecialDrawer": [
-                    "ElementTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "16": {
-        "ID": 16,
-        "IDName": "skillid",
-        "Name": "吸收灵气到上限",
-        "Desc": "吸收灵气到上限"
-    },
-    "17": {
-        "ID": 17,
-        "IDName": "skillid",
-        "Name": "个性吸收灵气",
-        "Desc": "吸收X点灵气，使吸收到的Y属性灵气翻倍",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 吸收数量"
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 灵气属性",
-                "SpecialDrawer": [
-                    "ElementTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "18": {
-        "ID": 18,
-        "IDName": "skillid",
-        "Name": "复制灵气",
-        "Desc": "复制已有的所有灵气"
-    },
-    "19": {
-        "ID": 19,
-        "IDName": "skillid",
-        "Name": "全部消散",
-        "Desc": "消散所有灵气"
-    },
-    "20": {
-        "ID": 20,
-        "IDName": "skillid",
-        "Name": "消散吸收",
-        "Desc": "消散所有灵气，然后重新吸收相应数量的灵气"
-    },
-    "21": {
-        "ID": 21,
-        "IDName": "skillid",
-        "Name": "精确消散",
-        "Desc": "消散所有X属性灵气",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气属性",
-                "SpecialDrawer": [
-                    "ElementTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "22": {
-        "ID": 22,
-        "IDName": "skillid",
-        "Name": "驱动阵法",
-        "Desc": "判定阵法驱动技能使用"
-    },
-    "23": {
-        "ID": 23,
-        "IDName": "skillid",
-        "Name": "伤害提升",
-        "Desc": "本回合每使用过一次神通，额外提升X点伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 额外伤害"
-            }
-        ]
-    },
-    "24": {
-        "ID": 24,
-        "IDName": "skillid",
-        "Name": "跳过消散灵气",
-        "Desc": "本回合跳过消散灵气阶段"
-    },
-    "25": {
-        "ID": 25,
-        "IDName": "skillid",
-        "Name": "大护罩",
-        "Desc": "获得相当于已损失生命值的护罩"
-    },
-    "26": {
-        "ID": 26,
-        "IDName": "skillid",
-        "Name": "打一半血",
-        "Desc": "使敌方失去当前血量一半的生命值"
-    },
-    "27": {
-        "ID": 27,
-        "IDName": "skillid",
-        "Name": "灵气增伤",
-        "Desc": "每剩余一点灵气，额外提升X点伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 伤害加成"
-            }
-        ]
-    },
-    "28": {
-        "ID": 28,
-        "IDName": "skillid",
-        "Name": "过量治疗",
-        "Desc": "超过血量上限的治疗量会转化为护罩"
-    },
-    "29": {
-        "ID": 29,
-        "IDName": "skillid",
-        "Name": "技能冷却",
-        "Desc": "技能冷却时间为X回合",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 回合数"
-            }
-        ]
-    },
-    "30": {
-        "ID": 30,
-        "IDName": "skillid",
-        "Name": "精确吸收灵气2",
-        "Desc": "吸收X点灵气，保留所有Y属性灵气，并消散其它属性灵气",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 吸收数量"
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 灵气属性",
-                "SpecialDrawer": [
-                    "ElementTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "31": {
-        "ID": 31,
-        "IDName": "skillid",
-        "Name": "给施法者加buff",
-        "Desc": "给施法者加X层Y【buff】",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X 层数[数组]"
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y BuffID[数组]",
-                "SpecialDrawer": [
-                    "BuffArrayDrawer"
-                ]
-            }
-        ]
-    },
-    "32": {
-        "ID": 32,
-        "IDName": "skillid",
-        "Name": "净化目标buff",
-        "Desc": "净化目标X层Y【buff】",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 层数"
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            }
-        ]
-    },
-    "33": {
-        "ID": 33,
-        "IDName": "skillid",
-        "Name": "净化施法者buff",
-        "Desc": "净化施法者X层Y【buff】",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 层数"
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            }
-        ]
-    },
-    "34": {
-        "ID": 34,
-        "IDName": "skillid",
-        "Name": "伤害提升1",
-        "Desc": "技能造成的最终伤害 * 伤害系数X",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 伤害系数"
-            }
-        ]
-    },
-    "35": {
-        "ID": 35,
-        "IDName": "skillid",
-        "Name": "灵气增伤（非指定灵气）",
-        "Desc": "本回合每使用过一点灵气，提升X点伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 提示伤害"
-            }
-        ]
-    },
-    "36": {
-        "ID": 36,
-        "IDName": "skillid",
-        "Name": "灵气增伤（指定灵气）",
-        "Desc": "本回合每使用过一点X属性灵气，提升Y点伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气属性",
-                "SpecialDrawer": [
-                    "ElementTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 提升伤害"
-            }
-        ]
-    },
-    "37": {
-        "ID": 37,
-        "IDName": "skillid",
-        "Name": "灵气治疗",
-        "Desc": "每有一点灵气，恢复x点生命",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 恢复生命"
-            }
-        ]
-    },
-    "38": {
-        "ID": 38,
-        "IDName": "skillid",
-        "Name": "灵气增伤2",
-        "Desc": "每有一点X属性灵气，额外提升Y点伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气属性",
-                "SpecialDrawer": [
-                    "ElementTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 提升伤害"
-            }
-        ]
-    },
-    "39": {
-        "ID": 39,
-        "IDName": "skillid",
-        "Name": "消散灵气增伤",
-        "Desc": "消散所有灵气，每消散一点，额外提升X点伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 提升伤害"
-            }
-        ]
-    },
-    "40": {
-        "ID": 40,
-        "IDName": "skillid",
-        "Name": "消散灵气增伤2",
-        "Desc": "消散所有X属性灵气，每消散一点，额外提升Y点伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气属性",
-                "SpecialDrawer": [
-                    "ElementTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 提升伤害"
-            }
-        ]
-    },
-    "41": {
-        "ID": 41,
-        "IDName": "skillid",
-        "Name": "多次使用增伤",
-        "Desc": "该神通每使用X次，伤害提升Y点",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 使用次数"
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 提升伤害"
-            }
-        ]
-    },
-    "42": {
-        "ID": 42,
-        "IDName": "skillid",
-        "Name": "检测敌方buff增伤",
-        "Desc": "敌方每有一层X【buff】，提升Y点伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 提升伤害"
-            }
-        ]
-    },
-    "43": {
-        "ID": 43,
-        "IDName": "skillid",
-        "Name": "检测自身buff增伤",
-        "Desc": "自身每有一层X【buff】，提升Y点伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y 提升伤害"
-            }
-        ]
-    },
-    "44": {
-        "ID": 44,
-        "IDName": "skillid",
-        "Name": "检测自身buff回血",
-        "Desc": "自身每有一层X【buff】，恢复Y点生命值",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 恢复血量"
-            }
-        ]
-    },
-    "45": {
-        "ID": 45,
-        "IDName": "skillid",
-        "Name": "消耗buff打人",
-        "Desc": "消耗自身X【buff】Y层，造成Z点伤害，该特性需要检测buff数量是否大于Y，否则无法释放",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 层数"
-            },
-            {
-                "ID": "value3",
-                "Type": "Int",
-                "Desc": "Z 伤害"
-            }
-        ]
-    },
-    "46": {
-        "ID": 46,
-        "IDName": "skillid",
-        "Name": "消耗buff回血",
-        "Desc": "消耗自身X【buff】Y层，恢复Z点生命值，该特性需要检测buff数量是否大于Y，否则无法释放",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 层数"
-            },
-            {
-                "ID": "value3",
-                "Type": "Int",
-                "Desc": "Z 恢复生命"
-            }
-        ]
-    },
-    "47": {
-        "ID": 47,
-        "IDName": "skillid",
-        "Name": "消耗buff放技能1",
-        "Desc": "消耗自身X【buff】Y层，释放神通z，该特性需要检测buff数量是否大于Y，否则无法释放",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 层数"
-            },
-            {
-                "ID": "value3",
-                "Type": "Int",
-                "Desc": "Z 神通唯一ID",
-                "SpecialDrawer": [
-                    "SkillPKDrawer"
-                ]
-            }
-        ]
-    },
-    "48": {
-        "ID": 48,
-        "IDName": "skillid",
-        "Name": "消耗所有buff打人",
-        "Desc": "消耗自身所有的X【buff】，每消耗一层，造成Y点Z类型伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 伤害数值"
-            },
-            {
-                "ID": "value3",
-                "Type": "Int",
-                "Desc": "Z 伤害类型",
-                "SpecialDrawer": [
-                    "AttackTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "49": {
-        "ID": 49,
-        "IDName": "skillid",
-        "Name": "消耗所有buff增伤",
-        "Desc": "消耗自身所有的X【buff】，每消耗一层，伤害提升Y点",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X BuffID[数组]",
-                "SpecialDrawer": [
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y 伤害提升[数组]"
-            }
-        ]
-    },
-    "50": {
-        "ID": 50,
-        "IDName": "skillid",
-        "Name": "消耗所有buff回血",
-        "Desc": "消耗自身所有的X【buff】，每消耗一层，恢复Y点生命值",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 恢复生命"
-            }
-        ]
-    },
-    "51": {
-        "ID": 51,
-        "IDName": "skillid",
-        "Name": "消耗所有buff强化",
-        "Desc": "消耗自身所有的X【buff】，每消耗一层，获得Y【buff】*Z",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X 自身BuffID",
-                "SpecialDrawer": [
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y 获得BuffID",
-                "SpecialDrawer": [
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value3",
-                "Type": "IntArray",
-                "Desc": "Z Buff层数"
-            }
-        ]
-    },
-    "52": {
-        "ID": 52,
-        "IDName": "skillid",
-        "Name": "判定获得特性",
-        "Desc": "如果敌方身上有X【buff】，则触发后续的特效",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            }
-        ]
-    },
-    "53": {
-        "ID": 53,
-        "IDName": "skillid",
-        "Name": "判定敌方灵气",
-        "Desc": "如果敌方没有灵气，则触发后续的特效",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X"
-            }
-        ]
-    },
-    "54": {
-        "ID": 54,
-        "IDName": "skillid",
-        "Name": "判定我方灵气",
-        "Desc": "若剩余灵气数大于X，则触发后续的特效",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气数量"
-            }
-        ]
-    },
-    "55": {
-        "ID": 55,
-        "IDName": "skillid",
-        "Name": "判定吸收灵气",
-        "Desc": "吸收1点灵气，如果是X属性灵气牌，则触发后续的特效",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气属性",
-                "SpecialDrawer" : [
-                    "ElementTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "56": {
-        "ID": 56,
-        "IDName": "skillid",
-        "Name": "判定buff数量",
-        "Desc": "如果自身X【buff】的数量大于等于Y层，则触发后续的特效",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 自身BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y Buff层数"
-            }
-        ]
-    },
-    "57": {
-        "ID": 57,
-        "IDName": "skillid",
-        "Name": "判定并消耗buff",
-        "Desc": "移除自身X【buff】Y层，触发后续特效，该特性需要检测buff数量是否大于Y，否则无法释放",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X 自身BuffID",
-                "SpecialDrawer": [
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y Buff层数"
-            }
-        ]
-    },
-    "58": {
-        "ID": 58,
-        "IDName": "skillid",
-        "Name": "判定连击",
-        "Desc": "如果你上一个使用的是X系技能，则触发后续特效",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 技能属性",
-                "SpecialDrawer": [
-                    "AttackTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "59": {
-        "ID": 59,
-        "IDName": "skillid",
-        "Name": "百分比回血（上限）",
-        "Desc": "恢复血量上限X%的生命值",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 恢复百分比"
-            }
-        ]
-    },
-    "60": {
-        "ID": 60,
-        "IDName": "skillid",
-        "Name": "百分比回血（损失）",
-        "Desc": "恢复已损失血量X%的生命值",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 恢复百分比"
-            }
-        ]
-    },
-    "61": {
-        "ID": 61,
-        "IDName": "skillid",
-        "Name": "百分比伤害（己方）",
-        "Desc": "造成自己血量上限X%的伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 造成百分比"
-            }
-        ]
-    },
-    "62": {
-        "ID": 62,
-        "IDName": "skillid",
-        "Name": "驱阵",
-        "Desc": "使自身所有的X类【buff】生效一次。",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X Buff类型",
-                "SpecialDrawer": [
-                    "BuffTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "63": {
-        "ID": 63,
-        "IDName": "skillid",
-        "Name": "御阵",
-        "Desc": "自身每有一个X类【buff】，额外提升Y点伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X Buff类型",
-                "SpecialDrawer": [
-                    "BuffTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 提升伤害"
-            }
-        ]
-    },
-    "64": {
-        "ID": 64,
-        "IDName": "skillid",
-        "Name": "百分比伤害（敌方）",
-        "Desc": "造成敌方血量上限X%的伤害，",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 造成百分比"
-            }
-        ]
-    },
-    "65": {
-        "ID": 65,
-        "IDName": "skillid",
-        "Name": "本身伤害上限",
-        "Desc": "该技能本身伤害上限X",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 伤害上限"
-            }
-        ]
-    },
-    "66": {
-        "ID": 66,
-        "IDName": "skillid",
-        "Name": "伤害提升2",
-        "Desc": "技能造成的最终伤害+X",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 伤害增加"
-            }
-        ]
-    },
-    "67": {
-        "ID": 67,
-        "IDName": "skillid",
-        "Name": "检测自身buff上特效",
-        "Desc": "自身每有Xbuff*Y层，则给敌方上Zbuff*A层，",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer":[
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y Buff层数"
-            },
-            {
-                "ID": "value3",
-                "Type": "Int",
-                "Desc": "Z BuffID",
-                "SpecialDrawer":[
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value4",
-                "Type": "Int",
-                "Desc": "A Buff层数"
-            }
-        ]
-    },
-    "68": {
-        "ID": 68,
-        "IDName": "skillid",
-        "Name": "首次使用",
-        "Desc": "本回合没有使用过其他技能时，才能使用"
-    },
-    "69": {
-        "ID": 69,
-        "IDName": "skillid",
-        "Name": "刺杀（废弃）",
-        "Desc": "使用此技能时，不会解除【隐匿】"
-    },
-    "70": {
-        "ID": 70,
-        "IDName": "skillid",
-        "Name": "再来一次",
-        "Desc": "再进行一回合"
-    },
-    "71": {
-        "ID": 71,
-        "IDName": "skillid",
-        "Name": "消耗生命值获得buff",
-        "Desc": "消耗生命值X点，获得Ybuff，Z层",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 消耗生命"
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y BuffID",
-                "SpecialDrawer":[
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value3",
-                "Type": "Int",
-                "Desc": "Z Buff层数"
-            }
-        ]
-    },
-    "72": {
-        "ID": 72,
-        "IDName": "skillid",
-        "Name": "重置对手灵气",
-        "Desc": "消散对手所有灵气，并吸收同等数量的灵气"
-    },
-    "73": {
-        "ID": 73,
-        "IDName": "skillid",
-        "Name": "造伤一半",
-        "Desc": "对敌方造成等同于你上回合造成总伤害量一半的伤害"
-    },
-    "74": {
-        "ID": 74,
-        "IDName": "skillid",
-        "Name": "形态切换",
-        "Desc": "移除所有X类型的buff",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X Buff类型",
-                "SpecialDrawer":[
-                    "BuffTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "75": {
-        "ID": 75,
-        "IDName": "skillid",
-        "Name": "毒爆",
-        "Desc": "触发敌方的X【buff】*Y次，每触发一层，抽一张牌",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer":[
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 触发次数"
-            }
-        ]
-    },
-    "76": {
-        "ID": 76,
-        "IDName": "skillid",
-        "Name": "血量判定（1）",
-        "Desc": "血量低于X点时才能使用",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 血量判定"
-            }
-        ]
-    },
-    "77": {
-        "ID": 77,
-        "IDName": "skillid",
-        "Name": "血量判定（2）",
-        "Desc": "血量低于X%时，触发后续特效",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 血量判定"
-            }
-        ]
-    },
-    "78": {
-        "ID": 78,
-        "IDName": "skillid",
-        "Name": "终结判定",
-        "Desc": "如果自己没有手牌，则触发后续特性"
-    },
-    "79": {
-        "ID": 79,
-        "IDName": "skillid",
-        "Name": "给目标加buff",
-        "Desc": "施加X层Ybuff",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X BuffID",
-                "SpecialDrawer":[
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y Buff层数"
-            }
-        ]
-    },
-    "80": {
-        "ID": 80,
-        "IDName": "skillid",
-        "Name": "给施法者加buff",
-        "Desc": "给施法者加X层Y【buff】",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X BuffID",
-                "SpecialDrawer":[
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y Buff层数"
-            }
-        ]
-    },
-    "81": {
-        "ID": 81,
-        "IDName": "skillid",
-        "Name": "定数弃牌(施法者)",
-        "Desc": "随机弃置X张牌",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 弃牌数量"
-            }
-        ]
-    },
-    "82": {
-        "ID": 82,
-        "IDName": "skillid",
-        "Name": "buff层数（对目标）",
-        "Desc": "将目标身上的X【buff】层数变为Y层",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer":[
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y Buff层数"
-            }
-        ]
-    },
-    "83": {
-        "ID": 83,
-        "IDName": "skillid",
-        "Name": "buff层数（对施法者）",
-        "Desc": "将施法者身上的X【buff】层数变为Y层",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X BuffID",
-                "SpecialDrawer":[
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y Buff层数"
-            }
-        ]
-    },
-    "84": {
-        "ID": 84,
-        "IDName": "skillid",
-        "Name": "神识增伤",
-        "Desc": "神识每比敌方高X点，额外提升Y点伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 神识"
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 提高伤害"
-            }
-        ]
-    },
-    "85": {
-        "ID": 85,
-        "IDName": "skillid",
-        "Name": "遁速增伤",
-        "Desc": "每有X点遁速，额外提升Y点伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 遁速"
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 提高伤害"
-            }
-        ]
-    },
-    "86": {
-        "ID": 86,
-        "IDName": "skillid",
-        "Name": "百分比伤害（敌方）",
-        "Desc": "造成敌方当前血量X%的伤害，",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 百分比"
-            }
-        ]
-    },
-    "87": {
-        "ID": 87,
-        "IDName": "skillid",
-        "Name": "改变灵气属性",
-        "Desc": "将目标的X点非Y属性灵气转变为Y属性",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气数量"
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 灵气属性",
-                "SpecialDrawer": [
-                    "ElementTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "88": {
-        "ID": 88,
-        "IDName": "skillid",
-        "Name": "精确吸收灵气(目标)",
-        "Desc": "吸收X点Y属性灵气",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气数量"
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 灵气属性",
-                "SpecialDrawer": [
-                    "ElementTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "89": {
-        "ID": 89,
-        "IDName": "skillid",
-        "Name": "判定灵气",
-        "Desc": "若目标有X属性灵气触发后续特效",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气属性",
-                "SpecialDrawer": [
-                    "ElementTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "90": {
-        "ID": 90,
-        "IDName": "skillid",
-        "Name": "魔气增伤",
-        "Desc": "敌方每有1张X系灵气牌，额外增加Y点伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气属性",
-                "SpecialDrawer": [
-                    "ElementTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 增加伤害"
-            }
-        ]
-    },
-    "91": {
-        "ID": 91,
-        "IDName": "skillid",
-        "Name": "技能增伤",
-        "Desc": "本场战斗中每使用过一次X技能，额外提升Y点伤害",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 技能唯一ID",
-                "SpecialDrawer": [
-                    "SkillPKDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 增加伤害"
-            }
-        ]
-    },
-    "92": {
-        "ID": 92,
-        "IDName": "skillid",
-        "Name": "精确消散灵气(施法者)",
-        "Desc": "消散X点Y属性灵气",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 增加伤害"
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 灵气属性",
-                "SpecialDrawer": [
-                    "ElementTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "93": {
-        "ID": 93,
-        "IDName": "skillid",
-        "Name": "先手攻击",
-        "Desc": "若遁速高于对手才能使用"
-    },
-    "94": {
-        "ID": 94,
-        "IDName": "skillid",
-        "Name": "倒计时buff",
-        "Desc": "获得Xbuff，并将Xbuff的层数置为Y层",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer":[
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 层数"
-            }
-        ]
-    },
-    "95": {
-        "ID": 95,
-        "IDName": "skillid",
-        "Name": "buff类型检测",
-        "Desc": "如果目标身上有X类buff，则触发后续特效",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X Buff类型",
-                "SpecialDrawer":[
-                    "BuffTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "96": {
-        "ID": 96,
-        "IDName": "skillid",
-        "Name": "引爆暗劲",
-        "Desc": "目标身上所有的X类buff，移除一层",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X Buff类型",
-                "SpecialDrawer":[
-                    "BuffTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "97": {
-        "ID": 97,
-        "IDName": "skillid",
-        "Name": "累计消耗",
-        "Desc": "本回合每使用过一次本技能，再次使用时额外消耗一点X属性灵气",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气属性",
-                "SpecialDrawer":[
-                    "ElementTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "98": {
-        "ID": 98,
-        "IDName": "skillid",
-        "Name": "buff判定2",
-        "Desc": "如果自身没有Xbuff，则触发后续特效",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer":[
-                    "BuffDrawer"
-                ]
-            }
-        ]
-    },
-    "99": {
-        "ID": 99,
-        "IDName": "skillid",
-        "Name": "首次使用判定",
-        "Desc": "若这是本回合使用的第一个技能，则触发后续特效"
-    },
-    "100": {
-        "ID": 100,
-        "IDName": "skillid",
-        "Name": "判定buff数量",
-        "Desc": "如果目标身上X【buff】的数量（大于/小于）等于Y层，则触发后续的特效",
-        "SpecialDrawer":[
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "panduan",
-                "Type": "String",
-                "Desc": "判断",
-                "SpecialDrawer": [
-                    "ComparisonOperatorTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 层"
-            }
-        ]
-    },
-    "101": {
-        "ID": 101,
-        "IDName": "skillid",
-        "Name": "将自身生命值置为x",
-        "Desc": "将自身生命值置为x",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 生命"
-            }
-        ]
-    },
-    "102": {
-        "ID": 102,
-        "IDName": "skillid",
-        "Name": "触发施法者buff",
-        "Desc": "触发施法者X层Ybuff效果",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X BuffID",
-                "SpecialDrawer":[
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y 触发层数"
-            }
-        ]
-    },
-    "103": {
-        "ID": 103,
-        "IDName": "skillid",
-        "Name": "造成伤害获得buff",
-        "Desc": "该技能每造成X点伤害获得Ybuff*Z层（伤害以最终结算为准）",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 伤害"
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y BuffID",
-                "SpecialDrawer":[
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value3",
-                "Type": "Int",
-                "Desc": "Z 层数"
-            }
-        ]
-    },
-    "104": {
-        "ID": 104,
-        "IDName": "skillid",
-        "Name": "改变技能",
-        "Desc": "（满足条件后触发）此技能释放后，将其变化为另外一个技能X",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 技能ID",
-                "SpecialDrawer":[
-                    "SkillDrawer"
-                ]
-            }
-        ]
-    },
-    "105": {
-        "ID": 105,
-        "IDName": "skillid",
-        "Name": "释放技能",
-        "Desc": "释放一次X技能",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 技能ID",
-                "SpecialDrawer":[
-                    "SkillDrawer"
-                ]
-            }
-        ]
-    },
-    "106": {
-        "ID": 106,
-        "IDName": "skillid",
-        "Name": "回血",
-        "Desc": "回血（仅供炼器使用）"
-    },
-    "107": {
-        "ID": 107,
-        "IDName": "skillid",
-        "Name": "根据buff回血",
-        "Desc": "恢复等同于（敌方/自身）X【buff】层数的血量",
-        "Properties": [
-            {
-                "ID": "target",
-                "Type": "Int",
-                "Desc": "目标",
-                "SpecialDrawer": [
-                    "TargetTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer" : [
-                    "BuffDrawer"
-                ]
-            }
-        ]
-    },
-    "108": {
-        "ID": 108,
-        "IDName": "skillid",
-        "Name": "根据手牌获得buff",
-        "Desc": "每有一点X属性灵气，获得Ybuff*Z",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 属性",
-                "SpecialDrawer":[
-                    "ElementTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y BuffID",
-                "SpecialDrawer":[
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value3",
-                "Type": "Int",
-                "Desc": "Z Buff层数"
-            }
-        ]
-    },
-    "109": {
-        "ID": 109,
-        "IDName": "skillid",
-        "Name": "判定X类buff",
-        "Desc": "判定自身有X类buff时，才能使用",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X Buff类型",
-                "SpecialDrawer":[
-                    "BuffTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "110": {
-        "ID": 110,
-        "IDName": "id",
-        "Name": "耗血增伤",
-        "Desc": "消耗当前x%的生命，每消耗一点生命增伤一点",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 消耗血量百分比"
-            }
-        ]
-    },
-    "111": {
-        "ID": 111,
-        "IDName": "id",
-        "Name": "使用时消耗寿元",
-        "Desc": "使用时减少寿元x(该技能特性寿元不够时无法使用)",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 消耗寿元"
-            }
-        ]
-    },
-    "112": {
-        "ID": 112,
-        "IDName": "skillid",
-        "Name": "给目标加buff",
-        "Desc": "施加Xbuff*Y层",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X BuffID[数组]",
-                "SpecialDrawer": [
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y 层数[数组]"
-            }
-        ]
-    },
-    "113": {
-        "ID": 113,
-        "IDName": "skillid",
-        "Name": "给施法者加buff",
-        "Desc": "给施法者加X层Y【buff】",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X BuffID[数组]",
-                "SpecialDrawer": [
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y 层数[数组]"
-            }
-        ]
-    },
-    "114": {
-        "ID": 114,
-        "IDName": "skillid",
-        "Name": "给敌方加buff",
-        "Desc": "给敌方加X层Y【buff】（不管目标是谁）",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X BuffID[数组]",
-                "SpecialDrawer": [
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y 层数[数组]"
-            }
-        ]
-    },
-    "115": {
-        "ID": 115,
-        "IDName": "skillid",
-        "Name": "首次释放",
-        "Desc": "若该技能是本场战斗中首次释放，则触发后续特效"
-    },
-    "116": {
-        "ID": 116,
-        "IDName": "skillid",
-        "Name": "天星若雨",
-        "Desc": "消耗所有Xbuff，每消耗Y点，视为额外消耗一点灵气，并提升Z点伤害。",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 消耗层数"
-            },
-            {
-                "ID": "value3",
-                "Type": "Int",
-                "Desc": "Z 提高伤害"
-            }
-        ]
-    },
-    "117": {
-        "ID": 117,
-        "IDName": "skillid",
-        "Name": "无视判定",
-        "Desc": "配置在任何判定特性后，即便判定失效也可以正常生效后续的其它特性"
-    },
-    "118": {
-        "ID": 118,
-        "IDName": "id",
-        "Name": "消散灵气获得buff",
-        "Desc": "消散所有灵气，每消散一点，获得X【buff】*Y层",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X BuffID[数组]",
-                "SpecialDrawer": [
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y 层数[数组]"
-            }
-        ]
-    },
-    "119": {
-        "ID": 119,
-        "IDName": "skillid",
-        "Name": "根据变量造成伤害",
-        "Desc": "造成的值，等于全局变量X的值",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 全局变量ID"
-            }
-        ]
-    },
-    "120": {
-        "ID": 120,
-        "IDName": "skillid",
-        "Name": "根据变量获得buff",
-        "Desc": "获得X【buff】*全局变量Y的值",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 全局变量ID"
-            }
-        ]
-    },
-    "121": {
-        "ID": 121,
-        "IDName": "skillid",
-        "Name": "根据变量造成多段伤害",
-        "Desc": "重复释放X次Y技能，根据全局变量Z",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 技能ID",
-                "SpecialDrawer":[
-                    "SkillDrawer"
-                ]
-            },
-            {
-                "ID": "value3",
-                "Type": "Int",
-                "Desc": "Z 全局变量ID"
-            }
-        ]
-    },
-    "122": {
-        "ID": 122,
-        "IDName": "skillid",
-        "Name": "根据变量恢复生命",
-        "Desc": "恢复的值，等于全局变量X的值",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 全局变量ID"
-            }
-        ]
-    },
-    "123": {
-        "ID": 123,
-        "IDName": "skillid",
-        "Name": "根据灵气属性获得buff",
-        "Desc": "根据玩家释放技能时使用的灵气属性获得对应buff，需要设置六种灵气对应的Buff（金、木、水、火、土、魔）",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X BuffID[数组]",
-                "SpecialDrawer": [
-                    "BuffArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y 层数[数组]"
-            }
-        ]
-    },
-    "124": {
-        "ID": 124,
-        "IDName": "skillid",
-        "Name": "连击判定2",
-        "Desc": "58的复制版，凤灵妖火特殊处理用；如果你上一个使用的是X系技能，则触发后续特效",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 技能属性",
-                "SpecialDrawer":[
-                    "AttackTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "125": {
-        "ID": 125,
-        "IDName": "id",
-        "Name": "落英专用",
-        "Desc": "（敌方/自身）每有一种不同的X类buff，技能造成的最终伤害+Y",
-        "Properties": [
-            {
-                "ID": "target",
-                "Type": "Int",
-                "Desc": "目标",
-                "SpecialDrawer": [
-                    "TargetTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X Buff类型",
-                "SpecialDrawer" : [
-                    "BuffTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 伤害增加"
-            }
-        ]
-    },
-    "139": {
-        "ID": 139,
-        "IDName": "skillid",
-        "Name": "buff139特殊特性",
-        "Desc": "当Buff中有Buff特性139时，该特性的后续特性触发多次"
-    },
-    "140": {
-        "ID": 140,
-        "IDName": "skillid",
-        "Name": "判断buff，释放技能",
-        "Desc": "检测自身buff，若都有则允许释放技能。",
-        "SpecialDrawer":[
-            {
-                "ID": "value1",
-                "Type": "IntArray",
-                "Desc": "X BuffID[数组]",
-                "SpecialDrawer" : [
-                    "BuffArrayDrawer"
-                ]
-            }
-        ]
-    },
-    "141": {
-        "ID": 141,
-        "IDName": "skillid",
-        "Name": "经脉伤害",
-        "Desc": "对经脉造成（恢复）X点伤害",
-        "SpecialDrawer":[
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 伤害/恢复"
-            }
-        ]
-    },
-    "142": {
-        "ID": 142,
-        "IDName": "skillid",
-        "Name": "意志伤害",
-        "Desc": "对意志造成（恢复）X点伤害",
-        "SpecialDrawer":[
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 伤害/恢复"
-            }
-        ]
-    },
-    "143": {
-        "ID": 143,
-        "IDName": "skillid",
-        "Name": "化婴进度",
-        "Desc": "【化婴】属性加减X",
-        "SpecialDrawer":[
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 化婴进度"
-            }
-        ]
-    },
-    "144": {
-        "ID": 144,
-        "IDName": "skillid",
-        "Name": "金丹伤害",
-        "Desc": "金丹生命加减X",
-        "SpecialDrawer":[
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 金丹生命变化"
-            }
-        ]
-    },
-    "145": {
-        "ID": 145,
-        "IDName": "skillid",
-        "Name": "血量判定（3）",
-        "Desc": "血量低于X%时，才可以使用",
-        "SpecialDrawer":[
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 血量百分比"
-            }
-        ]
-    },
-    "146": {
-        "ID": 146,
-        "IDName": "skillid",
-        "Name": "灵气压缩",
-        "Desc": "灵气压缩进度+X",
-        "SpecialDrawer":[
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气压缩进度"
-            }
-        ]
-    },
-    "147": {
-        "ID": 147,
-        "IDName": "skillid",
-        "Name": "Buff判断使用条件",
-        "Desc": "若（敌方/自身）的X【buff】层数大于（小于/等于）Y时，才可以使用",
-        "Properties": [
-            {
-                "ID": "target",
-                "Type": "Int",
-                "Desc": "目标",
-                "SpecialDrawer": [
-                    "TargetTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "panduan",
-                "Type": "String",
-                "Desc": "判断",
-                "SpecialDrawer": [
-                    "ComparisonOperatorTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 层"
-            }
-        ]
-    },
-    "148": {
-        "ID": 148,
-        "IDName": "skillid",
-        "Name": "Buff判断额外触发",
-        "Desc": "若（敌方/自身）的X【buff】层数大于（小于/等于）Y时，触发后续特效",
-        "Properties": [
-            {
-                "ID": "target",
-                "Type": "Int",
-                "Desc": "目标",
-                "SpecialDrawer": [
-                    "TargetTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "panduan",
-                "Type": "String",
-                "Desc": "判断",
-                "SpecialDrawer": [
-                    "ComparisonOperatorTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 层"
-            }
-        ]
-    },
-    "149": {
-        "ID": 149,
-        "IDName": "skillid",
-        "Name": "Buff判断额外触发2",
-        "Desc": "若（敌方/自身）的X【buff】层数大于（小于/等于）Y时，触发后续特效",
-        "Properties": [
-            {
-                "ID": "target",
-                "Type": "Int",
-                "Desc": "目标",
-                "SpecialDrawer": [
-                    "TargetTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "panduan",
-                "Type": "String",
-                "Desc": "判断",
-                "SpecialDrawer": [
-                    "ComparisonOperatorTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 层"
-            }
-        ]
-    },
-    "150": {
-        "ID": 150,
-        "IDName": "skillid",
-        "Name": "特性判断",
-        "Desc": "逻辑判定，如果满足特性x则触发Y列特性，否则则触发Z列特性",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 特性",
-                "SpecialDrawer" :[
-                    "SeidDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y 特性[数组]",
-                "SpecialDrawer" :[
-                    "SeidArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value3",
-                "Type": "IntArray",
-                "Desc": "Z 特性[数组]",
-                "SpecialDrawer" :[
-                    "SeidArrayDrawer"
-                ]
-            }
-        ]
-    },
-    "151": {
-        "ID": 151,
-        "IDName": "skillid",
-        "Name": "特性判定2",
-        "Desc": "逻辑判定，如果满足特性x则触发Y列特性，否则则触发Z列特性",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 特性",
-                "SpecialDrawer" :[
-                    "SeidDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y 特性[数组]",
-                "SpecialDrawer" :[
-                    "SeidArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value3",
-                "Type": "IntArray",
-                "Desc": "Z 特性[数组]",
-                "SpecialDrawer" :[
-                    "SeidArrayDrawer"
-                ]
-            }
-        ]
-    },
-    "152": {
-        "ID": 152,
-        "IDName": "id",
-        "Name": "Buff判断额外触发",
-        "Desc": "（敌方/自身）每有X【buff】Y层，触发一次后续特性",
-        "Properties": [
-            {
-                "ID": "target",
-                "Type": "Int",
-                "Desc": "目标",
-                "SpecialDrawer": [
-                    "TargetTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y Buff层数"
-            }
-        ]
-    },
-    "153": {
-        "ID": 153,
-        "IDName": "skillid",
-        "Name": "消耗Buff触发特性",
-        "Desc": "消耗（敌方/自身）所有Xbuff，每消耗（敌方/自身）XbuffY层，触发一次后续特性",
-        "Properties": [
-            {
-                "ID": "target",
-                "Type": "Int",
-                "Desc": "目标",
-                "SpecialDrawer": [
-                    "TargetTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y Buff层数"
-            }
-        ]
-    },
-    "154": {
-        "ID": 154,
-        "IDName": "id",
-        "Name": "选择性消散灵气,触发特效",
-        "Desc": "选择消散X属性灵气，每消散X属性灵气Y点，则触发一次后续特效",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 灵气属性",
-                "SpecialDrawer": [
-                    "ElementTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y 消耗点数"
-            }
-        ]
-
-    },
-    "155": {
-        "ID": 155,
-        "IDName": "skillid",
-        "Name": "相生触发",
-        "Desc": "若使用相生的灵气释放此技能，则触发后续特效（针对X系+同，同+同，同+同+同类的技能生效）"
-    },
-    "156": {
-        "ID": 156,
-        "IDName": "skillid",
-        "Name": "相克触发",
-        "Desc": "若使用相克的灵气释放此技能，则触发后续特效（针对X系+同，或同+同类的技能生效）"
-    },
-    "157": {
-        "ID": 157,
-        "IDName": "skillid",
-        "Name": "同属性灵气触发",
-        "Desc": "若全部使用同一种属性灵气释放此技能，则触发后续特效（针对X系+同生效）"
-    },
-    "158": {
-        "ID": 158,
-        "IDName": "id",
-        "Name": "特性并行判定",
-        "Desc": "满足特性X则触发Y列特性，满足特性Z则触发A列特性。都满足则都触发。",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 特性",
-                "SpecialDrawer" :[
-                    "SeidDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "IntArray",
-                "Desc": "Y 特性[数组]",
-                "SpecialDrawer" :[
-                    "SeidArrayDrawer"
-                ]
-            },
-            {
-                "ID": "value3",
-                "Type": "Int",
-                "Desc": "Z 特性",
-                "SpecialDrawer" :[
-                    "SeidDrawer"
-                ]
-            },
-            {
-                "ID": "value4",
-                "Type": "IntArray",
-                "Desc": "A 特性[数组]",
-                "SpecialDrawer" :[
-                    "SeidArrayDrawer"
-                ]
-            }
-        ]
-    },
-    "159": {
-        "ID": 159,
-        "IDName": "id",
-        "Name": "Buff类型判断额外触发",
-        "Desc": "（敌方/自身）每有一种不同的X类buff，触发一次后续特效",
-        "Properties": [
-            {
-                "ID": "target",
-                "Type": "Int",
-                "Desc": "目标",
-                "SpecialDrawer": [
-                    "TargetTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X Buff类型",
-                "SpecialDrawer":[
-                    "BuffTypeDrawer"
-                ]
-            }
-        ]
-    },
-    "160": {
-        "ID": 160,
-        "IDName": "id",
-        "Name": "Buff没有判断额外触发",
-        "Desc": "若敌方没有Xbuff，则触发后续特效",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer": [
-                    "BuffDrawer"
-                ]
-            }
-        ]
-    },
-    "161": {
-        "ID": 161,
-        "IDName": "skillid",
-        "Name": "遁速判断",
-        "Desc": "当遁速大于对手时，触发后续特效"
-    },
-    "162": {
-        "ID": 162,
-        "IDName": "id",
-        "Name": "转化Buff",
-        "Desc": "消耗（敌方/自身）所有Xbuff，并使目标获得Ybuff*Z（Z为Xbuff移除的层数）",
-        "Properties": [
-            {
-                "ID": "target",
-                "Type": "Int",
-                "Desc": "目标",
-                "SpecialDrawer": [
-                    "TargetTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X BuffID",
-                "SpecialDrawer" : [
-                    "BuffDrawer"
-                ]
-            },
-            {
-                "ID": "value2",
-                "Type": "Int",
-                "Desc": "Y BuffID",
-                "SpecialDrawer":[
-                    "BuffDrawer"
-                ]
-            }
-        ]
-    },
-    "163": {
-        "ID": 163,
-        "IDName": "id",
-        "Name": "神识判断额外触发",
-        "Desc": "神识大于X时才能使用",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 神识"
-            }
-        ]
-    },
-    "164": {
-        "ID": 164,
-        "IDName": "skillid",
-        "Name": "神识判断额外触发2",
-        "Desc": "若（敌方/自身）的神识大于（小于/等于）X，则触发后续特效",
-        "Properties": [
-            {
-                "ID": "target",
-                "Type": "Int",
-                "Desc": "目标",
-                "SpecialDrawer": [
-                    "TargetTypeDrawer"
-                ]
-            },
-            {
-                "ID": "panduan",
-                "Type": "String",
-                "Desc": "判断",
-                "SpecialDrawer": [
-                    "ComparisonOperatorTypeDrawer"
-                ]
-            },
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 神识"
-            }
-        ]
-    },
-    "165": {
-        "ID": 165,
-        "IDName": "skillid",
-        "Name": "简单筑基额外进度",
-        "Desc": "极简筑基加成：若玩家玩的是极简难度，则额外获得灵气压缩进度+X",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 额外进度"
-            }
-        ]
-    },
-    "166": {
-        "ID": 166,
-        "IDName": "skillid",
-        "Name": "摧毁法宝获得护罩",
-        "Desc": "随机摧毁背包内最高品阶的法宝，并根据法宝的品阶获得对应层数的护罩（上，中，下品）\n符器：1780，1800，1820\n法器：1950，2000，2050\n法宝：2300，2400，2500\n纯阳法宝：2800，3000，3200\n通天灵宝：3500，4000，4500"
-    },
-    "170": {
-        "ID": 170,
-        "IDName": "skillid",
-        "Name": "对方剩余灵气提高伤害",
-        "Desc": "对手每剩余一点灵气，造成的伤害额外提升X%",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 伤害提高百分比"
-            }
-        ]
-    },
-    "171": {
-        "ID": 171,
-        "IDName": "skillid",
-        "Name": "心境额外伤害",
-        "Desc": "额外提升（10000-5*心境）点额外伤害"
-    },
-    "172": {
-        "ID": 172,
-        "IDName": "skillid",
-        "Name": "灵根临时重置",
-        "Desc": "将对手的灵根权重全部临时重置为20"
-    },
-    "173": {
-        "ID": 173,
-        "IDName": "skillid",
-        "Name": "【已删除】",
-        "Desc": "已删"
-    },
-    "174": {
-        "ID": 174,
-        "IDName": "skillid",
-        "Name": "不满血额外伤害",
-        "Desc": "若对手未处于满血状态，则造成的伤害提升X%",
-        "Properties": [
-            {
-                "ID": "value1",
-                "Type": "Int",
-                "Desc": "X 额外伤害"
-            }
-        ]
-    },
-    "175": {
-        "ID": 175,
-        "IDName": "skillid",
-        "Name": "雷劫Buff",
-        "Desc": "根据雷劫伤害表，获得雷劫buff3150 雷劫伤害层"
-    },
-    "176": {
-        "ID": 176,
-        "IDName": "skillid",
-        "Name": "雷劫随机技能",
-        "Desc": "根据随机到的雷劫释放对应技能"
-    },
-    "177": {
-        "ID": 177,
-        "IDName": "skillid",
-        "Name": "随机天劫",
-        "Desc": "重新随机下一道天劫（如果随机完还是和之前一样的，就重新随机，最多循环10次）"
-    }
+  "1": {
+    "ID": 1,
+    "IDName": "skillid",
+    "Name": "吸血",
+    "Desc": "恢复相当于造成伤害量的生命值（固定在判定后触发）",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 吸血比例"
+      }
+    ]
+  },
+  "2": {
+    "ID": 2,
+    "IDName": "skillid",
+    "Name": "吸收灵气",
+    "Desc": "吸收X点灵气",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 吸收灵气数量"
+      }
+    ]
+  },
+  "3": {
+    "ID": 3,
+    "IDName": "skillid",
+    "Name": "触发目标buff",
+    "Desc": "为目标触发XBuff Y层效果",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y Buff层数"
+      }
+    ]
+  },
+  "4": {
+    "ID": 4,
+    "IDName": "skillid",
+    "Name": "给目标加buff",
+    "Desc": "为目标施加XBuff Y层",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y Buff层数"
+      }
+    ]
+  },
+  "5": {
+    "ID": 5,
+    "IDName": "skillid",
+    "Name": "阵法",
+    "Desc": "该技能一场战斗中只能使用一次",
+    "Properties": []
+  },
+  "6": {
+    "ID": 6,
+    "IDName": "skillid",
+    "Name": "后继无力",
+    "Desc": "该技能每回合只能使用一次",
+    "Properties": []
+  },
+  "7": {
+    "ID": 7,
+    "IDName": "skillid",
+    "Name": "精确吸收灵气",
+    "Desc": "吸收X属性灵气Y点",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X 属性灵气[数组]",
+        "SpecialDrawer": [
+          "ElementTypeArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y 灵气数量[数组]"
+      }
+    ]
+  },
+  "8": {
+    "ID": 8,
+    "IDName": "skillid",
+    "Name": "消散灵气",
+    "Desc": "消散X点灵气",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 消散灵气数量"
+      }
+    ]
+  },
+  "9": {
+    "ID": 9,
+    "IDName": "skillid",
+    "Name": "指示物攻击",
+    "Desc": "指示物攻击",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID"
+      }
+    ]
+  },
+  "10": {
+    "ID": 10,
+    "IDName": "skillid",
+    "Name": "神识",
+    "Desc": "如果神识比敌方高，触发后续的特效",
+    "Properties": []
+  },
+  "11": {
+    "ID": 11,
+    "IDName": "skillid",
+    "Name": "多段伤害",
+    "Desc": "造成X段伤害（对神通12508有特殊处理）",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 重复释放次数"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 神通ID",
+        "SpecialDrawer": [
+          "SkillDrawer"
+        ]
+      },
+      {
+        "ID": "value3",
+        "Type": "Int",
+        "Desc": "A 技能伤害(神通12508为BuffID)"
+      }
+    ]
+  },
+  "12": {
+    "ID": 12,
+    "IDName": "skillid",
+    "Name": "焚烧",
+    "Desc": "消散对方X点灵气",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气数量"
+      }
+    ]
+  },
+  "13": {
+    "ID": 13,
+    "IDName": "skillid",
+    "Name": "提升吸收灵气概率",
+    "Desc": "本场战斗中，吸收X系灵气权重提升Y",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 权重变化数值"
+      }
+    ]
+  },
+  "14": {
+    "ID": 14,
+    "IDName": "skillid",
+    "Name": "选择吸收",
+    "Desc": "从五行灵气中，选择X点吸收",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 吸收数量"
+      }
+    ]
+  },
+  "15": {
+    "ID": 15,
+    "IDName": "skillid",
+    "Name": "精确消散灵气",
+    "Desc": "消散X点Y属性灵气",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 消散数量"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "16": {
+    "ID": 16,
+    "IDName": "skillid",
+    "Name": "吸收灵气到上限",
+    "Desc": "吸收灵气到上限"
+  },
+  "17": {
+    "ID": 17,
+    "IDName": "skillid",
+    "Name": "个性吸收灵气",
+    "Desc": "吸收X点灵气，使吸收到的Y属性灵气翻倍",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 吸收数量"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "18": {
+    "ID": 18,
+    "IDName": "skillid",
+    "Name": "复制灵气",
+    "Desc": "复制已有的所有灵气"
+  },
+  "19": {
+    "ID": 19,
+    "IDName": "skillid",
+    "Name": "全部消散",
+    "Desc": "消散所有灵气"
+  },
+  "20": {
+    "ID": 20,
+    "IDName": "skillid",
+    "Name": "消散吸收",
+    "Desc": "消散所有灵气，然后重新吸收相应数量的灵气"
+  },
+  "21": {
+    "ID": 21,
+    "IDName": "skillid",
+    "Name": "精确消散",
+    "Desc": "消散所有X属性灵气",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "22": {
+    "ID": 22,
+    "IDName": "skillid",
+    "Name": "驱动阵法",
+    "Desc": "判定阵法驱动技能使用"
+  },
+  "23": {
+    "ID": 23,
+    "IDName": "skillid",
+    "Name": "伤害提升",
+    "Desc": "本回合每使用过一次神通，额外提升X点伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 额外伤害"
+      }
+    ]
+  },
+  "24": {
+    "ID": 24,
+    "IDName": "skillid",
+    "Name": "跳过消散灵气",
+    "Desc": "本回合跳过消散灵气阶段"
+  },
+  "25": {
+    "ID": 25,
+    "IDName": "skillid",
+    "Name": "大护罩",
+    "Desc": "获得相当于已损失生命值的护罩"
+  },
+  "26": {
+    "ID": 26,
+    "IDName": "skillid",
+    "Name": "打一半血",
+    "Desc": "使敌方失去当前生命一半的生命值"
+  },
+  "27": {
+    "ID": 27,
+    "IDName": "skillid",
+    "Name": "灵气增伤",
+    "Desc": "每剩余一点灵气，额外提升X点伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 伤害加成"
+      }
+    ]
+  },
+  "28": {
+    "ID": 28,
+    "IDName": "skillid",
+    "Name": "过量治疗",
+    "Desc": "超过生命上限的治疗量会转化为护罩"
+  },
+  "29": {
+    "ID": 29,
+    "IDName": "skillid",
+    "Name": "技能冷却",
+    "Desc": "技能冷却时间为X回合",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 回合数"
+      }
+    ]
+  },
+  "30": {
+    "ID": 30,
+    "IDName": "skillid",
+    "Name": "精确吸收灵气2",
+    "Desc": "吸收X点灵气，保留所有Y属性灵气，并消散其它属性灵气",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 吸收数量"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "31": {
+    "ID": 31,
+    "IDName": "skillid",
+    "Name": "给施法者加buff",
+    "Desc": "给施法者加X层Y【buff】",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X 层数[数组]"
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y BuffID[数组]",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      }
+    ]
+  },
+  "32": {
+    "ID": 32,
+    "IDName": "skillid",
+    "Name": "净化目标buff",
+    "Desc": "净化目标X层Y【buff】",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 层数"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      }
+    ]
+  },
+  "33": {
+    "ID": 33,
+    "IDName": "skillid",
+    "Name": "净化施法者buff",
+    "Desc": "净化施法者X层Y【buff】",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 层数"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      }
+    ]
+  },
+  "34": {
+    "ID": 34,
+    "IDName": "skillid",
+    "Name": "伤害提升1",
+    "Desc": "技能造成的最终伤害 * 伤害系数X",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 伤害系数"
+      }
+    ]
+  },
+  "35": {
+    "ID": 35,
+    "IDName": "skillid",
+    "Name": "灵气增伤（非指定灵气）",
+    "Desc": "本回合每使用过一点灵气，提升X点伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 提示伤害"
+      }
+    ]
+  },
+  "36": {
+    "ID": 36,
+    "IDName": "skillid",
+    "Name": "灵气增伤（指定灵气）",
+    "Desc": "本回合每使用过一点X属性灵气，提升Y点伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 提升伤害"
+      }
+    ]
+  },
+  "37": {
+    "ID": 37,
+    "IDName": "skillid",
+    "Name": "灵气治疗",
+    "Desc": "每有一点灵气，恢复x点生命",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 恢复生命"
+      }
+    ]
+  },
+  "38": {
+    "ID": 38,
+    "IDName": "skillid",
+    "Name": "灵气增伤2",
+    "Desc": "每有一点X属性灵气，额外提升Y点伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 提升伤害"
+      }
+    ]
+  },
+  "39": {
+    "ID": 39,
+    "IDName": "skillid",
+    "Name": "消散灵气增伤",
+    "Desc": "消散所有灵气，每消散一点，额外提升X点伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 提升伤害"
+      }
+    ]
+  },
+  "40": {
+    "ID": 40,
+    "IDName": "skillid",
+    "Name": "消散灵气增伤2",
+    "Desc": "消散所有X属性灵气，每消散一点，额外提升Y点伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 提升伤害"
+      }
+    ]
+  },
+  "41": {
+    "ID": 41,
+    "IDName": "skillid",
+    "Name": "多次使用增伤",
+    "Desc": "该神通每使用X次，伤害提升Y点",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 使用次数"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 提升伤害"
+      }
+    ]
+  },
+  "42": {
+    "ID": 42,
+    "IDName": "skillid",
+    "Name": "检测敌方buff增伤",
+    "Desc": "敌方每有一层X【buff】，提升Y点伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 提升伤害"
+      }
+    ]
+  },
+  "43": {
+    "ID": 43,
+    "IDName": "skillid",
+    "Name": "检测自身buff增伤",
+    "Desc": "自身每有一层X【buff】，提升Y点伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y 提升伤害"
+      }
+    ]
+  },
+  "44": {
+    "ID": 44,
+    "IDName": "skillid",
+    "Name": "检测自身buff回血",
+    "Desc": "自身每有一层X【buff】，恢复Y点生命值",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 恢复生命"
+      }
+    ]
+  },
+  "45": {
+    "ID": 45,
+    "IDName": "skillid",
+    "Name": "消耗buff打人",
+    "Desc": "消耗自身X【buff】Y层，造成Z点伤害，该特性需要检测buff数量是否大于Y，否则无法释放",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 层数"
+      },
+      {
+        "ID": "value3",
+        "Type": "Int",
+        "Desc": "Z 伤害"
+      }
+    ]
+  },
+  "46": {
+    "ID": 46,
+    "IDName": "skillid",
+    "Name": "消耗buff回血",
+    "Desc": "消耗自身X【buff】Y层，恢复Z点生命值，该特性需要检测buff数量是否大于Y，否则无法释放",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 层数"
+      },
+      {
+        "ID": "value3",
+        "Type": "Int",
+        "Desc": "Z 恢复生命"
+      }
+    ]
+  },
+  "47": {
+    "ID": 47,
+    "IDName": "skillid",
+    "Name": "消耗buff放技能1",
+    "Desc": "消耗自身X【buff】Y层，释放神通z，该特性需要检测buff数量是否大于Y，否则无法释放",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 层数"
+      },
+      {
+        "ID": "value3",
+        "Type": "Int",
+        "Desc": "Z 神通唯一ID",
+        "SpecialDrawer": [
+          "SkillPKDrawer"
+        ]
+      }
+    ]
+  },
+  "48": {
+    "ID": 48,
+    "IDName": "skillid",
+    "Name": "消耗所有buff打人",
+    "Desc": "消耗自身所有的X【buff】，每消耗一层，造成Y点Z类型伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 伤害数值"
+      },
+      {
+        "ID": "value3",
+        "Type": "Int",
+        "Desc": "Z 伤害类型",
+        "SpecialDrawer": [
+          "AttackTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "49": {
+    "ID": 49,
+    "IDName": "skillid",
+    "Name": "消耗所有buff增伤",
+    "Desc": "消耗自身所有的X【buff】，每消耗一层，伤害提升Y点",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID[数组]",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y 伤害提升[数组]"
+      }
+    ]
+  },
+  "50": {
+    "ID": 50,
+    "IDName": "skillid",
+    "Name": "消耗所有buff回血",
+    "Desc": "消耗自身所有的X【buff】，每消耗一层，恢复Y点生命值",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 恢复生命"
+      }
+    ]
+  },
+  "51": {
+    "ID": 51,
+    "IDName": "skillid",
+    "Name": "消耗所有buff强化",
+    "Desc": "消耗自身所有的X【buff】，每消耗一层，获得Y【buff】*Z",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X 自身BuffID",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y 获得BuffID",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value3",
+        "Type": "IntArray",
+        "Desc": "Z Buff层数"
+      }
+    ]
+  },
+  "52": {
+    "ID": 52,
+    "IDName": "skillid",
+    "Name": "判定获得特性",
+    "Desc": "如果敌方身上有X【buff】，则触发后续的特效",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      }
+    ]
+  },
+  "53": {
+    "ID": 53,
+    "IDName": "skillid",
+    "Name": "判定敌方灵气",
+    "Desc": "如果敌方没有灵气，则触发后续的特效",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X"
+      }
+    ]
+  },
+  "54": {
+    "ID": 54,
+    "IDName": "skillid",
+    "Name": "判定我方灵气",
+    "Desc": "若剩余灵气数大于X，则触发后续的特效",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气数量"
+      }
+    ]
+  },
+  "55": {
+    "ID": 55,
+    "IDName": "skillid",
+    "Name": "判定吸收灵气",
+    "Desc": "吸收1点灵气，如果是X属性灵气牌，则触发后续的特效",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "56": {
+    "ID": 56,
+    "IDName": "skillid",
+    "Name": "判定buff数量",
+    "Desc": "如果自身X【buff】的数量大于等于Y层，则触发后续的特效",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 自身BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y Buff层数"
+      }
+    ]
+  },
+  "57": {
+    "ID": 57,
+    "IDName": "skillid",
+    "Name": "判定并消耗buff",
+    "Desc": "移除自身X【buff】Y层，触发后续特效，该特性需要检测buff数量是否大于Y，否则无法释放",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X 自身BuffID",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y Buff层数"
+      }
+    ]
+  },
+  "58": {
+    "ID": 58,
+    "IDName": "skillid",
+    "Name": "判定连击",
+    "Desc": "如果你上一个使用的是X系技能，则触发后续特效",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 技能属性",
+        "SpecialDrawer": [
+          "AttackTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "59": {
+    "ID": 59,
+    "IDName": "skillid",
+    "Name": "百分比回血（上限）",
+    "Desc": "恢复生命上限X%的生命值",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 恢复百分比"
+      }
+    ]
+  },
+  "60": {
+    "ID": 60,
+    "IDName": "skillid",
+    "Name": "百分比回血（损失）",
+    "Desc": "恢复已损失生命X%的生命值",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 恢复百分比"
+      }
+    ]
+  },
+  "61": {
+    "ID": 61,
+    "IDName": "skillid",
+    "Name": "百分比伤害（己方）",
+    "Desc": "造成自己生命上限X%的伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 造成百分比"
+      }
+    ]
+  },
+  "62": {
+    "ID": 62,
+    "IDName": "skillid",
+    "Name": "驱阵",
+    "Desc": "使自身所有的X类【buff】生效一次。",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X Buff类型",
+        "SpecialDrawer": [
+          "BuffTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "63": {
+    "ID": 63,
+    "IDName": "skillid",
+    "Name": "御阵",
+    "Desc": "自身每有一个X类【buff】，额外提升Y点伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X Buff类型",
+        "SpecialDrawer": [
+          "BuffTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 提升伤害"
+      }
+    ]
+  },
+  "64": {
+    "ID": 64,
+    "IDName": "skillid",
+    "Name": "百分比伤害（敌方）",
+    "Desc": "造成敌方生命上限X%的伤害，",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 造成百分比"
+      }
+    ]
+  },
+  "65": {
+    "ID": 65,
+    "IDName": "skillid",
+    "Name": "本身伤害上限",
+    "Desc": "该技能本身伤害上限X",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 伤害上限"
+      }
+    ]
+  },
+  "66": {
+    "ID": 66,
+    "IDName": "skillid",
+    "Name": "伤害提升2",
+    "Desc": "技能造成的最终伤害+X",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 伤害增加"
+      }
+    ]
+  },
+  "67": {
+    "ID": 67,
+    "IDName": "skillid",
+    "Name": "检测自身buff上特效",
+    "Desc": "自身每有Xbuff*Y层，则给敌方上Zbuff*A层，",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y Buff层数"
+      },
+      {
+        "ID": "value3",
+        "Type": "Int",
+        "Desc": "Z BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value4",
+        "Type": "Int",
+        "Desc": "A Buff层数"
+      }
+    ]
+  },
+  "68": {
+    "ID": 68,
+    "IDName": "skillid",
+    "Name": "首次使用",
+    "Desc": "本回合没有使用过其他技能时，才能使用"
+  },
+  "69": {
+    "ID": 69,
+    "IDName": "skillid",
+    "Name": "刺杀（废弃）",
+    "Desc": "使用此技能时，不会解除【隐匿】"
+  },
+  "70": {
+    "ID": 70,
+    "IDName": "skillid",
+    "Name": "再来一次",
+    "Desc": "再进行一回合"
+  },
+  "71": {
+    "ID": 71,
+    "IDName": "skillid",
+    "Name": "消耗生命值获得buff",
+    "Desc": "消耗生命值X点，获得Ybuff，Z层",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 消耗生命"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value3",
+        "Type": "Int",
+        "Desc": "Z Buff层数"
+      }
+    ]
+  },
+  "72": {
+    "ID": 72,
+    "IDName": "skillid",
+    "Name": "重置对手灵气",
+    "Desc": "消散对手所有灵气，并吸收同等数量的灵气"
+  },
+  "73": {
+    "ID": 73,
+    "IDName": "skillid",
+    "Name": "造伤一半",
+    "Desc": "对敌方造成等同于你上回合造成总伤害量一半的伤害"
+  },
+  "74": {
+    "ID": 74,
+    "IDName": "skillid",
+    "Name": "形态切换",
+    "Desc": "移除所有X类型的buff",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X Buff类型",
+        "SpecialDrawer": [
+          "BuffTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "75": {
+    "ID": 75,
+    "IDName": "skillid",
+    "Name": "毒爆",
+    "Desc": "触发敌方的X【buff】*Y次，每触发一层，抽一张牌",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 触发次数"
+      }
+    ]
+  },
+  "76": {
+    "ID": 76,
+    "IDName": "skillid",
+    "Name": "生命判定（1）",
+    "Desc": "生命低于X点时才能使用",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 生命判定"
+      }
+    ]
+  },
+  "77": {
+    "ID": 77,
+    "IDName": "skillid",
+    "Name": "生命判定（2）",
+    "Desc": "生命低于X%时，触发后续特效",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 生命判定"
+      }
+    ]
+  },
+  "78": {
+    "ID": 78,
+    "IDName": "skillid",
+    "Name": "终结判定",
+    "Desc": "如果自己没有手牌，则触发后续特性"
+  },
+  "79": {
+    "ID": 79,
+    "IDName": "skillid",
+    "Name": "给目标加buff",
+    "Desc": "施加X层Ybuff",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y Buff层数"
+      }
+    ]
+  },
+  "80": {
+    "ID": 80,
+    "IDName": "skillid",
+    "Name": "给施法者加buff",
+    "Desc": "给施法者加X层Y【buff】",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y Buff层数"
+      }
+    ]
+  },
+  "81": {
+    "ID": 81,
+    "IDName": "skillid",
+    "Name": "定数弃牌(施法者)",
+    "Desc": "随机弃置X张牌",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 弃牌数量"
+      }
+    ]
+  },
+  "82": {
+    "ID": 82,
+    "IDName": "skillid",
+    "Name": "buff层数（对目标）",
+    "Desc": "将目标身上的X【buff】层数变为Y层",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y Buff层数"
+      }
+    ]
+  },
+  "83": {
+    "ID": 83,
+    "IDName": "skillid",
+    "Name": "buff层数（对施法者）",
+    "Desc": "将施法者身上的X【buff】层数变为Y层",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y Buff层数"
+      }
+    ]
+  },
+  "84": {
+    "ID": 84,
+    "IDName": "skillid",
+    "Name": "神识增伤",
+    "Desc": "神识每比敌方高X点，额外提升Y点伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 神识"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 提高伤害"
+      }
+    ]
+  },
+  "85": {
+    "ID": 85,
+    "IDName": "skillid",
+    "Name": "遁速增伤",
+    "Desc": "每有X点遁速，额外提升Y点伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 遁速"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 提高伤害"
+      }
+    ]
+  },
+  "86": {
+    "ID": 86,
+    "IDName": "skillid",
+    "Name": "百分比伤害（敌方）",
+    "Desc": "造成敌方当前生命X%的伤害，",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 百分比"
+      }
+    ]
+  },
+  "87": {
+    "ID": 87,
+    "IDName": "skillid",
+    "Name": "改变灵气属性",
+    "Desc": "将目标的X点非Y属性灵气转变为Y属性",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气数量"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "88": {
+    "ID": 88,
+    "IDName": "skillid",
+    "Name": "精确吸收灵气(目标)",
+    "Desc": "吸收X点Y属性灵气",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气数量"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "89": {
+    "ID": 89,
+    "IDName": "skillid",
+    "Name": "判定灵气",
+    "Desc": "若目标有X属性灵气触发后续特效",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "90": {
+    "ID": 90,
+    "IDName": "skillid",
+    "Name": "魔气增伤",
+    "Desc": "敌方每有1张X系灵气牌，额外增加Y点伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 增加伤害"
+      }
+    ]
+  },
+  "91": {
+    "ID": 91,
+    "IDName": "skillid",
+    "Name": "技能增伤",
+    "Desc": "本场战斗中每使用过一次X技能，额外提升Y点伤害",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 技能唯一ID",
+        "SpecialDrawer": [
+          "SkillPKDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 增加伤害"
+      }
+    ]
+  },
+  "92": {
+    "ID": 92,
+    "IDName": "skillid",
+    "Name": "精确消散灵气(施法者)",
+    "Desc": "消散X点Y属性灵气",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 增加伤害"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "93": {
+    "ID": 93,
+    "IDName": "skillid",
+    "Name": "先手攻击",
+    "Desc": "若遁速高于对手才能使用"
+  },
+  "94": {
+    "ID": 94,
+    "IDName": "skillid",
+    "Name": "倒计时buff",
+    "Desc": "获得Xbuff，并将Xbuff的层数置为Y层",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 层数"
+      }
+    ]
+  },
+  "95": {
+    "ID": 95,
+    "IDName": "skillid",
+    "Name": "buff类型检测",
+    "Desc": "如果目标身上有X类buff，则触发后续特效",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X Buff类型",
+        "SpecialDrawer": [
+          "BuffTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "96": {
+    "ID": 96,
+    "IDName": "skillid",
+    "Name": "引爆暗劲",
+    "Desc": "目标身上所有的X类buff，移除一层",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X Buff类型",
+        "SpecialDrawer": [
+          "BuffTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "97": {
+    "ID": 97,
+    "IDName": "skillid",
+    "Name": "累计消耗",
+    "Desc": "本回合每使用过一次本技能，再次使用时额外消耗一点X属性灵气",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "98": {
+    "ID": 98,
+    "IDName": "skillid",
+    "Name": "buff判定2",
+    "Desc": "如果自身没有Xbuff，则触发后续特效",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      }
+    ]
+  },
+  "99": {
+    "ID": 99,
+    "IDName": "skillid",
+    "Name": "首次使用判定",
+    "Desc": "若这是本回合使用的第一个技能，则触发后续特效"
+  },
+  "100": {
+    "ID": 100,
+    "IDName": "skillid",
+    "Name": "判定buff数量",
+    "Desc": "如果目标身上X【buff】的数量（大于/小于）等于Y层，则触发后续的特效",
+    "SpecialDrawer": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "panduan",
+        "Type": "String",
+        "Desc": "判断",
+        "SpecialDrawer": [
+          "ComparisonOperatorTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 层"
+      }
+    ]
+  },
+  "101": {
+    "ID": 101,
+    "IDName": "skillid",
+    "Name": "将自身生命值置为x",
+    "Desc": "将自身生命值置为x",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 生命"
+      }
+    ]
+  },
+  "102": {
+    "ID": 102,
+    "IDName": "skillid",
+    "Name": "触发施法者buff",
+    "Desc": "触发施法者X层Ybuff效果",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y 触发层数"
+      }
+    ]
+  },
+  "103": {
+    "ID": 103,
+    "IDName": "skillid",
+    "Name": "造成伤害获得buff",
+    "Desc": "该技能每造成X点伤害获得Ybuff*Z层（伤害以最终结算为准）",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 伤害"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value3",
+        "Type": "Int",
+        "Desc": "Z 层数"
+      }
+    ]
+  },
+  "104": {
+    "ID": 104,
+    "IDName": "skillid",
+    "Name": "改变技能",
+    "Desc": "（满足条件后触发）此技能释放后，将其变化为另外一个技能X",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 技能ID",
+        "SpecialDrawer": [
+          "SkillDrawer"
+        ]
+      }
+    ]
+  },
+  "105": {
+    "ID": 105,
+    "IDName": "skillid",
+    "Name": "释放技能",
+    "Desc": "释放一次X技能",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 技能ID",
+        "SpecialDrawer": [
+          "SkillDrawer"
+        ]
+      }
+    ]
+  },
+  "106": {
+    "ID": 106,
+    "IDName": "skillid",
+    "Name": "回血",
+    "Desc": "回血（仅供炼器使用）"
+  },
+  "107": {
+    "ID": 107,
+    "IDName": "skillid",
+    "Name": "根据buff回血",
+    "Desc": "恢复等同于（敌方/自身）X【buff】层数的生命",
+    "Properties": [
+      {
+        "ID": "target",
+        "Type": "Int",
+        "Desc": "目标",
+        "SpecialDrawer": [
+          "TargetTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      }
+    ]
+  },
+  "108": {
+    "ID": 108,
+    "IDName": "skillid",
+    "Name": "根据手牌获得buff",
+    "Desc": "每有一点X属性灵气，获得Ybuff*Z",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value3",
+        "Type": "Int",
+        "Desc": "Z Buff层数"
+      }
+    ]
+  },
+  "109": {
+    "ID": 109,
+    "IDName": "skillid",
+    "Name": "判定X类buff",
+    "Desc": "判定自身有X类buff时，才能使用",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X Buff类型",
+        "SpecialDrawer": [
+          "BuffTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "110": {
+    "ID": 110,
+    "IDName": "id",
+    "Name": "耗血增伤",
+    "Desc": "消耗当前x%的生命，每消耗一点生命增伤一点",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 消耗生命百分比"
+      }
+    ]
+  },
+  "111": {
+    "ID": 111,
+    "IDName": "id",
+    "Name": "使用时消耗寿元",
+    "Desc": "使用时减少寿元x(该技能特性寿元不够时无法使用)",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 消耗寿元"
+      }
+    ]
+  },
+  "112": {
+    "ID": 112,
+    "IDName": "skillid",
+    "Name": "给目标加buff",
+    "Desc": "施加Xbuff*Y层",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID[数组]",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y 层数[数组]"
+      }
+    ]
+  },
+  "113": {
+    "ID": 113,
+    "IDName": "skillid",
+    "Name": "给施法者加buff",
+    "Desc": "给施法者加X层Y【buff】",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID[数组]",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y 层数[数组]"
+      }
+    ]
+  },
+  "114": {
+    "ID": 114,
+    "IDName": "skillid",
+    "Name": "给敌方加buff",
+    "Desc": "给敌方加X层Y【buff】（不管目标是谁）",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID[数组]",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y 层数[数组]"
+      }
+    ]
+  },
+  "115": {
+    "ID": 115,
+    "IDName": "skillid",
+    "Name": "首次释放",
+    "Desc": "若该技能是本场战斗中首次释放，则触发后续特效"
+  },
+  "116": {
+    "ID": 116,
+    "IDName": "skillid",
+    "Name": "天星若雨",
+    "Desc": "消耗所有Xbuff，每消耗Y点，视为额外消耗一点灵气，并提升Z点伤害。",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 消耗层数"
+      },
+      {
+        "ID": "value3",
+        "Type": "Int",
+        "Desc": "Z 提高伤害"
+      }
+    ]
+  },
+  "117": {
+    "ID": 117,
+    "IDName": "skillid",
+    "Name": "无视判定",
+    "Desc": "配置在任何判定特性后，即便判定失效也可以正常生效后续的其它特性"
+  },
+  "118": {
+    "ID": 118,
+    "IDName": "id",
+    "Name": "消散灵气获得buff",
+    "Desc": "消散所有灵气，每消散一点，获得X【buff】*Y层",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID[数组]",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y 层数[数组]"
+      }
+    ]
+  },
+  "119": {
+    "ID": 119,
+    "IDName": "skillid",
+    "Name": "根据变量造成伤害",
+    "Desc": "造成的值，等于全局变量X的值",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 全局变量ID"
+      }
+    ]
+  },
+  "120": {
+    "ID": 120,
+    "IDName": "skillid",
+    "Name": "根据变量获得buff",
+    "Desc": "获得X【buff】*全局变量Y的值",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 全局变量ID"
+      }
+    ]
+  },
+  "121": {
+    "ID": 121,
+    "IDName": "skillid",
+    "Name": "根据变量造成多段伤害",
+    "Desc": "重复释放X次Y技能，根据全局变量Z",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 技能ID",
+        "SpecialDrawer": [
+          "SkillDrawer"
+        ]
+      },
+      {
+        "ID": "value3",
+        "Type": "Int",
+        "Desc": "Z 全局变量ID"
+      }
+    ]
+  },
+  "122": {
+    "ID": 122,
+    "IDName": "skillid",
+    "Name": "根据变量恢复生命",
+    "Desc": "恢复的值，等于全局变量X的值",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 全局变量ID"
+      }
+    ]
+  },
+  "123": {
+    "ID": 123,
+    "IDName": "skillid",
+    "Name": "根据灵气属性获得buff",
+    "Desc": "根据玩家释放技能时使用的灵气属性获得对应buff，需要设置六种灵气对应的Buff（金、木、水、火、土、魔）",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID[数组]",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y 层数[数组]"
+      }
+    ]
+  },
+  "124": {
+    "ID": 124,
+    "IDName": "skillid",
+    "Name": "连击判定2",
+    "Desc": "58的复制版，凤灵妖火特殊处理用；如果你上一个使用的是X系技能，则触发后续特效",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 技能属性",
+        "SpecialDrawer": [
+          "AttackTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "125": {
+    "ID": 125,
+    "IDName": "id",
+    "Name": "落英专用",
+    "Desc": "（敌方/自身）每有一种不同的X类buff，技能造成的最终伤害+Y",
+    "Properties": [
+      {
+        "ID": "target",
+        "Type": "Int",
+        "Desc": "目标",
+        "SpecialDrawer": [
+          "TargetTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X Buff类型",
+        "SpecialDrawer": [
+          "BuffTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 伤害增加"
+      }
+    ]
+  },
+  "139": {
+    "ID": 139,
+    "IDName": "skillid",
+    "Name": "buff139特殊特性",
+    "Desc": "当Buff中有Buff特性139时，该特性的后续特性触发多次"
+  },
+  "140": {
+    "ID": 140,
+    "IDName": "skillid",
+    "Name": "判断buff，释放技能",
+    "Desc": "检测自身buff，若都有则允许释放技能。",
+    "SpecialDrawer": [
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID[数组]",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      }
+    ]
+  },
+  "141": {
+    "ID": 141,
+    "IDName": "skillid",
+    "Name": "经脉伤害",
+    "Desc": "对经脉造成（恢复）X点伤害",
+    "SpecialDrawer": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 伤害/恢复"
+      }
+    ]
+  },
+  "142": {
+    "ID": 142,
+    "IDName": "skillid",
+    "Name": "意志伤害",
+    "Desc": "对意志造成（恢复）X点伤害",
+    "SpecialDrawer": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 伤害/恢复"
+      }
+    ]
+  },
+  "143": {
+    "ID": 143,
+    "IDName": "skillid",
+    "Name": "化婴进度",
+    "Desc": "【化婴】属性加减X",
+    "SpecialDrawer": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 化婴进度"
+      }
+    ]
+  },
+  "144": {
+    "ID": 144,
+    "IDName": "skillid",
+    "Name": "金丹伤害",
+    "Desc": "金丹生命加减X",
+    "SpecialDrawer": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 金丹生命变化"
+      }
+    ]
+  },
+  "145": {
+    "ID": 145,
+    "IDName": "skillid",
+    "Name": "生命判定（3）",
+    "Desc": "生命低于X%时，才可以使用",
+    "SpecialDrawer": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 生命百分比"
+      }
+    ]
+  },
+  "146": {
+    "ID": 146,
+    "IDName": "skillid",
+    "Name": "灵气压缩",
+    "Desc": "灵气压缩进度+X",
+    "SpecialDrawer": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气压缩进度"
+      }
+    ]
+  },
+  "147": {
+    "ID": 147,
+    "IDName": "skillid",
+    "Name": "Buff判断使用条件",
+    "Desc": "若（敌方/自身）的X【buff】层数大于（小于/等于）Y时，才可以使用",
+    "Properties": [
+      {
+        "ID": "target",
+        "Type": "Int",
+        "Desc": "目标",
+        "SpecialDrawer": [
+          "TargetTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "panduan",
+        "Type": "String",
+        "Desc": "判断",
+        "SpecialDrawer": [
+          "ComparisonOperatorTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 层"
+      }
+    ]
+  },
+  "148": {
+    "ID": 148,
+    "IDName": "skillid",
+    "Name": "Buff判断额外触发",
+    "Desc": "若（敌方/自身）的X【buff】层数大于（小于/等于）Y时，触发后续特效",
+    "Properties": [
+      {
+        "ID": "target",
+        "Type": "Int",
+        "Desc": "目标",
+        "SpecialDrawer": [
+          "TargetTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "panduan",
+        "Type": "String",
+        "Desc": "判断",
+        "SpecialDrawer": [
+          "ComparisonOperatorTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 层"
+      }
+    ]
+  },
+  "149": {
+    "ID": 149,
+    "IDName": "skillid",
+    "Name": "Buff判断额外触发2",
+    "Desc": "若（敌方/自身）的X【buff】层数大于（小于/等于）Y时，触发后续特效",
+    "Properties": [
+      {
+        "ID": "target",
+        "Type": "Int",
+        "Desc": "目标",
+        "SpecialDrawer": [
+          "TargetTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "panduan",
+        "Type": "String",
+        "Desc": "判断",
+        "SpecialDrawer": [
+          "ComparisonOperatorTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 层"
+      }
+    ]
+  },
+  "150": {
+    "ID": 150,
+    "IDName": "skillid",
+    "Name": "特性判断",
+    "Desc": "逻辑判定，如果满足特性x则触发Y列特性，否则则触发Z列特性",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 特性",
+        "SpecialDrawer": [
+          "SeidDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y 特性[数组]",
+        "SpecialDrawer": [
+          "SeidArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value3",
+        "Type": "IntArray",
+        "Desc": "Z 特性[数组]",
+        "SpecialDrawer": [
+          "SeidArrayDrawer"
+        ]
+      }
+    ]
+  },
+  "151": {
+    "ID": 151,
+    "IDName": "skillid",
+    "Name": "特性判定2",
+    "Desc": "逻辑判定，如果满足特性x则触发Y列特性，否则则触发Z列特性",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 特性",
+        "SpecialDrawer": [
+          "SeidDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y 特性[数组]",
+        "SpecialDrawer": [
+          "SeidArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value3",
+        "Type": "IntArray",
+        "Desc": "Z 特性[数组]",
+        "SpecialDrawer": [
+          "SeidArrayDrawer"
+        ]
+      }
+    ]
+  },
+  "152": {
+    "ID": 152,
+    "IDName": "id",
+    "Name": "Buff判断额外触发",
+    "Desc": "（敌方/自身）每有X【buff】Y层，触发一次后续特性",
+    "Properties": [
+      {
+        "ID": "target",
+        "Type": "Int",
+        "Desc": "目标",
+        "SpecialDrawer": [
+          "TargetTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y Buff层数"
+      }
+    ]
+  },
+  "153": {
+    "ID": 153,
+    "IDName": "id",
+    "Name": "消耗Buff触发特性",
+    "Desc": "消耗（敌方/自身）所有Xbuff，每消耗（敌方/自身）XbuffY层，触发一次后续特性",
+    "Properties": [
+      {
+        "ID": "target",
+        "Type": "Int",
+        "Desc": "目标",
+        "SpecialDrawer": [
+          "TargetTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y Buff层数"
+      }
+    ]
+  },
+  "154": {
+    "ID": 154,
+    "IDName": "id",
+    "Name": "选择性消散灵气,触发特效",
+    "Desc": "选择消散X属性灵气，每消散X属性灵气Y点，则触发一次后续特效",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 灵气属性",
+        "SpecialDrawer": [
+          "ElementTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 消耗点数"
+      }
+    ]
+  },
+  "155": {
+    "ID": 155,
+    "IDName": "skillid",
+    "Name": "相生触发",
+    "Desc": "若使用相生的灵气释放此技能，则触发后续特效（针对X系+同，同+同，同+同+同类的技能生效）"
+  },
+  "156": {
+    "ID": 156,
+    "IDName": "skillid",
+    "Name": "相克触发",
+    "Desc": "若使用相克的灵气释放此技能，则触发后续特效（针对X系+同，或同+同类的技能生效）"
+  },
+  "157": {
+    "ID": 157,
+    "IDName": "skillid",
+    "Name": "同属性灵气触发",
+    "Desc": "若全部使用同一种属性灵气释放此技能，则触发后续特效（针对X系+同生效）"
+  },
+  "158": {
+    "ID": 158,
+    "IDName": "id",
+    "Name": "特性并行判定",
+    "Desc": "满足特性X则触发Y列特性，满足特性Z则触发A列特性。都满足则都触发。",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 特性",
+        "SpecialDrawer": [
+          "SeidDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y 特性[数组]",
+        "SpecialDrawer": [
+          "SeidArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value3",
+        "Type": "Int",
+        "Desc": "Z 特性",
+        "SpecialDrawer": [
+          "SeidDrawer"
+        ]
+      },
+      {
+        "ID": "value4",
+        "Type": "IntArray",
+        "Desc": "A 特性[数组]",
+        "SpecialDrawer": [
+          "SeidArrayDrawer"
+        ]
+      }
+    ]
+  },
+  "159": {
+    "ID": 159,
+    "IDName": "id",
+    "Name": "Buff类型判断额外触发",
+    "Desc": "（敌方/自身）每有一种不同的X类buff，触发一次后续特效",
+    "Properties": [
+      {
+        "ID": "target",
+        "Type": "Int",
+        "Desc": "目标",
+        "SpecialDrawer": [
+          "TargetTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X Buff类型",
+        "SpecialDrawer": [
+          "BuffTypeDrawer"
+        ]
+      }
+    ]
+  },
+  "160": {
+    "ID": 160,
+    "IDName": "id",
+    "Name": "Buff没有判断额外触发",
+    "Desc": "若敌方没有Xbuff，则触发后续特效",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      }
+    ]
+  },
+  "161": {
+    "ID": 161,
+    "IDName": "skillid",
+    "Name": "遁速判断",
+    "Desc": "当遁速大于对手时，触发后续特效"
+  },
+  "162": {
+    "ID": 162,
+    "IDName": "id",
+    "Name": "转化Buff",
+    "Desc": "消耗（敌方/自身）所有Xbuff，并使目标获得Ybuff*Z（Z为Xbuff移除的层数）",
+    "Properties": [
+      {
+        "ID": "target",
+        "Type": "Int",
+        "Desc": "目标",
+        "SpecialDrawer": [
+          "TargetTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      }
+    ]
+  },
+  "163": {
+    "ID": 163,
+    "IDName": "id",
+    "Name": "神识判断额外触发",
+    "Desc": "神识大于X时才能使用",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 神识"
+      }
+    ]
+  },
+  "164": {
+    "ID": 164,
+    "IDName": "skillid",
+    "Name": "神识判断额外触发2",
+    "Desc": "若（敌方/自身）的神识大于（小于/等于）X，则触发后续特效",
+    "Properties": [
+      {
+        "ID": "target",
+        "Type": "Int",
+        "Desc": "目标",
+        "SpecialDrawer": [
+          "TargetTypeDrawer"
+        ]
+      },
+      {
+        "ID": "panduan",
+        "Type": "String",
+        "Desc": "判断",
+        "SpecialDrawer": [
+          "ComparisonOperatorTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 神识"
+      }
+    ]
+  },
+  "165": {
+    "ID": 165,
+    "IDName": "skillid",
+    "Name": "简单筑基额外进度",
+    "Desc": "极简筑基加成：若玩家玩的是极简难度，则额外获得灵气压缩进度+X",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 额外进度"
+      }
+    ]
+  },
+  "166": {
+    "ID": 166,
+    "IDName": "skillid",
+    "Name": "摧毁法宝获得护罩",
+    "Desc": "随机摧毁背包内最高品阶的法宝，并根据法宝的品阶获得对应层数的护罩（上，中，下品）\n符器：1780，1800，1820\n法器：1950，2000，2050\n法宝：2300，2400，2500\n纯阳法宝：2800，3000，3200\n通天灵宝：3500，4000，4500"
+  },
+  "170": {
+    "ID": 170,
+    "IDName": "skillid",
+    "Name": "对方剩余灵气提高伤害",
+    "Desc": "对手每剩余一点灵气，造成的伤害额外提升X%",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 伤害提高百分比"
+      }
+    ]
+  },
+  "171": {
+    "ID": 171,
+    "IDName": "skillid",
+    "Name": "心境额外伤害",
+    "Desc": "额外提升（10000-5*心境）点额外伤害"
+  },
+  "172": {
+    "ID": 172,
+    "IDName": "skillid",
+    "Name": "灵根临时重置",
+    "Desc": "将对手的灵根权重全部临时重置为20"
+  },
+  "173": {
+    "ID": 173,
+    "IDName": "skillid",
+    "Name": "【已删除】",
+    "Desc": "已删"
+  },
+  "174": {
+    "ID": 174,
+    "IDName": "skillid",
+    "Name": "不满血额外伤害",
+    "Desc": "若对手未处于满血状态，则造成的伤害提升X%",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 额外伤害"
+      }
+    ]
+  },
+  "175": {
+    "ID": 175,
+    "IDName": "skillid",
+    "Name": "雷劫Buff",
+    "Desc": "根据雷劫伤害表，获得雷劫buff3150 雷劫伤害层"
+  },
+  "176": {
+    "ID": 176,
+    "IDName": "skillid",
+    "Name": "雷劫随机技能",
+    "Desc": "根据随机到的雷劫释放对应技能"
+  },
+  "177": {
+    "ID": 177,
+    "IDName": "skillid",
+    "Name": "随机天劫",
+    "Desc": "重新随机下一道天劫（如果随机完还是和之前一样的，就重新随机，最多循环10次）"
+  },
+  "178": {
+    "ID": 178,
+    "IDName": "skillid",
+    "Name": "残血加攻",
+    "Desc": "目标每损失X%的生命值，则造成的伤害提升Y%",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 损失生命百分比"
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y 增加伤害百分比"
+      }
+    ],
+    "SpecialDrawer": []
+  },
+  "179": {
+    "ID": 179,
+    "IDName": "skillid",
+    "Name": "根据Buff差值触发特性",
+    "Desc": "若（敌方/自身）的X【buff】层数大于（小于/等于）Y【buff】的层数时，触发后续特性",
+    "Properties": [
+      {
+        "ID": "target",
+        "Type": "Int",
+        "Desc": "目标",
+        "SpecialDrawer": [
+          "TargetTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      },
+      {
+        "ID": "panduan",
+        "Type": "String",
+        "Desc": "判断",
+        "SpecialDrawer": [
+          "ComparisonOperatorTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "Int",
+        "Desc": "Y BuffID",
+        "SpecialDrawer": [
+          "BuffDrawer"
+        ]
+      }
+    ],
+    "SpecialDrawer": []
+  },
+  "180": {
+    "ID": 180,
+    "IDName": "skillid",
+    "Name": "锻体-根据当前天雷造成伤害",
+    "Desc": "锻体-根据当前天雷造成伤害"
+  }
 }

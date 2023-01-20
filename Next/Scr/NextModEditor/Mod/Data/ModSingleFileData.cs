@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
-using SkySwordKill.NextModEditor.Mod;
+using SkySwordKill.Next.Mod;
 
 namespace SkySwordKill.NextModEditor.Mod.Data;
 

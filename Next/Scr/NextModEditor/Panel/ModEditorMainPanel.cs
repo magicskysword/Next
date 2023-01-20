@@ -11,7 +11,6 @@ using SkySwordKill.Next.Mod;
 using SkySwordKill.NextFGUI.NextCore;
 using SkySwordKill.NextModEditor.Mod;
 using SkySwordKill.NextModEditor.PanelProject;
-using UnityEngine;
 
 namespace SkySwordKill.NextModEditor.Panel;
 
@@ -271,22 +270,14 @@ public class ModEditorMainPanel : FGUIPanelBase
 
     private void OnClickFileOpen()
     {
-        try
-        {
-            WindowModSelectorDialog.CreateDialog("打开工坊工程".I18NTodo(),
-                ModFilter.Local, 
-                new List<TableInfo>()
-                {
-                    new TableInfo("名称", TableInfo.DEFAULT_GRID_WIDTH * 3, o => ((ModWorkshop)o).ModInfo.Title),
-                    new TableInfo("位置", TableInfo.DEFAULT_GRID_WIDTH * 6, o => ((ModWorkshop)o).Path),
-                },
-                OnOpenMod);
-        }
-        catch (Exception e)
-        {
-            Main.LogError(e);
-            WindowConfirmDialog.CreateDialog("工程打开失败", "打开工程失败，请检查日志", false);
-        }
+        WindowModSelectorDialog.CreateDialog("打开工坊工程".I18NTodo(),
+            ModFilter.Local, 
+            new List<TableInfo>()
+            {
+                new TableInfo("名称", TableInfo.DEFAULT_GRID_WIDTH * 3, o => ((ModWorkshop)o).ModInfo.Title),
+                new TableInfo("位置", TableInfo.DEFAULT_GRID_WIDTH * 6, o => ((ModWorkshop)o).Path),
+            },
+            OnOpenMod);
     }
         
     private void OnClickFileSave()
@@ -326,18 +317,31 @@ public class ModEditorMainPanel : FGUIPanelBase
     {
         Clear();
 
-        CurMod = mod;
-        CurMod.LoadProjects();
-            
-        TreeProject.AddProject(new ProjectTreeModWorkshop(CurMod));
-        TreeProject.AddProject(new ProjectTreeModProjectReferenced(CurMod, ModEditorManager.I.ReferenceProject));
-        foreach (var project in mod.Projects)
+        try
         {
-            var modProjNode = new ProjectTreeModProject(CurMod, project);
-            TreeProject.AddProject(modProjNode);
-        }
+            CurMod = mod;
+            CurMod.LoadProjects();
 
-        TreeProject.Refresh();
+            TreeProject.AddProject(new ProjectTreeModWorkshop(CurMod));
+            TreeProject.AddProject(new ProjectTreeModProjectReferenced(CurMod, ModEditorManager.I.ReferenceProject));
+            foreach (var project in mod.Projects)
+            {
+                var modProjNode = new ProjectTreeModProject(CurMod, project);
+                TreeProject.AddProject(modProjNode);
+            }
+
+            TreeProject.Refresh();
+        }
+        catch (ModOpenException e)
+        {
+            WindowConfirmDialog.CreateDialog("工程打开失败", $"打开工程失败，错误日志：\n{e.Message}", false);
+            Clear();
+        }
+        catch (Exception e)
+        {
+            WindowConfirmDialog.CreateDialog("工程打开失败", $"打开工程失败，错误日志：\n{e}", false);
+            Clear();
+        }
     }
 
     private void OnSaveMod(ModWorkshop mod, string path)

@@ -5,9 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Fungus;
 using Newtonsoft.Json;
-using SkySwordKill.Next.FCanvas.PatchCommand;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace SkySwordKill.Next.FCanvas;
 

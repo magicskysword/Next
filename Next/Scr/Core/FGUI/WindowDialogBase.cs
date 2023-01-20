@@ -1,5 +1,4 @@
 ﻿using FairyGUI;
-using SkySwordKill.Next.FGUI;
 using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using FairyGUI;
-using SkySwordKill.Next;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.Next.FGUI.Dialog;
@@ -524,11 +523,12 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
         InspectItem(TableList.SelectedIndex);
     }
 
-    protected virtual void AddDrawer(CtlPropertyDrawerBase drawer)
+    protected virtual IPropertyDrawer AddDrawer(IPropertyDrawer drawer)
     {
-        drawer.OnChanged += RefreshTable;
+        drawer.AddChangeListener(RefreshTable);
         drawer.UndoManager = UndoManager;
         Inspector.AddDrawer(drawer);
+        return drawer;
     }
         
     protected abstract void OnInspectItem(T data);

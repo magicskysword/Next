@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
-namespace SkySwordKill.NextModEditor.Mod;
+namespace SkySwordKill.Next.Mod;
 
 [Serializable]
 public class ModException : Exception
@@ -17,10 +16,5 @@ public class ModException : Exception
     public ModException(string message, Exception inner) : base(message, inner)
     {
     }
-
-    protected ModException(
-        SerializationInfo info,
-        StreamingContext context) : base(info, context)
-    {
-    }
 }
+

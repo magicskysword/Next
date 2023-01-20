@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace SkySwordKill.Next.DialogSystem;
+﻿namespace SkySwordKill.Next.DialogSystem;
 
 public class AvatarNextData
 {

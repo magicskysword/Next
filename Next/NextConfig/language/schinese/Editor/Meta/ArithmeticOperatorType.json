@@ -1,0 +1,14 @@
+[
+    {
+        "TypeStrID": "+",
+        "TypeName": "增加"
+    },
+    {
+        "TypeStrID": "-",
+        "TypeName": "减少"
+    },
+    {
+        "TypeStrID": "=",
+        "TypeName": "赋值"
+    }
+]

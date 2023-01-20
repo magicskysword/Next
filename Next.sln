@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Next", "Next\Next.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextLocalizationExporter", "NextLocalizationExporter\NextLocalizationExporter.csproj", "{1F6DBA78-C94C-4600-BCE0-6BA8E2D84D5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextDataChecker", "NextDataChecker\NextDataChecker.csproj", "{4FB73A70-EF70-429E-9134-8425EB563ECD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{1F6DBA78-C94C-4600-BCE0-6BA8E2D84D5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F6DBA78-C94C-4600-BCE0-6BA8E2D84D5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F6DBA78-C94C-4600-BCE0-6BA8E2D84D5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FB73A70-EF70-429E-9134-8425EB563ECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FB73A70-EF70-429E-9134-8425EB563ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FB73A70-EF70-429E-9134-8425EB563ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FB73A70-EF70-429E-9134-8425EB563ECD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

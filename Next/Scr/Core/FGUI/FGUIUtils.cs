@@ -4,7 +4,6 @@ using System.Text;
 using FairyGUI;
 using SkySwordKill.NextModEditor.Mod;
 using UnityEngine;
-using Action = UltimateSurvival.AI.Actions.Action;
 
 namespace SkySwordKill.Next.FGUI;
 

@@ -1,6 +1,5 @@
 ﻿using Fungus;
 using SkySwordKill.Next.DialogSystem;
-using UnityEngine.Events;
 
 namespace SkySwordKill.Next.FCanvas.PatchCommand;
 

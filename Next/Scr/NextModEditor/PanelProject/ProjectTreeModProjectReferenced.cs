@@ -1,5 +1,4 @@
-﻿using SkySwordKill.Next.Extension;
-using SkySwordKill.Next.FGUI.Component;
+﻿using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.NextModEditor.Mod;
 
 namespace SkySwordKill.NextModEditor.PanelProject;

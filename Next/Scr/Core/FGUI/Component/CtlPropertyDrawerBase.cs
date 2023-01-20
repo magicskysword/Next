@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FairyGUI;
 
 namespace SkySwordKill.Next.FGUI.Component;
@@ -31,9 +32,15 @@ public abstract class CtlPropertyDrawerBase : IPropertyDrawer
         }
     }
 
+    protected Action OnChanged { get; set; }
     public UndoInstManager UndoManager { get; set; }
-    public Action OnChanged { get; set; } = () => { };
+    
     public GComponent Component { get; set; }
+
+    /// <summary>
+    /// 绑定的绘制器，该绘制器刷新时同时也会刷新其他绘制器
+    /// </summary>
+    protected List<IPropertyDrawer> ChainDrawers { get; set; } = new List<IPropertyDrawer>();
     protected abstract GComponent OnCreateCom();
     protected virtual void OnRemoveCom(GComponent component) { }
     protected virtual void OnRefresh() { }
@@ -60,23 +67,43 @@ public abstract class CtlPropertyDrawerBase : IPropertyDrawer
         Component = null;
     }
 
+    /// <summary>
+    /// 刷新绘制器，并刷新其他绘制器
+    /// </summary>
     public void Refresh()
     {
         OnRefresh();
+        foreach (var chainDrawer in ChainDrawers)
+        {
+            chainDrawer.Refresh();
+        }
     }
 
-    public void AddChangeListener(Action OnChanged)
+    public IPropertyDrawer AddChangeListener(Action OnChanged)
     {
         this.OnChanged += OnChanged;
+        return this;
     }
     
-    public void RemoveChangeListener(Action OnChange)
+    public IPropertyDrawer RemoveChangeListener(Action OnChange)
     {
         OnChanged -= OnChange;
+        return this;
     }
     
-    public void ClearChangeListener()
+    public IPropertyDrawer ClearChangeListener()
     {
         OnChanged = () => { };
+        return this;
+    }
+
+    /// <summary>
+    /// 链接一个绘制器，当自身刷新时，也会刷新该绘制器
+    /// </summary>
+    /// <param name="drawer"></param>
+    public IPropertyDrawer ChainDrawer(IPropertyDrawer drawer)
+    {
+        ChainDrawers.Add(drawer);
+        return this;
     }
 }

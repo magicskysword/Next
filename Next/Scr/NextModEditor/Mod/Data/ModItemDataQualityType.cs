@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace SkySwordKill.NextModEditor.Mod.Data;
+﻿namespace SkySwordKill.NextModEditor.Mod.Data;
 
 public class ModItemDataQualityType : IModData
 {

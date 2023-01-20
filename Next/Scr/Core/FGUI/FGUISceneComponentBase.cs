@@ -1,6 +1,5 @@
 ﻿using SkySwordKill.Next;
 using SkySwordKill.Next.FGUI;
-using SkySwordKill.Next.XiaoYeGUI;
 
 namespace Next.Scr.Core.FGUI;
 

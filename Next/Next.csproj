@@ -7,9 +7,9 @@
     <ProjectGuid>{48F99F98-1EE6-4027-93BA-B1082F52BB03}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Next</RootNamespace>
+    <RootNamespace>SkySwordKill.Next</RootNamespace>
     <AssemblyName>Next</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <LangVersion>10</LangVersion>
   </PropertyGroup>
@@ -125,7 +125,10 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\CtlLongPropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowConfirmDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowConfirmDialogExtra.cs" />
+    <Compile Include="Scr\Core\FGUI\Dialog\WindowCreateWorkshopModDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowIntInputDialog.cs" />
+    <Compile Include="Scr\Core\FGUI\Dialog\WindowModSelectorDialog.cs" />
+    <Compile Include="Scr\Core\FGUI\Dialog\WindowSeidEditorDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowStringAreaInputPreviewDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowTableSelectorDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowStringAreaInputDialog.cs" />
@@ -147,6 +150,8 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\ModGUI\ProjectTreeFolderModGroup.cs" />
     <Compile Include="Scr\Core\ModGUI\ProjectTreeItemMod.cs" />
     <Compile Include="Scr\Core\Mod\ICustomSetting.cs" />
+    <Compile Include="Scr\Core\Mod\ModDataIdNotExistException.cs" />
+    <Compile Include="Scr\Core\Mod\ModException.cs" />
     <Compile Include="Scr\Core\Mod\ModSettingDefinition_Custom.cs" />
     <Compile Include="Scr\Core\Mod\ModSettingDefinition_DoubleFloatInput.cs" />
     <Compile Include="Scr\Core\Mod\ModSettingDefinition_DoubleFloatSlider.cs" />
@@ -160,8 +165,10 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\Mod\ModSettingDefinition.cs" />
     <Compile Include="Scr\Core\Mod\ModSettingDefinitionConverter.cs" />
     <Compile Include="Scr\Core\Mod\ModType.cs" />
+    <Compile Include="Scr\Core\Mod\ModOpenException.cs" />
     <Compile Include="Scr\Core\Mod\SettingTypeAttribute.cs" />
     <Compile Include="Scr\Core\Patch\FungusClonePatch.cs" />
+    <Compile Include="Scr\Core\Patch\MainUIMagPatch.cs" />
     <Compile Include="Scr\Core\Res\BytesAsset.cs" />
     <Compile Include="Scr\Core\Res\FileAsset.cs" />
     <Compile Include="Scr\Core\Res\ResourcesManager.cs" />
@@ -292,6 +299,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\NextModEditor\Mod\Data\ModAffixDataAffixType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModAffixDataProjectType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModAlchemyElementData.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModArithmeticOperatorType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModAttackType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModBuffData.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModBuffDataBuffType.cs" />
@@ -343,7 +351,6 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\NextModEditor\Mod\Data\ModTargetType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\IModDataClipboardPage.cs" />
     <Compile Include="Scr\NextModEditor\Mod\ModDataClipboard.cs" />
-    <Compile Include="Scr\NextModEditor\Mod\ModLoadException.cs" />
     <Compile Include="Scr\NextModEditor\Mod\ModEditorManager.cs" />
     <Compile Include="Scr\NextModEditor\Mod\ModProject.cs" />
     <Compile Include="Scr\NextModEditor\Mod\ModUtils.cs" />
@@ -374,9 +381,6 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeModProjectReferenced.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeModWorkshop.cs" />
     <Compile Include="Scr\NextModEditor\Panel\ModEditorMainPanel.cs" />
-    <Compile Include="Scr\NextModEditor\Panel\WindowCreateWorkshopModDialog.cs" />
-    <Compile Include="Scr\NextModEditor\Panel\WindowModSelectorDialog.cs" />
-    <Compile Include="Scr\NextModEditor\Panel\WindowSeidEditorDialog.cs" />
     <Compile Include="Scr\Xlua\Src\CodeEmit.cs" />
     <Compile Include="Scr\Xlua\Src\CopyByValue.cs" />
     <Compile Include="Scr\Xlua\Src\DelegateBridge.cs" />
@@ -426,6 +430,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scr\FairyGUI\Source" />
+    <Folder Include="Scr\NextModEditor\Window" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
