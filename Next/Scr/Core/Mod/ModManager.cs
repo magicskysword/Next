@@ -1260,12 +1260,13 @@ public static class ModManager
         
         return null;
     }
-     public static bool TryGetModSetting(string key, out bool value)
+    public static bool TryGetModSetting(string key, out bool value)
     {
-        if(TryGetModSetting(key,out bool? _)){
-             value = _ ?? false;
+        if(TryGetModSetting(key,out bool? config)){
+            value = config ?? false ;
             return true;
         }
+        value = false;
         return false;
     }
     
