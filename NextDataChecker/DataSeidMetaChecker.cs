@@ -174,8 +174,8 @@ public class DataSeidMetaChecker
                     }
                     else if (GetFieldType(fieldInfo.FieldType) != propertyDic[fieldInfo.Name])
                     {
-                        Logger.Error($"【{SeidNameSpace}】Seid:{seidId}的字段{fieldInfo.Name}的Property类型不匹配，当前为{propertyDic[fieldInfo.Name]}，应为:{GetFieldType(fieldInfo.FieldType)}");
-                        hasPropertyError = true;
+                        Logger.Warning($"【{SeidNameSpace}】Seid:{seidId}的字段{fieldInfo.Name}的Property类型不匹配，当前为{propertyDic[fieldInfo.Name]}，应为:{GetFieldType(fieldInfo.FieldType)}");
+                        //hasPropertyError = true;
                         propertyDic.Remove(fieldInfo.Name);
                     }
                     else
@@ -234,10 +234,10 @@ public class DataSeidMetaChecker
                 }
                 else if (GetFieldType(fieldInfo.FieldType) != propertyDic[fieldInfo.Name]["Type"]!.ToString())
                 {
-                    var property = propertyDic[fieldInfo.Name];
-                    var oldType = property["Type"]!.ToString();
-                    property["Type"] = GetFieldType(fieldInfo.FieldType);
-                    Logger.Info($"【{SeidNameSpace}】Seid:{seid}的字段{fieldInfo.Name}的类型从{oldType}修复为{property["Type"]}");
+                    // var property = propertyDic[fieldInfo.Name];
+                    // var oldType = property["Type"]!.ToString();
+                    // property["Type"] = GetFieldType(fieldInfo.FieldType);
+                    // Logger.Info($"【{SeidNameSpace}】Seid:{seid}的字段{fieldInfo.Name}的类型从{oldType}修复为{property["Type"]}");
                 }
             }
         }

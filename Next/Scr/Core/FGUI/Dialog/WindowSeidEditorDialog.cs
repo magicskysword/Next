@@ -7,6 +7,7 @@ using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.NextFGUI.NextCore;
 using SkySwordKill.NextModEditor.Mod;
 using SkySwordKill.NextModEditor.Mod.Data;
+using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI.Dialog;
 
@@ -122,6 +123,16 @@ public class WindowSeidEditorDialog : WindowDialogBase
 
         Refresh();
         UnselectTargetSeid();
+    }
+    
+    protected override void OnKeyDown(EventContext context)
+    {
+        base.OnKeyDown(context);
+        
+        if (context.inputEvent.keyCode == KeyCode.Escape)
+        {
+            Hide();
+        }
     }
 
     private void Refresh()
@@ -590,6 +601,45 @@ public class WindowSeidEditorDialog : WindowDialogBase
                 modData => ((ModSkillData)modData).SkillPkId);
             drawer = intPropertyDrawer;
         }
+        else if (seidProperty.SpecialDrawer.Contains("StaticSkillPKDrawer"))
+        {
+            var intPropertyDrawer = new CtlIntBindTablePropertyDrawer(seidProperty.Desc,
+                value => sInt.Value = value,
+                () => sInt.Value,
+                value =>
+                {
+                    var staticSkillData = Mod.FindStaticSkillBySkillPkId(value);
+                    if (staticSkillData != null)
+                    {
+                        return $"【{staticSkillData.Id}({staticSkillData.SkillPkId}) {staticSkillData.Name}】{staticSkillData.Desc}";
+                    }
+
+                    return $"【?({value})  ？】";
+                },
+                new List<TableInfo>()
+                {
+                    new TableInfo("ID",
+                        TableInfo.DEFAULT_GRID_WIDTH,
+                        getData => ((ModStaticSkillData)getData).Id.ToString()),
+                    new TableInfo("功法唯一ID",
+                        TableInfo.DEFAULT_GRID_WIDTH,
+                        getData => ((ModStaticSkillData)getData).SkillPkId.ToString()),
+                    new TableInfo("名称",
+                        TableInfo.DEFAULT_GRID_WIDTH,
+                        getData => ((ModStaticSkillData)getData).Name),
+                    new TableInfo("描述",
+                        TableInfo.DEFAULT_GRID_WIDTH * 2,
+                        getData => ((ModStaticSkillData)getData).Desc),
+                },
+                () => new List<IModData>(Mod
+                    .GetAllStaticSkillData(true)
+                    .GroupBy(skillData => skillData.SkillPkId)
+                    .Select(d =>
+                        d.OrderByDescending(skill => skill.SkillLv).First())
+                ),
+                modData => ((ModStaticSkillData)modData).SkillPkId);
+            drawer = intPropertyDrawer;
+        }
         else if (seidProperty.SpecialDrawer.Contains("SeidDrawer"))
         {
             var intPropertyDrawer = new CtlIntBindTablePropertyDrawer(seidProperty.Desc,
@@ -641,6 +691,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
                 case "SeidDrawer":
                 case "SkillDrawer":
                 case "SkillPKDrawer":
+                case "StaticSkillPKDrawer":
                 case "BuffDrawer":
                     continue;
                 case "BuffTypeDrawer":
@@ -655,7 +706,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
                         },
                         () => ModEditorManager.I.BuffDataBuffTypes.FindIndex(type => type.TypeID == sInt.Value));
                     Inspector.AddDrawer(dropdownPropertyDrawer);
-                    drawer.ChainDrawer(dropdownPropertyDrawer);
+                    drawer.AddChainDrawer(dropdownPropertyDrawer);
                     break;
                 }
                 case "LevelTypeDrawer":
@@ -670,7 +721,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
                         },
                         () => ModEditorManager.I.LevelTypes.FindIndex(type => type.TypeID == sInt.Value));
                     Inspector.AddDrawer(dropdownPropertyDrawer);
-                    drawer.ChainDrawer(dropdownPropertyDrawer);
+                    drawer.AddChainDrawer(dropdownPropertyDrawer);
                     break;
                 }
                 case "BuffRemoveTriggerTypeDrawer":
@@ -687,7 +738,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
                         () => ModEditorManager.I.BuffDataRemoveTriggerTypes.FindIndex(type =>
                             type.TypeID == sInt.Value));
                     Inspector.AddDrawer(dropdownPropertyDrawer);
-                    drawer.ChainDrawer(dropdownPropertyDrawer);
+                    drawer.AddChainDrawer(dropdownPropertyDrawer);
                     break;
                 }
                 case "AttackTypeDrawer":
@@ -704,7 +755,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
                         () => ModEditorManager.I.AttackTypes.FindIndex(type =>
                             type.Id == sInt.Value));
                     Inspector.AddDrawer(dropdownPropertyDrawer);
-                    drawer.ChainDrawer(dropdownPropertyDrawer);
+                    drawer.AddChainDrawer(dropdownPropertyDrawer);
                     break;
                 }
                 case "ElementTypeDrawer":
@@ -721,7 +772,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
                         () => ModEditorManager.I.ElementTypes.FindIndex(type =>
                             type.Id == sInt.Value));
                     Inspector.AddDrawer(dropdownPropertyDrawer);
-                    drawer.ChainDrawer(dropdownPropertyDrawer);
+                    drawer.AddChainDrawer(dropdownPropertyDrawer);
                     break;
                 }
                 case "TargetTypeDrawer":
@@ -738,7 +789,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
                         () => ModEditorManager.I.TargetTypes.FindIndex(type =>
                             type.TypeID == sInt.Value));
                     Inspector.AddDrawer(dropdownPropertyDrawer);
-                    drawer.ChainDrawer(dropdownPropertyDrawer);
+                    drawer.AddChainDrawer(dropdownPropertyDrawer);
                     break;
                 }
                 default:
@@ -1031,7 +1082,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
                         () => ModEditorManager.I.ComparisonOperatorTypes.FindIndex(type =>
                             type.TypeStrID == sString.Value));
                     Inspector.AddDrawer(buffTypeDrawer);
-                    drawer.ChainDrawer(buffTypeDrawer);
+                    drawer.AddChainDrawer(buffTypeDrawer);
                     break;
                 }
                 case "ArithmeticOperatorTypeDrawer":
@@ -1048,7 +1099,7 @@ public class WindowSeidEditorDialog : WindowDialogBase
                         () => ModEditorManager.I.ArithmeticOperatorTypes.FindIndex(type =>
                             type.TypeStrID == sString.Value));
                     Inspector.AddDrawer(buffTypeDrawer);
-                    drawer.ChainDrawer(buffTypeDrawer);
+                    drawer.AddChainDrawer(buffTypeDrawer);
                     break;
                 }
                 default:

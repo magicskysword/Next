@@ -7,6 +7,7 @@ namespace SkySwordKill.NextFGUI.NextCore
 {
     public partial class UI_BtnTab : GButton
     {
+        public GGraph m_dragArea;
         public GButton m_closeButton;
         public const string URL = "ui://028qk31hnkvz1o";
 
@@ -19,6 +20,7 @@ namespace SkySwordKill.NextFGUI.NextCore
         {
             base.ConstructFromXML(xml);
 
+            m_dragArea = (GGraph)GetChild("dragArea");
             m_closeButton = (GButton)GetChild("closeButton");
         }
     }

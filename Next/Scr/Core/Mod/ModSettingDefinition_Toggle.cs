@@ -19,8 +19,8 @@ public class ModSettingDefinition_Toggle : ModSettingDefinition
            value => ModManager.SetModSetting(Key, value),
            () =>
            {
-               ModManager.TryGetModSetting(Key, out bool value);
-               return value;
+               ModManager.TryGetModSetting(Key, out bool? value);
+               return value ?? false;
            });
        drawer.Tooltips = Description;
        inspector.AddDrawer(drawer);

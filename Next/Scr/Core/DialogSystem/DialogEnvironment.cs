@@ -152,7 +152,7 @@ public class DialogEnvironment
         return DialogAnalysis.GetStr(key);
     }
     
-    public bool GetBoolSetting(string key) => ModManager.TryGetModSetting(key, out bool value) && value;
+    public bool GetBoolSetting(string key) => ModManager.TryGetModSetting(key, out bool? value) && (value ?? false);
     public int GetIntSetting(string key) => ModManager.TryGetModSetting(key, out long value) ? (int)value : 0;
     public long GetLongSetting(string key) => ModManager.TryGetModSetting(key, out long value) ? value : 0L;
     public float GetFloatSetting(string key) => ModManager.TryGetModSetting(key, out double value) ? (float)value : 0f;

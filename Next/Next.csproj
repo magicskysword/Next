@@ -134,12 +134,14 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\FGUI\Dialog\WindowStringAreaInputDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowStringInputDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowWaitDialog.cs" />
+    <Compile Include="Scr\Core\FGUI\FGUIDragDropManager.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIPanelBase.cs" />
     <Compile Include="Scr\Core\FGUI\FGUISceneComponentBase.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIUtils.cs" />
     <Compile Include="Scr\Core\FGUI\IUndoCommand.cs" />
     <Compile Include="Scr\Core\FGUI\IUndoInst.cs" />
     <Compile Include="Scr\Core\FGUI\NextGLoader.cs" />
+    <Compile Include="Scr\Core\FGUI\SequenceCommand.cs" />
     <Compile Include="Scr\Core\FGUI\UndoExtension.cs" />
     <Compile Include="Scr\Core\FGUI\UndoInstManager.cs" />
     <Compile Include="Scr\Core\FGUI\ValueChangedCommand.cs" />
@@ -321,7 +323,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\NextModEditor\Mod\Data\ModForgePropertyData.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModItemData.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModItemDataArtifactTypeGroup.cs" />
-    <Compile Include="Scr\NextModEditor\Mod\Data\ModItemDataGuideType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModGuideType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModItemDataPhaseType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModItemDataQualityType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModItemDataShopType.cs" />
@@ -348,6 +350,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSkillSeidDataGroup.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSString.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModStaticSkillData.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModStaticSkillSeidDataGroup.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModTargetType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\IModDataClipboardPage.cs" />
     <Compile Include="Scr\NextModEditor\Mod\ModDataClipboard.cs" />

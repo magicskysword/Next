@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FairyGUI;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
@@ -38,6 +39,9 @@ public class ModDataTableDataList<T> : TableDataList<T> where T : IModData, new(
 
     public T AddItem(T modData)
     {
+        if (TryGetItem(modData.Id, out var data))
+            return data;
+        
         _list.Add(modData);
         OnAddItem(modData);
         _list.ModSort();
@@ -64,6 +68,12 @@ public class ModDataTableDataList<T> : TableDataList<T> where T : IModData, new(
     public bool TryGetItem(int id, out T item)
     {
         return _list.TryFindData(id, out item);
+    }
+    
+    public T GetItemById(int id)
+    {
+        _list.TryFindData(id, out var item);
+        return item;
     }
 }
 
@@ -163,6 +173,10 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
     public GButton BtnToolsCopy { get; set; }
     public GButton BtnToolsPaste { get; set; }
     public GButton BtnToolsPasteAsNew { get; set; }
+    public GButton BtnToolsDelete { get; set; }
+    /// <summary>
+    /// Mod数据表封装
+    /// </summary>
     public abstract ModDataTableDataList<T> ModDataTableDataList { get; set; }
     public UndoInstManager UndoManager { get; set; } = new UndoInstManager();
     public bool IsInit { get; private set; } = false;
@@ -176,12 +190,14 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
         TableList.SetClickItem(OnClickTableItem);
         TableList.SetRightClickItem(OnRightClickTableItem);
         TableList.SetTableRightClick(() => OnPopupMenu(null));
+        TableList.AllowClickToSelect = false;
+        TableList.MultiSelect = true;
         TableList.BindTable(TableInfos, ModDataTableDataList);
 
         UndoManager.OnChanged += RefreshToolsBar;
             
         BtnToolsAdd = TableEditor.ToolsBar.AddToolBtn("ui://NextCore/icon_add", "新建数据(Ctrl + N)", OnClickAdd);
-        BtnToolsRemove = TableEditor.ToolsBar.AddToolBtn("ui://NextCore/icon_minus", "移除数据(Delete)", OnClickRemove);
+        BtnToolsRemove = TableEditor.ToolsBar.AddToolBtn("ui://NextCore/icon_trash", "移除数据(Delete)", OnClickRemove);
         TableEditor.ToolsBar.AddToolSep();
         BtnToolsUndo = TableEditor.ToolsBar.AddToolBtn("ui://NextCore/icon_undo", "撤销(Ctrl + Z)", OnClickUndo);
         BtnToolsRedo = TableEditor.ToolsBar.AddToolBtn("ui://NextCore/icon_redo", "重做(Ctrl + Y)", OnClickRedo);
@@ -189,12 +205,15 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
         BtnToolsCopy = TableEditor.ToolsBar.AddToolBtn("ui://NextCore/icon_copy", "复制(Ctrl + C)", OnClickCopy);
         BtnToolsPaste = TableEditor.ToolsBar.AddToolBtn("ui://NextCore/icon_paste", "粘贴(Ctrl + V)", OnClickPaste);
         BtnToolsPasteAsNew = TableEditor.ToolsBar.AddToolBtn("ui://NextCore/icon_paste_as_new", "粘贴为新数据(Ctrl + Shift + V)", OnClickPasteAsNew);
+        TableEditor.ToolsBar.AddToolSep();
+        BtnToolsDelete = TableEditor.ToolsBar.AddToolBtn("ui://NextCore/icon_delete", "删除数据(Delete)", OnClickDelete);
         TableEditor.ToolsBar.AddToolSearch(OnSearchData);
             
         CurInspectIndex = -1;
         RefreshToolsBar();
         return TableEditor.MainView;
     }
+    
 
     protected abstract void OnInit();
 
@@ -277,79 +296,106 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
     public virtual void Refresh()
     {
         RefreshTable();
+        RefreshInspector();
+    }
+
+    private void RefreshInspector()
+    {
+        if(CurInspectIndex >= 0 && CurInspectIndex < GetDataCount())
+            TableList.ScrollToView(CurInspectIndex);
         InspectItem(CurInspectIndex);
     }
 
-    
     public void RefreshTable()
     {
-        TableList.SelectedIndex = CurInspectIndex;
         TableList.Refresh();
     }
-    
-    public void RefreshCurrentRow()
-    {
-        if(CurInspectIndex < 0)
-            return;
-    
-        TableList.RefreshRowAt(CurInspectIndex);
-    }
-        
+
     protected virtual void TableItemRenderer(int index, UI_ComTableRow row, object data)
     {
             
     }
     
-    protected virtual void OnClickTableItem(int index, object data)
+    protected virtual void OnClickTableItem()
     {
-        var toIndex = index;
+        Focus(TableList.SelectedIndex);
+    }
+
+    /// <summary>
+    /// 聚焦到选中的数据
+    /// </summary>
+    /// <param name="indexArray"></param>
+    protected virtual void Focus(params int[] indexArray)
+    {
+        if(indexArray.Length == 0)
+            return;
+        
+        var toIndex = indexArray.Min();
         var curIndex = CurInspectIndex;
+        var curIndexArray = TableList.SelectionArea.ToArray();
         this.Record(new CommonUndoCommand(
             () =>
             {
                 CurInspectIndex = toIndex;
-                Refresh();
+                TableList.SelectionArea = indexArray;
+                RefreshInspector();
             }, 
             () =>
             {
                 CurInspectIndex = curIndex;
-                Refresh();
+                TableList.SelectionArea = curIndexArray;
+                RefreshInspector();
             }));
     }
-        
-    protected virtual void OnRightClickTableItem(int index, object data)
+
+    /// <summary>
+    /// 聚焦到选中的数据组
+    /// </summary>
+    /// <param name="indexArray"></param>
+    protected virtual void FocusWithoutRecord(params int[] indexArray)
     {
-        OnPopupMenu((T)data);
+        if(indexArray.Length == 0)
+            return;
+        
+        var toIndex = indexArray.Min();
+        CurInspectIndex = toIndex;
+        TableList.SelectionArea = indexArray;
+        RefreshInspector();
+    }
+        
+    protected virtual void OnRightClickTableItem()
+    {
+        OnPopupMenu(TableList.SelectedItems.Select(data => (T) data).ToArray());
     }
 
-    protected void OnPopupMenu(T modData)
+    protected void OnPopupMenu(T[] selectedItems)
     {
-        var popupMenu = BuildTableItemPopupMenu(modData);
+        var popupMenu = BuildTableItemPopupMenu(selectedItems);
         popupMenu.Show(null, PopupDirection.Down);
     }
 
     protected virtual void OnClickPasteAsNew()
     {
-        if (CanPaste(DataClipboard.CurCopyData))
+        if (CanPaste(DataClipboard.CopyDatas))
         {
             PasteCopyDataAsNew(DataClipboard.CurCopyData);
             RefreshTable();
         }
     }
         
-    protected virtual PopupMenu BuildTableItemPopupMenu(T modData)
+    protected virtual PopupMenu BuildTableItemPopupMenu(T[] modDataArray)
     {
         var menu = new PopupMenu();
         menu.AddItem("新建", TryAddData).enabled = Editable;
-        menu.AddItem("复制", () => OnCopy(modData)).enabled = CanCopy(modData);
-        menu.AddItem("粘贴", OnClickPaste).enabled = Editable && CanPaste(DataClipboard.CurCopyData);
-        menu.AddItem("另存为", OnClickPasteAsNew).enabled = Editable && CanPaste(DataClipboard.CurCopyData);
-        OnBuildCustomPopupMenu(menu, modData);
-        menu.AddItem("删除", () => TryRemoveData(modData)).enabled = Editable && modData != null;
+        menu.AddItem("复制", () => OnCopy(modDataArray)).enabled = modDataArray != null && CanCopy(modDataArray);
+        menu.AddItem("粘贴", OnClickPaste).enabled = Editable && CanPaste(DataClipboard.CopyDatas);
+        menu.AddItem("另存为", OnClickPasteAsNew).enabled = Editable && CanPaste(DataClipboard.CopyDatas);
+        OnBuildCustomPopupMenu(menu, modDataArray);
+        menu.AddItem("删除", () => TryRemoveData(modDataArray)).enabled = Editable && CanRemove(modDataArray);
         return menu;
     }
 
-    protected virtual void OnBuildCustomPopupMenu(PopupMenu menu, T modData)
+    protected virtual void OnBuildCustomPopupMenu(PopupMenu menu, T[] modDataArray)
     {
             
     }
@@ -378,18 +424,20 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
         if (Editable)
         {
             BtnToolsAdd.enabled = true;
-            if(CurInspectIndex >= 0 && CurInspectIndex < TableList.GetDataCount())
+            var curIndexArray = TableList.SelectionArea.ToArray();
+            var modDataArray = curIndexArray.Select(GetItem).ToArray();
+            if(curIndexArray.Length > 0)
             {
-                BtnToolsRemove.enabled = true;
-                BtnToolsCopy.enabled = CanCopy((T)TableList.GetData(CurInspectIndex));
+                BtnToolsRemove.enabled = CanRemove(modDataArray);
+                BtnToolsCopy.enabled = CanCopy(modDataArray);
             }
             else
             {
                 BtnToolsRemove.enabled = false;
                 BtnToolsCopy.enabled = false;
             }
-            BtnToolsPaste.enabled = Editable && CanPaste(DataClipboard?.CurCopyData);
-            BtnToolsPasteAsNew.enabled = Editable && CanPaste(DataClipboard?.CurCopyData);
+            BtnToolsPaste.enabled = Editable && CanPaste(DataClipboard?.CopyDatas);
+            BtnToolsPasteAsNew.enabled = Editable && CanPaste(DataClipboard?.CopyDatas);
         }
         else
         {
@@ -437,12 +485,18 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
         
     private void OnClickRemove()
     {
-        var index = CurInspectIndex;
-        if(index < 0 || index > TableList.GetDataCount())
+        var dataArray = TableList.SelectedItems.Select(d => (T)d).ToArray();
+        if(dataArray.Length == 0)
             return;
-            
-        var data = (T)TableList.GetData(CurInspectIndex);
-        TryRemoveData(data);
+        
+        if(dataArray.Length == 1)
+        {
+            TryRemoveData(dataArray[0]);
+        }
+        else
+        {
+            TryRemoveData(dataArray);
+        }
     }
 
     protected void TryRemoveData(T modData)
@@ -457,28 +511,50 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
             );
         });
     }
+    
+    protected void TryRemoveData(T[] modDataArray)
+    {
+        WindowConfirmDialog.CreateDialog("提示", $"即将删除【{OnGetDataName(modDataArray[0])}】等{modDataArray.Length}项数据，是否确认？", true, () =>
+        {
+            for (var index = 0; index < modDataArray.Length; index++)
+            {
+                var modData = modDataArray[index];
+                this.Record(new RemoveDataUndoCommand(
+                        modData,
+                        data => AddData((T)data),
+                        data => RemoveData(data.Id)
+                    )
+                );
+            }
+        });
+    }
 
     protected virtual void OnClickCopy()
     {
-        OnCopy((T)TableList.GetData(CurInspectIndex));
+        OnCopy(TableList.SelectedItems.Select(d => (T)d).ToArray());
     }
         
-    protected virtual void OnCopy(T modData)
+    protected virtual void OnCopy(T[] modDataArray)
     {
-        if(CanCopy(modData))
+        if(CanCopy(modDataArray))
         {
-            DataClipboard.CurCopyData = GetCopyData(modData);
+            DataClipboard.SetCopyData(modDataArray.Select(GetCopyData));
             RefreshToolsBar();
         }
     }
         
     protected virtual void OnClickPaste()
     {
-        if (CanPaste(DataClipboard.CurCopyData))
+        if (CanPaste(DataClipboard.CopyDatas))
         {
-            PasteCopyData(DataClipboard.CurCopyData);
+            PasteCopyData(DataClipboard.CopyDatas);
             RefreshTable();
         }
+    }
+    
+    private void OnClickDelete()
+    {
+        TryRemoveData(TableList.SelectedItems.Select(d => (T)d).ToArray());
     }
         
     protected virtual void OnClickUndo()
@@ -523,7 +599,7 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
         InspectItem(TableList.SelectedIndex);
     }
 
-    protected virtual IPropertyDrawer AddDrawer(IPropertyDrawer drawer)
+    protected virtual TDrawer AddDrawer<TDrawer>(TDrawer drawer) where TDrawer : IPropertyDrawer
     {
         drawer.AddChangeListener(RefreshTable);
         drawer.UndoManager = UndoManager;
@@ -545,7 +621,8 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
         
     public virtual T GetItemById(int id)
     {
-        return ModDataTableDataList.GetItem(GetIndexById(id));
+        ModDataTableDataList.TryGetItem(id, out var item);
+        return item;
     }
         
     public virtual int GetIndexById(int id)
@@ -569,7 +646,7 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
         return Editable && UndoManager.CanRedo;
     }
 
-    protected virtual bool CanCopy(T data)
+    protected virtual bool CanCopy(T[] data)
     {
         return data != null;
     }
@@ -585,36 +662,107 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
     }
 
     public abstract string OnGetDataName(T data);
-
-    public virtual bool CanPaste(CopyData data)
+    
+    private bool CanRemove(T[] modDataArray)
     {
-        if(data == null)
+        return modDataArray != null &&  modDataArray.Length > 0;
+    }
+
+    public virtual bool CanPaste(List<CopyData> dataArray)
+    {
+        if(dataArray == null || dataArray.Count == 0)
             return false;
             
-        return data.Data is T;
+        return dataArray.All(copyData => copyData.Data is T);
     }
         
-    public void PasteCopyData(CopyData copyData)
+    public void PasteCopyData(List<CopyData> copyDataArray)
     {
-        if (ModDataTableDataList.TryGetItem(copyData.Data.Id, out var data))
+        if (copyDataArray.Count == 1)
         {
-            if(copyData.Data == data)
+            var copyData = copyDataArray[0];
+            if (ModDataTableDataList.TryGetItem(copyData.Data.Id, out var data))
             {
-                PasteCopyDataAsNew(copyData);
-                return;
-            }
+                if(copyData.Data == data)
+                {
+                    PasteCopyDataAsNew(copyData);
+                    return;
+                }
                 
-            WindowConfirmDialog.CreateDialog("提示", "目标ID已经存在数据，是否覆盖？", true, () =>
+                WindowConfirmDialog.CreateDialog("提示", $"目标ID:【{copyData.Data.Id}】已经存在数据，是否覆盖？", true, () =>
+                {
+                    ModDataTableDataList.RemoveItem(copyData.Data.Id);
+                    this.Record(new AddDataUndoCommand(
+                            () => OnPasteData(copyData, copyData.Data.Id),
+                            data => AddData((T)data),
+                            data => RemoveData(data.Id)
+                        )
+                    );
+                    
+                    var index = GetIndexById(copyData.Data.Id);
+                    Focus(index);
+                    RefreshTable();
+                });
+            }
+            else
             {
-                ModDataTableDataList.RemoveItem(copyData.Data.Id);
-                OnPasteData(copyData, copyData.Data.Id);
+                this.Record(new AddDataUndoCommand(
+                        () => OnPasteData(copyData, copyData.Data.Id),
+                        data => AddData((T)data),
+                        data => RemoveData(data.Id)
+                    )
+                );
+
+                var index = GetIndexById(copyData.Data.Id);
+                Focus(index);
                 RefreshTable();
-            });
+            }
         }
         else
         {
-            OnPasteData(copyData, copyData.Data.Id);
-            RefreshTable();
+            if (copyDataArray.Any(copyData => ModDataTableDataList.HasId(copyData.Data.Id)))
+            {
+                var conflictDataArray = copyDataArray.Where(copyData => ModDataTableDataList.HasId(copyData.Data.Id)).ToArray();
+                WindowConfirmDialog.CreateDialog("提示", $"目标ID:【{string.Join("," ,conflictDataArray.Select(d => d.Data.Id.ToString()))}】已经存在数据，是否覆盖？", true, () =>
+                {
+                    var commandSequence = new SequenceCommand();
+                    foreach (var copyData in copyDataArray)
+                    {
+                        if (ModDataTableDataList.HasId(copyData.Data.Id))
+                        {
+                            var removeData = ModDataTableDataList.GetItemById(copyData.Data.Id);
+                            commandSequence.AddCommand(new RemoveDataUndoCommand(removeData, 
+                                data => AddData((T)data), 
+                                data => RemoveData(data.Id)));
+                        }
+                        commandSequence.AddCommand(new AddDataUndoCommand(
+                            () => OnPasteData(copyData, copyData.Data.Id),
+                            data => AddData((T)data),
+                            data => RemoveData(data.Id)));
+                    }
+                    this.Record(commandSequence);
+
+                    var indexArray = copyDataArray.Select(copyData => GetIndexById(copyData.Data.Id)).ToArray();
+                    Focus(indexArray);
+                    RefreshTable();
+                });
+            }
+            else
+            {
+                var commandSequence = new SequenceCommand();
+                foreach (var copyData in copyDataArray)
+                {
+                    commandSequence.AddCommand(new AddDataUndoCommand(
+                        () => OnPasteData(copyData, copyData.Data.Id),
+                        data => AddData((T)data),
+                        data => RemoveData(data.Id)));
+                }
+                this.Record(commandSequence);
+                
+                var indexArray = copyDataArray.Select(copyData => GetIndexById(copyData.Data.Id)).ToArray();
+                Focus(indexArray);
+                RefreshTable();
+            }
         }
     }
         

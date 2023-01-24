@@ -10,7 +10,7 @@ public class NextModSetting
 {
     public Dictionary<string, ModGroupSetting> groupSettings = new Dictionary<string, ModGroupSetting>();
     public Dictionary<string, ModConfigSetting> modSettings = new Dictionary<string, ModConfigSetting>();
-    public DataGroup<bool> BoolGroup = new DataGroup<bool>();
+    public DataGroup<bool?> BoolGroup = new DataGroup<bool?>();
     public DataGroup<long> LongIntegerGroup = new DataGroup<long>();
     public DataGroup<double> DoubleFloatGroup = new DataGroup<double>();
     public DataGroup<string> StringGroup = new DataGroup<string>();

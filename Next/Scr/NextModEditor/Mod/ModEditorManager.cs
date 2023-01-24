@@ -29,7 +29,7 @@ public class ModEditorManager
     public List<ModBuffDataTriggerType> BuffDataTriggerTypes { get; set; }
     public List<ModBuffDataRemoveTriggerType> BuffDataRemoveTriggerTypes { get; set; }
     public List<ModBuffDataOverlayType> BuffDataOverlayTypes { get; set; }
-    public List<ModItemDataGuideType> ItemDataGuideTypes { get; set; }
+    public List<ModGuideType> GuideTypes { get; set; }
     public List<ModItemDataShopType> ItemDataShopTypes { get; set; }
     public List<ModItemDataQualityType> ItemDataQualityTypes { get; set; }
     public List<ModItemDataPhaseType> ItemDataPhaseTypes { get; set; }
@@ -38,6 +38,7 @@ public class ModEditorManager
     public Dictionary<int, ModSeidMeta> ItemUseSeidMetas { get; set; }
     public List<ModItemDataUseType> ItemDataUseTypes { get; set; }
     public Dictionary<int, ModSeidMeta> SkillSeidMetas { get; set; }
+    public Dictionary<int, ModSeidMeta> StaticSkillSeidMetas { get; set; }
     public List<ModAttackType> AttackTypes { get; set; }
     public List<ModElementType> ElementTypes { get; set; }
     public List<ModComparisonOperatorType> ComparisonOperatorTypes { get; set; }
@@ -52,10 +53,10 @@ public class ModEditorManager
     public List<ModSkillDataConsultType> SkillDataConsultTypes { get; set; }
     public List<ModSkillDataAttackScriptType> SkillDataAttackScriptTypes { get; set; }
 
+    
     // Data
     public ModProject ReferenceProject { get; set; }
     public Dictionary<string, FFlowchart> DefaultFFlowchart { get; set; }
-        
     public bool IsInit { get; private set; }
 
     static ModEditorManager()
@@ -104,9 +105,9 @@ public class ModEditorManager
             BuffDataOverlayTypes = JArray
                 .Parse(ModUtils.LoadEditorConfig("Meta/BuffOverlayType.json"))
                 .ToObject<List<ModBuffDataOverlayType>>();
-            ItemDataGuideTypes = JArray
-                .Parse(ModUtils.LoadEditorConfig("Meta/ItemGuideType.json"))
-                .ToObject<List<ModItemDataGuideType>>();
+            GuideTypes = JArray
+                .Parse(ModUtils.LoadEditorConfig("Meta/GuideType.json"))
+                .ToObject<List<ModGuideType>>();
             ItemDataShopTypes = JArray
                 .Parse(ModUtils.LoadEditorConfig("Meta/ItemShopType.json"))
                 .ToObject<List<ModItemDataShopType>>();
@@ -130,6 +131,9 @@ public class ModEditorManager
                 .ToObject<List<ModItemDataUseType>>();
             SkillSeidMetas = JObject
                 .Parse(ModUtils.LoadEditorConfig("Meta/SkillSeidMeta.json"))
+                .ToObject<Dictionary<int, ModSeidMeta>>();
+            StaticSkillSeidMetas = JObject
+                .Parse(ModUtils.LoadEditorConfig("Meta/StaticSkillSeidMeta.json"))
                 .ToObject<Dictionary<int, ModSeidMeta>>();
             AttackTypes = JArray
                 .Parse(ModUtils.LoadEditorConfig("Meta/AttackType.json"))
@@ -233,5 +237,36 @@ public class ModEditorManager
     {
         return CreateAvatarDataTalentTypes.FirstOrDefault(type => type.TypeID == relationNum)?.Desc ??
                "Main.Unknown".I18N();
+    }
+    
+    
+    private HashSet<int> _itemGuideTypes = new() { 0, 1, 2, 3, 4};
+    /// <summary>
+    /// 获取物品使用的图鉴类型
+    /// </summary>
+    /// <returns></returns>
+    public List<ModGuideType> GetItemGuideTypes()
+    {
+        return GuideTypes.Where(type => _itemGuideTypes.Contains(type.Id) ).ToList();
+    }
+    
+    private HashSet<int> _skillGuideTypes = new() { 0, 6, 8, 9 };
+    /// <summary>
+    /// 获取神通使用的图鉴类型
+    /// </summary>
+    /// <returns></returns>
+    public List<ModGuideType> GetSkillGuideTypes()
+    {
+        return GuideTypes.Where(type => _skillGuideTypes.Contains(type.Id) ).ToList();
+    }
+    
+    private HashSet<int> _staticSkillGuideTypes = new() { 0, 7};
+    /// <summary>
+    /// 获取功法使用的图鉴类型
+    /// </summary>
+    /// <returns></returns>
+    public List<ModGuideType> GetStaticSkillGuideTypes()
+    {
+        return GuideTypes.Where(type => _staticSkillGuideTypes.Contains(type.Id) ).ToList();
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using FairyGUI;
 using SkySwordKill.NextFGUI.NextCore;
+using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI.Dialog;
 
@@ -12,6 +14,7 @@ public class WindowConfirmDialogExtra : WindowDialogBase
     private bool _defaultExtra;
     private Action<bool> _onConfirm;
     private Action _onCancel;
+    private bool _result;
 
     private WindowConfirmDialogExtra() : base("NextCore", "WinConfirmDialogExtra")
     {
@@ -34,7 +37,17 @@ public class WindowConfirmDialogExtra : WindowDialogBase
 
         window.Show();
     }
-    
+
+    protected override void OnKeyDown(EventContext context)
+    {
+        base.OnKeyDown(context);
+        
+        if (context.inputEvent.keyCode == KeyCode.Escape && _canCancel)
+        {
+            Cancel();
+        }
+    }
+
     protected override void OnInit()
     {
         base.OnInit();
@@ -51,13 +64,22 @@ public class WindowConfirmDialogExtra : WindowDialogBase
 
     private void Confirm()
     {
-        _onConfirm?.Invoke(MainView.m_tglExtra.selected);
+        _result = true;
         Hide();
     }
 
     private void Cancel()
     {
-        _onCancel?.Invoke();
+        _result = false;
         Hide();
+    }
+    
+    protected override void OnHide()
+    {
+        base.OnHide();
+        if (_result)
+            _onConfirm?.Invoke(MainView.m_tglExtra.selected);
+        else
+            _onCancel?.Invoke();
     }
 }

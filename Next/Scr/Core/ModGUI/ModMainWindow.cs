@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using FairyGUI;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
@@ -73,6 +74,29 @@ public class ModMainWindow : FGUIWindowBase
         MakeFullScreenAndCenter(0.8f);
         
         Refresh();
+    }
+    
+    protected override void DoShowAnimation()
+    {
+        pivot = new Vector2(0.5f, 0.5f);
+        alpha = 0f;
+        scale = Vector2.zero;
+        Center();
+        TweenScale(Vector2.one, 0.3f).SetEase(EaseType.CubicOut);
+        TweenFade(1f, 0.3f).OnComplete(OnShown);
+    }
+    
+    protected override void DoHideAnimation()
+    {
+        TweenFade(0f, 0.2f).OnComplete(HideImmediately);
+    }
+
+    protected override void OnKeyDown(EventContext context)
+    {
+        base.OnKeyDown(context);
+        
+        if(context.inputEvent.keyCode == KeyCode.Escape)
+            Close();
     }
 
     protected override void OnHide()
@@ -182,6 +206,11 @@ public class ModMainWindow : FGUIWindowBase
     
     private void OnClickClose(EventContext context)
     {
+        Close();
+    }
+
+    private void Close()
+    {
         if (ModSettingDirty)
         {
             WindowConfirmDialog.CreateDialog("提示", "检测到Mod设置已经发生变更，是否不保存并退出？", true,Hide);
@@ -191,38 +220,47 @@ public class ModMainWindow : FGUIWindowBase
             Hide();
         }
     }
-    
+
     private void OnClickApply(EventContext context)
     {
         WindowConfirmDialog.CreateDialog("提示", "是否应用更改？", true,() =>
         {
-            WindowWaitDialog.CreateDialog("提示","正在应用更改...", 1f, 
-                waitContext =>
-            {
-                try
+            WindowWaitDialog.CreateDialogAsync("提示","正在应用更改...", 1f, 
+                (callback, waitContext) =>
                 {
-                    ModManager.SaveSetting();
-                    if (ModLoadSettingDirty)
+                    UniTask.Create(async () =>
                     {
-                        ModManager.ReloadAllMod();
+                        await UniTask.SwitchToThreadPool();
+                        try
+                        {
+                            ModManager.SaveSetting();
+                            if (ModLoadSettingDirty)
+                            {
+                                await ModManager.ReloadAllModAsync();
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            waitContext.Exception = e;
+                        }
+                        finally
+                        {
+                            await UniTask.SwitchToMainThread();
+                            callback();
+                        }
+                    });
+                }, 
+                waitContext=>
+                {
+                    _modLoadSettingDirty = false;
+                    _modDataSettingDirty = false;
+                    if (waitContext.Exception != null)
+                    {
+                        Main.LogError(waitContext.Exception);
+                        WindowConfirmDialog.CreateDialog("提示", "应用更改失败！发生未知异常！Mod加载发生错误！请检查Mod内容并重启游戏！\n错误信息：" + waitContext.Exception, true);
                     }
-                }
-                catch (Exception e)
-                {
-                    waitContext.Exception = e;
-                }
-            }, 
-                context=>
-            {
-                _modLoadSettingDirty = false;
-                _modDataSettingDirty = false;
-                if (context.Exception != null)
-                {
-                    Main.LogError(context.Exception);
-                    WindowConfirmDialog.CreateDialog("提示", "应用更改失败！发生未知异常！Mod加载发生错误！请检查Mod内容并重启游戏！\n错误信息：" + context.Exception, true);
-                }
-                Refresh();
-            });
+                    Refresh();
+                });
         });
     }
     

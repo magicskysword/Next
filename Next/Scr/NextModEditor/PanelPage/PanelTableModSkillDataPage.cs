@@ -106,14 +106,22 @@ public class PanelTableModSkillDataPage : PanelTablePageBase<ModSkillData>
                 () => data.SkillPkId
             )
         );
+        
+        AddDrawer(new CtlStringPropertyDrawer(
+                "名称".I18NTodo(),
+                value => data.Name = value,
+                () => data.Name
+            )
+        );
             
+        var iconDrawer = new CtlIconPreviewDrawer(() => Mod.GetSkillIconUrl(data));
         AddDrawer(new CtlIntPropertyDrawer(
                 "图标".I18NTodo(),
                 value => data.Icon = value,
                 () => data.Icon).AddChangeListener(Inspector.Refresh)
-        );
+        ).AddChainDrawer(iconDrawer);
             
-        AddDrawer(new CtlIconPreviewDrawer(() => Mod.GetSkillIconUrl(data)));
+        AddDrawer(iconDrawer);
 
         AddDrawer(new CtlIntPropertyDrawer(
                 "神通等级".I18NTodo(),
@@ -137,11 +145,11 @@ public class PanelTableModSkillDataPage : PanelTablePageBase<ModSkillData>
                 () => ModEditorManager.I.SkillDataPhase.FindIndex(s => s.Id == data.Phase)
             )
         );
-
-        AddDrawer(new CtlStringPropertyDrawer(
-                "名称".I18NTodo(),
-                value => data.Name = value,
-                () => data.Name
+        
+        AddDrawer(new CtlIntPropertyDrawer(
+                "参悟月数".I18NTodo(),
+                value => data.LearnCostMonth = value,
+                () => data.LearnCostMonth
             )
         );
 
@@ -313,6 +321,13 @@ public class PanelTableModSkillDataPage : PanelTablePageBase<ModSkillData>
         );
 
         AddDrawer(new CtlDropdownPropertyDrawer(
+            "图鉴类型".I18NTodo(),
+                () => ModEditorManager.I.GetSkillGuideTypes().Select(type => $"{type.Id} : {type.Desc}"),
+                index => data.GuideType = ModEditorManager.I.GetSkillGuideTypes()[index].Id,
+                () => ModEditorManager.I.GetSkillGuideTypes().GetIndex(data.GuideType)
+        ));
+
+        AddDrawer(new CtlDropdownPropertyDrawer(
                 "请教类型".I18NTodo(),
                 () => ModEditorManager.I.SkillDataConsultTypes.Select(type => $"{type.Id} : {type.Desc}"),
                 index => data.ConsultType = ModEditorManager.I.SkillDataConsultTypes[index].Id,
@@ -347,13 +362,13 @@ public class PanelTableModSkillDataPage : PanelTablePageBase<ModSkillData>
         return $"{data.Id} {data.Name}";
     }
 
-    protected override void OnBuildCustomPopupMenu(PopupMenu menu, ModSkillData modData)
+    protected override void OnBuildCustomPopupMenu(PopupMenu menu, ModSkillData[] modDataArray)
     {
         menu.AddSeperator();
-        menu.AddItem("生成神通组".I18NTodo(), () => OnGenerateSkillGroup(modData))
-            .enabled = Editable && modData != null;
-        menu.AddItem("生成神通书籍".I18NTodo(), () => OnGenerateSkillBook(modData))
-            .enabled = Editable && modData != null;
+        menu.AddItem("生成神通组".I18NTodo(), () => OnGenerateSkillGroup(modDataArray[0]))
+            .enabled = Editable && modDataArray?.Length == 1;
+        menu.AddItem("生成神通书籍".I18NTodo(), () => OnGenerateSkillBook(modDataArray[0]))
+            .enabled = Editable && modDataArray?.Length == 1;
         menu.AddSeperator();
     }
 
@@ -379,6 +394,7 @@ public class PanelTableModSkillDataPage : PanelTablePageBase<ModSkillData>
                 itemData.Id = itemId;
                 itemData.Icon = 3001;
                 itemData.Name = modData.Name;
+                itemData.Info = modData.SkillPkId.ToString();
                 itemData.Desc = modData.Desc;
                 itemData.Quality = modData.Quality;
                 itemData.Phase = modData.Phase;
@@ -415,15 +431,16 @@ public class PanelTableModSkillDataPage : PanelTablePageBase<ModSkillData>
             if (ModDataTableDataList.HasId(id))
             {
                 WindowConfirmDialog.CreateDialog("提示", 
-                    $"已经存在id为{id}的神通，请确保从{modData.Id + 1} ~ {modData.Id + 5}范围没有相应技能。".I18NTodo(), false);
+                    $"已经存在id为{id}的神通，请确保从{modData.Id} ~ {modData.Id + 4}范围没有相应技能。".I18NTodo(), false);
                 return;
             }
         }
             
         WindowConfirmDialog.CreateDialog("提示", 
-            $"是否生成从{modData.Id} ~ {modData.Id + 5}的技能组？".I18NTodo(), true, () =>
+            $"是否生成从{modData.Id} ~ {modData.Id + 4}的技能组？".I18NTodo(), true, () =>
             {
                 var copyData = GetCopyData(modData);
+                var sequenceCommand = new SequenceCommand();
                 if (!modData.Name.EndsWith("1"))
                 {
                     modData.Name += "1";
@@ -432,7 +449,7 @@ public class PanelTableModSkillDataPage : PanelTablePageBase<ModSkillData>
                 {
                     var id = modData.Id + i;
                     var tagLv = i + 1;
-                    this.Record(new AddDataUndoCommand(
+                    sequenceCommand.AddCommand(new AddDataUndoCommand(
                         () =>
                         {
                             var tagData = OnPasteData(copyData, id);
@@ -442,8 +459,8 @@ public class PanelTableModSkillDataPage : PanelTablePageBase<ModSkillData>
                         },
                         data => AddData((ModSkillData)data),
                         data => RemoveData(data.Id)));
-                        
                 }
+                this.Record(sequenceCommand);
                 Refresh();
             });
     }

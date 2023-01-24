@@ -14,7 +14,6 @@ public abstract class WindowDialogBase : FGUIWindowBase
     
     protected override void DoShowAnimation()
     {
-        base.DoShowAnimation();
         pivot = new Vector2(0.5f, 0.5f);
         alpha = 0f;
         scale = Vector2.zero;
@@ -23,10 +22,22 @@ public abstract class WindowDialogBase : FGUIWindowBase
         TweenFade(1f, 0.3f).OnComplete(OnShown);
     }
 
+    protected override void DoHideAnimation()
+    {
+        contentPane.touchable = false;
+        TweenFade(0f, 0.2f).OnComplete(HideImmediately);
+    }
+
     protected override void OnInit()
     {
         base.OnInit();
         BindResizeHandle();
+    }
+
+    protected override void OnShown()
+    {
+        base.OnShown();
+        contentPane.touchable = true;
     }
 
     private Vector2 _startPos = Vector2.zero;

@@ -71,6 +71,7 @@ public class FGUIPanelBase
     {
         isShowing = true;
         RayBlocker.OpenBlocker();
+        contentPane.RequestFocus();
     }
 
     protected virtual void OnHide()

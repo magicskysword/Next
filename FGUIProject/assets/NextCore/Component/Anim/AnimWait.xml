@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="200,12" overflow="hidden">
+  <displayList>
+    <graph id="n0_f830" name="n0" xy="61,6" pivot="0.5,0.5" anchor="true" size="4,4" group="n5_f830" type="eclipse" lineSize="0" fillColor="#ff959595"/>
+    <graph id="n1_f830" name="n1" xy="80,6" pivot="0.5,0.5" anchor="true" size="4,4" group="n5_f830" type="eclipse" lineSize="0" fillColor="#ff959595"/>
+    <graph id="n2_f830" name="n2" xy="99,6" pivot="0.5,0.5" anchor="true" size="4,4" group="n5_f830" type="eclipse" lineSize="0" fillColor="#ff959595"/>
+    <graph id="n3_f830" name="n3" xy="118,6" pivot="0.5,0.5" anchor="true" size="4,4" group="n5_f830" type="eclipse" lineSize="0" fillColor="#ff959595"/>
+    <graph id="n6_f830" name="n6" xy="137,6" pivot="0.5,0.5" anchor="true" size="4,4" group="n5_f830" type="eclipse" lineSize="0" fillColor="#ff959595"/>
+    <group id="n5_f830" name="n5" xy="59,4" size="80,4" advanced="true" layout="hz" colGap="15" excludeInvisibles="true">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
+  </displayList>
+  <transition name="t1" autoPlay="true" autoPlayRepeat="-1">
+    <item time="0" type="Scale" target="n0_f830" tween="true" startValue="1,1" endValue="3,3" duration="6"/>
+    <item time="6" type="Scale" target="n0_f830" tween="true" startValue="3,3" endValue="1,1" duration="6"/>
+    <item time="6" type="Scale" target="n1_f830" tween="true" startValue="1,1" endValue="3,3" duration="6"/>
+    <item time="12" type="Scale" target="n1_f830" tween="true" startValue="3,3" endValue="1,1" duration="6"/>
+    <item time="12" type="Scale" target="n2_f830" tween="true" startValue="1,1" endValue="3,3" duration="6"/>
+    <item time="18" type="Scale" target="n2_f830" tween="true" startValue="3,3" endValue="1,1" duration="6"/>
+    <item time="18" type="Scale" target="n3_f830" tween="true" startValue="1,1" endValue="3,3" duration="6"/>
+    <item time="24" type="Scale" target="n3_f830" tween="true" startValue="3,3" endValue="1,1" duration="6"/>
+    <item time="24" type="Scale" target="n6_f830" tween="true" startValue="1,1" endValue="3,3" duration="6"/>
+    <item time="30" type="Scale" target="n6_f830" tween="true" startValue="3,3" endValue="1,1" duration="6"/>
+  </transition>
+</component>

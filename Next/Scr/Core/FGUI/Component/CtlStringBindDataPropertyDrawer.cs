@@ -28,7 +28,13 @@ public class CtlStringBindDataPropertyDrawer: CtlPropertyDrawerBase
         var drawer = UI_ComStringBindDataDrawer.CreateInstance();
         drawer.title = _drawerName;
         drawer.m_inContent.onFocusOut.Add(() => OnSetProperty(drawer.m_inContent.text));
+        drawer.m_btnEdit.onClick.Add(OnClickEdit);
         return drawer;
+    }
+
+    private void OnClickEdit(EventContext context)
+    {
+        _onClickEdit?.Invoke(OnGetProperty());
     }
 
     protected override void OnRefresh()

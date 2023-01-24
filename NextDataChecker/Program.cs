@@ -7,6 +7,7 @@ var seidCheckers = new List<DataSeidMetaChecker>()
 {
     new DataSeidMetaChecker("BuffSeidJson", dataRootPath + "Meta/BuffSeidMeta.json"),
     new DataSeidMetaChecker("SkillSeidJson", dataRootPath + "Meta/SkillSeidMeta.json"),
+    new DataSeidMetaChecker("StaticSkillSeidJson", dataRootPath + "Meta/StaticSkillSeidMeta.json"),
     new DataSeidMetaChecker("CrateAvatarSeid", dataRootPath + "Meta/CreateAvatarSeidMeta.json"),
     new DataSeidMetaChecker("ItemsSeidJsonData", dataRootPath + "Meta/ItemUseSeidMeta.json"),
     new DataSeidMetaChecker("EquipSeidJsonData", dataRootPath + "Meta/ItemEquipSeidMeta.json"),

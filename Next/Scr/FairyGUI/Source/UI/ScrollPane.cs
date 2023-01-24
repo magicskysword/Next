@@ -26,7 +26,8 @@ public class ScrollPane : EventDispatcher
     bool _needRefresh;
     int _refreshBarAxis;
 
-    bool _displayOnLeft;
+    public bool _displayOnLeft;
+    public bool _displayOnTop;
     bool _snapToItem;
     internal bool _displayInDemand;
     bool _mouseWheelEnabled;
@@ -1049,7 +1050,10 @@ public class ScrollPane : EventDispatcher
             mx = Mathf.FloorToInt(_owner.margin.left + _vtScrollBar.width);
         else
             mx = _owner.margin.left;
-        my = _owner.margin.top;
+        if(_displayOnTop && _hzScrollBar != null && !_floating)
+            my = Mathf.FloorToInt(_owner.margin.top + _hzScrollBar.height);
+        else
+            my = _owner.margin.top;
         mx += _owner._alignOffset.x;
         my += _owner._alignOffset.y;
 
@@ -1062,7 +1066,10 @@ public class ScrollPane : EventDispatcher
 
         if (_hzScrollBar != null)
         {
-            _hzScrollBar.y = aHeight - _hzScrollBar.height;
+            if(!_displayOnTop)
+                _hzScrollBar.y = aHeight - _hzScrollBar.height;
+            else
+                _hzScrollBar.y = 0;
             if (_vtScrollBar != null)
             {
                 _hzScrollBar.width = aWidth - _vtScrollBar.width - _scrollBarMargin.left - _scrollBarMargin.right;
@@ -1081,8 +1088,16 @@ public class ScrollPane : EventDispatcher
         {
             if (!_displayOnLeft)
                 _vtScrollBar.x = aWidth - _vtScrollBar.width;
+            else
+                _vtScrollBar.x = 0;
             if (_hzScrollBar != null)
+            {
                 _vtScrollBar.height = aHeight - _hzScrollBar.height - _scrollBarMargin.top - _scrollBarMargin.bottom;
+                if(_displayOnTop)
+                    _vtScrollBar.y = _scrollBarMargin.top + _hzScrollBar.height;
+                else
+                    _vtScrollBar.y = _scrollBarMargin.top;
+            }
             else
                 _vtScrollBar.height = aHeight - _scrollBarMargin.top - _scrollBarMargin.bottom;
             _vtScrollBar.y = _scrollBarMargin.top;

@@ -22,6 +22,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             UIObjectFactory.SetPackageItemExtension(UI_ComTableEditor.URL, typeof(UI_ComTableEditor));
             UIObjectFactory.SetPackageItemExtension(UI_ComNodeCanvas.URL, typeof(UI_ComNodeCanvas));
             UIObjectFactory.SetPackageItemExtension(UI_ComNodeBlock.URL, typeof(UI_ComNodeBlock));
+            UIObjectFactory.SetPackageItemExtension(UI_AnimWait.URL, typeof(UI_AnimWait));
             UIObjectFactory.SetPackageItemExtension(UI_ComTitleDrawer.URL, typeof(UI_ComTitleDrawer));
             UIObjectFactory.SetPackageItemExtension(UI_WinWaitDialog.URL, typeof(UI_WinWaitDialog));
             UIObjectFactory.SetPackageItemExtension(UI_ComStringBindDataDrawer.URL, typeof(UI_ComStringBindDataDrawer));

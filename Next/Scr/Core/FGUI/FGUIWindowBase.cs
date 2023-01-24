@@ -15,8 +15,9 @@ public class FGUIWindowBase : Window
         this.pkgName = pkgName;
         this.comName = comName;
         contentPane = Main.FGUI.CreateUIObject(pkgName, comName).asCom;
+        contentPane.onKeyDown.Add(OnKeyDown);
     }
-        
+
     protected override void OnInit()
     {
         RayBlocker = RayBlocker.CreateRayBlock(comName);
@@ -40,6 +41,7 @@ public class FGUIWindowBase : Window
     {
         base.OnShown();
         RayBlocker.OpenBlocker();
+        contentPane.RequestFocus();
     }
 
     protected override void OnHide()
@@ -47,6 +49,11 @@ public class FGUIWindowBase : Window
         RayBlocker.CloseBlocker();
         RayBlocker.DestroySelf();
         Dispose();
+    }
+    
+    protected virtual void OnKeyDown(EventContext context)
+    {
+        
     }
 
     protected override void closeEventHandler(EventContext context)

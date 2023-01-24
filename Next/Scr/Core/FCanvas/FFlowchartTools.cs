@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Cysharp.Threading.Tasks;
 using Fungus;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -89,7 +90,7 @@ public static class FFlowchartTools
             }
         }
     }
-    
+
     public static void ExportCurrentSceneFungusFlowchart(string outputPath)
     {
         var flowchartsInScene = new List<Flowchart>();

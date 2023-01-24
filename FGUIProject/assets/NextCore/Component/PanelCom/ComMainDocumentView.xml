@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="879,600" bgColorEnabled="true" bgColor="#3e4247">
+<component size="879,600" designImageOffsetX="50" designImageOffsetY="50" designImageForTest="true" bgColorEnabled="true" bgColor="#3e4247">
   <displayList>
     <graph id="n2_10zy0" name="n2" xy="0,30" size="879,570" type="rect" lineSize="0" lineColor="#ff21252b" fillColor="#ff21252b">
       <relation target="" sidePair="width-width,height-height"/>
@@ -7,23 +7,31 @@
     <graph id="n1_10zy0" name="n1" xy="0,0" size="879,34" type="rect" lineSize="0" fillColor="#ff21252b">
       <relation target="" sidePair="width-width"/>
     </graph>
-    <graph id="n8_nqml" name="frameLineUp" xy="0,0" size="879,34" touchable="false" type="rect" lineColor="#ff32363c" fillColor="#002c313c">
+    <graph id="n8_nqml" name="frameLineUp" xy="0,0" size="879,40" touchable="false" type="rect" lineColor="#ff32363c" fillColor="#002c313c">
       <relation target="" sidePair="width-width"/>
     </graph>
-    <graph id="n7_nqml" name="frameLine" xy="0,33" size="879,567" touchable="false" type="rect" lineColor="#ff32363c" fillColor="#002c313c">
+    <graph id="n7_nqml" name="frameLine" xy="0,39" size="879,561" touchable="false" type="rect" lineColor="#ff32363c" fillColor="#002c313c">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <list id="n0_10zy0" name="lstTab" xy="1,1" size="877,32" layout="row" overflow="scroll" scroll="horizontal" scrollBarFlags="164" scrollBar="auto" margin="0,0,0,20" scrollBarMargin="0,0,1,1" scrollBarRes=",ui://028qk31hnkvz2a" defaultItem="ui://028qk31hnkvz1o" autoItemSize="false" autoClearItems="true">
+    <list id="n0_10zy0" name="lstTab" xy="1,1" size="877,38" layout="row" overflow="scroll" scroll="horizontal" scrollBarFlags="1188" scrollBar="auto" margin="0,0,0,20" scrollBarMargin="0,0,1,1" scrollBarRes=",ui://028qk31hnkvz2a" defaultItem="ui://028qk31hnkvz1o" autoItemSize="false" vAlign="bottom" autoClearItems="true">
       <relation target="" sidePair="width-width"/>
       <item title="Mod信息"/>
       <item title="游戏物品"/>
       <item title="请教物品"/>
       <item title="功法"/>
       <item title="神通"/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
     </list>
-    <list id="n6_10zy0" name="content" xy="1,34" size="877,565" layout="pagination" lineItemCount="1" lineItemCount2="1" autoItemSize="true" autoClearItems="true" scrollItemToViewOnClick="false">
+    <graph id="n6_10zy0" name="placeholder" xy="1,40" size="877,559" visible="false" type="rect" lineSize="0" fillColor="#ff2c313c">
       <relation target="" sidePair="width-width,height-height"/>
-      <item url="ui://028qk31heg8y3f"/>
-    </list>
+    </graph>
   </displayList>
 </component>

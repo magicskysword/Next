@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FairyGUI;
 using Next.Scr.Core.FGUI;
 using SkySwordKill.Next.Res;
 using SkySwordKill.NextFGUI.NextCore;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace SkySwordKill.Next.FGUI;
 
-public class FGUIManager
+public class FGUIManager : MonoBehaviour
 {
     public const string PKG_NEXT_CORE = "NextCore";
         
@@ -27,6 +30,12 @@ public class FGUIManager
 
     private bool _inClearScenePanel = false;
     
+    private Canvas _fguiCanvas;
+    private RenderTexture _renderTexture;
+    
+    int lastScreenWidth = 0;
+    int lastScreenHeight = 0;
+
     public void Init()
     {
         LoadFGUIAB();
@@ -74,6 +83,51 @@ public class FGUIManager
         }
         
         SceneManager.sceneLoaded += OnSceneLoaded;
+        
+        // 创建一个Canvas，用于显示FGUI
+        var obj = new GameObject("FGUICanvas");
+        DontDestroyOnLoad(obj);
+        _fguiCanvas = obj.AddComponent<Canvas>();
+        _fguiCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        _fguiCanvas.sortingOrder = 900;
+
+        // 将StageCamera的内容通过RenderTexure渲染到FGUI的Canvas上
+        var camera = StageCamera.main.GetComponent<Camera>();
+        camera.clearFlags = CameraClearFlags.SolidColor;
+        _renderTexture = new RenderTexture(Screen.width, Screen.height, 24);
+        camera.targetTexture = _renderTexture;
+        var imageObj = new GameObject("FGUIRawImage");
+        var imageRect = imageObj.AddComponent<RectTransform>();
+        imageObj.transform.SetParent(_fguiCanvas.transform);
+        // 将imageRect设为全屏
+        imageRect.anchorMin = Vector2.zero;
+        imageRect.anchorMax = Vector2.one;
+        imageRect.offsetMin = Vector2.zero;
+        imageRect.offsetMax = Vector2.zero;
+        var image = imageObj.AddComponent<RawImage>();
+        image.texture = _renderTexture;
+        
+        lastScreenWidth = Screen.width;
+        lastScreenHeight = Screen.height;
+    }
+    
+    void Update()
+    {
+        if (lastScreenWidth != Screen.width || lastScreenHeight != Screen.height)
+        {
+            lastScreenWidth = Screen.width;
+            lastScreenHeight = Screen.height;
+            OnScreenSizeChanged();
+        }
+    }
+
+    private void OnScreenSizeChanged()
+    {
+        _renderTexture.Release();
+        _renderTexture = new RenderTexture(Screen.width, Screen.height, 24);
+        StageCamera.main.GetComponent<Camera>().targetTexture = _renderTexture;
+        var image = _fguiCanvas.GetComponentInChildren<RawImage>();
+        image.texture = _renderTexture;
     }
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)

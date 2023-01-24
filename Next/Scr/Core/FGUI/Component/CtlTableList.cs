@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FairyGUI;
 using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextModEditor.Mod;
+using SkySwordKill.NextModEditor.Mod.Data;
 using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI.Component;
 
 public delegate void OnTableItemRenderer(int index, UI_ComTableRow row, object data);
-public delegate void OnClickTableItem(int index, object data);
-    
+
 public interface ITableDataList
 {
     int Count { get; }
@@ -38,31 +40,105 @@ public class TableDataList<T> : ITableDataList
     
 public class CtlTableList
 {
-        
-
     public CtlTableList(UI_ComTableList com)
     {
         MainView = com;
     }
-        
-    public UI_ComTableList MainView { get; set; }
-
-    public int SelectedIndex
-    {
-        get => MainView.m_list.selectedIndex;
-        set => MainView.m_list.selectedIndex = value;
-    }
-        
+    
+    private SortedSet<int> _selectionArea = new SortedSet<int>();
     private OnTableItemRenderer _tableItemRenderer;
-    private OnClickTableItem _onClickTableItem;
-    private OnClickTableItem _onRightClickTableItem;
+    private Action _onClickTableItem;
+    private Action _onRightClickTableItem;
     private Action _onRightClickTableList;
+    private Action _onItemSelectedChanged;
     private List<TableInfo> _tableInfos;
     private ITableDataList _tableDataList;
     private string _searchText;
 
     private List<object> _searchList = new List<object>();
     private bool _isSearching;
+    
+    public UI_ComTableList MainView { get; set; }
+
+    /// <summary>
+    /// 选中的索引
+    /// </summary>
+    public int SelectedIndex
+    {
+        get
+        {
+            // 过滤一遍
+            var index = _selectionArea.Count > 0 ? _selectionArea.First() : -1;
+            if (index >= _tableDataList.Count)
+                return -1;
+            
+            return index;
+        }
+        set
+        {
+            _selectionArea.Clear();
+            _selectionArea.Add(value);
+            OnItemSelectedChanged();
+        }
+    }
+    
+    /// <summary>
+    /// 选中区域，对获取的数据做筛选
+    /// </summary>
+    public IReadOnlyCollection<int> SelectionArea
+    {
+        get
+        {
+            var list = new List<int>();
+            foreach (var index in _selectionArea)
+            {
+                if(index < _tableDataList.Count && index >= 0)
+                    list.Add(index);
+            }
+            return list;
+        }
+        set
+        {
+            _selectionArea.Clear();
+            foreach (var index in value)
+            {
+                if(index < _tableDataList.Count && index >= 0)
+                    _selectionArea.Add(index);
+            }
+            OnItemSelectedChanged();
+        }
+    }
+
+    /// <summary>
+    /// 是否允许多选
+    /// </summary>
+    public bool MultiSelect { get; set; } = false;
+
+    public object SelectedItem
+    {
+        get
+        {
+            var index = SelectedIndex;
+            if (index == -1)
+                return null;
+            
+            return GetData(index);
+        }
+    }
+
+    public IEnumerable<object> SelectedItems
+    {
+        get
+        {
+            var indexes = SelectionArea;
+            if (indexes.Count == 0)
+                return Array.Empty<object>();
+            
+            return indexes.Select(GetData);
+        }
+    }
+
+    public bool AllowClickToSelect { get; set; } = false;
 
     public void BindTable(List<TableInfo> tableInfos, ITableDataList tableDataList)
     {
@@ -74,6 +150,7 @@ public class CtlTableList
         MainView.m_list.onClickItem.Set(OnClickItem);
         MainView.m_list.onRightClickItem.Set(OnRightClickItem);
         MainView.m_list.opaque = false;
+        MainView.m_list.selectionMode = ListSelectionMode.None;
         MainView.m_list.SetVirtual();
             
         // 绑定背景
@@ -102,19 +179,24 @@ public class CtlTableList
         _tableItemRenderer = renderer;
     }
         
-    public void SetClickItem(OnClickTableItem clickItem)
+    public void SetClickItem(Action clickItem)
     {
         _onClickTableItem = clickItem;
     }
         
-    public void SetRightClickItem(OnClickTableItem rightClickItem)
+    public void SetRightClickItem(Action rightClickItem)
     {
         _onRightClickTableItem = rightClickItem;
     }
         
-    public void SetTableRightClick(Action action)
+    public void SetTableRightClick(Action callback)
     {
-        _onRightClickTableList = action;
+        _onRightClickTableList = callback;
+    }
+    
+    public void SetItemSelectedChanged(Action callback)
+    {
+        _onItemSelectedChanged = callback;
     }
 
     public void SetSelectionMode(ListSelectionMode mode)
@@ -143,6 +225,7 @@ public class CtlTableList
     public void RefreshRows()
     {
         MainView.m_list.numItems = GetDataCount();
+        MainView.m_list.RefreshVirtualList();
             
         var width = Mathf.Max(MainView.m_listHeader.scrollPane.contentWidth, 
             MainView.m_list.scrollPane.viewWidth);
@@ -175,6 +258,7 @@ public class CtlTableList
     public void SearchItems(string searchText)
     {
         _searchText = searchText;
+        _selectionArea.Clear();
         Refresh();
     }
 
@@ -182,30 +266,107 @@ public class CtlTableList
     {
         var row = (UI_ComTableRow)item;
         row.RefreshItem(_tableInfos, GetData(index), MainView.m_listHeader.width);
-        if (MainView.m_list.selectionMode == ListSelectionMode.Single && index != SelectedIndex)
+        if (!_selectionArea.Contains(index))
         {
-            row.GetController("button").selectedIndex = 0;
+            row.selected = false;
+        }
+        else
+        {
+            row.selected = true;
         }
         _tableItemRenderer?.Invoke(index, row, row.data);
     }
-        
+    
     private void OnClickItem(EventContext context)
     {
         var index = MainView.m_list.GetChildIndex((GObject)context.data);
         int itemIndex = MainView.m_list.ChildIndexToItemIndex(index);
-        _onClickTableItem?.Invoke(itemIndex, GetData(itemIndex));
+        
+        if(itemIndex == SelectedIndex)
+            return;
+        
+        if(itemIndex == -1)
+            return;
+
+        if (MultiSelect)
+        {
+            if (context.inputEvent.shift)
+            {
+                //已选中第一个时，则选中第一个与当前的区间
+                if (SelectedIndex != -1)
+                {
+                    var min = Mathf.Min(itemIndex, SelectedIndex);
+                    var max = Mathf.Max(itemIndex, SelectedIndex);
+                    for (int i = min; i <= max; i++)
+                    {
+                        _selectionArea.Add(i);
+                    }
+                }
+                else
+                {
+                    _selectionArea.Add(itemIndex);
+                }
+                OnItemSelectedChanged();
+            }
+            else if (context.inputEvent.ctrlOrCmd || AllowClickToSelect)
+            {
+                if (SelectionArea.Contains(itemIndex))
+                {
+                    _selectionArea.Remove(itemIndex);
+                }
+                else
+                {
+                    _selectionArea.Add(itemIndex);
+                }
+                
+                OnItemSelectedChanged();
+                
+                // 单击选中状态下允许点击触发事件
+                if (AllowClickToSelect && !context.inputEvent.ctrlOrCmd)
+                {
+                    _onClickTableItem?.Invoke();
+                }
+            }
+            else
+            {
+                SelectedIndex = itemIndex;
+                _onClickTableItem?.Invoke();
+                
+                OnItemSelectedChanged();
+            }
+        }
+        else
+        {
+            SelectedIndex = itemIndex;
+            _onClickTableItem?.Invoke();
+            
+            OnItemSelectedChanged();
+        }
     }
         
     private void OnRightClickItem(EventContext context)
     {
         var index = MainView.m_list.GetChildIndex((GObject)context.data);
         int itemIndex = MainView.m_list.ChildIndexToItemIndex(index);
-        _onRightClickTableItem?.Invoke(itemIndex, GetData(itemIndex));
+
+        if (!SelectionArea.Contains(itemIndex))
+        {
+            SelectedIndex = itemIndex;
+            OnItemSelectedChanged();
+        }
+        
+        _onRightClickTableItem?.Invoke();
     }
 
     private void OnRightClickTableList(EventContext context)
     {
         _onRightClickTableList?.Invoke();
+    }
+
+    private void OnItemSelectedChanged()
+    {
+        Refresh();
+        _onItemSelectedChanged?.Invoke();
     }
 
     private void ResetDataList()
@@ -257,5 +418,10 @@ public class CtlTableList
             return _searchList.Count;
         }
         return _tableDataList.Count;
+    }
+
+    public void ScrollToView(int tagIndex, bool ani = false, bool setFirst = false)
+    {
+        MainView.m_list.ScrollToView(tagIndex, ani, setFirst);
     }
 }

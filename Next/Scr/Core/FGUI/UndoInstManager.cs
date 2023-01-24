@@ -30,18 +30,27 @@ public class UndoInstManager
         OnChanged?.Invoke();
     }
         
-    public void Undo()
+    /// <summary>
+    /// 返回Undo的命令
+    /// </summary>
+    /// <returns></returns>
+    public IUndoCommand Undo()
     {
+        IUndoCommand command = null;
         if (UndoBuffer.Count > 0)
         {
-            var command = UndoBuffer[UndoBuffer.Count - 1];
+            command = UndoBuffer[UndoBuffer.Count - 1];
             command.Undo();
             UndoBuffer.RemoveAt(UndoBuffer.Count - 1);
             RedoBuffer.Add(command);
         }
         OnChanged?.Invoke();
+        return command;
     }
         
+    /// <summary>
+    /// 返回Redo的命令
+    /// </summary>
     public void Redo()
     {
         if (RedoBuffer.Count > 0)

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FairyGUI;
+using Fungus;
+using SkySwordKill.Next;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
@@ -117,13 +119,14 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
             () => data.Name)
         );
             
+        var iconDrawer = new CtlIconPreviewDrawer(() => Mod.GetItemIconUrl(data));
         AddDrawer(new CtlIntPropertyDrawer(
                 "图标".I18NTodo(),
                 value => data.Icon = value,
-                () => data.Icon)
-        ).AddChangeListener(Inspector.Refresh);
+                () => data.Icon).AddChangeListener(Inspector.Refresh)
+        ).AddChainDrawer(iconDrawer);
             
-        AddDrawer(new CtlIconPreviewDrawer(() => Mod.GetItemIconUrl(data)));
+        AddDrawer(iconDrawer);
             
         AddDrawer(new CtlDropdownPropertyDrawer(
                 "物品类型".I18NTodo(),
@@ -361,7 +364,7 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
             )
         );
 
-        AddDrawer(new CtlGroupDrawer("其他", true, 
+        var groupOther = AddDrawer(new CtlGroupDrawer("其他", true, 
             new CtlDropdownPropertyDrawer(
                 "品阶".I18NTodo(),
                 () => ModEditorManager.I.ItemDataQualityTypes.Select(type => $"{type.Id} : {type.Desc}"),
@@ -376,9 +379,9 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
             ),
             new CtlDropdownPropertyDrawer(
                 "图鉴类型".I18NTodo(),
-                () => ModEditorManager.I.ItemDataGuideTypes.Select(type => $"{type.Id} : {type.Desc}"),
-                index => data.GuideType = ModEditorManager.I.ItemDataGuideTypes[index].Id,
-                () => ModEditorManager.I.ItemDataGuideTypes.GetIndex(data.GuideType)
+                () => ModEditorManager.I.GetItemGuideTypes().Select(type => $"{type.Id} : {type.Desc}"),
+                index => data.GuideType = ModEditorManager.I.GetItemGuideTypes()[index].Id,
+                () => ModEditorManager.I.GetItemGuideTypes().GetIndex(data.GuideType)
             ),
             new CtlIntPropertyDrawer(
                 "价格".I18NTodo(),
@@ -430,17 +433,104 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
                         getData => ((ModAffixData)getData).Desc),
                 },
                 () => new List<IModData>(Mod.GetAllAffixData())
-            ).AddChangeListener(Inspector.Refresh),
-            new CtlStringAreaPropertyDrawer(
+            ).AddChangeListener(Inspector.Refresh)
+        ));
+
+        if (data.ItemType == 3 || data.ItemType == 4)
+        {
+            groupOther.AddDrawer(new CtlStringBindDataPropertyDrawer(
+                "功能描述".I18NTodo(),
+                value => data.Info = value,
+                () => data.Info,
+                input =>
+                {
+                    if(float.TryParse(input, out var fId))
+                    {
+                        var id = (int)fId;
+                        if (data.ItemType == 3)
+                        {
+                            var skillData = Mod.FindSkillBySkillPkId(id);
+                            if (skillData != null)
+                                return $"【{skillData.SkillPkId} {skillData.Name}】{skillData.Desc}";
+                        }
+                        else
+                        {
+                            var staticSkillData = Mod.FindStaticSkillBySkillPkId(id);
+                            if (staticSkillData != null)
+                                return $"【{staticSkillData.SkillPkId} {staticSkillData.Name}】{staticSkillData.Desc}";
+                        }
+                        
+                        return $"【{id}】？？？";
+                    }
+                    
+                    return $"【{input}】？？？";
+                },
+                input =>
+                {
+                    int id = -1;
+                    if (double.TryParse(input, out var fId))
+                        id = (int)fId;
+                    
+                    var title = data.ItemType == 3 ? "选择神通描述".I18NTodo() : "选择功法描述".I18NTodo();
+                    var tableInfo = new List<TableInfo>()
+                    {
+                        new("ID".I18NTodo(),
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((IModData)getData).Id.ToString()),
+                    };
+                    List<IModData> dataList = new List<IModData>();
+                    if (data.ItemType == 3)
+                    {
+                        tableInfo.Add(new TableInfo("名称".I18NTodo(),
+                                TableInfo.DEFAULT_GRID_WIDTH,
+                                getData => ((ModSkillData)getData).Name.ToString()));
+                        tableInfo.Add(new TableInfo("描述".I18NTodo(),
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModSkillData)getData).Desc.ToString()));
+                        dataList.AddRange(Mod.GetAllSkillData()
+                            .GroupBy(skillData => skillData.SkillPkId)
+                            .Select(d => d.OrderByDescending(skill => skill.SkillLv).First()));
+                    }
+                    else
+                    {
+                        tableInfo.Add(new TableInfo("名称".I18NTodo(),
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModSkillData)getData).Name.ToString()));
+                        tableInfo.Add(new TableInfo("描述".I18NTodo(),
+                            TableInfo.DEFAULT_GRID_WIDTH,
+                            getData => ((ModSkillData)getData).Desc.ToString()));
+                        dataList.AddRange(Mod.GetAllStaticSkillData()
+                            .GroupBy(skillData => skillData.SkillPkId)
+                            .Select(d => d.OrderByDescending(skill => skill.SkillLv).First()));
+                    }
+                    
+                    Main.LogInfo($"进行物品编辑：{data.Id}");
+                    WindowTableSelectorDialog.CreateDialog(title, tableInfo, new []{ id }, true
+                        ,dataList, false, ids =>
+                        {
+                            var id = ids.FirstOrDefault();
+                            if (id == -1)
+                                return;
+                            
+                            data.Info = id.ToString();
+                            Inspector.Refresh();
+                        });
+                }
+            ));
+        }
+        else
+        {
+            groupOther.AddDrawer(new CtlStringAreaPropertyDrawer(
                 "功能描述".I18NTodo(),
                 value => data.Info = value,
                 () => data.Info
-            ),
-            new CtlStringAreaPropertyDrawer(
-                "物品简介".I18NTodo(),
-                value => data.Desc = value,
-                () => data.Desc
-            )
+            ));
+        }
+        
+        groupOther.AddDrawer(new CtlStringAreaPropertyDrawer(
+            "物品简介".I18NTodo(),
+            value => data.Desc = value,
+            () => data.Desc
         ));
     }
 
@@ -449,56 +539,62 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
         return $"{data.Id} {data.Name}";
     }
 
-    protected override void OnBuildCustomPopupMenu(PopupMenu menu, ModItemData modData)
+    protected override void OnBuildCustomPopupMenu(PopupMenu menu, ModItemData[] modDataArray)
     {
         menu.AddSeperator();
-        menu.AddItem("生成请教书籍".I18NTodo(), () => OnGenerateSkillLearnBook(modData))
-            .enabled = Editable && modData != null && (modData.ItemType == 3 || modData.ItemType == 4);
+        var canCreateBook = modDataArray?.All(modData => modData.ItemType == 3 || modData.ItemType == 4);
+        menu.AddItem("生成请教书籍".I18NTodo(), () => OnGenerateSkillLearnBook(modDataArray))
+            .enabled = Editable && canCreateBook == true;
         menu.AddSeperator();
     }
 
-    private void OnGenerateSkillLearnBook(ModItemData modData)
+    private void OnGenerateSkillLearnBook(ModItemData[] modDataArray)
     {
         if(!Editable)
             return;
-            
-        if(modData == null)
-            return;
 
-        if (modData.Id > 1000000000)
+        if (modDataArray.Any(modData => modData.Id > 1000000000))
         {
-            WindowConfirmDialog.CreateDialog("提示", $"当前物品ID超出1000000000，无法创建对应请教书籍", false);
+            var conflictData = modDataArray.First(modData => modData.Id > 1000000000);
+            WindowConfirmDialog.CreateDialog("提示", $"当前物品ID:{conflictData}超出10,0000,0000(十亿)，无法创建对应请教书籍", false);
             return;
         }
             
-        if(modData.ItemType != 3 && modData.ItemType != 4)
+        if(modDataArray.Any(modData => modData.ItemType != 3 && modData.ItemType != 4))
         {
-            WindowConfirmDialog.CreateDialog("提示", $"当前物品类型不为神通或功法书籍，无法创建对应请教书籍", false);
+            var conflictData = modDataArray.First(modData => modData.ItemType != 3 && modData.ItemType != 4);
+            WindowConfirmDialog.CreateDialog("提示", $"当前物品ID:{conflictData}类型不为神通或功法书籍，无法创建对应请教书籍", false);
+            return;
+        }
+        
+        if(modDataArray.Any(modData => ModDataTableDataList.HasId(modData.Id + 1000000000)))
+        {
+            var conflictData = modDataArray.First(modData => ModDataTableDataList.HasId(modData.Id + 1000000000));
+            WindowConfirmDialog.CreateDialog("提示", $"当前物品ID:{conflictData.Id}对应的请教书籍已存在，无法创建对应请教书籍", false);
             return;
         }
             
-        var bookId = modData.Id + 1000000000;
-        if(ModDataTableDataList.HasId(bookId))
-        {
-            WindowConfirmDialog.CreateDialog("提示", $"当前物品ID对应的请教书籍已存在，无法创建对应请教书籍", false);
-            return;
-        }
-            
-        WindowConfirmDialog.CreateDialog("提示", $"是否创建ID为{bookId}的请教书籍？",true, 
+        WindowConfirmDialog.CreateDialog("提示", $"是否创建ID为[{string.Join(",", modDataArray.Select(modData => $"({modData.Id}){modData.Name}"))}]的请教书籍？",true, 
             () =>
             {
-                var copyData = GetCopyData(modData);
-                this.Record(new AddDataUndoCommand(
-                    () =>
-                    {
-                        var data = OnPasteData(copyData, bookId);
-                        data.ShopType = 99;
-                        data.ItemFlagList.Clear();
-                        data.Price = 0;
-                        return data;
-                    },
-                    data => AddData((ModItemData)data),
-                    data => RemoveData(data.Id)));
+                var sequenceCommand = new SequenceCommand();
+                foreach (var modData in modDataArray)
+                {
+                    var copyData = GetCopyData(modData);
+                    var bookId = modData.Id + 1000000000;
+                    sequenceCommand.AddCommand(new AddDataUndoCommand(
+                        () =>
+                        {
+                            var data = OnPasteData(copyData, bookId);
+                            data.ShopType = 99;
+                            data.ItemFlagList.Clear();
+                            data.Price = 0;
+                            return data;
+                        },
+                        data => AddData((ModItemData)data),
+                        data => RemoveData(data.Id)));
+                }
+                this.Record(sequenceCommand);
                 Refresh();
             });
     }

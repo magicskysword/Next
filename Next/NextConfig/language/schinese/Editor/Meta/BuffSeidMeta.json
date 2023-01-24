@@ -1502,9 +1502,9 @@
       {
         "ID": "value1",
         "Type": "IntArray",
-        "Desc": "X 属性灵气 数组",
+        "Desc": "X 属性伤害 数组",
         "SpecialDrawer": [
-          "ElementTypeArrayDrawer"
+          "AttackTypeArrayDrawer"
         ]
       }
     ]
@@ -2051,7 +2051,7 @@
     "IDName": "id",
     "Name": "【未实现】【选择】从五种灵气中选择灵气吸收",
     "Desc": "【选择】从五种灵气中选择X*层数点吸收",
-    "Ignore" : true,
+    "Ignore": true,
     "Properties": []
   },
   "124": {
@@ -2059,7 +2059,7 @@
     "IDName": "id",
     "Name": "【未实现】【选择】从随机的灵气中选择灵气吸收",
     "Desc": "【选择】从X点随机的灵气中选择Y点吸收",
-    "Ignore" : true,
+    "Ignore": true,
     "Properties": []
   },
   "125": {
@@ -2067,7 +2067,7 @@
     "IDName": "id",
     "Name": "【未实现】【选择】选择一属性灵气，然后加入X*层数张该属性灵气到你的灵气",
     "Desc": "【选择】选择一属性灵气，然后加入X*层数张该属性灵气到你的灵气",
-    "Ignore" : true,
+    "Ignore": true,
     "Properties": []
   },
   "126": {
@@ -2345,13 +2345,13 @@
   "137": {
     "ID": 137,
     "IDName": "id",
-    "Name": "受到的治疗效果（提升/降低）X%",
+    "Name": "受到的治疗效果（提升/降低）",
     "Desc": "受到的治疗效果（提升/降低）X%",
     "Properties": [
       {
         "ID": "value1",
-        "Type": "Int",
-        "Desc": "X 变化百分比"
+        "Type": "Float",
+        "Desc": "X 变化百分比(小数)"
       }
     ]
   },
@@ -2434,7 +2434,7 @@
     "Properties": [
       {
         "ID": "value1",
-        "Type": "Int",
+        "Type": "Float",
         "Desc": "X 百分比(小数)"
       }
     ]
@@ -2463,7 +2463,7 @@
       },
       {
         "ID": "value2",
-        "Type": "Int",
+        "Type": "Float",
         "Desc": "Y 百分比(小数)"
       }
     ]
@@ -3243,7 +3243,7 @@
       },
       {
         "ID": "value1",
-        "Type": "Int",
+        "Type": "Float",
         "Desc": "X 百分比(小数)"
       }
     ]

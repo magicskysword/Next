@@ -1,6 +1,8 @@
 ﻿using System;
+using FairyGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.NextFGUI.NextCore;
+using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI.Dialog;
 
@@ -67,5 +69,15 @@ public class WindowStringAreaInputPreviewDialog : WindowDialogBase
     {
         _onCancel?.Invoke(getStr);
         Hide();
+    }
+    
+    protected override void OnKeyDown(EventContext context)
+    {
+        base.OnKeyDown(context);
+        
+        if (context.inputEvent.keyCode == KeyCode.Escape)
+        {
+            Cancel(InputArea.Text);
+        }
     }
 }

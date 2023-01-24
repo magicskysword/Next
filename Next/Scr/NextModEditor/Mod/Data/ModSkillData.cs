@@ -107,7 +107,7 @@ public class ModSkillData : ModFolderFileData<ModSkillData>
     public int Quality { get; set; } = 1;
 
     /// <summary>
-    /// 功法技能品阶
+    /// 功法技能阶段
     /// </summary>
     [JsonProperty(PropertyName = "typePinJie", Order = 13)]
     public int Phase { get; set; } = 1;

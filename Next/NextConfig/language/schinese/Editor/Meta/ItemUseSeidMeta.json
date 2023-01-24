@@ -24,7 +24,10 @@
       {
         "ID": "value1",
         "Type": "Int",
-        "Desc": "X 功法ID"
+        "Desc": "X 功法唯一ID",
+        "SpecialDrawer": [
+          "StaticSkillPKDrawer"
+        ]
       }
     ]
   },
@@ -421,7 +424,10 @@
       {
         "ID": "value2",
         "Type": "Int",
-        "Desc": "Y 功法ID"
+        "Desc": "Y 功法唯一ID",
+        "SpecialDrawer": [
+          "StaticSkillPKDrawer"
+        ]
       }
     ]
   },

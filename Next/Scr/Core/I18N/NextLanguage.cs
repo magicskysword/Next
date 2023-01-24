@@ -27,6 +27,11 @@ public class NextLanguage
             try
             {
                 var fileName = Path.Combine(dir, "language.json");
+                if (!File.Exists(fileName))
+                {
+                    Main.LogWarning($"language config [{fileName}] not find in {dir}!");
+                    continue;
+                }
                 var json = File.ReadAllText(fileName);
                 var config = JsonConvert.DeserializeObject<NextLanguageConfig>(json);
                 if (config == null)

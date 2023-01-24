@@ -49,8 +49,7 @@ public class RayBlocker
         rayBlocker._canvasObj.AddComponent<GraphicRaycaster>();
             
         var gameObject = new GameObject("RayBlocker");
-            
-            
+        
         rayBlocker._rt = gameObject.AddComponent<RectTransform>();
         rayBlocker._rt.SetParent(rayBlocker._canvasObj.transform);
         rayBlocker._rt.pivot = new Vector2(0, 1);

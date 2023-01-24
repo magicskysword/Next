@@ -12,4 +12,5 @@ public interface IPropertyDrawer : IUndoInst
     IPropertyDrawer AddChangeListener(Action onChanged);
     IPropertyDrawer RemoveChangeListener(Action onChanged);
     IPropertyDrawer ClearChangeListener();
+    IPropertyDrawer AddChainDrawer(IPropertyDrawer iconDrawer);
 }

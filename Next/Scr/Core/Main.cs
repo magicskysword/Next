@@ -22,7 +22,7 @@ namespace SkySwordKill.Next;
 [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
 public partial class Main : BaseUnityPlugin
 {
-    public const string MOD_VERSION = "0.7.5";
+    public const string MOD_VERSION = "0.8.0.1";
         
     public static Lazy<string> PathLocalModsDir;
     public static Lazy<string> PathLibraryDir;
@@ -85,13 +85,13 @@ public partial class Main : BaseUnityPlugin
         _resourcesManager = gameObject.AddComponent<ResourcesManager>();
         _resourcesManager.Init();
             
-        _luaManager = new LuaManager();
+        _luaManager = gameObject.AddComponent<LuaManager>();
         _luaManager.Init();
 
-        _fguiManager = new FGUIManager();
+        _fguiManager = gameObject.AddComponent<FGUIManager>();
         _fguiManager.Init();
 
-        _fPatchManager = new FPatchManager();
+        _fPatchManager = gameObject.AddComponent<FPatchManager>();
         _fPatchManager.Init();
             
         new Harmony("skyswordkill.plugin.Next").PatchAll();

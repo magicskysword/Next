@@ -37,7 +37,7 @@ public class NextGLoader : GLoader
 
                 if (img != null && img is Texture2D tex)
                 {
-                    var nTex = new NTexture(tex);
+                    var nTex = tex.CreateTempNTexture();
                     onExternalLoadSuccess(nTex);
                 }
                 else
@@ -54,6 +54,6 @@ public class NextGLoader : GLoader
 
     protected override void FreeExternal(NTexture texture)
     {
-        texture.Dispose();
+        texture.refCount--;
     }
 }

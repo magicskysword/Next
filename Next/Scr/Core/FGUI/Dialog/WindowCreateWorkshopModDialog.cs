@@ -4,6 +4,7 @@ using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.NextFGUI.NextCore;
 using SkySwordKill.NextModEditor.Mod;
 using SkySwordKill.NextModEditor.PanelProject;
+using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI.Dialog;
 
@@ -55,10 +56,25 @@ public class WindowCreateWorkshopModDialog : WindowDialogBase
         ListProject.ProjectList.m_list.selectedIndex = 0;
         OnSelectWorkshopItem(emptyWorkshop);
     }
+    
+    protected override void OnKeyDown(EventContext context)
+    {
+        base.OnKeyDown(context);
+        
+        if (context.inputEvent.keyCode == KeyCode.Escape)
+        {
+            Cancel();
+        }
+    }
+
+    private void Cancel()
+    {
+        Hide();
+    }
 
     private void OnClickCancel()
     {
-        Hide();
+        Cancel();
     }
 
     private void OnClickConfirm(EventContext context)

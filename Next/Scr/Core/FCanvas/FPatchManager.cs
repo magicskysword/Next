@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Fungus;
+using UnityEngine;
 
 namespace SkySwordKill.Next.FCanvas;
 
-public class FPatchManager
+public class FPatchManager : MonoBehaviour
 {
     public Dictionary<string,List<FPatch>> PatchGroup = new Dictionary<string,List<FPatch>>();
 

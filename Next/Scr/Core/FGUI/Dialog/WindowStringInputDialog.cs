@@ -1,11 +1,14 @@
 ﻿using System;
 using FairyGUI;
 using SkySwordKill.NextFGUI.NextCore;
+using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI.Dialog;
 
 public class WindowStringInputDialog : WindowDialogBase
 {
+    private bool _result;
+
     private WindowStringInputDialog() : base("NextCore", "WinInputDialog")
     {
             
@@ -49,13 +52,37 @@ public class WindowStringInputDialog : WindowDialogBase
 
     private void OnClickConfirm(EventContext context)
     {
+        _result = true;
         Hide();
-        OnConfirm?.Invoke(InputDialog.m_inContent.text);
     }
         
     private void OnClickCancel(EventContext context)
     {
+       Cancel();
+    }
+    
+    protected override void OnKeyDown(EventContext context)
+    {
+        base.OnKeyDown(context);
+        
+        if (context.inputEvent.keyCode == KeyCode.Escape)
+        {
+            Cancel();
+        }
+    }
+
+    private void Cancel()
+    {
+        _result = false;
         Hide();
-        OnCancel?.Invoke();
+    }
+
+    protected override void OnHide()
+    {
+        base.OnHide();
+        if(_result)
+            OnConfirm?.Invoke(InputDialog.m_inContent.text);
+        else
+            OnCancel?.Invoke();
     }
 }

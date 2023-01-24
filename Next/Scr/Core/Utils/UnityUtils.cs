@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using FairyGUI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -59,5 +60,46 @@ public static class UnityUtils
     {
         var sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
         return sprite;
+    }
+    
+    public static Texture2D ToTexture2D(this RenderTexture rTex)
+    {
+        Texture2D tex = new Texture2D(rTex.width, rTex.height, TextureFormat.RGBA32, false);
+        var old_rt = RenderTexture.active;
+        RenderTexture.active = rTex;
+
+        tex.ReadPixels(new Rect(0, 0, rTex.width, rTex.height), 0, 0);
+        tex.Apply();
+
+        RenderTexture.active = old_rt;
+        return tex;
+    }
+    
+    public static bool IsChildOf(this GObject gObject, GObject parent)
+    {
+        var parentGObject = gObject.parent;
+        while (parentGObject != null)
+        {
+            if (parentGObject == parent)
+            {
+                return true;
+            }
+            parentGObject = parentGObject.parent;
+        }
+        return false;
+    }
+    
+    public static T FindParent<T>(this GObject gObject) where T : GObject
+    {
+        var parentGObject = gObject.parent;
+        while (parentGObject != null)
+        {
+            if (parentGObject is T parent)
+            {
+                return parent;
+            }
+            parentGObject = parentGObject.parent;
+        }
+        return null;
     }
 }

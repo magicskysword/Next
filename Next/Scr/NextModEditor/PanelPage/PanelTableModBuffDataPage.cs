@@ -93,13 +93,14 @@ namespace SkySwordKill.NextModEditor.PanelPage
                 () => data.SkillEffect)
             );
 
+            var iconDrawer = new CtlIconPreviewDrawer(() => Mod.GetBuffIconUrl(data));
             AddDrawer(new CtlIntPropertyDrawer(
-                "ModEditor.Main.modBuffData.icon".I18N(),
-                num => data.Icon = num,
-                () => data.Icon)
-            ).AddChangeListener(Inspector.Refresh);
+                    "ModEditor.Main.modBuffData.icon".I18NTodo(),
+                    value => data.Icon = value,
+                    () => data.Icon).AddChangeListener(Inspector.Refresh)
+            ).AddChainDrawer(iconDrawer);
             
-            AddDrawer(new CtlIconPreviewDrawer(() => Mod.GetBuffIconUrl(data)));
+            AddDrawer(iconDrawer);
 
             AddDrawer(new CtlStringAreaPropertyDrawer(
                     "ModEditor.Main.modBuffData.desc".I18N(),

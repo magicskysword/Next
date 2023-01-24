@@ -33,10 +33,10 @@ public class ProjectTreeModProjectReferenced : ProjectTreeFolder
         {
             Editable = false,
         });
-        // AddChild(new ProjectTreeItemModStaticSkillData(Mod, Project)
-        // {
-        //     Editable = false,
-        // });
+        AddChild(new ProjectTreeItemModStaticSkillData(Mod, Project)
+        {
+            Editable = false,
+        });
         AddChild(new ProjectTreeItemModBuffData(Mod, Project)
         {
             Editable = false,

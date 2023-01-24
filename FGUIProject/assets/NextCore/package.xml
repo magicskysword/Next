@@ -126,6 +126,8 @@
     <component id="txbi5b" name="ComSliderDrawer_slider.xml" path="/Component/Drawer/"/>
     <component id="1143j5c" name="LabText.xml" path="/Component/Label/" exported="true"/>
     <component id="pk2ij5d" name="WinConfirmDialogExtra.xml" path="/Dialog/" exported="true"/>
+    <image id="f830j5e" name="icon_trash.png" path="/Icon/" exported="true"/>
+    <component id="f830j5f" name="AnimWait.xml" path="/Component/Anim/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

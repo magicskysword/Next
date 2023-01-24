@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using FairyGUI;
 using SkySwordKill.NextFGUI.NextCore;
 
@@ -73,7 +74,7 @@ public class WindowWaitDialog : WindowDialogBase
     }
         
     public UI_WinWaitDialog MainView => (UI_WinWaitDialog)contentPane;
-        
+
     protected override void OnInit()
     {
         base.OnInit();
@@ -84,7 +85,7 @@ public class WindowWaitDialog : WindowDialogBase
     protected override void OnShown()
     {
         base.OnShown();
-        Timers.inst.Add(_hideDelay / 2f, 1, _ => OnWait());
+        WaitForWait().Forget();
     }
 
     private void OnWait()
@@ -93,14 +94,28 @@ public class WindowWaitDialog : WindowDialogBase
         {
             _onWaitAsync.Invoke(() =>
             {
-                Timers.inst.Add(_hideDelay / 2f, 1, _ => Hide());
+                WaitForHide().Forget();
             }, _context);
         }
         else
         {
             _onWait?.Invoke(_context);
-            Timers.inst.Add(_hideDelay / 2f, 1, _ => Hide());
+            WaitForHide().Forget();
         }
+    }
+
+    private async UniTask WaitForWait()
+    {
+        await UniTask.SwitchToMainThread();
+        await UniTask.Delay(TimeSpan.FromSeconds(_hideDelay / 2f));
+        OnWait();
+    }
+
+    private async UniTask WaitForHide()
+    {
+        await UniTask.SwitchToMainThread();
+        await UniTask.Delay(TimeSpan.FromSeconds(_hideDelay / 2f));
+        Hide();
     }
 
     protected override void OnHide()

@@ -49,8 +49,22 @@ public class ModProject
     public List<ModComprehensionData> Comprehension { get; set; }
     public List<ModComprehensionPhaseData> ComprehensionPhase { get; set; }
     public ModItemUseSeidDataGroup ItemUseSeidDataGroup { get; set; }
+    /// <summary>
+    /// 神通数据
+    /// </summary>
     public List<ModSkillData> SkillData { get; set; }
+    /// <summary>
+    /// 功法数据
+    /// </summary>
+    public List<ModStaticSkillData> StaticSkillData { get; set; }
+    /// <summary>
+    /// 技能Seid数据
+    /// </summary>
     public ModSkillSeidDataGroup SkillSeidDataGroup { get; set; }
+    /// <summary>
+    /// 神通Seid信息
+    /// </summary>
+    public ModStaticSkillSeidDataGroup StaticSkillSeidDataGroup { get; set; }
 
     private ModProject()
     {
@@ -78,6 +92,11 @@ public class ModProject
         return flagData;
     }
 
+    /// <summary>
+    /// 根据技能Id返回技能
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public ModSkillData FindSkill(int id)
     {
         var skillData = SkillData.Find(data => data.Id == id);
@@ -93,6 +112,29 @@ public class ModProject
     public ModSkillData FindSkillBySkillPkId(int id)
     {
         var list = SkillData.FindAll(data => data.SkillPkId == id);
+        return list.OrderByDescending(data => data.SkillLv).FirstOrDefault();
+    }
+    
+    /// <summary>
+    /// 根据神通Id返回神通
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public ModStaticSkillData FindStaticSkill(int id)
+    {
+        var staticSkillData = StaticSkillData.Find(data => data.Id == id);
+
+        return staticSkillData;
+    }
+
+    /// <summary>
+    /// 根据神通Id返回神通，默认返回等级最高神通
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public ModStaticSkillData FindStaticSkillBySkillPkId(int id)
+    {
+        var list = StaticSkillData.FindAll(data => data.SkillPkId == id);
         return list.OrderByDescending(data => data.SkillLv).FirstOrDefault();
     }
         
@@ -147,7 +189,9 @@ public class ModProject
             Comprehension = new List<ModComprehensionData>(),
             ComprehensionPhase = new List<ModComprehensionPhaseData>(),
             SkillData = new List<ModSkillData>(),
-            SkillSeidDataGroup = ModSkillSeidDataGroup.Create(ModEditorManager.I.SkillSeidMetas)
+            StaticSkillData = new List<ModStaticSkillData>(),
+            SkillSeidDataGroup = ModSkillSeidDataGroup.Create(ModEditorManager.I.SkillSeidMetas),
+            StaticSkillSeidDataGroup = ModStaticSkillSeidDataGroup.Create(ModEditorManager.I.StaticSkillSeidMetas),
         };
             
         return project;
@@ -162,30 +206,33 @@ public class ModProject
         {
             ProjectPath = dir,
             Config = config,
-            CreateAvatarData = ModCreateAvatarData.Load(dataDir)?.Select(pair => pair.Value).ToList(),
+            CreateAvatarData = ModCreateAvatarData.Load(dataDir).ToList(),
             CreateAvatarSeidDataGroup =
                 ModCreateAvatarSeidDataGroup.Load(dataDir, ModEditorManager.I.CreateAvatarSeidMetas),
             BuffData = ModBuffData.Load(dataDir),
             ItemData = ModItemData.Load(dataDir),
-            ItemFlagData = ModItemFlagData.Load(dataDir)?.Select(pair => pair.Value).ToList(),
+            ItemFlagData = ModItemFlagData.Load(dataDir).ToList(),
             ItemEquipSeidDataGroup = ModItemEquipSeidDataGroup.Load(dataDir, ModEditorManager.I.ItemEquipSeidMetas),
             ItemUseSeidDataGroup = ModItemUseSeidDataGroup.Load(dataDir, ModEditorManager.I.ItemUseSeidMetas),
             BuffSeidDataGroup = ModBuffSeidDataGroup.Load(dataDir, ModEditorManager.I.BuffSeidMetas),
-            AffixData = ModAffixData.Load(dataDir).Select(pair => pair.Value).ToList(),
-            ForgeProperty = ModForgePropertyData.Load(dataDir).Select(pair => pair.Value).ToList(),
-            ForgeElement = ModForgeElementData.Load(dataDir).Select(pair => pair.Value).ToList(),
-            AlchemyElement = ModAlchemyElementData.Load(dataDir).Select(pair => pair.Value).ToList(),
-            Comprehension = ModComprehensionData.Load(dataDir).Select(pair => pair.Value).ToList(),
-            ComprehensionPhase = ModComprehensionPhaseData.Load(dataDir).Select(pair => pair.Value).ToList(),
+            AffixData = ModAffixData.Load(dataDir).ToList(),
+            ForgeProperty = ModForgePropertyData.Load(dataDir).ToList(),
+            ForgeElement = ModForgeElementData.Load(dataDir).ToList(),
+            AlchemyElement = ModAlchemyElementData.Load(dataDir).ToList(),
+            Comprehension = ModComprehensionData.Load(dataDir).ToList(),
+            ComprehensionPhase = ModComprehensionPhaseData.Load(dataDir).ToList(),
             SkillData = ModSkillData.Load(dataDir),
-            SkillSeidDataGroup = ModSkillSeidDataGroup.Load(dataDir, ModEditorManager.I.SkillSeidMetas)
+            StaticSkillData = ModStaticSkillData.Load(dataDir),
+            SkillSeidDataGroup = ModSkillSeidDataGroup.Load(dataDir, ModEditorManager.I.SkillSeidMetas),
+            StaticSkillSeidDataGroup = ModStaticSkillSeidDataGroup.Load(dataDir, ModEditorManager.I.StaticSkillSeidMetas),
         };
 
         project.CreateAvatarData.ModSort();
         project.BuffData.ModSort();
-        project.ItemData.ModSort();
+        project.ItemData.ModSort();      
         project.AffixData.ModSort();
         project.SkillData.ModSort();
+        project.StaticSkillData.ModSort();
 
         return project;
     }
@@ -201,21 +248,23 @@ public class ModProject
             
         ModConfig.Save(config.GetConfigDir(), project.Config);
         ModCreateAvatarData.Save(config.GetDataDir(),
-            project.CreateAvatarData.ToDictionary(item => item.Id.ToString()));
+            project.CreateAvatarData);
         ModCreateAvatarSeidDataGroup.Save(config.GetDataDir(), project.CreateAvatarSeidDataGroup);
         ModBuffData.Save(config.GetDataDir(), project.BuffData);
         ModItemData.Save(config.GetDataDir(), project.ItemData);
-        ModItemFlagData.Save(config.GetDataDir(), project.ItemFlagData.ToDictionary(item => item.Id.ToString()));
+        ModItemFlagData.Save(config.GetDataDir(), project.ItemFlagData);
         ModItemEquipSeidDataGroup.Save(config.GetDataDir(), project.ItemEquipSeidDataGroup);
         ModItemUseSeidDataGroup.Save(config.GetDataDir(), project.ItemUseSeidDataGroup);
         ModBuffSeidDataGroup.Save(config.GetDataDir(), project.BuffSeidDataGroup);
-        ModAffixData.Save(config.GetDataDir(), project.AffixData.ToDictionary(data => data.Id.ToString()));
-        ModForgePropertyData.Save(config.GetDataDir(), project.ForgeProperty.ToDictionary(data => data.Id.ToString()));
-        ModForgeElementData.Save(config.GetDataDir(), project.ForgeElement.ToDictionary(data => data.Id.ToString()));
-        ModAlchemyElementData.Save(config.GetDataDir(), project.AlchemyElement.ToDictionary(data => data.Id.ToString()));
-        ModComprehensionData.Save(config.GetDataDir(), project.Comprehension.ToDictionary(data => data.Id.ToString()));
-        ModComprehensionPhaseData.Save(config.GetDataDir(), project.ComprehensionPhase.ToDictionary(data => data.Id.ToString()));
+        ModAffixData.Save(config.GetDataDir(), project.AffixData);
+        ModForgePropertyData.Save(config.GetDataDir(), project.ForgeProperty);
+        ModForgeElementData.Save(config.GetDataDir(), project.ForgeElement);
+        ModAlchemyElementData.Save(config.GetDataDir(), project.AlchemyElement);
+        ModComprehensionData.Save(config.GetDataDir(), project.Comprehension);
+        ModComprehensionPhaseData.Save(config.GetDataDir(), project.ComprehensionPhase);
         ModSkillData.Save(config.GetDataDir(), project.SkillData);
+        ModStaticSkillData.Save(config.GetDataDir(), project.StaticSkillData);
         ModSkillSeidDataGroup.Save(config.GetDataDir(), project.SkillSeidDataGroup);
+        ModStaticSkillSeidDataGroup.Save(config.GetDataDir(), project.StaticSkillSeidDataGroup);
     }
 }

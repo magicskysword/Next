@@ -1,6 +1,7 @@
 ﻿using System;
 using FairyGUI;
 using SkySwordKill.NextFGUI.NextCore;
+using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI.Dialog;
 
@@ -27,6 +28,8 @@ public class WindowIntInputDialog : WindowDialogBase
     private bool CanCancel { get; set; }
     private Action<int> OnConfirm { get; set; }
     private Action OnCancel { get; set; }
+    private bool _result;
+    private int _resultValue;
 
     public UI_WinInputDialog InputDialog => (UI_WinInputDialog)contentPane;
 
@@ -43,19 +46,48 @@ public class WindowIntInputDialog : WindowDialogBase
 
         InputDialog.m_type.selectedIndex = CanCancel ? 1 : 0;
     }
+    
+    protected override void OnKeyDown(EventContext context)
+    {
+        base.OnKeyDown(context);
+        
+        if (context.inputEvent.keyCode == KeyCode.Escape && CanCancel)
+        {
+            Cancel();
+        }
+    }
 
     private void OnClickConfirm(EventContext context)
     {
         if (int.TryParse(InputDialog.m_inContent.text, out var value))
         {
+            _result = true;
+            _resultValue = value;
             Hide();
-            OnConfirm?.Invoke(value);
         }
     }
         
     private void OnClickCancel(EventContext context)
     {
+        Cancel();
+    }
+    
+    private void Cancel()
+    {
+        _result = false;
         Hide();
-        OnCancel?.Invoke();
+    }
+    
+    protected override void OnHide()
+    {
+        base.OnHide();
+        if (_result)
+        {
+            OnConfirm?.Invoke(_resultValue);
+        }
+        else
+        {
+            OnCancel?.Invoke();
+        }
     }
 }

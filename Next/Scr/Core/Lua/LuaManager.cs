@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using UnityEngine;
 using XLua;
 
 namespace SkySwordKill.Next.Lua;
 
-public class LuaManager
+public class LuaManager : MonoBehaviour
 {
     public Dictionary<string, LuaFileCache> LuaCaches = new Dictionary<string, LuaFileCache>();
 

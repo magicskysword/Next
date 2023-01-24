@@ -1,0 +1,164 @@
+{
+  "1": {
+    "ID": 1,
+    "IDName": "skillid",
+    "Name": "获得Buff",
+    "Desc": "战斗开始时，为对手/自己添加X【Buff】*Y层",
+    "Properties": [
+      {
+        "ID": "target",
+        "Type": "Int",
+        "Desc": "目标",
+        "SpecialDrawer": [
+          "TargetTypeDrawer"
+        ]
+      },
+      {
+        "ID": "value1",
+        "Type": "IntArray",
+        "Desc": "X BuffID 数组",
+        "SpecialDrawer": [
+          "BuffArrayDrawer"
+        ]
+      },
+      {
+        "ID": "value2",
+        "Type": "IntArray",
+        "Desc": "Y Buff层数 数组"
+      }
+    ],
+    "SpecialDrawer": []
+  },
+  "2": {
+    "ID": 2,
+    "IDName": "skillid",
+    "Name": "神识提升",
+    "Desc": "神识提升X点",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 提高神识"
+      }
+    ],
+    "SpecialDrawer": []
+  },
+  "3": {
+    "ID": 3,
+    "IDName": "skillid",
+    "Name": "生命提高",
+    "Desc": "生命上限提升X点",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 提高生命"
+      }
+    ],
+    "SpecialDrawer": []
+  },
+  "4": {
+    "ID": 4,
+    "IDName": "skillid",
+    "Name": "【永久】寿元提升",
+    "Desc": "修炼功法后，寿元永久提升X点",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 提高寿元 "
+      }
+    ],
+    "SpecialDrawer": []
+  },
+  "5": {
+    "ID": 5,
+    "IDName": "skillid",
+    "Name": "【永久】心境提高",
+    "Desc": "修炼功法后，心境提升X点",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 提高心境 "
+      }
+    ],
+    "SpecialDrawer": []
+  },
+  "6": {
+    "ID": 6,
+    "IDName": "skillid",
+    "Name": "资质提高",
+    "Desc": "资质提升X点",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 提高资质"
+      }
+    ],
+    "SpecialDrawer": []
+  },
+  "7": {
+    "ID": 7,
+    "IDName": "skillid",
+    "Name": "悟性提高",
+    "Desc": "悟性提升X点",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 提高悟性"
+      }
+    ],
+    "SpecialDrawer": []
+  },
+  "8": {
+    "ID": 8,
+    "IDName": "skillid",
+    "Name": "遁速提高",
+    "Desc": "遁速提升X点",
+    "Properties": [
+      {
+        "ID": "value1",
+        "Type": "Int",
+        "Desc": "X 提高遁速"
+      }
+    ],
+    "SpecialDrawer": []
+  },
+  "9": {
+    "ID": 9,
+    "IDName": "skillid",
+    "Name": "改变大地图移动动画",
+    "Desc": "改变大地图的骨骼、移动动画",
+    "Properties": [
+      {
+        "ID": "Spine",
+        "Type": "String",
+        "Desc": "对应骨骼"
+      },
+      {
+        "ID": "OnMoveEnter",
+        "Type": "String",
+        "Desc": "当进入移动状态时(每次移动仅一次)"
+      },
+      {
+        "ID": "OnMoveExit",
+        "Type": "String",
+        "Desc": "当退出移动状态时(每次移动仅一次)"
+      },
+      {
+        "ID": "OnLoopMoveEnter",
+        "Type": "String",
+        "Desc": "当移动动画开始一次播放时(根据动画时长会触发多次)"
+      },
+      {
+        "ID": "OnLoopMoveExit",
+        "Type": "String",
+        "Desc": "当移动动画播放完毕一次时(根据动画时长会触发多次)"
+      }
+    ],
+    "SpecialDrawer": []
+  }
+}

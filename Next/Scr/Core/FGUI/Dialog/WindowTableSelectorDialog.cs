@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FairyGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.NextFGUI.NextCore;
 using SkySwordKill.NextModEditor.Mod.Data;
+using UnityEngine;
 
 namespace SkySwordKill.Next.FGUI.Dialog;
 
@@ -19,6 +21,7 @@ public class WindowTableSelectorDialog : WindowDialogBase
     private Func<IModData, int> _idGetter;
     private Action _onCancel;
     private bool _allowEmpty;
+    private bool _result;
 
     private WindowTableSelectorDialog() : base("NextCore", "WinTableDialog")
     {
@@ -62,49 +65,36 @@ public class WindowTableSelectorDialog : WindowDialogBase
         ToolsBar.AddToolSearch(OnSearch);
 
         TableList = new CtlTableList(MainView.m_table.As<UI_ComTableList>());
-        TableList.SetClickItem(OnClickListItem);
+        TableList.MultiSelect = _allowMulti;
+        TableList.AllowClickToSelect = true;
         TableList.SetItemRenderer(OnItemRenderer);
+        TableList.SetItemSelectedChanged(OnItemSelectedChanged);
         TableList.BindTable(_tableInfos, _tableDataList);
-            
-        if (_allowMulti)
-        {
-            TableList.SetSelectionMode(ListSelectionMode.None);
-        }
-        else
-        {
-            TableList.SetSelectionMode(ListSelectionMode.Single);
-        }
 
         RefreshConfirm();
         RefreshTipText();
     }
-
+    
+    protected override void OnKeyDown(EventContext context)
+    {
+        base.OnKeyDown(context);
+        
+        if (context.inputEvent.keyCode == KeyCode.Escape)
+        {
+            Cancel();
+        }
+    }
+    
     private void OnSearch(string searchStr)
     {
         TableList.SearchItems(searchStr);
     }
-
-    private void OnClickListItem(int index, object o)
+    
+    private void OnItemSelectedChanged()
     {
-        var modData = (IModData)o;
-        if(_allowMulti)
-        {
-            if (_curIds.Contains(GetId(modData)))
-            {
-                _curIds.Remove(GetId(modData));
-            }
-            else
-            {
-                _curIds.Add(GetId(modData));
-            }
-            TableList.RefreshRows();
-        }
-        else
-        {
-            _curIds.Clear();
-            _curIds.Add(GetId(modData));
-        }
-
+        _curIds.Clear();
+        _curIds.AddRange(TableList.SelectedItems.Select(item => GetId((IModData)item)));
+        
         RefreshTipText();
         RefreshConfirm();
     }
@@ -153,13 +143,22 @@ public class WindowTableSelectorDialog : WindowDialogBase
     private void Confirm()
     {
         _curIds.Sort();
-        _onConfirm?.Invoke(_curIds);
+        _result = true;
         Hide();
     }
 
     private void Cancel()
     {
-        _onCancel?.Invoke();
+        _result = false;
         Hide();
+    }
+    
+    protected override void OnHide()
+    {
+        base.OnHide();
+        if(_result)
+            _onConfirm?.Invoke(_curIds);
+        else
+            _onCancel?.Invoke();
     }
 }

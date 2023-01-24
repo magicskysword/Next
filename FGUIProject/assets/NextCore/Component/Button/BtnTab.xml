@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="82,32" overflow="hidden" extention="Button">
+<component size="82,38" overflow="hidden" extention="Button">
   <controller name="button" pages="2,up,3,down,4,over,5,selectedOver" selected="1"/>
   <displayList>
-    <graph id="n0_10zy0" name="n0" xy="0,0" size="82,32" type="rect" lineSize="0" lineColor="#ff292828" fillColor="#ff2b3139">
+    <graph id="n0_10zy0" name="n0" xy="0,0" size="82,38" type="rect" lineSize="0" lineColor="#ff292828" fillColor="#ff2b3139">
       <gearColor controller="button" pages="2,3,5" values="#21252b|#2b3139|#33383f" default="#21252b"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <graph id="n3_10zy0" name="n3" xy="0,30" size="82,2" type="rect" lineColor="#ff4992e0" fillColor="#ff4992e0">
+    <graph id="n3_10zy0" name="n3" xy="0,34" size="82,4" type="rect" lineColor="#ff4992e0" fillColor="#ff4992e0">
       <gearDisplay controller="button" pages="3,5"/>
       <relation target="" sidePair="width-width"/>
     </graph>
-    <component id="n1_10zy0" name="closeButton" src="nkvz1p" fileName="Component/Button/BtnCloseTab.xml" xy="61,6" size="20,20">
-      <gearLook controller="button" pages="2,4" values="0,0,0,1|0.5,0,0,1" default="1,0,0,1"/>
-      <relation target="" sidePair="right-right"/>
-    </component>
-    <loader id="n2_10zy0" name="icon" xy="7,8" size="16,16" url="ui://028qk31hnkvz1n" fill="scale">
+    <loader id="n2_10zy0" name="icon" xy="7,11" size="16,16" url="ui://028qk31hnkvz1n" fill="scale">
       <relation target="" sidePair="middle-middle"/>
     </loader>
-    <text id="n4_10zy0" name="title" xy="29,5" size="33,22" fontSize="14" color="#ffffff" text="Title">
+    <text id="n4_10zy0" name="title" xy="29,8" size="33,22" fontSize="14" color="#ffffff" text="Title">
       <gearColor controller="button" pages="3,4,5" values="#ffffff,#000000|#ffffff,#000000|#ffffff,#000000" default="#959595,#000000"/>
       <relation target="" sidePair="middle-middle"/>
     </text>
+    <graph id="n5_nmyo" name="dragArea" xy="0,0" size="82,38" alpha="0" type="rect" lineSize="0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <component id="n1_10zy0" name="closeButton" src="nkvz1p" fileName="Component/Button/BtnCloseTab.xml" xy="61,9" size="20,20">
+      <gearLook controller="button" pages="2,4" values="0,0,0,1|0.5,0,0,1" default="1,0,0,1"/>
+      <relation target="" sidePair="right-right"/>
+    </component>
   </displayList>
   <Button mode="Radio"/>
   <relation target="n4_10zy0" sidePair="width-width"/>

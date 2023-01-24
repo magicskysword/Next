@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Cysharp.Threading.Tasks;
 using FairyGUI;
 using SkySwordKill.Next;
 using SkySwordKill.Next.Extension;
@@ -45,20 +46,29 @@ public class ModEditorMainPanel : FGUIPanelBase
     {
         base.OnShown();
 
-        WindowWaitDialog.CreateDialog("提示", "正在初始化编辑器...", 0.5f,
-            context =>
+        WindowWaitDialog.CreateDialogAsync("提示", "正在初始化编辑器...", 0.5f,
+            (callback, context) =>
             {
                 // 预加载管理器
-                try
+                UniTask.Create(async () =>
                 {
-                    ModEditorManager.I.Init();
-                    ModEditorManager.I.LoadDefaultData();
-                }
-                catch (Exception e)
-                {
-                    Main.LogError(e);
-                    context.Exception = e;
-                }
+                    await UniTask.SwitchToThreadPool();
+                    try
+                    {
+                        ModEditorManager.I.Init();
+                        ModEditorManager.I.LoadDefaultData();
+                    }
+                    catch (Exception e)
+                    {
+                        Main.LogError(e);
+                        context.Exception = e;
+                    }
+                    finally
+                    {
+                        await UniTask.SwitchToMainThread();
+                        callback();
+                    }
+                });
             }, 
             context =>
             {

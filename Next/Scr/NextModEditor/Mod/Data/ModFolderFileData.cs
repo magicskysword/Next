@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using SkySwordKill.Next.Mod;
@@ -16,9 +17,18 @@ public abstract class ModFolderFileData<T> : IModData where T : ModFolderFileDat
         var buffDir = $"{dir}/{FolderName}";
         if (!Directory.Exists(buffDir))
             return dataList;
+        
         foreach (var filePath in Directory.GetFiles(buffDir))
         {
-            var data = JsonConvert.DeserializeObject<T>(File.ReadAllText(filePath));
+            T data;
+            try
+            {
+                data = JsonConvert.DeserializeObject<T>(File.ReadAllText(filePath));
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"加载 {typeof(T).Name} 数据失败！文件路径：{filePath}", e);
+            }
 
             if (Path.GetFileNameWithoutExtension(filePath) != data?.Id.ToString())
                 throw new ModException("文件ID与定义ID不一致");

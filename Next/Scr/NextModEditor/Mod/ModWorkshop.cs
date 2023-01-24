@@ -200,6 +200,36 @@ public class ModWorkshop
             
         return ModEditorManager.I.ReferenceProject.FindSkillBySkillPkId(id);
     }
+    
+    public ModStaticSkillData FindStaticSkill(int id)
+    {
+        ModStaticSkillData data = null;
+        foreach (var project in Projects)
+        {
+            data = project.FindStaticSkill(id);
+            if(data != null)
+            {
+                return data;
+            }
+        }
+            
+        return ModEditorManager.I.ReferenceProject.FindStaticSkill(id);
+    }
+        
+    public ModStaticSkillData FindStaticSkillBySkillPkId(int id)
+    {
+        ModStaticSkillData data = null;
+        foreach (var project in Projects)
+        {
+            data = project.FindStaticSkillBySkillPkId(id);
+            if(data != null)
+            {
+                return data;
+            }
+        }
+            
+        return ModEditorManager.I.ReferenceProject.FindStaticSkillBySkillPkId(id);
+    }
         
     public ModComprehensionData FindComprehension(int id)
     {
@@ -470,6 +500,31 @@ public class ModWorkshop
         dataList.ModSort();
         return dataList;
     }
+    
+    public List<ModStaticSkillData> GetAllStaticSkillData(bool containRefData = true)
+    {
+        Dictionary<int, ModStaticSkillData> dataDic = new Dictionary<int, ModStaticSkillData>();
+
+        if (containRefData)
+        {
+            foreach (var data in ModEditorManager.I.ReferenceProject.StaticSkillData)
+            {
+                dataDic.Add(data.Id, data);
+            }
+        }
+            
+        foreach (var project in Projects)
+        {
+            foreach (var data in project.StaticSkillData)
+            {
+                dataDic[data.Id] = data;
+            }
+        }
+
+        var dataList = new List<ModStaticSkillData>(dataDic.Values);
+        dataList.ModSort();
+        return dataList;
+    }
         
     public string GetBuffIconUrl(ModBuffData buff)
     {
@@ -499,6 +554,16 @@ public class ModWorkshop
         }
             
         return GetImageUrl($"Skill Icon/{data.Icon}");
+    }
+    
+    public string GetStaticSkillIconUrl(ModStaticSkillData data)
+    {
+        if (data.Icon == 0)
+        {
+            return GetImageUrl($"StaticSkill Icon/{data.SkillPkId}");
+        }
+            
+        return GetImageUrl($"StaticSkill Icon/{data.Icon}");
     }
         
     public string GetImageUrl(string resPath)

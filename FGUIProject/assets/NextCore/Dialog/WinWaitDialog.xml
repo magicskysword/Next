@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="350,65">
+<component size="350,91">
   <displayList>
-    <component id="n0_tcay" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="350,65">
+    <component id="n0_tcay" name="frame" src="nkvz2m" fileName="Component/Frame/WindowFrameDialog.xml" xy="0,0" size="350,91">
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <text id="n1_tcay" name="text" xy="11,32" size="330,22" fontSize="14" color="#ffffff" autoSize="height" autoClearText="true" text=""/>
+    <text id="n1_tcay" name="text" xy="11,58" size="330,22" fontSize="14" color="#ffffff" autoSize="height" autoClearText="true" text=""/>
+    <component id="n2_f830" name="n2" src="f830j5f" fileName="Component/Anim/AnimWait.xml" xy="124,39" size="101,12"/>
   </displayList>
   <relation target="n1_tcay" sidePair="bottomext-bottom"/>
 </component>

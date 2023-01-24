@@ -65,6 +65,7 @@ public class WindowModSelectorDialog : WindowDialogBase
             AddWorkshopMods();
         }
             
+        TableList.MultiSelect = false;
         TableList.SetClickItem(OnClickModItem);
         TableList.BindTable(TableInfos, new TableDataList<ModWorkshop>(Mods));
             
@@ -86,9 +87,9 @@ public class WindowModSelectorDialog : WindowDialogBase
         Hide();
     }
 
-    private void OnClickModItem(int index, object o)
+    private void OnClickModItem()
     {
-        var modInfo = (ModWorkshop)o;
+        var modInfo = (ModWorkshop)TableList.SelectedItem;
         ShowModInfo(modInfo);
     }
         

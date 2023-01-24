@@ -120,6 +120,25 @@ public static class FGUIUtils
             }
         });
     }
+    
+    /// <summary>
+    /// 不要手动创建NTexture，会造成内存泄露
+    /// 自动创建并设置销毁模式的NTexture
+    /// </summary>
+    /// <param name="texture"></param>
+    /// <returns></returns>
+    public static NTexture CreateTempNTexture(this Texture2D texture)
+    {
+        var nTex = new NTexture(texture);
+        nTex.onRelease += OnReleaseNTexture;
+        nTex.destroyMethod = DestroyMethod.Destroy;
+        return nTex;
+    }
+    
+    private static void OnReleaseNTexture(NTexture obj)
+    {
+        obj.Dispose();
+    }   
 
     public class HyLabel
     {
@@ -128,10 +147,14 @@ public static class FGUIUtils
         public bool HasUnderline = true;
         public string HoverColor { get; set; } = string.Empty;
     }
-        
+
     public static string UHyperTextToFGUIText(string text)
     {
+        if (string.IsNullOrEmpty(text))
+            return text;
+        
         StringBuilder sb = new StringBuilder();
+        // 计算font标签数量，用于关闭标签
         var fLabel = 0;
         for (int i = 0; i < text.Length; i++)
         {
@@ -265,7 +288,7 @@ public static class FGUIUtils
         var list = new List<LabelInfo>();
         foreach (var str in labelText.Split(' '))
         {
-            if(string.IsNullOrWhiteSpace(str))
+            if(string.IsNullOrEmpty(str))
                 continue;
             var arr = str.Split('=');
             var labelInfo = new LabelInfo();

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace SkySwordKill.Next;
 
-public class DataGroup<T> where T : IEquatable<T>
+public class DataGroup<T>
 {
     private const string DEFAULT_GROUP = "Default";
         

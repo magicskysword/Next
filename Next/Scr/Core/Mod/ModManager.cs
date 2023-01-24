@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using BepInEx;
+using Cysharp.Threading.Tasks;
 using KBEngine;
 using Newtonsoft.Json.Linq;
 using script.Steam;
@@ -75,18 +76,27 @@ public static class ModManager
 
     public static void GenerateBaseData(Action onComplete = null)
     {
-        WindowWaitDialog.CreateDialog("提示", "正在导出数据...", 1f,
-            context =>
+        WindowWaitDialog.CreateDialogAsync("提示", "正在导出基础数据...", 1f,
+            (callback, context) =>
             {
-                try
+                UniTask.Create(async () =>
                 {
-                    GenerateBaseDataWithoutGUI();
-                }
-                catch (Exception e)
-                {
-                    Main.LogError(e);
-                    context.Exception = e;
-                }
+                    await UniTask.SwitchToThreadPool();
+                    try
+                    {
+                        await GenerateBaseDataWithoutGUIAsync();
+                    }
+                    catch (Exception e)
+                    {
+                        Main.LogError(e);
+                        context.Exception = e;
+                    }
+                    finally
+                    {
+                        await UniTask.SwitchToMainThread();
+                        callback?.Invoke();
+                    }
+                });
             }, 
             context =>
             {
@@ -107,7 +117,7 @@ public static class ModManager
 
     public static void GenerateCurrentSceneFungusData(Action onComplete = null)
     {
-        WindowWaitDialog.CreateDialog("提示", "正在导出数据...", 1f,
+        WindowWaitDialog.CreateDialog("提示", "正在导出Fungus数据...", 1f,
             context =>
             {
                 try
@@ -156,6 +166,30 @@ public static class ModManager
         Main.LogInfo(string.Format("Fungus导出耗时\t：{0} s".I18NTodo(), fungusCost / 1000f));
         Main.LogIndent -= 1;
     }
+    
+    public static async UniTask GenerateBaseDataWithoutGUIAsync()
+    {
+        Main.LogInfo("ModManager.GenerateBaseData".I18N());
+
+        var sw = Stopwatch.StartNew();
+
+        await UniTask.SwitchToThreadPool();
+        
+        MainDataContainer.ExportMainData(dataContainer, Main.PathBaseDataDir.Value);
+        var dataCost = sw.ElapsedMilliseconds;
+
+        await UniTask.SwitchToMainThread();
+            
+        FFlowchartTools.ExportAllFungusFlowchart(Main.PathBaseFungusDataDir.Value);
+        var fungusCost = sw.ElapsedMilliseconds - dataCost;
+
+        sw.Stop();
+        Main.LogInfo(string.Format("所有数据导出完毕，总耗时\t {0} s".I18NTodo(), sw.ElapsedMilliseconds / 1000f));
+        Main.LogIndent += 1;
+        Main.LogInfo(string.Format("Data导出耗时\t：{0} s".I18NTodo(), dataCost / 1000f));
+        Main.LogInfo(string.Format("Fungus导出耗时\t：{0} s".I18NTodo(), fungusCost / 1000f));
+        Main.LogIndent -= 1;
+    }
 
     public static void ReloadAllMod()
     {
@@ -168,6 +202,27 @@ public static class ModManager
             OnModLoadStart();
             LoadAllMod();
             InitJSONClassData();
+            SceneManager.LoadScene("MainMenu");
+            OnModLoadComplete();
+            OnModSettingChanged();
+        }
+        sw.Stop();
+        Main.LogInfo(string.Format("ModManager.ReloadComplete".I18N(), sw.ElapsedMilliseconds / 1000f));
+    }
+    
+    public static async UniTask ReloadAllModAsync()
+    {
+        Main.LogInfo($"ModManager.StartReloadMod".I18N());
+        await UniTask.SwitchToThreadPool();
+        var sw = Stopwatch.StartNew();
+        {
+            OnModReload();
+            RestoreBaseData();
+            RestoreNextData();
+            OnModLoadStart();
+            LoadAllMod();
+            InitJSONClassData();
+            await UniTask.SwitchToMainThread();
             SceneManager.LoadScene("MainMenu");
             OnModLoadComplete();
             OnModSettingChanged();
@@ -1206,7 +1261,7 @@ public static class ModManager
         return null;
     }
     
-    public static bool TryGetModSetting(string key, out bool value)
+    public static bool TryGetModSetting(string key, out bool? value)
     {
         var setting = Main.I.NextModSetting;
         if(setting.BoolGroup.Has(key))
@@ -1214,11 +1269,11 @@ public static class ModManager
             value = setting.BoolGroup.Get(key);
             return true;
         }
-        value = false;
+        value = null;
         return false;
     }
     
-    public static void SetModSetting(string key, bool value)
+    public static void SetModSetting(string key, bool? value)
     {
         var setting = Main.I.NextModSetting;
         setting.BoolGroup.Set(key, value);

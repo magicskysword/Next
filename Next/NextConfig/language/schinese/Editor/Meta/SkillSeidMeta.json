@@ -7,8 +7,8 @@
     "Properties": [
       {
         "ID": "value1",
-        "Type": "Int",
-        "Desc": "X 吸血比例"
+        "Type": "Float",
+        "Desc": "X 吸血百分比(小数)"
       }
     ]
   },

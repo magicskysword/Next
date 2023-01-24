@@ -146,6 +146,8 @@ public class ModSeidDataGroupBase<TGroup> : IModSeidDataGroup where TGroup : Mod
                 var json = ModSeidData.SaveSeidData(pair.Value.MetaData ,dataList[index]);
                 var data = ModSeidData.LoadSeidData(pair.Value.MetaData, json);
                 data.Id = targetId;
+                if (DataGroups[pair.Key].DataList.HasId(data.Id))
+                    DataGroups[pair.Key].DataList.RemoveAll(findData => findData.Id == data.Id);
                 DataGroups[pair.Key].DataList.Add(data);
             }
         }

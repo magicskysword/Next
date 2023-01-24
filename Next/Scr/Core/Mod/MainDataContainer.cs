@@ -204,7 +204,7 @@ public class MainDataContainer
             if (!Directory.Exists(dirPathForData))
                 Directory.CreateDirectory(dirPathForData);
             var jsonObjects = pair.Value;
-            for (int i = 0; i < jsonObjects.Length; i++)
+            for (int i = 1; i < jsonObjects.Length; i++)
             {
                 if (jsonObjects[i] == null)
                     continue;

@@ -18,9 +18,9 @@ public abstract class ModSettingDefinition
     public abstract void OnInit();
     public abstract void OnDrawer(IInspector inspector);
     
-    public virtual void InitBool(string key, bool defaultValue)
+    public virtual void InitBool(string key, bool? defaultValue)
     {
-        if (!ModManager.TryGetModSetting(Key, out bool _))
+        if (!ModManager.TryGetModSetting(Key, out bool? _))
         {
             ModManager.SetModSetting(Key, defaultValue);
         }
