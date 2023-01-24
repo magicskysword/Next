@@ -1260,7 +1260,17 @@ public static class ModManager
         
         return null;
     }
+    public static bool TryGetModSetting(string key, out bool value)
+    {
+        if(TryGetModSetting(key,out bool? config)){
+            value = config ?? false ;
+            return true;
+        }
+        value = false;
+        return false;
+    }
     
+
     public static bool TryGetModSetting(string key, out bool? value)
     {
         var setting = Main.I.NextModSetting;
