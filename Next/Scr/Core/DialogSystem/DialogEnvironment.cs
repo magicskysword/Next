@@ -113,6 +113,17 @@ public class DialogEnvironment
         return 0;
     }
 
+    public bool IsTriggerOn(string triggerId)
+    {
+        DialogAnalysis.DialogTriggerDataDic.TryGetValue(triggerId, out var triggerData);
+        return triggerData != null && DialogAnalysis.IsTriggerOn(triggerData);
+    }
+    
+    public int GetTriggerCount(string triggerId)
+    {
+        return DialogAnalysis.AvatarNextData.GetTriggerState(triggerId, false)?.Count ?? 0;
+    }
+
     public int GetLuaInt(string luaFile, string luaFunc)
     {
         var rets = Main.Lua.RunFunc(luaFile, luaFunc,

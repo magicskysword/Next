@@ -44,6 +44,9 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\DataGroup.cs" />
     <Compile Include="Scr\Core\DialogEvent\BindNpc.cs" />
     <Compile Include="Scr\Core\DialogEvent\RunFungusBlock.cs" />
+    <Compile Include="Scr\Core\DialogEvent\SetTrigger.cs" />
+    <Compile Include="Scr\Core\DialogEvent\Trigger.cs" />
+    <Compile Include="Scr\Core\DialogEvent\TriggerAll.cs" />
     <Compile Include="Scr\Core\DialogSystem\AvatarNextData.cs" />
     <Compile Include="Scr\Core\DialogSystem\DialogAnalysis.cs" />
     <Compile Include="Scr\Core\DialogSystem\DialogAnalysis.Utils.cs" />
@@ -51,6 +54,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\Core\DialogSystem\DialogEventData.cs" />
     <Compile Include="Scr\Core\DialogSystem\DialogTriggerData.cs" />
     <Compile Include="Scr\Core\DialogSystem\IDialogEnvQuery.cs" />
+    <Compile Include="Scr\Core\DialogSystem\TriggerState.cs" />
     <Compile Include="Scr\Core\DialogTrigger\OnLoadMapScene.cs" />
     <Compile Include="Scr\Core\FCanvas\Command\Call.cs" />
     <Compile Include="Scr\Core\FCanvas\Command\VariableCondition.cs" />

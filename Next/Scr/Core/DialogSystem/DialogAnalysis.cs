@@ -138,6 +138,43 @@ public static partial class DialogAnalysis
         CurEvaluator.PreEvaluateFunction += Evaluator_PreEvaluateFunction;
         return CurEvaluator;
     }
+    
+    public static bool TryTriggerByID(string triggerID,DialogEnvironment env = null)
+    {
+        var newEnv = env ?? new DialogEnvironment();
+        if (DialogTriggerDataDic.TryGetValue(triggerID, out var triggerData))
+        {
+            try
+            {
+                if (!IsTriggerOn(triggerData))
+                {
+                    return false;
+                }
+                
+                if (CheckCondition(triggerData.Condition,newEnv))
+                {
+                    Main.LogInfo($"触发器 [{triggerID}] {triggerData.Condition} 触发成功。");
+                    if (triggerData.Once)
+                    {
+                        AvatarNextData.SetTrigger(triggerID, false);
+                    }
+                    AvatarNextData.ChangeTriggerCount(triggerID, 1);
+                    SwitchDialogEvent(triggerID, newEnv);
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Main.LogError($"触发器 [{triggerID}] {triggerData.Condition} 触发失败。");
+                Main.LogError(e);
+            }
+        }
+        else
+        {
+            Main.LogError($"触发器 [{triggerID}] 不存在。");
+        }
+        return false;
+    }
 
     public static bool TryTrigger(IEnumerable<string> triggerTypes,DialogEnvironment env = null,bool triggerAll = false)
     {
@@ -152,9 +189,18 @@ public static partial class DialogAnalysis
         {
             try
             {
+                // 如果触发器关闭则不参与判断
+                if(!IsTriggerOn(trigger))
+                    continue;
+                
                 if (CheckCondition(trigger.Condition,newEnv))
                 {
                     Main.LogInfo($"触发器 [{trigger.ID}] {trigger.Condition} 触发成功。");
+                    if (trigger.Once)
+                    {
+                        AvatarNextData.SetTrigger(trigger.ID, false);
+                    }
+                    AvatarNextData.ChangeTriggerCount(trigger.ID, 1);
                     if(!triggerAll)
                     {
                         // 非队列触发，直接切换事件
@@ -176,6 +222,15 @@ public static partial class DialogAnalysis
             }
         }
         return triggerSuccess;
+    }
+
+    public static bool IsTriggerOn(DialogTriggerData triggerData)
+    {
+        var triggerState = AvatarNextData.GetTriggerState(triggerData.ID, false);
+        if(triggerState == null)
+            return triggerData.Default;
+        
+        return triggerState.Enabled;
     }
 
     public static void StartDialogEvent(string eventID,DialogEnvironment env = null)

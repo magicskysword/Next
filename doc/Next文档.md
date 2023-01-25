@@ -322,7 +322,11 @@ Next 0.3.0 版本新增了增量修改的功能
         "id":"测试触发器",
         "type":"交谈",
         "condition":"roleBindID==609",
-        "triggerEvent":"测试1"
+        "triggerEvent":"测试1",
+        // 默认true
+        "default" : true,
+        // 默认false
+        "once" : false
     }
 ]
 ```
@@ -334,6 +338,8 @@ Next 0.3.0 版本新增了增量修改的功能
 |type|字符串|触发器类型，参考[**触发器类型**](触发器类型.md)|
 |condition|字符串|检测指令，参考[**运行时脚本**](运行时脚本.md)|
 |triggerEvent|字符串|触发事件，使用事件ID<br>参考本篇 **5 剧情文件**|
+|default|布尔类型|初始状态，false为关闭，true为开启，关闭的触发器不会参与触发判断|
+|once|布尔类型|是否触发后自动关闭，默认false|
 
 ## 7 添加资源
 Next为游戏引入了添加自定义资源的功能

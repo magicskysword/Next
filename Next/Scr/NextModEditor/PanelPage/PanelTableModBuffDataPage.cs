@@ -95,7 +95,7 @@ namespace SkySwordKill.NextModEditor.PanelPage
 
             var iconDrawer = new CtlIconPreviewDrawer(() => Mod.GetBuffIconUrl(data));
             AddDrawer(new CtlIntPropertyDrawer(
-                    "ModEditor.Main.modBuffData.icon".I18NTodo(),
+                    "ModEditor.Main.modBuffData.icon".I18N(),
                     value => data.Icon = value,
                     () => data.Icon).AddChangeListener(Inspector.Refresh)
             ).AddChainDrawer(iconDrawer);

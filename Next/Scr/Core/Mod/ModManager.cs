@@ -1270,7 +1270,12 @@ public static class ModManager
         return false;
     }
     
-
+    public static void SetModSetting(string key, bool value)
+    {
+        var setting = Main.I.NextModSetting;
+        setting.BoolGroup.Set(key, value);
+    }
+    
     public static bool TryGetModSetting(string key, out bool? value)
     {
         var setting = Main.I.NextModSetting;
@@ -1288,7 +1293,7 @@ public static class ModManager
         var setting = Main.I.NextModSetting;
         setting.BoolGroup.Set(key, value);
     }
-    
+
     public static bool TryGetModSetting(string key, out long value)
     {
         var setting = Main.I.NextModSetting;
