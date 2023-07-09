@@ -180,6 +180,7 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
     public abstract ModDataTableDataList<T> ModDataTableDataList { get; set; }
     public UndoInstManager UndoManager { get; set; } = new UndoInstManager();
     public bool IsInit { get; private set; } = false;
+    public virtual bool NeedRemoveSeidData { get; set; } = false;
 
     protected override GObject OnAdd()
     {
@@ -501,15 +502,22 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
 
     protected void TryRemoveData(T modData)
     {
-        WindowConfirmDialog.CreateDialog("提示", $"即将删除数据【{OnGetDataName(modData)}】，是否确认？", true, () =>
+        if (NeedRemoveSeidData)
         {
-            this.Record(new RemoveDataUndoCommand(
-                    modData,
-                    data => AddData((T)data),
-                    data => RemoveData(data.Id)
-                )
-            );
-        });
+            WindowConfirmDialogExtra.CreateDialog("提示", $"即将删除数据【{OnGetDataName(modData)}】，是否确认？", "同时删除所有引用该数据的数据", true,false, (removeSeidData) =>
+            {
+                OnRemoveData(modData, removeSeidData);
+            });
+        }
+        else
+        {
+            WindowConfirmDialog.CreateDialog("提示", $"即将删除数据【{OnGetDataName(modData)}】，是否确认？", true, () =>
+            {
+                OnRemoveData(modData);
+            });
+        }
+        
+        
     }
     
     protected void TryRemoveData(T[] modDataArray)
@@ -519,14 +527,24 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
             for (var index = 0; index < modDataArray.Length; index++)
             {
                 var modData = modDataArray[index];
-                this.Record(new RemoveDataUndoCommand(
-                        modData,
-                        data => AddData((T)data),
-                        data => RemoveData(data.Id)
-                    )
-                );
+                OnRemoveData(modData);
             }
         });
+    }
+    
+    /// <summary>
+    /// 移除数据，基类只移除数据，不移除seid数据
+    /// </summary>
+    /// <param name="modData"></param>
+    /// <param name="removeSeidData"></param>
+    protected virtual void OnRemoveData(T modData, bool removeSeidData = false)
+    {
+        this.Record(new RemoveDataUndoCommand(
+                modData,
+                data => AddData((T)data),
+                data => RemoveData(data.Id)
+            )
+        );
     }
 
     protected virtual void OnClickCopy()

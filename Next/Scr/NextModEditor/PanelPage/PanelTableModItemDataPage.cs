@@ -88,7 +88,7 @@ public class PanelTableModItemDataPage : PanelTablePageBase<ModItemData>
         AddDrawer(new CtlIDPropertyDrawer(
             "ID".I18NTodo(),
             data,
-            () => Project.BuffData,
+            () => Project.ItemData,
             theData =>
             {
                 var curData = (ModItemData)theData;

@@ -78,7 +78,7 @@ public class PanelTableModStaticSkillDataPage : PanelTablePageBase<ModStaticSkil
         AddDrawer(new CtlIDPropertyDrawer(
             "ID".I18NTodo(),
             data,
-            () => Project.BuffData,
+            () => Project.StaticSkillData,
             theData =>
             {
                 var curData = (ModStaticSkillData)theData;
@@ -160,13 +160,13 @@ public class PanelTableModStaticSkillDataPage : PanelTablePageBase<ModStaticSkil
         );
         
         AddDrawer(new CtlIntBindTablePropertyDrawer(
-                "攻击类型".I18NTodo(),
+                "类型".I18NTodo(),
                 value => data.AttackType = value,
                 () => data.AttackType,
                 value =>
                 {
-                    var attackType = ModEditorManager.I.AttackTypes.Find(type => type.Id == value);
-                    return $"【{attackType.Id}】{attackType.Desc}";
+                    var type = ModEditorManager.I.StaticSkillTypes.Find(type => type.Id == value);
+                    return $"【{type.Id}】{type.Desc}";
                 },
                 new List<TableInfo>()
                 {
@@ -181,7 +181,7 @@ public class PanelTableModStaticSkillDataPage : PanelTablePageBase<ModStaticSkil
                         value => ((ModAttackType)value).Desc
                     ),
                 },
-                () => new List<IModData>(ModEditorManager.I.AttackTypes)
+                () => new List<IModData>(ModEditorManager.I.StaticSkillTypes)
             )
         );
         

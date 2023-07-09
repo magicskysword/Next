@@ -107,8 +107,11 @@ public static class FFlowchartTools
                 {
                     Main.LogError(e);
                 }
+                Resources.UnloadAsset(flowchart);
             }
         }
+        
+        Resources.UnloadUnusedAssets();
     }
 
     private static void ExportFungusFlowchart(Flowchart flowchart, string outputPath)

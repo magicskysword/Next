@@ -355,6 +355,7 @@ XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i</PostBui
     <Compile Include="Scr\NextModEditor\Mod\Data\ModSString.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModStaticSkillData.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModStaticSkillSeidDataGroup.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModStaticSkillType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModTargetType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\IModDataClipboardPage.cs" />
     <Compile Include="Scr\NextModEditor\Mod\ModDataClipboard.cs" />

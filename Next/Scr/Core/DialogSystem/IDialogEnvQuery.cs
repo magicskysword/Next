@@ -2,6 +2,7 @@
 
 namespace SkySwordKill.Next.DialogSystem;
 
+[AttributeUsage(AttributeTargets.Class,AllowMultiple = true)]
 public class DialogEnvQueryAttribute : Attribute
 {
     public DialogEnvQueryAttribute(string method)

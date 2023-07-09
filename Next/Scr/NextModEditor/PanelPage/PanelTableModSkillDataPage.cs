@@ -79,7 +79,7 @@ public class PanelTableModSkillDataPage : PanelTablePageBase<ModSkillData>
         AddDrawer(new CtlIDPropertyDrawer(
             "ID".I18NTodo(),
             data,
-            () => Project.BuffData,
+            () => Project.SkillData,
             theData =>
             {
                 var curData = (ModSkillData)theData;

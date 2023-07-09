@@ -40,6 +40,7 @@ public class ModEditorManager
     public Dictionary<int, ModSeidMeta> SkillSeidMetas { get; set; }
     public Dictionary<int, ModSeidMeta> StaticSkillSeidMetas { get; set; }
     public List<ModAttackType> AttackTypes { get; set; }
+    public List<ModStaticSkillType> StaticSkillTypes { get; set; }
     public List<ModElementType> ElementTypes { get; set; }
     public List<ModComparisonOperatorType> ComparisonOperatorTypes { get; set; }
     public List<ModArithmeticOperatorType> ArithmeticOperatorTypes { get; set; }
@@ -138,6 +139,9 @@ public class ModEditorManager
             AttackTypes = JArray
                 .Parse(ModUtils.LoadEditorConfig("Meta/AttackType.json"))
                 .ToObject<List<ModAttackType>>();
+            StaticSkillTypes = JArray
+                .Parse(ModUtils.LoadEditorConfig("Meta/StaticSkillType.json"))
+                .ToObject<List<ModStaticSkillType>>();
             ElementTypes = JArray
                 .Parse(ModUtils.LoadEditorConfig("Meta/ElementType.json"))
                 .ToObject<List<ModElementType>>();

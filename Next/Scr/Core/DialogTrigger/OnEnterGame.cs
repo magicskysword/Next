@@ -23,6 +23,18 @@ public class OnEnterGame
     }
 }
 
+[HarmonyPatch(typeof(YSNewSaveSystem))]
+public class NewSaveSystemPatch
+{
+    [HarmonyPatch("LoadSave")]
+    [HarmonyPostfix]
+    public static void AfterLoad(int avatarIndex, int slot, int DFIndex)
+    {
+        OnEnterGame.IsEnterGame = true;
+        Main.LogInfo($"读取存档");
+    }
+}
+
 [HarmonyPatch(typeof(CreateNewPlayerFactory),"createPlayer")]
 public class OnEnterGameAfterCreatePlayer
 {
@@ -42,7 +54,7 @@ public class OnEnterGameAfterLoad
     public static void Prefix()
     {
         OnEnterGame.IsEnterGame = true;
-        Main.LogInfo($"读取存档 - 游戏内");
+        Main.LogInfo($"读取存档 - 旧版本 - 游戏内");
     }
 }
     
@@ -53,7 +65,7 @@ public class OnEnterGameAfterLoadMain
     public static void Prefix()
     {
         OnEnterGame.IsEnterGame = true;
-        Main.LogInfo($"读取存档 - 主界面");
+        Main.LogInfo($"读取存档 - 旧版本 - 主界面");
     }
 }
 

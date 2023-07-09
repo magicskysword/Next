@@ -33,6 +33,12 @@ public class GameExDataPatch
         [HarmonyPostfix]
         public static void Postfix(Tools __instance,int id, int index, KBEngine.Avatar _avatar)
         {
+            if (jsonData.instance.saveState == 1)
+                return;
+            if (!NpcJieSuanManager.inst.isCanJieSuan)
+                return;
+            if (FpUIMag.inst != null || TpUIMag.inst != null || UINPCJiaoHu.Inst.NowIsJiaoHu2 || SetFaceUI.Inst != null)
+                return;
             Main.LogInfo($"NextData 保存旧版存档数据");
             DialogAnalysis.SaveAvatarNextDataOld(id, index);
         }

@@ -356,15 +356,6 @@ public static class ModManager
         _buildCacheSuccess = false;
         try
         {
-            foreach (JSONObject jsonobject in jsonInstance._BuffJsonData.list)
-            {
-                var key = (int)jsonobject["buffid"].n;
-                if (!jsonInstance.Buff.ContainsKey(key))
-                {
-                    jsonInstance.Buff.Add(key, new Buff(key));
-                }
-            }
-            
             // 重建Buff缓存
             jsonInstance.Buff.Clear();
             jsonInstance.InitBuff();

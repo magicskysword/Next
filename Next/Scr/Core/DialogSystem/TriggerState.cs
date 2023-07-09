@@ -2,6 +2,6 @@
 
 public class TriggerState
 {
-    public bool Enabled { get; set; }
-    public int Count { get; set; }
+    public bool Enabled { get; set; } = true;
+    public int Count { get; set; } = 0;
 }
