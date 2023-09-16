@@ -818,7 +818,7 @@ public class InputTextField : RichTextField
                     return v;
             }
             else if (firstInLine != -1)
-                return v;
+                return textField.charPositions[i - 1];
         }
 
         return textField.charPositions[i - 1];

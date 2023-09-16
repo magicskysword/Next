@@ -49,77 +49,19 @@ public class SkillIconPatch
         if (__instance.IsStaticSkill)
         {
             // 功法图标
-            var staticSkillIDByKey = GetStaticSkillIconByKey(__instance.skill_ID);
-            var path = $"StaticSkill Icon/{staticSkillIDByKey}";
-            if (Main.Res.TryGetAsset($"Assets/{path}.png", asset =>
-                {
-                    if (asset is Texture2D texture)
-                    {
-                        __instance.skill_Icon = texture;
-                        __instance.skillIconSprite = Main.Res.GetSpriteCache(texture);
-                    }
-                }))
-            {
-                Main.LogInfo($"功法 [{__instance.skill_ID}] 图标加载成功");
-            }
-            else
-            {
-                Texture2D exists = Resources.Load<Texture2D>(path);
-                if (exists)
-                {
-                    __instance.skill_Icon = exists;
-                }
-                else
-                {
-                    __instance.skill_Icon = Resources.Load<Texture2D>("StaticSkill Icon/0");
-                }
-                Sprite exists2 = Resources.Load<Sprite>(path);
-                if (exists2)
-                {
-                    __instance.skillIconSprite = exists2;
-                }
-                else
-                {
-                    __instance.skillIconSprite = Resources.Load<Sprite>("StaticSkill Icon/0");
-                }
-            }
+            var path = $"Skill Icon/{GetSkillIconByKey(__instance.skill_ID)}";
+            Texture2D texture2D = ResManager.inst.LoadTexture2D("StaticSkill Icon/" + Tools.instance.getStaticSkillIDByKey(__instance.skill_ID));
+            __instance.skill_Icon = texture2D != null ? ResManager.inst.LoadTexture2D("StaticSkill Icon/0") : texture2D;
+            Sprite sprite = ResManager.inst.LoadSprite("StaticSkill Icon/" + Tools.instance.getStaticSkillIDByKey(__instance.skill_ID));
+            __instance.skillIconSprite = sprite != null ? ResManager.inst.LoadSprite("StaticSkill Icon/0") : sprite;
         }
         else
         {
             // 神通图标
-            var path = $"Skill Icon/{GetSkillIconByKey(__instance.skill_ID)}";
-            if (Main.Res.TryGetAsset($"Assets/{path}.png", asset =>
-                {
-                    if (asset is Texture2D texture)
-                    {
-                        __instance.skill_Icon = texture;
-                        __instance.skillIconSprite = Main.Res.GetSpriteCache(texture);
-                    }
-                }))
-            {
-                Main.LogInfo($"技能 [{__instance.skill_ID}] 图标加载成功");
-            }
-            else
-            {
-                Texture2D exists = Resources.Load<Texture2D>(path);
-                if (exists)
-                {
-                    __instance.skill_Icon = exists;
-                }
-                else
-                {
-                    __instance.skill_Icon = Resources.Load<Texture2D>("Skill Icon/0");
-                }
-                Sprite exists2 = Resources.Load<Sprite>(path);
-                if (exists2)
-                {
-                    __instance.skillIconSprite = exists2;
-                }
-                else
-                {
-                    __instance.skillIconSprite = Resources.Load<Sprite>("Skill Icon/0");
-                }
-            };
+            Texture2D texture2D = ResManager.inst.LoadTexture2D("Skill Icon/" + Tools.instance.getSkillIDByKey(__instance.skill_ID));
+            __instance.skill_Icon = texture2D != null ? ResManager.inst.LoadTexture2D("Skill Icon/0") : texture2D;
+            Sprite sprite = ResManager.inst.LoadSprite("Skill Icon/" + Tools.instance.getSkillIDByKey(__instance.skill_ID));
+            __instance.skillIconSprite = sprite != null ? ResManager.inst.LoadSprite("Skill Icon/0") : sprite;
         }
     }
 }
