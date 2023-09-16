@@ -388,7 +388,7 @@ public class GObject : EventDispatcher
     /// </summary>
     /// <param name="xv"></param>
     /// <param name="yv"></param>
-    /// <param name="topLeft"></param>
+    /// <param name="topLeftValue"></param>
     public void SetXY(float xv, float yv, bool topLeftValue)
     {
         if (_pivotAsAnchor)
@@ -1616,7 +1616,7 @@ public class GObject : EventDispatcher
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="point"></param>
+    /// <param name="pt"></param>
     /// <param name="targetSpace"></param>
     /// <returns></returns>
     public Vector2 TransformPoint(Vector2 pt, GObject targetSpace)

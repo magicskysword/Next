@@ -6,12 +6,15 @@ namespace SkySwordKill.NextDataChecker;
 
 public class DataSeidMetaChecker
 {
+    
+#pragma warning disable CS8618
     public DataSeidMetaChecker(string seidNameSpace,string dataPath)
     {
         SeidNameSpace = seidNameSpace;
         DataPath = dataPath;
     }
-
+#pragma warning restore CS8618
+    
     private bool _init;
     
     public string SeidNameSpace { get; }

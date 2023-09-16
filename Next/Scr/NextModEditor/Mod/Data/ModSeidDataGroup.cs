@@ -41,7 +41,7 @@ public class ModSeidDataGroup
                         throw new ModException("Seid ID与Key ID不一致");
                     data.DataList.Add(seidData);
                 }
-                catch (ModDataIdNotExistException idNotExistModException)
+                catch (ModDataIdNotExistException)
                 {
                     throw new ModException(string.Format("{0}中的{1}的ID不存在".I18NTodo(), meta.Id, property.Name));
                 }

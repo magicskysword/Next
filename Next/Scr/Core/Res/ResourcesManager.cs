@@ -144,12 +144,12 @@ public class ResourcesManager : MonoBehaviour
         asset = null;
         return false;
     }
-        
+
     /// <summary>
     /// 获取FileAsset，可以通过FileAsset获取资源原始位置及加载信息等
     /// </summary>
     /// <param name="path"></param>
-    /// <param name="asset"></param>
+    /// <param name="fileAsset"></param>
     /// <returns></returns>
     public bool TryGetFileAsset(string path,out FileAsset fileAsset)
     {

@@ -123,6 +123,7 @@ public class NTexture
     /// 
     /// </summary>
     /// <param name="texture"></param>
+    /// <param name="alphaTexture"></param>
     /// <param name="xScale"></param>
     /// <param name="yScale"></param>
     public NTexture(Texture texture, Texture alphaTexture, float xScale, float yScale)

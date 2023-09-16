@@ -1250,7 +1250,6 @@ namespace FairyGUI
         /// 设置UIPanel/UIPainter等的渲染层次，由UIPanel等内部调用。开发者不需要调用。
         /// </summary>
         /// <param name="target"></param>
-        /// <param name="value"></param>
         public void ApplyPanelOrder(Container target)
         {
             int sortingOrder = target._panelOrder;

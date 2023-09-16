@@ -801,7 +801,7 @@ public class ScrollPane : EventDispatcher
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="speed"></param>
+    /// <param name="ratio"></param>
     /// <param name="ani"></param>
     public void ScrollLeft(float ratio, bool ani)
     {

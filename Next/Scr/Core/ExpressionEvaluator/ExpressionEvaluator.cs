@@ -4332,6 +4332,10 @@ namespace SkySwordKill.Next
         /// Constructor of the VariableEvaluationEventArg
         /// </summary>
         /// <param name="name">The name of the variable to Evaluate</param>
+        /// <param name="evaluator"></param>
+        /// <param name="onInstance"></param>
+        /// <param name="genericTypes"></param>
+        /// <param name="evaluateGenericTypes"></param>
         public VariableEvaluationEventArg(string name, ExpressionEvaluator evaluator = null, object onInstance = null, string genericTypes = null, Func<string, Type[]> evaluateGenericTypes = null)
         {
             Name = name;

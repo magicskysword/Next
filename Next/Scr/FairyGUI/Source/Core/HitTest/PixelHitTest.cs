@@ -44,6 +44,8 @@ public class PixelHitTest : IHitTest
     /// <param name="data"></param>
     /// <param name="offsetX"></param>
     /// <param name="offsetY"></param>
+    /// <param name="sourceWidth"></param>
+    /// <param name="sourceHeight"></param>
     public PixelHitTest(PixelHitTestData data, int offsetX, int offsetY, float sourceWidth, float sourceHeight)
     {
         _data = data;

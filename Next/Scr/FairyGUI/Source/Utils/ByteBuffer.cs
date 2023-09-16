@@ -347,7 +347,6 @@ public class ByteBuffer
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="result"></param>
     public List<GPathPoint> ReadPath()
     {
         helperPoints.Clear();

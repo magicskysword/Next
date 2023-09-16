@@ -170,7 +170,6 @@ public class GTree : GList
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="folderNode"></param>
     public void CollapseAll()
     {
         CollapseAll(_rootNode);

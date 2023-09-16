@@ -1096,7 +1096,7 @@ public class DisplayObject : EventDispatcher
     /// 可以在onPaint回调里对这张纹理进行进一步操作，实现特殊效果。
     /// 可能有多个地方要求进入绘画模式，这里用requestorId加以区别，取值是1、2、4、8、16以此类推。1024内内部保留。用户自定义的id从1024开始。
     /// </summary>
-    /// <param name="requestId">请求者id</param>
+    /// <param name="requestorId">请求者id</param>
     /// <param name="extend">纹理四周的留空。如果特殊处理后的内容大于原内容，那么这里的设置可以使纹理扩大。</param>
     public void EnterPaintingMode(int requestorId, Margin? extend)
     {
@@ -1163,7 +1163,7 @@ public class DisplayObject : EventDispatcher
     /// <summary>
     /// 离开绘画模式
     /// </summary>
-    /// <param name="requestId"></param>
+    /// <param name="requestorId"></param>
     public void LeavePaintingMode(int requestorId)
     {
         if (_paintingMode == 0 || (_flags & Flags.Disposed) != 0)

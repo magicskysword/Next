@@ -100,7 +100,7 @@ public abstract class CtlPropertyDrawerBase : IPropertyDrawer
     /// <summary>
     /// 链接一个绘制器，当自身刷新时，也会刷新该绘制器
     /// </summary>
-    /// <param name="drawer"></param>
+    /// <param name="iconDrawer"></param>
     public IPropertyDrawer AddChainDrawer(IPropertyDrawer iconDrawer)
     {
         ChainDrawers.Add(iconDrawer);

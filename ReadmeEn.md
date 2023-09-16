@@ -1,5 +1,7 @@
 # Immortal Way Of Life Next Mod Framework
 
+![Next](preview.png)
+
 Next Mod is a Mod based on the BepinEx framework. It provides the ability to change data incrementally, add story and trigger to the game
 
 github url：https://github.com/magicskysword/Next
@@ -30,35 +32,35 @@ The mod menu can be opened through F4 in the game (the keys can be modified)
 
 ## Build
 
-Clone the library, add the Dll references in the game folder, including
+### Preparation
 
-`觅长生\BepInEx\core`
-```
-0Harmony.dll
-BepInEx.dll
-```
-`觅长生\觅长生_Data\Managed`
-```
-Assembly-CSharp.dll
-Assembly-CSharp-firstpass.dll
-Newtonsoft.CSharp.dll
-UnityEngine.dll
-UnityEngine.AssetBundleModule.dll
-UnityEngine.AudioModule.dll
-UnityEngine.CoreModule.dll
-UnityEngine.IMGUIModule.dll
-UnityEngine.InputModule.dll
-UnityEngine.TextRenderingModule.dll
-UnityEngine.UI.dll
-UnityEngine.UIModule.dll
-UnityEngine.UnityWebRequestAssetBundleModule.dll
-UnityEngine.UnityWebRequestAudioModule.dll
-UnityEngine.UnityWebRequestModule.dll
-UnityEngine.UnityWebRequestTextureModule.dll
-UnityEngine.UnityWebRequestWWWModule.dll
-```
+1. Download the latest game version from Steam
 
-After adding them, Build them directly and place the `Next.Dll` file, `NextLib` and `NextConfig` folders into the `觅长生\BepInEx\plugins` directory
+2. Subscribe to BepinEx from Steam Workshop
+
+### Mod build
+
+1. Add environment variables
+
+   * Open this computer -> Attribute -> Advanced System Settings
+
+   * Switch to the Advanced TAB
+
+   * Open Environment Variables
+
+   * Creaate a new variable
+
+     * Variable name: McsPath
+
+     * The variable value is the game address, such as: D:\Steam\steamapps\common\觅长生
+
+2. Open the solution and select the Next project
+
+3. Compile the Next project
+
+4. After compiling, the file will be automatically copied to the game directory
+
+5. Open the game and test it
 
 ## Develop mods based on Next
 Next Plugin Example：https://github.com/magicskysword/NextExamplePlugin

@@ -360,6 +360,7 @@ public class GPath
     /// <param name="t1"></param>
     /// <param name="points"></param>
     /// <param name="ts"></param>
+    /// <param name="pointDensity"></param>
     public void GetPointsInSegment(int segmentIndex, float t0, float t1, List<Vector3> points, List<float> ts = null, float pointDensity = 0.1f)
     {
         if (points == null)
@@ -414,6 +415,7 @@ public class GPath
     /// 
     /// </summary>
     /// <param name="points"></param>
+    /// <param name="pointDensity"></param>
     public void GetAllPoints(List<Vector3> points, float pointDensity = 0.1f)
     {
         int cnt = _segments.Count;

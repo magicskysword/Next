@@ -372,11 +372,12 @@ public static class ModManager
             Main.LogError(CheckData.log);
         }
     }
-        
+
     /// <summary>
     /// 重载mod元数据
     /// </summary>
     /// <param name="resetModState">是否重置Mod状态</param>
+    /// <param name="showLog"></param>
     public static void ReloadModMeta(bool resetModState,bool showLog = false)
     {
         if (resetModState)

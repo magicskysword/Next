@@ -22,7 +22,7 @@
 
     <ItemGroup>
       <Reference Include="Assembly-CSharp">
-        <HintPath>..\..\..\..\soft\steam\steamapps\common\觅长生\觅长生_Data\Managed\Assembly-CSharp.dll</HintPath>
+        <HintPath>$(McsPath)\觅长生_Data\Managed\Assembly-CSharp.dll</HintPath>
       </Reference>
     </ItemGroup>
 

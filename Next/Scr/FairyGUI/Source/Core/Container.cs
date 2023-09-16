@@ -500,7 +500,6 @@ public class Container : DisplayObject
     /// </summary>
     /// <param name="stagePoint"></param>
     /// <param name="forTouch"></param>
-    /// <param name="displayIndex"></param>
     /// <returns></returns>
     public DisplayObject HitTest(Vector2 stagePoint, bool forTouch)
     {

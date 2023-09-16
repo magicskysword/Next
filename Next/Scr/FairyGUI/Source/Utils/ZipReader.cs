@@ -27,7 +27,7 @@ public class ZipReader
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="stream"></param>
+    /// <param name="data"></param>
     public ZipReader(byte[] data)
     {
         _stream = new ByteBuffer(data);
@@ -97,7 +97,7 @@ public class ZipReader
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="name"></param>
+    /// <param name="entry"></param>
     /// <returns></returns>
     public byte[] GetEntryData(ZipEntry entry)
     {
