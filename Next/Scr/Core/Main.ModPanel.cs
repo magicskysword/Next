@@ -74,7 +74,7 @@ namespace SkySwordKill.Next
 
         #region 回调方法
 
-        private void Update()
+        private void OnPanelUpdate()
         {
             if (Input.GetKeyDown(WinKeyCode.Value))
             {
@@ -921,6 +921,16 @@ namespace SkySwordKill.Next
                         var window = new ModEditorMainPanel();
                         window.Show();
                         _isWinOpen = false;
+                    }
+                    
+                    if (GUILayout.Button("关闭所有自定义UI"))
+                    {
+                        FGUI.RemoveAllWindow();
+                    }
+                    
+                    if (GUILayout.Button("关闭所有自定义UI（强制）"))
+                    {
+                        FGUI.RemoveAllWindowForce();
                     }
 
                     GUILayout.BeginHorizontal();

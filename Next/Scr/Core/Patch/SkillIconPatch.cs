@@ -51,18 +51,18 @@ public class SkillIconPatch
             // 功法图标
             var path = $"StaticSkill Icon/{GetStaticSkillIconByKey(__instance.skill_ID)}";
             Texture2D texture2D = ResManager.inst.LoadTexture2D(path);
-            __instance.skill_Icon = texture2D != null ? ResManager.inst.LoadTexture2D("StaticSkill Icon/0") : texture2D;
+            __instance.skill_Icon = texture2D == null ? ResManager.inst.LoadTexture2D("StaticSkill Icon/0") : texture2D;
             Sprite sprite = ResManager.inst.LoadSprite(path);
-            __instance.skillIconSprite = sprite != null ? ResManager.inst.LoadSprite("StaticSkill Icon/0") : sprite;
+            __instance.skillIconSprite = sprite == null ? ResManager.inst.LoadSprite("StaticSkill Icon/0") : sprite;
         }
         else
         {
             // 神通图标
             var path = $"Skill Icon/{GetSkillIconByKey(__instance.skill_ID)}";
             Texture2D texture2D = ResManager.inst.LoadTexture2D(path);
-            __instance.skill_Icon = texture2D != null ? ResManager.inst.LoadTexture2D("Skill Icon/0") : texture2D;
+            __instance.skill_Icon = texture2D == null ? ResManager.inst.LoadTexture2D("Skill Icon/0") : texture2D;
             Sprite sprite = ResManager.inst.LoadSprite(path);
-            __instance.skillIconSprite = sprite != null ? ResManager.inst.LoadSprite("Skill Icon/0") : sprite;
+            __instance.skillIconSprite = sprite == null ? ResManager.inst.LoadSprite("Skill Icon/0") : sprite;
         }
     }
 }

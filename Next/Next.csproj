@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_STANDALONE_WIN;</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_STANDALONE_WIN;FAIRYGUI_SPINE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Next.xml</DocumentationFile>
@@ -30,7 +30,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_STANDALONE_WIN;</DefineConstants>
+    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_STANDALONE_WIN;FAIRYGUI_SPINE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Next.xml</DocumentationFile>
@@ -44,9 +44,11 @@ XCOPY "$(OutDir)**" "$(McsPath)\本地Mod测试\Next\plugins" /s /r /f /y /i
 XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /f /y /i</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="NextLib\Lua\example\ExamplePanel.lua" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scr\Core\DataGroup.cs" />
     <Compile Include="Scr\Core\DialogEvent\BindNpc.cs" />
+    <Compile Include="Scr\Core\DialogEvent\OpenGUI.cs" />
     <Compile Include="Scr\Core\DialogEvent\RunFungusBlock.cs" />
     <Compile Include="Scr\Core\DialogEvent\SetTrigger.cs" />
     <Compile Include="Scr\Core\DialogEvent\Trigger.cs" />
@@ -144,6 +146,7 @@ XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /
     <Compile Include="Scr\Core\FGUI\Dialog\WindowWaitDialog.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIDragDropManager.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIPanelBase.cs" />
+    <Compile Include="Scr\Core\FGUI\FGUIWindowLua.cs" />
     <Compile Include="Scr\Core\FGUI\FGUISceneComponentBase.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIUtils.cs" />
     <Compile Include="Scr\Core\FGUI\IUndoCommand.cs" />
@@ -154,6 +157,7 @@ XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /
     <Compile Include="Scr\Core\FGUI\UndoInstManager.cs" />
     <Compile Include="Scr\Core\FGUI\ValueChangedCommand.cs" />
     <Compile Include="Scr\Core\FGUI\WindowDialogBase.cs" />
+    <Compile Include="Scr\Core\Helper.cs" />
     <Compile Include="Scr\Core\I18N\NextLanguage.cs" />
     <Compile Include="Scr\Core\I18N\NextLanguageConfig.cs" />
     <Compile Include="Scr\Core\ModGUI\ModMainWindow.cs" />
@@ -393,6 +397,7 @@ XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeModProjectReferenced.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeModWorkshop.cs" />
     <Compile Include="Scr\NextModEditor\Panel\ModEditorMainPanel.cs" />
+    <Compile Include="Scr\Xlua\Gen\**" />
     <Compile Include="Scr\Xlua\Src\CodeEmit.cs" />
     <Compile Include="Scr\Xlua\Src\CopyByValue.cs" />
     <Compile Include="Scr\Xlua\Src\DelegateBridge.cs" />
@@ -471,6 +476,14 @@ XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>$(McsPath)\觅长生_Data\Managed\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="spine-csharp">
+      <HintPath>$(McsPath)\觅长生_Data\Managed\spine-csharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="spine-unity">
+      <HintPath>$(McsPath)\觅长生_Data\Managed\spine-unity.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System">

@@ -1092,8 +1092,9 @@ public static class ModManager
                 FilePath = filePath
                     .Replace(@"\", @"/"),
             };
-            var luaPath = Path.GetFileNameWithoutExtension(virtualPath)
-                .Replace(@"\", @"/");
+            var luaPath = virtualPath.Substring(0, virtualPath.Length - 4).Replace(@"\", @"/");
+            if(luaPath.StartsWith("/"))
+                luaPath = luaPath.Substring(1);
 
             try
             {

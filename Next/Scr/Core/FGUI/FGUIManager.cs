@@ -19,6 +19,7 @@ public class FGUIManager : MonoBehaviour
     public Dictionary<string, Shader> ShaderMap = new Dictionary<string, Shader>();
     public Dictionary<string, UIPackage> Packages = new Dictionary<string, UIPackage>();
     public List<FGUIScenePanelBase> ScenePanels = new List<FGUIScenePanelBase>();
+    public List<FGUIWindowBase> Windows = new List<FGUIWindowBase>();
 
     public const string MOUSE_RESIZE_H = "resizeH";
     public const string MOUSE_RESIZE_V = "resizeV";
@@ -28,8 +29,6 @@ public class FGUIManager : MonoBehaviour
     public const string MOUSE_TEXT = "text";
     public const string MOUSE_HAND = "hand";
 
-    private bool _inClearScenePanel = false;
-    
     private Canvas _fguiCanvas;
     private RenderTexture _renderTexture;
     
@@ -134,19 +133,41 @@ public class FGUIManager : MonoBehaviour
     {
         ResetCamera();
 
-        try
+        // 清除场景UI
+        foreach (var sceneComponent in ScenePanels.ToArray())
         {
-            _inClearScenePanel = true;
-            // 清除场景UI
-            foreach (var sceneComponent in ScenePanels)
-            {
+            if(!sceneComponent.DontDestroyOnLoad)
                 sceneComponent.Hide();
-            }
-            ScenePanels.Clear();
         }
-        finally
+    }
+    
+    public void RemoveAllWindow()
+    {
+        foreach (var window in Windows.ToArray())
         {
-            _inClearScenePanel = false;
+            try
+            {
+                window.Hide();
+            }
+            catch (Exception e)
+            {
+                Main.LogError(e);
+            }
+        }
+    }
+
+    public void RemoveAllWindowForce()
+    {
+        foreach (var window in Windows.ToArray())
+        {
+            try
+            {
+                window.HideForce();
+            }
+            catch (Exception e)
+            {
+                Main.LogError(e);
+            }
         }
     }
     
@@ -189,7 +210,7 @@ public class FGUIManager : MonoBehaviour
         }
         else
         {
-            Main.LogWarning($"[FGUI]不存在UI包：{pkgName}");
+            Main.LogError($"[FGUI]不存在UI包：{pkgName}");
         }
     }
 
@@ -258,8 +279,16 @@ public class FGUIManager : MonoBehaviour
 
     public void RemoveScenePanel(FGUIScenePanelBase scenePanel)
     {
-        if(_inClearScenePanel)
-            return;
         ScenePanels.Remove(scenePanel);
+    }
+
+    public void RegisterWindow(FGUIWindowBase fguiWindowBase)
+    {
+        Windows.Add(fguiWindowBase);
+    }
+
+    public void UnRegisterWindow(FGUIWindowBase fguiWindowBase)
+    {
+        Windows.Remove(fguiWindowBase);
     }
 }

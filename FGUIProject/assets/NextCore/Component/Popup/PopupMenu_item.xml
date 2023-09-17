@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="64,24" extention="Button">
-  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver,6,disabled,7,selectedDisabled" selected="5"/>
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver,6,disabled,7,selectedDisabled" selected="0"/>
   <controller name="checked" pages="0,no,1,yes" selected="0"/>
   <displayList>
     <graph id="n5_hbj2" name="select" xy="0,0" size="64,24" type="rect" lineSize="0" fillColor="#ff4d78f0">
       <gearDisplay controller="button" pages="2,3"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <text id="n4_hbj2" name="title" xy="22,0" size="42,24" fontSize="12" color="#999999" vAlign="middle" autoSize="none" singleLine="true" autoClearText="true" text="选项">
+    <text id="n4_hbj2" name="title" xy="22,0" size="42,24" fontSize="12" color="#ffffff" vAlign="middle" autoSize="none" singleLine="true" autoClearText="true" text="选项">
       <gearColor controller="button" pages="6,7" values="#999999,#000000|#999999,#000000" default="#ffffff,#000000"/>
       <relation target="" sidePair="width-width,height-height"/>
     </text>
     <image id="n6_hbj2" name="n6" src="nkvz2i" fileName="Icon/icon_true.png" xy="4,4" size="16,16">
       <gearDisplay controller="checked" pages="1"/>
     </image>
-    <image id="n8_10zy0" name="arrow" src="nkvz1l" fileName="Icon/icon_arrow4.png" xy="45,4" size="16,16" visible="false" color="#999999">
+    <image id="n8_10zy0" name="arrow" src="nkvz1l" fileName="Icon/icon_arrow4.png" xy="45,4" size="16,16" visible="false">
       <gearColor controller="button" pages="6,7" values="#999999|#999999" default="#ffffff"/>
+      <relation target="" sidePair="middle-middle,right-right"/>
     </image>
   </displayList>
   <Button mode="Radio"/>

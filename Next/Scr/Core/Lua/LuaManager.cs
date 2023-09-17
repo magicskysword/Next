@@ -41,6 +41,22 @@ public class LuaManager : MonoBehaviour
         }
     }
 
+    public T RunScript<T>(string scrPath)
+    {
+        var path = scrPath;
+        var scripts = LuaScriptsLoader(ref path);
+        var rets = LuaEnv.DoString(scripts, path);
+        if (rets.Length > 0 && rets[0] is T ret)
+        {
+            return ret;
+        }
+        else
+        {
+            Main.LogError($"Lua  {scrPath} 返回值数量或类型不匹配");
+            return default;
+        }
+    }
+
     public void Reset()
     {
         InitLuaEnv();
@@ -154,6 +170,6 @@ for key, _ in pairs(package.loaded) do
     package.loaded[key] = nil
 end
 ");
-            
+        LuaCaches.Clear();
     }
 }

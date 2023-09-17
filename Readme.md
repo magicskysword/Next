@@ -77,6 +77,8 @@ Next插件范例：https://github.com/magicskysword/NextExamplePlugin
 
 [rxi/json.lua](https://github.com/rxi/json.lua) lua json库
 
+[fairygui/FairyGUI-unity](https://github.com/fairygui/FairyGUI-unity) FairyGUI运行时库
+
 ## 相关库
 
 [BepinEx](https://github.com/BepInEx/BepInEx) 本mod基于BepinEx

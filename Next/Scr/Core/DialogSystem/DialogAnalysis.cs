@@ -233,7 +233,7 @@ public static partial class DialogAnalysis
         return triggerState.Enabled;
     }
 
-    public static void StartDialogEvent(string eventID,DialogEnvironment env = null)
+    public static void StartDialogEvent(string eventID, DialogEnvironment env = null)
     {
         if (!DialogDataDic.TryGetValue(eventID, out var data))
         {
@@ -244,7 +244,7 @@ public static partial class DialogAnalysis
         StartDialogEvent(data,env);
     }
 
-    public static void StartTestDialogEvent(string dialog,DialogEnvironment env = null)
+    public static void StartTestDialogEvent(string dialog, DialogEnvironment env = null)
     {
         var data = new DialogEventData()
         {
@@ -253,7 +253,7 @@ public static partial class DialogAnalysis
             Character = new Dictionary<string, int>()
         };
 
-        data.Dialog = dialog.Split('\n').Where(str=>!string.IsNullOrWhiteSpace(str)).ToArray();
+        data.Dialog = dialog.Trim().Split('\n').Where(str=>!string.IsNullOrWhiteSpace(str)).ToArray();
         StartDialogEvent(data,env);
     }
 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="800,600">
+  <displayList>
+    <component id="n0_q7nz" name="frame" src="q0gg3d" fileName="Component/Frame/WindowFrameDialogStyle2.xml" xy="0,0" size="800,600">
+      <relation target="" sidePair="width-width,height-height"/>
+      <Label title="测试界面"/>
+    </component>
+    <component id="n1_q7nz" name="btn_change_title" src="rabj44" fileName="Component/Button/BtnOk.xml" xy="26,52" size="124,27">
+      <Button title="修改标题"/>
+    </component>
+    <component id="n2_q7nz" name="n2" src="rabj44" fileName="Component/Button/BtnOk.xml" xy="463,109" size="124,27">
+      <Button title="执行事件"/>
+    </component>
+    <graph id="n3_q7nz" name="n3" xy="105,108" size="329,30" type="rect" lineSize="2" fillColor="#ff2c313c">
+      <relation target="n4_q7nz" sidePair="width-width,height-height,center-center,middle-middle"/>
+    </graph>
+    <text id="n4_q7nz" name="inContent" xy="111,112" size="317,22" fontSize="14" color="#ffffff" autoSize="none" singleLine="true" autoClearText="true" text="" input="true">
+      <relation target="" sidePair="width-width,height-height"/>
+    </text>
+    <text id="n5_q7nz" name="n5" xy="30,102" size="65,42" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="事件"/>
+    <component id="n6_q7nz" name="n6" src="rabj44" fileName="Component/Button/BtnOk.xml" xy="175,52" size="124,27">
+      <Button title="弹窗测试"/>
+    </component>
+    <graph id="n8_q7nz" name="n8" xy="26,221" size="200,300" type="rect" lineSize="2" fillColor="#ff2c313c">
+      <relation target="n4_q7nz" sidePair="width-width,height-height,center-center,middle-middle"/>
+    </graph>
+    <list id="n7_q7nz" name="n7" xy="30,225" size="193,293" overflow="scroll"/>
+    <component id="n9_q7nz" name="n9" src="rabj44" fileName="Component/Button/BtnOk.xml" xy="30,547" size="72,27">
+      <Button title="增加"/>
+    </component>
+    <component id="n10_q7nz" name="btn_change_title" src="rabj44" fileName="Component/Button/BtnOk.xml" xy="154,547" size="72,27">
+      <Button title="减少"/>
+    </component>
+    <text id="n11_q7nz" name="n11" xy="68,174" size="117,42" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="列表测试"/>
+    <component id="n12_q7nz" name="n12" src="txbi5b" fileName="Component/Drawer/ComSliderDrawer_slider.xml" xy="303,225" size="440,24">
+      <Slider value="50" max="100"/>
+    </component>
+    <text id="n13_q7nz" name="n13" xy="461,174" size="117,42" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="滑动条测试"/>
+    <text id="n14_q7nz" name="n14" xy="485,265" size="76,26" fontSize="18" color="#ffffff" align="center" autoSize="none" text="0"/>
+    <component id="n15_q7nz" name="n15" src="rabj44" fileName="Component/Button/BtnOk.xml" xy="324,52" size="124,27">
+      <Button title="右键菜单"/>
+    </component>
+    <component id="n16_q7nz" name="n16" src="nkvz23" fileName="Component/Drawer/ComDropdownDrawer.xml" xy="314,303" size="416,30">
+      <Label title="下拉框测试"/>
+    </component>
+    <component id="n17_q7nz" name="n17" src="rabj49" fileName="Component/Button/BtnCheckbox.xml" xy="347,359"/>
+    <text id="n18_q7nz" name="n18" xy="391,358" size="134,26" fontSize="18" color="#ffffff" autoSize="none" text="勾选测试：√"/>
+    <component id="n20_q7nz" name="n20" src="nkvz1x" fileName="Component/Drawer/ComStringDrawer.xml" xy="314,431" size="329,30">
+      <Label title="变量显示测试"/>
+    </component>
+    <text id="n21_q7nz" name="n21" xy="657,433" size="118,26" fontSize="18" color="#ffffff" autoSize="none" text="0"/>
+    <text id="n22_q7nz" name="n22" xy="315,536" size="415,35" fontSize="18" color="#ffffff" ubb="true" autoSize="none" text="[url=www.baidu,com]打开百度[/url]"/>
+  </displayList>
+</component>

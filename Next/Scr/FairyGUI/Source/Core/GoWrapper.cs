@@ -23,7 +23,7 @@ public class GoWrapper : DisplayObject
     protected bool _cloneMaterial;
     protected bool _shouldCloneMaterial;
 
-    protected struct RendererInfo
+    public struct RendererInfo
     {
         public Renderer renderer;
         public Material[] materials;

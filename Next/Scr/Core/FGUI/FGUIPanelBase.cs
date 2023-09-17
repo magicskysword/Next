@@ -11,8 +11,9 @@ public class FGUIPanelBase
     public RayBlocker RayBlocker;
         
     public GComponent contentPane { get; set; }
-    public bool isShowing { get; set; }
-    private bool isInit { get; set; } = false;
+    public bool IsShowing { get; set; }
+    private bool IsInit { get; set; } = false;
+    public bool IsModal { get; set; }
 
     public FGUIPanelBase(string pkgName,string comName)
     {
@@ -24,8 +25,15 @@ public class FGUIPanelBase
     protected virtual void OnInit()
     {
         RayBlocker = RayBlocker.CreateRayBlock(comName);
-        contentPane.onSizeChanged.Add(ResetRayBlocker);
-        contentPane.onPositionChanged.Add(ResetRayBlocker);
+        if (!IsModal)
+        {
+            contentPane.onSizeChanged.Add(ResetRayBlocker);
+            contentPane.onPositionChanged.Add(ResetRayBlocker);
+        }
+        else
+        {
+            RayBlocker.SetSize(new Rect(0, 0, GRoot.inst.width, GRoot.inst.height));
+        }
     }
 
     public virtual void ResetRayBlocker()
@@ -35,10 +43,10 @@ public class FGUIPanelBase
         
     public void Show()
     {
-        if(!isInit)
+        if(!IsInit)
         {
             OnInit();
-            isInit = true;
+            IsInit = true;
         }
         GRoot.inst.AddChild(contentPane);
         DoShowAnimation();
@@ -46,7 +54,7 @@ public class FGUIPanelBase
         
     public void Hide()
     {
-        if (isShowing)
+        if (IsShowing)
             DoHideAnimation();
     }
 
@@ -60,16 +68,16 @@ public class FGUIPanelBase
         HideImmediately();
     }
 
-    protected virtual void HideImmediately()
+    protected void HideImmediately()
     {
         GRoot.inst.RemoveChild(contentPane);
-        isShowing = false;
+        IsShowing = false;
         OnHide();
     }
 
     protected virtual void OnShown()
     {
-        isShowing = true;
+        IsShowing = true;
         RayBlocker.OpenBlocker();
         contentPane.RequestFocus();
     }
@@ -78,15 +86,21 @@ public class FGUIPanelBase
     {
         RayBlocker.CloseBlocker();
         RayBlocker.DestroySelf();
+        OnDispose();
         contentPane.Dispose();
+    }
+    
+    protected virtual void OnDispose()
+    {
+        
     }
         
     /// <summary>
     /// 按缩放因子设置缩放大小并居中
     /// </summary>
-    public void MakeFullScreenAndCenter(float factor = 1f)
+    public void MakeFullScreenAndCenter()
     {
-        contentPane.SetSize(GRoot.inst.width * factor, GRoot.inst.height * factor);
+        contentPane.SetSize(GRoot.inst.width, GRoot.inst.height);
         contentPane.Center();
         ResetRayBlocker();
     }

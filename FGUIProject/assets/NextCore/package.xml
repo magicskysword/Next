@@ -128,6 +128,7 @@
     <component id="pk2ij5d" name="WinConfirmDialogExtra.xml" path="/Dialog/" exported="true"/>
     <image id="f830j5e" name="icon_trash.png" path="/Icon/" exported="true"/>
     <component id="f830j5f" name="AnimWait.xml" path="/Component/Anim/"/>
+    <component id="q7nzj5g" name="ModExamplePanel.xml" path="/Window/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

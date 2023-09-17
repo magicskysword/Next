@@ -23,6 +23,20 @@ public class WindowIntInputDialog : WindowDialogBase
         window.modal = true;
         window.Show();
     }
+    
+    public static void CreateDialog(string title, bool canCancel, int defaultInt, Action<int> onConfirm, Action onCancel = null)
+    {
+        var window = new WindowIntInputDialog();
+        window.Title = title;
+        window.CanCancel = canCancel;
+        window.OnConfirm = onConfirm;
+        window.OnCancel = onCancel;
+        
+        window.InputDialog.m_inContent.text = defaultInt.ToString();
+
+        window.modal = true;
+        window.Show();
+    }
         
     private string Title { get; set; }
     private bool CanCancel { get; set; }
