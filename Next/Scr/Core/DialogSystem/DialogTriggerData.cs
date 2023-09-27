@@ -39,6 +39,7 @@ namespace SkySwordKill.Next.DialogSystem
         /// <summary>
         /// 初始状态
         /// </summary>
+        [JsonProperty(PropertyName = "default")]
         public bool Default { get; set; } = true;
 
         /// <summary>

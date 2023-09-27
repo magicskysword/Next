@@ -8,7 +8,7 @@ public class AvatarNextData
     public DataGroup<string> StrGroup { get; set; } = new DataGroup<string>();
     public Dictionary<string, TriggerState> TriggerStates { get; set; } = new Dictionary<string, TriggerState>();
 
-    public TriggerState GetTriggerState(string triggerID, bool createNew = true)
+    public TriggerState GetTriggerState(string triggerID, bool createNew = true, bool triggerDefault = true)
     {
         if (TriggerStates.TryGetValue(triggerID, out var state))
         {
@@ -18,6 +18,7 @@ public class AvatarNextData
         {
             state = new TriggerState();
             TriggerStates.Add(triggerID, state);
+            state.Enabled = triggerDefault;
             return state;
         }
         else

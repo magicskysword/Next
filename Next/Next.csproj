@@ -315,6 +315,7 @@ XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /
     <Compile Include="Scr\NextModEditor\Mod\Data\ModAlchemyElementData.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModArithmeticOperatorType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModAttackType.cs" />
+    <Compile Include="Scr\NextModEditor\Mod\Data\ModAvatarJsonData.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModBuffData.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModBuffDataBuffType.cs" />
     <Compile Include="Scr\NextModEditor\Mod\Data\ModBuffDataOverlayType.cs" />
