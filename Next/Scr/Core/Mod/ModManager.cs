@@ -71,7 +71,7 @@ public static class ModManager
 
     public static bool IsJsonFilePath(string filePath)
     {
-        return 0 == String.Compare(Path.GetExtension(filePath), "json", true);
+        return 0 == String.Compare(Path.GetExtension(filePath), ".json", true);
     }
 
     public static void CloneMainData()
