@@ -69,6 +69,11 @@ public static class ModManager
 
     #region 公共方法
 
+    public static bool IsJsonFilePath(string filePath)
+    {
+        return 0 == String.Compare(Path.GetExtension(filePath), "json", true);
+    }
+
     public static void CloneMainData()
     {
         dataContainer = MainDataContainer.CloneMainData();
@@ -735,7 +740,7 @@ public static class ModManager
                 dataTemplate = jsonObject[0];
             }
 
-            if (File.Exists(filePath))
+            if (File.Exists(filePath) && IsJsonFilePath(filePath))
             {
                 var fileName = Path.GetFileNameWithoutExtension(filePath);
                 var jsonData = LoadJSONObject(filePath);
@@ -855,6 +860,11 @@ public static class ModManager
         var dataTemplate = toJsonObject[0];
         foreach (var filePath in Directory.GetFiles(dirPathForData))
         {
+            if (!IsJsonFilePath(filePath))
+            {
+                continue;
+            }
+
             try
             {
                 var curData = LoadJSONObject(filePath);
@@ -903,6 +913,11 @@ public static class ModManager
             return;
         foreach (var filePath in Directory.GetFiles(dirPathForData))
         {
+            if (!IsJsonFilePath(filePath))
+            {
+                continue;
+            }
+
             try
             {
                 var curData = LoadJSONObject(filePath);
@@ -994,6 +1009,11 @@ public static class ModManager
             return;
         foreach (var filePath in Directory.GetFiles(tagDir))
         {
+            if (!IsJsonFilePath(filePath))
+            {
+                continue;
+            }
+
             try
             {
                 string json = File.ReadAllText(filePath);
@@ -1016,6 +1036,11 @@ public static class ModManager
             return;
         foreach (var filePath in Directory.GetFiles(tagDir))
         {
+            if (!IsJsonFilePath(filePath))
+            {
+                continue;
+            }
+
             try
             {
                 string json = File.ReadAllText(filePath);
@@ -1061,6 +1086,11 @@ public static class ModManager
             return;
         foreach (var filePath in Directory.GetFiles(tagDir))
         {
+            if (!IsJsonFilePath(filePath))
+            {
+                continue;
+            }
+
             try
             {
                 string json = File.ReadAllText(filePath);
