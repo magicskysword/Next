@@ -109,10 +109,13 @@ public class DialogEventData
     #region 字段
     [JsonProperty(PropertyName = "id")]
     public string ID { get; set; } 
+    
     [JsonProperty(PropertyName = "character")]
     public Dictionary<string, int> Character { get; set; } 
+    
     [JsonProperty(PropertyName = "dialog")]
     public string[] Dialog { get; set; } 
+    
     [JsonProperty(PropertyName = "option")]
     public string[] Option { get; set; } 
 
