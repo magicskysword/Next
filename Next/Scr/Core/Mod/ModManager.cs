@@ -977,14 +977,14 @@ public static class ModManager
                     list.Add(new JSONObject());
                 }
             }
-            
-            string filePath = Utility.CombinePaths(dirPathForData, $"RandomMap.json");
+
+            string filePath = Utility.CombinePaths(dirPath, $"RandomMap.json");
             PatchFubenJsonData(list[0], filePath);
-            filePath = Utility.CombinePaths(dirPathForData, $"ShiJian.json");
+            filePath = Utility.CombinePaths(dirPath, $"ShiJian.json");
             PatchFubenJsonData(list[1], filePath);
-            filePath = Utility.CombinePaths(dirPathForData, $"XuanXiang.json");
+            filePath = Utility.CombinePaths(dirPath, $"XuanXiang.json");
             PatchFubenJsonData(list[2], filePath);
-            filePath = Utility.CombinePaths(dirPathForData, $"fubentime.json");
+            filePath = Utility.CombinePaths(dirPath, $"fubentime.json");
             PatchFubenJsonData(list[3], filePath);
         }
     }
