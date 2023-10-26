@@ -1,31 +1,23 @@
-﻿using FairyGUI;
+﻿using System.Collections.Generic;
+using FairyGUI;
 using SkySwordKill.Next.Extension;
+using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
+using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.NextFGUI.NextCore;
 using SkySwordKill.NextModEditor.Mod;
 using SkySwordKill.NextModEditor.PanelProject;
 using UnityEngine;
 
-namespace SkySwordKill.Next.FGUI.Dialog;
+namespace SkySwordKill.Next.NextModEditor.Window;
 
 public class WindowCreateWorkshopModDialog : WindowDialogBase
 {
-    private WindowCreateWorkshopModDialog() : base("NextCore", "WinCreateWorkshopModDialog")
+    public WindowCreateWorkshopModDialog() : base("NextCore", "WinCreateWorkshopModDialog")
     {
             
     }
-
-    public static WindowCreateWorkshopModDialog CreateDialog(string title, OnSelectMod confirm)
-    {
-        var window = new WindowCreateWorkshopModDialog();
-        window.Title = title;
-        window.OnConfirm = confirm;
-
-        window.modal = true;
-        window.Show();
-        return window;
-    }
-        
+    
     public UI_WinCreateWorkshopModDialog MainView => contentPane as UI_WinCreateWorkshopModDialog;
         
     public string Title { get; set; }
@@ -34,7 +26,9 @@ public class WindowCreateWorkshopModDialog : WindowDialogBase
     public CtlListProject ListProject { get; set; }
     public CtlPropertyInspector Inspector { get; set; }
         
-    private ProjectListCreateWorkshopItem CurrentItem { get; set; }
+    private ProjectListBase CurrentItem { get; set; }
+    
+    public List<ProjectListBase> ProjectList { get; } = new();
 
     protected override void OnInit()
     {
@@ -44,17 +38,18 @@ public class WindowCreateWorkshopModDialog : WindowDialogBase
         Inspector = new CtlPropertyInspector(MainView.m_inspector);
             
         ListProject.SetClickItem(OnClickProjectItem);
+        foreach (var projectListItemBase in ProjectList)
+        {
+            ListProject.AddProject(projectListItemBase);
+        }
 
-        var emptyWorkshop = new ProjectListCreateWorkshopEmpty();
-        ListProject.AddProject(emptyWorkshop);
-            
         MainView.m_btnConfirm.onClick.Add(OnClickConfirm);
         MainView.m_btnCancel.onClick.Add(OnClickCancel);
         MainView.m_frame.m_closeButton.onClick.Add(OnClickCancel);
 
         ListProject.Refresh();
         ListProject.ProjectList.m_list.selectedIndex = 0;
-        OnSelectWorkshopItem(emptyWorkshop);
+        OnSelectWorkshopItem(ListProject.FirstProjectItem as ProjectListCreateWorkshopItem);
     }
     
     protected override void OnKeyDown(EventContext context)
@@ -82,8 +77,15 @@ public class WindowCreateWorkshopModDialog : WindowDialogBase
         ModWorkshop workshop;
         try
         {
-            workshop = CurrentItem.OnCreateWorkshop();
-            ModEditorManager.I.SaveWorkshop(workshop);
+            if (CurrentItem is ProjectListCreateWorkshopItem workshopItem)
+            {
+                workshop = workshopItem.OnCreateWorkshop();
+                ModEditorManager.I.SaveWorkshop(workshop);
+            }
+            else
+            {
+                return;
+            }
         }
         catch (CreateWorkshopException e)
         {
@@ -109,8 +111,11 @@ public class WindowCreateWorkshopModDialog : WindowDialogBase
             
         CurrentItem = workshopItem;
                 
-        workshopItem.Inspector = Inspector;
-        workshopItem.OnInspect();
+        if(workshopItem != null)
+        {
+            workshopItem.Inspector = Inspector;
+            workshopItem.OnInspect();
+        }
             
         Inspector.Refresh();
     }

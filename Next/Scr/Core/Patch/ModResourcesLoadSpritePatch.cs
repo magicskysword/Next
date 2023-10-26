@@ -12,16 +12,14 @@ public class ModResourcesLoadSpritePatch
     [HarmonyPrefix]
     public static bool LoadSprite(string path,ref Sprite __result)
     {
-        if (Main.Res.TryGetAsset($"Assets/Res/{path}.png", out var asset))
+        var texture = Main.Res.LoadAsset<Texture2D>($"Assets/Res/{path}.png");
+        if (texture == null)
         {
-            if (asset is Texture2D texture)
-            {
-                __result = Main.Res.GetSpriteCache(texture);
-                return false;
-            }
+            return true;
         }
-
-        return true;
+        
+        __result = Main.Res.GetSpriteCache(texture);
+        return false;
     }
 
 }

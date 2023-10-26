@@ -9,6 +9,8 @@ using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.Next.Mod;
+using SkySwordKill.Next.NextModEditor.Window;
+using SkySwordKill.Next.NextModEditor.WindowBuilder;
 using SkySwordKill.NextFGUI.NextCore;
 using SkySwordKill.NextModEditor.Mod;
 using SkySwordKill.NextModEditor.PanelProject;
@@ -247,7 +249,8 @@ public class ModEditorMainPanel : FGUIPanelBase
     private void InitHeader()
     {
         // Root
-        HeaderBar.AddMenu("ModEditor.Main.Header.File".I18N(), FilePopupBuild);    
+        HeaderBar.AddMenu("ModEditor.Main.Header.File".I18N(), FilePopupBuild);
+        HeaderBar.AddMenu("工具".I18NTodo(), ToolPopupBuild);
     }
 
     private PopupMenu FilePopupBuild()
@@ -267,6 +270,21 @@ public class ModEditorMainPanel : FGUIPanelBase
             
         return popMenu;
     }
+    
+    private PopupMenu ToolPopupBuild()
+    {
+        var popMenu = new PopupMenu();
+        popMenu.AddItem("创建AB包工程".I18NTodo(), OnClickCreateABProject);
+
+        return popMenu;
+    }
+
+    private void OnClickCreateABProject()
+    {
+        new WindowCreateABProjectDialogBuilder()
+            .Build()
+            .Show();
+    }
 
     private void OnClickFileExit()
     {
@@ -275,7 +293,15 @@ public class ModEditorMainPanel : FGUIPanelBase
 
     private void OnClickFileCreate()
     {
-        WindowCreateWorkshopModDialog.CreateDialog("新建工坊工程", OnOpenMod);
+        new WindowCreateWorkshopModDialogBuilder()
+            .SetTitle("新建工坊工程".I18NTodo())
+            .SetItemList(new []
+            {
+                new ProjectListCreateWorkshopEmpty()
+            })
+            .SetOnSelectMod(OnOpenMod)
+            .Build()
+            .Show();
     }
 
     private void OnClickFileOpen()

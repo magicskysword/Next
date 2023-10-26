@@ -382,4 +382,24 @@ public static class ModUtils
             return str;
         }
     }
+
+    public static void CreateUnityABTemplateProject(string projectName, string projectPath, string exportABPath)
+    {
+        var templatePath = Path.Combine(Main.PathTemplateDir.Value, "ModABPackTemplate");
+        // 复制模板
+        CopyDirectory(templatePath, projectPath, true);
+        
+        // 创建打包目录
+        var modAssetsPath = Path.Combine(projectPath, "Assets/NextMods/modAssets");
+        Directory.CreateDirectory(modAssetsPath);
+        
+        // 修改模板
+        var collectionFile = Path.Combine(projectPath, "Assets/NextModPackerCollection.asset");
+        var text = File.ReadAllText(collectionFile);
+        text = text
+            .Replace("%TemplateAB%", projectName)
+            .Replace("%TemplateFile%", modAssetsPath)
+            .Replace("%TemplateOutput%", Path.GetFullPath(exportABPath));
+        File.WriteAllText(collectionFile, text);
+    }
 }

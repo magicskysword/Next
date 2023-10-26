@@ -26,16 +26,16 @@ public class MainUIMagPatch
             var window = new ModMainWindow();
             window.Show();
         });
-
-        var res = Main.Res;
-        res.TryGetAsset<Texture2D>("Assets/Next/MCS_DLJM_btn_next.png", tex =>
-        {
-            var spr = tex.ToSprite();
-            nextBtnGo.GetComponent<Image>().sprite = spr;
-            nextBtn.nomalSprite = spr;
-        });
-        res.TryGetAsset<Texture2D>("Assets/Next/MCS_DLJM_btn_next_bk.png", tex => nextBtn.mouseDownSprite = tex.ToSprite());
-        res.TryGetAsset<Texture2D>("Assets/Next/MCS_DLJM_btn_next_hlg.png", tex => nextBtn.mouseEnterSprite = tex.ToSprite());
+        
+        var spr = Main.Res.LoadAsset<Texture2D>("Assets/Next/MCS_DLJM_btn_next.png").ToSprite();
+        nextBtnGo.GetComponent<Image>().sprite = spr;
+        nextBtn.nomalSprite = spr;
+        
+        spr = Main.Res.LoadAsset<Texture2D>("Assets/Next/MCS_DLJM_btn_next_bk.png").ToSprite();
+        nextBtn.mouseDownSprite = spr;
+        
+        spr = Main.Res.LoadAsset<Texture2D>("Assets/Next/MCS_DLJM_btn_next_hlg.png").ToSprite();
+        nextBtn.mouseEnterSprite = spr;
 
         nextBtnGo.AddComponent<MainPanelButtonAnimation>();
 

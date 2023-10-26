@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="300,30" extention="Label">
-  <controller name="grayed" pages="0,,1," selected="1"/>
+  <controller name="grayed" pages="0,,1," selected="0"/>
   <displayList>
-    <graph id="n1_10zy0" name="n1" xy="125,0" size="175,30" type="rect" lineSize="2" fillColor="#ff3e4247">
+    <graph id="n1_10zy0" name="n1" xy="125,0" size="175,30" type="rect" lineSize="2" fillColor="#ff2c313c">
       <gearColor controller="grayed" pages="1" values="#3e4247" default="#2c313c"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <text id="n0_10zy0" name="inContent" xy="131,4" size="163,22" fontSize="14" color="#959595" autoSize="none" singleLine="true" autoClearText="true" text="text" input="true">
+    <text id="n0_10zy0" name="inContent" xy="131,4" size="163,22" fontSize="14" color="#ffffff" autoSize="none" singleLine="true" autoClearText="true" text="text" input="true">
       <gearColor controller="grayed" pages="1" values="#959595,#000000" default="#ffffff,#000000"/>
       <relation target="" sidePair="width-width,height-height"/>
     </text>
-    <text id="n2_10zy0" name="title" xy="0,0" size="125,30" fontSize="14" color="#ffffff" align="center" vAlign="middle" autoSize="none" autoClearText="true" text="String"/>
+    <text id="n2_10zy0" name="title" xy="0,4" size="125,22" fontSize="14" color="#ffffff" align="center" vAlign="middle" autoSize="height" autoClearText="true" text="String"/>
   </displayList>
+  <relation target="n2_10zy0" sidePair="height-height"/>
 </component>

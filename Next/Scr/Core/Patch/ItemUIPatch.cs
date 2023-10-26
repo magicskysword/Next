@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Cysharp.Threading.Tasks;
+using HarmonyLib;
 using JSONClass;
 using UnityEngine;
 
@@ -26,16 +27,14 @@ public class ItemUIPatch
         }
         _ItemJsonData itemJsonData = _ItemJsonData.DataDict[id];
         var path = $"Assets/Item Icon/{GetItemIconByKey(itemJsonData)}.png";
-        if (Main.Res.TryGetAsset(path, asset =>
-            {
-                if (asset is Texture2D texture)
-                {
-                    __instance.itemIcon = texture;
-                    __instance.itemIconSprite = Main.Res.GetSpriteCache(texture);
-                }
-            }))
+
+        var texture = Main.Res.LoadAsset<Texture2D>(path);
+        if (texture == null)
         {
-            Main.LogInfo($"物品 [{__instance.itemID}] 图标加载成功");
+            return;
         }
+        
+        __instance.itemIcon = texture;
+        __instance.itemIconSprite = Main.Res.GetSpriteCache(texture);
     }
 }

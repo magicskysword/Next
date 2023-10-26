@@ -7,14 +7,14 @@ namespace SkySwordKill.Next.FGUI.Dialog;
 
 public class WindowConfirmDialog : WindowDialogBase
 {
-    private string _title;
-    private string _showText;
-    private bool _canCancel;
-    private Action _onConfirm;
-    private Action _onCancel;
+    public string _title;
+    public string _showText;
+    public bool _canCancel;
+    public Action _onConfirm;
+    public Action _onCancel;
     private bool _result;
 
-    private WindowConfirmDialog() : base("NextCore", "WinConfirmDialog")
+    public WindowConfirmDialog() : base("NextCore", "WinConfirmDialog")
     {
     }
 

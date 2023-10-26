@@ -22,13 +22,16 @@ public class MusicMagPatch
             Background = __instance.BackGroudMusic.ToDictionary(info => info.name);
             
         var musicInfo = __instance.BackGroudMusic.Find(info => info.name == name);
-        if (Main.Res.TryGetAsset($"Assets/Sound/Music/{name}.mp3",out var asset))
+        var audioClip = Main.Res.LoadAsset<AudioClip>($"Assets/Sound/Music/{name}.mp3");
+        if (audioClip == null)
         {
-            var audioClip = asset as AudioClip;
-            if(audioClip == null)
-                return;
-                
-                
+            if (Background.TryGetValue(name, out var rawMusic))
+            {
+                musicInfo.audioClip = rawMusic.audioClip;
+            }
+        }
+        else
+        {
             if (musicInfo != null)
             {
                 musicInfo.audioClip = audioClip;
@@ -41,13 +44,6 @@ public class MusicMagPatch
                     audioClip = audioClip
                 };
                 __instance.BackGroudMusic.Add(musicInfo);
-            }
-        }
-        else
-        {
-            if (Background.TryGetValue(name, out var rawMusic))
-            {
-                musicInfo.audioClip = rawMusic.audioClip;
             }
         }
     }

@@ -3,6 +3,7 @@ using GUIPackage;
 using HarmonyLib;
 using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.DialogTrigger;
+using SkySwordKill.Next.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using YSGame;
@@ -152,6 +153,7 @@ public class StartFight : IDialogEvent
                         var DefeatEvent = DialogAnalysis.GetStr("Fight", "DefeatEvent");
                         var IsVictory = DialogAnalysis.GetInt("Fight", "IsVictory") == 1;
 
+                        ResetEventFight();
                         if (IsVictory && !string.IsNullOrEmpty(VictoryEvent))
                         {
                             DialogAnalysis.StartDialogEvent(VictoryEvent);
@@ -160,7 +162,6 @@ public class StartFight : IDialogEvent
                         {
                             DialogAnalysis.StartDialogEvent(DefeatEvent);
                         }
-                        ResetEventFight();
                     }
                 }
             }
@@ -177,13 +178,11 @@ public class StartFight : IDialogEvent
             {
                 if (Tools.instance.monstarMag.FightImageID != 0)
                 {
-                    if (Main.Res.TryGetAsset($"Assets/Fightimage/{Tools.instance.monstarMag.FightImageID}.png", out var asset))
+                    var texture = Main.Res.LoadAsset<Texture2D>($"Assets/Fightimage/{Tools.instance.monstarMag.FightImageID}.png");
+                    if (texture != null)
                     {
-                        if (asset is Texture2D texture)
-                        {
-                            Sprite sprite = Main.Res.GetSpriteCache(texture);
-                            __instance.BackGroud.sprite = sprite;
-                        }
+                        Sprite sprite = texture.ToSprite();
+                        __instance.BackGroud.sprite = sprite;
                     }
                 }
             }

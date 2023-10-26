@@ -45,7 +45,7 @@ public class LuaManager : MonoBehaviour
     {
         var path = scrPath;
         var scripts = LuaScriptsLoader(ref path);
-        var rets = LuaEnv.DoString(scripts, path, LuaEnv.NewTable());
+        var rets = LuaEnv.DoString(scripts, path);
         if (rets.Length > 0 && rets[0] is T ret)
         {
             return ret;

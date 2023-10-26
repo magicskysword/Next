@@ -3,134 +3,136 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Cysharp.Threading.Tasks;
+using SkySwordKill.Next.Utils;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 namespace SkySwordKill.Next.Res;
 
 public class ResourcesManager : MonoBehaviour
 {
-    public delegate void FileHandle(string virtualPath, string filePath);
-        
-    #region 字段
-
-    public Dictionary<string, FileAsset> fileAssets = new Dictionary<string, FileAsset>(StringComparer.OrdinalIgnoreCase);
+    public Dictionary<string, ResMapper> resMappers = new Dictionary<string, ResMapper>(StringComparer.OrdinalIgnoreCase);
+    
     public Dictionary<int, Sprite> spriteCache = new Dictionary<int, Sprite>();
+    
+    public FileResLoader FileResLoader { get; } = new FileResLoader();
+    
+    public ABResLoader ABResLoader { get; } = new ABResLoader();
+    
+    public IEnumerable<IResLoader> ResLoaders
+    {
+        get
+        {
+            yield return FileResLoader;
+            yield return ABResLoader;
+        }
+    }
+    
+    #region 管理器接口
 
-    #endregion
-
-    #region 属性
-
-
-
-    #endregion
-
-    #region 回调方法
-
-
-
-    #endregion
-
-    #region 公共方法
-        
     public void Init()
     {
-        LoadInnerAsset();
+        Reset();
     }
         
     public void Reset()
     {
-        fileAssets.Clear();
+        // 清理Sprite缓存
+        foreach (var pair in spriteCache)
+        {
+            Destroy(pair.Value);
+        }
         spriteCache.Clear();
+        
+        // 清理资源缓存
+        foreach (var resLoader in ResLoaders)
+        {
+            resLoader.Reset();
+        }
+        
+        Resources.UnloadUnusedAssets();
+        
+        // 加载内部资源
         LoadInnerAsset();
     }
 
     public void LoadInnerAsset()
     {
-        CacheAssetDir(Main.PathInnerAssetDir.Value);
+        CacheAssetDir(Main.PathInnerAssetDir.Value, true);
     }
         
-    public void CacheAssetDir(string rootPath)
+    public void CacheAssetDir(string rootPath, bool dontDestroyOnLoad = false)
     {
-        DirectoryHandle("Assets", rootPath, AddAsset);
-    }
-
-    public void DirectoryHandle(string rootPath,string dirPath,FileHandle fileHandle)
-    {
-        if(!Directory.Exists(dirPath))
+        if (!Directory.Exists(rootPath))
+        {
             return;
-
-        foreach (var directory in Directory.GetDirectories(dirPath))
-        {
-            var name = Path.GetFileNameWithoutExtension(directory);
-            if (string.IsNullOrEmpty(rootPath))
-            {
-                DirectoryHandle($"{name}", directory, fileHandle);
-            }
-            else
-            {
-                DirectoryHandle($"{rootPath}/{name}", directory, fileHandle);
-            }
-            
         }
-
-        foreach (var file in Directory.GetFiles(dirPath))
+        
+        FileUtils.DirectoryHandle("Assets", rootPath, 
+            ((path, filePath) => AddFileAsset(path, filePath, dontDestroyOnLoad)));
+    }
+    
+    public void CacheAssetBundleDir(string rootPath)
+    {
+        if (!Directory.Exists(rootPath))
         {
-            var fileName = Path.GetFileName(file);
-                
-            var cachePath = $"{rootPath}/{fileName}";
-            fileHandle.Invoke(cachePath, file);
+            return;
+        }
+        
+        var abPaths = Directory.GetFiles(rootPath, "*.ab", SearchOption.AllDirectories);
+        foreach (var abPath in abPaths)
+        {
+            AddABAsset(abPath);
         }
     }
+
+    #endregion
+
+    #region 资源加载接口
 
     /// <summary>
-    /// 异步加载资源，返回值表示资源是否存在
+    /// 异步加载资源
     /// </summary>
     /// <param name="path"></param>
     /// <param name="callback"></param>
     /// <returns></returns>
-    public bool TryGetAsset(string path,Action<Object> callback)
+    public async UniTask<Object> LoadAssetAsync(string path)
     {
-        if (fileAssets.TryGetValue(path, out var fileAsset))
+        if (resMappers.TryGetValue(path, out var resMapper))
         {
-            fileAsset.LoadAssetAsync(callback);
-            return true;
+            return await resMapper.LoadAsync();
         }
-        return false;
+
+        return null;
     }
     
-    public bool TryGetAsset<T>(string path,Action<T> callback) where T : Object
+    /// <summary>
+    /// 异步加载资源，泛型接口
+    /// </summary>
+    /// <param name="path"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public async UniTask<T> LoadAssetAsync<T>(string path) where T : Object
     {
-        if (fileAssets.TryGetValue(path, out var fileAsset))
-        {
-            fileAsset.LoadAssetAsync(asset => callback.Invoke(asset as T));
-            return true;
-        }
-        return false;
+        return await LoadAssetAsync(path) as T;
     }
-        
+
     /// <summary>
     /// 同步加载资源，返回值表示资源是否存在且加载完毕
     /// </summary>
     /// <param name="path"></param>
     /// <param name="asset"></param>
     /// <returns></returns>
-    public bool TryGetAsset(string path,out Object asset)
+    public Object LoadAsset(string path)
     {
-        if (fileAssets.TryGetValue(path, out var fileAsset))
+        if (resMappers.TryGetValue(path, out var resMapper))
         {
-            asset = fileAsset.LoadAsset();
-            if (asset != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return resMapper.Load();
         }
-        asset = null;
-        return false;
+
+        return null;
     }
     
     /// <summary>
@@ -140,155 +142,104 @@ public class ResourcesManager : MonoBehaviour
     /// <param name="asset"></param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public bool TryGetAsset<T>(string path,out T asset) where T : Object
+    public T LoadAsset<T>(string path) where T : Object
     {
-        Object loadAsset;
-        if (TryGetAsset(path,out loadAsset) && loadAsset is T tAsset)
-        {
-            asset = tAsset;
-            return true;
-        }
-
-        asset = null;
-        return false;
+        return LoadAsset(path) as T;
     }
-
-    /// <summary>
-    /// 获取FileAsset，可以通过FileAsset获取资源原始位置及加载信息等
-    /// </summary>
-    /// <param name="path"></param>
-    /// <param name="fileAsset"></param>
-    /// <returns></returns>
-    public bool TryGetFileAsset(string path,out FileAsset fileAsset)
+    
+    public byte[] LoadBytes(string path)
     {
-        if (fileAssets.TryGetValue(path, out fileAsset))
+        if (resMappers.TryGetValue(path, out var resMapper))
         {
-            return true;
+            return resMapper.LoadBytes();
         }
-        return false;
-    }
-
-    /// <summary>
-    /// 异步按文件夹加载资源
-    /// </summary>
-    /// <param name="path"></param>
-    /// <param name="callback"></param>
-    /// <param name="includeSubfolder">是否包含子文件夹</param>
-    /// <param name="extension">文件拓展名</param>
-    /// <returns></returns>
-    public void TryGetAssets(string path,Action<Object[]> callback,bool includeSubfolder = false,string extension = ".*")
-    {
-        var list = new List<FileAsset>();
-        var transPath = path.ToLower();
-        foreach (var pair in fileAssets)
-        {
-            var curPath = pair.Key;
-            var asset = pair.Value;
-            if (curPath.StartsWith(transPath)
-                && (includeSubfolder || !curPath.Substring(transPath.Length).Contains("/")) 
-                && (extension == ".*" || curPath.EndsWith(extension)))
-            {
-                list.Add(asset);
-            }
-        }
-
-        StartCoroutine(LoadAssets(list,callback));
-    }
         
-    /// <summary>
-    /// 同步按文件夹加载资源
-    /// 如果一个资源没有准备就绪，不会被加载进来
-    /// </summary>
-    /// <param name="path"></param>
-    /// <param name="asstes"></param>
-    /// <param name="includeSubfolder"></param>
-    /// <param name="extension"></param>
-    public void TryGetAssets(string path,out Object[] asstes,bool includeSubfolder = false,string extension = ".*")
-    {
-        var list = new List<FileAsset>();
-        var transPath = path.ToLower();
-        foreach (var pair in fileAssets)
-        {
-            var curPath = pair.Key;
-            var asset = pair.Value;
-            if (curPath.StartsWith(transPath)
-                && (includeSubfolder || !curPath.Substring(transPath.Length).Contains("/")) 
-                && (extension == ".*" || curPath.EndsWith(extension)))
-            {
-                list.Add(asset);
-            }
-        }
-
-        asstes = list
-            .Where(asset=>asset.IsDone)
-            .Select(asset=>asset.LoadAsset())
-            .ToArray();
+        return null;
     }
-
-    private IEnumerator LoadAssets(IEnumerable<FileAsset> assets,Action<Object[]> callback)
+    
+    public async UniTask<byte[]> LoadBytesAsync(string path)
     {
-        var loadAssets = new List<FileAsset>();
-        var doneAssets = new List<FileAsset>();
-            
-        loadAssets.AddRange(assets);
-            
-        while (doneAssets.Count < loadAssets.Count)
+        if (resMappers.TryGetValue(path, out var resMapper))
         {
-            for (int i = loadAssets.Count - 1; i >= 0; i--)
-            {
-                var asset = loadAssets[i];
-                if (asset.IsDone)
-                {
-                    loadAssets.RemoveAt(i);
-                    doneAssets.Add(asset);
-                }
-            }
-
-            yield return null;
+            return await resMapper.LoadBytesAsync();
         }
-            
-        callback?.Invoke(doneAssets.Select(asset=>asset.asset).ToArray());
+        
+        return null;
+    }
+    
+    public void LoadScene(string path, LoadSceneMode mode = LoadSceneMode.Single)
+    {
+        SceneManager.LoadScene(path, mode);
+    }
+    
+    public async UniTask LoadSceneAsync(string path, LoadSceneMode mode = LoadSceneMode.Single)
+    {
+        var asyncOperation = SceneManager.LoadSceneAsync(path, mode);
+        await asyncOperation;
     }
 
     /// <summary>
-    /// 是否存在资源（无论是否加载完毕）
+    /// 是否存在资源
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
     public bool HaveAsset(string path)
     {
-        return fileAssets.ContainsKey(path);
-    }
-        
-    /// <summary>
-    /// 是否存在资源且加载完毕
-    /// </summary>
-    /// <param name="path"></param>
-    /// <returns></returns>
-    public bool IsAssetReady(string path)
-    {
-        return fileAssets.TryGetValue(path, out var fileAsset) && fileAsset.IsDone;
+        return resMappers.ContainsKey(path);
     }
 
-    public void AddAsset(string cachePath,string path)
+    /// <summary>
+    /// 直接添加文件资源引用
+    /// </summary>
+    /// <param name="cachePath"></param>
+    /// <param name="path"></param>
+    /// <param name="dontDestroyOnLoad"></param>
+    public void AddFileAsset(string cachePath,string path, bool dontDestroyOnLoad)
     {
         var fileAsset = new FileAsset(path);
-        var key = cachePath.Replace(@"\\", "/").ToLower();
-            
-        if (fileAssets.TryGetValue(key, out var oldAsset))
+        fileAsset.DontDestroyOnLoad = dontDestroyOnLoad;
+        var resPath = cachePath.Replace(@"\\", "/");
+
+        FileResLoader.AddFileAsset(resPath, fileAsset);
+        AddResMapper(resPath, new ResMapper(cachePath, FileResLoader));
+    }
+    
+    public void AddABAsset(string path)
+    {
+        var abAsset = new ABRefAsset(path);
+        abAsset.LoadAssetBundle();
+        
+        var allAssetsName = abAsset.RefAssetBundle.GetAllAssetNames();
+        foreach (var resPath in allAssetsName)
         {
-            Main.LogWarning($"重复添加Asset ({key})");
+            if(!resPath.StartsWith("Assets/", StringComparison.OrdinalIgnoreCase))
+                continue;
+            
+            AddResMapper(resPath, new ResMapper(resPath, ABResLoader));
+        }
+        
+        ABResLoader.AddABAssetToFirst(abAsset);
+    }
+
+    public void AddResMapper(string path, ResMapper resMapper)
+    {
+        if (resMappers.ContainsKey(path))
+        {
+            Main.LogWarning($"覆盖Asset [{resMapper.resLoader.LoaderCode}]({path})");
         }
         else
         {
-            Main.LogInfo($"添加Asset ({key})");
+            Main.LogInfo($"添加Asset [{resMapper.resLoader.LoaderCode}]({path})");
         }
-        fileAssets[key] = fileAsset;
+        resMappers[path] = resMapper;
     }
 
     public Sprite GetSpriteCache(Texture2D texture)
     {
-        if(!spriteCache.TryGetValue(texture.GetHashCode(),out var sprite))
+        if (texture == null)
+            return null;
+        
+        if(!spriteCache.TryGetValue(texture.GetHashCode(), out var sprite) || sprite == null)
         {
             sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),
                 new Vector2(0.5f, 0.5f));
@@ -299,14 +250,9 @@ public class ResourcesManager : MonoBehaviour
 
     #endregion
 
-    #region 私有方法
-
-    private void DrawWindow(int id)
+    public void ReleaseCache()
     {
-        var assetCount = fileAssets.Count;
-        var loadSuccessCount = fileAssets.Count(pair => pair.Value.IsDone);
-        GUILayout.Label($"资源加载进度：{loadSuccessCount} / {assetCount}");
+        spriteCache.Clear();
+        Resources.UnloadUnusedAssets();
     }
-
-    #endregion
 }

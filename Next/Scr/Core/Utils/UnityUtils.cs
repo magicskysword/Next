@@ -58,7 +58,7 @@ public static class UnityUtils
 
     public static Sprite ToSprite(this Texture2D texture2D)
     {
-        var sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
+        var sprite = Main.Res.GetSpriteCache(texture2D);
         return sprite;
     }
     

@@ -13,11 +13,16 @@ public class PlayEffect : IDialogEvent
         var name = command.GetStr(0);
         var pitch = command.GetFloat(1, 1f);
 
-        Main.Res.TryGetAsset($"Assets/Sound/Effect/{name}.mp3", asset =>
+        var audioClip = Main.Res.LoadAsset<AudioClip>($"Assets/Sound/Effect/{name}.mp3");
+        if (audioClip != null)
         {
-            if (asset is AudioClip audioClip)
-                MusicMag.instance.PlayEffectMusic(audioClip, pitch);
-        });
+            MusicMag.instance.PlayEffectMusic(audioClip, pitch);
+        }
+        else
+        {
+            Debug.LogError($"音效 {name} 不存在。");
+        }
+        
         callback?.Invoke();
     }
 }

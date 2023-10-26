@@ -134,7 +134,7 @@ public static partial class DialogAnalysis
     public static ExpressionEvaluator GetEvaluate(DialogEnvironment env)
     {
         CurEvaluator = CurEvaluator ?? new ExpressionEvaluator();
-        CurEvaluator.Context = env;
+        CurEvaluator.Context = env ?? new DialogEnvironment();
         CurEvaluator.PreEvaluateFunction += Evaluator_PreEvaluateFunction;
         return CurEvaluator;
     }

@@ -141,13 +141,14 @@ public class FGUIManager : MonoBehaviour
         }
     }
     
-    public void RemoveAllWindow()
+    public void RemoveAllWindow(Func<FGUIWindowBase, bool> checker = null)
     {
         foreach (var window in Windows.ToArray())
         {
             try
             {
-                window.Hide();
+                if(checker == null || checker(window))
+                    window.Hide();
             }
             catch (Exception e)
             {
@@ -193,24 +194,26 @@ public class FGUIManager : MonoBehaviour
         
     public void AddPackage(string pkgName)
     {
+        // 防止重复加载
         if(Packages.ContainsKey(pkgName))
             return;
 
         var fguiPath = $"Assets/UIRes/{pkgName}";
         var fguiBytesPath = $"{fguiPath}_fui.bytes";
-        if (Main.Res.TryGetAsset(fguiBytesPath, out var asset) && asset is BytesAsset bytesAsset)
-        {
-            var tagPackage = UIPackage.AddPackage(bytesAsset.Bytes , fguiPath, LoadResFunc);
-            Packages.Add(pkgName, tagPackage);
-            // 加载依赖
-            foreach (var dependency in tagPackage.dependencies)
-            {
-                AddPackage(dependency["name"]);
-            }
-        }
-        else
+
+        var bytes = Main.Res.LoadBytes(fguiBytesPath);
+        if(bytes == null)
         {
             Main.LogError($"[FGUI]不存在UI包：{pkgName}");
+            return;
+        }
+        
+        var tagPackage = UIPackage.AddPackage(bytes, fguiPath, LoadResFunc);
+        Packages.Add(pkgName, tagPackage);
+        // 加载依赖
+        foreach (var dependency in tagPackage.dependencies)
+        {
+            AddPackage(dependency["name"]);
         }
     }
 
@@ -223,7 +226,7 @@ public class FGUIManager : MonoBehaviour
         
     private void LoadFGUIAB()
     {
-        FguiAB = AssetBundle.LoadFromFile($"{Main.PathAbDir.Value}/next_fairygui");
+        FguiAB = AssetBundle.LoadFromFile($"{Main.PathInnerAbDir.Value}/next_fairygui");
         foreach (var asset in FguiAB.LoadAllAssets())
         {
             if (asset is Shader shader)
@@ -234,16 +237,18 @@ public class FGUIManager : MonoBehaviour
         }
     }
         
-    private void RegisterCursor(string name,string path)
+    private void RegisterCursor(string cursorName,string path, float hotspotX = 0.5f, float hotspotY = 0.5f)
     {
-        if (Main.Res.TryGetAsset(path, out var asset) && asset is Texture2D texture2D)
+        var texture2D = Main.Res.LoadAsset<Texture2D>(path);
+        if (texture2D == null)
         {
-            Stage.inst.RegisterCursor(name, texture2D, new Vector2(texture2D.width/2f,texture2D.height/2f));
+            Debug.LogWarning($"[FGUI]鼠标[{cursorName}]资源不存在，路径：{path}");
+            return;
         }
-        else
-        {
-            Debug.LogWarning($"[FGUI]鼠标[{name}]资源不存在，路径：{path}");
-        }
+        
+        var hotspot = new Vector2(texture2D.width * hotspotX, texture2D.height * hotspotY);
+        
+        Stage.inst.RegisterCursor(cursorName, texture2D, hotspot);
     }
 
     private Shader GetShaderInAB(string name)
@@ -259,17 +264,16 @@ public class FGUIManager : MonoBehaviour
     private static object LoadResFunc(string name, string extension, System.Type type, out DestroyMethod destroyMethod)
     {
         destroyMethod = DestroyMethod.None;
-        string tagPath = name + extension;
+        string tagPath = $"{name}{extension}".Replace("\\", "/");
         Main.LogDebug($"[FGUI]加载文件：<{type}> {tagPath}");
-        if (Main.Res.HaveAsset(tagPath))
+        var asset = Main.Res.LoadAsset(tagPath);
+        
+        if (asset == null)
         {
-            if (Main.Res.TryGetAsset(tagPath, out var asset))
-            {
-                return asset;
-            }
+            Main.LogWarning($"[FGUI]不存在文件：<{type}> {tagPath}");
         }
-        Main.LogWarning($"[FGUI]不存在文件：<{type}> {tagPath}");
-        return null;
+
+        return asset;
     }
 
     public void RegisterScenePanel(FGUIScenePanelBase scenePanel)
@@ -290,5 +294,15 @@ public class FGUIManager : MonoBehaviour
     public void UnRegisterWindow(FGUIWindowBase fguiWindowBase)
     {
         Windows.Remove(fguiWindowBase);
+    }
+
+    public void AutoCloseUIOnLoadScene()
+    {
+        RemoveAllWindow(window => window.AutoCloseInSceneChange);
+    }
+
+    public void AutoCloseUIOnSaveQuit()
+    {
+        RemoveAllWindow(window => window.AutoCloseInQuitSave);
     }
 }

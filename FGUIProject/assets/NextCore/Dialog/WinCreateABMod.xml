@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="595,400">
+  <displayList>
+    <component id="n0_c5lp" name="frame" src="q0gg3d" fileName="Component/Frame/WindowFrameDialogStyle2.xml" xy="0,0" size="595,400">
+      <relation target="" sidePair="width-width,height-height"/>
+      <Label title="创建 Unity AB Mod"/>
+    </component>
+    <component id="n5_c5lp" name="btnOk" src="rabj44" fileName="Component/Button/BtnOk.xml" xy="469,363" pivot="0.5,0" anchor="true">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+      <Button title="确定"/>
+    </component>
+    <component id="n6_c5lp" name="btnCancle" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="553,363" pivot="0.5,0" anchor="true">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+      <Button title="取消"/>
+    </component>
+    <component id="n2_c5lp" name="title" src="fqcb3s" fileName="Component/Drawer/ComTitleDrawer.xml" xy="41,51" size="527,40" group="n7_c5lp">
+      <Label title="基本信息"/>
+    </component>
+    <component id="n10_c5lp" name="inputABName" src="nkvz1x" fileName="Component/Drawer/ComStringDrawer.xml" xy="41,111" size="527,30" group="n7_c5lp">
+      <Label title="AB包名"/>
+    </component>
+    <component id="n1_c5lp" name="inputProjectPath" src="nkvz1x" fileName="Component/Drawer/ComStringDrawer.xml" xy="41,161" size="527,30" group="n7_c5lp">
+      <Label title="工程地址"/>
+    </component>
+    <text id="n8_c5lp" name="n8" xy="41,211" size="526,22" group="n7_c5lp" fontSize="14" color="#ffffff" autoSize="none" text="工程地址为Unity工程存放的地址，尽量不要放在Mod文件夹内，不然会随工程发布"/>
+    <component id="n3_c5lp" name="inputExportPath" src="nkvz1x" fileName="Component/Drawer/ComStringDrawer.xml" xy="41,253" size="527,30" group="n7_c5lp">
+      <Label title="导出AB地址"/>
+    </component>
+    <text id="n9_c5lp" name="n9" xy="41,303" size="526,22" group="n7_c5lp" fontSize="14" color="#ffffff" autoSize="none" text="导出AB为AB包存放的地址，参考地址：mod范例/AssetBundles/"/>
+    <group id="n7_c5lp" name="groupInfo" xy="41,51" size="527,274" advanced="true" layout="vt" lineGap="20" excludeInvisibles="true"/>
+    <component id="n11_c5lp" name="btnEditProjectPath" src="nkvz1r" fileName="Component/Button/BtnEdit.xml" xy="543,165" size="20,20">
+      <relation target="" sidePair="right-right"/>
+    </component>
+    <component id="n12_c5lp" name="btnEditOutputABPath" src="nkvz1r" fileName="Component/Button/BtnEdit.xml" xy="543,258" size="20,20">
+      <relation target="" sidePair="right-right"/>
+    </component>
+  </displayList>
+</component>

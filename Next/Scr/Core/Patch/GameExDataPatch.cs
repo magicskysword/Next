@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using KBEngine;
 using SkySwordKill.Next.DialogSystem;
+using SkySwordKill.Next.FGUI;
 
 namespace SkySwordKill.Next.Patch;
 
@@ -18,12 +19,12 @@ public class GameExDataPatch
             DialogAnalysis.OnEnterWorld();
         }
         
-        [HarmonyPatch("SaveGame")]
+        [HarmonyPatch("SaveAvatar")]
         [HarmonyPostfix]
-        public static void AfterSave(int avatarIndex, int slot, Avatar _avatar, bool ignoreSlot0Time)
+        public static void AfterSave()
         {
             Main.LogInfo($"NextData 保存存档数据");
-            DialogAnalysis.SaveAvatarNextData(avatarIndex, slot);
+            DialogAnalysis.SaveAvatarNextData(YSNewSaveSystem.NowUsingAvatarIndex, YSNewSaveSystem.NowUsingSlot);
         }
     }
         

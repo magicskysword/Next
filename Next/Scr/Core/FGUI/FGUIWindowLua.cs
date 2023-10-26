@@ -1,5 +1,6 @@
 ﻿using System;
 using FairyGUI;
+using SkySwordKill.Next.DialogSystem;
 using SkySwordKill.Next.Lua;
 using XLua;
 
@@ -10,6 +11,8 @@ public class FGUIWindowLua : FGUIWindowBase
     public FGUIWindowLua(string pkgName, string comName, string scriptPath) : base(pkgName, comName)
     {
         this.ScriptPath = scriptPath;
+        
+        DialogEnvironment = new DialogEnvironment();
         
         BindLuaTable();
     }
@@ -27,6 +30,7 @@ public class FGUIWindowLua : FGUIWindowBase
     public EventCallback1 LuaCallback_OnKeyDown;
 
     public Action OnCloseCallback;
+    public DialogEnvironment DialogEnvironment;
 
     private void BindLuaTable()
     {
@@ -35,6 +39,7 @@ public class FGUIWindowLua : FGUIWindowBase
             throw new Exception($"Lua脚本加载失败：{ScriptPath}");
         
         Table.Set("script", this);
+        Table.Set("env", DialogEnvironment);
         Table.Set("contentPane", contentPane);
         
         Table.Get("OnInit", out LuaCallback_OnInit);

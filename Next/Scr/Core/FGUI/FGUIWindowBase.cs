@@ -9,6 +9,15 @@ public class FGUIWindowBase : Window
     public string comName;
     public string pkgName;
     public RayBlocker RayBlocker;
+    
+    /// <summary>
+    /// 场景切换时是否自动关闭
+    /// </summary>
+    public bool AutoCloseInSceneChange = true;
+    /// <summary>
+    /// 退出存档时是否自动关闭
+    /// </summary>
+    public bool AutoCloseInQuitSave = true;
 
     public FGUIWindowBase(string pkgName,string comName)
     {
@@ -35,7 +44,10 @@ public class FGUIWindowBase : Window
         }
         else
         {
-            RayBlocker.SetSize(new Rect(x, y, width, height));
+            var realWidth = width * scaleX;
+            var realHeight = height * scaleY;
+            
+            RayBlocker.SetSize(new Rect(x, y, realWidth, realHeight));
         }
     }
 
@@ -84,6 +96,19 @@ public class FGUIWindowBase : Window
     {
         this.SetSize(GRoot.inst.width * factor, GRoot.inst.height * factor);
         Center();
+        ResetRayBlocker();
+    }
+    
+    public void ScaleWithScreen()
+    {
+        var factor = Mathf.Min(GRoot.inst.width / 1920f, GRoot.inst.height / 1080f);
+        this.SetScale(factor, factor);
+        ResetRayBlocker();
+    }
+
+    public void ResetScale()
+    {
+        this.SetScale(1f, 1f);
         ResetRayBlocker();
     }
 }

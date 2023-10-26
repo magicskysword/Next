@@ -1,4 +1,5 @@
-﻿using FairyGUI;
+﻿using Cysharp.Threading.Tasks;
+using FairyGUI;
 using SkySwordKill.Next.Res;
 using UnityEngine;
 
@@ -7,44 +8,17 @@ namespace SkySwordKill.Next.FGUI;
 public class NextGLoader : GLoader
 {
     public const string UI_FILE_PREFIX = "file://";
-
+    
     protected override void LoadExternal()
     {
         var curUrl = this.url;
         if (curUrl.StartsWith(UI_FILE_PREFIX))
         {
-            var filePath = curUrl.Substring(UI_FILE_PREFIX.Length);
-            var tagFile = new FileAsset(filePath);
-            var obj = tagFile.LoadAsset();
-            if(obj != null && obj is Texture2D tex)
-            {
-                var nTex = new NTexture(tex);
-                onExternalLoadSuccess(nTex);
-            }
-            else
-            {
-                onExternalLoadFailed();
-            }
+            LoadFromFileAsync(curUrl).Forget();
         }
         else if(Main.Res.HaveAsset(curUrl))
         {
-            Main.Res.TryGetAsset(curUrl, img =>
-            {
-                if (curUrl != url)
-                {
-                    return;
-                }
-
-                if (img != null && img is Texture2D tex)
-                {
-                    var nTex = tex.CreateTempNTexture();
-                    onExternalLoadSuccess(nTex);
-                }
-                else
-                {
-                    onExternalLoadFailed();
-                }
-            });
+            LoadFromResourceManagerAsync(curUrl).Forget();
         }
         else
         {
@@ -52,8 +26,44 @@ public class NextGLoader : GLoader
         }
     }
 
-    protected override void FreeExternal(NTexture texture)
+    private async UniTask LoadFromFileAsync(string curUrl)
     {
-        texture.refCount--;
+        var filePath = curUrl.Substring(UI_FILE_PREFIX.Length);
+        var tagFile = new FileAsset(filePath);
+        var asset = await tagFile.LoadAsync() as Texture2D;
+        if (curUrl != url)
+        {
+            tagFile.Unload();
+            return;
+        }
+
+        if (asset == null)
+        {
+            onExternalLoadFailed();
+            return;
+        }
+        
+        var nTex = asset.CreateTempNTexture();
+        nTex.destroyMethod = DestroyMethod.Destroy;
+        onExternalLoadSuccess(nTex);
+    }
+
+    private async UniTask LoadFromResourceManagerAsync(string curUrl)
+    {
+        var asset = await Main.Res.LoadAssetAsync<Texture2D>(curUrl);
+        if (asset == null)
+        {
+            onExternalLoadFailed();
+            return;
+        }
+
+        var nTex = asset.CreateTempNTexture();
+        nTex.destroyMethod = DestroyMethod.None;
+        onExternalLoadSuccess(nTex);
+    }
+
+    protected override void FreeExternal(NTexture nTexture)
+    {
+        nTexture.refCount--;
     }
 }

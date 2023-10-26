@@ -40,6 +40,7 @@
     <PostBuildEvent>XCOPY "$(SolutionDir)NextAssets\**" "$(OutDir)NextAssets" /s /r /f /y /i
 XCOPY "$(SolutionDir)Next\NextConfig\**" "$(OutDir)NextConfig" /s /r /f /y /i
 XCOPY "$(SolutionDir)Next\NextLib\**" "$(OutDir)NextLib" /s /r /f /y /i
+XCOPY "$(SolutionDir)Template\**" "$(OutDir)Template" /s /r /f /y /i
 XCOPY "$(OutDir)**" "$(McsPath)\本地Mod测试\Next\plugins" /s /r /f /y /i
 XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /f /y /i</PostBuildEvent>
   </PropertyGroup>
@@ -133,11 +134,10 @@ XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /
     <Compile Include="Scr\Core\FGUI\Component\ProjectTreeFolder.cs" />
     <Compile Include="Scr\Core\FGUI\Component\ProjectTreeItem.cs" />
     <Compile Include="Scr\Core\FGUI\CtlLongPropertyDrawer.cs" />
+    <Compile Include="Scr\Core\FGUI\DialogBuilder\WindowConfirmDialogBuilder.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowConfirmDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowConfirmDialogExtra.cs" />
-    <Compile Include="Scr\Core\FGUI\Dialog\WindowCreateWorkshopModDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowIntInputDialog.cs" />
-    <Compile Include="Scr\Core\FGUI\Dialog\WindowModSelectorDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowSeidEditorDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowStringAreaInputPreviewDialog.cs" />
     <Compile Include="Scr\Core\FGUI\Dialog\WindowTableSelectorDialog.cs" />
@@ -183,10 +183,18 @@ XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /
     <Compile Include="Scr\Core\Mod\SettingTypeAttribute.cs" />
     <Compile Include="Scr\Core\Patch\FungusClonePatch.cs" />
     <Compile Include="Scr\Core\Patch\MainUIMagPatch.cs" />
+    <Compile Include="Scr\Core\Patch\QuitSaveChangePatch.cs" />
+    <Compile Include="Scr\Core\Patch\SceneChangePatch.cs" />
+    <Compile Include="Scr\Core\Res\ABRefAsset.cs" />
+    <Compile Include="Scr\Core\Res\ABResLoader.cs" />
     <Compile Include="Scr\Core\Res\BytesAsset.cs" />
     <Compile Include="Scr\Core\Res\FileAsset.cs" />
+    <Compile Include="Scr\Core\Res\FileResLoader.cs" />
+    <Compile Include="Scr\Core\Res\IResLoader.cs" />
+    <Compile Include="Scr\Core\Res\ResMapper.cs" />
     <Compile Include="Scr\Core\Res\ResourcesManager.cs" />
     <Compile Include="Scr\Core\Utils\AccessExtension.cs" />
+    <Compile Include="Scr\Core\Utils\FileUtils.cs" />
     <Compile Include="Scr\Core\Utils\MainPanelButtonAnimation.cs" />
     <Compile Include="Scr\Core\Utils\MathTools.cs" />
     <Compile Include="Scr\Core\Utils\UnityUtils.cs" />
@@ -398,6 +406,11 @@ XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeModProjectReferenced.cs" />
     <Compile Include="Scr\NextModEditor\PanelProject\ProjectTreeModWorkshop.cs" />
     <Compile Include="Scr\NextModEditor\Panel\ModEditorMainPanel.cs" />
+    <Compile Include="Scr\NextModEditor\WindowBuilder\WindowCreateABProjectDialogBuilder.cs" />
+    <Compile Include="Scr\NextModEditor\WindowBuilder\WindowCreateWorkshopModDialogBuilder.cs" />
+    <Compile Include="Scr\NextModEditor\Window\WindowCreateABProjectDialog.cs" />
+    <Compile Include="Scr\NextModEditor\Window\WindowCreateWorkshopModDialog.cs" />
+    <Compile Include="Scr\NextModEditor\Window\WindowModSelectorDialog.cs" />
     <Compile Include="Scr\Xlua\Gen\**" />
     <Compile Include="Scr\Xlua\Src\CodeEmit.cs" />
     <Compile Include="Scr\Xlua\Src\CopyByValue.cs" />

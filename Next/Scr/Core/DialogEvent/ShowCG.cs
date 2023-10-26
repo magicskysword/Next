@@ -1,5 +1,6 @@
 ﻿using System;
 using SkySwordKill.Next.DialogSystem;
+using SkySwordKill.Next.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,16 +13,16 @@ public class ShowCG : IDialogEvent
     {
         var cgName = command.GetStr(0);
         var path = $"Assets/CG/{cgName}.png";
-        if (Main.Res.TryGetAsset(path, out var asset)
-            && asset is Texture2D texture)
+        var texture = Main.Res.LoadAsset<Texture2D>(path);
+        if (texture == null)
         {
-            Sprite sprite = Main.Res.GetSpriteCache(texture);
-            CGManager.Instance.CGSprite = sprite;
-            CGManager.Instance.Enable = true;
+            Debug.LogError($"背景图片 {path} 不存在。");
         }
         else
         {
-            Main.LogWarning($"背景图片 {path} 不存在。");
+            Sprite sprite = texture.ToSprite();
+            CGManager.Instance.CGSprite = sprite;
+            CGManager.Instance.Enable = true;
         }
         callback?.Invoke();
     }

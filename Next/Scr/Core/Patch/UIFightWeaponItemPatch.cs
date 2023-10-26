@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using JSONClass;
 using KBEngine;
+using SkySwordKill.Next.Utils;
 using UnityEngine;
 using YSGame.Fight;
 
@@ -17,24 +18,22 @@ public class UIFightWeaponItemPatch
     {
         int id = weapon.itemId;
         if (id == -1) return;
-        if (_ItemJsonData.DataDict.ContainsKey(id))
+        if (_ItemJsonData.DataDict.TryGetValue(id, out var itemJsonData))
         {
-            _ItemJsonData itemJsonData = _ItemJsonData.DataDict[id];
             var path = $"Assets/Item Icon/{ItemUIPatch.GetItemIconByKey(itemJsonData)}.png";
 
             if (!Main.Res.HaveAsset(path))
                 path = $"Assets/Item Icon/1.png";
                 
-            if (Main.Res.TryGetAsset(path, asset =>
-                {
-                    if (asset is Texture2D texture)
-                    {
-                        __instance.IconImage.sprite = Sprite.Create(texture, new Rect(0f, 0f, texture.width, texture.height), new Vector2(0, 0));
-                    }
-                }))
+            
+            var texture = Main.Res.LoadAsset<Texture2D>(path);
+            if (texture == null)
             {
-                Main.LogInfo($"物品 [{id}] 图标加载成功");
+                return;
             }
+            
+            __instance.IconImage.sprite = texture.ToSprite();
+            Main.LogInfo($"物品 [{id}] 图标加载成功");
         }
     }
 }

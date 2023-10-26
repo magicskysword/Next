@@ -12,15 +12,13 @@ public class ResManagerLoadSpritePatch
     [HarmonyPrefix]
     public static bool LoadSprite(ResManager __instance,string path,ref Sprite __result)
     {
-        if (Main.Res.TryGetAsset($"Assets/{path}.png", out var asset))
+        var texture = Main.Res.LoadAsset<Texture2D>($"Assets/{path}.png");
+        if (texture == null)
         {
-            if (asset is Texture2D texture)
-            {
-                __result = Main.Res.GetSpriteCache(texture);
-                return false;
-            }
+            return true;
         }
-
-        return true;
+        
+        __result = Main.Res.GetSpriteCache(texture);
+        return false;
     }
 }

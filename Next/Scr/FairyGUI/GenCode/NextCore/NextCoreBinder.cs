@@ -15,6 +15,7 @@ namespace SkySwordKill.NextFGUI.NextCore
             UIObjectFactory.SetPackageItemExtension(UI_ComCmdTextWithPort.URL, typeof(UI_ComCmdTextWithPort));
             UIObjectFactory.SetPackageItemExtension(UI_ComMainDocumentNodeView.URL, typeof(UI_ComMainDocumentNodeView));
             UIObjectFactory.SetPackageItemExtension(UI_ComNodeZoomArea.URL, typeof(UI_ComNodeZoomArea));
+            UIObjectFactory.SetPackageItemExtension(UI_WinCreateABMod.URL, typeof(UI_WinCreateABMod));
             UIObjectFactory.SetPackageItemExtension(UI_ComToolsBar.URL, typeof(UI_ComToolsBar));
             UIObjectFactory.SetPackageItemExtension(UI_WinInputDialog.URL, typeof(UI_WinInputDialog));
             UIObjectFactory.SetPackageItemExtension(UI_ComToolsSearchBox.URL, typeof(UI_ComToolsSearchBox));

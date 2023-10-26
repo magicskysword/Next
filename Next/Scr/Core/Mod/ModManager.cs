@@ -17,6 +17,7 @@ using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FCanvas;
 using SkySwordKill.Next.FGUI.Dialog;
 using SkySwordKill.Next.StaticFace;
+using SkySwordKill.Next.Utils;
 using UnityEngine.SceneManagement;
 
 namespace SkySwordKill.Next.Mod;
@@ -71,7 +72,7 @@ public static class ModManager
 
     public static bool IsJsonFilePath(string filePath)
     {
-        return 0 == String.Compare(Path.GetExtension(filePath), ".json", true);
+        return 0 == String.Compare(Path.GetExtension(filePath), ".json", StringComparison.OrdinalIgnoreCase);
     }
 
     public static void CloneMainData()
@@ -667,8 +668,11 @@ public static class ModManager
             // 载入Mod Lua数据
             LoadCustomLuaData(modConfig,$"{modConfig.Path}/Lua");
 
-            // 载入ModAsset
+            // 载入Mod FileAsset数据
             Main.Res.CacheAssetDir($"{modConfig.Path}/Assets");
+            
+            // 载入Mod AssetBundle数据
+            Main.Res.CacheAssetBundleDir($"{modConfig.Path}/AssetBundles");
         }
             
         catch (Exception)
@@ -978,9 +982,9 @@ public static class ModManager
             PatchFubenJsonData(list[0], filePath);
             filePath = Utility.CombinePaths(dirPathForData, $"ShiJian.json");
             PatchFubenJsonData(list[1], filePath);
-            filePath = Utility.CombinePaths(dirPathForData, $"RandomMap.json");
+            filePath = Utility.CombinePaths(dirPathForData, $"XuanXiang.json");
             PatchFubenJsonData(list[2], filePath);
-            filePath = Utility.CombinePaths(dirPathForData, $"RandomMap.json");
+            filePath = Utility.CombinePaths(dirPathForData, $"fubentime.json");
             PatchFubenJsonData(list[3], filePath);
         }
     }
@@ -1111,7 +1115,7 @@ public static class ModManager
 
     private static void LoadCustomLuaData(ModConfig modConfig, string rootPath)
     {
-        Main.Res.DirectoryHandle("",rootPath, (virtualPath, filePath) =>
+        FileUtils.DirectoryHandle("",rootPath, (virtualPath, filePath) =>
         {
             if(Path.GetExtension(filePath) != ".lua")
                 return;

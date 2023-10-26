@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FairyGUI;
 using SkySwordKill.NextFGUI.NextCore;
+using SkySwordKill.NextModEditor.PanelProject;
 
 namespace SkySwordKill.Next.FGUI.Component;
 
@@ -26,7 +27,8 @@ public class CtlListProject
         
     private OnClickListProjectItem OnClickItem { get; set; }
     private OnClickListProjectItem OnRightClickItem { get; set; }
-        
+    public ProjectListBase FirstProjectItem => _projectItems[0];
+
     public void SetClickItem(OnClickListProjectItem action)
     {
         OnClickItem = action;
@@ -37,7 +39,7 @@ public class CtlListProject
         OnRightClickItem = action;
     }
         
-    public void AddProject(ProjectListItemBase item)
+    public void AddProject(ProjectListBase item)
     {
         _projectItems.Add(item);
     }

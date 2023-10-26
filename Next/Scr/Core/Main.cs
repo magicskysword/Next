@@ -22,20 +22,57 @@ namespace SkySwordKill.Next;
 [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
 public partial class Main : BaseUnityPlugin
 {
-    public const string MOD_VERSION = "0.8.4";
+    public const string MOD_VERSION = "0.9.0";
         
+    /// <summary>
+    /// 本地Mods文件夹
+    /// </summary>
     public static Lazy<string> PathLocalModsDir;
+    /// <summary>
+    /// 使用库文件夹
+    /// </summary>
     public static Lazy<string> PathLibraryDir;
+    /// <summary>
+    /// 配置文件夹
+    /// </summary>
     public static Lazy<string> PathConfigDir;
+    /// <summary>
+    /// 导出文件夹
+    /// </summary>
     public static Lazy<string> PathExportOutputDir;
+    /// <summary>
+    /// 基础数据文件夹
+    /// </summary>
     public static Lazy<string> PathBaseDataDir;
+    /// <summary>
+    /// Lua基础库文件夹
+    /// </summary>
     public static Lazy<string> PathLuaLibDir;
+    /// <summary>
+    /// 语言文件夹
+    /// </summary>
     public static Lazy<string> PathLanguageDir;
+    /// <summary>
+    /// Mod设置文件
+    /// </summary>
     public static Lazy<string> PathModSettingFile;
+    /// <summary>
+    /// 内置资源文件夹
+    /// </summary>
     public static Lazy<string> PathInnerAssetDir;
+    /// <summary>
+    /// 基础Fungus数据文件夹
+    /// </summary>
     public static Lazy<string> PathBaseFungusDataDir;
-    public static Lazy<string> PathAbDir;
-        
+    /// <summary>
+    /// 内置AB文件夹
+    /// </summary>
+    public static Lazy<string> PathInnerAbDir;
+    /// <summary>
+    /// 模板文件夹
+    /// </summary>
+    public static Lazy<string> PathTemplateDir;
+
     public static Main Instance => I;
     public static Main I { get; private set; }
     public static ResourcesManager Res => I._resourcesManager;
@@ -145,28 +182,23 @@ public partial class Main : BaseUnityPlugin
             new Lazy<string>(() => BepInEx.Paths.GameRootPath + @"\本地Mod测试");
         PathLibraryDir =
             new Lazy<string>(() => Utility.CombinePaths(
-                dllPath,
-                "NextLib"));
+                dllPath, "NextLib"));
         PathConfigDir =
             new Lazy<string>(() => Utility.CombinePaths(
-                dllPath,
-                "NextConfig"));
+                dllPath, "NextConfig"));
         PathExportOutputDir = 
             new Lazy<string>(() => Utility.CombinePaths(
-                dllPath,
-                "../OutPut"));
+                dllPath, "../OutPut"));
         PathBaseDataDir =
             new Lazy<string>(() => Utility.CombinePaths(
-                PathExportOutputDir.Value,
-                "Data"));
+                PathExportOutputDir.Value, "Data"));
         PathBaseFungusDataDir =
             new Lazy<string>(() => Utility.CombinePaths(
-                PathExportOutputDir.Value, 
-                "Fungus"));
+                PathExportOutputDir.Value, "Fungus"));
         PathLuaLibDir =
             new Lazy<string>(() => Utility.CombinePaths(
                 PathLibraryDir.Value, "Lua"));
-        PathAbDir =
+        PathInnerAbDir =
             new Lazy<string>(() => Utility.CombinePaths(
                 PathLibraryDir.Value, "AB"));
         PathLanguageDir =
@@ -178,6 +210,9 @@ public partial class Main : BaseUnityPlugin
         PathInnerAssetDir =
             new Lazy<string>(() => Utility.CombinePaths(
                 dllPath, "NextAssets"));
+        PathTemplateDir =
+            new Lazy<string>(() => Utility.CombinePaths(
+                dllPath, "Template"));
     }
 
     private void LoadDefaultLanguage()

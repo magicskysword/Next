@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using FairyGUI;
+using SkySwordKill.Next.FGUI;
 using SkySwordKill.Next.FGUI.Component;
 using SkySwordKill.NextFGUI.NextCore;
 using SkySwordKill.NextModEditor.Mod;
 using Steamworks;
 
-namespace SkySwordKill.Next.FGUI.Dialog;
+namespace SkySwordKill.Next.NextModEditor.Window;
 
 [Flags]
 public enum ModFilter

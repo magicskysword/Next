@@ -11,12 +11,24 @@ public class FileAsset
 {
     #region 字段
 
-    public Object asset;
-    public event Action<Object> OnLoadedAsset;
-
+    /// <summary>
+    /// 资源
+    /// </summary>
+    private Object asset;
+    /// <summary>
+    /// 文件路径
+    /// </summary>
     private string filePath;
+    /// <summary>
+    /// 已经加载完成
+    /// </summary>
     private bool isDone = false;
-    private bool isLoading = false;
+    /// <summary>
+    /// 正在异步加载
+    /// </summary>
+    private bool isAsyncLoading = false;
+    
+    public bool DontDestroyOnLoad { get; set; } = false;
 
     public FileAsset(string path)
     {
@@ -27,8 +39,9 @@ public class FileAsset
 
     #region 属性
 
+    public Object Asset => asset;
     public bool IsDone => isDone;
-    public bool IsLoading => isLoading;
+    public bool IsAsyncLoading => isAsyncLoading;
     public string FileRawPath => filePath;
 
     #endregion
@@ -39,49 +52,67 @@ public class FileAsset
 
     #region 公共方法
 
-    public void LoadAssetAsync(Action<Object> callback)
+    public async UniTask<Object> LoadAsync()
     {
-        if (!isDone)
+        if (isDone)
         {
-            OnLoadedAsset += callback;
-            LoadAsync().Forget();
+            return asset;
         }
-        else
-        {
-            callback?.Invoke(asset);
-        }
+        
+        await LoadAsyncInner();
+
+        return asset;
     }
 
-    public Object LoadAsset()
+    public Object Load()
     {
         if (isDone)
         {
             return asset;
         }
 
-        try
-        {
-            Load();
-        }
-        catch (Exception e)
-        {
-            Main.LogError(e);
-            return null;
-        }
+        LoadInner();
         return asset;
     }
 
+    public void Unload()
+    {
+        if (DontDestroyOnLoad)
+            return;
+        
+        if (asset != null)
+        {
+            Object.Destroy(asset);
+            isDone = false;
+        }
+    }
+    
     #endregion
 
     #region 私有方法
 
-    private async UniTaskVoid LoadAsync()
+    /// <summary>
+    /// 异步加载
+    /// </summary>
+    private async UniTask LoadAsyncInner()
     {
-        if (isLoading || isDone)
+        if (isDone)
             return;
-        isLoading = true;
+
+        if (isAsyncLoading)
+        {
+            // 自旋等待加载完成
+            while (isAsyncLoading)
+            {
+                await UniTask.Yield();
+            }
+            return;
+        }
+
+        isAsyncLoading = true;
+
         Object loadAsset = null;
-        var extension = Path.GetExtension(filePath);
+        var extension = Path.GetExtension(filePath).ToLower();
         try
         {
             switch (extension)
@@ -106,14 +137,6 @@ public class FileAsset
                     }
 
                     break;
-                case ".ab":
-                    using (UnityWebRequest webRequest = UnityWebRequestAssetBundle.GetAssetBundle(filePath))
-                    {
-                        await webRequest.SendWebRequest();
-                        var ab = DownloadHandlerAssetBundle.GetContent(webRequest);
-                        loadAsset = ab;
-                    }
-                    break;
                 case ".bytes":
                     var bytes = File.ReadAllBytes(filePath);
                     loadAsset = new BytesAsset(bytes);
@@ -123,78 +146,80 @@ public class FileAsset
         catch (Exception e)
         {
             Main.LogError(e);
-            Debug.LogWarning($"{filePath}加载失败");
-            isLoading = false;
-            isDone = false;
+            Main.LogError($"FileAsset:{filePath} 异步加载失败");
+            isAsyncLoading = false;
             return;
         }
 
-        if (!isDone && loadAsset != null)
+        if (isDone)
         {
-            asset = loadAsset;
-        }
-
-        if (asset != null)
-        {
-            asset.name = filePath;
-            OnLoadedAsset?.Invoke(asset);
-            isLoading = false;
-            isDone = true;
-        }
-        else
-        {
-            Main.LogWarning($"{filePath}加载失败");
-            isLoading = false;
-            isDone = false;
-        }
-    }
-
-    private void Load()
-    {
-        Object loadAsset = null;
-        var extension = Path.GetExtension(filePath);
-        switch (extension)
-        {
-            case ".jpg":
-            case ".png":
-            {
-                var bytes = File.ReadAllBytes(filePath);
-                var texture = new Texture2D(1, 1, TextureFormat.ARGB32, false);
-                texture.hideFlags = HideFlags.HideAndDontSave;
-                texture.LoadImage(bytes);
-                loadAsset = texture;
-            }
-                break;
-            case ".mp3":
-                using (UnityWebRequest webRequest =
-                       UnityWebRequestMultimedia.GetAudioClip(filePath, AudioType.UNKNOWN))
-                {
-                    webRequest.SendWebRequest();
-                    while (!webRequest.isDone)
-                    {
-                            
-                    }
-                    loadAsset = DownloadHandlerAudioClip.GetContent(webRequest);
-                    break;
-                }
-            case ".ab":
-            {
-                asset = AssetBundle.LoadFromFile(filePath);
-                break;
-            }
-            case ".bytes":
-            {
-                var bytes = File.ReadAllBytes(filePath);
-                loadAsset = new BytesAsset(bytes);
-                break;
-            }
+            return;
         }
 
         if (loadAsset != null)
         {
             asset = loadAsset;
-            isDone = true;
         }
+        isAsyncLoading = false;
+        isDone = true;
+    }
+
+    private void LoadInner()
+    {
+        try
+        {
+            Object loadAsset = null;
+            var extension = Path.GetExtension(filePath).ToLower();
+            switch (extension)
+            {
+                case ".jpg":
+                case ".png":
+                {
+                    var bytes = File.ReadAllBytes(filePath);
+                    var texture = new Texture2D(1, 1, TextureFormat.ARGB32, false);
+                    texture.hideFlags = HideFlags.HideAndDontSave;
+                    texture.LoadImage(bytes);
+                    loadAsset = texture;
+                }
+                    break;
+                case ".mp3":
+                    using (UnityWebRequest webRequest =
+                           UnityWebRequestMultimedia.GetAudioClip(filePath, AudioType.UNKNOWN))
+                    {
+                        webRequest.SendWebRequest();
+                        while (!webRequest.isDone)
+                        {
+                            
+                        }
+                        loadAsset = DownloadHandlerAudioClip.GetContent(webRequest);
+                        break;
+                    }
+                case ".bytes":
+                {
+                    var bytes = File.ReadAllBytes(filePath);
+                    loadAsset = new BytesAsset(bytes);
+                    break;
+                }
+                default:
+                {
+                    Main.LogError($"FileAsset:{filePath} 不属于可加载的文件");
+                    break;
+                }
+            }
+            if (loadAsset != null)
+            {
+                asset = loadAsset;
+                isDone = true;
+            }
+        }
+        catch (Exception e)
+        {
+            Main.LogError(e);
+            Main.LogError($"FileAsset:{filePath} 同步加载失败");
+            return;
+        }
+        
+        
     }
 
     #endregion

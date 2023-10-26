@@ -35,13 +35,11 @@ namespace SkySwordKill.Next.DialogSystem
         /// </summary>
         [JsonProperty(PropertyName = "priority")]
         public int Priority { get; set; }  = 0;
-
         /// <summary>
         /// 初始状态
         /// </summary>
         [JsonProperty(PropertyName = "default")]
         public bool Default { get; set; } = true;
-
         /// <summary>
         /// 触发一次后关闭
         /// </summary>
@@ -49,31 +47,5 @@ namespace SkySwordKill.Next.DialogSystem
         public bool Once { get; set; } = false;
 
         #endregion
-
-        #region 属性
-
-
-
-        #endregion
-
-        #region 回调方法
-
-
-
-        #endregion
-
-        #region 公共方法
-
-
-
-        #endregion
-
-        #region 私有方法
-
-
-
-        #endregion
-
-
     }
 }

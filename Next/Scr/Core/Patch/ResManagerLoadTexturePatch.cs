@@ -12,14 +12,13 @@ public class ResManagerLoadTexturePatch
     [HarmonyPrefix]
     public static bool LoadTexture2D(ResManager __instance,string path,ref Texture2D __result)
     {
-        if (Main.Res.TryGetAsset($"Assets/{path}.png", out var asset))
+        var texture = Main.Res.LoadAsset<Texture2D>($"Assets/{path}.png");
+        if (texture == null)
         {
-            if (asset is Texture2D texture)
-            {
-                __result = texture;
-                return false;
-            }
+            return true;
         }
-        return true;
+        
+        __result = texture;
+        return false;
     }
 }
