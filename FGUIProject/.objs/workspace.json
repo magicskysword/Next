@@ -23,6 +23,8 @@
     "028qk31h",
     "/Component/",
     "028qk31h",
+    "/Component/Button/",
+    "028qk31h",
     "/Dialog/",
     "028qk31h",
     "/Font/",
@@ -31,7 +33,7 @@
     "028qk31h",
     "/Window/"
   ],
-  "doc.activeDoc": "ui://028qk31hnkvz33",
+  "doc.activeDoc": "ui://028qk31hq7nzj5g",
   "libview.twoColumn": false,
   "auxline2": true,
   "snapToGrid": true,

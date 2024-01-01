@@ -65,6 +65,8 @@ public class StartFight : IDialogEvent
                 }
             }
             
+            DialogAnalysis.CancelEvent();
+            
             MusicMag.instance.playMusic(music);
             Tools.instance.monstarMag.FightImageID = background;
             Tools.instance.CanFpRun = canRun;
@@ -76,7 +78,6 @@ public class StartFight : IDialogEvent
             ResetEventFight();
             throw;
         }
-        DialogAnalysis.CancelEvent();
     }
 
     public static void SetEventFight(string victory, string defeat, string[] tags)
