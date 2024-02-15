@@ -63,8 +63,13 @@ XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /
     <Compile Include="Scr\Core\DialogSystem\IDialogEnvQuery.cs" />
     <Compile Include="Scr\Core\DialogSystem\TriggerState.cs" />
     <Compile Include="Scr\Core\DialogTrigger\OnLoadMapScene.cs" />
-    <Compile Include="Scr\Core\FCanvas\Command\Call.cs" />
-    <Compile Include="Scr\Core\FCanvas\Command\VariableCondition.cs" />
+    <Compile Include="Scr\Core\FCanvas\FakerCommand\AddTime.cs" />
+    <Compile Include="Scr\Core\FCanvas\FakerCommand\Call.cs" />
+    <Compile Include="Scr\Core\FCanvas\FakerCommand\GetImportantNpcId.cs" />
+    <Compile Include="Scr\Core\FCanvas\FakerCommand\SetSTalk.cs" />
+    <Compile Include="Scr\Core\FCanvas\FakerCommand\StartFight.cs" />
+    <Compile Include="Scr\Core\FCanvas\FakerCommand\Variable.cs" />
+    <Compile Include="Scr\Core\FCanvas\FakerCommand\VariableCondition.cs" />
     <Compile Include="Scr\Core\FCanvas\FCommandConverter.cs" />
     <Compile Include="Scr\Core\FCanvas\FPatch.cs" />
     <Compile Include="Scr\Core\FCanvas\FPatchCommand.cs" />
@@ -76,6 +81,13 @@ XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /
     <Compile Include="Scr\Core\FCanvas\PCommand\NextInnerEvent.cs" />
     <Compile Include="Scr\Core\FCanvas\PCommand\NextMenu.cs" />
     <Compile Include="Scr\Core\FGUI\CommonUndoCommand.cs" />
+    <Compile Include="Scr\Core\FGUI\ComponentBuilder\CtlButtonDrawerBuilder.cs" />
+    <Compile Include="Scr\Core\FGUI\ComponentBuilder\CtlGroupDrawerBuilder.cs" />
+    <Compile Include="Scr\Core\FGUI\ComponentBuilder\CtlInfoDrawerBuilder.cs" />
+    <Compile Include="Scr\Core\FGUI\ComponentBuilder\CtlPropertyDrawerBuilderBase.cs" />
+    <Compile Include="Scr\Core\FGUI\ComponentBuilder\CtlStringPropertyDrawerBuilder.cs" />
+    <Compile Include="Scr\Core\FGUI\ComponentBuilder\CtlTextDrawerBuilder.cs" />
+    <Compile Include="Scr\Core\FGUI\Component\CtlButtonDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlComboSearchBox.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlDoublePropertyDrawer.cs" />
     <Compile Include="Scr\Core\FGUI\Component\CtlDoubleSliderDrawer.cs" />
@@ -152,6 +164,7 @@ XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /
     <Compile Include="Scr\Core\FGUI\IUndoCommand.cs" />
     <Compile Include="Scr\Core\FGUI\IUndoInst.cs" />
     <Compile Include="Scr\Core\FGUI\NextGLoader.cs" />
+    <Compile Include="Scr\Core\FGUI\PropertyDrawerExtension.cs" />
     <Compile Include="Scr\Core\FGUI\SequenceCommand.cs" />
     <Compile Include="Scr\Core\FGUI\UndoExtension.cs" />
     <Compile Include="Scr\Core\FGUI\UndoInstManager.cs" />
@@ -195,6 +208,7 @@ XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /
     <Compile Include="Scr\Core\Res\ResourcesManager.cs" />
     <Compile Include="Scr\Core\Utils\AccessExtension.cs" />
     <Compile Include="Scr\Core\Utils\FileUtils.cs" />
+    <Compile Include="Scr\Core\Utils\LinqExtension.cs" />
     <Compile Include="Scr\Core\Utils\MainPanelButtonAnimation.cs" />
     <Compile Include="Scr\Core\Utils\MathTools.cs" />
     <Compile Include="Scr\Core\Utils\UnityUtils.cs" />
@@ -271,8 +285,8 @@ XCOPY "$(SolutionDir)NextModConfig\**" "$(McsPath)\本地Mod测试\Next" /s /r /
     <Compile Include="Scr\Core\Extension\ExtensionUtils.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIManager.cs" />
     <Compile Include="Scr\Core\FGUI\FGUIWindowBase.cs" />
-    <Compile Include="Scr\Core\FCanvas\Command\Menu.cs" />
-    <Compile Include="Scr\Core\FCanvas\Command\Say.cs" />
+    <Compile Include="Scr\Core\FCanvas\FakerCommand\Menu.cs" />
+    <Compile Include="Scr\Core\FCanvas\FakerCommand\Say.cs" />
     <Compile Include="Scr\Core\FCanvas\FBlock.cs" />
     <Compile Include="Scr\Core\FCanvas\FCommand.cs" />
     <Compile Include="Scr\Core\FCanvas\FCommandBinderAttribute.cs" />

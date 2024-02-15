@@ -44,4 +44,9 @@ public class PanelBaseFungusPage : PanelPageBase
     {
             
     }
+
+    public override bool OnHandleKey(InputEvent evt)
+    {
+        return false;
+    }
 }

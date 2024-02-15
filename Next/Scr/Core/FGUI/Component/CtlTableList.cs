@@ -47,7 +47,7 @@ public class CtlTableList
     
     private SortedSet<int> _selectionArea = new SortedSet<int>();
     private OnTableItemRenderer _tableItemRenderer;
-    private Action _onClickTableItem;
+    private Action<EventContext> _onClickTableItem;
     private Action _onRightClickTableItem;
     private Action _onRightClickTableList;
     private Action _onItemSelectedChanged;
@@ -179,7 +179,7 @@ public class CtlTableList
         _tableItemRenderer = renderer;
     }
         
-    public void SetClickItem(Action clickItem)
+    public void SetClickItem(Action<EventContext> clickItem)
     {
         _onClickTableItem = clickItem;
     }
@@ -324,13 +324,13 @@ public class CtlTableList
                 // 单击选中状态下允许点击触发事件
                 if (AllowClickToSelect && !context.inputEvent.ctrlOrCmd)
                 {
-                    _onClickTableItem?.Invoke();
+                    _onClickTableItem?.Invoke(context);
                 }
             }
             else
             {
                 SelectedIndex = itemIndex;
-                _onClickTableItem?.Invoke();
+                _onClickTableItem?.Invoke(context);
                 
                 OnItemSelectedChanged();
             }
@@ -338,7 +338,7 @@ public class CtlTableList
         else
         {
             SelectedIndex = itemIndex;
-            _onClickTableItem?.Invoke();
+            _onClickTableItem?.Invoke(context);
             
             OnItemSelectedChanged();
         }

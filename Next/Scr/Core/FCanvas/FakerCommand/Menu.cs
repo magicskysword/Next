@@ -6,8 +6,8 @@ namespace SkySwordKill.Next.FCanvas.FakerCommand;
 [FCommandBinder(typeof(Fungus.Menu))]
 public class Menu : FCommand
 {
-    public string Text;
-    public string TargetBlockID;
+    public string Text { get; set; }
+    public string TargetBlockID { get; set; }
         
     public override void ReadCommand(Command command)
     {
@@ -24,5 +24,10 @@ public class Menu : FCommand
         {
             TargetBlockID = "";
         }
+    }
+
+    public override string GetSummary()
+    {
+        return $"【选项】{Text} => {TargetBlockID}";
     }
 }

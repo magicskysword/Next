@@ -19,4 +19,9 @@ public class FCommand
     {
         return null;
     }
+
+    public virtual string GetSummary()
+    {
+        return $"[{CmdType}]";
+    }
 }

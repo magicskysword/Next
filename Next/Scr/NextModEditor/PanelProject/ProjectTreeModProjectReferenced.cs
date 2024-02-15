@@ -41,6 +41,10 @@ public class ProjectTreeModProjectReferenced : ProjectTreeFolder
         {
             Editable = false,
         });
+        AddChild(new ProjectTreeItemBaseFungus(Mod, Project)
+        {
+            Editable = false,
+        });
     }
 
     public override string Name => Project.ProjectName;

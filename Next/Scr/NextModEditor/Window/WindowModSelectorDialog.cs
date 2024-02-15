@@ -88,7 +88,7 @@ public class WindowModSelectorDialog : WindowDialogBase
         Hide();
     }
 
-    private void OnClickModItem()
+    private void OnClickModItem(EventContext eventContext)
     {
         var modInfo = (ModWorkshop)TableList.SelectedItem;
         ShowModInfo(modInfo);

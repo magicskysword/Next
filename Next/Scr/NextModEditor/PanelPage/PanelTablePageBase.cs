@@ -209,7 +209,7 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
         TableEditor.ToolsBar.AddToolSep();
         BtnToolsDelete = TableEditor.ToolsBar.AddToolBtn("ui://NextCore/icon_delete", "删除数据(Delete)", OnClickDelete);
         TableEditor.ToolsBar.AddToolSearch(OnSearchData);
-            
+        
         CurInspectIndex = -1;
         RefreshToolsBar();
         return TableEditor.MainView;
@@ -317,7 +317,7 @@ public abstract class PanelTablePageBase<T> : PanelPageBase, IModDataClipboardPa
             
     }
     
-    protected virtual void OnClickTableItem()
+    protected virtual void OnClickTableItem(EventContext context)
     {
         Focus(TableList.SelectedIndex);
     }

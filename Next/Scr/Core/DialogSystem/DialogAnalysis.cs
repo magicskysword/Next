@@ -133,10 +133,23 @@ public static partial class DialogAnalysis
         
     public static ExpressionEvaluator GetEvaluate(DialogEnvironment env)
     {
-        CurEvaluator = CurEvaluator ?? new ExpressionEvaluator();
-        CurEvaluator.Context = env ?? new DialogEnvironment();
-        CurEvaluator.PreEvaluateFunction += Evaluator_PreEvaluateFunction;
+        if (CurEvaluator == null)
+        {
+            CurEvaluator = CreateNewEvaluate(env);
+        }
+        else
+        {
+            CurEvaluator.Context = env;
+        }
         return CurEvaluator;
+    }
+    
+    public static ExpressionEvaluator CreateNewEvaluate(DialogEnvironment env)
+    {
+        var evaluator = new ExpressionEvaluator();
+        evaluator.Context = env ?? new DialogEnvironment();
+        evaluator.PreEvaluateFunction += Evaluator_PreEvaluateFunction;
+        return evaluator;
     }
     
     public static bool TryTriggerByID(string triggerID,DialogEnvironment env = null)

@@ -8,13 +8,12 @@ namespace SkySwordKill.Next.FCanvas.FakerCommand;
 [FCommandBinder(typeof(Fungus.Say))]
 public class Say : FCommand
 {
-    public int AvatarIDInt;
-    public string AvatarBindKey;
-    public string StoryText;
-    public string Description;
-    [JsonConverter(typeof(StringEnumConverter))]
-    public StartFight.MonstarType AvatarIDSetType;
-        
+    public int AvatarIDInt { get; set; }
+    public string AvatarBindKey { get; set; }
+    public string StoryText { get; set; }
+    public string Description { get; set; }
+    public int AvatarIDSetType { get; set; }
+    
     public override void ReadCommand(Command command)
     {
         base.ReadCommand(command);
@@ -25,6 +24,14 @@ public class Say : FCommand
             .GetValue(command))?.Key ?? "";
         StoryText = (string)AccessTools.Field(command.GetType(), "storyText").GetValue(command);
         Description = (string)AccessTools.Field(command.GetType(), "description")?.GetValue(command);
-        AvatarIDSetType = cmdSay._AvatarIDSetType;
+        AvatarIDSetType = (int)cmdSay._AvatarIDSetType;
+    }
+
+    public override string GetSummary()
+    {
+        var id = AvatarIDSetType == 0
+            ? AvatarIDInt.ToString()
+            : AvatarBindKey;
+        return  $"{id} : {StoryText}";
     }
 }
