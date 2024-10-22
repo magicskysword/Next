@@ -6,11 +6,11 @@ namespace SkySwordKill.Next.FCanvas.FakerCommand;
 [FCommandBinder(typeof(Fungus.Call))]
 public class Call : FCommand
 {
-    public string targetFlowchartName;
-    public string targetBlockID;
-    public string startLabel;
-    public int startIndex;
-    public CallMode callMode;
+    public string targetFlowchartName { get; set; }
+    public string targetBlockID { get; set; }
+    public string startLabel { get; set; }
+    public int startIndex { get; set; }
+    public CallMode callMode { get; set; }
         
     public override void ReadCommand(Command command)
     {
@@ -26,5 +26,10 @@ public class Call : FCommand
         startLabel = cmdCall.GetFieldValue<StringData>("startLabel").Value;
         startIndex = cmdCall.GetFieldValue<int>("startIndex");
         callMode = cmdCall.GetFieldValue<CallMode>("callMode");
+    }
+
+    public override string GetSummary()
+    {
+        return $"跳转 {targetFlowchartName ?? "this"}:{targetBlockID}";
     }
 }

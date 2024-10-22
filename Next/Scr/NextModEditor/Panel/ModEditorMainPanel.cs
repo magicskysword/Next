@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Cysharp.Threading.Tasks;
 using FairyGUI;
+using Newtonsoft.Json;
 using SkySwordKill.Next;
 using SkySwordKill.Next.Extension;
 using SkySwordKill.Next.FGUI;
@@ -76,7 +77,15 @@ public class ModEditorMainPanel : FGUIPanelBase
             {
                 if (context.Exception != null)
                 {
-                    WindowConfirmDialog.CreateDialog("提示", $"初始化失败！错误信息：\n{context.Exception}", false);
+                    Hide();
+                    if (context.Exception is JsonException jsonException)
+                    {
+                        WindowConfirmDialog.CreateDialog("提示", $"初始化失败！读取导出的游戏数据时发生错误，请尝试重新导出游戏数据（使用F4 -> 导出游戏数据 进行导出）\n错误信息：\n{context.Exception}", false);
+                    }
+                    else
+                    {
+                        WindowConfirmDialog.CreateDialog("提示", $"初始化失败！错误信息：\n{context.Exception}", false);
+                    }
                 }
                 else
                 {

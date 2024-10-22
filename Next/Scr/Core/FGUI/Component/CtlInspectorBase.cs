@@ -40,9 +40,10 @@ public abstract class CtlInspectorBase : IInspector
     {
         foreach (var drawer in _drawers)
         {
-            drawer.Refresh();
             drawer.Editable = Editable;
         }
+        _drawers.RefreshWithChain();
+        
         OnRefresh();
     }
 

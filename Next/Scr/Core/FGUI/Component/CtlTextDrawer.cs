@@ -31,7 +31,7 @@ public class CtlTextDrawer : CtlPropertyDrawerBase
 
     protected override void SetDrawerEditable(bool value)
     {
-            
+        
     }
 
     public virtual void SetText(string text)

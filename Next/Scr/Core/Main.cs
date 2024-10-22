@@ -22,7 +22,7 @@ namespace SkySwordKill.Next;
 [BepInPlugin("skyswordkill.plugin.Next", "Next", MOD_VERSION)]
 public partial class Main : BaseUnityPlugin
 {
-    public const string MOD_VERSION = "0.9.0";
+    public const string MOD_VERSION = "0.9.1";
         
     /// <summary>
     /// 本地Mods文件夹

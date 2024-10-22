@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="180,24" extention="Label">
+<component size="180,24" extention="Button">
   <controller name="bg" pages="0,,1," selected="0"/>
+  <controller name="button" pages="2,up,3,down,4,over,5,selectedOver" selected="0"/>
   <displayList>
+    <graph id="n2_ec2p" name="indent" xy="0,0" size="0,24" alpha="0" type="rect" lineSize="0"/>
     <graph id="n1_asvv" name="bg" xy="0,0" size="180,24" type="rect" lineSize="0" fillColor="#ff3d424b">
       <gearColor controller="bg" pages="1" values="#484e59" default="#3d424b"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <text id="n0_asvv" name="title" xy="0,0" size="180,24" fontSize="16" color="#ffffff" ubb="true" autoSize="height" text="文本：测试测试">
       <relation target="" sidePair="width-width"/>
+      <relation target="n2_ec2p" sidePair="leftext-right"/>
     </text>
+    <graph id="n3_s4q2" name="n3" xy="0,0" size="180,24" alpha="0.1" type="rect" lineSize="0" fillColor="#ffffff99">
+      <gearDisplay controller="button" pages="4,5"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
   </displayList>
+  <Button/>
   <relation target="n0_asvv" sidePair="height-height"/>
 </component>

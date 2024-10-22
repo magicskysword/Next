@@ -6,6 +6,12 @@ namespace SkySwordKill.Next.FGUI.Component;
 
 public class CtlGroupDrawer : CtlPropertyDrawerBase, IInspector
 {
+    private List<IPropertyDrawer> _drawers { get; } = new List<IPropertyDrawer>();
+    private string DrawerName { get; set; }
+    private bool IsExpand { get; set; }
+    private UI_ComGroupDrawer GroupDrawer => (UI_ComGroupDrawer)Component;
+    private CtlGroupInspector Inspector { get; set; }
+    
     public CtlGroupDrawer(string title,bool isExpend ,params IPropertyDrawer[] drawers)
     {
         DrawerName = title;
@@ -42,12 +48,6 @@ public class CtlGroupDrawer : CtlPropertyDrawerBase, IInspector
         base.OnRemoveCom(component);
         Inspector = null;
     }
-
-    private List<IPropertyDrawer> _drawers { get; } = new List<IPropertyDrawer>();
-    private string DrawerName { get; set; }
-    private bool IsExpand { get; set; }
-    private UI_ComGroupDrawer GroupDrawer => (UI_ComGroupDrawer)Component;
-    private CtlGroupInspector Inspector { get; set; }
     
     public IReadOnlyList<IPropertyDrawer> Drawers => _drawers;
 

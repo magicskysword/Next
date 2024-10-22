@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="300,30" extention="Label">
+  <displayList>
+    <text id="n0_s4q2" name="title" xy="0,0" size="125,30" fontSize="14" color="#ffffff" align="center" vAlign="middle" autoSize="none" autoClearText="true" text="checkbox"/>
+    <component id="n2_s4q2" name="button" src="nkvz1f" fileName="Component/Button/BtnCommon.xml" xy="150,3" size="100,23">
+      <Button title="编辑"/>
+    </component>
+  </displayList>
+</component>

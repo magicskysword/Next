@@ -10,11 +10,17 @@ public abstract class CtlPropertyDrawerBase : IPropertyDrawer
 
     public bool Editable
     {
-        get { return _editable; }
+        get
+        {
+            return _editable;
+        }
         set
         {
             _editable = value;
-            SetDrawerEditable(value);
+            if (Component != null)
+            {
+                SetDrawerEditable(value);
+            }
         }
     }
 
@@ -40,7 +46,7 @@ public abstract class CtlPropertyDrawerBase : IPropertyDrawer
     /// <summary>
     /// 绑定的绘制器，该绘制器刷新时同时也会刷新其他绘制器
     /// </summary>
-    protected List<IPropertyDrawer> ChainDrawers { get; set; } = new List<IPropertyDrawer>();
+    public List<IPropertyDrawer> ChainDrawers { get; set; } = new List<IPropertyDrawer>();
     protected abstract GComponent OnCreateCom();
     protected virtual void OnRemoveCom(GComponent component) { }
     protected virtual void OnRefresh() { }
@@ -53,6 +59,7 @@ public abstract class CtlPropertyDrawerBase : IPropertyDrawer
             Component = OnCreateCom();
         }
         Component.tooltips = Tooltips;
+        SetDrawerEditable(Editable);
         return Component;
     }
 
@@ -70,24 +77,48 @@ public abstract class CtlPropertyDrawerBase : IPropertyDrawer
     /// <summary>
     /// 刷新绘制器，并刷新其他绘制器
     /// </summary>
-    public void Refresh()
+    /// <param name="chainRefresh"></param>
+    public void Refresh(bool chainRefresh = true)
     {
         OnRefresh();
-        foreach (var chainDrawer in ChainDrawers)
+
+        if (chainRefresh && ChainDrawers.Count > 0)
         {
-            chainDrawer.Refresh();
+            var hashSet = new HashSet<IPropertyDrawer>();
+            var queue = new Queue<IPropertyDrawer>();
+            foreach (var drawer in ChainDrawers)
+            {
+                queue.Enqueue(drawer);
+                hashSet.Add(drawer);
+            }
+            
+            while (queue.Count > 0)
+            {
+                var currentDrawer = queue.Dequeue();
+                currentDrawer.Refresh(false);
+                if (currentDrawer.ChainDrawers.Count > 0)
+                {
+                    foreach (var chainDrawer in currentDrawer.ChainDrawers)
+                    {
+                        if (hashSet.Add(chainDrawer))
+                        {
+                            queue.Enqueue(chainDrawer);
+                        }
+                    }
+                }
+            }
         }
     }
 
-    public IPropertyDrawer AddChangeListener(Action OnChanged)
+    public IPropertyDrawer AddChangeListener(Action OnDrawerChanged)
     {
-        this.OnChanged += OnChanged;
+        OnChanged += OnDrawerChanged;
         return this;
     }
     
-    public IPropertyDrawer RemoveChangeListener(Action OnChange)
+    public IPropertyDrawer RemoveChangeListener(Action OnDrawerChanged)
     {
-        OnChanged -= OnChange;
+        OnChanged -= OnDrawerChanged;
         return this;
     }
     
@@ -104,6 +135,12 @@ public abstract class CtlPropertyDrawerBase : IPropertyDrawer
     public IPropertyDrawer AddChainDrawer(IPropertyDrawer iconDrawer)
     {
         ChainDrawers.Add(iconDrawer);
+        return this;
+    }
+    
+    public IPropertyDrawer RemoveChainDrawer(IPropertyDrawer iconDrawer)
+    {
+        ChainDrawers.Remove(iconDrawer);
         return this;
     }
 }
